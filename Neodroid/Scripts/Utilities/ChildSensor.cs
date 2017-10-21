@@ -52,37 +52,37 @@ namespace Neodroid.Utilities {
     }
 
 
-    private void OnCollisionEnter (Collision collision) {
+    void OnCollisionEnter (Collision collision) {
       if (_on_collision_enter_delegate != null) {
         _on_collision_enter_delegate (this.gameObject, collision);
       }
     }
 
-    private void OnTriggerEnter (Collider other) {
+    void OnTriggerEnter (Collider other) {
       if (_on_trigger_enter_delegate != null) {
         _on_trigger_enter_delegate (this.gameObject, other);
       }
     }
 
-    private void OnTriggerStay (Collider other) {
+    void OnTriggerStay (Collider other) {
       if (_on_trigger_stay_delegate != null) {
         _on_trigger_stay_delegate (this.gameObject, other);
       }
     }
 
-    private void OnCollisionStay (Collision collision) {
+    void OnCollisionStay (Collision collision) {
       if (_on_collision_stay_delegate != null) {
         _on_collision_stay_delegate (this.gameObject, collision);
       }
     }
 
-    private void OnTriggerExit (Collider other) {
+    void OnTriggerExit (Collider other) {
       if (_on_trigger_exit_delegate != null) {
         _on_trigger_exit_delegate (this.gameObject, other);
       }
     }
 
-    private void OnCollisionExit (Collision collision) {
+    void OnCollisionExit (Collision collision) {
       if (_on_collision_exit_delegate != null) {
         _on_collision_exit_delegate (this.gameObject, collision);
       }

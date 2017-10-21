@@ -281,8 +281,10 @@ namespace Neodroid.BoundingBoxes {
     void OnDrawGizmos () {
 
       Gizmos.color = _line_color;
-      for (int i = 0; i < _lines.GetLength (0); i++) {
-        Gizmos.DrawLine (_lines [i, 0], _lines [i, 1]);
+      if (_lines != null) {
+        for (int i = 0; i < _lines.GetLength (0); i++) {
+          Gizmos.DrawLine (_lines [i, 0], _lines [i, 1]);
+        }
       }
     }
 
