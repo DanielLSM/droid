@@ -3,7 +3,7 @@ using UnityEngine;
 using Neodroid.Utilities;
 
 namespace SceneSpecificAssets.Grasping.Utilities {
-  public static class NeodroidUtilities {
+  public static class GraspingUtilities {
     public static void DrawBoxFromCenter (Vector3 p, float r, Color c) { // p is pos.yition of the center, r is "radius" and c is the color of the box
       //Bottom lines
       Debug.DrawLine (new Vector3 (-r + p.x, -r + p.y, -r + p.z), new Vector3 (r + p.x, -r + p.y, -r + p.z), c);
@@ -22,19 +22,6 @@ namespace SceneSpecificAssets.Grasping.Utilities {
       Debug.DrawLine (new Vector3 (-r + p.x, -r + p.y, r + p.z), new Vector3 (-r + p.x, r + p.y, r + p.z), c);
       Debug.DrawLine (new Vector3 (r + p.x, -r + p.y, -r + p.z), new Vector3 (r + p.x, r + p.y, -r + p.z), c);
       Debug.DrawLine (new Vector3 (r + p.x, -r + p.y, r + p.z), new Vector3 (r + p.x, r + p.y, r + p.z), c);
-    }
-
-    public static void RegisterCollisionTriggerCallbacksOnChildren (Transform transform, ChildSensor.OnChildCollisionEnterDelegate OnCollisionEnterChild, ChildSensor.OnChildTriggerEnterDelegate OnTriggerEnterChild, ChildSensor.OnChildCollisionExitDelegate OnCollisionExitChild, ChildSensor.OnChildTriggerExitDelegate OnTriggerExitChild, bool debug = false) {
-      var childrenWithColliders = transform.GetComponentsInChildren<Collider> (transform.gameObject);
-
-      foreach (Collider child in childrenWithColliders) {
-        ChildSensor child_sensor = child.gameObject.AddComponent<ChildSensor> ();
-        child_sensor.OnCollisionEnterDelegate = OnCollisionEnterChild;
-        child_sensor.OnTriggerEnterDelegate = OnTriggerEnterChild;
-        child_sensor.OnCollisionExitDelegate = OnCollisionExitChild;
-        child_sensor.OnTriggerExitDelegate = OnTriggerExitChild;
-        //Debug.Log(transform.name + " has " + child_sensor.name + " registered");
-      }
     }
 
     public static void DrawRect (float x_size, float y_size, float z_size, Vector3 pos, Color color) {

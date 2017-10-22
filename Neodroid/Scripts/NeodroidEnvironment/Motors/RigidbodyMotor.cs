@@ -30,15 +30,15 @@ namespace Neodroid.NeodroidEnvironment.Motors {
       case MotorAxis.Z:
         _rigidbody.AddForce (Vector3.forward * motion._strength);
         break;
-      case MotorAxis.Rot_X:
+      case MotorAxis.RotX:
         _rigidbody.AddTorque (Vector3.left * motion._strength);
           //GetComponent<Rigidbody>().AddForceAtPosition(Vector3.forward * motion._strength, transform.position);
           //GetComponent<Rigidbody>().AddRelativeTorque(Vector3.up * motion._strength);
         break;
-      case MotorAxis.Rot_Y:
+      case MotorAxis.RotY:
         _rigidbody.AddTorque (Vector3.up * motion._strength);
         break;
-      case MotorAxis.Rot_Z:
+      case MotorAxis.RotZ:
         _rigidbody.AddTorque (Vector3.forward * motion._strength);
         break;
       default:

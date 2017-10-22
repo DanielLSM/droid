@@ -4,6 +4,7 @@ using SceneSpecificAssets.Grasping.Navigation;
 using SceneSpecificAssets.Grasping.Utilities;
 using SceneSpecificAssets.Grasping.Grasps;
 using System.Collections.Generic;
+using Neodroid.Utilities;
 
 namespace SceneSpecificAssets.Grasping {
   public class ScriptedGripper : MonoBehaviour {
@@ -65,7 +66,7 @@ namespace SceneSpecificAssets.Grasping {
     #region Setup
 
     void UpdateMeshFilterBounds () {
-      var agent_bounds = NeodroidUtilities.GetMaxBounds (this.gameObject);
+      var agent_bounds = GraspingUtilities.GetMaxBounds (this.gameObject);
       //_agent_size = agent_bounds.size.magnitude;
       //_approach_distance = agent_bounds.size.magnitude + _precision;
       _agent_size = agent_bounds.extents.magnitude * 2; //Mathf.Max(agent_bounds.extents.x, Mathf.Max(agent_bounds.extents.y, agent_bounds.extents.z)) * 2;
@@ -73,7 +74,7 @@ namespace SceneSpecificAssets.Grasping {
     }
 
     void SetupEnvironment () {
-      NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (transform, OnCollisionEnterChild, OnTriggerEnterChild, OnCollisionExitChild, OnTriggerExitChild);
+      NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (transform, OnCollisionEnterChild, OnTriggerEnterChild, OnCollisionExitChild, OnTriggerExitChild, OnCollisionStayChild, OnTriggerStayChild);
     }
 
     #endregion
@@ -100,7 +101,7 @@ namespace SceneSpecificAssets.Grasping {
     void Update () {
       _step_size = _speed * Time.deltaTime;
       if (_draw_search_boundary)
-        NeodroidUtilities.DrawBoxFromCenter (this.transform.position, _search_boundary, Color.magenta);
+        GraspingUtilities.DrawBoxFromCenter (this.transform.position, _search_boundary, Color.magenta);
       _state.ObstructionMotionState = _state.GetMotionState (FindObjectsOfType<Obstruction> (), _state.ObstructionMotionState, _sensitivity);
       _state.TargetMotionState = _state.GetMotionState (FindObjectsOfType<GraspableObject> (), _state.TargetMotionState, _sensitivity);
 

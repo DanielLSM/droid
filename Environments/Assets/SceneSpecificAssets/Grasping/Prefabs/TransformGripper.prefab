@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 4008384475306948}
   - component: {fileID: 33561866144991592}
   - component: {fileID: 23393454201074908}
+  - component: {fileID: 64648417072538148}
   m_Layer: 0
   m_Name: House
   m_TagString: Gripper
@@ -146,7 +147,7 @@ GameObject:
   - component: {fileID: 81051131398947538}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: Gripper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,6 +168,7 @@ GameObject:
   - component: {fileID: 114486923131810870}
   - component: {fileID: 114200241081661828}
   - component: {fileID: 114117860755349358}
+  - component: {fileID: 114066256538711184}
   m_Layer: 0
   m_Name: TransformGripper
   m_TagString: Gripper
@@ -567,7 +569,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: f742b9df054d68644ba2621b1fdb5859, type: 3}
@@ -585,6 +587,20 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f742b9df054d68644ba2621b1fdb5859, type: 3}
+--- !u!64 &64648417072538148
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289757404202096}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300006, guid: f742b9df054d68644ba2621b1fdb5859, type: 3}
 --- !u!65 &65076433725961616
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -616,7 +632,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1723811317435446}
   m_Enabled: 1
-  m_ExtensionPropertyValues: []
 --- !u!114 &114047137971768666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -635,6 +650,25 @@ MonoBehaviour:
   _motor_identifier: 
   _axis_of_motion: 0
   _space: 1
+--- !u!114 &114066256538711184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860348953583632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 278496fbfbc005044baa4fade0d803a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _agent_game_object: {fileID: 0}
+  _environment_manager: {fileID: 0}
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
+  _debug: 0
+  _observer_identifier: 
+  _data: 
 --- !u!114 &114117860755349358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -727,7 +761,7 @@ MonoBehaviour:
   _direction: {x: 0, y: 0, z: 0}
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _debug: 1
+  _debug: 0
 --- !u!114 &114486923131810870
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -46,10 +46,10 @@ namespace Neodroid.Windows {
         _environment_manager._coordinate_reference_point = (Transform)EditorGUILayout.ObjectField ("Coordinate Reference Point:", _environment_manager._coordinate_reference_point, typeof(Transform), true);
         EditorGUI.EndDisabledGroup ();
 
-        _agents = NeodroidFunctions.FindAllObjectsOfTypeInScene<NeodroidAgent> ();
-        _actors = NeodroidFunctions.FindAllObjectsOfTypeInScene<Actor> ();
-        _motors = NeodroidFunctions.FindAllObjectsOfTypeInScene<Motor> ();
-        _observers = NeodroidFunctions.FindAllObjectsOfTypeInScene<Observer> ();
+        _agents = NeodroidUtilities.FindAllObjectsOfTypeInScene<NeodroidAgent> ();
+        _actors = NeodroidUtilities.FindAllObjectsOfTypeInScene<Actor> ();
+        _motors = NeodroidUtilities.FindAllObjectsOfTypeInScene<Motor> ();
+        _observers = NeodroidUtilities.FindAllObjectsOfTypeInScene<Observer> ();
 
 
         _scroll_position = EditorGUILayout.BeginScrollView (_scroll_position);

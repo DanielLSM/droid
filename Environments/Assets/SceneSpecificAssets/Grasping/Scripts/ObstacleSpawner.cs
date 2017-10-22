@@ -92,7 +92,7 @@ namespace SceneSpecificAssets.Grasping {
 
     void Update () {
       if (visualize_grid)
-        NeodroidUtilities.DrawRect (x_size, y_size, z_size, this.transform.position, Color.red);
+        GraspingUtilities.DrawRect (x_size, y_size, z_size, this.transform.position, Color.red);
     }
 
     public void SpawnObstacles (float cubeNum = 1, float sphereNum = 1) {

@@ -8,9 +8,9 @@ namespace Neodroid.NeodroidEnvironment.Motors {
     X,
     Y,
     Z,
-    Rot_X,
-    Rot_Y,
-    Rot_Z
+    RotX,
+    RotY,
+    RotZ
 
   }
 }

@@ -33,6 +33,7 @@ namespace Neodroid.NeodroidEnvironment.Agents {
     Dictionary<string, Observer> _observers = new Dictionary<string, Observer> ();
     MessageServer _message_server;
     bool _waiting_for_reaction = true;
+    bool _has_stepped_since_reaction = true;
     bool _client_connected = false;
 
     Reaction _lastest_reaction = null;
@@ -80,10 +81,13 @@ namespace Neodroid.NeodroidEnvironment.Agents {
     }
 
     void LateUpdate () {
-      if (!_waiting_for_reaction) {
-        UpdateObserversData ();
-        _message_server.SendEnvironmentState (GetCurrentState ());
+      if (!_waiting_for_reaction && !_has_stepped_since_reaction) {
         _environment_manager.Step ();
+        UpdateObserversData ();
+        _has_stepped_since_reaction = true;
+      }
+      if (!_waiting_for_reaction && _has_stepped_since_reaction && _environment_manager.IsEnvironmentUpdated ()) {
+        _message_server.SendEnvironmentState (GetCurrentState ());
         _waiting_for_reaction = true;
       }
     }
@@ -188,7 +192,7 @@ namespace Neodroid.NeodroidEnvironment.Agents {
     }
 
     void AddToEnvironment () {
-      NeodroidFunctions.MaybeRegisterComponent (_environment_manager, this);
+      NeodroidUtilities.MaybeRegisterComponent (_environment_manager, this);
     }
 
 
@@ -250,6 +254,7 @@ namespace Neodroid.NeodroidEnvironment.Agents {
         Debug.Log ("Received: " + reaction.ToString ());
       _lastest_reaction = reaction;
       _waiting_for_reaction = false;
+      _has_stepped_since_reaction = false;
     }
 
     void OnDisconnectCallback () {

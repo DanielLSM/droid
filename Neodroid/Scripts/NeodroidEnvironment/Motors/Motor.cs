@@ -21,7 +21,7 @@ namespace Neodroid.NeodroidEnvironment.Motors {
     public void RegisterComponent () {
       if (_motor_identifier == null || _motor_identifier == "")
         _motor_identifier = GetMotorIdentifier ();
-      NeodroidFunctions.MaybeRegisterComponent (_actor_game_object, this);
+      NeodroidUtilities.MaybeRegisterComponent (_actor_game_object, this);
     }
 
     private void Update () {

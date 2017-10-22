@@ -16,7 +16,7 @@ namespace Neodroid.NeodroidEnvironment.Observers {
     }
 
     public override byte[] GetData () {
-      _data = NeodroidFunctions.RenderTextureImage (_camera).EncodeToPNG ();
+      _data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG ();
       return _data;
     }
 

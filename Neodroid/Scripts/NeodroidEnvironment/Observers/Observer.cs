@@ -35,7 +35,7 @@ namespace Neodroid.NeodroidEnvironment.Observers {
     }
 
     protected void AddToAgent () {
-      NeodroidFunctions.MaybeRegisterComponent (_agent_game_object, this);
+      NeodroidUtilities.MaybeRegisterComponent (_agent_game_object, this);
     }
 
     public virtual byte[] GetData () { 

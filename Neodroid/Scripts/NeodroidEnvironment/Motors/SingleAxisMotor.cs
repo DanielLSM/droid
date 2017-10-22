@@ -23,13 +23,13 @@ namespace Neodroid.NeodroidEnvironment.Motors {
       case MotorAxis.Z:
         transform.Translate (-Vector3.forward * motion._strength, _space);
         break;
-      case MotorAxis.Rot_X:
+      case MotorAxis.RotX:
         transform.Rotate (Vector3.left, motion._strength, _space);
         break;
-      case MotorAxis.Rot_Y:
+      case MotorAxis.RotY:
         transform.Rotate (Vector3.up, motion._strength, _space);
         break;
-      case MotorAxis.Rot_Z:
+      case MotorAxis.RotZ:
         transform.Rotate (Vector3.forward, motion._strength, _space);
         break;
       default:

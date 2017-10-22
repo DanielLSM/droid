@@ -24,7 +24,7 @@ namespace Neodroid.NeodroidEnvironment.Actors {
     protected void Start () {
       if (_motors == null)
         _motors = new Dictionary<string, Motor> ();
-      NeodroidFunctions.MaybeRegisterComponent (_agent_game_object, this);
+      NeodroidUtilities.MaybeRegisterComponent (_agent_game_object, this);
       Setup ();
       UpdatePosRotDir ();
     }

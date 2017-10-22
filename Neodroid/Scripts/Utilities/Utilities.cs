@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 #endif
 
 namespace Neodroid.Utilities {
-  public static class NeodroidFunctions {
+  public static class NeodroidUtilities {
     
     public static Texture2D RenderTextureImage (Camera camera) { // From unity documentation, https://docs.unity3d.com/ScriptReference/Camera.Render.html
       RenderTexture current_render_texture = RenderTexture.active;
@@ -19,6 +19,29 @@ namespace Neodroid.Utilities {
       texture.Apply ();
       RenderTexture.active = current_render_texture;
       return texture;
+    }
+
+    public static void RegisterCollisionTriggerCallbacksOnChildren (Transform transform,
+                                                                    ChildSensor.OnChildCollisionEnterDelegate OnCollisionEnterChild,
+                                                                    ChildSensor.OnChildTriggerEnterDelegate OnTriggerEnterChild,
+                                                                    ChildSensor.OnChildCollisionExitDelegate OnCollisionExitChild,
+                                                                    ChildSensor.OnChildTriggerExitDelegate OnTriggerExitChild,
+                                                                    ChildSensor.OnChildCollisionStayDelegate OnCollisionStayChild,
+                                                                    ChildSensor.OnChildTriggerStayDelegate OnTriggerStayChild,
+                                                                    bool debug = false) {
+      var childrenWithColliders = transform.GetComponentsInChildren<Collider> (transform.gameObject);
+
+      foreach (Collider child in childrenWithColliders) {
+        ChildSensor child_sensor = child.gameObject.AddComponent<ChildSensor> ();
+        child_sensor.OnCollisionEnterDelegate = OnCollisionEnterChild;
+        child_sensor.OnTriggerEnterDelegate = OnTriggerEnterChild;
+        child_sensor.OnCollisionExitDelegate = OnCollisionExitChild;
+        child_sensor.OnTriggerExitDelegate = OnTriggerExitChild;
+        child_sensor.OnTriggerStayDelegate = OnTriggerStayChild;
+        child_sensor.OnCollisionStayDelegate = OnCollisionStayChild;
+        if (debug)
+          Debug.Log (transform.name + " has " + child_sensor.name + " registered");
+      }
     }
 
     public static string ColorArrayToString (Color[] colors) {

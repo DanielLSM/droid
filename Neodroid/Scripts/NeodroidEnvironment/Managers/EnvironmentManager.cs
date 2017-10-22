@@ -28,6 +28,7 @@ namespace Neodroid.NeodroidEnvironment.Managers {
     int _current_episode_frame = 0;
     Dictionary<string, NeodroidAgent> _agents = new Dictionary<string, NeodroidAgent> ();
     float _last_reset_time = 0;
+    bool _is_environment_updated = false;
 
     #endregion
 
@@ -54,21 +55,29 @@ namespace Neodroid.NeodroidEnvironment.Managers {
       if (_episode_length > 0 && _current_episode_frame > _episode_length) {
         if (_debug)
           Debug.Log ("Maximum episode length reached, resetting");
-        foreach (var agent in _agents.Values) {
-          if (_debug)
-            Debug.Log ("Interrupting agent");
-          //agent.ResetRegisteredObjects ();
-          agent.Interrupt ();
-        }
-        ResetEnvironment ();
-        _current_episode_frame = 0;
-        return;
+        InterruptEnvironment ();
       }
+    }
+
+    void LateUpdate () {
+      _is_environment_updated = true;
     }
 
     #endregion
 
     #region PublicMethods
+
+    public void InterruptEnvironment () {
+      foreach (var agent in _agents.Values) {
+        if (_debug)
+          Debug.Log ("Interrupting agent");
+        agent.ResetRegisteredObjects ();
+        agent.Interrupt ();
+      }
+      ResetEnvironment ();
+      _current_episode_frame = 0;
+      _is_environment_updated = false;
+    }
 
     public Vector3 TransformPosition (Vector3 position) {
       if (_coordinate_system == CoordinateSystem.RelativeToReferencePoint) {
@@ -95,8 +104,12 @@ namespace Neodroid.NeodroidEnvironment.Managers {
     }
 
     public void Step () {
-      ResumeEnvironment ();
       _current_episode_frame++;
+      ResumeEnvironment ();
+    }
+
+    public bool IsEnvironmentUpdated () {
+      return _is_environment_updated;
     }
 
     public int GetCurrentFrameNumber () {
@@ -117,6 +130,10 @@ namespace Neodroid.NeodroidEnvironment.Managers {
           _game_objects [i].transform.rotation = _reset_rotations [i];
           if (rigid_body)
             rigid_body.WakeUp ();
+          
+          var animation = _game_objects [i].GetComponent<Animation> ();
+          if (animation)
+            animation.Rewind ();
         }
       }
       _last_reset_time = Time.time;
@@ -138,6 +155,7 @@ namespace Neodroid.NeodroidEnvironment.Managers {
 
     void ResumeEnvironment () {
       Time.timeScale = 1;
+      _is_environment_updated = false;
     }
 
     #region Registration
