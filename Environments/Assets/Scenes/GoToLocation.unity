@@ -16018,13 +16018,13 @@ Prefab:
     - target: {fileID: 114944286371804306, guid: c7090f9373f0b4799a1e1b3a1b703874,
         type: 2}
       propertyPath: _coordinate_system
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114944286371804306, guid: c7090f9373f0b4799a1e1b3a1b703874,
         type: 2}
       propertyPath: _coordinate_reference_point
       value: 
-      objectReference: {fileID: 1803486973}
+      objectReference: {fileID: 0}
     - target: {fileID: 114723573921721854, guid: c7090f9373f0b4799a1e1b3a1b703874,
         type: 2}
       propertyPath: m_Enabled
@@ -16050,7 +16050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91e82ab6aba45f08d723cd9845d4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 1
+  _debug: 0
   _area: {fileID: 710721101}
   _actor: {fileID: 506735765}
   _environment: {fileID: 0}
