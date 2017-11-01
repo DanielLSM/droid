@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 
-namespace Neodroid.BoundingBoxes {
+namespace Neodroid.Utilities.BoundingBoxes {
 
   [ExecuteInEditMode]
   public class BoundingBox : MonoBehaviour {

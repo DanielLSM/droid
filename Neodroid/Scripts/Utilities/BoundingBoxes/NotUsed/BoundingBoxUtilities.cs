@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using Neodroid.Utilities;
 
-namespace Neodroid.BoundingBoxes.NotUsed {
+namespace Neodroid.UtilitiesBoundingBoxes {
   public static class Utilities {
     public static void DrawBoxFromCenter (Vector3 p, float r, Color c) { // p is pos.yition of the center, r is "radius" and c is the color of the box
       //Bottom lines

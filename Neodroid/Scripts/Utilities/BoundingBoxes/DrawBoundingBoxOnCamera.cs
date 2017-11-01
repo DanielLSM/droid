@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Neodroid.BoundingBoxes {
+namespace Neodroid.Utilities.BoundingBoxes {
+  
   [RequireComponent (typeof(Camera))]
   [ExecuteInEditMode]
   public class DrawBoundingBoxOnCamera : MonoBehaviour {

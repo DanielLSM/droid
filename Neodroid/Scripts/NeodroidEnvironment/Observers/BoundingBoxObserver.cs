@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Text;
-using Neodroid.BoundingBoxes;
+using Neodroid.Utilities.BoundingBoxes;
 
 namespace Neodroid.NeodroidEnvironment.Observers {
 

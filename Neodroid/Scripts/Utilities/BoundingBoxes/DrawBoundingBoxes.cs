@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-namespace Neodroid.Scripts.BoundingBoxes {
+namespace Neodroid.Utilities.BoundingBoxes {
 
   [ExecuteInEditMode] 
   public class ShowBoundingBoxes : MonoBehaviour {
@@ -81,7 +81,7 @@ namespace Neodroid.Scripts.BoundingBoxes {
     }
 
     void DrawBox (Vector3 v3FrontTopLeft, Vector3 v3FrontTopRight, Vector3 v3FrontBottomLeft, Vector3 v3FrontBottomRight, 
-               Vector3 v3BackTopLeft, Vector3 v3BackTopRight, Vector3 v3BackBottomLeft, Vector3 v3BackBottomRight) {
+                  Vector3 v3BackTopLeft, Vector3 v3BackTopRight, Vector3 v3BackBottomLeft, Vector3 v3BackBottomRight) {
       Debug.DrawLine (v3FrontTopLeft, v3FrontTopRight, color);
       Debug.DrawLine (v3FrontTopRight, v3FrontBottomRight, color);
       Debug.DrawLine (v3FrontBottomRight, v3FrontBottomLeft, color);

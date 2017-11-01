@@ -4,6 +4,8 @@ using UnityEngine;
 using Neodroid.NeodroidEnvironment.Actors;
 using Neodroid.Utilities;
 using Neodroid.NeodroidEnvironment.Managers;
+using SceneSpecificAssets.Grasping;
+using Neodroid.Utilities.BoundingBoxes;
 
 namespace Neodroid.Evaluation {
   enum ActorOverlapping {
@@ -17,12 +19,15 @@ namespace Neodroid.Evaluation {
   }
 
 
-  public class OverlappingArea : ObjectiveFunction {
+  public class GotoArea : ObjectiveFunction {
 
     public bool _debug = false;
     public Collider _area;
     public Actor _actor;
     public EnvironmentManager _environment;
+    public Obstruction[] _obstructions;
+    public BoundingBox _playable_area;
+    //Used for.. if outside playable area then reset
 
     ActorOverlapping _overlapping = ActorOverlapping.OUTSIDE_AREA;
     ActorColliding _colliding = ActorColliding.NOT_COLLIDING;
@@ -30,7 +35,20 @@ namespace Neodroid.Evaluation {
     public override float Evaluate () {
       var reward = 0f;
 
-      reward += -Mathf.Abs (Vector3.Distance (_area.transform.position, _actor.transform.position));
+
+
+      /*var regularising_term = 0f;
+
+      foreach (var ob in _obstructions) {
+        RaycastHit ray_hit;
+        Physics.Raycast (_actor.transform.position, (ob.transform.position - _actor.transform.position).normalized, out ray_hit, LayerMask.NameToLayer ("Obstruction"));
+        regularising_term += -Mathf.Abs (Vector3.Distance (ray_hit.point, _actor.transform.position));
+        //regularising_term += -Mathf.Abs (Vector3.Distance (ob.transform.position, _actor.transform.position));
+      }
+
+      reward += 0.2 * regularising_term;*/
+
+      reward += 1 / Mathf.Abs (Vector3.Distance (_area.transform.position, _actor.transform.position)); // Inversely porpotional to the absolute distance, closer higher reward
 
       if (_overlapping == ActorOverlapping.INSIDE_AREA) {
         reward += 10f; 
@@ -58,6 +76,9 @@ namespace Neodroid.Evaluation {
       }
       if (!_environment) {
         _environment = FindObjectOfType<EnvironmentManager> ();
+      }
+      if (_obstructions.Length <= 0) {
+        _obstructions = FindObjectsOfType<Obstruction> ();
       }
 
       NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (
