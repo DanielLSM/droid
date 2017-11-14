@@ -12,6 +12,8 @@ TagManager:
   - Target
   - Obstruction
   - Gripper
+  - GrabTag
+  - Goal
   layers:
   - Default
   - TransparentFX

@@ -257,6 +257,15 @@ namespace Neodroid.NeodroidEnvironment.Agents {
       _has_stepped_since_reaction = false;
     }
 
+    /*void OnResetCallback (EnvironmentConfiguration configuration) {
+      _client_connected = true;
+      if (_debug)
+        Debug.Log ("Received: " + reaction.ToString ());
+      _lastest_reaction = reaction;
+      _waiting_for_reaction = false;
+      _has_stepped_since_reaction = false;
+    }*/
+
     void OnDisconnectCallback () {
       _client_connected = false;
       if (_debug)

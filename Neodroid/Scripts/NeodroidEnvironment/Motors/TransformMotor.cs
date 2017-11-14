@@ -6,15 +6,15 @@ namespace Neodroid.NeodroidEnvironment.Motors {
 
     public override void ApplyMotion (MotorMotion motion) {
       if (_debug)
-        Debug.Log ("Applying " + motion._strength.ToString () + " To " + name);
-      if (!_bidirectional && motion._strength < 0) {
+        Debug.Log ("Applying " + motion.Strength.ToString () + " To " + name);
+      if (!_bidirectional && motion.Strength < 0) {
         Debug.Log ("Motor is not bi-directional. It does not accept negative input.");
         return; // Do nothing
       }
 
       //TODO: implement transform motor
 
-      _energy_spend_since_reset += _energy_cost * motion._strength;
+      _energy_spend_since_reset += _energy_cost * motion.Strength;
     }
 
     public override string GetMotorIdentifier () {

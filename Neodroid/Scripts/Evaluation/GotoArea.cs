@@ -69,7 +69,7 @@ namespace Neodroid.Evaluation {
 
     private void Start () {
       if (!_area) {
-        //_area = FindObjectOfType<Collider> ();
+        _area = FindObjectOfType<Collider> ();
       }
       if (!_actor) {
         _actor = FindObjectOfType<Actor> ();

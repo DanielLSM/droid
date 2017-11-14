@@ -108,7 +108,7 @@ namespace Neodroid.Messaging {
 
 
     public static Reaction create_reaction (FlatBufferReaction reaction) {
-      return new Reaction (create_motions (reaction, reaction.MotionsLength), reaction.Reset);
+      return new Reaction (create_motions (reaction, reaction.MotionsLength), null, reaction.Reset);
     }
 
     public static MotorMotion[] create_motions (FlatBufferReaction reaction, int len) {

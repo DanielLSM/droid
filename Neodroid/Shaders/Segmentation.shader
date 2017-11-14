@@ -1,5 +1,9 @@
-﻿Shader "Custom/Segmentation"{ //Draws objects with shader on top always
+﻿Shader "Neodroid/Segmentation"{ //Draws objects with shader on top always
     SubShader{
+      //Tags
+      //{
+      //  "RenderType"="Opaque" // What RenderType shaders to replace there is a copy of this exact shame shader below with the "Transparent" RenderType
+      //}
       //Tags{
       //  "Queue" = "Transparent"
       //}

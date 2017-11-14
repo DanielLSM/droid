@@ -46,6 +46,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1181633398302462
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4227589893027060}
+  - component: {fileID: 20993525591422136}
+  - component: {fileID: 114040556332385592}
+  - component: {fileID: 114694187629340422}
+  - component: {fileID: 114485459183939594}
+  m_Layer: 0
+  m_Name: InfraredShadowCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1222284825586676
 GameObject:
   m_ObjectHideFlags: 1
@@ -55,11 +74,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4532989944215654}
   - component: {fileID: 20495345772018724}
-  - component: {fileID: 114040556332385592}
   - component: {fileID: 114559157595683568}
   - component: {fileID: 114274260537545652}
+  - component: {fileID: 114502963649128268}
   m_Layer: 0
-  m_Name: InfraredShadowCamera
+  m_Name: NormalCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +291,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229309920468564}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 2, z: -2}
+  m_LocalPosition: {x: 0, y: 1, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4150379215804238}
@@ -293,6 +312,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4970107176667458}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4227589893027060
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1181633398302462}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4970107176667458}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4402841328780416
 Transform:
@@ -318,7 +350,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4970107176667458}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4582005251780966
 Transform:
@@ -385,11 +417,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4532989944215654}
+  - {fileID: 4227589893027060}
   - {fileID: 4052085036045928}
   - {fileID: 4402841328780416}
   - {fileID: 4746122066090982}
   - {fileID: 4188051971926122}
+  - {fileID: 4532989944215654}
   m_Father: {fileID: 4154979080732794}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -410,7 +443,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5
+  far clip plane: 3
   field of view: 30
   orthographic: 1
   orthographic size: 1
@@ -445,7 +478,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5
+  far clip plane: 3
   field of view: 30
   orthographic: 1
   orthographic size: 1
@@ -480,7 +513,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5
+  far clip plane: 3
   field of view: 58.6
   orthographic: 1
   orthographic size: 1
@@ -489,7 +522,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967039
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 397526a456d4446bfb3742cfaf86a5e5, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 35ebd21bab7a6466fa33d96db2ed4b55, type: 2}
   m_TargetDisplay: 1
   m_TargetEye: 3
   m_HDR: 1
@@ -515,7 +548,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5
+  far clip plane: 3
   field of view: 58.6
   orthographic: 1
   orthographic size: 1
@@ -550,7 +583,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5
+  far clip plane: 3
   field of view: 58.6
   orthographic: 1
   orthographic size: 1
@@ -585,7 +618,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5
+  far clip plane: 3
   field of view: 58.6
   orthographic: 1
   orthographic size: 1
@@ -595,6 +628,41 @@ Camera:
     m_Bits: 4294967039
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: fa884919f4af94b439a0e37e3bfc80fb, type: 2}
+  m_TargetDisplay: 1
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!20 &20993525591422136
+Camera:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1181633398302462}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.1
+  far clip plane: 3
+  field of view: 58.6
+  orthographic: 1
+  orthographic size: 1
+  m_Depth: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967039
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 8400000, guid: 397526a456d4446bfb3742cfaf86a5e5, type: 2}
   m_TargetDisplay: 1
   m_TargetEye: 3
   m_HDR: 1
@@ -663,7 +731,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229309920468564}
   m_Enabled: 0
-  m_ExtensionPropertyValues: []
 --- !u!92 &92466076279640654
 Behaviour:
   m_ObjectHideFlags: 1
@@ -812,7 +879,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1222284825586676}
+  m_GameObject: {fileID: 1181633398302462}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71ff536b79b9a49e9af073152e3d2b03, type: 3}
@@ -881,7 +948,6 @@ MonoBehaviour:
   lColor: {r: 0, g: 1, b: 0, a: 1}
   colors:
   - {r: 0, g: 1, b: 0.4, a: 0.74}
-  - {r: 0.32352942, g: 1, b: 0.58012176, a: 0.74}
 --- !u!114 &114295651411325096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -956,6 +1022,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lights_to_ignore:
   - {fileID: 108484706134688396}
+--- !u!114 &114485459183939594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1181633398302462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33dd720eb089547dabb1538899cef5d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orthographic_size: 1
+  _near_clip_plane: 1
+  _far_clip_plane: 1
+--- !u!114 &114502963649128268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1222284825586676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218752bc193dfc141a183aa0dc41d3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReplacementShader: {fileID: 4800000, guid: f83df06aeca3c45269800b7f2e3dcefa, type: 3}
+  OverDrawColor: {r: 0, g: 0, b: 0, a: 0}
+  _replace_rendertype: 
 --- !u!114 &114559157595683568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -981,6 +1075,25 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1728262864285934}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171828f705f73414fb42bd11259fceea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _agent_game_object: {fileID: 0}
+  _environment_manager: {fileID: 0}
+  _position: {x: 0, y: 2, z: -2}
+  _rotation: {x: 0, y: 0.7071068, z: 0.70710677}
+  _direction: {x: 0, y: -0.70710677, z: 0.7071068}
+  _debug: 0
+  _observer_identifier: 
+  _data: 
+--- !u!114 &114694187629340422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1181633398302462}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 171828f705f73414fb42bd11259fceea, type: 3}
