@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Neodroid.NeodroidEnvironment.Actors;
-using Neodroid.NeodroidEnvironment.Observers;
+using Neodroid.Actors;
+using Neodroid.Observers;
 
 namespace Neodroid.Messaging.Messages {
   [Serializable]

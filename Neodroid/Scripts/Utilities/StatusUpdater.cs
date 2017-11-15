@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Neodroid.NeodroidEnvironment.Observers;
-using Neodroid.NeodroidEnvironment.Agents;
+using Neodroid.Observers;
+using Neodroid.Agents;
 
 namespace Neodroid.Utilities {
   public class StatusUpdater : MonoBehaviour {

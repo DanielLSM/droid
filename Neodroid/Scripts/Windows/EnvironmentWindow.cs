@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Neodroid.NeodroidEnvironment.Agents;
-using Neodroid.NeodroidEnvironment.Actors;
-using Neodroid.NeodroidEnvironment.Motors;
-using Neodroid.NeodroidEnvironment.Observers;
-using Neodroid.NeodroidEnvironment.Managers;
+using Neodroid.Agents;
+using Neodroid.Actors;
+using Neodroid.Motors;
+using Neodroid.Observers;
+using Neodroid.Managers;
 using Neodroid.Utilities;
 
 namespace Neodroid.Windows {

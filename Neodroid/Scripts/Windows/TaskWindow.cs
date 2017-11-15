@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Neodroid.NeodroidEnvironment.Task;
-using Neodroid.NeodroidEnvironment.Managers;
+using Neodroid.Task;
+using Neodroid.Managers;
 
 namespace Neodroid.Windows {
   #if UNITY_EDITOR

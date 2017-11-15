@@ -168,7 +168,10 @@ GameObject:
   - component: {fileID: 114486923131810870}
   - component: {fileID: 114200241081661828}
   - component: {fileID: 114117860755349358}
+  - component: {fileID: 114337085296411524}
   - component: {fileID: 114066256538711184}
+  - component: {fileID: 54759619620098030}
+  - component: {fileID: 135614881064048114}
   m_Layer: 0
   m_Name: TransformGripper
   m_TagString: Gripper
@@ -287,8 +290,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1860348953583632}
-  m_LocalRotation: {x: 0.10754807, y: 0.380359, z: 0.044586636, w: -0.9174816}
-  m_LocalPosition: {x: 3.8646646, y: -3.5539017, z: -3.661421}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4008384475306948}
@@ -300,7 +303,7 @@ Transform:
   - {fileID: 4514637320497820}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 22.553001, y: 1.3750001, z: 1.83}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20848018614798238
 Camera:
   m_ObjectHideFlags: 1
@@ -318,7 +321,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 3
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -530,6 +533,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &54759619620098030
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860348953583632}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &54854293887807104
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -687,9 +705,9 @@ MonoBehaviour:
     m_Extent: {x: 0.100000024, y: 0.13001463, z: 0.10630481}
   _collider_bounds_offset: {x: 0, y: 0.0020143986, z: -0.019819811}
   _mesh_bounds:
-    m_Center: {x: 3.8646646, y: 0.44832778, z: -3.686666}
-    m_Extent: {x: 0.07402849, y: 0.13022947, z: 0.11172974}
-  _mesh_bounds_offset: {x: 0, y: 0.0022294521, z: -0.025244951}
+    m_Center: {x: -0.000000007450581, y: 2.0022295, z: -0.025244936}
+    m_Extent: {x: 0.07402845, y: 0.13022947, z: 0.111729875}
+  _mesh_bounds_offset: {x: -0.000000007450581, y: 0.0022294521, z: -0.025244936}
   _setup_on_awake: 1
 --- !u!114 &114170325556735516
 MonoBehaviour:
@@ -762,6 +780,17 @@ MonoBehaviour:
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
   _debug: 0
+--- !u!114 &114337085296411524
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860348953583632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e5b7c4c887764bf4910730181526057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114486923131810870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -823,3 +852,15 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1723811317435446}
   m_Enabled: 1
+--- !u!135 &135614881064048114
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860348953583632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15
+  m_Center: {x: 0, y: 0, z: 0}

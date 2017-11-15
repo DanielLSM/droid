@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Neodroid.NeodroidEnvironment.Actors;
+using Neodroid.Actors;
 using Neodroid.Utilities;
-using Neodroid.NeodroidEnvironment.Managers;
+using Neodroid.Managers;
 using SceneSpecificAssets.Grasping;
 using Neodroid.Utilities.BoundingBoxes;
 
