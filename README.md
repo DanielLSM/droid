@@ -6,6 +6,10 @@ Droid is a unity package that enables prototyping reinforcement learning environ
 ## Screenshot Of The Game View With The Droid Unity Package
 ![droid](images/neodroid.png)
 
+## Setup
+### !Important Notice For Windows Users!
+  Run '''fix_windows_symlink.bat''' with administrative privileges, to make windows recognise the symlink. If on any other platform you should be fine.
+
 ## Features
 The unity comes quite selection of scripts and tools for setting up and experimenting reinforcement learning environments.
 
