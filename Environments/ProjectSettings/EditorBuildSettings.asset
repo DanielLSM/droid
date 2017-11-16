@@ -17,9 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Grasping.unity
     guid: 9fa334bbf7af447369124ccb2e175b81
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Reaching.unity
     guid: 5b303c2d2a51d4419b34503947fd110c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Robolab/Robolab.unity
     guid: eeb0673df5e9c4bf890fc3ae17d5a524

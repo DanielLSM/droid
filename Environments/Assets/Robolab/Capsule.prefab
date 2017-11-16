@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 20280333308183486}
   - component: {fileID: 124406171273288658}
   - component: {fileID: 81295661047921080}
+  - component: {fileID: 92320862758993970}
+  - component: {fileID: 114660849032801532}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -69,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1090873042983168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.7239809, y: 2.439, z: -1.1704059}
+  m_LocalPosition: {x: -0.314, y: 3, z: 3.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4483885323088792}
@@ -174,6 +176,27 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1034004615939670}
   m_Enabled: 1
+--- !u!92 &92320862758993970
+Behaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1034004615939670}
+  m_Enabled: 1
+--- !u!114 &114660849032801532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1034004615939670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef1e70b0e1574993a2c4d202ea421f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineMaterial: {fileID: 2100000, guid: d42519a563a464a4aafb34a53463a90d, type: 2}
+  lColor: {r: 0, g: 1, b: 0, a: 1}
+  colors: []
 --- !u!114 &114770426948709038
 MonoBehaviour:
   m_ObjectHideFlags: 1
