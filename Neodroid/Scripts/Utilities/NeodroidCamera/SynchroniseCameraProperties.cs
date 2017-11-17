@@ -12,10 +12,12 @@ namespace Neodroid.Utilities.NeodroidCamera {
     public bool _orthographic_size = true;
     public bool _near_clip_plane = true;
     public bool _far_clip_plane = true;
+    public bool _culling_mask = true;
 
     float _old_near_clip_plane;
     float _old_far_clip_plane;
     float _old_orthographic_size;
+    int _old_culling_mask;
 
     Camera _camera;
     Camera[] _cameras;
@@ -26,6 +28,7 @@ namespace Neodroid.Utilities.NeodroidCamera {
         _old_orthographic_size = _camera.orthographicSize;
         _old_near_clip_plane = _camera.nearClipPlane;
         _old_far_clip_plane = _camera.farClipPlane;
+        _old_culling_mask = _camera.cullingMask;
 
         _cameras = FindObjectsOfType<Camera> ();
       } else {
@@ -58,6 +61,14 @@ namespace Neodroid.Utilities.NeodroidCamera {
           foreach (Camera camera in _cameras) {
             if (camera != _camera) {
               camera.farClipPlane = _camera.farClipPlane;
+            }
+          }
+        }
+        if (_old_culling_mask != _camera.cullingMask) {
+          _old_culling_mask = _camera.cullingMask;
+          foreach (Camera camera in _cameras) {
+            if (camera != _camera) {
+              camera.cullingMask = _camera.cullingMask;
             }
           }
         }

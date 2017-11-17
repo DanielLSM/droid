@@ -65,7 +65,7 @@ namespace Neodroid.Agents {
         if (_environment_manager) {
           ResetRegisteredObjects ();
           _environment_manager.ResetEnvironment ();
-          _environment_manager.Configure ("IncreaseDifficulty");
+          _environment_manager.Configure (1);
           Interrupt ();
           return;
         }

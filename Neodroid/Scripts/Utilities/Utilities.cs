@@ -85,6 +85,20 @@ namespace Neodroid.Utilities {
       return results.ToArray ();
     }
 
+    public static GameObject[] FindAllGameObjectsExceptLayer (int layer) {
+      var goa = GameObject.FindObjectsOfType<GameObject> ();
+      var gol = new List<GameObject> ();
+      foreach (var go in goa) {
+        if (go.layer != layer) {
+          gol.Add (go);
+        }
+      }
+      if (gol.Count == 0) {
+        return null;
+      }
+      return gol.ToArray ();
+    }
+
     /** Contains logic for coverting a camera component into a Texture2D. */
     /*public Texture2D ObservationToTex(Camera camera, int width, int height)
     {

@@ -35,8 +35,8 @@ namespace Neodroid.Managers {
     #region UnityCallbacks
 
     void Start () {
-      //_configurables = FindObjectsOfType<Configurable> ();
-      _game_objects = FindObjectsOfType<GameObject> ();
+      var _ignored_layer = LayerMask.NameToLayer ("IgnoredByNeodroid");
+      _game_objects = NeodroidUtilities.FindAllGameObjectsExceptLayer (_ignored_layer);
       _reset_positions = new Vector3[_game_objects.Length];
       _reset_rotations = new Quaternion[_game_objects.Length];
       for (int i = 0; i < _game_objects.Length; i++) {
@@ -139,9 +139,9 @@ namespace Neodroid.Managers {
       _last_reset_time = Time.time;
     }
 
-    public void Configure (string configuration) {
+    public void Configure (float configuration) {
       foreach (var configurable in _configurables.Values) {
-        configurable.Configure (configuration);
+        configurable.ApplyConfiguration (configuration);
       }
     }
 

@@ -5,12 +5,10 @@ using UnityEngine;
 namespace Neodroid.Configurations {
   public class Difficulty : Configurable {
 
-    // Example
-
-    public override void Configure (string configuration) { 
-      if (configuration == "IncreaseDifficulty") {
+    public override void ApplyConfiguration (float value) { 
+      if (value == 1) {
         print ("Increased Difficulty");
-      } else if (configuration == "DecreaseDifficulty") {
+      } else if (value == -1) {
         print ("Decreased Difficulty");
       }
     }

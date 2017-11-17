@@ -1,9 +1,10 @@
 ﻿using Neodroid.Messaging.Messages;
+using Neodroid.Utilities;
 using UnityEngine;
 
 namespace Neodroid.Motors {
   public class SingleAxisMotor : Motor {
-    public MotorAxis _axis_of_motion;
+    public Axis _axis_of_motion;
     public Space _space = Space.Self;
 
     public override void ApplyMotion (MotorMotion motion) {
@@ -14,22 +15,22 @@ namespace Neodroid.Motors {
         return; // Do nothing
       }
       switch (_axis_of_motion) {
-      case MotorAxis.X:
+      case Axis.X:
         transform.Translate (Vector3.left * motion.Strength, _space);
         break;
-      case MotorAxis.Y:
+      case Axis.Y:
         transform.Translate (-Vector3.up * motion.Strength, _space);
         break;
-      case MotorAxis.Z:
+      case Axis.Z:
         transform.Translate (-Vector3.forward * motion.Strength, _space);
         break;
-      case MotorAxis.RotX:
+      case Axis.RotX:
         transform.Rotate (Vector3.left, motion.Strength, _space);
         break;
-      case MotorAxis.RotY:
+      case Axis.RotY:
         transform.Rotate (Vector3.up, motion.Strength, _space);
         break;
-      case MotorAxis.RotZ:
+      case Axis.RotZ:
         transform.Rotate (Vector3.forward, motion.Strength, _space);
         break;
       default:

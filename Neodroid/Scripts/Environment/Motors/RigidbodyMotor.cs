@@ -1,11 +1,12 @@
 ﻿using Neodroid.Messaging.Messages;
 using UnityEngine;
+using Neodroid.Utilities;
 
 namespace Neodroid.Motors {
 
   [RequireComponent (typeof(Rigidbody))]
   public class RigidbodyMotor : Motor {
-    public MotorAxis _axis_of_motion;
+    public Axis _axis_of_motion;
     Rigidbody _rigidbody;
 
     private void Start () {
@@ -21,24 +22,24 @@ namespace Neodroid.Motors {
       if (_debug)
         Debug.Log ("Applying " + motion.Strength.ToString () + " To " + name);
       switch (_axis_of_motion) {
-      case MotorAxis.X:
+      case Axis.X:
         _rigidbody.AddForce (Vector3.left * motion.Strength);
         break;
-      case MotorAxis.Y:
+      case Axis.Y:
         _rigidbody.AddForce (Vector3.up * motion.Strength);
         break;
-      case MotorAxis.Z:
+      case Axis.Z:
         _rigidbody.AddForce (Vector3.forward * motion.Strength);
         break;
-      case MotorAxis.RotX:
+      case Axis.RotX:
         _rigidbody.AddTorque (Vector3.left * motion.Strength);
           //GetComponent<Rigidbody>().AddForceAtPosition(Vector3.forward * motion._strength, transform.position);
           //GetComponent<Rigidbody>().AddRelativeTorque(Vector3.up * motion._strength);
         break;
-      case MotorAxis.RotY:
+      case Axis.RotY:
         _rigidbody.AddTorque (Vector3.up * motion.Strength);
         break;
-      case MotorAxis.RotZ:
+      case Axis.RotZ:
         _rigidbody.AddTorque (Vector3.forward * motion.Strength);
         break;
       default:
