@@ -4,14 +4,15 @@ using UnityEngine;
 using Neodroid.Configurations;
 using Neodroid.Utilities;
 using Neodroid.Agents;
+using Neodroid.Messaging.Messages;
 
 namespace Neodroid.Managers {
-  public class EnvironmentManager : MonoBehaviour, HasRegister<NeodroidAgent>, HasRegister<Configurable> {
+  public class EnvironmentManager : MonoBehaviour, HasRegister<NeodroidAgent>, HasRegister<ConfigurableGameObject> {
 
     #region PublicMembers
 
     public int _episode_length = 0;
-    public int _frames_spent_resetting = 10;
+    public int _resets = 10;
     public bool _wait_for_reaction_every_frame = false;
     public CoordinateSystem _coordinate_system = CoordinateSystem.GlobalCoordinates;
     public Transform _coordinate_reference_point;
@@ -121,7 +122,7 @@ namespace Neodroid.Managers {
     }
 
     public void ResetEnvironment () {
-      for (int resets = 0; resets < _frames_spent_resetting; resets++) { 
+      for (int resets = 0; resets < _resets; resets++) { 
         for (int i = 0; i < _game_objects.Length; i++) {
           var rigid_body = _game_objects [i].GetComponent<Rigidbody> ();
           if (rigid_body)
@@ -139,9 +140,14 @@ namespace Neodroid.Managers {
       _last_reset_time = Time.time;
     }
 
-    public void Configure (float configuration) {
-      foreach (var configurable in _configurables.Values) {
-        configurable.ApplyConfiguration (configuration);
+    public void Configure (Configuration[] configurations) {
+      foreach (var configuration in configurations) {
+        if (_configurables.ContainsKey (configuration.ConfigurableName)) {
+          _configurables [configuration.ConfigurableName].ApplyConfiguration (configuration);
+        } else {
+          if (_debug)
+            Debug.Log ("Could find not configurable with the specified name: " + configuration.ConfigurableName);
+        }
       }
     }
 
@@ -164,7 +170,7 @@ namespace Neodroid.Managers {
       AddAgent (obj);
     }
 
-    public void Register (Configurable obj) {
+    public void Register (ConfigurableGameObject obj) {
       AddConfigurable (obj);
     }
 
@@ -180,10 +186,10 @@ namespace Neodroid.Managers {
       _agents.Add (agent.name, agent);
     }
 
-    void AddConfigurable (Configurable configurable) {
+    void AddConfigurable (ConfigurableGameObject configurable) {
       if (_debug)
-        Debug.Log ("Environment " + name + " has configurable " + configurable.name);
-      _configurables.Add (configurable.name, configurable);
+        Debug.Log ("Environment " + name + " has configurable " + configurable.GetConfigurableIdentifier ());
+      _configurables.Add (configurable.GetConfigurableIdentifier (), configurable);
     }
 
     #endregion

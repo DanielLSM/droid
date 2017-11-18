@@ -6,6 +6,7 @@ using Neodroid.Messaging.Messages;
 using Neodroid.Actors;
 using Neodroid.Observers;
 using Neodroid.Motors;
+using Neodroid.Configurations;
 using Neodroid.Messaging.FlatBuffer;
 using Neodroid.Messaging.Models.State;
 using Neodroid.Messaging.Models.Reaction;
@@ -108,7 +109,7 @@ namespace Neodroid.Messaging {
 
 
     public static Reaction create_reaction (FlatBufferReaction reaction) {
-      return new Reaction (create_motions (reaction, reaction.MotionsLength), null, reaction.Reset);
+      return new Reaction (create_motions (reaction, reaction.MotionsLength), create_configurations (reaction, reaction.ConfigurationsLength), reaction.Reset);
     }
 
     public static MotorMotion[] create_motions (FlatBufferReaction reaction, int len) {
@@ -117,6 +118,24 @@ namespace Neodroid.Messaging {
         m [i] = create_motion (reaction.Motions (i));
       }
       return m;
+    }
+
+    public static Configuration[] create_configurations (FlatBufferReaction reaction, int len) {
+      Configuration[] m = new Configuration[len];
+      for (int i = 0; i < len; i++) {
+        m [i] = create_configuration (reaction.Configurations (i));
+      }
+      return m;
+    }
+
+    public static Configuration create_configuration (FlatBufferConfiguration? configuration_maybe) {
+      FlatBufferConfiguration configuration;
+      try {
+        configuration = configuration_maybe.Value;
+        return new Configuration (configuration.ConfigurableName, configuration.ConfigurableValue);
+      } catch { 
+        return null;
+      }
     }
 
     public static MotorMotion create_motion (FlatBufferMotion? motion_maybe) {

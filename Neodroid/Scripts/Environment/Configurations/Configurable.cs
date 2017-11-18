@@ -1,37 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Neodroid.Agents;
-using Neodroid.Managers;
-using Neodroid.Messaging.Messages;
-using Neodroid.Utilities;
+﻿using Neodroid.Messaging.Messages;
 
 namespace Neodroid.Configurations {
-  public class Configurable : MonoBehaviour {
+  public interface Configurable {
+    void ApplyConfiguration (Configuration obj);
 
-    public EnvironmentManager _environment_manager;
-    public bool _debug = false;
-
-    protected virtual void Start () {
-      Setup ();
-      AddToEnvironment ();
-    }
-
-    protected virtual void Setup () {
-      if (!_environment_manager) {
-        _environment_manager = FindObjectOfType<EnvironmentManager> ();
-      }
-    }
-
-    protected void AddToEnvironment () {
-      NeodroidUtilities.MaybeRegisterComponent (_environment_manager, this);
-    }
-
-    public virtual void ApplyConfiguration (float configuration) {
-    }
-
-    public virtual string GetConfigurableIdentifier () {
-      return name + "BaseConfigurable";
-    }
+    string GetConfigurableIdentifier ();
   }
 }

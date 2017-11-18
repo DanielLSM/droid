@@ -95,23 +95,22 @@ public struct FlatBufferConfiguration : IFlatbufferObject
   public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
   public FlatBufferConfiguration __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public string Key { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
-  public ArraySegment<byte>? GetKeyBytes() { return __p.__vector_as_arraysegment(4); }
-  public string Value { get { int o = __p.__offset(6); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
-  public ArraySegment<byte>? GetValueBytes() { return __p.__vector_as_arraysegment(6); }
+  public string ConfigurableName { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public ArraySegment<byte>? GetConfigurableNameBytes() { return __p.__vector_as_arraysegment(4); }
+  public float ConfigurableValue { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
 
   public static Offset<FlatBufferConfiguration> CreateFlatBufferConfiguration(FlatBufferBuilder builder,
-      StringOffset keyOffset = default(StringOffset),
-      StringOffset valueOffset = default(StringOffset)) {
+      StringOffset configurable_nameOffset = default(StringOffset),
+      float configurable_value = 0.0f) {
     builder.StartObject(2);
-    FlatBufferConfiguration.AddValue(builder, valueOffset);
-    FlatBufferConfiguration.AddKey(builder, keyOffset);
+    FlatBufferConfiguration.AddConfigurableValue(builder, configurable_value);
+    FlatBufferConfiguration.AddConfigurableName(builder, configurable_nameOffset);
     return FlatBufferConfiguration.EndFlatBufferConfiguration(builder);
   }
 
   public static void StartFlatBufferConfiguration(FlatBufferBuilder builder) { builder.StartObject(2); }
-  public static void AddKey(FlatBufferBuilder builder, StringOffset keyOffset) { builder.AddOffset(0, keyOffset.Value, 0); }
-  public static void AddValue(FlatBufferBuilder builder, StringOffset valueOffset) { builder.AddOffset(1, valueOffset.Value, 0); }
+  public static void AddConfigurableName(FlatBufferBuilder builder, StringOffset configurableNameOffset) { builder.AddOffset(0, configurableNameOffset.Value, 0); }
+  public static void AddConfigurableValue(FlatBufferBuilder builder, float configurableValue) { builder.AddFloat(1, configurableValue, 0.0f); }
   public static Offset<FlatBufferConfiguration> EndFlatBufferConfiguration(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     return new Offset<FlatBufferConfiguration>(o);

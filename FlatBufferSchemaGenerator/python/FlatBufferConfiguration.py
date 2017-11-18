@@ -19,20 +19,20 @@ class FlatBufferConfiguration(object):
         self._tab = flatbuffers.table.Table(buf, pos)
 
     # FlatBufferConfiguration
-    def Key(self):
+    def ConfigurableName(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
         return ""
 
     # FlatBufferConfiguration
-    def Value(self):
+    def ConfigurableValue(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
-            return self._tab.String(o + self._tab.Pos)
-        return ""
+            return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+        return 0.0
 
 def FlatBufferConfigurationStart(builder): builder.StartObject(2)
-def FlatBufferConfigurationAddKey(builder, key): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(key), 0)
-def FlatBufferConfigurationAddValue(builder, value): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(value), 0)
+def FlatBufferConfigurationAddConfigurableName(builder, configurableName): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(configurableName), 0)
+def FlatBufferConfigurationAddConfigurableValue(builder, configurableValue): builder.PrependFloat32Slot(1, configurableValue, 0.0)
 def FlatBufferConfigurationEnd(builder): return builder.EndObject()

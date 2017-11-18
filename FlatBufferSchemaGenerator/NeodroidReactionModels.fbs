@@ -13,8 +13,8 @@ table FlatBufferMotion {
 }
 
 table FlatBufferConfiguration {
-  key:string;
-  value:string;
+  configurable_name:string;
+  configurable_value:float;
 }
 
 root_type FlatBufferReaction;

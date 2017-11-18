@@ -808,7 +808,7 @@ MonoBehaviour:
   _wait_for_reaction_every_frame: 0
   _coordinate_system: 1
   _coordinate_reference_point: {fileID: 1803486973}
-  _debug: 0
+  _debug: 1
 --- !u!114 &433336211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1299,7 +1299,7 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 482
+      value: 463
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
@@ -2420,11 +2420,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1311237946}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8758db3b98b444f7818b9888a0cfa7a, type: 3}
+  m_Script: {fileID: 11500000, guid: d0a5ec781dc714cc0b7c7ec1d64bbbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _environment_manager: {fileID: 0}
-  _debug: 0
+  _debug: 1
+  _axis_of_configuration: 0
 --- !u!21 &1325578655
 Material:
   serializedVersion: 6

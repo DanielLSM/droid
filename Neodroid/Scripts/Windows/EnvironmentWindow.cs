@@ -38,7 +38,7 @@ namespace Neodroid.Windows {
       _environment_manager = FindObjectOfType<EnvironmentManager> ();
       if (_environment_manager) {
         _environment_manager._episode_length = EditorGUILayout.IntField ("Episode Length", _environment_manager._episode_length);
-        _environment_manager._frames_spent_resetting = EditorGUILayout.IntField ("Frames Spent Resetting", _environment_manager._frames_spent_resetting);
+        _environment_manager._resets = EditorGUILayout.IntField ("Resets when resetting", _environment_manager._resets);
         _environment_manager._wait_for_reaction_every_frame = EditorGUILayout.Toggle ("Wait For Reaction Every Frame", _environment_manager._wait_for_reaction_every_frame);
         _environment_manager._coordinate_system = (CoordinateSystem)EditorGUILayout.EnumPopup ("Coordinate System:", _environment_manager._coordinate_system);
 

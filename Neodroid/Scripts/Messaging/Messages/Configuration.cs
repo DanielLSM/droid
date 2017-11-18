@@ -4,9 +4,9 @@ namespace Neodroid.Messaging.Messages {
   public class Configuration {
 
     string _configurable_name;
-    string _configurable_value;
+    float _configurable_value;
 
-    public Configuration (string configurable_name, string configurable_value) {
+    public Configuration (string configurable_name, float configurable_value) {
       _configurable_name = configurable_name;
       _configurable_value = configurable_value;
     }
@@ -15,7 +15,7 @@ namespace Neodroid.Messaging.Messages {
       get{ return _configurable_name; }
     }
 
-    public string ConfigurableValue {
+    public float ConfigurableValue {
       get{ return _configurable_value; }
     }
 

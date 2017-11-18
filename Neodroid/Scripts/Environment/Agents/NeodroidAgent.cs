@@ -65,8 +65,8 @@ namespace Neodroid.Agents {
         if (_environment_manager) {
           ResetRegisteredObjects ();
           _environment_manager.ResetEnvironment ();
-          _environment_manager.Configure (1);
           Interrupt ();
+          _environment_manager.Configure (_lastest_reaction.Configurations);
           return;
         }
       }
