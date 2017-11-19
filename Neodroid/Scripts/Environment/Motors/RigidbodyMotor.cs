@@ -49,7 +49,7 @@ namespace Neodroid.Motors {
     }
 
     public override string GetMotorIdentifier () {
-      return name + "RigidbodyMotor" + _axis_of_motion.ToString ();
+      return name + "Rigidbody" + _axis_of_motion.ToString ();
     }
   }
 }

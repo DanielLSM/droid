@@ -182,8 +182,8 @@ namespace Neodroid.Managers {
 
     void AddAgent (NeodroidAgent agent) {
       if (_debug)
-        Debug.Log ("Environment " + name + " has agent " + agent.name);
-      _agents.Add (agent.name, agent);
+        Debug.Log ("Environment " + name + " has agent " + agent.GetAgentIdentifier ());
+      _agents.Add (agent.GetAgentIdentifier (), agent);
     }
 
     void AddConfigurable (ConfigurableGameObject configurable) {

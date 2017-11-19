@@ -12,16 +12,13 @@ namespace Neodroid.Motors {
     public float _energy_cost = 1;
     protected float _energy_spend_since_reset = 0;
     public Actor _actor_game_object;
-    public string _motor_identifier = "";
 
     private void Start () {
       RegisterComponent ();
     }
 
     public void RegisterComponent () {
-      if (_motor_identifier == null || _motor_identifier == "")
-        _motor_identifier = GetMotorIdentifier ();
-      NeodroidUtilities.MaybeRegisterComponent (_actor_game_object, this);
+      _actor_game_object = NeodroidUtilities.MaybeRegisterComponent (_actor_game_object, this);
     }
 
     private void Update () {
@@ -31,7 +28,7 @@ namespace Neodroid.Motors {
     }
 
     public virtual string GetMotorIdentifier () {
-      return _motor_identifier;
+      return name + "Motor";
     }
 
     public virtual void ApplyMotion (MotorMotion motion) {

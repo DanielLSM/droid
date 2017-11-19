@@ -14,6 +14,7 @@ TagManager:
   - Gripper
   - GrabTag
   - Goal
+  - Actor
   layers:
   - Default
   - TransparentFX

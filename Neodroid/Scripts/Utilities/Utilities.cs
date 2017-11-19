@@ -52,7 +52,7 @@ namespace Neodroid.Utilities {
       return s;
     }
 
-    public static void MaybeRegisterComponent<Recipient, Caller> (Recipient r, Caller c) where Recipient : Object, HasRegister<Caller> where Caller : Component {
+    public static Recipient MaybeRegisterComponent<Recipient, Caller> (Recipient r, Caller c) where Recipient : Object, HasRegister<Caller> where Caller : Component {
       Recipient component;
       if (r != null) {
         component = r;  //.GetComponent<Recipient>();
@@ -61,10 +61,12 @@ namespace Neodroid.Utilities {
       } else {
         component = Object.FindObjectOfType<Recipient> ();
       }
-      if (component != null)
+      if (component != null) {
         component.Register (c);
-      else
+      } else {
         Debug.Log ("Could not find recipient during registeration");
+      }
+      return component;
     }
 
 

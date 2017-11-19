@@ -181,18 +181,18 @@ namespace Neodroid.Agents {
 
     void AddActor (Actor actor) {
       if (_debug)
-        Debug.Log ("Agent " + name + " has actor " + actor.name);
-      _actors.Add (actor.name, actor);
+        Debug.Log ("Agent " + name + " has actor " + actor.GetActorIdentifier ());
+      _actors.Add (actor.GetActorIdentifier (), actor);
     }
 
     void AddObserver (Observer observer) {
       if (_debug)
-        Debug.Log ("Agent " + name + " has observer " + observer.name);
-      _observers.Add (observer.name, observer);
+        Debug.Log ("Agent " + name + " has observer " + observer.GetObserverIdentifier ());
+      _observers.Add (observer.GetObserverIdentifier (), observer);
     }
 
     void AddToEnvironment () {
-      NeodroidUtilities.MaybeRegisterComponent (_environment_manager, this);
+      _environment_manager = NeodroidUtilities.MaybeRegisterComponent (_environment_manager, this);
     }
 
 
@@ -219,6 +219,10 @@ namespace Neodroid.Agents {
       _was_interrupted = true;
       if (_debug)
         Debug.Log ("Was interrupted");
+    }
+
+    public string GetAgentIdentifier () {
+      return name + "Agent";
     }
 
     public void ResetRegisteredObjects () {

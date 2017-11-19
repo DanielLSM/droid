@@ -42,7 +42,7 @@ namespace Neodroid.Messaging {
 
     private static Offset<FlatBufferActor> build_actor (FlatBufferBuilder b, Offset<FlatBufferMotor>[] motors, Actor actor) {
       var posrotdir = build_posrotdir (b, actor._position, actor._rotation, actor._direction);
-      StringOffset n = b.CreateString (actor.name);
+      StringOffset n = b.CreateString (actor.GetActorIdentifier ());
       FlatBufferActor.CreateMotorsVector (b, motors);
       var motor_vector = b.EndVector ();
       FlatBufferActor.StartFlatBufferActor (b);
@@ -57,7 +57,7 @@ namespace Neodroid.Messaging {
       FlatBufferObserver.CreateDataVector (b, observer.GetData ());
       //CustomFlatBufferImplementation.CreateDataVectorAndAddAllDataAtOnce (b, observer.GetData ());
       var data_vector = b.EndVector ();
-      StringOffset n = b.CreateString (observer.name);
+      StringOffset n = b.CreateString (observer.GetObserverIdentifier ());
       FlatBufferObserver.StartFlatBufferObserver (b);
       FlatBufferObserver.AddName (b, n);
       FlatBufferObserver.AddData (b, data_vector);

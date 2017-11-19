@@ -35,7 +35,7 @@ namespace Neodroid.Observers {
     }
 
     protected void AddToAgent () {
-      NeodroidUtilities.MaybeRegisterComponent (_agent_game_object, this);
+      _agent_game_object = NeodroidUtilities.MaybeRegisterComponent (_agent_game_object, this);
     }
 
     public virtual byte[] GetData () { 
@@ -48,7 +48,7 @@ namespace Neodroid.Observers {
 
 
     public virtual string GetObserverIdentifier () {
-      return name + "BaseObserver";
+      return name + "Observer";
     }
 
 

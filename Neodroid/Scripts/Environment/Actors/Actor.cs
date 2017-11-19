@@ -59,8 +59,12 @@ namespace Neodroid.Actors {
       if (_motors == null)
         _motors = new Dictionary<string, Motor> ();
       if (_debug)
-        Debug.Log ("Actor " + name + " has motor " + motor);
-      _motors.Add (motor._motor_identifier, motor);
+        Debug.Log ("Actor " + name + " has motor " + motor.GetMotorIdentifier ());
+      _motors.Add (motor.GetMotorIdentifier (), motor);
+    }
+
+    public string GetActorIdentifier () {
+      return name + "Actor";
     }
 
     public void Register (Motor obj) {

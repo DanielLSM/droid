@@ -24,7 +24,7 @@ namespace Neodroid.Configurations {
     }
 
     protected void AddToEnvironment () {
-      NeodroidUtilities.MaybeRegisterComponent (_environment_manager, this);
+      _environment_manager = NeodroidUtilities.MaybeRegisterComponent (_environment_manager, this);
     }
 
     public virtual void ApplyConfiguration (Configuration configuration) {
