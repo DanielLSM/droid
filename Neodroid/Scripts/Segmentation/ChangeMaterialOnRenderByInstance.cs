@@ -8,9 +8,9 @@ public class ChangeMaterialOnRenderByInstance : MonoBehaviour {
   public bool _use_shared_materials = false;
 
   Dictionary<GameObject, Color> _instance_colors;
-  //LinkedList<Material>[] _instance_materials;
   LinkedList<Color>[] _original_colors;
   Renderer[] _all_renders;
+  MaterialPropertyBlock _block;
 
   public Dictionary<GameObject, Color> InstanceColorsDict {
     get{ return _instance_colors; }
@@ -60,63 +60,42 @@ public class ChangeMaterialOnRenderByInstance : MonoBehaviour {
 
   void Setup () {
     _all_renders = FindObjectsOfType<Renderer> ();
+    _block = new MaterialPropertyBlock ();
 
     _instance_colors = new Dictionary<GameObject, Color> (_all_renders.Length);
     foreach (Renderer renderer in _all_renders) {
       _instance_colors.Add (renderer.gameObject, Random.ColorHSV ());
     }
+
+
   }
 
   void Change () {
     _original_colors = new LinkedList<Color>[_all_renders.Length];
-    //_instance_materials = new LinkedList<Material>[_all_renders.Length];
+
     for (int i = 0; i < _original_colors.Length; i++) {
       _original_colors [i] = new LinkedList<Color> ();
-      //_instance_materials [i] = new LinkedList<Material> ();
     }
-
-
+      
     for (int i = 0; i < _all_renders.Length; i++) {
-      if (_use_shared_materials) {
-        foreach (var mat in _all_renders[i].sharedMaterials) {
-          if (mat != null) {
-            _original_colors [i].AddFirst (mat.color);
-            mat.color = _instance_colors [_all_renders [i].gameObject];
-          }
+      foreach (var mat in _all_renders[i].sharedMaterials) {
+        if (mat != null) {
+          _original_colors [i].AddFirst (mat.color);
         }
-      } else {
-        foreach (var mat in _all_renders[i].materials) {
-          if (mat != null) {
-            _original_colors [i].AddFirst (mat.color);
-            //var temporary_material = new Material (mat);
-            //temporary_material.hideFlags = HideFlags.DontSave;
-            //temporary_material.name = "_TemporaryMaterial" + GetInstanceID ();
-            //temporary_material.color = _instance_colors [_all_renders [i].gameObject];
-            //_instance_materials [i].AddFirst (temporary_material);
-            //_all_renders [i].materials [j] = temporary_material;
-            mat.color = _instance_colors [_all_renders [i].gameObject];
-          }
-        }
+        _block.SetColor ("_Color", _instance_colors [_all_renders [i].gameObject]);
+        _all_renders [i].SetPropertyBlock (_block);
       }
+
     }
   }
 
   void Restore () {
     for (int i = 0; i < _all_renders.Length; i++) {
-      if (_use_shared_materials) {
-        foreach (var mat in _all_renders[i].sharedMaterials) {
-          if (mat != null) {
-            mat.color = _original_colors [i].Last.Value;
-            _original_colors [i].RemoveLast ();
-          }
-        }
-      } else {
-        foreach (var mat in _all_renders[i].materials) {
-          if (mat != null) {
-            mat.color = _original_colors [i].Last.Value;
-            _original_colors [i].RemoveLast ();
-            //_instance_materials [i].RemoveLast ();
-          }
+      foreach (var mat in _all_renders[i].sharedMaterials) {
+        if (mat != null) {
+          _block.SetColor ("_Color", _original_colors [i].Last.Value);
+          _original_colors [i].RemoveLast ();
+          _all_renders [i].SetPropertyBlock (_block);
         }
       }
     }

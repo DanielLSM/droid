@@ -5,11 +5,12 @@ using System;
 
 [ExecuteInEditMode]
 public class ChangeMaterialOnRenderByTag : MonoBehaviour {
- 
+
   public bool _replace_untagged_color = true;
   public Color _untagged_color = Color.black;
-  public bool _use_shared_materials = false;
   public SegmentationColorByTag[] _colors_by_tag;
+
+  MaterialPropertyBlock _block;
 
   Dictionary<string, Color> _tag_colors;
   LinkedList<Color>[] _original_colors;
@@ -19,17 +20,13 @@ public class ChangeMaterialOnRenderByTag : MonoBehaviour {
     get{ return _colors_by_tag; }
   }
 
-  // Use this for initialization
-  void Start () {
-  }
-	
-  // Update is called once per frame
   void Update () {
-    Setup ();
+    Setup (); // renderes maybe be disable and enabled, that is why every update we find all renderers again
   }
 
   void Setup () {
     _all_renders = FindObjectsOfType<Renderer> ();
+    _block = new MaterialPropertyBlock ();
 
     _tag_colors = new Dictionary<string, Color> ();
     if (_colors_by_tag.Length > 0) {
@@ -49,97 +46,39 @@ public class ChangeMaterialOnRenderByTag : MonoBehaviour {
 
     for (int i = 0; i < _all_renders.Length; i++) {
       if (_tag_colors.ContainsKey (_all_renders [i].tag)) {
-        if (_use_shared_materials) {
-          foreach (var mat in _all_renders[i].sharedMaterials) {
-            if (mat != null) {
-              _original_colors [i].AddFirst (mat.color);
-              mat.color = _tag_colors [_all_renders [i].tag];
-            }
-          }
-        
-        } /*else {
-          int j = 0;
-          foreach (var mat in _all_renders[i].sharedMaterials) {
+        foreach (var mat in _all_renders[i].sharedMaterials) {
+          if (mat != null) {
             _original_colors [i].AddFirst (mat.color);
-            var temporary_material = new Material (mat);
-            temporary_material.color = _tag_colors [_all_renders [i].tag];
-            _all_renders [i].sharedMaterials [j] = temporary_material;
-            j++;
           }
-        }*/
-
-        else {
-          foreach (var mat in _all_renders[i].materials) {
-            if (mat != null) {
-              _original_colors [i].AddFirst (mat.color);
-              mat.color = _tag_colors [_all_renders [i].tag];
-            }
-          }
+          _block.SetColor ("_Color", _tag_colors [_all_renders [i].tag]);
+          _all_renders [i].SetPropertyBlock (_block);
         }
 
       } else if (_replace_untagged_color) {
-        if (_use_shared_materials) {
-          foreach (var mat in _all_renders[i].sharedMaterials) {
-            if (mat != null) {
-              _original_colors [i].AddFirst (mat.color);
-              mat.color = _untagged_color;
-            }
+        foreach (var mat in _all_renders[i].sharedMaterials) {
+          if (mat != null) {
+            _original_colors [i].AddFirst (mat.color);
           }
-        } else {
-          foreach (var mat in _all_renders[i].materials) {
-            if (mat != null) {
-              _original_colors [i].AddFirst (mat.color);
-              mat.color = _untagged_color;
-            }
-          }
+          _block.SetColor ("_Color", _untagged_color);
+          _all_renders [i].SetPropertyBlock (_block);
         }
       }
     }
+
   }
 
   void Restore () {
     for (int i = 0; i < _all_renders.Length; i++) {
-      if (_tag_colors.ContainsKey (_all_renders [i].tag)) {
-        if (_use_shared_materials) {
-          foreach (var mat in _all_renders[i].sharedMaterials) {
-            if (mat != null) {
-              mat.color = _original_colors [i].Last.Value;
-              _original_colors [i].RemoveLast ();
-            }
-          }
-        }/* else {
-          foreach (var mat in _all_renders[i].sharedMaterials) {
-            mat.color = _original_colors [i].Last.Value;
-            _original_colors [i].RemoveLast ();
-          }
-        }*/
-        else {
-          foreach (var mat in _all_renders[i].materials) {
-            if (mat != null) {
-              mat.color = _original_colors [i].Last.Value;
-              _original_colors [i].RemoveLast ();
-            }
-          }
-        }
-      } else if (_replace_untagged_color) {
-        if (_use_shared_materials) {
-          foreach (var mat in _all_renders[i].sharedMaterials) {
-            if (mat != null) {
-              mat.color = _original_colors [i].Last.Value;
-              _original_colors [i].RemoveLast ();
-            }
-          }
-        } else {
-          foreach (var mat in _all_renders[i].materials) {
-            if (mat != null) {
-              mat.color = _original_colors [i].Last.Value;
-              _original_colors [i].RemoveLast ();
-            }
-          }
+      foreach (var mat in _all_renders[i].sharedMaterials) {
+        if (mat != null) {
+          _block.SetColor ("_Color", _original_colors [i].Last.Value);
+          _original_colors [i].RemoveLast ();
+          _all_renders [i].SetPropertyBlock (_block);
         }
       }
     }
   }
+
 
   void OnPreCull () { // change
   }

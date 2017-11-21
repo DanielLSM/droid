@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 114705762485809378}
   - component: {fileID: 114583550578861066}
   m_Layer: 0
-  m_Name: InstanceSegmentationCamera
+  m_Name: InstanceSegmentation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 114554312817569342}
   - component: {fileID: 114987180938374324}
   m_Layer: 0
-  m_Name: RGBCamera
+  m_Name: RGB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 114233013785027764}
   - component: {fileID: 114559839958468648}
   m_Layer: 0
-  m_Name: InfraredShadowCamera
+  m_Name: InfraredShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 114044439806580818}
   - component: {fileID: 114780472175799290}
   m_Layer: 0
-  m_Name: DepthCamera
+  m_Name: Depth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 114906826257649894}
   - component: {fileID: 114512072595084190}
   m_Layer: 0
-  m_Name: NormalCamera
+  m_Name: Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 114314432778866690}
   - component: {fileID: 114768594439098468}
   m_Layer: 0
-  m_Name: SegmentationCamera
+  m_Name: Segmentation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 114893045318798646}
   - component: {fileID: 114982598003798586}
   m_Layer: 0
-  m_Name: MotionCamera
+  m_Name: Motion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -473,7 +473,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1789175225826214}
-  m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -519,7 +519,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1090873042983168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.163, y: 2.439, z: -1.497}
+  m_LocalPosition: {x: 0, y: 2.3, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4483885323088792}
@@ -695,10 +695,10 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 4294966527
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -1180,9 +1180,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: 0.163, y: 2.039, z: -1.497}
-  _rotation: {x: 0, y: 0.7071068, z: 0.70710677}
-  _direction: {x: 0, y: -0.70710677, z: 0.7071068}
+  _position: {x: 0, y: 1.9000001, z: -1.5}
+  _rotation: {x: 0, y: 1, z: 0}
+  _direction: {x: 0, y: 0, z: 1}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1291,8 +1291,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _replace_untagged_color: 1
   _untagged_color: {r: 0, g: 0, b: 0, a: 1}
-  _use_shared_materials: 0
-  _colors_by_tag: []
+  _colors_by_tag:
+  - tag: Actor
+    color: {r: 0, g: 1, b: 0.13103437, a: 1}
+  - tag: Obstruction
+    color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114315249499555392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1372,9 +1375,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: 0.163, y: 2.039, z: -1.497}
-  _rotation: {x: 0, y: 0.7071068, z: 0.70710677}
-  _direction: {x: 0, y: -0.70710677, z: 0.7071068}
+  _position: {x: 0, y: 1.9000001, z: -1.5}
+  _rotation: {x: 0, y: 1, z: 0}
+  _direction: {x: 0, y: 0, z: 1}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1431,9 +1434,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: 0.163, y: 2.039, z: -1.497}
-  _rotation: {x: 0, y: 0.7071068, z: 0.70710677}
-  _direction: {x: 0, y: -0.70710677, z: 0.7071068}
+  _position: {x: 0, y: 1.9000001, z: -1.5}
+  _rotation: {x: 0, y: 1, z: 0}
+  _direction: {x: 0, y: 0, z: 1}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1476,9 +1479,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: 0.163, y: 2.039, z: -1.497}
-  _rotation: {x: 0, y: 0.7071068, z: 0.70710677}
-  _direction: {x: 0, y: -0.70710677, z: 0.7071068}
+  _position: {x: 0, y: 1.9000001, z: -1.5}
+  _rotation: {x: 0, y: 1, z: 0}
+  _direction: {x: 0, y: 0, z: 1}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1507,9 +1510,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: 0.163, y: 2.039, z: -1.497}
-  _rotation: {x: 0, y: 0.7071068, z: 0.70710677}
-  _direction: {x: 0, y: -0.70710677, z: 0.7071068}
+  _position: {x: 0, y: 1.9000001, z: -1.5}
+  _rotation: {x: 0, y: 1, z: 0}
+  _direction: {x: 0, y: 0, z: 1}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1682,9 +1685,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: 0.163, y: 2.039, z: -1.497}
-  _rotation: {x: 0, y: 0.7071068, z: 0.70710677}
-  _direction: {x: 0, y: -0.70710677, z: 0.7071068}
+  _position: {x: 0, y: 1.9000001, z: -1.5}
+  _rotation: {x: 0, y: 1, z: 0}
+  _direction: {x: 0, y: 0, z: 1}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1715,9 +1718,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: 0.163, y: 2.039, z: -1.497}
-  _rotation: {x: 0, y: 0.7071068, z: 0.70710677}
-  _direction: {x: 0, y: -0.70710677, z: 0.7071068}
+  _position: {x: 0, y: 1.9000001, z: -1.5}
+  _rotation: {x: 0, y: 1, z: 0}
+  _direction: {x: 0, y: 0, z: 1}
   _debug: 1
   _observer_identifier: 
   _data: 
@@ -1732,7 +1735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2773a5ee782b3475e9f2cac8306134fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReplacementShader: {fileID: 4800000, guid: 0f2361423bff3490d8f046e398478528, type: 3}
+  ReplacementShader: {fileID: 4800000, guid: 570b8536c02044d88969010b6bf0ad4e, type: 3}
   OverDrawColor: {r: 0, g: 0, b: 0, a: 0}
   _replace_rendertype: 
 --- !u!114 &114987180938374324
