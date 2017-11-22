@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 23627167202759300}
   - component: {fileID: 54419362249860628}
   - component: {fileID: 114770426948709038}
+  - component: {fileID: 114040985824605590}
   m_Layer: 9
   m_Name: Person
   m_TagString: Untagged
@@ -184,8 +185,8 @@ Camera:
   m_GameObject: {fileID: 1034004615939670}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 1, g: 0, b: 1, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -404,6 +405,24 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1034004615939670}
   m_Enabled: 1
+--- !u!114 &114040985824605590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090873042983168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225df50fc650e4988b25b608a59abf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _max_pick_up_distance: 10
+  _throwing_strength: 10
+  _follow_strength: 10
+  _holding_distance: 3
+  _player: {fileID: 0}
+  _camera: {fileID: 20280333308183486}
+  _holding_position: {x: 0, y: 0, z: 0}
 --- !u!114 &114390874089218866
 MonoBehaviour:
   m_ObjectHideFlags: 1

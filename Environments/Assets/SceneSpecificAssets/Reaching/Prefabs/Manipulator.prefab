@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 64297552458200228}
   m_Layer: 0
   m_Name: House
-  m_TagString: Gripper
+  m_TagString: Actor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114776143826431334}
   m_Layer: 0
   m_Name: SliderMotor
-  m_TagString: Gripper
+  m_TagString: Actor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 54126130700959388}
   m_Layer: 0
   m_Name: Claw1
-  m_TagString: Gripper
+  m_TagString: Actor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,9 +86,10 @@ GameObject:
   - component: {fileID: 114031632917629426}
   - component: {fileID: 114996293596997362}
   - component: {fileID: 114748720204320466}
+  - component: {fileID: 114012785289762612}
   m_Layer: 0
   m_Name: Manipulator
-  m_TagString: Gripper
+  m_TagString: Actor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +108,7 @@ GameObject:
   - component: {fileID: 54011102154907134}
   m_Layer: 0
   m_Name: Claw2
-  m_TagString: Gripper
+  m_TagString: Actor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -461,6 +462,20 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f742b9df054d68644ba2621b1fdb5859, type: 3}
+--- !u!114 &114012785289762612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1773439048360894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a5ec781dc714cc0b7c7ec1d64bbbb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _environment_manager: {fileID: 0}
+  _debug: 0
+  _axis_of_configuration: 0
 --- !u!114 &114031632917629426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -476,7 +491,6 @@ MonoBehaviour:
   _bidirectional: 1
   _energy_cost: 1
   _actor_game_object: {fileID: 0}
-  _motor_identifier: 
   _axis_of_motion: 5
   _space: 1
 --- !u!114 &114044024429865386
@@ -494,7 +508,6 @@ MonoBehaviour:
   _bidirectional: 1
   _energy_cost: 1
   _actor_game_object: {fileID: 0}
-  _motor_identifier: 
   _axis_of_motion: 4
   _space: 1
 --- !u!114 &114073524450063356
@@ -512,7 +525,6 @@ MonoBehaviour:
   _bidirectional: 1
   _energy_cost: 1
   _actor_game_object: {fileID: 0}
-  _motor_identifier: 
   _axis_of_motion: 2
   _space: 1
 --- !u!114 &114320676608267946
@@ -530,7 +542,6 @@ MonoBehaviour:
   _bidirectional: 1
   _energy_cost: 1
   _actor_game_object: {fileID: 0}
-  _motor_identifier: 
   _axis_of_motion: 0
   _space: 1
 --- !u!114 &114460997051973174
@@ -548,7 +559,6 @@ MonoBehaviour:
   _bidirectional: 1
   _energy_cost: 1
   _actor_game_object: {fileID: 0}
-  _motor_identifier: 
   _axis_of_motion: 1
   _space: 1
 --- !u!114 &114707580791127854
@@ -566,7 +576,6 @@ MonoBehaviour:
   _bidirectional: 1
   _energy_cost: 1
   _actor_game_object: {fileID: 0}
-  _motor_identifier: 
   _axis_of_motion: 3
   _space: 1
 --- !u!114 &114748720204320466
@@ -603,7 +612,6 @@ MonoBehaviour:
   _bidirectional: 1
   _energy_cost: 1
   _actor_game_object: {fileID: 0}
-  _motor_identifier: 
   _axis_of_motion: 0
   _space: 1
 --- !u!114 &114996293596997362
