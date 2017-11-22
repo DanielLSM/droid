@@ -7,6 +7,7 @@ using Neodroid.Motors;
 using Neodroid.Observers;
 using Neodroid.Managers;
 using Neodroid.Utilities;
+using Neodroid.Configurations;
 
 namespace Neodroid.Windows {
   #if UNITY_EDITOR
@@ -26,6 +27,7 @@ namespace Neodroid.Windows {
     Actor[] _actors;
     Motor[] _motors;
     Observer[] _observers;
+    ConfigurableGameObject[] _configurables;
     Vector2 _scroll_position;
     Texture _icon;
 
@@ -50,6 +52,7 @@ namespace Neodroid.Windows {
         _actors = NeodroidUtilities.FindAllObjectsOfTypeInScene<Actor> ();
         _motors = NeodroidUtilities.FindAllObjectsOfTypeInScene<Motor> ();
         _observers = NeodroidUtilities.FindAllObjectsOfTypeInScene<Observer> ();
+        _configurables = NeodroidUtilities.FindAllObjectsOfTypeInScene<ConfigurableGameObject> ();
 
 
         _scroll_position = EditorGUILayout.BeginScrollView (_scroll_position);
@@ -96,6 +99,17 @@ namespace Neodroid.Windows {
           GUILayout.Label (observer.GetObserverIdentifier ());
           observer.enabled = EditorGUILayout.ToggleLeft ("Enabled", observer.enabled && observer.gameObject.activeSelf, GUILayout.Width (60));
           EditorGUILayout.ObjectField (observer, typeof(Observer), true, GUILayout.Width (60));
+          EditorGUILayout.EndHorizontal ();
+        }
+        EditorGUILayout.EndVertical ();
+
+        EditorGUILayout.BeginVertical ("Box");
+        GUILayout.Label ("Configurables");
+        foreach (var configurable in _configurables) {
+          EditorGUILayout.BeginHorizontal ("Box");
+          GUILayout.Label (configurable.GetConfigurableIdentifier ());
+          configurable.enabled = EditorGUILayout.ToggleLeft ("Enabled", configurable.enabled && configurable.gameObject.activeSelf, GUILayout.Width (60));
+          EditorGUILayout.ObjectField (configurable, typeof(ConfigurableGameObject), true, GUILayout.Width (60));
           EditorGUILayout.EndHorizontal ();
         }
         EditorGUILayout.EndVertical ();

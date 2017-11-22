@@ -11,7 +11,9 @@ namespace Neodroid.Utilities.NeodroidCamera {
 
     // Use this for initialization
     void Start () {
-		
+      if (_lights_to_ignore == null) {
+        _lights_to_ignore = new Light[1];
+      }
     }
 	
     // Update is called once per frame
@@ -20,20 +22,29 @@ namespace Neodroid.Utilities.NeodroidCamera {
     }
 
     void OnPreCull () {
-      foreach (var light in _lights_to_ignore) {
-        light.enabled = false;
+      if (_lights_to_ignore != null) {
+        foreach (var light in _lights_to_ignore) {
+          if (light)
+            light.enabled = false;
+        }
       }
     }
 
     void OnPreRender () {
-      foreach (var light in _lights_to_ignore) {
-        light.enabled = false;
+      if (_lights_to_ignore != null) {
+        foreach (var light in _lights_to_ignore) {
+          if (light)
+            light.enabled = false;
+        }
       }
     }
 
     void OnPostRender () {
-      foreach (var light in _lights_to_ignore) {
-        light.enabled = true;
+      if (_lights_to_ignore != null) {
+        foreach (var light in _lights_to_ignore) {
+          if (light)
+            light.enabled = true;
+        }
       }
     }
   }
