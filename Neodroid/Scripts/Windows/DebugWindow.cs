@@ -6,6 +6,7 @@ using Neodroid.Actors;
 using Neodroid.Motors;
 using Neodroid.Observers;
 using Neodroid.Managers;
+using Neodroid.Configurations;
 
 namespace Neodroid.Windows {
   #if UNITY_EDITOR
@@ -34,6 +35,9 @@ namespace Neodroid.Windows {
     Observer[] _observers;
     bool _show_observers_debug = false;
 
+    ConfigurableGameObject[] _configurables;
+    bool _show_configurables_debug = false;
+
     Texture _icon;
 
     void OnEnable () {
@@ -52,12 +56,14 @@ namespace Neodroid.Windows {
       _actors = FindObjectsOfType<Actor> ();
       _motors = FindObjectsOfType<Motor> ();
       _observers = FindObjectsOfType<Observer> ();
+      _configurables = FindObjectsOfType<ConfigurableGameObject> ();
 
       _show_envionment_manager_debug = EditorGUILayout.Toggle ("Debug environment manager", _show_envionment_manager_debug);
       _show_agents_debug = EditorGUILayout.Toggle ("Debug all agents", _show_agents_debug);
       _show_actors_debug = EditorGUILayout.Toggle ("Debug all actors", _show_actors_debug);
       _show_motors_debug = EditorGUILayout.Toggle ("Debug all motors", _show_motors_debug);
       _show_observers_debug = EditorGUILayout.Toggle ("Debug all observers", _show_observers_debug);
+      _show_configurables_debug = EditorGUILayout.Toggle ("Debug all configurables", _show_configurables_debug);
 
       if (GUILayout.Button ("Apply")) {
         _envionment_manager._debug = _show_envionment_manager_debug;
@@ -72,6 +78,9 @@ namespace Neodroid.Windows {
         }
         foreach (var observer in _observers) {
           observer._debug = _show_observers_debug;
+        }
+        foreach (var configurable in _configurables) {
+          configurable._debug = _show_configurables_debug;
         }
       }
       
