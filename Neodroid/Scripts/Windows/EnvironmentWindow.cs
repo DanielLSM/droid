@@ -61,7 +61,7 @@ namespace Neodroid.Windows {
         GUILayout.Label ("Agents");
         foreach (var agent in _agents) {
           EditorGUILayout.BeginHorizontal ("Box");
-          GUILayout.Label (agent.name);
+          GUILayout.Label (agent.GetAgentIdentifier ());
           agent.enabled = EditorGUILayout.ToggleLeft ("Enabled", agent.enabled && agent.gameObject.activeSelf, GUILayout.Width (60));
           EditorGUILayout.ObjectField (agent, typeof(NeodroidAgent), true, GUILayout.Width (60));
           EditorGUILayout.EndHorizontal ();
@@ -73,7 +73,7 @@ namespace Neodroid.Windows {
         GUILayout.Label ("Actors");
         foreach (var actor in _actors) {
           EditorGUILayout.BeginHorizontal ("Box");
-          GUILayout.Label (actor.name);
+          GUILayout.Label (actor.GetActorIdentifier ());
           actor.enabled = EditorGUILayout.ToggleLeft ("Enabled", actor.enabled && actor.gameObject.activeSelf, GUILayout.Width (60));
           EditorGUILayout.ObjectField (actor, typeof(Actor), true, GUILayout.Width (60));
           EditorGUILayout.EndHorizontal ();

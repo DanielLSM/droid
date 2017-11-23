@@ -36,6 +36,11 @@ namespace Neodroid.Evaluation {
       _extra_terms.Add (term.name (), term);
       _extra_term_weights.Add (term, 1);
     }
+
+    public virtual void Register (Term term, string identifier) {
+      _extra_terms.Add (term.name (), term);
+      _extra_term_weights.Add (term, 1);
+    }
       
 
   }

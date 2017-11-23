@@ -41,7 +41,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1138998545480074
 GameObject:
   m_ObjectHideFlags: 1
@@ -275,8 +275,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1866968490669790}
-  m_LocalRotation: {x: -0.0002690354, y: -0.98586607, z: 0.16752778, w: -0.001577578}
-  m_LocalPosition: {x: -0.28848988, y: 3.6063824, z: 3.2172513}
+  m_LocalRotation: {x: -0.15357414, y: 0.3320904, z: -0.054896664, w: -0.9290411}
+  m_LocalPosition: {x: 1.0844727, y: 3.5904393, z: -1.5973053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4331612275810624}
@@ -363,13 +363,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1037625987720610}
-  m_LocalRotation: {x: 0.07779529, y: 0.37244418, z: -0.37328056, w: 0.8461057}
+  m_LocalRotation: {x: 0.30853763, y: 0.25750896, z: -0.08716196, w: 0.9115353}
   m_LocalPosition: {x: -0.05, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4889865574120588}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 24.186, y: 38.846, z: -38.971}
+  m_LocalEulerAnglesHint: {x: 37.4, y: 31.55, z: 0}
 --- !u!4 &4453025719616826
 Transform:
   m_ObjectHideFlags: 1
@@ -484,7 +484,7 @@ Camera:
   far clip plane: 9
   field of view: 30
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 3
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -519,7 +519,7 @@ Camera:
   far clip plane: 9
   field of view: 30
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 3
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -554,7 +554,7 @@ Camera:
   far clip plane: 9
   field of view: 58.6
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 3
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -589,7 +589,7 @@ Camera:
   far clip plane: 9
   field of view: 58.6
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 3
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -624,7 +624,7 @@ Camera:
   far clip plane: 9
   field of view: 58.6
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 3
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -659,7 +659,7 @@ Camera:
   far clip plane: 9
   field of view: 58.6
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 3
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -694,7 +694,7 @@ Camera:
   far clip plane: 9
   field of view: 30
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 3
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -729,7 +729,7 @@ Camera:
   far clip plane: 9
   field of view: 58.6
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 3
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -1136,6 +1136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lights_to_ignore:
   - {fileID: 108906297679887750}
+  _ignore_infrared_if_empty: 1
 --- !u!114 &114475505895552272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1339,6 +1340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lights_to_ignore:
   - {fileID: 108906297679887750}
+  _ignore_infrared_if_empty: 1
 --- !u!114 &114851491309487662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1378,6 +1380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lights_to_ignore:
   - {fileID: 108906297679887750}
+  _ignore_infrared_if_empty: 1
 --- !u!114 &114910394560810596
 MonoBehaviour:
   m_ObjectHideFlags: 1

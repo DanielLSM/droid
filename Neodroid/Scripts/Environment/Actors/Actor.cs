@@ -4,6 +4,7 @@ using Neodroid.Motors;
 using System.Collections.Generic;
 using UnityEngine;
 using Neodroid.Managers;
+using Neodroid.Messaging.Messages;
 
 namespace Neodroid.Actors {
   public class Actor : MonoBehaviour, HasRegister<Motor> {
@@ -35,6 +36,19 @@ namespace Neodroid.Actors {
       }
     }
 
+    public void ApplyMotion (MotorMotion motion) {
+      if (_debug)
+        Debug.Log ("Applying " + motion.ToString () + " To " + name + "'s motors");
+      var motion_motor_name = motion.GetMotorName ();
+      if (_motors.ContainsKey (motion_motor_name)) {
+        _motors [motion_motor_name].ApplyMotion (motion);
+      } else {
+        if (_debug)
+          Debug.Log ("Could find not motor with the specified name: " + motion_motor_name);
+      }
+        
+    }
+
     void UpdatePosRotDir () {
       if (_environment_manager) {
         _position = _environment_manager.TransformPosition (this.transform.position);
@@ -56,11 +70,19 @@ namespace Neodroid.Actors {
     }
 
     public void AddMotor (Motor motor) {
-      if (_motors == null)
-        _motors = new Dictionary<string, Motor> ();
       if (_debug)
         Debug.Log ("Actor " + name + " has motor " + motor.GetMotorIdentifier ());
+      if (_motors == null)
+        _motors = new Dictionary<string, Motor> ();
       _motors.Add (motor.GetMotorIdentifier (), motor);
+    }
+
+    public void AddMotor (Motor motor, string identifier) {
+      if (_debug)
+        Debug.Log ("Actor " + name + " has motor " + identifier);
+      if (_motors == null)
+        _motors = new Dictionary<string, Motor> ();
+      _motors.Add (identifier, motor);
     }
 
     public string GetActorIdentifier () {
@@ -69,6 +91,10 @@ namespace Neodroid.Actors {
 
     public void Register (Motor obj) {
       AddMotor (obj);
+    }
+
+    public void Register (Motor obj, string identifier) {
+      AddMotor (obj, identifier);
     }
 
     public virtual void Reset () {

@@ -11,7 +11,7 @@
       //ZTest Always // Ignore what is the depth buffer draw pixels anyway
       //ZWrite Off // has same effect as above ^, this never write to the depth buffer
       Lighting Off // Turn off lighting
-      Cull Off // No culling
+      //Cull Off // No culling
 
       Pass{
         CGPROGRAM

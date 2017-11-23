@@ -20,7 +20,7 @@ namespace Neodroid.Motors {
         return; // Do nothing
       }
       if (_debug)
-        Debug.Log ("Applying " + motion.Strength.ToString () + " To " + name);
+        Debug.Log ("Applying " + motion.ToString () + " To " + name);
       switch (_axis_of_motion) {
       case Axis.X:
         _rigidbody.AddForce (Vector3.left * motion.Strength);

@@ -17,7 +17,7 @@ namespace Neodroid.Motors {
       RegisterComponent ();
     }
 
-    public void RegisterComponent () {
+    public virtual void RegisterComponent () {
       _actor_game_object = NeodroidUtilities.MaybeRegisterComponent (_actor_game_object, this);
     }
 

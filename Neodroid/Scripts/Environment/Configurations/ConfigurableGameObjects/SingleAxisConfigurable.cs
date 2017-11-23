@@ -8,12 +8,9 @@ namespace Neodroid.Configurations {
 
     public Axis _axis_of_configuration;
 
-    public SingleAxisConfigurable () {
-    }
-
     public override void ApplyConfiguration (Configuration configuration) { 
       if (_debug)
-        Debug.Log ("Applying " + configuration.ConfigurableValue + " To " + GetConfigurableIdentifier ());
+        Debug.Log ("Applying " + configuration.ToString () + " To " + GetConfigurableIdentifier ());
       var e = transform.rotation.eulerAngles;
       var pos = transform.position;
       switch (_axis_of_configuration) {
@@ -22,10 +19,12 @@ namespace Neodroid.Configurations {
         transform.position = pos;
         break;
       case Axis.Y:
-        transform.position.Set (transform.position.x, configuration.ConfigurableValue, transform.position.z);
+        pos.Set (transform.position.x, configuration.ConfigurableValue, transform.position.z);
+        transform.position = pos;
         break;
       case Axis.Z:
-        transform.position.Set (transform.position.x, transform.position.y, configuration.ConfigurableValue);
+        pos.Set (transform.position.x, transform.position.y, configuration.ConfigurableValue);
+        transform.position = pos;
         break;
       case Axis.RotX:
         e.Set (configuration.ConfigurableValue, e.y, e.z);

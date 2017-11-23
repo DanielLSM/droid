@@ -5,7 +5,7 @@
     //}
 
     Lighting Off // Turn off lighting
-    Cull Off // No culling
+    //Cull Off // No culling
 
     Pass {
       CGPROGRAM

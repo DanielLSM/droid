@@ -18,7 +18,7 @@ namespace Neodroid.Motors {
 
     public override void ApplyMotion (MotorMotion motion) {
       if (_debug)
-        Debug.Log ("Applying " + motion.Strength.ToString () + " To " + name);
+        Debug.Log ("Applying " + motion.ToString () + " To " + name);
       if (!_bidirectional && motion.Strength < 0) {
         Debug.Log ("Motor is not bi-directional. It does not accept negative input.");
         return; // Do nothing

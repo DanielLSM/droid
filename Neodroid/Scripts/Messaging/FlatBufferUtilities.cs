@@ -14,8 +14,8 @@ using Neodroid.Messaging.Models.Reaction;
 namespace Neodroid.Messaging {
   public static class FlatBufferUtilities {
 
-    private static Offset<FlatBufferMotor> build_motor (FlatBufferBuilder b, Motor motor) {
-      StringOffset n = b.CreateString (motor.GetMotorIdentifier ());
+    private static Offset<FlatBufferMotor> build_motor (FlatBufferBuilder b, Motor motor, string identifier) {
+      StringOffset n = b.CreateString (identifier);
       FlatBufferMotor.StartFlatBufferMotor (b);
       FlatBufferMotor.AddName (b, n);
       FlatBufferMotor.AddBinary (b, motor._bidirectional);
@@ -74,8 +74,8 @@ namespace Neodroid.Messaging {
       foreach (Actor actor in state._actors.Values) {
         var motors = new Offset<FlatBufferMotor>[actor._motors.Values.Count];
         int i = 0;
-        foreach (Motor motor in actor._motors.Values) {
-          motors [i++] = build_motor (b, motor);
+        foreach (var motor in actor._motors) {
+          motors [i++] = build_motor (b, motor.Value, motor.Key);
         }
         actors [j++] = build_actor (b, motors, actor);
       }

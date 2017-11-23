@@ -158,7 +158,7 @@ namespace Neodroid.Agents {
         interrupted_this_step);
     }
 
-    void ExecuteReaction (Reaction reaction) {
+    void ExecuteReaction2 (Reaction reaction) {
       var actors = GetActors ();
       if (reaction != null && reaction.GetMotions ().Length > 0)
         foreach (MotorMotion motion in reaction.GetMotions()) {
@@ -179,10 +179,32 @@ namespace Neodroid.Agents {
         }
     }
 
+    void ExecuteReaction (Reaction reaction) {
+      var actors = GetActors ();
+      if (reaction != null && reaction.GetMotions ().Length > 0)
+        foreach (MotorMotion motion in reaction.GetMotions()) {
+          if (_debug)
+            Debug.Log ("Applying " + motion.ToString () + " To " + name + "'s actors");
+          var motion_actor_name = motion.GetActorName ();
+          if (actors.ContainsKey (motion_actor_name)) {
+            actors [motion_actor_name].ApplyMotion (motion);
+          } else {
+            if (_debug)
+              Debug.Log ("Could find not actor with the specified name: " + motion_actor_name);
+          }
+        }
+    }
+
     void AddActor (Actor actor) {
       if (_debug)
         Debug.Log ("Agent " + name + " has actor " + actor.GetActorIdentifier ());
       _actors.Add (actor.GetActorIdentifier (), actor);
+    }
+
+    void AddActor (Actor actor, string identifier) {
+      if (_debug)
+        Debug.Log ("Agent " + name + " has actor " + identifier);
+      _actors.Add (identifier, actor);
     }
 
     void AddObserver (Observer observer) {
@@ -190,6 +212,13 @@ namespace Neodroid.Agents {
         Debug.Log ("Agent " + name + " has observer " + observer.GetObserverIdentifier ());
       _observers.Add (observer.GetObserverIdentifier (), observer);
     }
+
+    void AddObserver (Observer observer, string identifier) {
+      if (_debug)
+        Debug.Log ("Agent " + name + " has observer " + identifier);
+      _observers.Add (identifier, observer);
+    }
+
 
     void AddToEnvironment () {
       _environment_manager = NeodroidUtilities.MaybeRegisterComponent (_environment_manager, this);
@@ -242,8 +271,16 @@ namespace Neodroid.Agents {
       AddActor (obj);
     }
 
+    public void Register (Actor obj, string identifier) {
+      AddActor (obj, identifier);
+    }
+
     public void Register (Observer obj) {
       AddObserver (obj);
+    }
+
+    public void Register (Observer obj, string identifier) {
+      AddObserver (obj, identifier);
     }
 
     #endregion

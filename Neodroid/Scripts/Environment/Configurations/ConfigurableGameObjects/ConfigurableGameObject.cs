@@ -23,7 +23,7 @@ namespace Neodroid.Configurations {
       }
     }
 
-    protected void AddToEnvironment () {
+    protected virtual void AddToEnvironment () {
       _environment_manager = NeodroidUtilities.MaybeRegisterComponent (_environment_manager, this);
     }
 
@@ -31,7 +31,7 @@ namespace Neodroid.Configurations {
     }
 
     public virtual string GetConfigurableIdentifier () {
-      return name + "BaseConfigurable";
+      return name + "Configurable";
     }
   }
 }

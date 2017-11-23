@@ -69,6 +69,23 @@ namespace Neodroid.Utilities {
       return component;
     }
 
+    public static Recipient MaybeRegisterNamedComponent<Recipient, Caller> (Recipient r, Caller c, string identifier) where Recipient : Object, HasRegister<Caller> where Caller : Component {
+      Recipient component;
+      if (r != null) {
+        component = r;
+      } else if (c.GetComponentInParent<Recipient> () != null) {
+        component = c.GetComponentInParent<Recipient> ();
+      } else {
+        component = Object.FindObjectOfType<Recipient> ();
+      }
+      if (component != null) {
+        component.Register (c, identifier);
+      } else {
+        Debug.Log ("Could not find recipient during registeration");
+      }
+      return component;
+    }
+
 
     /// Use this method to get all loaded objects of some type, including inactive objects. 
     /// This is an alternative to Resources.FindObjectsOfTypeAll (returns project assets, including prefabs), and GameObject.FindObjectsOfTypeAll (deprecated).

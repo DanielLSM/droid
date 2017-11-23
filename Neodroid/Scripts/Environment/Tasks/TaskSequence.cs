@@ -21,7 +21,8 @@ namespace Neodroid.Task {
     }
 
     public Transform PopGoal () {
-      return _goal_stack.Pop ();
+      _current_goal = _goal_stack.Pop ();
+      return _current_goal;
     }
   }
 

@@ -170,8 +170,17 @@ namespace Neodroid.Managers {
       AddAgent (obj);
     }
 
+    public void Register (NeodroidAgent obj, string identifier) {
+      AddAgent (obj, identifier);
+    }
+
     public void Register (ConfigurableGameObject obj) {
       AddConfigurable (obj);
+    }
+
+
+    public void Register (ConfigurableGameObject obj, string identifier) {
+      AddConfigurable (obj, identifier);
     }
 
     #endregion
@@ -186,10 +195,22 @@ namespace Neodroid.Managers {
       _agents.Add (agent.GetAgentIdentifier (), agent);
     }
 
+    void AddAgent (NeodroidAgent agent, string identifier) {
+      if (_debug)
+        Debug.Log ("Environment " + name + " has agent " + identifier);
+      _agents.Add (identifier, agent);
+    }
+
     void AddConfigurable (ConfigurableGameObject configurable) {
       if (_debug)
         Debug.Log ("Environment " + name + " has configurable " + configurable.GetConfigurableIdentifier ());
       _configurables.Add (configurable.GetConfigurableIdentifier (), configurable);
+    }
+
+    void AddConfigurable (ConfigurableGameObject configurable, string identifier) {
+      if (_debug)
+        Debug.Log ("Environment " + name + " has configurable " + identifier);
+      _configurables.Add (identifier, configurable);
     }
 
     #endregion
