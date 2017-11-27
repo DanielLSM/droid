@@ -11,8 +11,8 @@ namespace Neodroid.Managers {
 
     #region PublicMembers
 
-    public int _episode_length = 0;
-    public int _resets = 10;
+    public int _episode_length = 1000;
+    public int _resets = 6;
     public bool _wait_for_reaction_every_frame = false;
     public CoordinateSystem _coordinate_system = CoordinateSystem.GlobalCoordinates;
     public Transform _coordinate_reference_point;
@@ -29,7 +29,9 @@ namespace Neodroid.Managers {
     Dictionary<string, NeodroidAgent> _agents = new Dictionary<string, NeodroidAgent> ();
     int _current_episode_frame = 0;
     float _last_reset_time = 0;
+    Configuration[] _last_received_configurations;
     bool _is_environment_updated = false;
+    //bool _interupted_this_step = false;
 
     #endregion
 
@@ -61,6 +63,9 @@ namespace Neodroid.Managers {
     }
 
     void LateUpdate () {
+      //if (_interupted_this_step)
+      //  _interupted_this_step = false;
+      //else
       _is_environment_updated = true;
     }
 
@@ -78,6 +83,7 @@ namespace Neodroid.Managers {
       ResetEnvironment ();
       _current_episode_frame = 0;
       _is_environment_updated = false;
+      //_interupted_this_step = true;
     }
 
     public Vector3 TransformPosition (Vector3 position) {
@@ -92,10 +98,34 @@ namespace Neodroid.Managers {
       }
     }
 
+    public Vector3 InverseTransformPosition (Vector3 position) {
+      if (_coordinate_system == CoordinateSystem.RelativeToReferencePoint) {
+        if (_coordinate_reference_point) {
+          return _coordinate_reference_point.transform.TransformPoint (position);
+        } else {
+          return position;
+        }
+      } else {
+        return position;
+      }
+    }
+
     public Vector3 TransformDirection (Vector3 direction) {
       if (_coordinate_system == CoordinateSystem.RelativeToReferencePoint) {
         if (_coordinate_reference_point) {
           return _coordinate_reference_point.transform.InverseTransformDirection (direction);
+        } else {
+          return direction;
+        }
+      } else {
+        return direction;
+      }
+    }
+
+    public Vector3 InverseTransformDirection (Vector3 direction) {
+      if (_coordinate_system == CoordinateSystem.RelativeToReferencePoint) {
+        if (_coordinate_reference_point) {
+          return _coordinate_reference_point.transform.TransformDirection (direction);
         } else {
           return direction;
         }
@@ -138,9 +168,13 @@ namespace Neodroid.Managers {
         }
       }
       _last_reset_time = Time.time;
+      if (_last_received_configurations != null) {
+        Configure (_last_received_configurations);
+      }
     }
 
     public void Configure (Configuration[] configurations) {
+      _last_received_configurations = configurations;
       foreach (var configuration in configurations) {
         if (_configurables.ContainsKey (configuration.ConfigurableName)) {
           _configurables [configuration.ConfigurableName].ApplyConfiguration (configuration);

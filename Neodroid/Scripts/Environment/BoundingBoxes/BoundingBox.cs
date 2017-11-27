@@ -12,19 +12,14 @@ namespace Neodroid.Utilities.BoundingBoxes {
   public class BoundingBox : MonoBehaviour {
 
     public bool _collider_based = false;
+    public bool _freeze = false;
 
     public Color _line_color = new Color (0f, 1f, 0.4f, 0.74f);
 
-    Bounds _bounds;
-    Vector3 _bounds_offset;
     [HideInInspector]
-    public Bounds _collider_bounds;
+    public Bounds _bounds;
     [HideInInspector]
-    public Vector3 _collider_bounds_offset;
-    [HideInInspector]
-    public Bounds _mesh_bounds;
-    [HideInInspector]
-    public Vector3 _mesh_bounds_offset;
+    public Vector3 _bounds_offset;
 
     public bool _setup_on_awake = true;
 
@@ -121,6 +116,9 @@ namespace Neodroid.Utilities.BoundingBoxes {
     }
 
     void LateUpdate () {
+      if (_freeze) {
+        return;
+      }
       if (_children_meshes != GetComponentsInChildren<MeshFilter> ()) {
         Setup ();
         CalculateBounds ();
@@ -162,24 +160,24 @@ namespace Neodroid.Utilities.BoundingBoxes {
         }
       }
 
-      _collider_bounds = bounds;
-      _collider_bounds_offset = bounds.center - this.transform.position;
+      _bounds = bounds;
+      _bounds_offset = bounds.center - this.transform.position;
     }
 
     void FitBoundingBoxToChildrenRenders () {
-      _mesh_bounds = new Bounds ();
+      _bounds = new Bounds ();
       for (int i = 0; i < _children_meshes.Length; i++) {
         Mesh ms = _children_meshes [i].sharedMesh;
         int vc = ms.vertexCount;
         for (int j = 0; j < vc; j++) {
           if (i == 0 && j == 0) {
-            _mesh_bounds = new Bounds (_children_meshes [i].transform.TransformPoint (ms.vertices [j]), Vector3.zero);
+            _bounds = new Bounds (_children_meshes [i].transform.TransformPoint (ms.vertices [j]), Vector3.zero);
           } else {
-            _mesh_bounds.Encapsulate (_children_meshes [i].transform.TransformPoint (ms.vertices [j]));
+            _bounds.Encapsulate (_children_meshes [i].transform.TransformPoint (ms.vertices [j]));
           }
         }
       }
-      _mesh_bounds_offset = _mesh_bounds.center - transform.position;
+      _bounds_offset = _bounds.center - transform.position;
     }
 
     void CalculateBounds () {
@@ -196,14 +194,6 @@ namespace Neodroid.Utilities.BoundingBoxes {
     }
 
     void RecalculatePoints () {
-
-      if (_collider_based) {
-        _bounds = _collider_bounds;
-        _bounds_offset = _collider_bounds_offset;
-      } else {
-        _bounds = _mesh_bounds;
-        _bounds_offset = _mesh_bounds_offset;
-      }
 
       _bounds.size = new Vector3 (_bounds.size.x * transform.localScale.x / _last_scale.x, _bounds.size.y * transform.localScale.y / _last_scale.y, _bounds.size.z * transform.localScale.z / _last_scale.z);
       _bounds_offset = new Vector3 (_bounds_offset.x * transform.localScale.x / _last_scale.x, _bounds_offset.y * transform.localScale.y / _last_scale.y, _bounds_offset.z * transform.localScale.z / _last_scale.z);

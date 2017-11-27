@@ -11,39 +11,35 @@ namespace Neodroid.Configurations {
     public override void ApplyConfiguration (Configuration configuration) { 
       if (_debug)
         Debug.Log ("Applying " + configuration.ToString () + " To " + GetConfigurableIdentifier ());
-      var e = transform.rotation.eulerAngles;
-      var pos = transform.position;
+      var pos = _environment_manager.TransformPosition (this.transform.position);
+      var dir = _environment_manager.TransformDirection (this.transform.forward);
       switch (_axis_of_configuration) {
       case Axis.X:
-        pos.Set (configuration.ConfigurableValue, transform.position.y, transform.position.z);
-        transform.position = pos;
+        pos.Set (configuration.ConfigurableValue, pos.y, pos.z);
         break;
       case Axis.Y:
-        pos.Set (transform.position.x, configuration.ConfigurableValue, transform.position.z);
-        transform.position = pos;
+        pos.Set (pos.x, configuration.ConfigurableValue, pos.z);
         break;
       case Axis.Z:
-        pos.Set (transform.position.x, transform.position.y, configuration.ConfigurableValue);
-        transform.position = pos;
+        pos.Set (pos.x, pos.y, configuration.ConfigurableValue);
         break;
       case Axis.RotX:
-        e.Set (configuration.ConfigurableValue, e.y, e.z);
-        transform.rotation.SetLookRotation (Vector3.zero);
-        transform.Rotate (e);
+        dir.Set (configuration.ConfigurableValue, dir.y, dir.z);
         break;
       case Axis.RotY:
-        e.Set (e.x, configuration.ConfigurableValue, e.z);
-        transform.rotation.SetLookRotation (Vector3.zero);
-        transform.Rotate (e);
+        dir.Set (dir.x, configuration.ConfigurableValue, dir.z);
         break;
       case Axis.RotZ:
-        e.Set (e.x, e.y, configuration.ConfigurableValue);
-        transform.rotation.SetLookRotation (Vector3.zero);
-        transform.Rotate (e);
+        dir.Set (dir.x, dir.y, configuration.ConfigurableValue);
         break;
       default:
         break;
       }
+      var inv_pos = _environment_manager.InverseTransformPosition (pos);
+      var inv_dir = _environment_manager.InverseTransformDirection (dir);
+      transform.position = inv_pos;
+      transform.rotation = Quaternion.identity;
+      transform.Rotate (inv_dir);
     }
 
     public override string GetConfigurableIdentifier () {

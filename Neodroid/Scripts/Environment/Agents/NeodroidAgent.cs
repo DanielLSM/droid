@@ -158,26 +158,6 @@ namespace Neodroid.Agents {
         interrupted_this_step);
     }
 
-    void ExecuteReaction2 (Reaction reaction) {
-      var actors = GetActors ();
-      if (reaction != null && reaction.GetMotions ().Length > 0)
-        foreach (MotorMotion motion in reaction.GetMotions()) {
-          var motion_actor_name = motion.GetActorName ();
-          var motion_motor_name = motion.GetMotorName ();
-          if (actors.ContainsKey (motion_actor_name)) {
-            var motors = actors [motion_actor_name].GetMotors ();
-            if (motors.ContainsKey (motion_motor_name)) {
-              motors [motion_motor_name].ApplyMotion (motion);
-            } else {
-              if (_debug)
-                Debug.Log ("Could find not motor with the specified name: " + motion_motor_name);
-            }
-          } else {
-            if (_debug)
-              Debug.Log ("Could find not actor with the specified name: " + motion_actor_name);
-          }
-        }
-    }
 
     void ExecuteReaction (Reaction reaction) {
       var actors = GetActors ();

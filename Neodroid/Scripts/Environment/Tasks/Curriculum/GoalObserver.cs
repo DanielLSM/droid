@@ -19,10 +19,10 @@ public class GoalObserver : Observer {
   #if UNITY_EDITOR
     void OnDrawGizmos () {
       if (_draw_names){
-  if(_current_goal)
-  drawString (this.name, this.transform.position,Color.green);
-  else
-  drawString (this.name, this.transform.position);
+        if(_current_goal)
+        drawString (this.name, this.transform.position,Color.green);
+        else
+        drawString (this.name, this.transform.position);
       }
     }
     
