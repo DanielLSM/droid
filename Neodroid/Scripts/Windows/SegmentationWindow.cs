@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Neodroid.Segmentation;
 
 namespace Neodroid.Windows {
   #if UNITY_EDITOR
@@ -16,8 +17,8 @@ namespace Neodroid.Windows {
     public SegmentationColorByTag[] _segmentation_colors_by_tag;
     public SegmentationColorByInstance[] _segmentation_colors_by_instance;
 
-  Vector2 _scroll_position;
-  Texture _icon;
+    Vector2 _scroll_position;
+    Texture _icon;
 
     void OnEnable () {
   _icon =  (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/Neodroid/Scripts/Windows/Icons/color_wheel.png", typeof(Texture2D));
@@ -56,7 +57,7 @@ namespace Neodroid.Windows {
         EditorGUILayout.PropertyField (instance_colors_property, new GUIContent (material_changer_by_instance.name), true); // True means show children
       }
       EditorGUILayout.EndVertical ();
-  EditorGUILayout.EndScrollView ();
+      EditorGUILayout.EndScrollView ();
       serialised_object.ApplyModifiedProperties (); // Remember to apply modified properties
     }
   }

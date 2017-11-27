@@ -126,9 +126,9 @@ GameObject:
   - component: {fileID: 4762047315780166}
   - component: {fileID: 108906297679887750}
   - component: {fileID: 114704739639699848}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PerspectiveInfraredLightSource
-  m_TagString: Untagged
+  m_TagString: Infrared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 114271565463949058}
   - component: {fileID: 114615516401622464}
   - component: {fileID: 114608562479145288}
+  - component: {fileID: 114100763809553962}
   m_Layer: 0
   m_Name: InfraredShadow
   m_TagString: Untagged
@@ -275,8 +276,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1866968490669790}
-  m_LocalRotation: {x: -0.15357414, y: 0.3320904, z: -0.054896664, w: -0.9290411}
-  m_LocalPosition: {x: 1.0844727, y: 3.5904393, z: -1.5973053}
+  m_LocalRotation: {x: 0.27781588, y: 0.36497167, z: -0.1150751, w: 0.8811196}
+  m_LocalPosition: {x: -5, y: 10, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4331612275810624}
@@ -284,7 +285,7 @@ Transform:
   - {fileID: 4889865574120588}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35, y: 45, z: 0}
 --- !u!4 &4218908600063310
 Transform:
   m_ObjectHideFlags: 1
@@ -481,10 +482,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 9
+  far clip plane: 20
   field of view: 30
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -516,10 +517,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 9
+  far clip plane: 20
   field of view: 30
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -551,10 +552,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 9
+  far clip plane: 20
   field of view: 58.6
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -586,10 +587,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 9
+  far clip plane: 20
   field of view: 58.6
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -621,10 +622,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 9
+  far clip plane: 20
   field of view: 58.6
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -656,10 +657,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 9
+  far clip plane: 20
   field of view: 58.6
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -691,10 +692,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 9
+  far clip plane: 20
   field of view: 30
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -726,10 +727,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 9
+  far clip plane: 20
   field of view: 58.6
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -878,10 +879,10 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
-  m_Range: 10
-  m_SpotAngle: 60
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Intensity: 1
+  m_Range: 100
+  m_SpotAngle: 90
   m_CookieSize: 0
   m_Shadows:
     m_Type: 2
@@ -931,6 +932,23 @@ MonoBehaviour:
   ReplacementShader: {fileID: 4800000, guid: aa118ec7ab6c04e139900fecf923c766, type: 3}
   OverDrawColor: {r: 0, g: 0, b: 0, a: 0}
   _replace_rendertype: 
+--- !u!114 &114100763809553962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1975208461797724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d8486c2d1444fb8ac452a5a74cf74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lights_to_ignore:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _ignore_infrared_if_empty: 0
 --- !u!114 &114106945798636252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -956,9 +974,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -0.28848988, y: 1.6063824, z: 3.2172513}
-  _rotation: {x: 0.001059042, y: 0.94386876, z: -0.33031908}
-  _direction: {x: 0.0030204195, y: -0.33032075, z: -0.943864}
+  _position: {x: -3.74, y: 6.25, z: -6.65}
+  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
+  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -989,9 +1007,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -0.28848988, y: 1.6063824, z: 3.2172513}
-  _rotation: {x: 0.001059042, y: 0.94386876, z: -0.33031908}
-  _direction: {x: 0.0030204195, y: -0.33032075, z: -0.943864}
+  _position: {x: -3.74, y: 6.25, z: -6.65}
+  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
+  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1065,9 +1083,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -0.28848988, y: 1.6063824, z: 3.2172513}
-  _rotation: {x: 0.001059042, y: 0.94386876, z: -0.33031908}
-  _direction: {x: 0.0030204195, y: -0.33032075, z: -0.943864}
+  _position: {x: -3.74, y: 6.25, z: -6.65}
+  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
+  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1084,9 +1102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -0.28848988, y: 1.6063824, z: 3.2172513}
-  _rotation: {x: 0.001059042, y: 0.94386876, z: -0.33031908}
-  _direction: {x: 0.0030204195, y: -0.33032075, z: -0.943864}
+  _position: {x: -3.74, y: 6.25, z: -6.65}
+  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
+  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
   _debug: 1
   _observer_identifier: 
   _data: 
@@ -1123,6 +1141,8 @@ MonoBehaviour:
     color: {r: 0, g: 1, b: 0.13103437, a: 1}
   - tag: Obstruction
     color: {r: 1, g: 0, b: 0, a: 1}
+  - tag: Goal
+    color: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &114376289421041340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1150,9 +1170,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -0.28848988, y: 1.6063824, z: 3.2172513}
-  _rotation: {x: 0.001059042, y: 0.94386876, z: -0.33031908}
-  _direction: {x: 0.0030204195, y: -0.33032075, z: -0.943864}
+  _position: {x: -3.74, y: 6.25, z: -6.65}
+  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
+  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1223,9 +1243,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -0.28848988, y: 1.6063824, z: 3.2172513}
-  _rotation: {x: 0.001059042, y: 0.94386876, z: -0.33031908}
-  _direction: {x: 0.0030204195, y: -0.33032075, z: -0.943864}
+  _position: {x: -3.74, y: 6.25, z: -6.65}
+  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
+  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1294,9 +1314,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -0.28848988, y: 1.6063824, z: 3.2172513}
-  _rotation: {x: 0.001059042, y: 0.94386876, z: -0.33031908}
-  _direction: {x: 0.0030204195, y: -0.33032075, z: -0.943864}
+  _position: {x: -3.74, y: 6.25, z: -6.65}
+  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
+  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
   _debug: 0
   _observer_identifier: 
   _data: 

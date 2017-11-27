@@ -16,9 +16,10 @@ namespace Neodroid.Windows {
       EditorWindow.GetWindow (typeof(TaskWindow));      //Show existing window instance. If one doesn't exist, make one.
     }
 
-    NeodroidTask _sequence;
+    TaskSequence _task_sequence;
     Texture _icon;
-    string _status;
+    Vector2 _scroll_position;
+
 
     void OnEnable () {
       _icon = (Texture2D)AssetDatabase.LoadAssetAtPath ("Assets/Neodroid/Scripts/Windows/Icons/script.png", typeof(Texture2D));
@@ -31,22 +32,33 @@ namespace Neodroid.Windows {
     }
 
     void OnEnabled () {
-      if (!_sequence) {
-        _sequence = FindObjectOfType<TaskSequence> ();
+      if (!_task_sequence) {
+        _task_sequence = FindObjectOfType<TaskSequence> ();
       }
     }
 
     void OnGUI () {
-      EditorGUILayout.LabelField ("Status: ", _status);
-    }
+      GUILayout.Label ("Tasklist", EditorStyles.boldLabel);
+      _task_sequence = FindObjectOfType<TaskSequence> ();
+      if (_task_sequence != null) {
+        _scroll_position = EditorGUILayout.BeginScrollView (_scroll_position);
+        EditorGUILayout.BeginVertical ("Box");
 
-    void Update () {
-      if (EditorApplication.isPlaying && !EditorApplication.isPaused) {
-        this.Repaint ();
-      } else {
-        _status = "Waiting for Editor to Play";
+        var seq = _task_sequence.GetSequence ();
+        if (seq != null) {
+          foreach (GoalObserver g in seq) {
+            if (_task_sequence._current_goal.name == g.name)
+              GUILayout.Label (g.name, EditorStyles.whiteLabel);
+            else
+              GUILayout.Label (g.name);
+          }
+        }
+
+        EditorGUILayout.EndVertical ();
+        EditorGUILayout.EndScrollView ();
       }
     }
+      
   }
   #endif
 }

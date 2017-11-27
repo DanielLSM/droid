@@ -34,15 +34,6 @@ namespace Neodroid.Evaluation {
     ActorColliding _colliding = ActorColliding.NOT_COLLIDING;
 
     public override float Evaluate () {
-      var reward = 0f;
-
-      var v = _actor.GetComponent<Collider> ().bounds;
-      if (!_playable_area._bounds.Intersects (v)) {
-        reward += -1f; 
-        _environment.InterruptEnvironment ();
-        return reward;
-      }
-
       /*var regularising_term = 0f;
 
       foreach (var ob in _obstructions) {
@@ -57,22 +48,17 @@ namespace Neodroid.Evaluation {
       //reward += 1 / Mathf.Abs (Vector3.Distance (_area.transform.position, _actor.transform.position)); // Inversely porpotional to the absolute distance, closer higher reward
 
       if (_overlapping == ActorOverlapping.INSIDE_AREA) {
-        reward += 1f; 
         _environment.InterruptEnvironment ();
-        return reward;
-      } else {
-        //reward += 0f;
+        return 1f;
+      }
+      if (_colliding == ActorColliding.COLLIDING || !_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
+        print ("Colliding");
+        _environment.InterruptEnvironment ();
+        //return -1f;
       }
 
-      if (_colliding == ActorColliding.COLLIDING) {
-        reward += -1f; 
-        _environment.InterruptEnvironment ();
-        return reward;
-      } else {
-        //reward += 0;
-      }
 
-      return reward;
+      return 0f;
     }
 
     private void Start () {
@@ -100,7 +86,7 @@ namespace Neodroid.Evaluation {
         OnTriggerExitChild, 
         OnCollisionStayChild, 
         OnTriggerStayChild);
-      
+
       NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (
         _actor.transform, 
         OnCollisionEnterChild, 
@@ -158,6 +144,6 @@ namespace Neodroid.Evaluation {
 
     void OnCollisionExitChild (GameObject child_game_object, Collision collision) {
     }
-      
+
   }
 }
