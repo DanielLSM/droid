@@ -52,7 +52,6 @@ namespace Neodroid.Evaluation {
         return 1f;
       }
       if (_colliding == ActorColliding.COLLIDING || !_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
-        print ("Colliding");
         _environment.InterruptEnvironment ();
         //return -1f;
       }
