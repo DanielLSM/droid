@@ -6,6 +6,7 @@ using Neodroid.Messaging.Messages;
 namespace Neodroid.Configurations {
 
   public class TriDOFConfigurable : ConfigurableGameObject {
+
     string _X;
     string _Y;
     string _Z;

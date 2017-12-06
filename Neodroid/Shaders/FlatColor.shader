@@ -1,10 +1,14 @@
-﻿Shader "Neodroid/FlatColor"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Neodroid/FlatColor"
 {
     Properties
     {
-        _MainTex("Main Texture", 2D) = "black" {}
+        //_MainTex("Main Texture", 2D) = "black" {}
+        _Color ("Main Color", COLOR) = (1,1,1,1)
     }
 
+    /*
     CGINCLUDE
 
         #include "UnityCG.cginc"
@@ -28,16 +32,22 @@
           return o;
         }
 
-        sampler2D _MainTex;
+        fixed4 _Color;
 
         fixed4 frag(v2f i) : SV_Target{
-            fixed4 col = fixed4(0,0,0,1);
-            return col;
+            //fixed4 col = fixed4(0,0,0,1);
+            //return col;
+            return _Color;
         }
 
     ENDCG
+    */
 
     SubShader{
+        Tags{
+          "Queue" = "Transparent"
+        }
+
         Cull Off
         ZWrite Off
         ZTest Always
@@ -48,6 +58,17 @@
 
                 #pragma vertex vert
                 #pragma fragment frag
+
+            float4 vert (float4 vertex : POSITION) : SV_POSITION
+            {
+                return UnityObjectToClipPos(vertex);
+            }
+
+            fixed4 _Color;
+
+            fixed4 frag() : SV_Target{
+                return _Color;
+            }
 
             ENDCG
         }
