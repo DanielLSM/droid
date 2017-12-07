@@ -45,7 +45,7 @@ namespace SceneSpecificAssets.Grasping {
     [Space (1)]
     [Header ("Path Finding Parameters")]
     public float _search_boundary = 6f;
-    public float _agent_size = 0.3f;
+    public float _actor_size = 0.3f;
     public float _grid_granularity = 0.4f;
     public float _speed = 0.5f;
     public float _precision = 0.02f;
@@ -66,11 +66,11 @@ namespace SceneSpecificAssets.Grasping {
     #region Setup
 
     void UpdateMeshFilterBounds () {
-      var agent_bounds = GraspingUtilities.GetMaxBounds (this.gameObject);
-      //_agent_size = agent_bounds.size.magnitude;
+      var actor_bounds = GraspingUtilities.GetMaxBounds (this.gameObject);
+      //_environment_size = agent_bounds.size.magnitude;
       //_approach_distance = agent_bounds.size.magnitude + _precision;
-      _agent_size = agent_bounds.extents.magnitude * 2; //Mathf.Max(agent_bounds.extents.x, Mathf.Max(agent_bounds.extents.y, agent_bounds.extents.z)) * 2;
-      _approach_distance = _agent_size + _precision;
+      _actor_size = actor_bounds.extents.magnitude * 2; //Mathf.Max(agent_bounds.extents.x, Mathf.Max(agent_bounds.extents.y, agent_bounds.extents.z)) * 2;
+      _approach_distance = _actor_size + _precision;
     }
 
     void SetupEnvironment () {
@@ -412,9 +412,9 @@ namespace SceneSpecificAssets.Grasping {
 
     BezierCurvePath FindPath (Vector3 start_position, Vector3 target_position) {
       UpdateMeshFilterBounds ();
-      var _path_list = PathFinding.FindPathAstar (start_position, target_position, _search_boundary, _grid_granularity, _agent_size, _approach_distance);
+      var _path_list = PathFinding.FindPathAstar (start_position, target_position, _search_boundary, _grid_granularity, _actor_size, _approach_distance);
       if (_path_list != null && _path_list.Count > 0) {
-        _path_list = PathFinding.SimplifyPath (_path_list, _agent_size);
+        _path_list = PathFinding.SimplifyPath (_path_list, _actor_size);
         _path_list.Add (target_position);
       } else {
         _path_list = new List<Vector3>{ start_position, target_position };

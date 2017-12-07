@@ -203,7 +203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1870355748897446
 GameObject:
   m_ObjectHideFlags: 1
@@ -943,9 +943,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -3.74, y: 6.25, z: -6.65}
-  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
-  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
+  _position: {x: -1.12, y: -1.46, z: -4.84}
+  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
+  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -962,9 +962,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -3.74, y: 6.25, z: -6.65}
-  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
-  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
+  _position: {x: -1.12, y: -1.46, z: -4.84}
+  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
+  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1026,9 +1026,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -3.74, y: 6.25, z: -6.65}
-  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
-  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
+  _position: {x: -1.12, y: -1.46, z: -4.84}
+  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
+  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1045,9 +1045,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -3.74, y: 6.25, z: -6.65}
-  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
-  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
+  _position: {x: -1.12, y: -1.46, z: -4.84}
+  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
+  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
   _debug: 1
   _observer_identifier: 
   _data: 
@@ -1127,9 +1127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -3.74, y: 6.25, z: -6.65}
-  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
-  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
+  _position: {x: -1.12, y: -1.46, z: -4.84}
+  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
+  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1176,9 +1176,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -3.74, y: 6.25, z: -6.65}
-  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
-  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
+  _position: {x: -1.12, y: -1.46, z: -4.84}
+  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
+  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1235,9 +1235,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent_game_object: {fileID: 0}
   _environment_manager: {fileID: 0}
-  _position: {x: -3.74, y: 6.25, z: -6.65}
-  _rotation: {x: 0.4055797, y: 0.8191521, z: 0.40557975}
-  _direction: {x: 0.579228, y: -0.57357633, z: 0.57922804}
+  _position: {x: -1.12, y: -1.46, z: -4.84}
+  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
+  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
   _debug: 0
   _observer_identifier: 
   _data: 

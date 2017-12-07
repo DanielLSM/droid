@@ -4,24 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Neodroid.Observers;
-using Neodroid.Agents;
+using Neodroid.Environments;
 
 namespace Neodroid.Utilities {
   public class StatusUpdater : MonoBehaviour {
 
-    public NeodroidAgent _agent;
+    public LearningEnvironment _environment;
     Text _status_text;
 
     // Use this for initialization
     void Start () {
-      if (!_agent)
-        _agent = FindObjectOfType<NeodroidAgent> ();
+      if (!_environment)
+        _environment = FindObjectOfType<LearningEnvironment> ();
       _status_text = GetComponent<Text> ();
     }
 	
     // Update is called once per frame
     void Update () {
-      _status_text.text = _agent.GetStatus ();
+      _status_text.text = _environment.GetStatus ();
     }
   }
 }
