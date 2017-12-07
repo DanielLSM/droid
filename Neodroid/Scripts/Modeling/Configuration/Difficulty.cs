@@ -8,9 +8,9 @@ namespace Neodroid.Configurations {
 
     public override void ApplyConfiguration (Configuration configuration) { 
       if (configuration.ConfigurableValue == 1) {
-        print ("Increased Difficulty");
+        //print ("Increased Difficulty");
       } else if (configuration.ConfigurableValue == -1) {
-        print ("Decreased Difficulty");
+        //print ("Decreased Difficulty");
       }
     }
 

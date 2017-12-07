@@ -1,9 +1,10 @@
 ﻿using Neodroid.Messaging.Messages;
+using UnityEngine;
 
 namespace Neodroid.Configurations {
-  public interface Configurable {
-    void ApplyConfiguration (Configuration obj);
+  public abstract class Configurable : MonoBehaviour {
+    public abstract void ApplyConfiguration (Configuration obj);
 
-    string GetConfigurableIdentifier ();
+    public abstract string GetConfigurableIdentifier ();
   }
 }

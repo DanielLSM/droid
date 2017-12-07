@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Neodroid.Actors;
 using Neodroid.Utilities;
-using Neodroid.Managers;
+using Neodroid.Environments;
 using SceneSpecificAssets.Grasping;
 using Neodroid.Utilities.BoundingBoxes;
 
@@ -24,7 +24,8 @@ namespace Neodroid.Evaluation {
     public bool _based_on_tags = false;
     public Collider _area;
     public Collider _actor;
-    public EnvironmentManager _environment;
+    public LearningEnvironment _environment;
+
     public Obstruction[] _obstructions;
     public BoundingBox _playable_area;
     //Used for.. if outside playable area then reset
@@ -47,11 +48,11 @@ namespace Neodroid.Evaluation {
       //reward += 1 / Mathf.Abs (Vector3.Distance (_area.transform.position, _actor.transform.position)); // Inversely porpotional to the absolute distance, closer higher reward
 
       if (_overlapping == ActorOverlapping.INSIDE_AREA) {
-        _environment.InterruptEnvironment ();
+        _environment.Interrupt ();
         return 1f;
       }
       if (_colliding == ActorColliding.COLLIDING || !_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
-        _environment.InterruptEnvironment ();
+        _environment.Interrupt ();
         //return -1f;
       }
 
@@ -67,7 +68,7 @@ namespace Neodroid.Evaluation {
         _actor = FindObjectOfType<Actor> ().gameObject.GetComponent<Collider> ();
       }
       if (!_environment) {
-        _environment = FindObjectOfType<EnvironmentManager> ();
+        _environment = FindObjectOfType<LearningEnvironment> ();
       }
       if (_obstructions.Length <= 0) {
         _obstructions = FindObjectsOfType<Obstruction> ();

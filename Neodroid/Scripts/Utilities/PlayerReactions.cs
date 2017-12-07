@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Neodroid.Environments;
+using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
 
 public class PlayerReactions : MonoBehaviour {
@@ -17,10 +17,10 @@ public class PlayerReactions : MonoBehaviour {
 
   public PlayerMotion[] _player_motions;
 
-  LearningEnvironment _environment;
+  SimulationManager _simulation_manager;
 
   void Start () {
-    _environment = FindObjectOfType<LearningEnvironment> ();
+    _simulation_manager = FindObjectOfType<SimulationManager> ();
   }
 
   void Update () {
@@ -33,7 +33,7 @@ public class PlayerReactions : MonoBehaviour {
     }
 
     var reaction = new Reaction (motions.ToArray (), null, false);
-    _environment.OnReceiveCallback (reaction);
+    _simulation_manager.OnReceiveCallback (reaction);
   }
 
 

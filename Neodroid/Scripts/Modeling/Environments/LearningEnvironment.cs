@@ -7,7 +7,6 @@ using Neodroid.Observers;
 using Neodroid.Motors;
 using Neodroid.Actors;
 using Neodroid.Managers;
-using Neodroid.Messaging;
 using Neodroid.Messaging.Messages;
 using Neodroid.Configurations;
 
@@ -16,42 +15,54 @@ namespace Neodroid.Environments {
 
     #region PublicMembers
 
-    public string _ip_address = "127.0.0.1";
-    public int _port = 5555;
-    public bool _continue_lastest_reaction_on_disconnect = false;
     public CoordinateSystem _coordinate_system = CoordinateSystem.GlobalCoordinates;
     public Transform _coordinate_reference_point;
 
     //infinite
     public ObjectiveFunction _objective_function;
-    public EnvironmentManager _environment_manager;
+    public SimulationManager _simulation_manager;
     public bool _debug = false;
 
     #endregion
 
     #region PrivateMembers
 
+    Vector3[] _reset_positions;
+    Quaternion[] _reset_rotations;
+    GameObject[] _child_game_objects;
     Dictionary<string, Actor> _actors = new Dictionary<string, Actor> ();
     Dictionary<string, Observer> _observers = new Dictionary<string, Observer> ();
     Dictionary<string, ConfigurableGameObject> _configurables = new Dictionary<string, ConfigurableGameObject> ();
-    MessageServer _message_server;
+
+
+    int _current_episode_frame = 0;
+    float _lastest_reset_time = 0;
+    float energy_spent = 0f;
+    bool _was_interrupted = false;
+    Reaction _lastest_reaction = null;
     bool _waiting_for_reaction = true;
     bool _has_stepped_since_reaction = true;
-    bool _client_connected = false;
 
-    Reaction _lastest_reaction = null;
-    float energy_spent = 0f;
-    private bool _was_interrupted = false;
 
     #endregion
 
     #region UnityCallbacks
 
     void Start () {
-      FetchCommmandLineArguments ();
       FindMissingMembers ();
-      StartMessagingServer ();
       AddToEnvironment ();
+      SaveInitialPoses ();
+    }
+
+    void SaveInitialPoses () {
+      var _ignored_layer = LayerMask.NameToLayer ("IgnoredByNeodroid");
+      _child_game_objects = NeodroidUtilities.FindAllGameObjectsExceptLayer (_ignored_layer);
+      _reset_positions = new Vector3[_child_game_objects.Length];
+      _reset_rotations = new Quaternion[_child_game_objects.Length];
+      for (int i = 0; i < _child_game_objects.Length; i++) {
+        _reset_positions [i] = _child_game_objects [i].transform.position;
+        _reset_rotations [i] = _child_game_objects [i].transform.rotation;
+      }
     }
 
     void Update () { // Update is called once per frame, updates like actor position needs to be done on the main thread
@@ -59,38 +70,38 @@ namespace Neodroid.Environments {
       /*if (_episode_length > 0 && _current_episode_frame > _episode_length) {
         Debug.Log ("Maximum episode length reached, resetting");
         ResetRegisteredObjects ();
-        _environment_manager.ResetEnvironment ();
+        _simulation_manager.ResetEnvironment ();
         _current_episode_frame = 0;
         return;
       }*/
+      if (_simulation_manager._episode_length > 0 && _current_episode_frame > _simulation_manager._episode_length) {
+        if (_debug)
+          Debug.Log ("Maximum episode length reached, resetting");
+        Interrupt ();
+      }
 
       if (_lastest_reaction != null && _lastest_reaction._reset) {
-        if (_environment_manager) {
-          ResetRegisteredObjects ();
-          _environment_manager.ResetEnvironment ();
-          Interrupt ();
-          Configure (_lastest_reaction.Configurations);
-          return;
-        }
+        Interrupt ();
+        Configure (_lastest_reaction.Configurations);
+        return;
       }
 
       if (_lastest_reaction != null && !_waiting_for_reaction) {
-        ExecuteReaction (_lastest_reaction);
+        //ExecuteReaction (_lastest_reaction);
       }
 
-      if (!_continue_lastest_reaction_on_disconnect) {
+      if (!_simulation_manager._continue_lastest_reaction_on_disconnect) {
         _lastest_reaction = null;
       }
     }
 
     void LateUpdate () {
       if (!_waiting_for_reaction && !_has_stepped_since_reaction) {
-        _environment_manager.Step ();
-        UpdateObserversData ();
+        //UpdateObserversData ();
         _has_stepped_since_reaction = true;
       }
-      if (!_waiting_for_reaction && _has_stepped_since_reaction && _environment_manager.IsEnvironmentUpdated ()) {
-        _message_server.SendEnvironmentState (GetCurrentState ());
+      if (!_waiting_for_reaction && _has_stepped_since_reaction && _simulation_manager.IsSimulationUpdated ()) {
+        //_simulation_manager.SendEnvironmentState (GetCurrentState ());
         _waiting_for_reaction = true;
       }
     }
@@ -99,44 +110,23 @@ namespace Neodroid.Environments {
 
     #region Helpers
 
-    void FetchCommmandLineArguments () {
-      string[] arguments = System.Environment.GetCommandLineArgs ();
-
-      for (int i = 0; i < arguments.Length; i++) {
-        if (arguments [i] == "-ip") {
-          _ip_address = arguments [i + 1];
-        }
-        if (arguments [i] == "-port") {
-          _port = int.Parse (arguments [i + 1]);
-        }
-      }
-    }
 
     void FindMissingMembers () {
-      if (!_environment_manager) {
-        _environment_manager = FindObjectOfType<EnvironmentManager> ();
+      if (!_simulation_manager) {
+        _simulation_manager = FindObjectOfType<SimulationManager> ();
       }
       if (!_objective_function) {
         _objective_function = FindObjectOfType<ObjectiveFunction> ();
       }
     }
 
-    void StartMessagingServer () {
-      if (_ip_address != "" || _port != 0)
-        _message_server = new MessageServer (_ip_address, _port);
-      else
-        _message_server = new MessageServer ();
-
-      _message_server.ListenForClientToConnect (OnConnectCallback);
-    }
-
-    void UpdateObserversData () {
+    public void UpdateObserversData () {
       foreach (Observer obs in GetObservers().Values) {
         obs.GetComponent<Observer> ().GetData ();
       }
     }
 
-    EnvironmentState GetCurrentState () {
+    public EnvironmentState GetCurrentState () {
       foreach (Actor a in _actors.Values) {
         foreach (Motor m in a.GetMotors().Values) {
           energy_spent += m.GetEnergySpend ();
@@ -153,16 +143,24 @@ namespace Neodroid.Environments {
       }
 
       return new EnvironmentState (
-        _environment_manager.GetTimeSinceReset (),
+        GetTimeSinceReset (),
         energy_spent,
         _actors, _observers,
-        _environment_manager.GetCurrentFrameNumber (),
+        GetCurrentFrameNumber (),
         reward,
         interrupted_this_step);
     }
 
+    public int GetCurrentFrameNumber () {
+      return _current_episode_frame;
+    }
 
-    void ExecuteReaction (Reaction reaction) {
+    public float GetTimeSinceReset () {
+      return Time.time - _lastest_reset_time;//Time.realtimeSinceStartup;
+    }
+
+    public void ExecuteReaction (Reaction reaction) {
+      _current_episode_frame++;
       var actors = GetActors ();
       if (reaction != null && reaction.GetMotions ().Length > 0)
         foreach (MotorMotion motion in reaction.GetMotions()) {
@@ -190,7 +188,7 @@ namespace Neodroid.Environments {
     }
 
     void AddToEnvironment () {
-      _environment_manager = NeodroidUtilities.MaybeRegisterComponent (_environment_manager, this);
+      _simulation_manager = NeodroidUtilities.MaybeRegisterComponent (_simulation_manager, this);
     }
 
 
@@ -255,15 +253,10 @@ namespace Neodroid.Environments {
       return _observers;
     }
 
-    public string GetStatus () {
-      if (_client_connected)
-        return "Connected";
-      else
-        return "Not Connected";
-    }
 
     public void Interrupt () {
       ResetRegisteredObjects ();
+      ResetEnvironment ();
       _was_interrupted = true;
       if (_debug)
         Debug.Log ("Was interrupted");
@@ -282,6 +275,27 @@ namespace Neodroid.Environments {
       foreach (var observer in _observers.Values) {
         observer.Reset ();
       }
+    }
+
+    public void ResetEnvironment () {
+      for (int resets = 0; resets < _simulation_manager._resets; resets++) { 
+        for (int i = 0; i < _child_game_objects.Length; i++) {
+          var rigid_body = _child_game_objects [i].GetComponent<Rigidbody> ();
+          if (rigid_body)
+            rigid_body.Sleep ();
+          _child_game_objects [i].transform.position = _reset_positions [i];
+          _child_game_objects [i].transform.rotation = _reset_rotations [i];
+          if (rigid_body)
+            rigid_body.WakeUp ();
+
+          var animation = _child_game_objects [i].GetComponent<Animation> ();
+          if (animation)
+            animation.Rewind ();
+        }
+      }
+      _lastest_reset_time = Time.time;
+      _current_episode_frame = 0;
+      //_is_environment_updated = false;
     }
 
     #region Registration
@@ -327,59 +341,6 @@ namespace Neodroid.Environments {
 
     #endregion
 
-    #region Callbacks
 
-    public void OnReceiveCallback (Reaction reaction) {
-      _client_connected = true;
-      if (_debug)
-        Debug.Log ("Received: " + reaction.ToString ());
-      _lastest_reaction = reaction;
-      _waiting_for_reaction = false;
-      _has_stepped_since_reaction = false;
-    }
-
-    /*void OnResetCallback (EnvironmentConfiguration configuration) {
-      _client_connected = true;
-      if (_debug)
-        Debug.Log ("Received: " + reaction.ToString ());
-      _lastest_reaction = reaction;
-      _waiting_for_reaction = false;
-      _has_stepped_since_reaction = false;
-    }*/
-
-    void OnDisconnectCallback () {
-      _client_connected = false;
-      if (_debug)
-        Debug.Log ("Client disconnected.");
-    }
-
-    void OnErrorCallback (string error) {
-      if (_debug)
-        Debug.Log ("ErrorCallback: " + error);
-    }
-
-    void OnConnectCallback () {
-      if (_debug)
-        Debug.Log ("Client connected.");
-      _message_server.StartReceiving (OnReceiveCallback, OnDisconnectCallback, OnErrorCallback);
-    }
-
-    void OnInterruptCallback () {
-
-    }
-
-    #endregion
-
-    #region Deconstruction
-
-    private void OnApplicationQuit () {
-      _message_server.KillPollingAndListenerThread ();
-    }
-
-    private void OnDestroy () { //Deconstructor
-      _message_server.Destroy ();
-    }
-
-    #endregion
   }
 }

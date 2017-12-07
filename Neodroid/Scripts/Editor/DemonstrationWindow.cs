@@ -15,7 +15,7 @@ namespace Neodroid.Windows {
   EditorWindow.GetWindow (typeof(DemonstrationWindow));      //Show existing window instance. If one doesn't exist, make one.
     }
 
-    EnvironmentManager _environment_manager;
+    SimulationManager _environment_manager;
     Texture _icon;
 
     void OnEnable () {

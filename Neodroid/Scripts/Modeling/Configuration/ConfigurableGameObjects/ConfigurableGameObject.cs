@@ -7,7 +7,7 @@ using Neodroid.Messaging.Messages;
 using Neodroid.Utilities;
 
 namespace Neodroid.Configurations {
-  public class ConfigurableGameObject : MonoBehaviour, Configurable {
+  public class ConfigurableGameObject : Configurable {
 
     public LearningEnvironment _environment;
     public bool _debug = false;
@@ -21,10 +21,10 @@ namespace Neodroid.Configurations {
       _environment = NeodroidUtilities.MaybeRegisterComponent (_environment, this);
     }
 
-    public virtual void ApplyConfiguration (Configuration configuration) {
+    public override void ApplyConfiguration (Configuration configuration) {
     }
 
-    public virtual string GetConfigurableIdentifier () {
+    public override string GetConfigurableIdentifier () {
       return name + "Configurable";
     }
   }

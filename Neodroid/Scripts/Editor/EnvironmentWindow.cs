@@ -22,7 +22,7 @@ namespace Neodroid.Windows {
       //window.Show();
     }
 
-    EnvironmentManager _environment_manager;
+  SimulationManager _simulation_manager;
     LearningEnvironment[] _environments;
     Actor[] _actors;
     Motor[] _motors;
@@ -37,17 +37,19 @@ namespace Neodroid.Windows {
     }
 
     void OnGUI () {
-      _environment_manager = FindObjectOfType<EnvironmentManager> ();
-      if (_environment_manager) {
-        _environment_manager._episode_length = EditorGUILayout.IntField ("Episode Length", _environment_manager._episode_length);
-        _environment_manager._frame_skips = EditorGUILayout.IntField ("Frame skips", _environment_manager._frame_skips);
-        _environment_manager._resets = EditorGUILayout.IntField ("Resets when resetting", _environment_manager._resets);
-        _environment_manager._wait_for_reaction_every_frame = EditorGUILayout.Toggle ("Wait For Reaction Every Frame", _environment_manager._wait_for_reaction_every_frame);
-        //_environment_manager._coordinate_system = (CoordinateSystem)EditorGUILayout.EnumPopup ("Coordinate System:", _environment_manager._coordinate_system);
+  _simulation_manager = FindObjectOfType<SimulationManager> ();
+  if (_simulation_manager) {
+  _simulation_manager._episode_length = EditorGUILayout.IntField ("Episode Length", _simulation_manager._episode_length);
+  _simulation_manager._frame_skips = EditorGUILayout.IntField ("Frame skips", _simulation_manager._frame_skips);
+  _simulation_manager._resets = EditorGUILayout.IntField ("Resets when resetting", _simulation_manager._resets);
+  _simulation_manager._wait_for_reaction_every_frame = EditorGUILayout.Toggle ("Wait For Reaction Every Frame", _simulation_manager._wait_for_reaction_every_frame);
 
-        //EditorGUI.BeginDisabledGroup (_environment_manager._coordinate_system != CoordinateSystem.RelativeToReferencePoint);
-        //_environment_manager._coordinate_reference_point = (Transform)EditorGUILayout.ObjectField ("Coordinate Reference Point:", _environment_manager._coordinate_reference_point, typeof(Transform), true);
-        //EditorGUI.EndDisabledGroup ();
+
+  //_environment._coordinate_system = (CoordinateSystem)EditorGUILayout.EnumPopup ("Coordinate System:", _environment._coordinate_system);
+
+  //EditorGUI.BeginDisabledGroup (_environment._coordinate_system != CoordinateSystem.RelativeToReferencePoint);
+  //_environment._coordinate_reference_point = (Transform)EditorGUILayout.ObjectField ("Coordinate Reference Point:", _environment._coordinate_reference_point, typeof(Transform), true);
+  //EditorGUI.EndDisabledGroup ();
 
         _environments = NeodroidUtilities.FindAllObjectsOfTypeInScene<LearningEnvironment> ();
         _actors = NeodroidUtilities.FindAllObjectsOfTypeInScene<Actor> ();
@@ -120,11 +122,11 @@ namespace Neodroid.Windows {
         EditorGUI.BeginDisabledGroup (!Application.isPlaying);
 
         if (GUILayout.Button ("Step")) {
-          _environment_manager.Step ();
+        //_simulation_manager.Step ();
         }
 
         if (GUILayout.Button ("Reset")) {
-          _environment_manager.ResetEnvironment ();
+  //_simulation_manager.ResetEnvironment ();
         }
 
         EditorGUI.EndDisabledGroup ();
