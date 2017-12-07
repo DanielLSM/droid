@@ -18,7 +18,7 @@ namespace Neodroid.Windows {
 
     [MenuItem ("Neodroid/DebugWindow")]
     public static void ShowWindow () {
-      EditorWindow.GetWindow (typeof(DebugWindow));      //Show existing window instance. If one doesn't exist, make one.
+      EditorWindow.GetWindow<DebugWindow>();      //Show existing window instance. If one doesn't exist, make one.
     }
 
     SimulationManager _simulation_manager;

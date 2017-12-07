@@ -1,15 +1,15 @@
-﻿using FlatBuffers;
-using System.Collections.Generic;
-using UnityEngine;
-using Neodroid.Messaging;
-using Neodroid.Messaging.Messages;
+﻿using System.Collections.Generic;
+using FlatBuffers;
 using Neodroid.Actors;
-using Neodroid.Observers;
-using Neodroid.Motors;
 using Neodroid.Configurations;
+using Neodroid.Messaging;
 using Neodroid.Messaging.FlatBuffer;
-using Neodroid.Messaging.Models.State;
+using Neodroid.Messaging.Messages;
 using Neodroid.Messaging.Models.Reaction;
+using Neodroid.Messaging.Models.State;
+using Neodroid.Motors;
+using Neodroid.Observers;
+using UnityEngine;
 
 namespace Neodroid.Messaging {
   public static class FlatBufferUtilities {

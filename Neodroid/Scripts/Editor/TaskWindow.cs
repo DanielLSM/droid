@@ -47,10 +47,12 @@ namespace Neodroid.Windows {
         var seq = _task_sequence.GetSequence ();
         if (seq != null) {
           foreach (GoalObserver g in seq) {
-            if (_task_sequence._current_goal.name == g.name)
+  if(g != null){
+            if (_task_sequence._current_goal != null &&_task_sequence._current_goal.name == g.name)
               GUILayout.Label (g.name, EditorStyles.whiteLabel);
             else
               GUILayout.Label (g.name);
+  }
           }
         }
 
