@@ -33,7 +33,6 @@ namespace Neodroid.Managers {
     bool _client_connected = false;
     Reaction _lastest_reaction = null;
     bool _waiting_for_reaction = true;
-    bool _has_stepped_since_reaction = true;
 
     #endregion
 
@@ -175,7 +174,6 @@ namespace Neodroid.Managers {
         Debug.Log ("Received: " + reaction.ToString ());
       _lastest_reaction = reaction;
       _waiting_for_reaction = false;
-      _has_stepped_since_reaction = false;
     }
 
     /*void OnResetCallback (EnvironmentConfiguration configuration) {

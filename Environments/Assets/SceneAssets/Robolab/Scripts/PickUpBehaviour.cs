@@ -13,8 +13,8 @@ namespace Robolab {
     public Camera _camera;
     public Rigidbody LeftArm;
     public Rigidbody RightArm;
-    readonly VectorPid angularVelocityController = new VectorPid (30.7766f, 0, 0.2553191f);
-    readonly VectorPid headingController = new VectorPid (2.244681f, 0, 0.1382979f);
+    //readonly VectorPid angularVelocityController = new VectorPid (30.7766f, 0, 0.2553191f);
+    //readonly VectorPid headingController = new VectorPid (2.244681f, 0, 0.1382979f);
 
     public Vector3 _holding_position;
 
