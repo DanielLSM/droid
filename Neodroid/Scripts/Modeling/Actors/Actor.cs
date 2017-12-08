@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
+using System;
 
 namespace Neodroid.Actors {
   public class Actor : MonoBehaviour, HasRegister<Motor> {
@@ -22,10 +23,20 @@ namespace Neodroid.Actors {
     public bool _debug = false;
 
     void Awake () {
+      Setup ();
+    }
+
+    void Setup () {
       if (_motors == null)
         _motors = new Dictionary<string, Motor> ();
       _environment = NeodroidUtilities.MaybeRegisterComponent (_environment, this);
     }
+
+    #if UNITY_EDITOR
+    void OnValidate () { // Only called in the editor
+    //Setup ();
+    }
+    #endif
 
     protected void Start () {
       UpdatePosRotDir ();
@@ -65,32 +76,29 @@ namespace Neodroid.Actors {
       return _motors;
     }
 
-    public void AddMotor (Motor motor) {
-      if (_debug)
-        Debug.Log ("Actor " + name + " has motor " + motor.GetMotorIdentifier ());
-      if (_motors == null)
-        _motors = new Dictionary<string, Motor> ();
-      _motors.Add (motor.GetMotorIdentifier (), motor);
-    }
-
     public void AddMotor (Motor motor, string identifier) {
       if (_debug)
         Debug.Log ("Actor " + name + " has motor " + identifier);
       if (_motors == null)
         _motors = new Dictionary<string, Motor> ();
-      _motors.Add (identifier, motor);
+      if (!_motors.ContainsKey (identifier)) {
+        _motors.Add (identifier, motor);
+      } else {
+        if (_debug)
+          Debug.Log (String.Format ("A motor with the identifier {0} is already registered", identifier));
+      }
     }
 
     public string GetActorIdentifier () {
       return name + "Actor";
     }
 
-    public void Register (Motor obj) {
-      AddMotor (obj);
+    public void Register (Motor motor) {
+      AddMotor (motor, motor.GetMotorIdentifier ());
     }
 
-    public void Register (Motor obj, string identifier) {
-      AddMotor (obj, identifier);
+    public void Register (Motor motor, string identifier) {
+      AddMotor (motor, identifier);
     }
 
     public virtual void Reset () {

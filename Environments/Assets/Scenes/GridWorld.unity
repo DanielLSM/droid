@@ -1569,7 +1569,7 @@ MonoBehaviour:
   _debug: 0
   _bidirectional: 1
   _energy_cost: 1
-  _actor_game_object: {fileID: 0}
+  _actor_game_object: {fileID: 1650564493}
   _axis_of_motion: 2
   _space: 1
 --- !u!114 &1650564492
@@ -1586,7 +1586,7 @@ MonoBehaviour:
   _debug: 0
   _bidirectional: 1
   _energy_cost: 1
-  _actor_game_object: {fileID: 0}
+  _actor_game_object: {fileID: 1650564493}
   _axis_of_motion: 0
   _space: 1
 --- !u!114 &1650564493
@@ -1603,7 +1603,7 @@ MonoBehaviour:
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _direction: {x: 0, y: 0, z: 0}
-  _environment: {fileID: 0}
+  _environment: {fileID: 1943801932}
   _debug: 0
 --- !u!1 &1873909285
 GameObject:
@@ -1721,7 +1721,7 @@ MonoBehaviour:
   _coordinate_reference_point: {fileID: 0}
   _objective_function: {fileID: 0}
   _simulation_manager: {fileID: 0}
-  _debug: 0
+  _debug: 1
 --- !u!114 &1943801933
 MonoBehaviour:
   m_ObjectHideFlags: 0

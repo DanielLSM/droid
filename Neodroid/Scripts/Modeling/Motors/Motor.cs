@@ -21,6 +21,12 @@ namespace Neodroid.Motors {
       _actor_game_object = NeodroidUtilities.MaybeRegisterComponent (_actor_game_object, this);
     }
 
+    #if UNITY_EDITOR
+    void OnValidate () { // Only called in the editor
+      //RegisterComponent ();
+    }
+    #endif
+
     private void Update () {
     }
 
