@@ -21,10 +21,13 @@ namespace Neodroid.Actors {
 
     public bool _debug = false;
 
-    protected void Start () {
+    void Awake () {
       if (_motors == null)
         _motors = new Dictionary<string, Motor> ();
       _environment = NeodroidUtilities.MaybeRegisterComponent (_environment, this);
+    }
+
+    protected void Start () {
       UpdatePosRotDir ();
     }
 
@@ -91,8 +94,12 @@ namespace Neodroid.Actors {
     }
 
     public virtual void Reset () {
-      foreach (var motor in _motors.Values) {
-        motor.Reset ();
+      if (_motors != null) {
+        foreach (var motor in _motors.Values) {
+          if (motor != null) {
+            motor.Reset ();
+          }
+        }
       }
     }
   }
