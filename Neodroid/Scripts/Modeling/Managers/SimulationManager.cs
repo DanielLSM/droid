@@ -57,13 +57,11 @@ namespace Neodroid.Managers {
     void Update () {
       if (!_waiting_for_reaction && _lastest_reaction != null) {
         ResumeSimulation ();
-        LearningEnvironment last = null;
-        foreach (var environment in _environments.Values) {
-          environment.ExecuteReaction (_lastest_reaction);
-          environment.UpdateObserversData ();
-          last = environment;
-        }
-        SendEnvironmentState (last.GetCurrentState ());
+
+        ExecuteReaction (_lastest_reaction);
+        //var last = ExecuteReaction (_lastest_reaction);
+        //SendEnvironmentState (last.GetCurrentState ());
+        SendEnvironmentStates (GatherStates ());
       }
     }
 
@@ -71,16 +69,22 @@ namespace Neodroid.Managers {
 
     #region PublicMethods
 
+    public LearningEnvironment ExecuteReaction (Reaction reaction) {
+      LearningEnvironment last = null;
+      foreach (var environment in _environments.Values) {
+        environment.ExecuteReaction (reaction);
+        environment.UpdateObserversData ();
+        last = environment;
+      }
+      return last;
+    }
+
     public bool IsSimulationUpdated () {
       return _is_simulation_updated;
     }
 
     public bool IsSimulationPaused () {
       return Time.timeScale == 0;
-    }
-
-    public void SendEnvironmentState (EnvironmentState state) {
-      _message_server.SendEnvironmentState (state);
     }
 
     public string GetStatus () {
@@ -109,6 +113,24 @@ namespace Neodroid.Managers {
     #endregion
 
     #region PrivateMethods
+
+    void SendEnvironmentState (EnvironmentState state) {
+      _message_server.SendEnvironmentState (state);
+    }
+
+    void SendEnvironmentStates (EnvironmentState[] states) {
+      _message_server.SendEnvironmentStates (states);
+    }
+
+    EnvironmentState[] GatherStates () {
+      var states = new EnvironmentState[_environments.Values.Count];
+      var i = 0;
+      foreach (var environment in _environments.Values) {
+        states [i++] = environment.GetCurrentState ();
+      }
+      return states;
+    }
+
 
     void PauseSimulation () {
       Time.timeScale = 0;
@@ -147,7 +169,7 @@ namespace Neodroid.Managers {
 
     #region Callbacks
 
-    public void OnReceiveCallback (Reaction reaction) {
+    void OnReceiveCallback (Reaction reaction) {
       _client_connected = true;
       if (_debug)
         Debug.Log ("Received: " + reaction.ToString ());

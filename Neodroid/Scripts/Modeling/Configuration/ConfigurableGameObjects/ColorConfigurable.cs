@@ -53,7 +53,6 @@ namespace Neodroid.Configurations {
 
     public override string GetConfigurableIdentifier () {
       return name + "Color";
-      ;
     }
   }
 }

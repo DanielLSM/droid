@@ -108,6 +108,12 @@ namespace Neodroid.Messaging {
       _waiting_for_main_loop_to_send = false;
     }
 
+    public void SendEnvironmentStates (EnvironmentState[] environment_states) {
+      byte_buffer = FlatBufferUtilities.build_states (environment_states);
+      _socket.SendFrame (byte_buffer);
+      _waiting_for_main_loop_to_send = false;
+    }
+
     #endregion
 
     #region Deconstruction

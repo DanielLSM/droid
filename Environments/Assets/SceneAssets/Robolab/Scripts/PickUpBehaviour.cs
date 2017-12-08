@@ -11,22 +11,27 @@ namespace Robolab {
 
     public GameObject _player;
     public Camera _camera;
+    public Rigidbody LeftArm;
+    public Rigidbody RightArm;
+    readonly VectorPid angularVelocityController = new VectorPid (30.7766f, 0, 0.2553191f);
+    readonly VectorPid headingController = new VectorPid (2.244681f, 0, 0.1382979f);
+
     public Vector3 _holding_position;
 
-    private GameObject _picked_up_object;
-    private Rigidbody _body;
-    private float _original_body_angular_drag;
+    GameObject _picked_up_object;
+    Rigidbody _body;
+    float _original_body_angular_drag;
 
-    private RaycastHit? _raycast;
+    RaycastHit? _raycast;
 
-    private void Start () {
+    void Start () {
       _player = this.gameObject;
       if (!_camera) {
         _camera = this.GetComponent<Camera> ();
       }
     }
 
-    private void Update () {
+    void Update () {
       Raycast ();
       if (_raycast.HasValue) {
         if (_raycast.Value.distance < _holding_distance) {
@@ -56,13 +61,15 @@ namespace Robolab {
         FreezeObject ();
     }
 
-    private void FixedUpdate () {
+    void FixedUpdate () {
       if (_picked_up_object) {
         UpdateHoldableObject ();
+        UpdateArm (LeftArm, _picked_up_object);
+        UpdateArm (RightArm, _picked_up_object);
       }
     }
 
-    private void Raycast () {
+    void Raycast () {
       _raycast = null;
       //const int layerMask = 1 << 8;
       //Debug.DrawLine (_camera.transform.position, _camera.transform.forward * _max_pick_up_distance);
@@ -80,7 +87,29 @@ namespace Robolab {
       }
     }
 
-    private void UpdateHoldableObject () {
+    void UpdateArm (Rigidbody arm, GameObject target) {
+      //var angularVelocityError = arm.angularVelocity * -1;
+      //Debug.DrawRay (transform.position, LeftArm.angularVelocity * 10, Color.black);
+
+      //var angularVelocityCorrection = angularVelocityController.Update (angularVelocityError, Time.deltaTime);
+      //Debug.DrawRay (transform.position, angularVelocityCorrection, Color.green);
+
+      //arm.AddTorque (angularVelocityCorrection);
+
+      //var desiredHeading = target.transform.position - transform.position;
+      //Debug.DrawRay (transform.position, desiredHeading, Color.magenta);
+
+      //var currentHeading = -transform.up;
+      //Debug.DrawRay (transform.position, currentHeading * 15, Color.blue);
+
+      //var headingError = Vector3.Cross (currentHeading, desiredHeading);
+      //var headingCorrection = headingController.Update (headingError, Time.deltaTime);
+
+      //arm.AddTorque (headingCorrection);
+      arm.transform.LookAt (target.transform);
+    }
+
+    void UpdateHoldableObject () {
       //_body.velocity = Vector3.Lerp (_picked_up_object.transform.position, _pivot_position, _follow_strength); 
       //_body.velocity = (_holding_position - _picked_up_object.transform.position) * _follow_strength;// + ((1 - _follow_strength) * _body.velocity);
       //_body.velocity = Vector3.SmoothDamp (_picked_up_object.transform.position, _pivot_position, _pivot_position- _picked_up_object.transform.position, _follow_strength);
@@ -91,7 +120,7 @@ namespace Robolab {
 
     }
 
-    private void TryPickUpObject () {
+    void TryPickUpObject () {
       _body = _raycast.Value.rigidbody;
       _body.transform.position = _holding_position;
       _body.useGravity = false;
@@ -103,7 +132,7 @@ namespace Robolab {
       Physics.IgnoreCollision (_picked_up_object.GetComponent<Collider> (), this.GetComponent<Collider> (), true);
     }
 
-    private void ReleaseObject (Action onRelease = null) {
+    void ReleaseObject (Action onRelease = null) {
       Physics.IgnoreCollision (_picked_up_object.GetComponent<Collider> (), this.GetComponent<Collider> (), false);
       _body.isKinematic = false;
       _body.useGravity = true;
@@ -113,18 +142,40 @@ namespace Robolab {
       ClearPickedUp ();
     }
 
-    private void ClearPickedUp () {
+    void ClearPickedUp () {
       _body = null;
       _picked_up_object = null;
     }
 
-    private void FreezeObject () {
+    void FreezeObject () {
       _body.isKinematic = true;
       ClearPickedUp ();
     }
 
-    private void ThrowObject () {
+    void ThrowObject () {
       ReleaseObject (() => _body.AddForce (_camera.transform.forward * _throwing_strength, ForceMode.Impulse));
+    }
+  }
+
+  public class VectorPid {
+    public float pFactor, iFactor, dFactor;
+
+    Vector3 integral;
+    Vector3 lastError;
+
+    public VectorPid (float pFactor, float iFactor, float dFactor) {
+      this.pFactor = pFactor;
+      this.iFactor = iFactor;
+      this.dFactor = dFactor;
+    }
+
+    public Vector3 Update (Vector3 currentError, float timeFrame) {
+      integral += currentError * timeFrame;
+      var deriv = (currentError - lastError) / timeFrame;
+      lastError = currentError;
+      return currentError * pFactor
+      + integral * iFactor
+      + deriv * dFactor;
     }
   }
 }

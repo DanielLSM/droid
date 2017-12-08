@@ -65,6 +65,46 @@ namespace Neodroid.Messaging {
       return FlatBufferObserver.EndFlatBufferObserver (b);
     }
 
+    public static byte[] build_states (EnvironmentState[] states) {
+      var b = new FlatBufferBuilder (1);
+      foreach (var state in states) {
+        var actors = new Offset<FlatBufferActor>[state._actors.Values.Count];
+        int j = 0;
+        foreach (Actor actor in state._actors.Values) {
+          var motors = new Offset<FlatBufferMotor>[actor._motors.Values.Count];
+          int i = 0;
+          foreach (var motor in actor._motors) {
+            motors [i++] = build_motor (b, motor.Value, motor.Key);
+          }
+          actors [j++] = build_actor (b, motors, actor);
+        }
+
+        var observers = new Offset<FlatBufferObserver>[state._observers.Values.Count];
+        int k = 0;
+        foreach (Observer observer in state._observers.Values) {
+          observers [k++] = build_observer (b, observer);
+        }
+
+        FlatBufferState.CreateActorsVector (b, actors);
+        var actors_vector = b.EndVector ();
+        FlatBufferState.CreateObserversVector (b, observers);
+        var observers_vector = b.EndVector ();
+
+        FlatBufferState.StartFlatBufferState (b);
+        FlatBufferState.AddTotalEnergySpentSinceReset (b, state._total_energy_spent_since_reset);
+        FlatBufferState.AddTimeSinceRest (b, state._time_since_reset);
+        FlatBufferState.AddRewardForLastStep (b, state._reward_for_last_step);
+        FlatBufferState.AddActors (b, actors_vector);
+        FlatBufferState.AddObservers (b, observers_vector);
+        FlatBufferState.AddLastStepsFrameNumber (b, state._last_steps_frame_number);
+        FlatBufferState.AddInterrupted (b, state._interrupted);
+        var offset = FlatBufferState.EndFlatBufferState (b);
+
+        FlatBufferState.FinishFlatBufferStateBuffer (b, offset);
+      }
+      return b.SizedByteArray ();
+    }
+
     public static byte[] build_state (EnvironmentState state) {
 
       var b = new FlatBufferBuilder (1);
