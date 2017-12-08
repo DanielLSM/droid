@@ -6,34 +6,41 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace Neodroid.Task {
+namespace Neodroid.Task
+{
 
-  namespace Neodroid.Utilities {
-    [CreateAssetMenu (fileName = "NeodroidTask", menuName = "Neodroid/Create/NeodroidTask", order = 1)]
-    public class NeodroidTask : ScriptableObject {
-      public Vector3 position;
-      public float radius;
+    namespace Neodroid.Utilities
+    {
+        [CreateAssetMenu(fileName = "NeodroidTask", menuName = "Neodroid/Create/NeodroidTask", order = 1)]
+        public class NeodroidTask : ScriptableObject
+        {
+            public Vector3 position;
+            public float radius;
+        }
+
+#if UNITY_EDITOR
+        public class CreateNeodroidTask
+        {
+            [MenuItem("Neodroid/Create/NeodroidTask")]
+            public static void CreateNeodroidTaskAsset()
+            {
+                var asset = ScriptableObject.CreateInstance<NeodroidTask>();
+
+                AssetDatabase.CreateAsset(asset, "Assets/NewNeodroidTask.asset");
+                AssetDatabase.SaveAssets();
+
+                EditorUtility.FocusProjectWindow();
+
+                Selection.activeObject = asset;
+            }
+        }
+#endif
     }
-
-    #if UNITY_EDITOR
-    public class CreateNeodroidTask {
-    [MenuItem ("Neodroid/Create/NeodroidTask")]
-    public static void CreateNeodroidTaskAsset () {
-    var asset = ScriptableObject.CreateInstance<NeodroidTask> ();
-
-    AssetDatabase.CreateAsset (asset, "Assets/NewNeodroidTask.asset");
-    AssetDatabase.SaveAssets ();
-
-    EditorUtility.FocusProjectWindow ();
-
-    Selection.activeObject = asset;
+    public class NeodroidTask : MonoBehaviour
+    {
+        public NeodroidTask()
+        {
+        }
     }
-    }
-    #endif
-  }
-  public class NeodroidTask : MonoBehaviour {
-    public NeodroidTask () {
-    }
-  }
 }
 

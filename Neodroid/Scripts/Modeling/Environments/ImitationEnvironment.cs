@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Neodroid.Environments {
-  public class ImitationEnvironment : LearningEnvironment {
+namespace Neodroid.Environments
+{
+    public class ImitationEnvironment : LearningEnvironment
+    {
 
-  }
+    }
 }

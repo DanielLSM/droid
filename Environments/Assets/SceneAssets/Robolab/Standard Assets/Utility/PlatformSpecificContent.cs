@@ -36,10 +36,8 @@ namespace UnityStandardAssets.Utility
 		CheckEnableContent();
 	}
 #else
-        public int callbackOrder
-        {
-            get
-            {
+        public int callbackOrder {
+            get {
                 return 1;
             }
         }
