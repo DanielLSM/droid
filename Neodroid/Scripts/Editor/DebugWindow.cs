@@ -74,7 +74,9 @@ namespace Neodroid.Windows {
       _show_objective_functions_debug = EditorGUILayout.Toggle ("Debug all objective functions", _show_objective_functions_debug);
 
       if (GUILayout.Button ("Apply")) {
-  _simulation_manager._debug = _show_simulation_manager_debug;
+  if (_simulation_manager != null) {
+    _simulation_manager._debug = _show_simulation_manager_debug; 
+  }
         foreach (var agent in _environments) {
           agent._debug = _show_environments_debug;
         }

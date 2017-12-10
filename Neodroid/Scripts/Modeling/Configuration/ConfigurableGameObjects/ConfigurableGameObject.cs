@@ -6,32 +6,30 @@ using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
 using Neodroid.Utilities;
 
-namespace Neodroid.Configurations
-{
-    public class ConfigurableGameObject : Configurable
-    {
+namespace Neodroid.Configurations {
+  
+  public class ConfigurableGameObject : Configurable {
 
-        public LearningEnvironment _environment;
-        public bool _debug = false;
+    public LearningEnvironment _environment;
+    public bool _debug = false;
 
-        protected virtual void Start()
-        {
-            AddToEnvironment();
-        }
-
-
-        protected virtual void AddToEnvironment()
-        {
-            _environment = NeodroidUtilities.MaybeRegisterComponent(_environment, this);
-        }
-
-        public override void ApplyConfiguration(Configuration configuration)
-        {
-        }
-
-        public override string GetConfigurableIdentifier()
-        {
-            return name + "Configurable";
-        }
+    protected virtual void Start () {
     }
+
+    void Awake () {
+      AddToEnvironment ();
+    }
+
+
+    protected virtual void AddToEnvironment () {
+      _environment = NeodroidUtilities.MaybeRegisterComponent (_environment, this);
+    }
+
+    public override void ApplyConfiguration (Configuration configuration) {
+    }
+
+    public override string GetConfigurableIdentifier () {
+      return name + "Configurable";
+    }
+  }
 }
