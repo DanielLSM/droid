@@ -84,49 +84,57 @@ namespace Neodroid.Windows {
               EditorGUILayout.BeginVertical ("Box");
               GUILayout.Label ("Actors");
               foreach (var actor in actors) {
-                motors = actor.Value.RegisteredMotors;
+                if (actor.Value != null) {
+                  motors = actor.Value.RegisteredMotors;
 
-                EditorGUILayout.BeginVertical ("Box");
-                actor.Value.enabled = EditorGUILayout.BeginToggleGroup (actor.Key, actor.Value.enabled && actor.Value.gameObject.activeSelf);
-                EditorGUILayout.ObjectField (actor.Value, typeof(Actor), true);
-
-                EditorGUILayout.BeginVertical ("Box");
-                GUILayout.Label ("Motors");
-                foreach (var motor in motors) {
                   EditorGUILayout.BeginVertical ("Box");
-                  motor.Value.enabled = EditorGUILayout.BeginToggleGroup (motor.Key, motor.Value.enabled && motor.Value.gameObject.activeSelf);
-                  EditorGUILayout.ObjectField (motor.Value, typeof(Motor), true);
+                  actor.Value.enabled = EditorGUILayout.BeginToggleGroup (actor.Key, actor.Value.enabled && actor.Value.gameObject.activeSelf);
+                  EditorGUILayout.ObjectField (actor.Value, typeof(Actor), true);
+
+                  EditorGUILayout.BeginVertical ("Box");
+                  GUILayout.Label ("Motors");
+                  foreach (var motor in motors) {
+                    if (motor.Value != null) {
+                      EditorGUILayout.BeginVertical ("Box");
+                      motor.Value.enabled = EditorGUILayout.BeginToggleGroup (motor.Key, motor.Value.enabled && motor.Value.gameObject.activeSelf);
+                      EditorGUILayout.ObjectField (motor.Value, typeof(Motor), true);
+                      EditorGUILayout.EndToggleGroup ();
+
+                      EditorGUILayout.EndVertical ();
+                    }
+                  }
+                  EditorGUILayout.EndVertical ();
+
                   EditorGUILayout.EndToggleGroup ();
 
                   EditorGUILayout.EndVertical ();
                 }
-                EditorGUILayout.EndVertical ();
-
-                EditorGUILayout.EndToggleGroup ();
-
-                EditorGUILayout.EndVertical ();
               }
               EditorGUILayout.EndVertical ();
 
               EditorGUILayout.BeginVertical ("Box");
               GUILayout.Label ("Observers");
               foreach (var observer in observers) {
-                EditorGUILayout.BeginVertical ("Box");
-                observer.Value.enabled = EditorGUILayout.BeginToggleGroup (observer.Key, observer.Value.enabled && observer.Value.gameObject.activeSelf);
-                EditorGUILayout.ObjectField (observer.Value, typeof(Observer), true);
-                EditorGUILayout.EndToggleGroup ();
-                EditorGUILayout.EndVertical ();
+                if (observer.Value != null) {
+                  EditorGUILayout.BeginVertical ("Box");
+                  observer.Value.enabled = EditorGUILayout.BeginToggleGroup (observer.Key, observer.Value.enabled && observer.Value.gameObject.activeSelf);
+                  EditorGUILayout.ObjectField (observer.Value, typeof(Observer), true);
+                  EditorGUILayout.EndToggleGroup ();
+                  EditorGUILayout.EndVertical ();
+                }
               }
               EditorGUILayout.EndVertical ();
 
               EditorGUILayout.BeginVertical ("Box");
               GUILayout.Label ("Configurables");
               foreach (var configurable in _configurables) {
-                EditorGUILayout.BeginVertical ("Box");
-                configurable.Value.enabled = EditorGUILayout.BeginToggleGroup (configurable.Key, configurable.Value.enabled && configurable.Value.gameObject.activeSelf);
-                EditorGUILayout.ObjectField (configurable.Value, typeof(ConfigurableGameObject), true);
-                EditorGUILayout.EndToggleGroup ();
-                EditorGUILayout.EndVertical ();
+                if (configurable.Value != null) {
+                  EditorGUILayout.BeginVertical ("Box");
+                  configurable.Value.enabled = EditorGUILayout.BeginToggleGroup (configurable.Key, configurable.Value.enabled && configurable.Value.gameObject.activeSelf);
+                  EditorGUILayout.ObjectField (configurable.Value, typeof(ConfigurableGameObject), true);
+                  EditorGUILayout.EndToggleGroup ();
+                  EditorGUILayout.EndVertical ();
+                }
               }
               EditorGUILayout.EndVertical ();
 

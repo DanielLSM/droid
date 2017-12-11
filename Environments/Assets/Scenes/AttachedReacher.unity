@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98260ba1aa8584a92bf9f04e2f7ec6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _environment: {fileID: 0}
+  _environment: {fileID: 1828114874}
   _debug: 0
 --- !u!1001 &334457577
 Prefab:
@@ -429,12 +429,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 416
+      value: 562.5
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 262.5
+      value: 374.5
       objectReference: {fileID: 0}
     - target: {fileID: 224267871597078786, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
@@ -532,6 +532,50 @@ Prefab:
         type: 2}
       propertyPath: _bounds_offset.z
       value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633047307681504, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20138910558271326, guid: 6f1ff38442c544cf19a2f6370122ccf9,
+        type: 2}
+      propertyPath: orthographic size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 20439747208925330, guid: 6f1ff38442c544cf19a2f6370122ccf9,
+        type: 2}
+      propertyPath: orthographic size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 20753389200406916, guid: 6f1ff38442c544cf19a2f6370122ccf9,
+        type: 2}
+      propertyPath: orthographic size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 20291214700808642, guid: 6f1ff38442c544cf19a2f6370122ccf9,
+        type: 2}
+      propertyPath: orthographic size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 20915124734482638, guid: 6f1ff38442c544cf19a2f6370122ccf9,
+        type: 2}
+      propertyPath: orthographic size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 20656250116842782, guid: 6f1ff38442c544cf19a2f6370122ccf9,
+        type: 2}
+      propertyPath: orthographic size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 20093815521174116, guid: 6f1ff38442c544cf19a2f6370122ccf9,
+        type: 2}
+      propertyPath: orthographic size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 20619034475555362, guid: 6f1ff38442c544cf19a2f6370122ccf9,
+        type: 2}
+      propertyPath: orthographic size
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
@@ -1023,6 +1067,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1828114868}
   m_Script: {fileID: 11500000, guid: c1d7d85cd41e84e548fde09fb5972b49, type: 3}
+--- !u!114 &1828114874 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114279995740554064, guid: 6f1ff38442c544cf19a2f6370122ccf9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1828114868}
+  m_Script: {fileID: 11500000, guid: f4675f9235ecc46a5982e50590d858cc, type: 3}
 --- !u!1001 &1978713198
 Prefab:
   m_ObjectHideFlags: 0
@@ -1067,6 +1117,11 @@ Prefab:
       propertyPath: _lights_to_ignore.Array.data[0]
       value: 
       objectReference: {fileID: 413061895}
+    - target: {fileID: 20280333308183486, guid: 161c5a6820fb14b35ab51338756ccc70,
+        type: 2}
+      propertyPath: orthographic size
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 161c5a6820fb14b35ab51338756ccc70, type: 2}
   m_IsPrefabParent: 0

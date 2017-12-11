@@ -23,14 +23,19 @@ namespace Neodroid.Evaluation {
         _environment.Interrupt ();
       }
 
-      var reward = 0.0f;  
-      reward += 1 / Mathf.Abs (Vector3.Distance (_goal.transform.position, _actor.transform.position) + 1);
+      var reward = 0.0f;
+      var distance = Mathf.Abs (Vector3.Distance (_goal.transform.position, _actor.transform.position));
+      reward += 1 / Mathf.Abs (distance + 1);
       var angle = Quaternion.Angle (_goal.transform.rotation, _actor.transform.rotation);
       reward += 1 / Mathf.Abs (angle + 1);
       if (reward <= peak_reward) {
         reward = 0.0f;
       } else {
         peak_reward = reward;
+      }
+
+      if (distance < 0.9) {
+        _environment.Interrupt ();
       }
       return reward;
     }

@@ -13,6 +13,7 @@ namespace Neodroid.Motors {
     public Space _space = Space.Self;
     public bool _rotational_motors = false;
     public bool _no_collisions = true;
+    public string _layer_mask = "Obstructions";
 
     public override void RegisterComponent () {
       if (!_rotational_motors) {
@@ -38,12 +39,13 @@ namespace Neodroid.Motors {
         Debug.Log ("Motor is not bi-directional. It does not accept negative input.");
         return; // Do nothing
       }
+      int layer_mask = 1 << LayerMask.NameToLayer (_layer_mask);
       if (_debug)
         Debug.Log ("Applying " + motion.ToString () + " To " + name);
       if (!_rotational_motors) {
         if (motion.GetMotorName () == _X) {
           if (_no_collisions) {
-            if (!Physics.Raycast (transform.position, Vector3.left, motion.Strength)) {
+            if (!Physics.Raycast (transform.position, Vector3.left, motion.Strength, layer_mask)) {
               transform.Translate (Vector3.left * motion.Strength, _space);
             }
           } else {
@@ -51,7 +53,7 @@ namespace Neodroid.Motors {
           }
         } else if (motion.GetMotorName () == _Y) {
           if (_no_collisions) {
-            if (!Physics.Raycast (transform.position, -Vector3.up, motion.Strength)) {
+            if (!Physics.Raycast (transform.position, -Vector3.up, motion.Strength, layer_mask)) {
               transform.Translate (-Vector3.up * motion.Strength, _space);
             }
           } else {
@@ -59,7 +61,7 @@ namespace Neodroid.Motors {
           }
         } else if (motion.GetMotorName () == _Z) {
           if (_no_collisions) {
-            if (!Physics.Raycast (transform.position, -Vector3.forward, motion.Strength)) {
+            if (!Physics.Raycast (transform.position, -Vector3.forward, motion.Strength, layer_mask)) {
               transform.Translate (-Vector3.forward * motion.Strength, _space);
             }
           } else {
