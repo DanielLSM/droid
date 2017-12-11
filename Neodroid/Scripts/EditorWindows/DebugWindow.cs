@@ -18,11 +18,11 @@ namespace Neodroid.Windows {
 
     [MenuItem ("Neodroid/DebugWindow")]
     public static void ShowWindow () {
-      EditorWindow.GetWindow<DebugWindow>();      //Show existing window instance. If one doesn't exist, make one.
+      EditorWindow.GetWindow<DebugWindow> ();      //Show existing window instance. If one doesn't exist, make one.
     }
 
     SimulationManager _simulation_manager;
-  bool _show_simulation_manager_debug = false;
+    bool _show_simulation_manager_debug = false;
 
     LearningEnvironment[] _environments;
     bool _show_environments_debug = false;
@@ -45,7 +45,7 @@ namespace Neodroid.Windows {
     Texture _icon;
 
     void OnEnable () {
-  _simulation_manager = FindObjectOfType<SimulationManager> ();
+      _simulation_manager = FindObjectOfType<SimulationManager> ();
       _environments = FindObjectsOfType<LearningEnvironment> ();
       _actors = FindObjectsOfType<Actor> ();
       _motors = FindObjectsOfType<Motor> ();
@@ -57,7 +57,7 @@ namespace Neodroid.Windows {
     }
 
     void OnGUI () {
-  _simulation_manager = FindObjectOfType<SimulationManager> ();
+      _simulation_manager = FindObjectOfType<SimulationManager> ();
       _environments = FindObjectsOfType<LearningEnvironment> ();
       _actors = FindObjectsOfType<Actor> ();
       _motors = FindObjectsOfType<Motor> ();
@@ -65,8 +65,8 @@ namespace Neodroid.Windows {
       _configurables = FindObjectsOfType<ConfigurableGameObject> ();
       _objective_functions = FindObjectsOfType<ObjectiveFunction> ();
 
-  _show_simulation_manager_debug = EditorGUILayout.Toggle ("Debug simulation manager", _show_simulation_manager_debug);
-      _show_environments_debug = EditorGUILayout.Toggle ("Debug all agents", _show_environments_debug);
+      _show_simulation_manager_debug = EditorGUILayout.Toggle ("Debug simulation manager", _show_simulation_manager_debug);
+      _show_environments_debug = EditorGUILayout.Toggle ("Debug all environments", _show_environments_debug);
       _show_actors_debug = EditorGUILayout.Toggle ("Debug all actors", _show_actors_debug);
       _show_motors_debug = EditorGUILayout.Toggle ("Debug all motors", _show_motors_debug);
       _show_observers_debug = EditorGUILayout.Toggle ("Debug all observers", _show_observers_debug);
@@ -74,9 +74,9 @@ namespace Neodroid.Windows {
       _show_objective_functions_debug = EditorGUILayout.Toggle ("Debug all objective functions", _show_objective_functions_debug);
 
       if (GUILayout.Button ("Apply")) {
-  if (_simulation_manager != null) {
-    _simulation_manager._debug = _show_simulation_manager_debug; 
-  }
+        if (_simulation_manager != null) {
+          _simulation_manager._debug = _show_simulation_manager_debug; 
+        }
         foreach (var agent in _environments) {
           agent._debug = _show_environments_debug;
         }

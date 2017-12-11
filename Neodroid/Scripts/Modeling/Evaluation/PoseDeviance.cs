@@ -16,20 +16,27 @@ namespace Neodroid.Evaluation {
 
     public Obstruction[] _obstructions;
     public BoundingBox _playable_area;
-    public float previous_reward = 0;
+    public float peak_reward = 0.0f;
 
-    public override float Evaluate () {
+    public override float InternalEvaluate () {
       if (!_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
         _environment.Interrupt ();
       }
-        
-      var reward = 1 / Mathf.Abs (Vector3.Distance (_goal.transform.position, _actor.transform.position));
-      reward += 1 / Mathf.Abs (Quaternion.Angle (_goal.transform.rotation, _actor.transform.rotation));
-      if (reward < previous_reward) {
-        previous_reward = reward;
-        reward = 0;
+
+      var reward = 0.0f;  
+      reward += 1 / Mathf.Abs (Vector3.Distance (_goal.transform.position, _actor.transform.position) + 1);
+      var angle = Quaternion.Angle (_goal.transform.rotation, _actor.transform.rotation);
+      reward += 1 / Mathf.Abs (angle + 1);
+      if (reward <= peak_reward) {
+        reward = 0.0f;
+      } else {
+        peak_reward = reward;
       }
       return reward;
+    }
+
+    public override void InternalReset () {
+      peak_reward = 0.0f;
     }
 
     private void Start () {

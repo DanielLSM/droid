@@ -6,6 +6,7 @@ using UnityEngine;
 using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
 using System;
+using System.Runtime.Remoting.Messaging;
 
 namespace Neodroid.Actors {
   [ExecuteInEditMode]
@@ -104,6 +105,16 @@ namespace Neodroid.Actors {
 
     public void Register (Motor motor, string identifier) {
       AddMotor (motor, identifier);
+    }
+
+    public Dictionary<string, Motor> RegisteredMotors {
+      get {
+        return _motors;
+      }
+    }
+
+    public void Refresh () {
+      Awake ();
     }
 
     public virtual void Reset () {

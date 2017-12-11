@@ -86,10 +86,6 @@ namespace Neodroid.Environments {
         return;
       }
 
-      if (_lastest_reaction != null && !_waiting_for_reaction) {
-        //ExecuteReaction (_lastest_reaction);
-      }
-
       if (!_simulation_manager._continue_lastest_reaction_on_disconnect) {
         _lastest_reaction = null;
       }
@@ -97,11 +93,9 @@ namespace Neodroid.Environments {
 
     void LateUpdate () {
       if (!_waiting_for_reaction && !_has_stepped_since_reaction) {
-        //UpdateObserversData ();
         _has_stepped_since_reaction = true;
       }
       if (!_waiting_for_reaction && _has_stepped_since_reaction && _simulation_manager.IsSimulationUpdated ()) {
-        //_simulation_manager.SendEnvironmentState (GetCurrentState ());
         _waiting_for_reaction = true;
       }
     }
@@ -121,14 +115,14 @@ namespace Neodroid.Environments {
     }
 
     public void UpdateObserversData () {
-      foreach (Observer obs in GetObservers().Values) {
+      foreach (Observer obs in RegisteredObservers.Values) {
         obs.GetComponent<Observer> ().GetData ();
       }
     }
 
     public EnvironmentState GetCurrentState () {
       foreach (Actor a in _actors.Values) {
-        foreach (Motor m in a.GetMotors().Values) {
+        foreach (Motor m in a.RegisteredMotors.Values) {
           energy_spent += m.GetEnergySpend ();
         }
       }
@@ -161,7 +155,7 @@ namespace Neodroid.Environments {
 
     public void ExecuteReaction (Reaction reaction) {
       _current_episode_frame++;
-      var actors = GetActors ();
+      var actors = RegisteredActors;
       if (reaction != null && reaction.GetMotions ().Length > 0)
         foreach (MotorMotion motion in reaction.GetMotions()) {
           if (_debug)
@@ -270,15 +264,6 @@ namespace Neodroid.Environments {
       }
     }
 
-    public Dictionary<string, Actor> GetActors () {
-      return _actors;
-    }
-
-    public Dictionary<string, Observer> GetObservers () {
-      return _observers;
-    }
-
-
     public void Interrupt () {
       ResetRegisteredObjects ();
       ResetEnvironment ();
@@ -288,7 +273,7 @@ namespace Neodroid.Environments {
     }
 
     public string GetEnvironmentIdentifier () {
-      return "LearningEnviroment" + name;
+      return name;
     }
 
     public void ResetRegisteredObjects () {
@@ -320,6 +305,7 @@ namespace Neodroid.Environments {
       }
       _lastest_reset_time = Time.time;
       _current_episode_frame = 0;
+      _objective_function.Reset ();
       //_is_environment_updated = false;
     }
 

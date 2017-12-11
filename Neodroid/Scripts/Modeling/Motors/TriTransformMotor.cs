@@ -12,6 +12,7 @@ namespace Neodroid.Motors {
 
     public Space _space = Space.Self;
     public bool _rotational_motors = false;
+    public bool _no_collisions = true;
 
     public override void RegisterComponent () {
       if (!_rotational_motors) {
@@ -41,11 +42,29 @@ namespace Neodroid.Motors {
         Debug.Log ("Applying " + motion.ToString () + " To " + name);
       if (!_rotational_motors) {
         if (motion.GetMotorName () == _X) {
-          transform.Translate (Vector3.left * motion.Strength, _space);
+          if (_no_collisions) {
+            if (!Physics.Raycast (transform.position, Vector3.left, motion.Strength)) {
+              transform.Translate (Vector3.left * motion.Strength, _space);
+            }
+          } else {
+            transform.Translate (Vector3.left * motion.Strength, _space);
+          }
         } else if (motion.GetMotorName () == _Y) {
-          transform.Translate (-Vector3.up * motion.Strength, _space);
+          if (_no_collisions) {
+            if (!Physics.Raycast (transform.position, -Vector3.up, motion.Strength)) {
+              transform.Translate (-Vector3.up * motion.Strength, _space);
+            }
+          } else {
+            transform.Translate (-Vector3.up * motion.Strength, _space);
+          }
         } else if (motion.GetMotorName () == _Z) {
-          transform.Translate (-Vector3.forward * motion.Strength, _space);
+          if (_no_collisions) {
+            if (!Physics.Raycast (transform.position, -Vector3.forward, motion.Strength)) {
+              transform.Translate (-Vector3.forward * motion.Strength, _space);
+            }
+          } else {
+            transform.Translate (-Vector3.forward * motion.Strength, _space);
+          }
         }
       } else {
         if (motion.GetMotorName () == _X) {

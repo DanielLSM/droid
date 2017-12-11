@@ -4444,12 +4444,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 416
+      value: 562.5
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 262.5
+      value: 375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
@@ -11885,6 +11885,39 @@ Material:
     - _Color1: {r: 0.23518598, g: 0.23518598, b: 0.6397059, a: 1}
     - _Color2: {r: 0.7058823, g: 0.3217993, b: 0.39331818, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!1 &1631750772 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1006605473164884, guid: c61a27994393f43f2bda3255c8605740,
+    type: 2}
+  m_PrefabInternal: {fileID: 1431385246}
+--- !u!114 &1631750773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1631750772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8b7c65bfbcfa4ac381370b0b8eef1bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: 0, y: 4, z: 0}
+  _rotation: {x: 0, y: 1, z: 0}
+  _direction: {x: 0, y: 0, z: 1}
+  _environment: {fileID: 1776001159}
+  _debug: 0
+--- !u!135 &1631750774
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1631750772}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!21 &1641446115
 Material:
   serializedVersion: 6
@@ -13025,7 +13058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider_based: 0
-  _freeze: 0
+  _freeze: 1
   _line_color: {r: 0, g: 1, b: 0.4, a: 0.74}
   _bounds:
     m_Center: {x: -0.00000047683716, y: 0.81622934, z: 0}

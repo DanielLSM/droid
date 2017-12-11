@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using Neodroid.Utilities;
 using System;
 using System.Runtime.Serialization;
+using System.Runtime.InteropServices;
 
 namespace Neodroid.Evaluation {
   [Serializable]
   public abstract class ObjectiveFunction : MonoBehaviour, HasRegister<Term> {
 
     public bool _debug = false;
+
+    public Term[] _extra_term_go;
 
     public Dictionary<string, Term> _extra_terms = new Dictionary<string, Term> ();
     public Dictionary<Term, float> _extra_term_weights = new Dictionary<Term, float> ();
@@ -19,7 +22,35 @@ namespace Neodroid.Evaluation {
           get { return _extra_terms_serial.dictionary; }
         }*/
 
-    public abstract float Evaluate ();
+    void Awale () {
+      foreach (var go in _extra_term_go) {
+        _extra_terms.Add (go.name, go);
+        _extra_term_weights.Add (go, 1);
+      }
+    }
+
+    public virtual float InternalEvaluate () {
+      return 0;
+    }
+
+
+    public float Evaluate () {
+      var signal = 0.0f;
+      signal += InternalEvaluate ();
+      signal += EvaluateExtraTerms ();
+
+      if (_debug) {
+        print (signal);
+      }
+      return signal;
+    }
+
+    public void Reset () {
+      InternalReset ();
+    }
+
+    public virtual void InternalReset () {
+    }
 
 
     public virtual void AdjustExtraTermsWeights (Term term, float new_weight) {
@@ -36,12 +67,12 @@ namespace Neodroid.Evaluation {
     }
 
     public virtual void Register (Term term) {
-      _extra_terms.Add (term.name (), term);
+      _extra_terms.Add (term.name, term);
       _extra_term_weights.Add (term, 1);
     }
 
     public virtual void Register (Term term, string identifier) {
-      _extra_terms.Add (term.name (), term);
+      _extra_terms.Add (term.name, term);
       _extra_term_weights.Add (term, 1);
     }
 

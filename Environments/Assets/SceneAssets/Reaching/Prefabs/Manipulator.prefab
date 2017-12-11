@@ -80,8 +80,8 @@ GameObject:
   - component: {fileID: 135753569530121446}
   - component: {fileID: 114996293596997362}
   - component: {fileID: 114748720204320466}
-  - component: {fileID: 114879149438025532}
-  - component: {fileID: 114148949765603154}
+  - component: {fileID: 114864207877648042}
+  - component: {fileID: 114861074379660356}
   m_Layer: 0
   m_Name: Manipulator
   m_TagString: Actor
@@ -457,22 +457,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f742b9df054d68644ba2621b1fdb5859, type: 3}
---- !u!114 &114148949765603154
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1773439048360894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 924e594e1cf56455386f8aea250dbf37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _debug: 0
-  _bidirectional: 1
-  _energy_cost: 1
-  _actor_game_object: {fileID: 0}
-  _space: 1
 --- !u!114 &114748720204320466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -484,11 +468,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
+  _environment: {fileID: 0}
+  _position: {x: 0.135, y: 5.537, z: 1.277}
+  _rotation: {x: 0, y: -0.00000011920929, z: 1.0000001}
+  _direction: {x: 0, y: -1.0000001, z: -0.00000011920929}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -500,16 +483,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1423655063664444}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5236ad6d53db245c6bf0932e4d84db90, type: 3}
+  m_Script: {fileID: 11500000, guid: 0af28dc92dd654e088300da6531ecd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 0
   _bidirectional: 1
   _energy_cost: 1
-  _actor_game_object: {fileID: 0}
+  _actor_game_object: {fileID: 114996293596997362}
   _axis_of_motion: 0
   _space: 1
---- !u!114 &114879149438025532
+--- !u!114 &114861074379660356
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -517,10 +500,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1773439048360894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be0fa2970c922453f860ad7db28eabd9, type: 3}
+  m_Script: {fileID: 11500000, guid: d70508e520cd84f69b7e0974dcbc5629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _environment_manager: {fileID: 0}
+  _debug: 0
+  _bidirectional: 1
+  _energy_cost: 1
+  _actor_game_object: {fileID: 114996293596997362}
+  _space: 1
+  _rotational_motors: 0
+--- !u!114 &114864207877648042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1773439048360894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20678454752714027aac65984404caf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _environment: {fileID: 0}
   _debug: 0
 --- !u!114 &114996293596997362
 MonoBehaviour:
@@ -533,11 +533,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b7c65bfbcfa4ac381370b0b8eef1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
+  _position: {x: 0.135, y: 5.537, z: 1.277}
+  _rotation: {x: 0, y: -0.00000011920929, z: 1.0000001}
+  _direction: {x: 0, y: -1.0000001, z: -0.00000011920929}
+  _environment: {fileID: 0}
   _debug: 0
 --- !u!135 &135753569530121446
 SphereCollider:

@@ -20,6 +20,10 @@ namespace Neodroid.Configurations {
       AddToEnvironment ();
     }
 
+    public void Refresh () {
+      Awake ();
+    }
+
 
     protected virtual void AddToEnvironment () {
       _environment = NeodroidUtilities.MaybeRegisterComponent (_environment, this);

@@ -31,6 +31,10 @@ namespace Neodroid.Motors {
     private void Update () {
     }
 
+    public void Refresh () {
+      Awake ();
+    }
+
     public Motor () {
     }
 

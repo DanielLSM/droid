@@ -1,9 +1,12 @@
-﻿namespace Neodroid.Evaluation
-{
-    public interface Term
-    {
-        string name();
+﻿using System;
+using UnityEngine;
 
-        float evaluate();
-    }
+namespace Neodroid.Evaluation {
+  [Serializable]
+  public abstract class Term: MonoBehaviour {
+    //ScriptableObject {
+
+
+    public abstract float evaluate ();
+  }
 }

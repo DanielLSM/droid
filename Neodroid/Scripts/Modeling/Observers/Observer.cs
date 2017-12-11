@@ -25,6 +25,10 @@ namespace Neodroid.Observers {
       Setup ();
     }
 
+    public void Refresh () {
+      Awake ();
+    }
+
     protected virtual void Start () {
       UpdatePosRotDir ();
     }

@@ -50,15 +50,18 @@ namespace Neodroid.Managers {
     }
 
     void LateUpdate () {
-      _is_simulation_updated = true;
+      if (!_is_simulation_updated) {
+        _is_simulation_updated = true;
+      }
     }
 
     void Update () {
-      if (!_waiting_for_reaction && _lastest_reaction != null && !_is_simulation_updated) {
+      if (!_waiting_for_reaction && _lastest_reaction != null) {
         ResumeSimulation ();
 
         ExecuteReaction (_lastest_reaction);
         SendEnvironmentStates (GatherStates ());
+        _waiting_for_reaction = true;
       }
     }
 
@@ -135,8 +138,6 @@ namespace Neodroid.Managers {
 
     void ResumeSimulation () {
       Time.timeScale = 1;
-      _is_simulation_updated = false;
-      _waiting_for_reaction = true;
     }
 
     void FetchCommmandLineArguments () {
