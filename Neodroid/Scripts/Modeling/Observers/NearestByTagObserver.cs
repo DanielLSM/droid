@@ -7,7 +7,7 @@ using System.Text;
 namespace Neodroid.Observers {
   public class NearestByTagObserver : Observer {
  
-    public GameObject _nearest_object;
+    GameObject _nearest_object;
     public string _tag = "";
 
     public override byte[] GetData () {

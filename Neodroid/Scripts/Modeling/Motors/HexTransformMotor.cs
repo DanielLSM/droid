@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Neodroid.Motors
 {
-    public class HexTransformMotor : Motor
+	public class HexTransformMotor : TransformMotor
     {
 
         string _X;
@@ -15,7 +15,6 @@ namespace Neodroid.Motors
         string _RotY;
         string _RotZ;
 
-        public Space _space = Space.Self;
 
         public override void RegisterComponent()
         {

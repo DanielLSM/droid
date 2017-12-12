@@ -6,7 +6,7 @@ using Neodroid.Messaging.Messages;
 namespace Neodroid.Configurations
 {
 
-	public class TriTransformConfigurable : ConfigurableGameObject
+	public class TriTransformConfigurable : TransformConfigurable
     {
 
         string _X;

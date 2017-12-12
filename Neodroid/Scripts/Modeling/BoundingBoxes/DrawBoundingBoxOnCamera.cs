@@ -13,7 +13,7 @@ namespace Neodroid.Utilities.BoundingBoxes
         public Color lColor = Color.green;
         List<Vector3[,]> outlines;
         List<Vector3[,]> triangles;
-        public List<Color> colors;
+        List<Color> colors;
 
         void Awake()
         {

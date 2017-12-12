@@ -48,11 +48,11 @@ namespace Neodroid.Evaluation {
       //reward += 1 / Mathf.Abs (Vector3.Distance (_area.transform.position, _actor.transform.position)); // Inversely porpotional to the absolute distance, closer higher reward
 
       if (_overlapping == ActorOverlapping.INSIDE_AREA) {
-        _environment.Interrupt ();
+        _environment.Interrupt ("Inside goal area");
         return 1f;
       }
       if (_colliding == ActorColliding.COLLIDING || !_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
-        _environment.Interrupt ();
+        _environment.Interrupt ("Actor colliding with obstruction or outside playable area");
         //return -1f;
       }
 

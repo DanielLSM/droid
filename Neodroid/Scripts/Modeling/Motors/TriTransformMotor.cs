@@ -4,13 +4,12 @@ using Neodroid.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Motors {
-  public class TriTransformMotor : Motor {
+	public class TriTransformMotor : TransformMotor {
 
     string _X;
     string _Y;
     string _Z;
 
-    public Space _space = Space.Self;
     public bool _rotational_motors = false;
     public bool _no_collisions = true;
     public string _layer_mask = "Obstructions";

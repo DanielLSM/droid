@@ -4,24 +4,13 @@ using Neodroid.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Motors
-{
-    public class TriRigidbodyMotor : Motor
+{    [RequireComponent(typeof(Rigidbody))]
+	public class TriRigidbodyMotor : RigidbodyMotor
     {
 
         string _X;
         string _Y;
         string _Z;
-
-        public Space _space = Space.Self;
-
-        Rigidbody _rigidbody;
-
-        private void Start()
-        {
-            _rigidbody = GetComponent<Rigidbody>();
-            RegisterComponent();
-        }
-
 
         public override void RegisterComponent()
         {

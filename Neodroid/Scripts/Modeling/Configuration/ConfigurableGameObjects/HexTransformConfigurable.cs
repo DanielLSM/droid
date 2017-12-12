@@ -5,7 +5,7 @@ using Neodroid.Messaging.Messages;
 
 namespace Neodroid.Configurations
 {
-	public class HexTransformConfigurable : ConfigurableGameObject
+	public class HexTransformConfigurable : TransformConfigurable
     {
         string _X;
         string _Y;

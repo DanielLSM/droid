@@ -20,7 +20,8 @@ namespace Neodroid.Evaluation {
 
     public override float InternalEvaluate () {
       if (!_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
-        _environment.Interrupt ();
+				print ("Outside playable area");
+				_environment.Interrupt ("Outside playable area");
       }
 
       var reward = 0.0f;
@@ -34,8 +35,9 @@ namespace Neodroid.Evaluation {
         peak_reward = reward;
       }
 
-      if (distance < 0.9) {
-        _environment.Interrupt ();
+      if (distance < 0.5) {
+				print ("Within range of goal");
+				_environment.Interrupt ("Within range of goal");
       }
       return reward;
     }
@@ -44,7 +46,7 @@ namespace Neodroid.Evaluation {
       peak_reward = 0.0f;
     }
 
-    private void Start () {
+    private void Awake () {
       if (!_goal) {
         _goal = FindObjectOfType<GoalObserver> ();
       }

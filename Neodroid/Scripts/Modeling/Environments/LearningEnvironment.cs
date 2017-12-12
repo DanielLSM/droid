@@ -77,11 +77,11 @@ namespace Neodroid.Environments {
       if (_simulation_manager._episode_length > 0 && _current_episode_frame > _simulation_manager._episode_length) {
         if (_debug)
           Debug.Log ("Maximum episode length reached, resetting");
-        Interrupt ();
+				Interrupt ("Maximum episode length reached, resetting");
       }
 
       if (_lastest_reaction != null && _lastest_reaction._reset) {
-        Interrupt ();
+				Interrupt ("Reaction called reset");
         Configure (_lastest_reaction.Configurations);
         return;
       }
@@ -265,13 +265,14 @@ namespace Neodroid.Environments {
       }
     }
 
-    public void Interrupt () {
+		public void Interrupt (string reason) {
       ResetRegisteredObjects ();
       ResetEnvironment ();
       _was_interrupted = true;
-      if (_debug)
-        Debug.Log ("Was interrupted");
-    }
+			if (_debug){
+				print ("Was interrupted");
+				print (reason);
+			} }
 
     public string GetEnvironmentIdentifier () {
       return name;
@@ -306,14 +307,16 @@ namespace Neodroid.Environments {
       }
       _lastest_reset_time = Time.time;
       _current_episode_frame = 0;
-      _objective_function.Reset ();
+			if (_objective_function) {
+				_objective_function.Reset ();
+			}
       //_is_environment_updated = false;
     }
 
     #region Registration
 
     public void Register (Actor actor) {
-      if (!_observers.ContainsKey (actor.GetActorIdentifier ())) {
+			if (!_actors.ContainsKey (actor.GetActorIdentifier ())) {
         if (_debug)
           Debug.Log (string.Format ("Environment {0} has registered actor {1}", name, actor.GetActorIdentifier ()));
         _actors.Add (actor.GetActorIdentifier (), actor);
@@ -324,7 +327,7 @@ namespace Neodroid.Environments {
     }
 
     public void Register (Actor actor, string identifier) {
-      if (!_observers.ContainsKey (identifier)) {
+			if (!_actors.ContainsKey (identifier)) {
         if (_debug)
           Debug.Log (string.Format ("Environment {0} has registered actor {1}", name, identifier));
         _actors.Add (identifier, actor);
@@ -357,7 +360,7 @@ namespace Neodroid.Environments {
     }
 
     public void Register (ConfigurableGameObject configurable) {
-      if (!_observers.ContainsKey (configurable.GetConfigurableIdentifier ())) {
+			if (!_configurables.ContainsKey (configurable.GetConfigurableIdentifier ())) {
         if (_debug)
           Debug.Log (string.Format ("Environment {0} has registered configurable {1}", name, configurable.GetConfigurableIdentifier ()));
         _configurables.Add (configurable.GetConfigurableIdentifier (), configurable);
@@ -368,7 +371,7 @@ namespace Neodroid.Environments {
     }
 
     public void Register (ConfigurableGameObject configurable, string identifier) {
-      if (!_observers.ContainsKey (identifier)) {
+			if (!_configurables.ContainsKey (identifier)) {
         if (_debug)
           Debug.Log (string.Format ("Environment {0} has registered configurable {1}", name, identifier));
         _configurables.Add (identifier, configurable);

@@ -4,8 +4,8 @@ using Neodroid.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Motors
-{
-    public class HexRigidbodyMotor : Motor
+{    [RequireComponent(typeof(Rigidbody))]
+	public class HexRigidbodyMotor : RigidbodyMotor
     {
 
         string _X;
@@ -14,17 +14,7 @@ namespace Neodroid.Motors
         string _RotX;
         string _RotY;
         string _RotZ;
-
-        public Space _space = Space.Self;
-
-        Rigidbody _rigidbody;
-
-        private void Start()
-        {
-            _rigidbody = GetComponent<Rigidbody>();
-            RegisterComponent();
-        }
-
+	
 
         public override void RegisterComponent()
         {

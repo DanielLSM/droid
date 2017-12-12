@@ -29,7 +29,7 @@ namespace Neodroid.Utilities.BoundingBoxes {
 
     Quaternion _rotation;
 
-    DrawBoundingBoxOnCamera _camera_lines;
+    public DrawBoundingBoxOnCamera _camera;
 
     MeshFilter[] _children_meshes;
     Collider[] _children_colliders;
@@ -96,7 +96,7 @@ namespace Neodroid.Utilities.BoundingBoxes {
     }
 
     void Setup () {
-      _camera_lines = FindObjectOfType<DrawBoundingBoxOnCamera> ();
+      _camera = FindObjectOfType<DrawBoundingBoxOnCamera> ();
       _children_meshes = GetComponentsInChildren<MeshFilter> ();
       _children_colliders = GetComponentsInChildren<Collider> ();
     }
@@ -139,8 +139,8 @@ namespace Neodroid.Utilities.BoundingBoxes {
         _last_position = transform.position;
         _last_scale = transform.localScale;
       }
-      if (_camera_lines) {
-        _camera_lines.setOutlines (_lines, _line_color, new Vector3[0, 0]);
+      if (_camera) {
+        _camera.setOutlines (_lines, _line_color, new Vector3[0, 0]);
       }
     }
 
@@ -151,8 +151,10 @@ namespace Neodroid.Utilities.BoundingBoxes {
 
     void FitBoundingBoxToChildrenColliders () {
 
-      var collider = this.GetComponent<BoxCollider> ();
+			var collider = this.GetComponent<BoxCollider> ();
       Bounds bounds = new Bounds (this.transform.position, Vector3.zero); // position and size
+
+			bounds.Encapsulate (collider.bounds);
 
       foreach (var col in _children_colliders) {
         if (col != collider) {
@@ -177,7 +179,7 @@ namespace Neodroid.Utilities.BoundingBoxes {
           }
         }
       }
-      _bounds_offset = _bounds.center - transform.position;
+      _bounds_offset = _bounds.center - this.transform.position;
     }
 
     void CalculateBounds () {

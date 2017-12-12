@@ -8,8 +8,9 @@ namespace Neodroid.Motors
     [RequireComponent(typeof(Rigidbody))]
     public class RigidbodyMotor : Motor
     {
-        public Axis _axis_of_motion;
-        Rigidbody _rigidbody;
+		[SerializeField]
+		Axis _axis_of_motion;
+        protected Rigidbody _rigidbody;
 
         private void Start()
         {

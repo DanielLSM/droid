@@ -6,7 +6,9 @@ namespace Neodroid.Motors
 {
     public class TransformMotor : Motor
     {
-        public Axis _axis_of_motion;
+		[SerializeField]
+        Axis _axis_of_motion;
+
         public Space _space = Space.Self;
 
         public override void ApplyMotion(MotorMotion motion)
