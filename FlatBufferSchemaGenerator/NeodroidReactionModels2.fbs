@@ -1,0 +1,27 @@
+namespace Neodroid.Messaging.Models.Reaction;
+
+table FlatBufferReaction {
+  motions:[FlatBufferMotion];
+  configurations:[FlatBufferConfiguration];
+  resets:[FlatBufferReset];
+}
+
+table FlatBufferReset {
+  enviroment_name:string;
+  reset:bool;
+}
+
+
+table FlatBufferMotion {
+  actor_name:string;
+  motor_name:string;
+  strength:float;
+}
+
+table FlatBufferConfiguration {
+  configurable_name:string;
+  configurable_value:float;
+}
+
+root_type FlatBufferReaction;
+file_identifier "REAC";

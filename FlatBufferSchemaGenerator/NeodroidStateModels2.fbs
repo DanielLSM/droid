@@ -1,0 +1,53 @@
+namespace Neodroid.Messaging.Models.State;
+
+struct FlatBufferVec3 {
+  x:float;
+  y:float;
+  z:float;
+}
+
+struct FlatBufferQuat {
+  x:float;
+  y:float;
+  z:float;
+  w:float;
+}
+
+table FlatBufferActor {
+  name:string;
+  posrotdir:FlatBufferPosRotDir;
+  motors:[FlatBufferMotor];
+}
+
+table FlatBufferState {
+  name:string;
+  time_since_rest:float;
+  total_energy_spent_since_reset:float;
+  actors:[FlatBufferActor];
+  observers:[FlatBufferObserver];
+  last_steps_frame_number:int;
+  reward_for_last_step:float;
+  interrupted:bool;
+}
+
+table FlatBufferPosRotDir {
+  position:FlatBufferVec3;
+  rotation:FlatBufferVec3;
+  direction:FlatBufferVec3;
+}
+
+table FlatBufferObserver {
+  name:string;
+  data:[ubyte];
+  posrotdir:FlatBufferPosRotDir;
+}
+
+table FlatBufferMotor{
+  name:string;
+  binary:bool;
+  energy_cost:float;
+  energy_spent_since_reset:float;
+}
+
+root_type FlatBufferState;
+file_identifier "STAT";

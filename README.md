@@ -43,8 +43,7 @@ The unity comes quite selection of scripts and tools for setting up and experime
 ![windows](images/neo_env.png)
 
 # To Do's
-- [ ] Exponential Proximity Regularisation Penalty
-- [ ] Be able to send a configure reset to change the environment, like frame skips/sampling rate, time scale, problem difficulty, evaluation function paramaters(term weighting)
+- [ ] Be able to reset and configure enviroments independently from each other
 
 # Other Components Of The Neodroid Platform
 

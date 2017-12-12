@@ -20,7 +20,7 @@ namespace Neodroid.Windows {
 
     void OnEnable () {
       _icon = (Texture2D)AssetDatabase.LoadAssetAtPath ("Assets/Neodroid/Icons/bullet_red.png", typeof(Texture2D));
-      this.titleContent = new GUIContent ("Neo:Demo", _icon, "Window for recording demonstrations");
+      this.titleContent = new GUIContent ("Neo:Rec", _icon, "Window for recording demonstrations");
     }
 
 
@@ -28,7 +28,7 @@ namespace Neodroid.Windows {
       this.Repaint ();
     }
 
-    string fileName = "FileName";
+    string fileName = "Demonstration/frame";
 
     string status = "Idle";
     string recordButton = "Record";
@@ -65,8 +65,8 @@ namespace Neodroid.Windows {
 
     void RecordImages () {
       if (lastFrameTime < Time.time + (1 / 24f)) { // 24fps
-        status = "Captured frame " + capturedFrame;
-        ScreenCapture.CaptureScreenshot (fileName + " " + capturedFrame + ".png");
+        status = "Captured frame" + capturedFrame;
+        ScreenCapture.CaptureScreenshot (fileName + capturedFrame + ".png");
         capturedFrame++;
         lastFrameTime = Time.time;
       }
