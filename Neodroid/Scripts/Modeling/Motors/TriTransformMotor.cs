@@ -31,7 +31,7 @@ namespace Neodroid.Motors {
     }
 
     public override string GetMotorIdentifier () {
-      return name + "TriTransform";
+      return name + "Transform";
     }
 
     public override void ApplyMotion (MotorMotion motion) {

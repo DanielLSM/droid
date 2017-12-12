@@ -168,6 +168,7 @@ namespace Neodroid.Environments {
               Debug.Log ("Could find not actor with the specified name: " + motion_actor_name);
           }
         }
+			_lastest_reaction = reaction;
     }
 
     public void Configure (Configuration[] configurations) {

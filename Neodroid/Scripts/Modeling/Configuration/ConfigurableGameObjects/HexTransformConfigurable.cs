@@ -5,7 +5,7 @@ using Neodroid.Messaging.Messages;
 
 namespace Neodroid.Configurations
 {
-    public class HexDOFConfigurable : ConfigurableGameObject
+	public class HexTransformConfigurable : ConfigurableGameObject
     {
         string _X;
         string _Y;
@@ -69,7 +69,7 @@ namespace Neodroid.Configurations
 
         public override string GetConfigurableIdentifier()
         {
-            return name + "HexDOF";
+            return name + "Transform";
         }
     }
 }

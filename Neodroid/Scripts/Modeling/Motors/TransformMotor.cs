@@ -46,7 +46,7 @@ namespace Neodroid.Motors
 
         public override string GetMotorIdentifier()
         {
-            return name + "TransformMotor" + _axis_of_motion.ToString();
+            return name + "Transform" + _axis_of_motion.ToString();
         }
     }
 }

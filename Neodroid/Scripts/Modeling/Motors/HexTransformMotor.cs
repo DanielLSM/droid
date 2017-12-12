@@ -35,7 +35,7 @@ namespace Neodroid.Motors
 
         public override string GetMotorIdentifier()
         {
-            return name + "HexTransform";
+            return name + "Transform";
         }
 
         public override void ApplyMotion(MotorMotion motion)

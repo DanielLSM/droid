@@ -44,7 +44,7 @@ namespace Neodroid.Motors
 
         public override string GetMotorIdentifier()
         {
-            return name + "HexRigidbody";
+            return name + "Rigidbody";
         }
 
         public override void ApplyMotion(MotorMotion motion)

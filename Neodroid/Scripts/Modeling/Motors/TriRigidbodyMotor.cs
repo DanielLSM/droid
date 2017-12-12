@@ -35,7 +35,7 @@ namespace Neodroid.Motors
 
         public override string GetMotorIdentifier()
         {
-            return name + "TriRigidbody";
+            return name + "Rigidbody";
         }
 
         public override void ApplyMotion(MotorMotion motion)

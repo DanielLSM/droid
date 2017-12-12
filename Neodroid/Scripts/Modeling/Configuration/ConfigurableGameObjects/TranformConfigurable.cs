@@ -5,7 +5,7 @@ using Neodroid.Messaging.Messages;
 
 namespace Neodroid.Configurations
 {
-    public class SingleAxisConfigurable : ConfigurableGameObject
+    public class TransformConfigurable : ConfigurableGameObject
     {
 
         public Axis _axis_of_configuration;
@@ -48,7 +48,7 @@ namespace Neodroid.Configurations
 
         public override string GetConfigurableIdentifier()
         {
-            return name + "SingleAxis" + _axis_of_configuration.ToString();
+            return name + "Transform" + _axis_of_configuration.ToString();
             ;
         }
     }

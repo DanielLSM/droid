@@ -6,7 +6,7 @@ using Neodroid.Messaging.Messages;
 namespace Neodroid.Configurations
 {
 
-    public class TriDOFConfigurable : ConfigurableGameObject
+	public class TriTransformConfigurable : ConfigurableGameObject
     {
 
         string _X;
@@ -25,7 +25,7 @@ namespace Neodroid.Configurations
 
         public override void ApplyConfiguration(Configuration configuration)
         {
-            if (_debug)
+            if (_debug) 
                 Debug.Log("Applying " + configuration.ToString() + " To " + GetConfigurableIdentifier());
             var pos = _environment.TransformPosition(this.transform.position);
             if (configuration.ConfigurableName == _X)
@@ -46,7 +46,7 @@ namespace Neodroid.Configurations
 
         public override string GetConfigurableIdentifier()
         {
-            return name + "TriDOF";
+            return name + "Transform";
         }
     }
 }
