@@ -28,6 +28,7 @@ table FlatBufferState {
   last_steps_frame_number:int;
   reward_for_last_step:float;
   interrupted:bool;
+  debug_message:string;
 }
 
 table FlatBufferPosRotDir {
