@@ -7,152 +7,154 @@ using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace Neodroid.Utilities
-{
-    public static class NeodroidUtilities
-    {
+namespace Neodroid.Utilities {
+  public static class NeodroidUtilities {
 
-        public static Texture2D RenderTextureImage(Camera camera)
-        { // From unity documentation, https://docs.unity3d.com/ScriptReference/Camera.Render.html
-            RenderTexture current_render_texture = RenderTexture.active;
-            RenderTexture.active = camera.targetTexture;
-            camera.Render();
-            Texture2D texture = new Texture2D(camera.targetTexture.width, camera.targetTexture.height);
-            texture.ReadPixels(new Rect(0, 0, camera.targetTexture.width, camera.targetTexture.height), 0, 0);
-            texture.Apply();
-            RenderTexture.active = current_render_texture;
-            return texture;
+    public static void DrawString (string text, Vector3 worldPos, Color? color = null, float oX = 0, float oY = 0) {
+
+      UnityEditor.Handles.BeginGUI ();
+
+      var restoreColor = GUI.color;
+
+      if (color.HasValue)
+        GUI.color = color.Value;
+      var view = UnityEditor.SceneView.currentDrawingSceneView;
+      Vector3 screenPos = view.camera.WorldToScreenPoint (worldPos);
+
+      if (screenPos.y < 0 || screenPos.y > Screen.height || screenPos.x < 0 || screenPos.x > Screen.width || screenPos.z < 0) {
+        GUI.color = restoreColor;
+        UnityEditor.Handles.EndGUI ();
+        return;
+      }
+
+      UnityEditor.Handles.Label (TransformByPixel (worldPos, oX, oY), text);
+
+      GUI.color = restoreColor;
+      UnityEditor.Handles.EndGUI ();
+    }
+
+    public static Vector3 TransformByPixel (Vector3 position, float x, float y) {
+      return TransformByPixel (position, new Vector3 (x, y));
+    }
+
+    public static Vector3 TransformByPixel (Vector3 position, Vector3 translateBy) {
+      Camera cam = UnityEditor.SceneView.currentDrawingSceneView.camera;
+      if (cam)
+        return cam.ScreenToWorldPoint (cam.WorldToScreenPoint (position) + translateBy);
+      else
+        return position;
+    }
+
+    public static Texture2D RenderTextureImage (Camera camera) { // From unity documentation, https://docs.unity3d.com/ScriptReference/Camera.Render.html
+      RenderTexture current_render_texture = RenderTexture.active;
+      RenderTexture.active = camera.targetTexture;
+      camera.Render ();
+      Texture2D texture = new Texture2D (camera.targetTexture.width, camera.targetTexture.height);
+      texture.ReadPixels (new Rect (0, 0, camera.targetTexture.width, camera.targetTexture.height), 0, 0);
+      texture.Apply ();
+      RenderTexture.active = current_render_texture;
+      return texture;
+    }
+
+    public static void RegisterCollisionTriggerCallbacksOnChildren (Transform transform,
+                                                                    ChildSensor.OnChildCollisionEnterDelegate OnCollisionEnterChild,
+                                                                    ChildSensor.OnChildTriggerEnterDelegate OnTriggerEnterChild,
+                                                                    ChildSensor.OnChildCollisionExitDelegate OnCollisionExitChild,
+                                                                    ChildSensor.OnChildTriggerExitDelegate OnTriggerExitChild,
+                                                                    ChildSensor.OnChildCollisionStayDelegate OnCollisionStayChild,
+                                                                    ChildSensor.OnChildTriggerStayDelegate OnTriggerStayChild,
+                                                                    bool debug = false) {
+      var childrenWithColliders = transform.GetComponentsInChildren<Collider> (transform.gameObject);
+
+      foreach (Collider child in childrenWithColliders) {
+        ChildSensor child_sensor = child.gameObject.AddComponent<ChildSensor> ();
+        child_sensor.OnCollisionEnterDelegate = OnCollisionEnterChild;
+        child_sensor.OnTriggerEnterDelegate = OnTriggerEnterChild;
+        child_sensor.OnCollisionExitDelegate = OnCollisionExitChild;
+        child_sensor.OnTriggerExitDelegate = OnTriggerExitChild;
+        child_sensor.OnTriggerStayDelegate = OnTriggerStayChild;
+        child_sensor.OnCollisionStayDelegate = OnCollisionStayChild;
+        if (debug)
+          Debug.Log (transform.name + " has " + child_sensor.name + " registered");
+      }
+    }
+
+    public static string ColorArrayToString (Color[] colors) {
+      string s = "";
+      foreach (Color color in colors) {
+        s += color.ToString ();
+      }
+      return s;
+    }
+
+    public static Recipient MaybeRegisterComponent<Recipient, Caller> (Recipient r, Caller c) where Recipient : Object, HasRegister<Caller> where Caller : Component {
+      Recipient component;
+      if (r != null) {
+        component = r;  //.GetComponent<Recipient>();
+      } else if (c.GetComponentInParent<Recipient> () != null) {
+        component = c.GetComponentInParent<Recipient> ();
+      } else {
+        component = Object.FindObjectOfType<Recipient> ();
+      }
+      if (component != null) {
+        component.Register (c);
+      } else {
+        Debug.Log ("Could not find recipient during registeration");
+      }
+      return component;
+    }
+
+    public static Recipient MaybeRegisterNamedComponent<Recipient, Caller> (Recipient r, Caller c, string identifier) where Recipient : Object, HasRegister<Caller> where Caller : Component {
+      Recipient component;
+      if (r != null) {
+        component = r;
+      } else if (c.GetComponentInParent<Recipient> () != null) {
+        component = c.GetComponentInParent<Recipient> ();
+      } else {
+        component = Object.FindObjectOfType<Recipient> ();
+      }
+      if (component != null) {
+        component.Register (c, identifier);
+      } else {
+        Debug.Log ("Could not find recipient during registeration");
+      }
+      return component;
+    }
+
+
+    /// Use this method to get all loaded objects of some type, including inactive objects. 
+    /// This is an alternative to Resources.FindObjectsOfTypeAll (returns project assets, including prefabs), and GameObject.FindObjectsOfTypeAll (deprecated).
+    public static T[] FindAllObjectsOfTypeInScene<T> () {//(Scene scene) {
+      List<T> results = new List<T> ();
+      for (int i = 0; i < SceneManager.sceneCount; i++) {
+        var s = SceneManager.GetSceneAt (i); // maybe EditorSceneManager
+        if (s.isLoaded) {
+          var allGameObjects = s.GetRootGameObjects ();
+          for (int j = 0; j < allGameObjects.Length; j++) {
+            var go = allGameObjects [j];
+            results.AddRange (go.GetComponentsInChildren<T> (true));
+          }
         }
+      }
+      return results.ToArray ();
+    }
 
-        public static void RegisterCollisionTriggerCallbacksOnChildren(Transform transform,
-                                                                        ChildSensor.OnChildCollisionEnterDelegate OnCollisionEnterChild,
-                                                                        ChildSensor.OnChildTriggerEnterDelegate OnTriggerEnterChild,
-                                                                        ChildSensor.OnChildCollisionExitDelegate OnCollisionExitChild,
-                                                                        ChildSensor.OnChildTriggerExitDelegate OnTriggerExitChild,
-                                                                        ChildSensor.OnChildCollisionStayDelegate OnCollisionStayChild,
-                                                                        ChildSensor.OnChildTriggerStayDelegate OnTriggerStayChild,
-                                                                        bool debug = false)
-        {
-            var childrenWithColliders = transform.GetComponentsInChildren<Collider>(transform.gameObject);
-
-            foreach (Collider child in childrenWithColliders)
-            {
-                ChildSensor child_sensor = child.gameObject.AddComponent<ChildSensor>();
-                child_sensor.OnCollisionEnterDelegate = OnCollisionEnterChild;
-                child_sensor.OnTriggerEnterDelegate = OnTriggerEnterChild;
-                child_sensor.OnCollisionExitDelegate = OnCollisionExitChild;
-                child_sensor.OnTriggerExitDelegate = OnTriggerExitChild;
-                child_sensor.OnTriggerStayDelegate = OnTriggerStayChild;
-                child_sensor.OnCollisionStayDelegate = OnCollisionStayChild;
-                if (debug)
-                    Debug.Log(transform.name + " has " + child_sensor.name + " registered");
-            }
+    public static GameObject[] FindAllGameObjectsExceptLayer (int layer) {
+      var goa = GameObject.FindObjectsOfType<GameObject> ();
+      var gol = new List<GameObject> ();
+      foreach (var go in goa) {
+        if (go.layer != layer) {
+          gol.Add (go);
         }
+      }
+      if (gol.Count == 0) {
+        return null;
+      }
+      return gol.ToArray ();
+    }
 
-        public static string ColorArrayToString(Color[] colors)
-        {
-            string s = "";
-            foreach (Color color in colors)
-            {
-                s += color.ToString();
-            }
-            return s;
-        }
-
-        public static Recipient MaybeRegisterComponent<Recipient, Caller>(Recipient r, Caller c) where Recipient : Object, HasRegister<Caller> where Caller : Component
-        {
-            Recipient component;
-            if (r != null)
-            {
-                component = r;  //.GetComponent<Recipient>();
-            }
-            else if (c.GetComponentInParent<Recipient>() != null)
-            {
-                component = c.GetComponentInParent<Recipient>();
-            }
-            else
-            {
-                component = Object.FindObjectOfType<Recipient>();
-            }
-            if (component != null)
-            {
-                component.Register(c);
-            }
-            else
-            {
-                Debug.Log("Could not find recipient during registeration");
-            }
-            return component;
-        }
-
-        public static Recipient MaybeRegisterNamedComponent<Recipient, Caller>(Recipient r, Caller c, string identifier) where Recipient : Object, HasRegister<Caller> where Caller : Component
-        {
-            Recipient component;
-            if (r != null)
-            {
-                component = r;
-            }
-            else if (c.GetComponentInParent<Recipient>() != null)
-            {
-                component = c.GetComponentInParent<Recipient>();
-            }
-            else
-            {
-                component = Object.FindObjectOfType<Recipient>();
-            }
-            if (component != null)
-            {
-                component.Register(c, identifier);
-            }
-            else
-            {
-                Debug.Log("Could not find recipient during registeration");
-            }
-            return component;
-        }
-
-
-        /// Use this method to get all loaded objects of some type, including inactive objects. 
-        /// This is an alternative to Resources.FindObjectsOfTypeAll (returns project assets, including prefabs), and GameObject.FindObjectsOfTypeAll (deprecated).
-        public static T[] FindAllObjectsOfTypeInScene<T>()
-        {//(Scene scene) {
-            List<T> results = new List<T>();
-            for (int i = 0; i < SceneManager.sceneCount; i++)
-            {
-                var s = SceneManager.GetSceneAt(i); // maybe EditorSceneManager
-                if (s.isLoaded)
-                {
-                    var allGameObjects = s.GetRootGameObjects();
-                    for (int j = 0; j < allGameObjects.Length; j++)
-                    {
-                        var go = allGameObjects[j];
-                        results.AddRange(go.GetComponentsInChildren<T>(true));
-                    }
-                }
-            }
-            return results.ToArray();
-        }
-
-        public static GameObject[] FindAllGameObjectsExceptLayer(int layer)
-        {
-            var goa = GameObject.FindObjectsOfType<GameObject>();
-            var gol = new List<GameObject>();
-            foreach (var go in goa)
-            {
-                if (go.layer != layer)
-                {
-                    gol.Add(go);
-                }
-            }
-            if (gol.Count == 0)
-            {
-                return null;
-            }
-            return gol.ToArray();
-        }
-
-        /** Contains logic for coverting a camera component into a Texture2D. */
-        /*public Texture2D ObservationToTex(Camera camera, int width, int height)
+    /** Contains logic for coverting a camera component into a Texture2D. */
+    /*public Texture2D ObservationToTex(Camera camera, int width, int height)
         {
           Camera cam = camera;
           Rect oldRec = camera.rect;
@@ -245,6 +247,6 @@ namespace Neodroid.Utilities
           }
           return observation_matrix_list;
         }*/
-    }
+  }
 
 }

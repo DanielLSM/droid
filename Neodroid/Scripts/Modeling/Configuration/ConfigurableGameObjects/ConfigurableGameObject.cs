@@ -15,6 +15,7 @@ namespace Neodroid.Configurations {
     public int _decimal_granularity = 0;
     public float _min_value = -100;
     public float _max_value = 100;
+    public bool _relative_to_default_value = false;
 
     protected virtual void Start () {
     }

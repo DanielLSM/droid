@@ -1015,12 +1015,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 706
+      value: 760.5
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 355.5
+      value: 332.5
       objectReference: {fileID: 0}
     - target: {fileID: 1709914492231660, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_IsActive
@@ -1041,6 +1041,7 @@ GameObject:
   - component: {fileID: 745076141}
   - component: {fileID: 745076140}
   - component: {fileID: 745076143}
+  - component: {fileID: 745076144}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Goal
@@ -1136,6 +1137,25 @@ MonoBehaviour:
   _data: 
   _order_index: 0
   _draw_names: 1
+--- !u!114 &745076144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 745076138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20678454752714027aac65984404caf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _environment: {fileID: 1943801932}
+  _debug: 0
+  _decimal_granularity: 0
+  _min_value: 0
+  _max_value: 10
+  _axis_of_configuration: 0
+  _use_bounding_box_for_range: 0
+  _bounding_box: {fileID: 1943801935}
 --- !u!1 &1014882065
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,8 +2138,8 @@ MonoBehaviour:
   _environment: {fileID: 1943801932}
   _debug: 1
   _decimal_granularity: 0
-  _min_value: 0
-  _max_value: 0
+  _min_value: -Infinity
+  _max_value: Infinity
   _axis_of_configuration: 0
   _use_bounding_box_for_range: 1
   _bounding_box: {fileID: 1943801935}
@@ -2378,6 +2398,7 @@ GameObject:
   - component: {fileID: 1943801934}
   - component: {fileID: 1943801937}
   - component: {fileID: 1943801938}
+  - component: {fileID: 1943801939}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -2525,6 +2546,19 @@ MonoBehaviour:
   _debug: 0
   _observer_identifier: 
   _data: 
+--- !u!114 &1943801939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1943801930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a528b8469faf414a85c0fc50923bf67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _curriculum: {fileID: 11400000, guid: 33e597028b82f4c84ba5be8d8ef8fa98, type: 2}
+  _draw_levels: 1
 --- !u!1 &1976304150
 GameObject:
   m_ObjectHideFlags: 0

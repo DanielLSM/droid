@@ -34,15 +34,26 @@ namespace Neodroid.Configurations {
       }
       if (_debug)
         Debug.Log ("Applying " + v.ToString () + " To " + GetConfigurableIdentifier ());
-      if (configuration.ConfigurableName == _X) {
-        pos.Set (v, pos.y, pos.z);
-      } else if (configuration.ConfigurableName == _Y) {
-        pos.Set (pos.x, v, pos.z);
-      } else if (configuration.ConfigurableName == _Z) {
-        pos.Set (pos.x, pos.y, v);
+      if (_relative_to_default_value) {
+        if (configuration.ConfigurableName == _X) {
+          pos.Set (v - pos.x, pos.y, pos.z);
+        } else if (configuration.ConfigurableName == _Y) {
+          pos.Set (pos.x, v - pos.y, pos.z);
+        } else if (configuration.ConfigurableName == _Z) {
+          pos.Set (pos.x, pos.y, v - pos.z);
+        }
+      } else {
+        if (configuration.ConfigurableName == _X) {
+          pos.Set (v, pos.y, pos.z);
+        } else if (configuration.ConfigurableName == _Y) {
+          pos.Set (pos.x, v, pos.z);
+        } else if (configuration.ConfigurableName == _Z) {
+          pos.Set (pos.x, pos.y, v);
+        }
       }
       var inv_pos = _environment.InverseTransformPosition (pos);
       transform.position = inv_pos;
+      
     }
 
     public override string GetConfigurableIdentifier () {

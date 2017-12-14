@@ -3,6 +3,7 @@ using Neodroid.Utilities;
 using UnityEngine;
 using Neodroid.Messaging.Messages;
 using Neodroid.Utilities.BoundingBoxes;
+using System.Collections.Specialized;
 
 namespace Neodroid.Configurations {
   public class TransformConfigurable : ConfigurableGameObject {
@@ -11,7 +12,7 @@ namespace Neodroid.Configurations {
     public bool _use_bounding_box_for_range = false;
     public BoundingBox _bounding_box;
 
-    void Awake () {
+    protected override void Awake () {
       AddToEnvironment ();
       if (_use_bounding_box_for_range) {
         if (_bounding_box != null) {
@@ -32,22 +33,22 @@ namespace Neodroid.Configurations {
       var dir = _environment.TransformDirection (this.transform.forward);
       switch (_axis_of_configuration) {
       case Axis.X:
-        pos.Set (configuration.ConfigurableValue, pos.y, pos.z);
+        pos.Set (configuration.ConfigurableValue - pos.x, pos.y, pos.z);
         break;
       case Axis.Y:
-        pos.Set (pos.x, configuration.ConfigurableValue, pos.z);
+        pos.Set (pos.x, configuration.ConfigurableValue - pos.y, pos.z);
         break;
       case Axis.Z:
-        pos.Set (pos.x, pos.y, configuration.ConfigurableValue);
+        pos.Set (pos.x, pos.y, configuration.ConfigurableValue - pos.z);
         break;
       case Axis.RotX:
-        dir.Set (configuration.ConfigurableValue, dir.y, dir.z);
+        dir.Set (configuration.ConfigurableValue - dir.x, dir.y, dir.z);
         break;
       case Axis.RotY:
-        dir.Set (dir.x, configuration.ConfigurableValue, dir.z);
+        dir.Set (dir.x, configuration.ConfigurableValue - dir.y, dir.z);
         break;
       case Axis.RotZ:
-        dir.Set (dir.x, dir.y, configuration.ConfigurableValue);
+        dir.Set (dir.x, dir.y, configuration.ConfigurableValue - dir.z);
         break;
       default:
         break;

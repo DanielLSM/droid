@@ -11,4 +11,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c9f168bf4054e75b9208402fe5fca0, type: 3}
   m_Name: Curriculum
   m_EditorClassIdentifier: 
-  levels: 
+  _levels:
+  - configurable_entries:
+    - configurable_name: Player
+      min_value: 0
+      max_value: 20
+    min_reward: 0
+    max_reward: 0
+  - configurable_entries:
+    - configurable_name: Player
+      min_value: 0
+      max_value: 30
+    min_reward: 0
+    max_reward: 0
+  - configurable_entries:
+    - configurable_name: Player
+      min_value: 0
+      max_value: 60
+    min_reward: 0
+    max_reward: 0
+  - configurable_entries:
+    - configurable_name: Player
+      min_value: 0
+      max_value: 80
+    min_reward: 0
+    max_reward: 0
