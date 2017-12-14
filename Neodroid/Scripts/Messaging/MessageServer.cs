@@ -6,7 +6,7 @@ using NetMQ;
 using NetMQ.Sockets;
 
 using Neodroid.Messaging;
-using Neodroid.Messaging.FlatBuffer;
+using Neodroid.Messaging.CustomFBS;
 using Neodroid.Messaging.Models.Reaction;
 
 namespace Neodroid.Messaging {
@@ -74,8 +74,8 @@ namespace Neodroid.Messaging {
             //msg = _socket.TryReceiveFrameBytes ();
             _socket.TryReceiveFrameBytes (TimeSpan.FromSeconds (2), out msg);
             if (msg != null && msg.Length > 0) {
-              var flat_reaction = FlatBufferReaction.GetRootAsFlatBufferReaction (new FlatBuffers.ByteBuffer (msg));
-              var reaction = FlatBufferUtilities.create_reaction (flat_reaction);
+              var flat_reaction = FBSReaction.GetRootAsFBSReaction (new FlatBuffers.ByteBuffer (msg));
+              var reaction = FBSUtilities.create_reaction (flat_reaction);
               receive_callback (reaction);
               _waiting_for_main_loop_to_send = true;
             }
@@ -103,13 +103,13 @@ namespace Neodroid.Messaging {
     #region PublicMethods
 
     public void SendEnvironmentState (EnvironmentState environment_state) {
-      byte_buffer = FlatBufferUtilities.build_state (environment_state);
+      byte_buffer = FBSUtilities.build_state (environment_state);
       _socket.SendFrame (byte_buffer);
       _waiting_for_main_loop_to_send = false; 
     }
 
     public void SendEnvironmentStates (EnvironmentState[] environment_states) {
-      byte_buffer = FlatBufferUtilities.build_states (environment_states);
+      byte_buffer = FBSUtilities.build_states (environment_states);
       _socket.SendFrame (byte_buffer);
       _waiting_for_main_loop_to_send = false;
     }

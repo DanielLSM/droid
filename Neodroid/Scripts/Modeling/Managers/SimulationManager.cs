@@ -73,7 +73,6 @@ namespace Neodroid.Managers {
       LearningEnvironment last = null;
       foreach (var environment in _environments.Values) {
         environment.ExecuteReaction (reaction);
-        environment.UpdateObserversData ();
         last = environment;
       }
       return last;

@@ -12,6 +12,9 @@ namespace Neodroid.Configurations {
 
     public LearningEnvironment _environment;
     public bool _debug = false;
+    public int _decimal_granularity = 0;
+    public float _min_strength = -100;
+    public float _max_strength = 100;
 
     protected virtual void Start () {
     }

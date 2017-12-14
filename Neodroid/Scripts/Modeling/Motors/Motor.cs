@@ -9,7 +9,9 @@ namespace Neodroid.Motors {
   [Serializable]
   public class Motor : MonoBehaviour {
     public bool _debug = false;
-    public bool _bidirectional = true;
+    public int _decimal_granularity = 0;
+    public float _min_strength = -100;
+    public float _max_strength = 100;
     public float _energy_cost = 1;
     protected float _energy_spend_since_reset = 0;
     public Actor _actor_game_object;

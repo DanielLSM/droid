@@ -1,0 +1,78 @@
+namespace Neodroid.Messaging.Models.State;
+
+table FBSState {
+  environment_name:string;
+  total_energy_spent:float;
+  actors:[FBSActor];
+  observers:[FBSObserver];
+  frame_number:int;
+  reward:float;
+  interrupted:bool;
+  environment_description:FBSEnvironmentDescription;
+  debug_message:string;
+}
+
+table FBSActor {
+  actor_name:string;
+  motors:[FBSMotor];
+}
+
+table FBSObserver {
+  observer_name:string;
+  data_type:string;
+  data:[ubyte];
+  transform:FBSTransform;
+  body:FBSBody;
+}
+
+table FBSEnvironmentDescription {
+  max_episode_length:int;
+  solved_threshold:float;
+  configurables:[FBSConfigurable];
+}
+
+table FBSConfigurable {
+  configurable_name:string;
+  valid_input:FBSInputRange;
+}
+
+table FBSMotor{
+  motor_name:string;
+  valid_input:FBSInputRange;
+  energy_cost:float;
+  energy_spent_since_reset:float;
+}
+
+struct FBSVec3 {
+  x:float;
+  y:float;
+  z:float;
+}
+
+struct FBSQuat {
+  x:float;
+  y:float;
+  z:float;
+  w:float;
+}
+
+struct FBSTransform {
+  position:FBSVec3;
+  rotation:FBSVec3;
+  direction:FBSVec3;
+}
+
+struct FBSBody{
+  velocity:FBSVec3;
+  angular_velocity:FBSVec3;
+}
+
+
+struct FBSInputRange{
+  decimal_granularity:int;
+  max_input_value:float;
+  min_input_value:float;
+}
+
+root_type FBSState;
+file_identifier "STAT";

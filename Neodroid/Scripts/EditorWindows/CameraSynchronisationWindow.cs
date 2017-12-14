@@ -46,9 +46,10 @@ namespace Neodroid.Windows {
             _show_camera_properties [i] = EditorGUILayout.Foldout (_show_camera_properties [i], _cameras [i].name);
             if (_show_camera_properties [i]) {
               EditorGUILayout.BeginVertical ("Box");
-              _cameras [i]._orthographic_size = EditorGUILayout.Toggle ("Synchronise Orthographic Size", _cameras [i]._orthographic_size);
-              _cameras [i]._near_clip_plane = EditorGUILayout.Toggle ("Synchronise Near Clip Plane", _cameras [i]._near_clip_plane);
-              _cameras [i]._far_clip_plane = EditorGUILayout.Toggle ("Synchronise Far Clip Plane", _cameras [i]._far_clip_plane);
+  _cameras [i]._sync_orthographic_size = EditorGUILayout.Toggle ("Synchronise Orthographic Size", _cameras [i]._sync_orthographic_size);
+  _cameras [i]._sync_near_clip_plane = EditorGUILayout.Toggle ("Synchronise Near Clip Plane", _cameras [i]._sync_near_clip_plane);
+  _cameras [i]._sync_far_clip_plane = EditorGUILayout.Toggle ("Synchronise Far Clip Plane", _cameras [i]._sync_far_clip_plane);
+  _cameras [i]._sync_culling_mask = EditorGUILayout.Toggle ("Synchronise Culling Mask", _cameras [i]._sync_culling_mask);
               EditorGUILayout.EndVertical ();
             }
           }

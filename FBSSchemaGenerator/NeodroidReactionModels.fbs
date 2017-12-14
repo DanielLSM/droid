@@ -1,0 +1,22 @@
+namespace Neodroid.Messaging.Models.Reaction;
+
+table FBSReaction {
+  environment_name:string;
+  motions:[FBSMotion];
+  configurations:[FBSConfiguration];
+  reset:bool;
+}
+
+table FBSMotion {
+  actor_name:string;
+  motor_name:string;
+  strength:float;
+}
+
+table FBSConfiguration {
+  configurable_name:string;
+  configurable_value:float;
+}
+
+root_type FBSReaction;
+file_identifier "REAC";

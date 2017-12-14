@@ -11,6 +11,8 @@ namespace Neodroid.Evaluation {
 
     public bool _debug = false;
 
+    public float _solved_threshold = 0;
+
     public Term[] _extra_term_go;
 
     public Dictionary<string, Term> _extra_terms = new Dictionary<string, Term> ();
@@ -22,7 +24,7 @@ namespace Neodroid.Evaluation {
           get { return _extra_terms_serial.dictionary; }
         }*/
 
-    void Awale () {
+    void Awake () {
       foreach (var go in _extra_term_go) {
         _extra_terms.Add (go.name, go);
         _extra_term_weights.Add (go, 1);

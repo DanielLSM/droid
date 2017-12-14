@@ -801,7 +801,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 75
+  field of view: 60
   orthographic: 1
   orthographic size: 8
   m_Depth: 0
@@ -1015,12 +1015,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 760
+      value: 416
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 473.5
+      value: 262.5
       objectReference: {fileID: 0}
     - target: {fileID: 1709914492231660, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_IsActive
@@ -2356,9 +2356,10 @@ GameObject:
   - component: {fileID: 1943801931}
   - component: {fileID: 1943801933}
   - component: {fileID: 1943801932}
-  - component: {fileID: 1943801934}
   - component: {fileID: 1943801935}
   - component: {fileID: 1943801936}
+  - component: {fileID: 1943801934}
+  - component: {fileID: 1943801937}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -2396,11 +2397,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4675f9235ecc46a5982e50590d858cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coordinate_system: 1
+  _coordinate_system: 0
   _coordinate_reference_point: {fileID: 0}
-  _objective_function: {fileID: 1943801934}
+  _objective_function: {fileID: 0}
   _simulation_manager: {fileID: 0}
-  _debug: 0
+  _debug: 1
 --- !u!114 &1943801933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2428,7 +2429,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1943801930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeb3ea73696124320971daeae2f4b29a, type: 3}
+  m_Script: {fileID: 11500000, guid: 00ead04bab60a4d90963870cde2c3320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 0
@@ -2455,9 +2456,9 @@ MonoBehaviour:
   _freeze: 1
   _line_color: {r: 0, g: 1, b: 0.4, a: 0.74}
   _bounds:
-    m_Center: {x: -0.5000005, y: 4.4999995, z: -0.5}
-    m_Extent: {x: 5, y: 5, z: 5.0000005}
-  _bounds_offset: {x: -0.5000005, y: 4.4999995, z: -0.5}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 10, y: 10, z: 10}
+  _bounds_offset: {x: 0, y: 0, z: 0}
   _setup_on_awake: 1
   _camera: {fileID: 0}
 --- !u!114 &1943801936
@@ -2473,6 +2474,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _a: {fileID: 1650564488}
   _b: {fileID: 745076141}
+--- !u!65 &1943801937
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1943801930}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 20, z: 20}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1976304150
 GameObject:
   m_ObjectHideFlags: 0

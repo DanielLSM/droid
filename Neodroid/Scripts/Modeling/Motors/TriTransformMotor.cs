@@ -4,7 +4,7 @@ using Neodroid.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Motors {
-	public class TriTransformMotor : TransformMotor {
+  public class TriTransformMotor : TransformMotor {
 
     string _X;
     string _Y;
@@ -34,8 +34,8 @@ namespace Neodroid.Motors {
     }
 
     public override void ApplyMotion (MotorMotion motion) {
-      if (!_bidirectional && motion.Strength < 0) {
-        Debug.Log ("Motor is not bi-directional. It does not accept negative input.");
+      if (motion.Strength < _min_strength || motion.Strength > _max_strength) {
+        Debug.Log ("It does not accept input, outside allowed range");
         return; // Do nothing
       }
       int layer_mask = 1 << LayerMask.NameToLayer (_layer_mask);

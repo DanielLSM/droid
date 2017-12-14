@@ -13,7 +13,10 @@ namespace Neodroid.Observers {
     public Vector3 _position;
     public Vector3 _rotation;
     public Vector3 _direction;
+    public Vector3 _velocity;
+    public Vector3 _angular_velocity;
 
+   
     //public Quaternion _rotation;
     //public Quaternion _direction;
 
