@@ -76,7 +76,7 @@ namespace Neodroid.Messaging {
       StringOffset n = b.CreateString (configurable.GetConfigurableIdentifier ());
       FBSConfigurable.StartFBSConfigurable (b);
       FBSConfigurable.AddConfigurableName (b, n);
-      FBSConfigurable.AddValidInput (b, FBSInputRange.CreateFBSInputRange (b, configurable._decimal_granularity, configurable._max_strength, configurable._min_strength));
+      FBSConfigurable.AddValidInput (b, FBSInputRange.CreateFBSInputRange (b, configurable._decimal_granularity, configurable._max_value, configurable._min_value));
       return FBSConfigurable.EndFBSConfigurable (b);
     }
 

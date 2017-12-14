@@ -1015,12 +1015,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 416
+      value: 706
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 262.5
+      value: 355.5
       objectReference: {fileID: 0}
     - target: {fileID: 1709914492231660, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_IsActive
@@ -1129,6 +1129,8 @@ MonoBehaviour:
   _position: {x: -4, y: 6, z: 2}
   _rotation: {x: 0, y: 1, z: 0}
   _direction: {x: 0, y: 0, z: 1}
+  _velocity: {x: 0, y: 0, z: 0}
+  _angular_velocity: {x: 0, y: 0, z: 0}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1318,6 +1320,8 @@ MonoBehaviour:
   _position: {x: -2, y: 3, z: 3}
   _rotation: {x: 0, y: 1, z: 0}
   _direction: {x: 0, y: 0, z: 1}
+  _velocity: {x: 0, y: 0, z: 0}
+  _angular_velocity: {x: 0, y: 0, z: 0}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -1788,6 +1792,8 @@ MonoBehaviour:
   _position: {x: -5, y: 4, z: 0}
   _rotation: {x: 0, y: 1, z: 0}
   _direction: {x: 0, y: 0, z: 1}
+  _velocity: {x: 0, y: 0, z: 0}
+  _angular_velocity: {x: 0, y: 0, z: 0}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -2034,6 +2040,8 @@ MonoBehaviour:
   _position: {x: 3, y: 1, z: -2}
   _rotation: {x: 0, y: 1, z: 0}
   _direction: {x: 0, y: 0, z: 1}
+  _velocity: {x: 0, y: 0, z: 0}
+  _angular_velocity: {x: 0, y: 0, z: 0}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -2049,7 +2057,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 0
-  _bidirectional: 1
+  _decimal_granularity: 0
+  _min_strength: -100
+  _max_strength: 100
   _energy_cost: 1
   _actor_game_object: {fileID: 1650564493}
   _axis_of_motion: 0
@@ -2072,6 +2082,8 @@ MonoBehaviour:
   _position: {x: 1, y: 0, z: 0}
   _rotation: {x: 0, y: 1, z: 0}
   _direction: {x: 0, y: 0, z: 1}
+  _velocity: {x: 0, y: 0, z: 0}
+  _angular_velocity: {x: 0, y: 0, z: 0}
   _debug: 0
   _observer_identifier: 
   _data: 
@@ -2104,8 +2116,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
-  _debug: 0
+  _debug: 1
+  _decimal_granularity: 0
+  _min_value: 0
+  _max_value: 0
   _axis_of_configuration: 0
+  _use_bounding_box_for_range: 1
+  _bounding_box: {fileID: 1943801935}
 --- !u!1001 &1663177657
 Prefab:
   m_ObjectHideFlags: 0
@@ -2360,6 +2377,7 @@ GameObject:
   - component: {fileID: 1943801936}
   - component: {fileID: 1943801934}
   - component: {fileID: 1943801937}
+  - component: {fileID: 1943801938}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -2401,7 +2419,7 @@ MonoBehaviour:
   _coordinate_reference_point: {fileID: 0}
   _objective_function: {fileID: 0}
   _simulation_manager: {fileID: 0}
-  _debug: 1
+  _debug: 0
 --- !u!114 &1943801933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2433,6 +2451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 0
+  _solved_threshold: 0
   _extra_term_go:
   - {fileID: 1943801936}
   _goal: {fileID: 745076143}
@@ -2456,9 +2475,9 @@ MonoBehaviour:
   _freeze: 1
   _line_color: {r: 0, g: 1, b: 0.4, a: 0.74}
   _bounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 10, y: 10, z: 10}
-  _bounds_offset: {x: 0, y: 0, z: 0}
+    m_Center: {x: -0.5000005, y: 4.4999995, z: -0.5}
+    m_Extent: {x: 5, y: 5, z: 5.0000005}
+  _bounds_offset: {x: -0.5000005, y: 4.4999995, z: -0.5}
   _setup_on_awake: 1
   _camera: {fileID: 0}
 --- !u!114 &1943801936
@@ -2486,6 +2505,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 20, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1943801938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1943801930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eefad9c8e1e8f49c396547eed494bd75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _environment: {fileID: 1943801932}
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 1, z: 0}
+  _direction: {x: 0, y: 0, z: 1}
+  _velocity: {x: 0, y: 0, z: 0}
+  _angular_velocity: {x: 0, y: 0, z: 0}
+  _debug: 0
+  _observer_identifier: 
+  _data: 
 --- !u!1 &1976304150
 GameObject:
   m_ObjectHideFlags: 0

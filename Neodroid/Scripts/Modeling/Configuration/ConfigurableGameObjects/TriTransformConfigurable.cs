@@ -3,50 +3,50 @@ using Neodroid.Utilities;
 using UnityEngine;
 using Neodroid.Messaging.Messages;
 
-namespace Neodroid.Configurations
-{
+namespace Neodroid.Configurations {
 
-	public class TriTransformConfigurable : TransformConfigurable
-    {
+  public class TriTransformConfigurable : TransformConfigurable {
 
-        string _X;
-        string _Y;
-        string _Z;
+    string _X;
+    string _Y;
+    string _Z;
 
-        protected override void AddToEnvironment()
-        {
-            _X = GetConfigurableIdentifier() + "X";
-            _Y = GetConfigurableIdentifier() + "Y";
-            _Z = GetConfigurableIdentifier() + "Z";
-            _environment = NeodroidUtilities.MaybeRegisterNamedComponent(_environment, (ConfigurableGameObject)this, _X);
-            _environment = NeodroidUtilities.MaybeRegisterNamedComponent(_environment, (ConfigurableGameObject)this, _Y);
-            _environment = NeodroidUtilities.MaybeRegisterNamedComponent(_environment, (ConfigurableGameObject)this, _Z);
-        }
-
-        public override void ApplyConfiguration(Configuration configuration)
-        {
-            if (_debug) 
-                Debug.Log("Applying " + configuration.ToString() + " To " + GetConfigurableIdentifier());
-            var pos = _environment.TransformPosition(this.transform.position);
-            if (configuration.ConfigurableName == _X)
-            {
-                pos.Set(configuration.ConfigurableValue, pos.y, pos.z);
-            }
-            else if (configuration.ConfigurableName == _Y)
-            {
-                pos.Set(pos.x, configuration.ConfigurableValue, pos.z);
-            }
-            else if (configuration.ConfigurableName == _Z)
-            {
-                pos.Set(pos.x, pos.y, configuration.ConfigurableValue);
-            }
-            var inv_pos = _environment.InverseTransformPosition(pos);
-            transform.position = inv_pos;
-        }
-
-        public override string GetConfigurableIdentifier()
-        {
-            return name + "Transform";
-        }
+    protected override void AddToEnvironment () {
+      _X = GetConfigurableIdentifier () + "X";
+      _Y = GetConfigurableIdentifier () + "Y";
+      _Z = GetConfigurableIdentifier () + "Z";
+      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _X);
+      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Y);
+      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Z);
     }
+
+    public override void ApplyConfiguration (Configuration configuration) {
+      var pos = _environment.TransformPosition (this.transform.position);
+      var v = configuration.ConfigurableValue;
+      if (_decimal_granularity >= 0) {
+        v = (float)Math.Round (v, _decimal_granularity);
+      }
+      if (_min_value.CompareTo (_max_value) != 0) {
+        if (v < _min_value || v > _max_value) {
+          Debug.Log (String.Format ("Configurable does not accept input{2}, outside allowed range {0} to {1}", _min_value, _max_value, v));
+          return; // Do nothing
+        }
+      }
+      if (_debug)
+        Debug.Log ("Applying " + v.ToString () + " To " + GetConfigurableIdentifier ());
+      if (configuration.ConfigurableName == _X) {
+        pos.Set (v, pos.y, pos.z);
+      } else if (configuration.ConfigurableName == _Y) {
+        pos.Set (pos.x, v, pos.z);
+      } else if (configuration.ConfigurableName == _Z) {
+        pos.Set (pos.x, pos.y, v);
+      }
+      var inv_pos = _environment.InverseTransformPosition (pos);
+      transform.position = inv_pos;
+    }
+
+    public override string GetConfigurableIdentifier () {
+      return name + "Transform";
+    }
+  }
 }

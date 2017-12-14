@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -60,6 +61,20 @@ namespace Neodroid.Utilities.BoundingBoxes {
         str_rep += "\"_bottom_front_right\":" + BoundingBoxCoordinates [5].ToString () + ", ";
         str_rep += "\"_bottom_back_left\":" + BoundingBoxCoordinates [6].ToString () + ", ";
         str_rep += "\"_bottom_back_right\":" + BoundingBoxCoordinates [7].ToString ();
+        return str_rep;
+      }
+    }
+
+    string JSONifyVec3 (Vector3 vec) {
+      return String.Format ("[{0},{1},{2}]", vec.x, vec.y, vec.z);
+    }
+
+    public string BoundingBoxCoordinatesAsJSON {
+      get {
+        string str_rep = "{";
+        str_rep += "\"_top_front_left\":" + JSONifyVec3 (BoundingBoxCoordinates [0]) + ", ";
+        str_rep += "\"_bottom_back_right\":" + JSONifyVec3 (BoundingBoxCoordinates [7]);
+        str_rep += "}";
         return str_rep;
       }
     }
@@ -151,10 +166,10 @@ namespace Neodroid.Utilities.BoundingBoxes {
 
     void FitBoundingBoxToChildrenColliders () {
 
-			var collider = this.GetComponent<BoxCollider> ();
+      var collider = this.GetComponent<BoxCollider> ();
       Bounds bounds = new Bounds (this.transform.position, Vector3.zero); // position and size
 
-			bounds.Encapsulate (collider.bounds);
+      bounds.Encapsulate (collider.bounds);
 
       foreach (var col in _children_colliders) {
         if (col != collider) {
@@ -235,15 +250,24 @@ namespace Neodroid.Utilities.BoundingBoxes {
       for (int i = 0; i < 4; i++) {
 
         //width
-        line = new Vector3[] { rot * _corners [2 * i] + pos, rot * _corners [2 * i + 1] + pos };
+        line = new Vector3[] {
+          rot * _corners [2 * i] + pos,
+          rot * _corners [2 * i + 1] + pos
+        };
         lines.Add (line);
 
         //height
-        line = new Vector3[] { rot * _corners [i] + pos, rot * _corners [i + 4] + pos };
+        line = new Vector3[] {
+          rot * _corners [i] + pos,
+          rot * _corners [i + 4] + pos
+        };
         lines.Add (line);
 
         //depth
-        line = new Vector3[] { rot * _corners [2 * i] + pos, rot * _corners [2 * i + 3 - 4 * (i % 2)] + pos };
+        line = new Vector3[] {
+          rot * _corners [2 * i] + pos,
+          rot * _corners [2 * i + 3 - 4 * (i % 2)] + pos
+        };
         lines.Add (line);
 
       }
@@ -261,15 +285,14 @@ namespace Neodroid.Utilities.BoundingBoxes {
     }
 
     #if UNITY_EDITOR
-        void OnValidate()
-        {
-            if (EditorApplication.isPlaying)
-                return;
-            Initialise();
-        }
+    void OnValidate () {
+      if (EditorApplication.isPlaying)
+        return;
+      Initialise ();
+    }
 
 
-#endif
+    #endif
 
     void OnDrawGizmos () {
 
