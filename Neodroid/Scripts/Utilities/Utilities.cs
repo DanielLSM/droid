@@ -9,7 +9,7 @@ using UnityEditor.SceneManagement;
 
 namespace Neodroid.Utilities {
   public static class NeodroidUtilities {
-
+    #if UNITY_EDITOR
     public static void DrawString (string text, Vector3 worldPos, Color? color = null, float oX = 0, float oY = 0) {
 
       UnityEditor.Handles.BeginGUI ();
@@ -44,6 +44,7 @@ namespace Neodroid.Utilities {
       else
         return position;
     }
+    #endif
 
     public static Texture2D RenderTextureImage (Camera camera) { // From unity documentation, https://docs.unity3d.com/ScriptReference/Camera.Render.html
       RenderTexture current_render_texture = RenderTexture.active;
@@ -99,7 +100,7 @@ namespace Neodroid.Utilities {
       if (component != null) {
         component.Register (c);
       } else {
-        Debug.Log ("Could not find recipient during registeration");
+        Debug.Log (System.String.Format ("Could not find a {0} recipient during registeration", typeof(Recipient).ToString ()));
       }
       return component;
     }
@@ -116,7 +117,7 @@ namespace Neodroid.Utilities {
       if (component != null) {
         component.Register (c, identifier);
       } else {
-        Debug.Log ("Could not find recipient during registeration");
+        Debug.Log (System.String.Format ("Could not find a {0} recipient during registeration", typeof(Recipient).ToString ()));
       }
       return component;
     }

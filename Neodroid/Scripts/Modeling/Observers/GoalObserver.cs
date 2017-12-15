@@ -4,10 +4,6 @@ using UnityEngine;
 using Neodroid.Observers;
 using Neodroid.Utilities;
 
-#if UNITY_EDITOR
-//using UnityEditor;
-#endif
-
 public class GoalObserver : Observer {
 
   public int _order_index = 0;
@@ -19,7 +15,11 @@ public class GoalObserver : Observer {
     _current_goal = v;
   }
 
-  //#if UNITY_EDITOR
+  public bool GetGoalStatus () {
+    return _current_goal;
+  }
+
+  #if UNITY_EDITOR
   void OnDrawGizmosSelected () {
     if (_draw_names) {
       if (_current_goal)
@@ -28,5 +28,5 @@ public class GoalObserver : Observer {
         NeodroidUtilities.DrawString (this.name, this.transform.position);
     }
   }
-  //#endif
+  #endif
 }

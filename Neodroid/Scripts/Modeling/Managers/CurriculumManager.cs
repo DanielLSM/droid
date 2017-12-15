@@ -8,11 +8,7 @@ public class CurriculumManager : MonoBehaviour {
   public Curriculum _curriculum;
   public bool _draw_levels = false;
 
-  // Use this for initialization
-  void Start () {
-		
-  }
-
+  #if UNITY_EDITOR
   void OnDrawGizmosSelected () {
     if (_draw_levels) {
       int i = 0;
@@ -52,10 +48,6 @@ public class CurriculumManager : MonoBehaviour {
       }
     }
   }
+  #endif
 
-
-  // Update is called once per frame
-  void Update () {
-		
-  }
 }

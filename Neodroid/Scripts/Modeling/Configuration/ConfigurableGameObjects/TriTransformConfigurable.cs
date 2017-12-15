@@ -26,7 +26,7 @@ namespace Neodroid.Configurations {
       if (_decimal_granularity >= 0) {
         v = (float)Math.Round (v, _decimal_granularity);
       }
-      if (_min_value.CompareTo (_max_value) != 0) {
+      if (_min_value != _max_value) {
         if (v < _min_value || v > _max_value) {
           Debug.Log (String.Format ("Configurable does not accept input{2}, outside allowed range {0} to {1}", _min_value, _max_value, v));
           return; // Do nothing
@@ -34,7 +34,7 @@ namespace Neodroid.Configurations {
       }
       if (_debug)
         Debug.Log ("Applying " + v.ToString () + " To " + GetConfigurableIdentifier ());
-      if (_relative_to_default_value) {
+      if (_relative_to_existing_value) {
         if (configuration.ConfigurableName == _X) {
           pos.Set (v - pos.x, pos.y, pos.z);
         } else if (configuration.ConfigurableName == _Y) {
@@ -52,7 +52,7 @@ namespace Neodroid.Configurations {
         }
       }
       var inv_pos = _environment.InverseTransformPosition (pos);
-      transform.position = inv_pos;
+      this.transform.position = inv_pos;
       
     }
 

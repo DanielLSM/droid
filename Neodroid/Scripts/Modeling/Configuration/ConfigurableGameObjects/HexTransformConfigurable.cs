@@ -28,26 +28,48 @@ namespace Neodroid.Configurations {
     }
 
     public override void ApplyConfiguration (Configuration configuration) {
-      if (configuration.ConfigurableValue < _min_value || configuration.ConfigurableValue > _max_value) {
-        Debug.Log (String.Format ("It does not accept input, outside allowed range {0} to {1}", _min_value, _max_value));
-        return; // Do nothing
-      }
-      if (_debug)
-        Debug.Log ("Applying " + configuration.ToString () + " To " + GetConfigurableIdentifier ());
       var pos = _environment.TransformPosition (this.transform.position);
       var dir = _environment.TransformDirection (this.transform.forward);
-      if (configuration.ConfigurableName == _X) {
-        pos.Set (configuration.ConfigurableValue, pos.y, pos.z);
-      } else if (configuration.ConfigurableName == _Y) {
-        pos.Set (pos.x, configuration.ConfigurableValue, pos.z);
-      } else if (configuration.ConfigurableName == _Z) {
-        pos.Set (pos.x, pos.y, configuration.ConfigurableValue);
-      } else if (configuration.ConfigurableName == _RotX) {
-        dir.Set (configuration.ConfigurableValue, dir.y, dir.z);
-      } else if (configuration.ConfigurableName == _RotY) {
-        dir.Set (dir.x, configuration.ConfigurableValue, dir.z);
-      } else if (configuration.ConfigurableName == _RotZ) {
-        dir.Set (dir.x, dir.y, configuration.ConfigurableValue);
+      var v = configuration.ConfigurableValue;
+      if (_decimal_granularity >= 0) {
+        v = (float)Math.Round (v, _decimal_granularity);
+      }
+      if (_min_value.CompareTo (_max_value) != 0) {
+        if (v < _min_value || v > _max_value) {
+          Debug.Log (String.Format ("Configurable does not accept input{2}, outside allowed range {0} to {1}", _min_value, _max_value, v));
+          return; // Do nothing
+        }
+      }
+      if (_debug)
+        Debug.Log ("Applying " + v.ToString () + " To " + GetConfigurableIdentifier ());
+      if (_relative_to_existing_value) {
+        if (configuration.ConfigurableName == _X) {
+          pos.Set (v - pos.x, pos.y, pos.z);
+        } else if (configuration.ConfigurableName == _Y) {
+          pos.Set (pos.x, v - pos.y, pos.z);
+        } else if (configuration.ConfigurableName == _Z) {
+          pos.Set (pos.x, pos.y, v - pos.z);
+        } else if (configuration.ConfigurableName == _RotX) {
+          dir.Set (v - dir.x, dir.y, dir.z);
+        } else if (configuration.ConfigurableName == _RotY) {
+          dir.Set (dir.x, v - dir.y, dir.z);
+        } else if (configuration.ConfigurableName == _RotZ) {
+          dir.Set (dir.x, dir.y, v - dir.z);
+        }
+      } else {
+        if (configuration.ConfigurableName == _X) {
+          pos.Set (v, pos.y, pos.z);
+        } else if (configuration.ConfigurableName == _Y) {
+          pos.Set (pos.x, v, pos.z);
+        } else if (configuration.ConfigurableName == _Z) {
+          pos.Set (pos.x, pos.y, v);
+        } else if (configuration.ConfigurableName == _RotX) {
+          dir.Set (v, dir.y, dir.z);
+        } else if (configuration.ConfigurableName == _RotY) {
+          dir.Set (dir.x, v, dir.z);
+        } else if (configuration.ConfigurableName == _RotZ) {
+          dir.Set (dir.x, dir.y, v);
+        }
       }
       var inv_pos = _environment.InverseTransformPosition (pos);
       var inv_dir = _environment.InverseTransformDirection (dir);

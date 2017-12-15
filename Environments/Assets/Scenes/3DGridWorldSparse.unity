@@ -1153,6 +1153,7 @@ MonoBehaviour:
   _decimal_granularity: 0
   _min_value: 0
   _max_value: 10
+  _relative_to_existing_value: 0
   _axis_of_configuration: 0
   _use_bounding_box_for_range: 0
   _bounding_box: {fileID: 1943801935}
@@ -2140,6 +2141,7 @@ MonoBehaviour:
   _decimal_granularity: 0
   _min_value: -Infinity
   _max_value: Infinity
+  _relative_to_existing_value: 0
   _axis_of_configuration: 0
   _use_bounding_box_for_range: 1
   _bounding_box: {fileID: 1943801935}
@@ -2552,13 +2554,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1943801930}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a528b8469faf414a85c0fc50923bf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _curriculum: {fileID: 11400000, guid: 33e597028b82f4c84ba5be8d8ef8fa98, type: 2}
-  _draw_levels: 1
+  _draw_levels: 0
 --- !u!1 &1976304150
 GameObject:
   m_ObjectHideFlags: 0

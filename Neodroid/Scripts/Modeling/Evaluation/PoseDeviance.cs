@@ -39,6 +39,7 @@ namespace Neodroid.Evaluation {
       if (distance < 0.5) {
         if (_debug)
           print ("Within range of goal");
+        reward += 100f;
         _environment.Interrupt ("Within range of goal");
       }
       return reward;
