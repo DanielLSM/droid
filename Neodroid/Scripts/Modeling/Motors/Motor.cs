@@ -16,7 +16,7 @@ namespace Neodroid.Motors {
     protected float _energy_spend_since_reset = 0;
     public Actor _actor_game_object;
 
-    private void Awake () {
+    protected virtual  void Awake () {
       RegisterComponent ();
     }
 
@@ -30,11 +30,17 @@ namespace Neodroid.Motors {
     }
     #endif
 
-    private void Update () {
+    protected virtual void Start () {
+
     }
 
-    public void Refresh () {
+    public void RefreshAwake () {
       Awake ();
+    }
+
+
+    public void RefreshStart () {
+      Start ();
     }
 
     public Motor () {

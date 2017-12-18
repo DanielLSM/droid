@@ -9,7 +9,9 @@ using Neodroid.Utilities;
 namespace Neodroid.Configurations {
   
   public class ConfigurableGameObject : Configurable {
-
+    
+    public bool _has_observer = false;
+    public string _observer_name = "";
     public LearningEnvironment _environment;
     public bool _debug = false;
     public int _decimal_granularity = 0;
@@ -21,13 +23,23 @@ namespace Neodroid.Configurations {
     }
 
     protected virtual void Awake () {
+      _has_observer = false;
+      _observer_name = "";
       AddToEnvironment ();
     }
 
-    public void Refresh () {
+    public void RefreshAwake () {
       Awake ();
     }
 
+    public void RefreshStart () {
+      Start ();
+    }
+
+    public void SetHasObserver (bool val, string str) {
+      _has_observer = true;
+      _observer_name = str;
+    }
 
     protected virtual void AddToEnvironment () {
       _environment = NeodroidUtilities.MaybeRegisterComponent (_environment, this);

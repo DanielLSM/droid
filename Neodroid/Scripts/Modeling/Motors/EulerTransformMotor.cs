@@ -3,7 +3,7 @@ using Neodroid.Utilities;
 using UnityEngine;
 
 namespace Neodroid.Motors {
-  public class TransformMotor : Motor {
+  public class EulerTransformMotor : Motor {
     [SerializeField]
     Axis _axis_of_motion;
 

@@ -10,7 +10,7 @@ namespace Neodroid.Motors {
     Axis _axis_of_motion;
     protected Rigidbody _rigidbody;
 
-    private void Start () {
+    protected override void Start () {
       _rigidbody = GetComponent<Rigidbody> ();
       RegisterComponent ();
     }

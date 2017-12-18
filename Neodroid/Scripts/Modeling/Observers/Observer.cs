@@ -16,8 +16,13 @@ namespace Neodroid.Observers {
     public string _observer_identifier = "";
     public byte[] _data;
 
-    void Awake () {
+    protected virtual void Awake () {
+      _has_configurable = false;
+      _configurable_name = "";
       Setup ();
+    }
+
+    protected virtual void Start () {
     }
 
     public void SetHasConfigurable (bool val, string str) {
@@ -25,8 +30,12 @@ namespace Neodroid.Observers {
       _configurable_name = str;
     }
 
-    public void Refresh () {
+    public void RefreshAwake () {
       Awake ();
+    }
+
+    public void RefreshStart () {
+      Start ();
     }
 
     protected void Setup () {

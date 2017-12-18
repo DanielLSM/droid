@@ -11,6 +11,7 @@ namespace Neodroid.Messaging.Messages {
     public float _total_energy_spent_since_reset;
     public int _last_steps_frame_number;
     public bool _interrupted;
+    public string _debug_message;
 
     public Dictionary<string, Observer> _observers;
 
@@ -25,7 +26,9 @@ namespace Neodroid.Messaging.Messages {
       int last_steps_frame_number,
       float reward_for_last_step,
       bool interrupted,
-      EnvironmentDescription description = null) {
+      EnvironmentDescription description = null,
+      string debug_message = "") {
+      _debug_message = debug_message;
       _environment_name = environment_name;
       _total_energy_spent_since_reset = total_energy_spent_since_reset;
       _observers = observers;

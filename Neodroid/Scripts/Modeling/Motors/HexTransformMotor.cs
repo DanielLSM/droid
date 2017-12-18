@@ -4,7 +4,7 @@ using Neodroid.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Motors {
-  public class HexTransformMotor : TransformMotor {
+  public class HexTransformMotor : EulerTransformMotor {
 
     string _X;
     string _Y;

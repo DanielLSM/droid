@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Neodroid.Managers {
+namespace Neodroid.Utilities {
   public enum CoordinateSystem {
     GlobalCoordinates,
     LocalCoordinates,

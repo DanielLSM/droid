@@ -14,9 +14,11 @@ public enum FBSObserverData : byte
  FBSByteArray = 1,
  FBSNumeral = 2,
  FBSString = 3,
- FBSEulerTransform = 4,
- FBSQuaternionTransform = 5,
- FBSBody = 6,
+ FBSPosition = 4,
+ FBSRotation = 5,
+ FBSEulerTransform = 6,
+ FBSQuaternionTransform = 7,
+ FBSBody = 8,
 };
 
 public enum FBSDataType : byte
@@ -204,11 +206,16 @@ public struct FBSConfigurable : IFlatbufferObject
 
   public string ConfigurableName { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
   public ArraySegment<byte>? GetConfigurableNameBytes() { return __p.__vector_as_arraysegment(4); }
-  public FBSRange? ValidInput { get { int o = __p.__offset(6); return o != 0 ? (FBSRange?)(new FBSRange()).__assign(o + __p.bb_pos, __p.bb) : null; } }
+  public bool HasObserver { get { int o = __p.__offset(6); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+  public string ObserverName { get { int o = __p.__offset(8); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public ArraySegment<byte>? GetObserverNameBytes() { return __p.__vector_as_arraysegment(8); }
+  public FBSRange? ValidInput { get { int o = __p.__offset(10); return o != 0 ? (FBSRange?)(new FBSRange()).__assign(o + __p.bb_pos, __p.bb) : null; } }
 
-  public static void StartFBSConfigurable(FlatBufferBuilder builder) { builder.StartObject(2); }
+  public static void StartFBSConfigurable(FlatBufferBuilder builder) { builder.StartObject(4); }
   public static void AddConfigurableName(FlatBufferBuilder builder, StringOffset configurableNameOffset) { builder.AddOffset(0, configurableNameOffset.Value, 0); }
-  public static void AddValidInput(FlatBufferBuilder builder, Offset<FBSRange> validInputOffset) { builder.AddStruct(1, validInputOffset.Value, 0); }
+  public static void AddHasObserver(FlatBufferBuilder builder, bool hasObserver) { builder.AddBool(1, hasObserver, false); }
+  public static void AddObserverName(FlatBufferBuilder builder, StringOffset observerNameOffset) { builder.AddOffset(2, observerNameOffset.Value, 0); }
+  public static void AddValidInput(FlatBufferBuilder builder, Offset<FBSRange> validInputOffset) { builder.AddStruct(3, validInputOffset.Value, 0); }
   public static Offset<FBSConfigurable> EndFBSConfigurable(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     return new Offset<FBSConfigurable>(o);
@@ -270,6 +277,44 @@ public struct FBSMotor : IFlatbufferObject
   public static Offset<FBSMotor> EndFBSMotor(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     return new Offset<FBSMotor>(o);
+  }
+};
+
+public struct FBSPosition : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static FBSPosition GetRootAsFBSPosition(ByteBuffer _bb) { return GetRootAsFBSPosition(_bb, new FBSPosition()); }
+  public static FBSPosition GetRootAsFBSPosition(ByteBuffer _bb, FBSPosition obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
+  public FBSPosition __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public FBSVector3? Position { get { int o = __p.__offset(4); return o != 0 ? (FBSVector3?)(new FBSVector3()).__assign(o + __p.bb_pos, __p.bb) : null; } }
+
+  public static void StartFBSPosition(FlatBufferBuilder builder) { builder.StartObject(1); }
+  public static void AddPosition(FlatBufferBuilder builder, Offset<FBSVector3> positionOffset) { builder.AddStruct(0, positionOffset.Value, 0); }
+  public static Offset<FBSPosition> EndFBSPosition(FlatBufferBuilder builder) {
+    int o = builder.EndObject();
+    return new Offset<FBSPosition>(o);
+  }
+};
+
+public struct FBSRotation : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static FBSRotation GetRootAsFBSRotation(ByteBuffer _bb) { return GetRootAsFBSRotation(_bb, new FBSRotation()); }
+  public static FBSRotation GetRootAsFBSRotation(ByteBuffer _bb, FBSRotation obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
+  public FBSRotation __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public FBSVector3? Rotation { get { int o = __p.__offset(4); return o != 0 ? (FBSVector3?)(new FBSVector3()).__assign(o + __p.bb_pos, __p.bb) : null; } }
+
+  public static void StartFBSRotation(FlatBufferBuilder builder) { builder.StartObject(1); }
+  public static void AddRotation(FlatBufferBuilder builder, Offset<FBSVector3> rotationOffset) { builder.AddStruct(0, rotationOffset.Value, 0); }
+  public static Offset<FBSRotation> EndFBSRotation(FlatBufferBuilder builder) {
+    int o = builder.EndObject();
+    return new Offset<FBSRotation>(o);
   }
 };
 

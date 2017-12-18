@@ -15,7 +15,7 @@ namespace Neodroid.Windows {
       typeof(CameraSynchronisationWindow),
       typeof(DebugWindow),
       typeof(SegmentationWindow),
-      typeof(EnvironmentWindow),
+      typeof(SimulationWindow),
       typeof(TaskWindow),
       typeof(DemonstrationWindow)
     };
@@ -26,7 +26,7 @@ namespace Neodroid.Windows {
       EditorWindow.GetWindow<CameraSynchronisationWindow> (_desired_dock_next_toos); 
       EditorWindow.GetWindow<DebugWindow> (_desired_dock_next_toos); 
       EditorWindow.GetWindow<SegmentationWindow> (_desired_dock_next_toos); 
-      EditorWindow.GetWindow<EnvironmentWindow> (_desired_dock_next_toos);
+      EditorWindow.GetWindow<SimulationWindow> (_desired_dock_next_toos);
       EditorWindow.GetWindow<TaskWindow> (_desired_dock_next_toos); 
       EditorWindow.GetWindow<DemonstrationWindow> (_desired_dock_next_toos); 
     }

@@ -11,7 +11,7 @@ using Neodroid.Observers;
 
 namespace Neodroid.Evaluation {
   public class PoseDeviance : ObjectiveFunction {
-    public TransformObserver _goal;
+    public EulerTransformObserver _goal;
     public Actor _actor;
     public LearningEnvironment _environment;
 
@@ -52,7 +52,7 @@ namespace Neodroid.Evaluation {
 
     private void Awake () {
       if (!_goal) {
-        _goal = FindObjectOfType<TransformObserver> ();
+        _goal = FindObjectOfType<EulerTransformObserver> ();
       }
       if (!_actor) {
         _actor = FindObjectOfType<Actor> ();

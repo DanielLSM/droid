@@ -23,6 +23,8 @@ union FBSObserverData {
   FBSByteArray,
   FBSNumeral,
   FBSString,
+  FBSPosition,
+  FBSRotation,
   FBSEulerTransform,
   FBSQuaternionTransform,
   FBSBody
@@ -50,6 +52,8 @@ table FBSEnvironmentDescription {
 
 table FBSConfigurable {
   configurable_name:string;
+  has_observer:bool;
+  observer_name:string;
   valid_input:FBSRange;
 }
 
@@ -62,6 +66,14 @@ table FBSMotor{
   motor_name:string;
   valid_input:FBSRange;
   energy_spent_since_reset:float;
+}
+
+table FBSPosition {
+  position:FBSVector3;
+}
+
+table FBSRotation {
+  rotation:FBSVector3;
 }
 
 table FBSEulerTransform {

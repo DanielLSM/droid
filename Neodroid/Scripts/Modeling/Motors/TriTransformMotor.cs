@@ -4,7 +4,7 @@ using Neodroid.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Motors {
-  public class TriTransformMotor : TransformMotor {
+  public class TriTransformMotor : EulerTransformMotor {
 
     string _X;
     string _Y;

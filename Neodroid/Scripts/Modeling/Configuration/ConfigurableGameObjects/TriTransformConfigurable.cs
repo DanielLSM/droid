@@ -6,7 +6,7 @@ using Neodroid.Observers;
 
 namespace Neodroid.Configurations {
 
-  public class TriTransformConfigurable : TransformConfigurable {
+  public class TriTransformConfigurable : EulerTransformConfigurable {
 
     string _X;
     string _Y;
@@ -19,9 +19,13 @@ namespace Neodroid.Configurations {
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _X);
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Y);
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Z);
-      var observer = GetComponent<TransformObserver> ();
+    }
+
+    protected override void Start () {
+      var observer = GetComponent<EulerTransformObserver> ();
       if (observer) {
         observer.SetHasConfigurable (true, GetConfigurableIdentifier ());
+        SetHasObserver (true, observer.GetObserverIdentifier ());
       }
     }
 
@@ -38,7 +42,7 @@ namespace Neodroid.Configurations {
         }
       }
       if (_debug)
-        Debug.Log ("Applying " + v.ToString () + " To " + GetConfigurableIdentifier ());
+        Debug.Log (String.Format ("Applying {0} to {1} configurable", v.ToString (), configuration.ConfigurableName));
       if (_relative_to_existing_value) {
         if (configuration.ConfigurableName == _X) {
           pos.Set (v - pos.x, pos.y, pos.z);

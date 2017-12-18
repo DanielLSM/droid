@@ -31,7 +31,7 @@ namespace Neodroid.Utilities {
         }
 
         var reaction = new Reaction (motions.ToArray ());
-        _simulation_manager.ExecuteReaction (reaction);
+        _simulation_manager.Step (reaction);
       } else {
         if (_debug)
           print ("No playermotions scriptable object assigned");

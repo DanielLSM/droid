@@ -9,7 +9,7 @@ namespace Neodroid.Observers {
 
     Camera _camera;
 
-    protected void Start () {
+    protected override void Start () {
       _camera = this.GetComponent<Camera> ();
     }
 

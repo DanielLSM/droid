@@ -5,8 +5,12 @@ using UnityEngine;
 using System.Text;
 
 namespace Neodroid.Observers {
-  public class NearestByTagObserver : TransformObserver {
+  public class NearestByTagObserver : Observer {
  
+    public Vector3 _position;
+    public Vector3 _rotation;
+    public Vector3 _direction;
+
     GameObject _nearest_object;
     public string _tag = "";
 

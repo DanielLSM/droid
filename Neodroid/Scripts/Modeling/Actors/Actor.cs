@@ -39,9 +39,9 @@ namespace Neodroid.Actors {
     }
 
     #if UNITY_EDITOR
-        void OnValidate(){ // Only called in the editor
-          //Setup ();
-        }
+    void OnValidate () { // Only called in the editor
+      //Setup ();
+    }
     #endif
 
     protected void Start () {
@@ -113,9 +113,14 @@ namespace Neodroid.Actors {
       }
     }
 
-    public void Refresh () {
+    public void RefreshAwake () {
       Awake ();
     }
+
+    public void RefreshStart () {
+      Start ();
+    }
+
 
     public virtual void Reset () {
       if (_motors != null) {

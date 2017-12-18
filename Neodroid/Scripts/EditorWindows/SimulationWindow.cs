@@ -8,33 +8,35 @@ using Neodroid.Observers;
 using Neodroid.Managers;
 using Neodroid.Utilities;
 using Neodroid.Configurations;
+using Neodroid.Messaging.Messages;
+using Neodroid.Evaluation;
 
 namespace Neodroid.Windows {
   #if UNITY_EDITOR
   using UnityEditor.AnimatedValues;
   using UnityEditor;
 
-  public class EnvironmentWindow : EditorWindow {
+  public class SimulationWindow : EditorWindow {
 
-    [MenuItem ("Neodroid/EnvironmentWindow")]
+    [MenuItem ("Neodroid/SimulationWindow")]
     public static void ShowWindow () {
-      EditorWindow.GetWindow (typeof(EnvironmentWindow));      //Show existing window instance. If one doesn't exist, make one.
+      EditorWindow.GetWindow (typeof(SimulationWindow));      //Show existing window instance. If one doesn't exist, make one.
       //window.Show();
     }
 
     SimulationManager _simulation_manager;
     LearningEnvironment[] _environments;
     bool[] _show_environment_properties = new bool[1];
-    Dictionary<string,Actor> actors;
-    Dictionary<string,Motor> motors;
-    Dictionary<string,Observer> observers;
+    Dictionary<string,Actor> _actors;
+    Dictionary<string,Motor> _motors;
+    Dictionary<string,Observer> _observers;
     Dictionary<string,ConfigurableGameObject> _configurables;
     Vector2 _scroll_position;
     Texture _icon;
 
     void OnEnable () {
       _icon = (Texture2D)AssetDatabase.LoadAssetAtPath ("Assets/Neodroid/Icons/world.png", typeof(Texture2D));
-      this.titleContent = new GUIContent ("Neo:Env", _icon, "Window for configuring environment");
+      this.titleContent = new GUIContent ("Neo:Sim", _icon, "Window for configuring simulation");
       Setup ();
     }
 
@@ -53,14 +55,6 @@ namespace Neodroid.Windows {
         _simulation_manager._resets = EditorGUILayout.IntField ("Resets when resetting", _simulation_manager._resets);
         _simulation_manager._wait_for_reaction_every_frame = EditorGUILayout.Toggle ("Wait For Reaction Every Frame", _simulation_manager._wait_for_reaction_every_frame);
 
-
-        //_environment._coordinate_system = (CoordinateSystem)EditorGUILayout.EnumPopup ("Coordinate System:", _environment._coordinate_system);
-
-        //EditorGUI.BeginDisabledGroup (_environment._coordinate_system != CoordinateSystem.RelativeToReferencePoint);
-        //_environment._coordinate_reference_point = (Transform)EditorGUILayout.ObjectField ("Coordinate Reference Point:", _environment._coordinate_reference_point, typeof(Transform), true);
-        //EditorGUI.EndDisabledGroup ();
-
-        //if (_environments == null || _environments.Length != NeodroidUtilities.FindAllObjectsOfTypeInScene<LearningEnvironment> ().Length)
         _environments = NeodroidUtilities.FindAllObjectsOfTypeInScene<LearningEnvironment> ();
         if (_show_environment_properties.Length != _environments.Length)
           Setup ();
@@ -73,19 +67,24 @@ namespace Neodroid.Windows {
           for (int i = 0; i < _show_environment_properties.Length; i++) {
             _show_environment_properties [i] = EditorGUILayout.Foldout (_show_environment_properties [i], _environments [i].GetEnvironmentIdentifier ());
             if (_show_environment_properties [i]) {
-              actors = _environments [i].RegisteredActors;
-              observers = _environments [i].RegisteredObservers;
+              _actors = _environments [i].RegisteredActors;
+              _observers = _environments [i].RegisteredObservers;
               _configurables = _environments [i].RegisteredConfigurables;
 
               EditorGUILayout.BeginVertical ("Box");
               _environments [i].enabled = EditorGUILayout.BeginToggleGroup (_environments [i].GetEnvironmentIdentifier (), _environments [i].enabled && _environments [i].gameObject.activeSelf);
               EditorGUILayout.ObjectField (_environments [i], typeof(LearningEnvironment), true);
+              _environments [i]._coordinate_system = (CoordinateSystem)EditorGUILayout.EnumPopup ("Coordinate system", _environments [i]._coordinate_system);
+              EditorGUI.BeginDisabledGroup (_environments [i]._coordinate_system != CoordinateSystem.RelativeToReferencePoint);
+              _environments [i]._coordinate_reference_point = (Transform)EditorGUILayout.ObjectField ("Reference point", _environments [i]._coordinate_reference_point, typeof(Transform), true);
+              EditorGUI.EndDisabledGroup ();
+              _environments [i]._objective_function = (ObjectiveFunction)EditorGUILayout.ObjectField ("Objective function", _environments [i]._objective_function, typeof(ObjectiveFunction), true);
 
               EditorGUILayout.BeginVertical ("Box");
               GUILayout.Label ("Actors");
-              foreach (var actor in actors) {
+              foreach (var actor in _actors) {
                 if (actor.Value != null) {
-                  motors = actor.Value.RegisteredMotors;
+                  _motors = actor.Value.RegisteredMotors;
 
                   EditorGUILayout.BeginVertical ("Box");
                   actor.Value.enabled = EditorGUILayout.BeginToggleGroup (actor.Key, actor.Value.enabled && actor.Value.gameObject.activeSelf);
@@ -93,7 +92,7 @@ namespace Neodroid.Windows {
 
                   EditorGUILayout.BeginVertical ("Box");
                   GUILayout.Label ("Motors");
-                  foreach (var motor in motors) {
+                  foreach (var motor in _motors) {
                     if (motor.Value != null) {
                       EditorGUILayout.BeginVertical ("Box");
                       motor.Value.enabled = EditorGUILayout.BeginToggleGroup (motor.Key, motor.Value.enabled && motor.Value.gameObject.activeSelf);
@@ -114,7 +113,7 @@ namespace Neodroid.Windows {
 
               EditorGUILayout.BeginVertical ("Box");
               GUILayout.Label ("Observers");
-              foreach (var observer in observers) {
+              foreach (var observer in _observers) {
                 if (observer.Value != null) {
                   EditorGUILayout.BeginVertical ("Box");
                   observer.Value.enabled = EditorGUILayout.BeginToggleGroup (observer.Key, observer.Value.enabled && observer.Value.gameObject.activeSelf);
@@ -149,36 +148,52 @@ namespace Neodroid.Windows {
           serialised_object.ApplyModifiedProperties ();
 
           if (GUILayout.Button ("Refresh")) {
-            var actors = FindObjectsOfType<Actor> ();
-            foreach (var obj in actors) {
-              obj.Refresh ();
-            }
-            var configurables = FindObjectsOfType<ConfigurableGameObject> ();
-            foreach (var obj in configurables) {
-              obj.Refresh ();
-            }
-            var motors = FindObjectsOfType<Motor> ();
-            foreach (var obj in motors) {
-              obj.Refresh ();
-            }
-            var observers = FindObjectsOfType<Observer> ();
-            foreach (var obj in observers) {
-              obj.Refresh ();
-            }
+            Refresh ();
           }
 
           EditorGUI.BeginDisabledGroup (!Application.isPlaying);
 
           if (GUILayout.Button ("Step")) {
-            //_simulation_manager.Step ();
+            _simulation_manager.Step (null);
           }
 
           if (GUILayout.Button ("Reset")) {
-            //_simulation_manager.ResetEnvironment ();
+            _simulation_manager.Step (new Reaction (true));
           }
 
           EditorGUI.EndDisabledGroup ();
         }
+      }
+    }
+
+    void Refresh () {
+      var actors = FindObjectsOfType<Actor> ();
+      foreach (var obj in actors) {
+        obj.RefreshAwake ();
+      }
+      var configurables = FindObjectsOfType<ConfigurableGameObject> ();
+      foreach (var obj in configurables) {
+        obj.RefreshAwake ();
+      }
+      var motors = FindObjectsOfType<Motor> ();
+      foreach (var obj in motors) {
+        obj.RefreshAwake ();
+      }
+      var observers = FindObjectsOfType<Observer> ();
+      foreach (var obj in observers) {
+        obj.RefreshAwake ();
+      }
+      foreach (var obj in actors) {
+        obj.RefreshStart ();
+      }
+      foreach (var obj in configurables) {
+        obj.RefreshStart ();
+      }
+      foreach (var obj in motors) {
+        obj.RefreshStart ();
+      }
+      foreach (var obj in observers) {
+        obj.RefreshStart ();
       }
     }
 

@@ -33,12 +33,18 @@ namespace Neodroid.Messaging {
 
         FBSState.CreateObserversVector (b, observers);
         var observers_vector = b.EndVector ();
-        var description_offset = build_description (b, state);
 
+        Offset<FBSEnvironmentDescription> description_offset = new FlatBuffers.Offset<FBSEnvironmentDescription> ();
+        if (state._description != null) {
+          description_offset = build_description (b, state);
+        }
+        StringOffset d = new StringOffset ();
+        if (state._debug_message != "") {
+          d = b.CreateString (state._debug_message);
+        }
 
         FBSState.StartFBSState (b);
         FBSState.AddEnvironmentName (b, n);
-        FBSState.AddDebugMessage (b, n);
         FBSState.AddTotalEnergySpent (b, state._total_energy_spent_since_reset);
         FBSState.AddReward (b, state._reward_for_last_step);
         FBSState.AddFrameNumber (b, state._last_steps_frame_number);
@@ -46,6 +52,9 @@ namespace Neodroid.Messaging {
         FBSState.AddObservers (b, observers_vector);
         if (state._description != null) {
           FBSState.AddEnvironmentDescription (b, description_offset);
+        }
+        if (state._debug_message != "") {
+          FBSState.AddDebugMessage (b, d);
         }
         var offset = FBSState.EndFBSState (b);
 
@@ -149,8 +158,8 @@ namespace Neodroid.Messaging {
     }
 
     static Offset<FBSObserver> build_observer (FlatBufferBuilder b, Observer observer) {
-      if (observer.GetType () == typeof(TransformObserver)) {
-        var tobs = (TransformObserver)observer;
+      if (observer.GetType () == typeof(EulerTransformObserver)) {
+        var tobs = (EulerTransformObserver)observer;
         var data = build_euler_transform (b, tobs._position, tobs._rotation, tobs._direction);
         StringOffset n = b.CreateString (observer.GetObserverIdentifier ());
         FBSObserver.StartFBSObserver (b);
@@ -182,8 +191,8 @@ namespace Neodroid.Messaging {
 
         var configurables = new Offset<FBSConfigurable>[state._description._configurables.Values.Count];
         int k = 0;
-        foreach (ConfigurableGameObject configurable in state._description._configurables.Values) {
-          configurables [k++] = build_configurable (b, configurable);
+        foreach (var configurable in state._description._configurables) {
+          configurables [k++] = build_configurable (b, configurable.Value, configurable.Key);
         }
 
         FBSEnvironmentDescription.CreateConfigurablesVector (b, configurables);
@@ -200,9 +209,12 @@ namespace Neodroid.Messaging {
       }
     }
 
-    static Offset<FBSConfigurable> build_configurable (FlatBufferBuilder b, ConfigurableGameObject configurable) {
-      StringOffset n = b.CreateString (configurable.GetConfigurableIdentifier ());
+    static Offset<FBSConfigurable> build_configurable (FlatBufferBuilder b, ConfigurableGameObject configurable, string identifier) {
+      StringOffset n = b.CreateString (identifier);
+      StringOffset o = b.CreateString (configurable._observer_name);
       FBSConfigurable.StartFBSConfigurable (b);
+      FBSConfigurable.AddHasObserver (b, configurable._has_observer);
+      FBSConfigurable.AddObserverName (b, o);
       FBSConfigurable.AddConfigurableName (b, n);
       FBSConfigurable.AddValidInput (b, FBSRange.CreateFBSRange (b, configurable._decimal_granularity, configurable._max_value, configurable._min_value));
       return FBSConfigurable.EndFBSConfigurable (b);

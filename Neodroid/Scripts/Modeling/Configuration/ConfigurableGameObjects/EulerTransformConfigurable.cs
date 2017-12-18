@@ -6,7 +6,7 @@ using Neodroid.Utilities.BoundingBoxes;
 using System.Collections.Specialized;
 
 namespace Neodroid.Configurations {
-  public class TransformConfigurable : ConfigurableGameObject {
+  public class EulerTransformConfigurable : ConfigurableGameObject {
 
     public Axis _axis_of_configuration;
     public bool _use_bounding_box_for_range = false;

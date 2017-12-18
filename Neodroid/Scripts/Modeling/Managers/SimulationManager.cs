@@ -60,7 +60,7 @@ namespace Neodroid.Managers {
       if (!_waiting_for_reaction && _reaction != null) {
         ResumeSimulation ();
 
-        ExecuteReaction (_reaction);
+        Step (_reaction);
         SendEnvironmentStates (GatherStates ());
         _waiting_for_reaction = true;
       }
@@ -70,7 +70,7 @@ namespace Neodroid.Managers {
 
     #region PublicMethods
 
-    public LearningEnvironment ExecuteReaction (Reaction reaction) {
+    public LearningEnvironment Step (Reaction reaction) {
       LearningEnvironment last = null;
       foreach (var environment in _environments.Values) {
         environment.ExecuteReaction (reaction);

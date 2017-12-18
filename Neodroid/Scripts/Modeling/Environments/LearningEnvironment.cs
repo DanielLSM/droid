@@ -78,7 +78,7 @@ namespace Neodroid.Environments {
 
     public void UpdateObserversData () {
       foreach (Observer obs in RegisteredObservers.Values) {
-        obs.GetComponent<Observer> ().GetData ();
+        obs.GetData ();
       }
     }
 
@@ -94,7 +94,8 @@ namespace Neodroid.Environments {
       }
       EnvironmentDescription description = null;
       if (_interrupted) {
-        description = new EnvironmentDescription (_simulation_manager._episode_length, 
+        description = new EnvironmentDescription (
+          _simulation_manager._episode_length, 
           _simulation_manager._frame_skips, 
           _actors, 
           _configurables, 

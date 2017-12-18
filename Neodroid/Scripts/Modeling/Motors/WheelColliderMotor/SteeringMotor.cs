@@ -7,12 +7,12 @@ namespace Neodroid.Motors {
 
     WheelCollider _wheel_collider;
 
-    private void Start () {
+    protected override  void Start () {
       _wheel_collider = GetComponent<WheelCollider> ();
       RegisterComponent ();
     }
 
-    private void FixedUpdate () {
+    void FixedUpdate () {
       ApplyLocalPositionToVisuals (_wheel_collider);
     }
 

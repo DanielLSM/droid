@@ -13,7 +13,7 @@ namespace Neodroid.Observers {
 
     BoundingBox _bounding_box;
 
-    protected void Start () {
+    protected override void Start () {
       _bounding_box = this.GetComponent<BoundingBox> ();
     }
 

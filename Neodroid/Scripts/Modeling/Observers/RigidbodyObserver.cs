@@ -14,7 +14,7 @@ namespace Neodroid.Observers {
     Rigidbody _rigidbody;
 
 
-    protected void Start () {
+    protected override void Start () {
       _rigidbody = this.GetComponent<Rigidbody> ();
     }
 
