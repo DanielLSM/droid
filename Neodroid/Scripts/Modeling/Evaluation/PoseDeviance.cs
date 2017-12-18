@@ -7,10 +7,11 @@ using Neodroid.Utilities;
 using Neodroid.Environments;
 using SceneSpecificAssets.Grasping;
 using Neodroid.Utilities.BoundingBoxes;
+using Neodroid.Observers;
 
 namespace Neodroid.Evaluation {
   public class PoseDeviance : ObjectiveFunction {
-    public GoalObserver _goal;
+    public TransformObserver _goal;
     public Actor _actor;
     public LearningEnvironment _environment;
 
@@ -51,7 +52,7 @@ namespace Neodroid.Evaluation {
 
     private void Awake () {
       if (!_goal) {
-        _goal = FindObjectOfType<GoalObserver> ();
+        _goal = FindObjectOfType<TransformObserver> ();
       }
       if (!_actor) {
         _actor = FindObjectOfType<Actor> ();

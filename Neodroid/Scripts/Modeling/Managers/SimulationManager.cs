@@ -15,7 +15,7 @@ namespace Neodroid.Managers {
 
     public string _ip_address = "127.0.0.1";
     public int _port = 5555;
-    public bool _continue_lastest_reaction_on_disconnect = false;
+    public bool _continue_reaction_on_disconnect = false;
     public int _episode_length = 1000;
     public int _frame_skips = 0;
     public int _resets = 6;
@@ -31,7 +31,7 @@ namespace Neodroid.Managers {
 
     bool _is_simulation_updated = false;
     bool _client_connected = false;
-    Reaction _lastest_reaction = null;
+    Reaction _reaction = null;
     bool _waiting_for_reaction = true;
 
     #endregion
@@ -53,13 +53,14 @@ namespace Neodroid.Managers {
       if (!_is_simulation_updated) {
         _is_simulation_updated = true;
       }
+      PostUpdate ();
     }
 
     void Update () {
-      if (!_waiting_for_reaction && _lastest_reaction != null) {
+      if (!_waiting_for_reaction && _reaction != null) {
         ResumeSimulation ();
 
-        ExecuteReaction (_lastest_reaction);
+        ExecuteReaction (_reaction);
         SendEnvironmentStates (GatherStates ());
         _waiting_for_reaction = true;
       }
@@ -121,6 +122,12 @@ namespace Neodroid.Managers {
       _message_server.SendEnvironmentStates (states);
     }
 
+    void PostUpdate () {
+      foreach (var environment in _environments.Values) {
+        environment.PostUpdate ();
+      }
+    }
+
     EnvironmentState[] GatherStates () {
       var states = new EnvironmentState[_environments.Values.Count];
       var i = 0;
@@ -170,18 +177,9 @@ namespace Neodroid.Managers {
       _client_connected = true;
       if (_debug)
         Debug.Log ("Received: " + reaction.ToString ());
-      _lastest_reaction = reaction;
+      _reaction = reaction;
       _waiting_for_reaction = false;
     }
-
-    /*void OnResetCallback (EnvironmentConfiguration configuration) {
-          _client_connected = true;
-          if (_debug)
-            Debug.Log ("Received: " + reaction.ToString ());
-          _lastest_reaction = reaction;
-          _waiting_for_reaction = false;
-          _has_stepped_since_reaction = false;
-        }*/
 
     void OnDisconnectCallback () {
       _client_connected = false;

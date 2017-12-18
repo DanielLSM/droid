@@ -10,16 +10,8 @@ namespace Neodroid.Observers {
 
     public LearningEnvironment _environment;
 
-    public Vector3 _position;
-    public Vector3 _rotation;
-    public Vector3 _direction;
-    public Vector3 _velocity;
-    public Vector3 _angular_velocity;
-
-   
-    //public Quaternion _rotation;
-    //public Quaternion _direction;
-
+    public bool _has_configurable = false;
+    public string _configurable_name = "";
     public bool _debug = false;
     public string _observer_identifier = "";
     public byte[] _data;
@@ -28,12 +20,13 @@ namespace Neodroid.Observers {
       Setup ();
     }
 
-    public void Refresh () {
-      Awake ();
+    public void SetHasConfigurable (bool val, string str) {
+      _has_configurable = true;
+      _configurable_name = str;
     }
 
-    protected virtual void Start () {
-      UpdatePosRotDir ();
+    public void Refresh () {
+      Awake ();
     }
 
     protected void Setup () {
@@ -47,27 +40,8 @@ namespace Neodroid.Observers {
         return new byte[] { };
     }
 
-
-
     public virtual string GetObserverIdentifier () {
       return name + "Observer";
-    }
-
-
-    protected virtual void UpdatePosRotDir () {
-      if (_environment) {
-        _position = _environment.TransformPosition (this.transform.position);
-        _direction = _environment.TransformDirection (this.transform.forward);
-        _rotation = _environment.TransformDirection (this.transform.up);
-      } else {
-        _position = this.transform.position;
-        _direction = this.transform.forward;
-        _rotation = this.transform.up;
-      }
-    }
-
-    private void Update () {
-      UpdatePosRotDir ();
     }
 
     public virtual void Reset () {

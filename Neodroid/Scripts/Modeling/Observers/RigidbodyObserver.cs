@@ -8,16 +8,23 @@ namespace Neodroid.Observers {
   [RequireComponent (typeof(Rigidbody))]
   public class RigidbodyObserver : Observer {
 
+    public Vector3 _velocity;
+    public Vector3 _angular_velocity;
+
     Rigidbody _rigidbody;
 
-    protected override void Start () {
+
+    protected void Start () {
       _rigidbody = this.GetComponent<Rigidbody> ();
     }
 
     public override byte[] GetData () {
+      _velocity = _rigidbody.velocity;
+      _angular_velocity = _rigidbody.angularVelocity;
+
       var str_rep = "{";
-      str_rep += "\"Velocity\": \"" + _rigidbody.velocity.ToString ();
-      str_rep += "\", \"AngularVelocity\": \"" + _rigidbody.angularVelocity.ToString ();
+      str_rep += "\"Velocity\": \"" + _velocity;
+      str_rep += "\", \"AngularVelocity\": \"" + _angular_velocity;
       str_rep += "\"}";
       _data = Encoding.ASCII.GetBytes (str_rep);
       return _data;

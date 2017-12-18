@@ -1015,12 +1015,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 760.5
+      value: 563.5
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 332.5
+      value: 185.5
       objectReference: {fileID: 0}
     - target: {fileID: 1709914492231660, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_IsActive
@@ -1123,20 +1123,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 745076138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1d7d85cd41e84e548fde09fb5972b49, type: 3}
+  m_Script: {fileID: 11500000, guid: 89e23e9eaa1ef49d1a9a7655751f38bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
-  _position: {x: -2, y: 4, z: -1}
-  _rotation: {x: 0, y: 1, z: 0}
-  _direction: {x: 0, y: 0, z: 1}
-  _velocity: {x: 0, y: 0, z: 0}
-  _angular_velocity: {x: 0, y: 0, z: 0}
+  _has_configurable: 1
+  _configurable_name: GoalTransform
   _debug: 0
   _observer_identifier: 
   _data: 
-  _order_index: 0
-  _draw_names: 1
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
 --- !u!114 &745076144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,18 +1332,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1067791535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
+  m_Script: {fileID: 11500000, guid: 89e23e9eaa1ef49d1a9a7655751f38bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
-  _position: {x: -2, y: 3, z: 3}
-  _rotation: {x: 0, y: 1, z: 0}
-  _direction: {x: 0, y: 0, z: 1}
-  _velocity: {x: 0, y: 0, z: 0}
-  _angular_velocity: {x: 0, y: 0, z: 0}
+  _has_configurable: 0
+  _configurable_name: 
   _debug: 0
   _observer_identifier: 
   _data: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
 --- !u!1 &1184716152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,18 +1804,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1544235444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
+  m_Script: {fileID: 11500000, guid: 89e23e9eaa1ef49d1a9a7655751f38bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
-  _position: {x: -5, y: 4, z: 0}
-  _rotation: {x: 0, y: 1, z: 0}
-  _direction: {x: 0, y: 0, z: 1}
-  _velocity: {x: 0, y: 0, z: 0}
-  _angular_velocity: {x: 0, y: 0, z: 0}
+  _has_configurable: 0
+  _configurable_name: 
   _debug: 0
   _observer_identifier: 
   _data: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
 --- !u!23 &1544235447
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1968,11 +1966,11 @@ GameObject:
   - component: {fileID: 1650564489}
   - component: {fileID: 1650564488}
   - component: {fileID: 1650564487}
-  - component: {fileID: 1650564490}
   - component: {fileID: 1650564493}
   - component: {fileID: 1650564491}
   - component: {fileID: 1650564492}
   - component: {fileID: 1650564494}
+  - component: {fileID: 1650564490}
   m_Layer: 0
   m_Name: Player
   m_TagString: Actor
@@ -2054,18 +2052,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1650564485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
+  m_Script: {fileID: 11500000, guid: 89e23e9eaa1ef49d1a9a7655751f38bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
-  _position: {x: 3, y: 1, z: -2}
-  _rotation: {x: 0, y: 1, z: 0}
-  _direction: {x: 0, y: 0, z: 1}
-  _velocity: {x: 0, y: 0, z: 0}
-  _angular_velocity: {x: 0, y: 0, z: 0}
+  _has_configurable: 0
+  _configurable_name: 
   _debug: 0
   _observer_identifier: 
   _data: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
 --- !u!114 &1650564491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2100,14 +2098,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
-  _position: {x: 1, y: 0, z: 0}
-  _rotation: {x: 0, y: 1, z: 0}
-  _direction: {x: 0, y: 0, z: 1}
-  _velocity: {x: 0, y: 0, z: 0}
-  _angular_velocity: {x: 0, y: 0, z: 0}
+  _has_configurable: 1
+  _configurable_name: PlayerTransform
   _debug: 0
   _observer_identifier: 
   _data: 
+  _position: {x: 1, y: 0, z: 0}
+  _rotation: {x: 0, y: 1, z: 0}
+  _direction: {x: 0, y: 0, z: 1}
   _tag: Obstruction
 --- !u!114 &1650564493
 MonoBehaviour:
@@ -2120,7 +2118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b7c65bfbcfa4ac381370b0b8eef1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: 3, y: 1, z: -2}
+  _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 1, z: 0}
   _direction: {x: 0, y: 0, z: 1}
   _environment: {fileID: 1943801932}
@@ -2436,10 +2434,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4675f9235ecc46a5982e50590d858cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coordinate_system: 1
-  _coordinate_reference_point: {fileID: 0}
+  _coordinate_system: 2
+  _coordinate_reference_point: {fileID: 1650564486}
   _objective_function: {fileID: 1943801934}
-  _simulation_manager: {fileID: 0}
+  _simulation_manager: {fileID: 1943801933}
   _debug: 0
 --- !u!114 &1943801933
 MonoBehaviour:
@@ -2454,7 +2452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ip_address: 127.0.0.1
   _port: 5555
-  _continue_lastest_reaction_on_disconnect: 0
+  _continue_reaction_on_disconnect: 0
   _episode_length: 100
   _frame_skips: 0
   _resets: 6

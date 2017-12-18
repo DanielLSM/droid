@@ -30,7 +30,7 @@ namespace Neodroid.Environments {
     Vector3[] _reset_positions;
     Quaternion[] _reset_rotations;
     GameObject[] _child_game_objects;
-    Configuration[] _last_configurations;
+    Configuration[] _configurations;
     Dictionary<string, Actor> _actors = new Dictionary<string, Actor> ();
     Dictionary<string, Observer> _observers = new Dictionary<string, Observer> ();
     Dictionary<string, ConfigurableGameObject> _configurables = new Dictionary<string, ConfigurableGameObject> ();
@@ -39,7 +39,7 @@ namespace Neodroid.Environments {
     int _current_episode_frame = 0;
     float _lastest_reset_time = 0;
     float energy_spent = 0f;
-    bool _was_interrupted = false;
+    bool _interrupted = false;
 
     #endregion
 
@@ -89,26 +89,26 @@ namespace Neodroid.Environments {
         }
       }
       var reward = 0f;
-      if (_objective_function != null)
+      if (_objective_function != null) {
         reward = _objective_function.Evaluate ();
-
-      var interrupted_this_step = false;
-      EnvironmentDescription description = null;
-      if (_was_interrupted) {
-        interrupted_this_step = true;
-        _was_interrupted = false;
-        description = new EnvironmentDescription (_simulation_manager._episode_length, _simulation_manager._frame_skips, _configurables, _objective_function._solved_threshold);
       }
-
+      EnvironmentDescription description = null;
+      if (_interrupted) {
+        description = new EnvironmentDescription (_simulation_manager._episode_length, 
+          _simulation_manager._frame_skips, 
+          _actors, 
+          _configurables, 
+          _objective_function._solved_threshold
+        );
+      }
       return new EnvironmentState (
         GetEnvironmentIdentifier (),
         energy_spent,
-        _actors, 
         _observers,
-        description,
         GetCurrentFrameNumber (),
         reward,
-        interrupted_this_step
+        _interrupted,
+        description
       );
     }
 
@@ -126,16 +126,10 @@ namespace Neodroid.Environments {
         if (_debug)
           Debug.Log ("Maximum episode length reached, resetting");
         Interrupt ("Maximum episode length reached, resetting");
-        UpdateObserversData ();
-        return;
-      }
-      if (reaction._reset) {
+      } else if (reaction != null && reaction.Reset) {
         Interrupt ("Reaction called reset");
-        Configure (reaction.Configurations);
-        UpdateObserversData ();
-        return;
-      }
-      if (reaction != null && reaction.Motions.Length > 0)
+        _configurations = reaction.Configurations;
+      } else if (reaction != null && reaction.Motions != null && reaction.Motions.Length > 0)
         foreach (MotorMotion motion in reaction.Motions) {
           if (_debug)
             Debug.Log ("Applying " + motion.ToString () + " To " + name + "'s actors");
@@ -151,10 +145,9 @@ namespace Neodroid.Environments {
       UpdateObserversData ();
     }
 
-    public void Configure (Configuration[] configurations) {
-      _last_configurations = configurations;
-      if (configurations != null) {
-        foreach (var configuration in configurations) {
+    public void Configure () {
+      if (_configurations != null) {
+        foreach (var configuration in _configurations) {
           if (_configurables.ContainsKey (configuration.ConfigurableName)) {
             _configurables [configuration.ConfigurableName].ApplyConfiguration (configuration);
           } else {
@@ -249,20 +242,30 @@ namespace Neodroid.Environments {
     }
 
     public void Interrupt (string reason) {
-      ResetRegisteredObjects ();
-      ResetEnvironment ();
-      Configure (_last_configurations);
-      _was_interrupted = true;
+      _interrupted = true;
       if (_debug) {
         print (System.String.Format ("Was interrupted, because {0}", reason));
       }
+    }
+
+    public void PostUpdate () {
+      if (_interrupted) {
+        _interrupted = false;
+        Reset ();
+      }
+    }
+
+    void Reset () {
+      ResetRegisteredObjects ();
+      ResetEnvironment ();
+      Configure ();
     }
 
     public string GetEnvironmentIdentifier () {
       return name;
     }
 
-    public void ResetRegisteredObjects () {
+    void ResetRegisteredObjects () {
       if (_debug)
         Debug.Log ("Resetting registed objects");
       foreach (var actor in _actors.Values) {
@@ -273,7 +276,7 @@ namespace Neodroid.Environments {
       }
     }
 
-    public void ResetEnvironment () {
+    void ResetEnvironment () {
       for (int resets = 0; resets < _simulation_manager._resets; resets++) {
         for (int i = 0; i < _child_game_objects.Length; i++) {
           var rigid_body = _child_game_objects [i].GetComponent<Rigidbody> ();

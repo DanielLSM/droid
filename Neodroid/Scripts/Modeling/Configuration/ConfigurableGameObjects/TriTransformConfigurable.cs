@@ -2,6 +2,7 @@
 using Neodroid.Utilities;
 using UnityEngine;
 using Neodroid.Messaging.Messages;
+using Neodroid.Observers;
 
 namespace Neodroid.Configurations {
 
@@ -18,6 +19,10 @@ namespace Neodroid.Configurations {
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _X);
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Y);
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Z);
+      var observer = GetComponent<TransformObserver> ();
+      if (observer) {
+        observer.SetHasConfigurable (true, GetConfigurableIdentifier ());
+      }
     }
 
     public override void ApplyConfiguration (Configuration configuration) {

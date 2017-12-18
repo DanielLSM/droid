@@ -1,10 +1,19 @@
 namespace Neodroid.Messaging.Models.Reaction;
 
+union FBSAction { FBSMotions, FBSConfigurations }
+
 table FBSReaction {
   environment_name:string;
-  motions:[FBSMotion];
-  configurations:[FBSConfiguration];
   reset:bool;
+  action:FBSAction;
+}
+
+table FBSMotions {
+  motions:[FBSMotion];
+}
+
+table FBSConfigurations {
+  configurations:[FBSConfiguration];
 }
 
 table FBSMotion {

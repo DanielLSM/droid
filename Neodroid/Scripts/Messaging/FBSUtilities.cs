@@ -12,87 +12,18 @@ using Neodroid.Observers;
 using UnityEngine;
 using Neodroid.Environments;
 using System.Xml;
+using System;
 
 namespace Neodroid.Messaging {
   public static class FBSUtilities {
 
-    private static Offset<FBSMotor> build_motor (FlatBufferBuilder b, Motor motor, string identifier) {
-      StringOffset n = b.CreateString (identifier);
-      FBSMotor.StartFBSMotor (b);
-      FBSMotor.AddMotorName (b, n);
-      FBSMotor.AddValidInput (b, FBSInputRange.CreateFBSInputRange (b, motor._decimal_granularity, motor._max_strength, motor._min_strength));
-      FBSMotor.AddEnergyCost (b, motor._energy_cost);
-      FBSMotor.AddEnergySpentSinceReset (b, motor.GetEnergySpend ());
-      return FBSMotor.EndFBSMotor (b);
-    }
-
-    /*private static Offset<FBSPosRotDir> build_posrotdir (FlatBufferBuilder b, Vector3 vec3_pos, Quaternion quat_rot, Quaternion quat_dir) {
-          FBSPosRotDir.StartFBSPosRotDir (b);
-          FBSPosRotDir.AddPosition (b, FBSVec3.CreateFBSVec3 (b, vec3_pos.x, vec3_pos.y, vec3_pos.z));
-          FBSPosRotDir.AddDirection (b, FBSQuat.CreateFBSQuat (b, quat_dir.x, quat_dir.y, quat_dir.z, quat_dir.w));
-          FBSPosRotDir.AddRotation (b, FBSQuat.CreateFBSQuat (b, quat_rot.x, quat_rot.y, quat_rot.z, quat_rot.w));
-          return FBSPosRotDir.EndFBSPosRotDir (b);
-        }*/
-
-    private static Offset<FBSTransform> build_transform (FlatBufferBuilder b, Vector3 vec3_pos, Vector3 vec3_rot, Vector3 vec3_dir) {
-      return FBSTransform.CreateFBSTransform (b, vec3_pos.x, vec3_pos.y, vec3_pos.z, vec3_dir.x, vec3_dir.y, vec3_dir.z, vec3_rot.x, vec3_rot.y, vec3_rot.z);
-    }
-
-    private static Offset<FBSBody> build_body (FlatBufferBuilder b, Vector3 vec3_vel, Vector3 vec3_ang) {
-      return FBSBody.CreateFBSBody (b, vec3_vel.x, vec3_vel.y, vec3_vel.z, vec3_ang.x, vec3_ang.y, vec3_ang.z);
-    }
-
-    private static Offset<FBSActor> build_actor (FlatBufferBuilder b, Offset<FBSMotor>[] motors, Actor actor) {
-      StringOffset n = b.CreateString (actor.GetActorIdentifier ());
-      FBSActor.CreateMotorsVector (b, motors);
-      var motor_vector = b.EndVector ();
-      FBSActor.StartFBSActor (b);
-      FBSActor.AddActorName (b, n);
-      FBSActor.AddMotors (b, motor_vector);
-      return FBSActor.EndFBSActor (b);
-    }
-
-    private static Offset<FBSObserver> build_observer (FlatBufferBuilder b, Observer observer) {
-      FBSObserver.CreateDataVector (b, observer.GetData ());
-      //CustomFBSImplementation.CreateDataVectorAndAddAllDataAtOnce (b, observer.GetData ());
-      var data_vector = b.EndVector ();
-      StringOffset n = b.CreateString (observer.GetObserverIdentifier ());
-      StringOffset data_type = b.CreateString (observer.GetObserverIdentifier ());
-      FBSObserver.StartFBSObserver (b);
-      FBSObserver.AddObserverName (b, n);
-      FBSObserver.AddData (b, data_vector);
-      FBSObserver.AddDataType (b, data_type);
-      FBSObserver.AddTransform (b, build_transform (b, observer._position, observer._rotation, observer._direction));
-      FBSObserver.AddBody (b, build_body (b, observer._velocity, observer._angular_velocity));
-      return FBSObserver.EndFBSObserver (b);
-    }
-
-    private static Offset<FBSEnvironmentDescription> build_description (FlatBufferBuilder b, EnvironmentDescription description) {
-      FBSEnvironmentDescription.StartFBSEnvironmentDescription (b);
-      return FBSEnvironmentDescription.EndFBSEnvironmentDescription (b);
-    }
-
-    private static Offset<FBSConfigurable> build_configurable (FlatBufferBuilder b, ConfigurableGameObject configurable) {
-      StringOffset n = b.CreateString (configurable.GetConfigurableIdentifier ());
-      FBSConfigurable.StartFBSConfigurable (b);
-      FBSConfigurable.AddConfigurableName (b, n);
-      FBSConfigurable.AddValidInput (b, FBSInputRange.CreateFBSInputRange (b, configurable._decimal_granularity, configurable._max_value, configurable._min_value));
-      return FBSConfigurable.EndFBSConfigurable (b);
-    }
+    #region PublicMethods
 
     public static byte[] build_states (EnvironmentState[] states) {
       var b = new FlatBufferBuilder (1);
       foreach (var state in states) {
-        var actors = new Offset<FBSActor>[state._actors.Values.Count];
-        int j = 0;
-        foreach (Actor actor in state._actors.Values) {
-          var motors = new Offset<FBSMotor>[actor._motors.Values.Count];
-          int i = 0;
-          foreach (var motor in actor._motors) {
-            motors [i++] = build_motor (b, motor.Value, motor.Key);
-          }
-          actors [j++] = build_actor (b, motors, actor);
-        }
+
+        StringOffset n = b.CreateString (state._environment_name);
 
         var observers = new Offset<FBSObserver>[state._observers.Values.Count];
         int k = 0;
@@ -100,23 +31,22 @@ namespace Neodroid.Messaging {
           observers [k++] = build_observer (b, observer);
         }
 
-        FBSState.CreateActorsVector (b, actors);
-        var actors_vector = b.EndVector ();
         FBSState.CreateObserversVector (b, observers);
         var observers_vector = b.EndVector ();
-        var description_offset = build_description (b, state._description);
-        
+        var description_offset = build_description (b, state);
+
 
         FBSState.StartFBSState (b);
+        FBSState.AddEnvironmentName (b, n);
+        FBSState.AddDebugMessage (b, n);
         FBSState.AddTotalEnergySpent (b, state._total_energy_spent_since_reset);
         FBSState.AddReward (b, state._reward_for_last_step);
-        FBSState.AddActors (b, actors_vector);
+        FBSState.AddFrameNumber (b, state._last_steps_frame_number);
+        FBSState.AddInterrupted (b, state._interrupted);
         FBSState.AddObservers (b, observers_vector);
         if (state._description != null) {
           FBSState.AddEnvironmentDescription (b, description_offset);
         }
-        FBSState.AddFrameNumber (b, state._last_steps_frame_number);
-        FBSState.AddInterrupted (b, state._interrupted);
         var offset = FBSState.EndFBSState (b);
 
         FBSState.FinishFBSStateBuffer (b, offset);
@@ -128,16 +58,7 @@ namespace Neodroid.Messaging {
 
       var b = new FlatBufferBuilder (1);
 
-      var actors = new Offset<FBSActor>[state._actors.Values.Count];
-      int j = 0;
-      foreach (Actor actor in state._actors.Values) {
-        var motors = new Offset<FBSMotor>[actor._motors.Values.Count];
-        int i = 0;
-        foreach (var motor in actor._motors) {
-          motors [i++] = build_motor (b, motor.Value, motor.Key);
-        }
-        actors [j++] = build_actor (b, motors, actor);
-      }
+      StringOffset n = b.CreateString (state._environment_name);
 
       var observers = new Offset<FBSObserver>[state._observers.Values.Count];
       int k = 0;
@@ -145,23 +66,22 @@ namespace Neodroid.Messaging {
         observers [k++] = build_observer (b, observer);
       }
 
-      FBSState.CreateActorsVector (b, actors);
-      var actors_vector = b.EndVector ();
       FBSState.CreateObserversVector (b, observers);
       var observers_vector = b.EndVector ();
-      var description_offset = build_description (b, state._description);
+      var description_offset = build_description (b, state);
 
 
       FBSState.StartFBSState (b);
+      FBSState.AddEnvironmentName (b, n);
+      FBSState.AddDebugMessage (b, n);
       FBSState.AddTotalEnergySpent (b, state._total_energy_spent_since_reset);
       FBSState.AddReward (b, state._reward_for_last_step);
-      FBSState.AddActors (b, actors_vector);
+      FBSState.AddFrameNumber (b, state._last_steps_frame_number);
+      FBSState.AddInterrupted (b, state._interrupted);
       FBSState.AddObservers (b, observers_vector);
       if (state._description != null) {
         FBSState.AddEnvironmentDescription (b, description_offset);
       }
-      FBSState.AddFrameNumber (b, state._last_steps_frame_number);
-      FBSState.AddInterrupted (b, state._interrupted);
       var offset = FBSState.EndFBSState (b);
 
       FBSState.FinishFBSStateBuffer (b, offset);
@@ -170,46 +90,166 @@ namespace Neodroid.Messaging {
       return b.SizedByteArray ();
     }
 
-
     public static Reaction create_reaction (FBSReaction reaction) {
-      return new Reaction (create_motions (reaction, reaction.MotionsLength), create_configurations (reaction, reaction.ConfigurationsLength), reaction.Reset);
-    }
-
-
-    public static MotorMotion[] create_motions (FBSReaction reaction, int len) {
-      MotorMotion[] m = new MotorMotion[len];
-      for (int i = 0; i < len; i++) {
-        m [i] = create_motion (reaction.Motions (i));
+      if (reaction.ActionType == FBSAction.FBSMotions) {
+        var flat_motions = reaction.Action<FBSMotions> ();
+        var motions = create_motions (flat_motions);
+        return new Reaction (motions);
+      } else if (reaction.ActionType == FBSAction.FBSConfigurations) {
+        var flat_configurations = reaction.Action<FBSConfigurations> ();
+        var configurations = create_configurations (flat_configurations);
+        return new Reaction (configurations);
       }
-      return m;
+      return new Reaction (reaction.Reset);
     }
 
-    public static Configuration[] create_configurations (FBSReaction reaction, int len) {
-      Configuration[] m = new Configuration[len];
-      for (int i = 0; i < len; i++) {
-        m [i] = create_configuration (reaction.Configurations (i));
+    #endregion
+
+    #region PrivateMethods
+
+    static Offset<FBSMotor> build_motor (FlatBufferBuilder b, Motor motor, string identifier) {
+      StringOffset n = b.CreateString (identifier);
+      FBSMotor.StartFBSMotor (b);
+      FBSMotor.AddMotorName (b, n);
+      FBSMotor.AddValidInput (b, FBSRange.CreateFBSRange (b, motor._decimal_granularity, motor._max_strength, motor._min_strength));
+      FBSMotor.AddEnergySpentSinceReset (b, motor.GetEnergySpend ());
+      return FBSMotor.EndFBSMotor (b);
+    }
+
+    static Offset<FBSQuaternionTransform> build_quaternion_transform (FlatBufferBuilder b, Vector3 pos, Quaternion rot) {
+      FBSQuaternionTransform.StartFBSQuaternionTransform (b);
+      FBSQuaternionTransform.AddPosition (b, FBSVector3.CreateFBSVector3 (b, pos.x, pos.y, pos.z));
+      FBSQuaternionTransform.AddRotation (b, FBSQuaternion.CreateFBSQuaternion (b, rot.x, rot.y, rot.z, rot.w));
+      return FBSQuaternionTransform.EndFBSQuaternionTransform (b);
+    }
+
+    static Offset<FBSEulerTransform> build_euler_transform (FlatBufferBuilder b, Vector3 pos, Vector3 rot, Vector3 dir) {
+      FBSEulerTransform.StartFBSEulerTransform (b);
+      FBSEulerTransform.AddPosition (b, FBSVector3.CreateFBSVector3 (b, pos.x, pos.y, pos.z));
+      FBSEulerTransform.AddRotation (b, FBSVector3.CreateFBSVector3 (b, rot.x, rot.y, rot.z));
+      FBSEulerTransform.AddDirection (b, FBSVector3.CreateFBSVector3 (b, dir.x, dir.y, dir.z));
+      return FBSEulerTransform.EndFBSEulerTransform (b);
+    }
+
+    static Offset<FBSBody> build_body (FlatBufferBuilder b, Vector3 vel, Vector3 ang) {
+      FBSBody.StartFBSBody (b);
+      FBSBody.AddVelocity (b, FBSVector3.CreateFBSVector3 (b, vel.x, vel.y, vel.z));
+      FBSBody.AddAngularVelocity (b, FBSVector3.CreateFBSVector3 (b, ang.x, ang.y, ang.z));
+      return FBSBody.EndFBSBody (b);
+    }
+
+    static Offset<FBSActor> build_actor (FlatBufferBuilder b, Offset<FBSMotor>[] motors, Actor actor) {
+      StringOffset n = b.CreateString (actor.GetActorIdentifier ());
+      FBSActor.CreateMotorsVector (b, motors);
+      var motor_vector = b.EndVector ();
+      FBSActor.StartFBSActor (b);
+      FBSActor.AddActorName (b, n);
+      FBSActor.AddMotors (b, motor_vector);
+      return FBSActor.EndFBSActor (b);
+    }
+
+    static Offset<FBSObserver> build_observer (FlatBufferBuilder b, Observer observer) {
+      if (observer.GetType () == typeof(TransformObserver)) {
+        var tobs = (TransformObserver)observer;
+        var data = build_euler_transform (b, tobs._position, tobs._rotation, tobs._direction);
+        StringOffset n = b.CreateString (observer.GetObserverIdentifier ());
+        FBSObserver.StartFBSObserver (b);
+        FBSObserver.AddObserverName (b, n);
+        FBSObserver.AddDataType (b, FBSObserverData.FBSEulerTransform);
+        FBSObserver.AddData (b, data.Value);
+        return FBSObserver.EndFBSObserver (b);
+      } else {
+        FBSObserver.StartFBSObserver (b);
+        return FBSObserver.EndFBSObserver (b);
       }
-      return m;
     }
 
-    public static Configuration create_configuration (FBSConfiguration? configuration_maybe) {
-      FBSConfiguration configuration;
-      try {
-        configuration = configuration_maybe.Value;
+    static Offset<FBSEnvironmentDescription> build_description (FlatBufferBuilder b, EnvironmentState state) {
+      if (state._description != null) {
+        var actors = new Offset<FBSActor>[state._description._actors.Values.Count];
+        int j = 0;
+        foreach (Actor actor in state._description._actors.Values) {
+          var motors = new Offset<FBSMotor>[actor._motors.Values.Count];
+          int i = 0;
+          foreach (var motor in actor._motors) {
+            motors [i++] = build_motor (b, motor.Value, motor.Key);
+          }
+          actors [j++] = build_actor (b, motors, actor);
+        }
+
+        FBSEnvironmentDescription.CreateActorsVector (b, actors);
+        var actors_vector = b.EndVector ();
+
+        var configurables = new Offset<FBSConfigurable>[state._description._configurables.Values.Count];
+        int k = 0;
+        foreach (ConfigurableGameObject configurable in state._description._configurables.Values) {
+          configurables [k++] = build_configurable (b, configurable);
+        }
+
+        FBSEnvironmentDescription.CreateConfigurablesVector (b, configurables);
+        var configurables_vector = b.EndVector ();
+
+
+        FBSEnvironmentDescription.StartFBSEnvironmentDescription (b);
+        FBSEnvironmentDescription.AddActors (b, actors_vector);
+        FBSEnvironmentDescription.AddConfigurables (b, configurables_vector);
+        return FBSEnvironmentDescription.EndFBSEnvironmentDescription (b);
+      } else {
+        FBSEnvironmentDescription.StartFBSEnvironmentDescription (b);
+        return FBSEnvironmentDescription.EndFBSEnvironmentDescription (b);
+      }
+    }
+
+    static Offset<FBSConfigurable> build_configurable (FlatBufferBuilder b, ConfigurableGameObject configurable) {
+      StringOffset n = b.CreateString (configurable.GetConfigurableIdentifier ());
+      FBSConfigurable.StartFBSConfigurable (b);
+      FBSConfigurable.AddConfigurableName (b, n);
+      FBSConfigurable.AddValidInput (b, FBSRange.CreateFBSRange (b, configurable._decimal_granularity, configurable._max_value, configurable._min_value));
+      return FBSConfigurable.EndFBSConfigurable (b);
+    }
+
+    static MotorMotion[] create_motions (FBSMotions? motions_maybe) {
+      if (motions_maybe.HasValue) {
+        var motions = motions_maybe.Value;
+        var length = motions.MotionsLength;
+        MotorMotion[] m = new MotorMotion[length];
+        for (int i = 0; i < length; i++) {
+          m [i] = create_motion (motions.Motions (i));
+        }
+        return m;
+      }
+      return null;
+    }
+
+    static Configuration[] create_configurations (FBSConfigurations? configurations_maybe) {
+      if (configurations_maybe.HasValue) {
+        var configurations = configurations_maybe.Value;
+        var length = configurations.ConfigurationsLength;
+        Configuration[] m = new Configuration[length];
+        for (int i = 0; i < length; i++) {
+          m [i] = create_configuration (configurations.Configurations (i));
+        }
+        return m;
+      }
+      return null;
+    }
+
+    static Configuration create_configuration (FBSConfiguration? configuration_maybe) {
+      if (configuration_maybe.HasValue) {
+        FBSConfiguration configuration = configuration_maybe.Value;
         return new Configuration (configuration.ConfigurableName, configuration.ConfigurableValue);
-      } catch {
-        return null;
       }
+      return null;
     }
 
-    public static MotorMotion create_motion (FBSMotion? motion_maybe) {
-      FBSMotion motion;
-      try {
-        motion = motion_maybe.Value;
+    static MotorMotion create_motion (FBSMotion? motion_maybe) {
+      if (motion_maybe.HasValue) {
+        FBSMotion motion = motion_maybe.Value;
         return new MotorMotion (motion.ActorName, motion.MotorName, motion.Strength);
-      } catch {
-        return null;
       }
+      return null;
     }
+
+    #endregion
   }
 }

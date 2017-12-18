@@ -7,16 +7,28 @@ namespace Neodroid.Messaging.Messages {
   public class Reaction {
     MotorMotion[] _motions;
     Configuration[] _configurations;
-    public bool _reset;
+    bool _reset = false;
 
-    public Reaction (MotorMotion[] motions, Configuration[] configurations, bool reset) {
+    public Reaction (MotorMotion[] motions) {
       _motions = motions;
+      _reset = false;
+    }
+
+    public Reaction (Configuration[] configurations) {
       _configurations = configurations;
+      _reset = true;
+    }
+
+    public Reaction (bool reset) {
       _reset = reset;
     }
 
     public MotorMotion[] Motions {
       get { return _motions; }
+    }
+
+    public bool Reset {
+      get { return _reset; }
     }
 
     public Configuration[] Configurations {
@@ -25,12 +37,16 @@ namespace Neodroid.Messaging.Messages {
 
     public override string ToString () {
       string motions_str = "";
-      foreach (MotorMotion motion in Motions) {
-        motions_str += motion.ToString () + "\n";
+      if (Motions != null) {
+        foreach (MotorMotion motion in Motions) {
+          motions_str += motion.ToString () + "\n";
+        }
       }
       string configurations_str = "";
-      foreach (Configuration configuration in Configurations) {
-        configurations_str += configuration.ToString () + "\n";
+      if (Configurations != null) {
+        foreach (Configuration configuration in Configurations) {
+          configurations_str += configuration.ToString () + "\n";
+        }
       }
       return "<Reaction> " + _reset + ",\n " + motions_str + ",\n " + configurations_str + "</Reaction>";
     }
