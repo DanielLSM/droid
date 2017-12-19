@@ -7,13 +7,21 @@ Droid is a unity package that enables prototyping reinforcement learning environ
 ![droid](images/neodroid.png)
 
 ## Setup
-### !Important Notice For Windows Users!
+### !Important notice for Windows users!
   Run '''fix_windows_symlink.bat''' with administrative privileges, to make windows recognise the symlink. If on any other platform you should be fine.
 
-## Features
-The unity comes quite selection of scripts and tools for setting up and experimenting reinforcement learning environments.
+## Environments
+- LunarLander
+- 3DGridWorld
+- Walker
+- And many more..
 
-![droid](images/package.png)(Outdated images)
+![droid](images/3Dgridworld.png)
+![droid](images/lunarlander.png)
+![droid](images/walker.png)
+
+## Features
+This unity packages is a selection of scripts and tools for easily setting up (Rapid prototyping) and experimenting reinforcement learning environments.
 
 ### Objective Functions (Out Of The Box, Easily Extendable)
 - euclidean distance between objects
@@ -35,7 +43,6 @@ The unity comes quite selection of scripts and tools for setting up and experime
 - wheel motors for vehicles
 
 ### Many Custom Windows For Quick Prototyping
-![windows](windows_menu.png)
 ![windows](images/neo_sync.png)
 ![windows](images/neo_segment.png)
 ![windows](images/neo_tex.png)
