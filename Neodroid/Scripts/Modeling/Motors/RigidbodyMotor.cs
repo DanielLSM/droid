@@ -13,7 +13,6 @@ namespace Neodroid.Motors {
 
     protected override void Start () {
       _rigidbody = GetComponent<Rigidbody> ();
-      RegisterComponent ();
     }
 
     public override void ApplyMotion (MotorMotion motion) {

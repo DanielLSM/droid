@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Neodroid.Actors;
+using Neodroid.Observers;
 using Neodroid.Utilities;
 using Neodroid.Environments;
 using SceneSpecificAssets.Grasping;
@@ -62,7 +63,7 @@ namespace Neodroid.Evaluation {
 
     private void Start () {
       if (!_area) {
-        _area = FindObjectOfType<GoalObserver> ().gameObject.GetComponent<Collider> ();
+        _area = FindObjectOfType<Observer> ().gameObject.GetComponent<Collider> ();
       }
       if (!_actor) {
         _actor = FindObjectOfType<Actor> ().gameObject.GetComponent<Collider> ();

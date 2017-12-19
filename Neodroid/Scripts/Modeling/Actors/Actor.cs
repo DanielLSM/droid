@@ -12,12 +12,6 @@ namespace Neodroid.Actors {
   [ExecuteInEditMode]
   //[RequireComponent (typeof(Collider))]
   public class Actor : MonoBehaviour, HasRegister<Motor> {
-    public Vector3 _position;
-    public Vector3 _rotation;
-    public Vector3 _direction;
-
-    //public Quaternion _rotation;
-    //public Quaternion _direction;
 
     public Dictionary<string, Motor> _motors;
 
@@ -44,10 +38,6 @@ namespace Neodroid.Actors {
     }
     #endif
 
-    protected void Start () {
-      UpdatePosRotDir ();
-    }
-
 
     public void ApplyMotion (MotorMotion motion) {
       if (_debug)
@@ -62,21 +52,6 @@ namespace Neodroid.Actors {
 
     }
 
-    void UpdatePosRotDir () {
-      if (_environment) {
-        _position = _environment.TransformPosition (this.transform.position);
-        _direction = _environment.TransformDirection (this.transform.forward);
-        _rotation = _environment.TransformDirection (this.transform.up);
-      } else {
-        _position = this.transform.position;
-        _direction = this.transform.forward;
-        _rotation = this.transform.up;
-      }
-    }
-
-    private void Update () {
-      UpdatePosRotDir ();
-    }
 
     public Dictionary<string, Motor> GetMotors () {
       return _motors;
@@ -119,6 +94,9 @@ namespace Neodroid.Actors {
 
     public void RefreshStart () {
       Start ();
+    }
+
+    protected virtual void Start () {
     }
 
 

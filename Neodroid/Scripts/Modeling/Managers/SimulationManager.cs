@@ -18,7 +18,8 @@ namespace Neodroid.Managers {
     public bool _continue_reaction_on_disconnect = false;
     public int _episode_length = 1000;
     public int _frame_skips = 0;
-    public int _resets = 6;
+    public int _resets = 10;
+    //When resetting transforms we run multiple times to ensure that we properly reset hierachies of objects
     public bool _wait_for_reaction_every_frame = false;
     public bool _debug = false;
 
