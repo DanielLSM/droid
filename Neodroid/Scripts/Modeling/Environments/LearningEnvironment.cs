@@ -78,7 +78,7 @@ namespace Neodroid.Environments {
 
     public void UpdateObserversData () {
       foreach (Observer obs in RegisteredObservers.Values) {
-        obs.GetData ();
+        obs.UpdateData ();
       }
     }
 

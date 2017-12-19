@@ -13,26 +13,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player_motions:
   - key: 119
-    actor: Robot Kyle RagdollActor
-    motor: RootRigidbodyRotX
-    strength: 100
-  - key: 115
-    actor: Robot Kyle RagdollActor
-    motor: RootRigidbodyRotX
+    actor: BotActor
+    motor: mixamorig:HeadRigidbodyRotX
     strength: -100
+  - key: 115
+    actor: BotActor
+    motor: mixamorig:HeadRigidbodyRotX
+    strength: 100
   - key: 100
-    actor: Robot Kyle RagdollActor
-    motor: RootRigidbodyRotZ
+    actor: BotActor
+    motor: mixamorig:HeadRigidbodyRotZ
     strength: -100
   - key: 97
-    actor: Robot Kyle RagdollActor
-    motor: RootRigidbodyRotZ
+    actor: BotActor
+    motor: mixamorig:HeadRigidbodyRotZ
     strength: 100
   - key: 113
-    actor: Robot Kyle RagdollActor
-    motor: RootRigidbodyRotY
+    actor: BotActor
+    motor: mixamorig:HeadRigidbodyRotY
     strength: -100
   - key: 101
-    actor: Robot Kyle RagdollActor
-    motor: RootRigidbodyRotY
+    actor: BotActor
+    motor: mixamorig:HeadRigidbodyRotY
     strength: 100

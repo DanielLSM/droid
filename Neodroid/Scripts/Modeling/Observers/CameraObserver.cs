@@ -13,9 +13,8 @@ namespace Neodroid.Observers {
       _camera = this.GetComponent<Camera> ();
     }
 
-    public override byte[] GetData () {
+    public override void UpdateData () {
       _data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG ();
-      return _data;
     }
 
     public override string GetObserverIdentifier () {

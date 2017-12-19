@@ -14,7 +14,7 @@ namespace Neodroid.Observers {
     public string _configurable_name = "";
     public bool _debug = false;
     public string _observer_identifier = "";
-    public byte[] _data;
+    public byte[] _data = new byte[] { };
 
     protected virtual void Awake () {
       _has_configurable = false;
@@ -42,11 +42,7 @@ namespace Neodroid.Observers {
       _environment = NeodroidUtilities.MaybeRegisterComponent (_environment, this);
     }
 
-    public virtual byte[] GetData () {
-      if (_data != null)
-        return _data;
-      else
-        return new byte[] { };
+    public virtual void UpdateData () {
     }
 
     public virtual string GetObserverIdentifier () {

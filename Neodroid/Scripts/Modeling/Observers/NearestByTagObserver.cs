@@ -14,7 +14,7 @@ namespace Neodroid.Observers {
     GameObject _nearest_object;
     public string _tag = "";
 
-    public override byte[] GetData () {
+    public override void UpdateData () {
       FindNearest ();
       if (_environment) {
         _position = _environment.TransformPosition (_nearest_object.transform.position);
@@ -34,7 +34,6 @@ namespace Neodroid.Observers {
       }
       str_rep += "\"}";
       _data = Encoding.ASCII.GetBytes (str_rep);
-      return _data;
     }
 
     public override string GetObserverIdentifier () {

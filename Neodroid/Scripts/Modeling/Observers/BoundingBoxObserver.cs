@@ -17,9 +17,8 @@ namespace Neodroid.Observers {
       _bounding_box = this.GetComponent<BoundingBox> ();
     }
 
-    public override byte[] GetData () {
+    public override void UpdateData () {
       _data = Encoding.ASCII.GetBytes (_bounding_box.BoundingBoxCoordinatesAsJSON);
-      return _data;
     }
 
     public override string GetObserverIdentifier () {

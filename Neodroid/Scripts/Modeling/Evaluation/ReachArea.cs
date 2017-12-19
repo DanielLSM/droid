@@ -52,9 +52,15 @@ namespace Neodroid.Evaluation {
         _environment.Interrupt ("Inside goal area");
         return 1f;
       }
-      if (_colliding == ActorColliding.COLLIDING || !_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
-        _environment.Interrupt ("Actor colliding with obstruction or outside playable area");
+
+      if (_colliding == ActorColliding.COLLIDING) {
+        _environment.Interrupt ("Actor colliding with obstruction");
         //return -1f;
+      }
+      if (_playable_area) {
+        if (!_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
+          _environment.Interrupt ("Actor is outside playable area");
+        }
       }
 
 

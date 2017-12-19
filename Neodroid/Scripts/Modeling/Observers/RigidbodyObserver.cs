@@ -18,7 +18,7 @@ namespace Neodroid.Observers {
       _rigidbody = this.GetComponent<Rigidbody> ();
     }
 
-    public override byte[] GetData () {
+    public override void UpdateData () {
       _velocity = _rigidbody.velocity;
       _angular_velocity = _rigidbody.angularVelocity;
 
@@ -27,7 +27,6 @@ namespace Neodroid.Observers {
       str_rep += "\", \"AngularVelocity\": \"" + _angular_velocity;
       str_rep += "\"}";
       _data = Encoding.ASCII.GetBytes (str_rep);
-      return _data;
     }
 
     public override string GetObserverIdentifier () {
