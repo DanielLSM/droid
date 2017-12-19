@@ -629,9 +629,9 @@ PlayerSettings:
     UNet: 0
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 9985b54c-392f-4c00-96fb-7f1f93d72cfd
-  projectName: droid
-  organizationId: christian-nielsen
+  cloudProjectId: 
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

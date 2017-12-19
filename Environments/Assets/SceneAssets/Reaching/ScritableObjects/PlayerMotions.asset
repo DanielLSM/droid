@@ -8,7 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 859f1ff7a0a9a42dd8359d2f2f06e850, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aa96101fe55749209a8963174b3defa, type: 3}
   m_Name: PlayerMotions
   m_EditorClassIdentifier: 
   _player_motions:

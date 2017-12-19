@@ -6,7 +6,7 @@ using Neodroid.Utilities;
 using Neodroid.Messaging.Messages;
 using System;
 
-namespace Neodroid.Configurations
+namespace Neodroid.Configurables
 {
     [RequireComponent(typeof(SimulationManager))]
     public class SimulationConfigurable : ConfigurableGameObject

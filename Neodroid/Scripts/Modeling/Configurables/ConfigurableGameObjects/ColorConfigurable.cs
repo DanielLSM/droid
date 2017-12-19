@@ -3,7 +3,7 @@ using Neodroid.Utilities;
 using UnityEngine;
 using Neodroid.Messaging.Messages;
 
-namespace Neodroid.Configurations {
+namespace Neodroid.Configurables {
 
   [RequireComponent (typeof(Renderer))]
   public class ColorConfigurable : ConfigurableGameObject {

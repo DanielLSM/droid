@@ -6,7 +6,7 @@ using Neodroid.Actors;
 using Neodroid.Motors;
 using Neodroid.Observers;
 using Neodroid.Managers;
-using Neodroid.Configurations;
+using Neodroid.Configurables;
 using Neodroid.Evaluation;
 
 namespace Neodroid.Windows {

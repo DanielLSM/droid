@@ -9,7 +9,7 @@ namespace Neodroid.Utilities {
   public class PlayerReactions : MonoBehaviour {
 
     public PlayerMotions _player_motions;
-    public bool _debug = true;
+    public bool _debug = false;
 
     SimulationManager _simulation_manager;
 

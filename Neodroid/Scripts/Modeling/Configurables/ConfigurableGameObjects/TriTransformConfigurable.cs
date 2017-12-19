@@ -4,7 +4,7 @@ using UnityEngine;
 using Neodroid.Messaging.Messages;
 using Neodroid.Observers;
 
-namespace Neodroid.Configurations {
+namespace Neodroid.Configurables {
 
   public class TriTransformConfigurable : EulerTransformConfigurable {
 

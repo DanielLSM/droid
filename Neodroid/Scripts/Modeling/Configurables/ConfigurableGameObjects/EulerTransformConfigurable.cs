@@ -5,7 +5,7 @@ using Neodroid.Messaging.Messages;
 using Neodroid.Utilities.BoundingBoxes;
 using System.Collections.Specialized;
 
-namespace Neodroid.Configurations {
+namespace Neodroid.Configurables {
   public class EulerTransformConfigurable : ConfigurableGameObject {
 
     public Axis _axis_of_configuration;

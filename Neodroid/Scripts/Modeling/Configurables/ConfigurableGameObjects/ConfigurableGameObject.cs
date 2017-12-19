@@ -6,7 +6,7 @@ using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
 using Neodroid.Utilities;
 
-namespace Neodroid.Configurations {
+namespace Neodroid.Configurables {
   
   public class ConfigurableGameObject : Configurable {
     

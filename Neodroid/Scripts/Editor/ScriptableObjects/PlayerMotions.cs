@@ -1,22 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
-#endif
-namespace Neodroid.Utilities
-{
-    [CreateAssetMenu(fileName = "PlayerMotions", menuName = "Neodroid/Create/PlayerMotions", order = 1)]
-    public class PlayerMotions : ScriptableObject
-    {
-        public PlayerMotion[] _player_motions;
-    }
+namespace Neodroid.Utilities {
 
-#if UNITY_EDITOR
     public class CreatePlayerMotions
     {
-        [MenuItem("Neodroid/Create/PlayerMotions")]
+[MenuItem("Neodroid/Create/ScriptableObjects/PlayerMotions")]
         public static void CreatePlayerMotionsAsset()
         {
             var asset = ScriptableObject.CreateInstance<PlayerMotions>();

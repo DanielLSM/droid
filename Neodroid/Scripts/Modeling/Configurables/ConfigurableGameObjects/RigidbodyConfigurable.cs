@@ -3,7 +3,7 @@ using Neodroid.Utilities;
 using UnityEngine;
 using Neodroid.Messaging.Messages;
 
-namespace Neodroid.Configurations
+namespace Neodroid.Configurables
 {[RequireComponent(typeof(Rigidbody))]
 	public class RigidbodyConfigurable : ConfigurableGameObject {
 

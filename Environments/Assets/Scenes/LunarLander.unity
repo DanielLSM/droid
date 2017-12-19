@@ -4161,8 +4161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debug: 0
   _decimal_granularity: 0
-  _min_strength: -30
-  _max_strength: 30
+  _min_strength: -100
+  _max_strength: 100
   _energy_cost: 1
   _actor_game_object: {fileID: 362436254}
   _axis_of_motion: 3
@@ -4858,8 +4858,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debug: 0
   _decimal_granularity: 0
-  _min_strength: -30
-  _max_strength: 30
+  _min_strength: -100
+  _max_strength: 100
   _energy_cost: 1
   _actor_game_object: {fileID: 362436254}
   _axis_of_motion: 3
@@ -4960,7 +4960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player_motions: {fileID: 11400000, guid: 6933863fa391246018c9224647f1ad1f, type: 2}
-  _debug: 1
+  _debug: 0
 --- !u!114 &903194209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4996,9 +4996,9 @@ MonoBehaviour:
   _freeze: 1
   _line_color: {r: 0, g: 1, b: 0.4, a: 0.74}
   _bounds:
-    m_Center: {x: -4.133423, y: -20.511559, z: 10.16571}
-    m_Extent: {x: 300, y: 70.40937, z: 300}
-  _bounds_offset: {x: -0.00000667572, y: -20.409367, z: 0.0000047683716}
+    m_Center: {x: -4.133423, y: -125.6022, z: 10.16571}
+    m_Extent: {x: 300, y: 175.5, z: 300}
+  _bounds_offset: {x: -0.00000667572, y: -125.500015, z: 0.0000047683716}
   _setup_on_awake: 1
   _camera: {fileID: 0}
 --- !u!65 &903194211
@@ -5514,8 +5514,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debug: 0
   _decimal_granularity: 0
-  _min_strength: -30
-  _max_strength: 30
+  _min_strength: -100
+  _max_strength: 100
   _energy_cost: 1
   _actor_game_object: {fileID: 362436254}
   _axis_of_motion: 3
@@ -6310,8 +6310,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debug: 0
   _decimal_granularity: 0
-  _min_strength: -30
-  _max_strength: 30
+  _min_strength: -100
+  _max_strength: 100
   _energy_cost: 1
   _actor_game_object: {fileID: 362436254}
   _axis_of_motion: 3
@@ -6326,9 +6326,8 @@ GameObject:
   - component: {fileID: 2123363033}
   - component: {fileID: 2123363036}
   - component: {fileID: 2123363035}
-  - component: {fileID: 2123363034}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: LanderCam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6340,20 +6339,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2123363032}
-  m_LocalRotation: {x: 0.48154712, y: 0, z: 0, w: 0.8764202}
-  m_LocalPosition: {x: -1.99, y: 10.48, z: -3.88}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 10, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 362436251}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 57.573, y: 0, z: 0}
---- !u!81 &2123363034
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2123363032}
-  m_Enabled: 1
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!124 &2123363035
 Behaviour:
   m_ObjectHideFlags: 0
@@ -6379,7 +6371,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 80
+  field of view: 55.1
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

@@ -8,7 +8,7 @@ using Neodroid.Motors;
 using Neodroid.Actors;
 using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
-using Neodroid.Configurations;
+using Neodroid.Configurables;
 
 namespace Neodroid.Environments {
   public class LearningEnvironment : MonoBehaviour, HasRegister<Actor>, HasRegister<Observer>, HasRegister<ConfigurableGameObject> {

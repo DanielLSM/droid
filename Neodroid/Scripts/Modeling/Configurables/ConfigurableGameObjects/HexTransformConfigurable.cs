@@ -3,7 +3,7 @@ using Neodroid.Utilities;
 using UnityEngine;
 using Neodroid.Messaging.Messages;
 
-namespace Neodroid.Configurations {
+namespace Neodroid.Configurables {
   public class HexTransformConfigurable : EulerTransformConfigurable {
     string _X;
     string _Y;

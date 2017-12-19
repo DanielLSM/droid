@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Neodroid.Messaging.Messages;
 
-namespace Neodroid.Configurations
+namespace Neodroid.Configurables
 {
     public class Difficulty : ConfigurableGameObject
     {

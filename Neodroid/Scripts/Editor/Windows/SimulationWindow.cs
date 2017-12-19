@@ -7,7 +7,7 @@ using Neodroid.Motors;
 using Neodroid.Observers;
 using Neodroid.Managers;
 using Neodroid.Utilities;
-using Neodroid.Configurations;
+using Neodroid.Configurables;
 using Neodroid.Messaging.Messages;
 using Neodroid.Evaluation;
 

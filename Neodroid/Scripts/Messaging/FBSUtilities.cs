@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FlatBuffers;
 using Neodroid.Actors;
-using Neodroid.Configurations;
+using Neodroid.Configurables;
 using Neodroid.Messaging;
 using Neodroid.Messaging.CustomFBS;
 using Neodroid.Messaging.Messages;

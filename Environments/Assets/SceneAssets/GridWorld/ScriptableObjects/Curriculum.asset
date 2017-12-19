@@ -8,7 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49c9f168bf4054e75b9208402fe5fca0, type: 3}
+  m_Script: {fileID: 11500000, guid: 97a8f038aab984971a9864073c93f771, type: 3}
   m_Name: Curriculum
   m_EditorClassIdentifier: 
   _levels:

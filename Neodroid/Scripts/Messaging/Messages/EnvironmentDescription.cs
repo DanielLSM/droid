@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Neodroid.Configurations;
+using Neodroid.Configurables;
 using Neodroid.Actors;
 
 namespace Neodroid.Messaging.Messages {

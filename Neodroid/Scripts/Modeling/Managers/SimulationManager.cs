@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Neodroid.Configurations;
+using Neodroid.Configurables;
 using Neodroid.Environments;
 using Neodroid.Messaging;
 using Neodroid.Messaging.Messages;
