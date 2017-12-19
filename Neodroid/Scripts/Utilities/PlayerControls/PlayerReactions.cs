@@ -24,7 +24,7 @@ namespace Neodroid.Utilities {
         foreach (var player_motion in _player_motions._player_motions) {
           if (Input.GetKey (player_motion.key)) {
             if (_debug)
-              print (String.Format ("{0}{1}{2}", player_motion.actor, player_motion.motor, player_motion.strength));
+              print (String.Format ("{0} {1} {2}", player_motion.actor, player_motion.motor, player_motion.strength));
             var motion = new MotorMotion (player_motion.actor, player_motion.motor, player_motion.strength);
             motions.Add (motion);
           }

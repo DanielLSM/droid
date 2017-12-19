@@ -18,8 +18,8 @@ namespace Neodroid.Evaluation {
     COLLIDING
   }
 
-  [RequireComponent (typeof(BoundingBox))]
-  [RequireComponent (typeof(BoxCollider))]
+  //[RequireComponent (typeof(BoundingBox))]
+  //[RequireComponent (typeof(BoxCollider))]
   public class ReachArea : ObjectiveFunction {
     public bool _based_on_tags = false;
     public Collider _area;

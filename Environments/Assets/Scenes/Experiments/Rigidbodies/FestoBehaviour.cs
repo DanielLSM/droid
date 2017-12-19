@@ -5,7 +5,7 @@ using UnityEngine;
 public class FestoBehaviour : MonoBehaviour {
 
   Rigidbody[] _children;
-  public float _torque_scalar;
+  public float _torque_scalar = 0;
   public bool _find_global_rigidbodies = false;
 
 
@@ -14,6 +14,14 @@ public class FestoBehaviour : MonoBehaviour {
       _children = FindObjectsOfType<Rigidbody> ();
     else
       _children = GetComponentsInChildren<Rigidbody> ();
+  }
+
+  void Update () {
+    if (Input.GetKeyDown (KeyCode.UpArrow)) {
+      _torque_scalar += 100; 
+    } else if (Input.GetKeyDown (KeyCode.DownArrow)) {
+      _torque_scalar -= 100; 
+    }
   }
 
   void FixedUpdate () {

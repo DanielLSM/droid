@@ -10,7 +10,7 @@ using System.Runtime.Remoting.Messaging;
 
 namespace Neodroid.Actors {
   [ExecuteInEditMode]
-  [RequireComponent (typeof(Collider))]
+  //[RequireComponent (typeof(Collider))]
   public class Actor : MonoBehaviour, HasRegister<Motor> {
     public Vector3 _position;
     public Vector3 _rotation;

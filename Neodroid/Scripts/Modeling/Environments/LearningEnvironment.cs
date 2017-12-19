@@ -278,25 +278,27 @@ namespace Neodroid.Environments {
     }
 
     void ResetEnvironment () {
-      for (int resets = 0; resets < _simulation_manager._resets; resets++) {
-        for (int i = 0; i < _child_game_objects.Length; i++) {
-          var rigid_body = _child_game_objects [i].GetComponent<Rigidbody> ();
-          if (rigid_body)
-            rigid_body.Sleep ();
-          _child_game_objects [i].transform.position = _reset_positions [i];
-          _child_game_objects [i].transform.rotation = _reset_rotations [i];
-          if (rigid_body)
-            rigid_body.WakeUp ();
+      if (_simulation_manager) {
+        for (int resets = 0; resets < _simulation_manager._resets; resets++) {
+          for (int i = 0; i < _child_game_objects.Length; i++) {
+            var rigid_body = _child_game_objects [i].GetComponent<Rigidbody> ();
+            if (rigid_body)
+              rigid_body.Sleep ();
+            _child_game_objects [i].transform.position = _reset_positions [i];
+            _child_game_objects [i].transform.rotation = _reset_rotations [i];
+            if (rigid_body)
+              rigid_body.WakeUp ();
 
-          var animation = _child_game_objects [i].GetComponent<Animation> ();
-          if (animation)
-            animation.Rewind ();
+            var animation = _child_game_objects [i].GetComponent<Animation> ();
+            if (animation)
+              animation.Rewind ();
+          }
         }
-      }
-      _lastest_reset_time = Time.time;
-      _current_episode_frame = 0;
-      if (_objective_function) {
-        _objective_function.Reset ();
+        _lastest_reset_time = Time.time;
+        _current_episode_frame = 0;
+        if (_objective_function) {
+          _objective_function.Reset ();
+        }
       }
     }
 

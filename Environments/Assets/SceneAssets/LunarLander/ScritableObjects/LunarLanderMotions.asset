@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859f1ff7a0a9a42dd8359d2f2f06e850, type: 3}
+  m_Name: LunarLanderMotions
+  m_EditorClassIdentifier: 
+  _player_motions:
+  - key: 264
+    actor: LunarLanderActor
+    motor: LegNRigidbodyRotX
+    strength: -30
+  - key: 258
+    actor: LunarLanderActor
+    motor: LegSRigidbodyRotX
+    strength: -30
+  - key: 260
+    actor: LunarLanderActor
+    motor: LegWRigidbodyRotX
+    strength: -30
+  - key: 262
+    actor: LunarLanderActor
+    motor: LegERigidbodyRotX
+    strength: -30
+  - key: 32
+    actor: LunarLanderActor
+    motor: LunarLanderRocketY
+    strength: 100
+  - key: 119
+    actor: LunarLanderActor
+    motor: LunarLanderRigidbodyRotX
+    strength: -10
+  - key: 115
+    actor: LunarLanderActor
+    motor: LunarLanderRigidbodyRotX
+    strength: 10
+  - key: 97
+    actor: LunarLanderActor
+    motor: LunarLanderRigidbodyRotZ
+    strength: 10
+  - key: 100
+    actor: LunarLanderActor
+    motor: LunarLanderRigidbodyRotZ
+    strength: -10
+  - key: 113
+    actor: LunarLanderActor
+    motor: LunarLanderRigidbodyRotY
+    strength: -10
+  - key: 101
+    actor: LunarLanderActor
+    motor: LunarLanderRigidbodyRotY
+    strength: 10
