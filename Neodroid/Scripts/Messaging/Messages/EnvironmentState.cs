@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Neodroid.Actors;
 using Neodroid.Observers;
 using Neodroid.Configurables;
+using UnityEngine;
 
 namespace Neodroid.Messaging.Messages {
   [Serializable]
@@ -12,6 +13,9 @@ namespace Neodroid.Messaging.Messages {
     public int _last_steps_frame_number;
     public bool _interrupted;
     public string _debug_message;
+
+    public Rigidbody[] _bodies;
+    public Transform[] _poses;
 
     public Dictionary<string, Observer> _observers;
 
@@ -26,6 +30,8 @@ namespace Neodroid.Messaging.Messages {
       int last_steps_frame_number,
       float reward_for_last_step,
       bool interrupted,
+      Rigidbody[] bodies,
+      Transform[] poses,
       EnvironmentDescription description = null,
       string debug_message = "") {
       _debug_message = debug_message;
@@ -36,6 +42,8 @@ namespace Neodroid.Messaging.Messages {
       _last_steps_frame_number = last_steps_frame_number;
       _interrupted = interrupted;
       _description = description;
+      _bodies = bodies;
+      _poses = poses;
     }
 
     public EnvironmentState () {

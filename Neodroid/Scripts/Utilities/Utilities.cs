@@ -154,6 +154,19 @@ namespace Neodroid.Utilities {
       return gol.ToArray ();
     }
 
+    public static GameObject[] ChildGameObjectsExceptLayer (Transform parent, int layer) {
+      var gol = new List<GameObject> ();
+      foreach (Transform go in parent) {
+        if (go.gameObject.layer != layer) {
+          gol.Add (go.gameObject);
+        }
+      }
+      if (gol.Count == 0) {
+        return null;
+      }
+      return gol.ToArray ();
+    }
+
     /** Contains logic for coverting a camera component into a Texture2D. */
     /*public Texture2D ObservationToTex(Camera camera, int width, int height)
         {

@@ -7,7 +7,7 @@ using NetMQ.Sockets;
 
 using Neodroid.Messaging;
 using Neodroid.Messaging.CustomFBS;
-using Neodroid.Messaging.Models.Reaction;
+using Neodroid.FBS.Reaction;
 
 namespace Neodroid.Messaging {
   class MessageServer {
@@ -102,11 +102,11 @@ namespace Neodroid.Messaging {
 
     #region PublicMethods
 
-    public void SendEnvironmentState (EnvironmentState environment_state) {
+    /*public void SendEnvironmentState (EnvironmentState environment_state) {
       byte_buffer = FBSUtilities.build_state (environment_state);
       _socket.SendFrame (byte_buffer);
       _waiting_for_main_loop_to_send = false; 
-    }
+    }*/
 
     public void SendEnvironmentStates (EnvironmentState[] environment_states) {
       byte_buffer = FBSUtilities.build_states (environment_states);

@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using Neodroid.Utilities;
-
-#if UNITY_EDITOR
 using UnityEditor;
 
 namespace Neodroid.Task {
@@ -21,7 +20,8 @@ namespace Neodroid.Task {
                 Selection.activeObject = asset;
             }
         }
-#endif
 }
+#endif
+
 
 

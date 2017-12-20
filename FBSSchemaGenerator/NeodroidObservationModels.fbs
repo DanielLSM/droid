@@ -1,0 +1,53 @@
+include "NeodroidSharedModels.fbs";
+
+namespace Neodroid.FBS;
+
+union FBSObserverData {
+  FBSByteArray,
+  FBSNumeral,
+  FBSString,
+  FBSPosition,
+  FBSRotation,
+  FBSEulerTransform,
+  FBSQuaternionTransformObservation,
+  FBSBodyObservation
+}
+
+enum FBSByteDataType:ubyte{ PNG, JPEG, Other }
+
+table FBSPosition {
+  position:FBSVector3;
+}
+
+table FBSRotation {
+  rotation:FBSVector3;
+}
+
+table FBSEulerTransform {
+  position:FBSVector3;
+  rotation:FBSVector3;
+  direction:FBSVector3;
+}
+
+table FBSQuaternionTransformObservation {
+  transform:FBSQuaternionTransform;
+}
+
+table FBSBodyObservation{
+  body:FBSBody;
+}
+
+table FBSByteArray{
+  byte_array:[ubyte];
+  data_type:FBSByteDataType;
+}
+
+table FBSNumeral{
+  value:double;
+}
+
+table FBSString{
+  value:string;
+}
+
+file_identifier "OBSE";

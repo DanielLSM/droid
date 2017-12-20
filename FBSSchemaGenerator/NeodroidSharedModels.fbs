@@ -1,0 +1,26 @@
+namespace Neodroid.FBS;
+
+struct FBSVector3 {
+  x:double;
+  y:double;
+  z:double;
+}
+
+struct FBSQuaternion {
+  x:double;
+  y:double;
+  z:double;
+  w:double;
+}
+
+struct FBSQuaternionTransform{
+  position:FBSVector3;
+  rotation:FBSQuaternion;
+}
+
+struct FBSBody{
+  velocity:FBSVector3;
+  angular_velocity:FBSVector3;
+}
+
+file_identifier "SHAR";

@@ -115,9 +115,9 @@ namespace Neodroid.Managers {
 
     #region PrivateMethods
 
-    void SendEnvironmentState (EnvironmentState state) {
+    /*void SendEnvironmentState (EnvironmentState state) {
       _message_server.SendEnvironmentState (state);
-    }
+    }*/
 
     void SendEnvironmentStates (EnvironmentState[] states) {
       _message_server.SendEnvironmentStates (states);

@@ -30,6 +30,13 @@ namespace Neodroid.Environments {
     Vector3[] _reset_positions;
     Quaternion[] _reset_rotations;
     GameObject[] _child_game_objects;
+    Vector3[] _reset_velocities;
+    Vector3[] _reset_angulars;
+    Rigidbody[] _bodies;
+    Transform[] _poses;
+    Pose[] _received_poses;
+    Body[] _received_bodies;
+
     Configuration[] _configurations;
     Dictionary<string, Actor> _actors = new Dictionary<string, Actor> ();
     Dictionary<string, Observer> _observers = new Dictionary<string, Observer> ();
@@ -49,16 +56,36 @@ namespace Neodroid.Environments {
       FindMissingMembers ();
       AddToEnvironment ();
       SaveInitialPoses ();
+      SaveInitialBodies ();
     }
 
     void SaveInitialPoses () {
       var _ignored_layer = LayerMask.NameToLayer ("IgnoredByNeodroid");
-      _child_game_objects = NeodroidUtilities.FindAllGameObjectsExceptLayer (_ignored_layer);
+      _child_game_objects = NeodroidUtilities.ChildGameObjectsExceptLayer (this.transform, _ignored_layer);
       _reset_positions = new Vector3[_child_game_objects.Length];
       _reset_rotations = new Quaternion[_child_game_objects.Length];
+      _poses = new Transform[_child_game_objects.Length];
       for (int i = 0; i < _child_game_objects.Length; i++) {
         _reset_positions [i] = _child_game_objects [i].transform.position;
         _reset_rotations [i] = _child_game_objects [i].transform.rotation;
+        _poses [i] = _child_game_objects [i].transform;
+      }
+    }
+
+    void SaveInitialBodies () {
+      List<Rigidbody> body_list = new List<Rigidbody> ();
+      foreach (var go in _child_game_objects) {
+        var body = go.GetComponent<Rigidbody> ();
+        if (body) {
+          body_list.Add (body);
+        }
+      }
+      _bodies = body_list.ToArray ();
+      _reset_velocities = new Vector3[_bodies.Length];
+      _reset_angulars = new Vector3[_bodies.Length];
+      for (int i = 0; i < _bodies.Length; i++) {
+        _reset_velocities [i] = _bodies [i].velocity;
+        _reset_angulars [i] = _bodies [i].angularVelocity;
       }
     }
 
@@ -88,10 +115,12 @@ namespace Neodroid.Environments {
           energy_spent += m.GetEnergySpend ();
         }
       }
+
       var reward = 0f;
       if (_objective_function != null) {
         reward = _objective_function.Evaluate ();
       }
+
       EnvironmentDescription description = null;
       if (_interrupted) {
         description = new EnvironmentDescription (
@@ -109,6 +138,8 @@ namespace Neodroid.Environments {
         GetCurrentFrameNumber (),
         reward,
         _interrupted,
+        _bodies,
+        _poses,
         description
       );
     }
@@ -130,6 +161,8 @@ namespace Neodroid.Environments {
       } else if (reaction != null && reaction.Reset) {
         Interrupt ("Reaction called reset");
         _configurations = reaction.Configurations;
+        _received_poses = reaction.Poses;
+        _received_bodies = reaction.Bodies;
       } else if (reaction != null && reaction.Motions != null && reaction.Motions.Length > 0)
         foreach (MotorMotion motion in reaction.Motions) {
           if (_debug)
@@ -147,6 +180,12 @@ namespace Neodroid.Environments {
     }
 
     public void Configure () {
+      if (_received_poses != null) {
+        SetEnvironmentPoses (_child_game_objects, _received_poses);
+      }
+      if (_received_bodies != null) {
+        SetEnvironmentBodies (_bodies, _received_bodies);
+      }
       if (_configurations != null) {
         foreach (var configuration in _configurations) {
           if (_configurables.ContainsKey (configuration.ConfigurableName)) {
@@ -258,7 +297,8 @@ namespace Neodroid.Environments {
 
     void Reset () {
       ResetRegisteredObjects ();
-      ResetEnvironment ();
+      SetEnvironmentPoses (_child_game_objects, _reset_positions, _reset_rotations);
+      SetEnvironmentBodies (_bodies, _reset_velocities, _reset_angulars);
       Configure ();
     }
 
@@ -277,19 +317,19 @@ namespace Neodroid.Environments {
       }
     }
 
-    void ResetEnvironment () {
+    void SetEnvironmentPoses (GameObject[] child_game_objects, Vector3[] positions, Quaternion[] rotations) {
       if (_simulation_manager) {
         for (int resets = 0; resets < _simulation_manager._resets; resets++) {
-          for (int i = 0; i < _child_game_objects.Length; i++) {
-            var rigid_body = _child_game_objects [i].GetComponent<Rigidbody> ();
+          for (int i = 0; i < child_game_objects.Length; i++) {
+            var rigid_body = child_game_objects [i].GetComponent<Rigidbody> ();
             if (rigid_body)
               rigid_body.Sleep ();
-            _child_game_objects [i].transform.position = _reset_positions [i];
-            _child_game_objects [i].transform.rotation = _reset_rotations [i];
+            child_game_objects [i].transform.position = positions [i];
+            child_game_objects [i].transform.rotation = rotations [i];
             if (rigid_body)
               rigid_body.WakeUp ();
 
-            var animation = _child_game_objects [i].GetComponent<Animation> ();
+            var animation = child_game_objects [i].GetComponent<Animation> ();
             if (animation)
               animation.Rewind ();
           }
@@ -300,6 +340,21 @@ namespace Neodroid.Environments {
           _objective_function.Reset ();
         }
       }
+    }
+
+    void SetEnvironmentBodies (Rigidbody[] bodies, Vector3[] velocities, Vector3[] angulars) {
+      for (int i = 0; i < bodies.Length; i++) {
+        bodies [i].Sleep ();
+        bodies [i].velocity = velocities [i];
+        bodies [i].angularVelocity = angulars [i];
+        bodies [i].WakeUp ();
+      }
+    }
+
+    void SetEnvironmentPoses (GameObject[] child_game_objects, Pose[] poses) {
+    }
+
+    void SetEnvironmentBodies (Rigidbody[] bodies, Body[] bods) {
     }
 
     #region Registration

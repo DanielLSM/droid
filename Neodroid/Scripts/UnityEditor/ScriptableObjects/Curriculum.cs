@@ -1,8 +1,8 @@
-﻿using Neodroid.Configurables;
+﻿
+#if UNITY_EDITOR
+using Neodroid.Configurables;
 using UnityEngine;
 using Neodroid.Utilities;
-
-#if UNITY_EDITOR
 using UnityEditor;
 
 namespace Neodroid.ScriptableObjects {
@@ -22,5 +22,5 @@ namespace Neodroid.ScriptableObjects {
             Selection.activeObject = asset;
         }
     }
-#endif
 }
+#endif

@@ -4,31 +4,31 @@
 
 import flatbuffers
 
-class FBSPosition(object):
+class FBSBodyObservation(object):
     __slots__ = ['_tab']
 
     @classmethod
-    def GetRootAsFBSPosition(cls, buf, offset):
+    def GetRootAsFBSBodyObservation(cls, buf, offset):
         n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-        x = FBSPosition()
+        x = FBSBodyObservation()
         x.Init(buf, n + offset)
         return x
 
-    # FBSPosition
+    # FBSBodyObservation
     def Init(self, buf, pos):
         self._tab = flatbuffers.table.Table(buf, pos)
 
-    # FBSPosition
-    def Position(self):
+    # FBSBodyObservation
+    def Body(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             x = o + self._tab.Pos
-            from .FBSVector3 import FBSVector3
-            obj = FBSVector3()
+            from .FBSBody import FBSBody
+            obj = FBSBody()
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
 
-def FBSPositionStart(builder): builder.StartObject(1)
-def FBSPositionAddPosition(builder, position): builder.PrependStructSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(position), 0)
-def FBSPositionEnd(builder): return builder.EndObject()
+def FBSBodyObservationStart(builder): builder.StartObject(1)
+def FBSBodyObservationAddBody(builder, body): builder.PrependStructSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(body), 0)
+def FBSBodyObservationEnd(builder): return builder.EndObject()

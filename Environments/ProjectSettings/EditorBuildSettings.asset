@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Dodge.unity
     guid: cead71cfc07e38e46ad4c96868d0b489
   - enabled: 0
-    path: Assets/Scenes/Research/Shadows/Point.unity
+    path: Assets/Scenes/Experiments/Shadows/Point.unity
     guid: 6836e12c0733d4900a1c6cc701cd6b91
   - enabled: 0
     path: Assets/Scenes/Grasping.unity
@@ -32,9 +32,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GridWorld.unity
     guid: edd2e0226bcca4942aa66b0bad983fc8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/3DGridWorld.unity
     guid: 052c63a64d446461d9a17929d53edc99
   - enabled: 0
     path: Assets/Scenes/3DGridWorldSparse.unity
     guid: 3db379be5ff4240a78f53bcabe29ac86
+  - enabled: 0
+    path: Assets/Scenes/Walker.unity
+    guid: 0d8523ed33ac04c45858367eed892ddd
+  - enabled: 1
+    path: Assets/Scenes/LunarLander.unity
+    guid: bea06f4b9662d4e20a16eb86ce11cfd3

@@ -1,4 +1,7 @@
-namespace Neodroid.Messaging.Models.State;
+include "NeodroidSharedModels.fbs";
+include "NeodroidObservationModels.fbs";
+
+namespace Neodroid.FBS.State;
 
 struct FBSRange{
   decimal_granularity:int;
@@ -6,36 +9,12 @@ struct FBSRange{
   min_value:float;
 }
 
-struct FBSVector3 {
-  x:float;
-  y:float;
-  z:float;
-}
-
-struct FBSQuaternion {
-  x:float;
-  y:float;
-  z:float;
-  w:float;
-}
-
-union FBSObserverData {
-  FBSByteArray,
-  FBSNumeral,
-  FBSString,
-  FBSPosition,
-  FBSRotation,
-  FBSEulerTransform,
-  FBSQuaternionTransform,
-  FBSBody
-}
-
-enum FBSDataType:ubyte{ PNG, JPEG, Other }
-
 table FBSState {
   environment_name:string;
   frame_number:int;
   reward:float;
+  poses:[FBSQuaternionTransform];
+  bodies:[FBSBody];
   interrupted:bool;
   total_energy_spent:float;
   observers:[FBSObserver];
@@ -52,8 +31,6 @@ table FBSEnvironmentDescription {
 
 table FBSConfigurable {
   configurable_name:string;
-  has_observer:bool;
-  observer_name:string;
   valid_input:FBSRange;
 }
 
@@ -68,47 +45,9 @@ table FBSMotor{
   energy_spent_since_reset:float;
 }
 
-table FBSPosition {
-  position:FBSVector3;
-}
-
-table FBSRotation {
-  rotation:FBSVector3;
-}
-
-table FBSEulerTransform {
-  position:FBSVector3;
-  rotation:FBSVector3;
-  direction:FBSVector3;
-}
-
-table FBSQuaternionTransform {
-  position:FBSVector3;
-  rotation:FBSQuaternion;
-}
-
-table FBSBody{
-  velocity:FBSVector3;
-  angular_velocity:FBSVector3;
-}
-
-table FBSByteArray{
-  byte_array:[ubyte];
-  data_type:FBSDataType;
-}
-
-table FBSNumeral{
-  value:float;
-}
-
-table FBSString{
-  value:string;
-}
-
 table FBSObserver {
   observer_name:string;
-  data:FBSObserverData;
-  is_configurable:bool;
+  observation:FBSObserverData;
 }
 
 root_type FBSState;

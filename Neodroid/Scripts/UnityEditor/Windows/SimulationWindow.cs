@@ -33,9 +33,12 @@ namespace Neodroid.Windows {
     Dictionary<string,ConfigurableGameObject> _configurables;
     Vector2 _scroll_position;
     Texture _icon;
+    int _preview_image_size = 100;
+    Texture _neodroid_icon;
 
     void OnEnable () {
       _icon = (Texture2D)AssetDatabase.LoadAssetAtPath ("Assets/Neodroid/Icons/world.png", typeof(Texture2D));
+      _neodroid_icon = (Texture)AssetDatabase.LoadAssetAtPath ("Assets/Neodroid/Icons/neodroid_favicon_cut.png", typeof(Texture));
       this.titleContent = new GUIContent ("Neo:Sim", _icon, "Window for configuring simulation");
       Setup ();
     }
@@ -50,10 +53,18 @@ namespace Neodroid.Windows {
       SerializedObject serialised_object = new SerializedObject (this);
       _simulation_manager = FindObjectOfType<SimulationManager> ();
       if (_simulation_manager) {
+        EditorGUILayout.BeginHorizontal ();
+
+        GUILayout.Label (_neodroid_icon, GUILayout.Width (_preview_image_size), GUILayout.Height (_preview_image_size));
+
+        EditorGUILayout.BeginVertical ();
         _simulation_manager._episode_length = EditorGUILayout.IntField ("Episode Length", _simulation_manager._episode_length);
         _simulation_manager._frame_skips = EditorGUILayout.IntField ("Frame skips", _simulation_manager._frame_skips);
         _simulation_manager._resets = EditorGUILayout.IntField ("Resets when resetting", _simulation_manager._resets);
         _simulation_manager._wait_for_reaction_every_frame = EditorGUILayout.Toggle ("Wait For Reaction Every Frame", _simulation_manager._wait_for_reaction_every_frame);
+        EditorGUILayout.EndVertical ();
+
+        EditorGUILayout.EndHorizontal ();
 
         _environments = NeodroidUtilities.FindAllObjectsOfTypeInScene<LearningEnvironment> ();
         if (_show_environment_properties.Length != _environments.Length)

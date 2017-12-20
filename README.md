@@ -50,7 +50,7 @@ This unity packages is a selection of scripts and tools for easily setting up (R
 ![windows](images/neo_env.png)
 
 # To Do's
-- [ ] Be able to reset and configure enviroments independently from each other
+- [ ] Server side memory hash table for large environment state spaces (raw poses and bodies are never send to the learning agent but instead a hash value is send, for dictionary look ups on the server).
 
 # Other Components Of The Neodroid Platform
 
