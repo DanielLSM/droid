@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using NUnit.Framework.Internal.Filters;
 
 #if UNITY_EDITOR
 using UnityEditor.SceneManagement;
