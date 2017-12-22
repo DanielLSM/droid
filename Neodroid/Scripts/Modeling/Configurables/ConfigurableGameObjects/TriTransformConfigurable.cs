@@ -13,21 +13,14 @@ namespace Neodroid.Configurables {
     string _Z;
 
     protected override void AddToEnvironment () {
-      _X = GetConfigurableIdentifier () + "X";
-      _Y = GetConfigurableIdentifier () + "Y";
-      _Z = GetConfigurableIdentifier () + "Z";
+      _X = ConfigurableIdentifier + "X";
+      _Y = ConfigurableIdentifier + "Y";
+      _Z = ConfigurableIdentifier + "Z";
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _X);
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Y);
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Z);
     }
 
-    protected override void Start () {
-      var observer = GetComponent<EulerTransformObserver> ();
-      if (observer) {
-        observer.SetHasConfigurable (true, GetConfigurableIdentifier ());
-        SetHasObserver (true, observer.GetObserverIdentifier ());
-      }
-    }
 
     public override void ApplyConfiguration (Configuration configuration) {
       var pos = _environment.TransformPosition (this.transform.position);
@@ -65,8 +58,6 @@ namespace Neodroid.Configurables {
       
     }
 
-    public override string GetConfigurableIdentifier () {
-      return name + "Transform";
-    }
+    public override string ConfigurableIdentifier { get { return name + "Transform"; } }
   }
 }

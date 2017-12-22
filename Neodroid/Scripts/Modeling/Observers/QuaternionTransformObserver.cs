@@ -22,8 +22,6 @@ namespace Neodroid.Observers {
       }
     }
 
-    public override string GetObserverIdentifier () {
-      return name + "QuaternionTransform";
-    }
+    public override string ObserverIdentifier { get { return name + "QuaternionTransform"; } }
   }
 }

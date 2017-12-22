@@ -28,7 +28,7 @@ namespace Neodroid.Configurables {
         return; // Do nothing
       }
       if (_debug)
-        Debug.Log ("Applying " + configuration.ToString () + " To " + GetConfigurableIdentifier ());
+        Debug.Log ("Applying " + configuration.ToString () + " To " + ConfigurableIdentifier);
       var pos = _environment.TransformPosition (this.transform.position);
       var dir = _environment.TransformDirection (this.transform.forward);
       switch (_axis_of_configuration) {
@@ -60,10 +60,7 @@ namespace Neodroid.Configurables {
       transform.Rotate (inv_dir);
     }
 
-    public override string GetConfigurableIdentifier () {
-      return name + "Transform" + _axis_of_configuration.ToString ();
-      ;
-    }
+    public override string ConfigurableIdentifier { get { return name + "Transform" + _axis_of_configuration.ToString (); } }
   }
 }
 

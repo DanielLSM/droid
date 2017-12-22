@@ -13,12 +13,12 @@ namespace Neodroid.Configurables {
     string _RotZ;
 
     protected override void AddToEnvironment () {
-      _X = GetConfigurableIdentifier () + "X";
-      _Y = GetConfigurableIdentifier () + "Y";
-      _Z = GetConfigurableIdentifier () + "Z";
-      _RotX = GetConfigurableIdentifier () + "RotX";
-      _RotY = GetConfigurableIdentifier () + "RotY";
-      _RotZ = GetConfigurableIdentifier () + "RotZ";
+      _X = ConfigurableIdentifier + "X";
+      _Y = ConfigurableIdentifier + "Y";
+      _Z = ConfigurableIdentifier + "Z";
+      _RotX = ConfigurableIdentifier + "RotX";
+      _RotY = ConfigurableIdentifier + "RotY";
+      _RotZ = ConfigurableIdentifier + "RotZ";
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _X);
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Y);
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Z);
@@ -41,7 +41,7 @@ namespace Neodroid.Configurables {
         }
       }
       if (_debug)
-        Debug.Log ("Applying " + v.ToString () + " To " + GetConfigurableIdentifier ());
+        Debug.Log ("Applying " + v.ToString () + " To " + ConfigurableIdentifier);
       if (_relative_to_existing_value) {
         if (configuration.ConfigurableName == _X) {
           pos.Set (v - pos.x, pos.y, pos.z);
@@ -78,8 +78,6 @@ namespace Neodroid.Configurables {
       transform.Rotate (inv_dir);
     }
 
-    public override string GetConfigurableIdentifier () {
-      return name + "Transform";
-    }
+    public override string ConfigurableIdentifier{ get { return name + "Transform"; } }
   }
 }

@@ -48,8 +48,6 @@ namespace Neodroid.Configurables {
     public override void ApplyConfiguration (Configuration configuration) {
     }
 
-    public override string GetConfigurableIdentifier () {
-      return name + "Configurable";
-    }
+    public override string ConfigurableIdentifier{ get { return name + "Configurable"; } }
   }
 }

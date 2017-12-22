@@ -27,7 +27,7 @@ namespace Neodroid.Actors {
       if (_motors == null)
         _motors = new Dictionary<string, Motor> ();
       if (_environment != null) {
-        _environment.UnRegisterActor (GetActorIdentifier ());
+        _environment.UnRegisterActor (ActorIdentifier);
       }
       _environment = NeodroidUtilities.MaybeRegisterComponent (_environment, this);
     }
@@ -43,7 +43,7 @@ namespace Neodroid.Actors {
       if (_debug)
         Debug.Log ("Applying " + motion.ToString () + " To " + name + "'s motors");
       var motion_motor_name = motion.GetMotorName ();
-      if (_motors.ContainsKey (motion_motor_name)) {
+      if (_motors.ContainsKey (motion_motor_name) && _motors [motion_motor_name] != null) {
         _motors [motion_motor_name].ApplyMotion (motion);
       } else {
         if (_debug)
@@ -70,9 +70,7 @@ namespace Neodroid.Actors {
       }
     }
 
-    public string GetActorIdentifier () {
-      return name + "Actor";
-    }
+    public string ActorIdentifier { get { return name; } }
 
     public void Register (Motor motor) {
       AddMotor (motor, motor.GetMotorIdentifier ());

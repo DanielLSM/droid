@@ -21,9 +21,7 @@ namespace Neodroid.Observers {
       _data = Encoding.ASCII.GetBytes (_bounding_box.BoundingBoxCoordinatesAsJSON);
     }
 
-    public override string GetObserverIdentifier () {
-      return name + "BoundingBox";
-    }
+    public override string ObserverIdentifier { get { return name + "BoundingBox"; } }
   }
 }
 

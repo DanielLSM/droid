@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using NUnit.Framework.Internal.Filters;
 
 #if UNITY_EDITOR
 using UnityEditor.SceneManagement;
@@ -46,6 +47,10 @@ namespace Neodroid.Utilities {
     }
     #endif
 
+    public static float KineticEnergy (Rigidbody rb) {
+      return 0.5f * rb.mass * Mathf.Pow (rb.velocity.magnitude, 2); // mass in kg, velocity in meters per second, result is joules
+    }
+
     public static Texture2D RenderTextureImage (Camera camera) { // From unity documentation, https://docs.unity3d.com/ScriptReference/Camera.Render.html
       RenderTexture current_render_texture = RenderTexture.active;
       RenderTexture.active = camera.targetTexture;
@@ -57,26 +62,51 @@ namespace Neodroid.Utilities {
       return texture;
     }
 
-    public static void RegisterCollisionTriggerCallbacksOnChildren (Transform transform,
+    public static void RegisterCollisionTriggerCallbacksOnChildren (Component caller,
+                                                                    Transform parent,
                                                                     ChildSensor.OnChildCollisionEnterDelegate OnCollisionEnterChild,
-                                                                    ChildSensor.OnChildTriggerEnterDelegate OnTriggerEnterChild,
-                                                                    ChildSensor.OnChildCollisionExitDelegate OnCollisionExitChild,
-                                                                    ChildSensor.OnChildTriggerExitDelegate OnTriggerExitChild,
-                                                                    ChildSensor.OnChildCollisionStayDelegate OnCollisionStayChild,
-                                                                    ChildSensor.OnChildTriggerStayDelegate OnTriggerStayChild,
+                                                                    ChildSensor.OnChildTriggerEnterDelegate OnTriggerEnterChild = null,
+                                                                    ChildSensor.OnChildCollisionExitDelegate OnCollisionExitChild = null,
+                                                                    ChildSensor.OnChildTriggerExitDelegate OnTriggerExitChild = null,
+                                                                    ChildSensor.OnChildCollisionStayDelegate OnCollisionStayChild = null,
+                                                                    ChildSensor.OnChildTriggerStayDelegate OnTriggerStayChild = null,
                                                                     bool debug = false) {
-      var childrenWithColliders = transform.GetComponentsInChildren<Collider> (transform.gameObject);
+      var childrenWithColliders = parent.GetComponentsInChildren<Collider> ();
 
       foreach (Collider child in childrenWithColliders) {
-        ChildSensor child_sensor = child.gameObject.AddComponent<ChildSensor> ();
-        child_sensor.OnCollisionEnterDelegate = OnCollisionEnterChild;
-        child_sensor.OnTriggerEnterDelegate = OnTriggerEnterChild;
-        child_sensor.OnCollisionExitDelegate = OnCollisionExitChild;
-        child_sensor.OnTriggerExitDelegate = OnTriggerExitChild;
-        child_sensor.OnTriggerStayDelegate = OnTriggerStayChild;
-        child_sensor.OnCollisionStayDelegate = OnCollisionStayChild;
+        var child_sensors = child.GetComponents<ChildSensor> ();
+        ChildSensor sensor = null;
+        for (var i = 0; i < child_sensors.Length; i++) {
+          var child_sensor = child_sensors [i];
+          if (child_sensor._caller != null && child_sensor._caller == caller) {
+            sensor = child_sensor;
+            break;
+          } else if (child_sensor._caller == null) {
+            child_sensor._caller = caller;
+            sensor = child_sensor;
+            break;
+          }
+        }
+        if (sensor == null) {
+          sensor = child.gameObject.AddComponent<ChildSensor> ();
+          sensor._caller = caller;
+        }
+
+        if (OnCollisionEnterChild != null)
+          sensor.OnCollisionEnterDelegate = OnCollisionEnterChild;
+        if (OnTriggerEnterChild != null)
+          sensor.OnTriggerEnterDelegate = OnTriggerEnterChild;
+        if (OnCollisionExitChild != null)
+          sensor.OnCollisionExitDelegate = OnCollisionExitChild;
+        if (OnTriggerExitChild != null)
+          sensor.OnTriggerExitDelegate = OnTriggerExitChild;
+        if (OnTriggerStayChild != null)
+          sensor.OnTriggerStayDelegate = OnTriggerStayChild;
+        if (OnCollisionStayChild != null)
+          sensor.OnCollisionStayDelegate = OnCollisionStayChild;
         if (debug)
-          Debug.Log (transform.name + " has " + child_sensor.name + " registered");
+          Debug.Log (caller.name + " has created " + sensor.name + " on " + child.name + " under parent " + parent.name);
+        
       }
     }
 
@@ -154,11 +184,17 @@ namespace Neodroid.Utilities {
       return gol.ToArray ();
     }
 
-    public static GameObject[] ChildGameObjectsExceptLayer (Transform parent, int layer) {
+    public static GameObject[] RecursiveChildGameObjectsExceptLayer (Transform parent, int layer) {
       var gol = new List<GameObject> ();
       foreach (Transform go in parent) {
-        if (go.gameObject.layer != layer) {
-          gol.Add (go.gameObject);
+        if (go) {
+          if (go.gameObject.layer != layer) {
+            gol.Add (go.gameObject);
+            var children = RecursiveChildGameObjectsExceptLayer (go, layer);
+            if (children != null && children.Length > 0) {
+              gol.AddRange (children);
+            }
+          }
         }
       }
       if (gol.Count == 0) {

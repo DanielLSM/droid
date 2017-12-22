@@ -6,6 +6,6 @@ namespace Neodroid.Configurables {
   public abstract class Configurable : MonoBehaviour {
     public abstract void ApplyConfiguration (Configuration obj);
 
-    public abstract string GetConfigurableIdentifier ();
+    public abstract string ConfigurableIdentifier{ get; }
   }
 }

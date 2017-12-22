@@ -20,10 +20,10 @@ namespace Neodroid.Configurables {
     string _A;
 
     protected override void AddToEnvironment () {
-      _R = GetConfigurableIdentifier () + "R";
-      _G = GetConfigurableIdentifier () + "G";
-      _B = GetConfigurableIdentifier () + "B";
-      _A = GetConfigurableIdentifier () + "A";
+      _R = ConfigurableIdentifier + "R";
+      _G = ConfigurableIdentifier + "G";
+      _B = ConfigurableIdentifier + "B";
+      _A = ConfigurableIdentifier + "A";
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _R);
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _G);
       _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _B);
@@ -32,7 +32,7 @@ namespace Neodroid.Configurables {
 
     public override void ApplyConfiguration (Configuration configuration) {
       if (_debug)
-        Debug.Log ("Applying " + configuration.ToString () + " To " + GetConfigurableIdentifier ());
+        Debug.Log ("Applying " + configuration.ToString () + " To " + ConfigurableIdentifier);
       foreach (var mat in _renderer.materials) {
         var c = mat.color;
 
@@ -50,9 +50,7 @@ namespace Neodroid.Configurables {
       }
     }
 
-    public override string GetConfigurableIdentifier () {
-      return name + "Color";
-    }
+    public override string ConfigurableIdentifier { get { return name + "Color"; } }
   }
 }
 

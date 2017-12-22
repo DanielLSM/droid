@@ -75,7 +75,7 @@ namespace SceneSpecificAssets.Grasping {
     }
 
     void SetupEnvironment () {
-      NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (transform, OnCollisionEnterChild, OnTriggerEnterChild, OnCollisionExitChild, OnTriggerExitChild, OnCollisionStayChild, OnTriggerStayChild);
+      NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (this, transform, OnCollisionEnterChild, OnTriggerEnterChild, OnCollisionExitChild, OnTriggerExitChild, OnCollisionStayChild, OnTriggerStayChild, _debug);
     }
 
     #endregion

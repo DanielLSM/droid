@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Neodroid.Evaluation;
@@ -9,9 +10,10 @@ using Neodroid.Actors;
 using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
 using Neodroid.Configurables;
+using System;
 
 namespace Neodroid.Environments {
-  public class LearningEnvironment : MonoBehaviour, HasRegister<Actor>, HasRegister<Observer>, HasRegister<ConfigurableGameObject> {
+  public class LearningEnvironment : MonoBehaviour, HasRegister<Actor>, HasRegister<Observer>, HasRegister<ConfigurableGameObject>, HasRegister<Resetable> {
 
     #region PublicMembers
 
@@ -38,6 +40,7 @@ namespace Neodroid.Environments {
     Body[] _received_bodies;
 
     Configuration[] _configurations;
+    Dictionary<string, Resetable> _resetables = new Dictionary<string, Resetable> ();
     Dictionary<string, Actor> _actors = new Dictionary<string, Actor> ();
     Dictionary<string, Observer> _observers = new Dictionary<string, Observer> ();
     Dictionary<string, ConfigurableGameObject> _configurables = new Dictionary<string, ConfigurableGameObject> ();
@@ -56,12 +59,12 @@ namespace Neodroid.Environments {
       FindMissingMembers ();
       AddToEnvironment ();
       SaveInitialPoses ();
-      SaveInitialBodies ();
+      StartCoroutine (SaveInitialBodiesIE ());
     }
 
     void SaveInitialPoses () {
       var _ignored_layer = LayerMask.NameToLayer ("IgnoredByNeodroid");
-      _child_game_objects = NeodroidUtilities.ChildGameObjectsExceptLayer (this.transform, _ignored_layer);
+      _child_game_objects = NeodroidUtilities.RecursiveChildGameObjectsExceptLayer (this.transform, _ignored_layer);
       _reset_positions = new Vector3[_child_game_objects.Length];
       _reset_rotations = new Quaternion[_child_game_objects.Length];
       _poses = new Transform[_child_game_objects.Length];
@@ -89,6 +92,12 @@ namespace Neodroid.Environments {
       }
     }
 
+    IEnumerator SaveInitialBodiesIE () {
+      yield return new WaitForFixedUpdate ();
+      SaveInitialBodies ();
+    }
+
+
     #endregion
 
     #region Helpers
@@ -105,12 +114,14 @@ namespace Neodroid.Environments {
 
     public void UpdateObserversData () {
       foreach (Observer obs in RegisteredObservers.Values) {
-        obs.UpdateData ();
+        if (obs) {
+          obs.UpdateData ();
+        }
       }
     }
 
     public EnvironmentState GetCurrentState () {
-      foreach (Actor a in _actors.Values) {
+      foreach (Actor a in RegisteredActors.Values) {
         foreach (Motor m in a.RegisteredMotors.Values) {
           energy_spent += m.GetEnergySpend ();
         }
@@ -126,16 +137,16 @@ namespace Neodroid.Environments {
         description = new EnvironmentDescription (
           _simulation_manager._episode_length, 
           _simulation_manager._frame_skips, 
-          _actors, 
-          _configurables, 
+          RegisteredActors, 
+          RegisteredConfigurables, 
           _objective_function._solved_threshold
         );
       }
       return new EnvironmentState (
-        GetEnvironmentIdentifier (),
+        EnvironmentIdentifier,
         energy_spent,
-        _observers,
-        GetCurrentFrameNumber (),
+        RegisteredObservers,
+        CurrentFrameNumber,
         reward,
         _interrupted,
         _bodies,
@@ -144,8 +155,8 @@ namespace Neodroid.Environments {
       );
     }
 
-    public int GetCurrentFrameNumber () {
-      return _current_episode_frame;
+    public int CurrentFrameNumber {
+      get{ return _current_episode_frame; }
     }
 
     public float GetTimeSinceReset () {
@@ -168,7 +179,7 @@ namespace Neodroid.Environments {
           if (_debug)
             Debug.Log ("Applying " + motion.ToString () + " To " + name + "'s actors");
           var motion_actor_name = motion.GetActorName ();
-          if (RegisteredActors.ContainsKey (motion_actor_name)) {
+          if (RegisteredActors.ContainsKey (motion_actor_name) && RegisteredActors [motion_actor_name] != null) {
             RegisteredActors [motion_actor_name].ApplyMotion (motion);
           } else {
             if (_debug)
@@ -222,6 +233,12 @@ namespace Neodroid.Environments {
     public Dictionary<string, ConfigurableGameObject> RegisteredConfigurables {
       get {
         return _configurables;
+      }
+    }
+
+    public Dictionary<string, Resetable> RegisteredResetable {
+      get {
+        return _resetables;
       }
     }
 
@@ -302,18 +319,27 @@ namespace Neodroid.Environments {
       Configure ();
     }
 
-    public string GetEnvironmentIdentifier () {
-      return name;
+    public string EnvironmentIdentifier {
+      get{ return name; }
     }
 
     void ResetRegisteredObjects () {
+      foreach (var resetable in _resetables.Values) {
+        if (resetable != null) {
+          resetable.Reset ();
+        }
+      }
       if (_debug)
         Debug.Log ("Resetting registed objects");
-      foreach (var actor in _actors.Values) {
-        actor.Reset ();
+      foreach (var actor in RegisteredActors.Values) {
+        if (actor) {
+          actor.Reset ();
+        }
       }
       foreach (var observer in _observers.Values) {
-        observer.Reset ();
+        if (observer) {
+          observer.Reset ();
+        }
       }
     }
 
@@ -321,17 +347,19 @@ namespace Neodroid.Environments {
       if (_simulation_manager) {
         for (int resets = 0; resets < _simulation_manager._resets; resets++) {
           for (int i = 0; i < child_game_objects.Length; i++) {
-            var rigid_body = child_game_objects [i].GetComponent<Rigidbody> ();
-            if (rigid_body)
-              rigid_body.Sleep ();
-            child_game_objects [i].transform.position = positions [i];
-            child_game_objects [i].transform.rotation = rotations [i];
-            if (rigid_body)
-              rigid_body.WakeUp ();
+            if (child_game_objects [i] != null) {
+              var rigid_body = child_game_objects [i].GetComponent<Rigidbody> ();
+              if (rigid_body)
+                rigid_body.Sleep ();
+              child_game_objects [i].transform.position = positions [i];
+              child_game_objects [i].transform.rotation = rotations [i];
+              if (rigid_body)
+                rigid_body.WakeUp ();
 
-            var animation = child_game_objects [i].GetComponent<Animation> ();
-            if (animation)
-              animation.Rewind ();
+              var animation = child_game_objects [i].GetComponent<Animation> ();
+              if (animation)
+                animation.Rewind ();
+            }
           }
         }
         _lastest_reset_time = Time.time;
@@ -343,38 +371,60 @@ namespace Neodroid.Environments {
     }
 
     void SetEnvironmentBodies (Rigidbody[] bodies, Vector3[] velocities, Vector3[] angulars) {
-      for (int i = 0; i < bodies.Length; i++) {
-        bodies [i].Sleep ();
-        bodies [i].velocity = velocities [i];
-        bodies [i].angularVelocity = angulars [i];
-        bodies [i].WakeUp ();
+      if (bodies != null && bodies.Length > 0) {
+        for (int i = 0; i < bodies.Length; i++) {
+          if (_debug)
+            print (String.Format ("Resetting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, velocities [i], angulars [i]));
+          bodies [i].Sleep ();
+          bodies [i].velocity = velocities [i];
+          bodies [i].angularVelocity = angulars [i];
+          bodies [i].WakeUp ();
+        }
       }
     }
 
     void SetEnvironmentPoses (GameObject[] child_game_objects, Pose[] poses) {
+      for (int i = 0; i < _child_game_objects.Length; i++) {
+        if (i < poses.Length) {
+          if (_debug)
+            print (String.Format ("Resetting {0}, position to {1} and rotation to {2}", child_game_objects [i].name, poses [i].position, poses [i].rotation));
+          child_game_objects [i].transform.position = poses [i].position;
+          child_game_objects [i].transform.rotation = poses [i].rotation;
+        }
+      }
     }
 
     void SetEnvironmentBodies (Rigidbody[] bodies, Body[] bods) {
+      if (bodies != null && bodies.Length > 0) {
+        for (int i = 0; i < bodies.Length; i++) {
+          if (bods [i] != null) {
+            if (_debug)
+              print (String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, bods [i].Velocity, bods [i].AngularVelocity));
+            bodies [i].velocity = bods [i].Velocity;
+            bodies [i].angularVelocity = bods [i].AngularVelocity;
+          }
+        }
+      }
     }
 
     #region Registration
 
     public void Register (Actor actor) {
-      if (!_actors.ContainsKey (actor.GetActorIdentifier ())) {
+      if (!RegisteredActors.ContainsKey (actor.ActorIdentifier)) {
         if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered actor {1}", name, actor.GetActorIdentifier ()));
-        _actors.Add (actor.GetActorIdentifier (), actor);
+          Debug.Log (string.Format ("Environment {0} has registered actor {1}", name, actor.ActorIdentifier));
+        RegisteredActors.Add (actor.ActorIdentifier, actor);
       } else {
         if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has actor {1} registered", name, actor.GetActorIdentifier ()));
+          Debug.Log (string.Format ("Environment {0} already has actor {1} registered", name, actor.ActorIdentifier));
       }
     }
 
     public void Register (Actor actor, string identifier) {
-      if (!_actors.ContainsKey (identifier)) {
+      if (!RegisteredActors.ContainsKey (identifier)) {
         if (_debug)
           Debug.Log (string.Format ("Environment {0} has registered actor {1}", name, identifier));
-        _actors.Add (identifier, actor);
+        RegisteredActors.Add (identifier, actor);
       } else {
         if (_debug)
           Debug.Log (string.Format ("Environment {0} already has actor {1} registered", name, identifier));
@@ -382,13 +432,13 @@ namespace Neodroid.Environments {
     }
 
     public void Register (Observer observer) {
-      if (!_observers.ContainsKey (observer.GetObserverIdentifier ())) {
+      if (!_observers.ContainsKey (observer.ObserverIdentifier)) {
         if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered observer {1}", name, observer.GetObserverIdentifier ()));
-        _observers.Add (observer.GetObserverIdentifier (), observer);
+          Debug.Log (string.Format ("Environment {0} has registered observer {1}", name, observer.ObserverIdentifier));
+        _observers.Add (observer.ObserverIdentifier, observer);
       } else {
         if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has observer {1} registered", name, observer.GetObserverIdentifier ()));
+          Debug.Log (string.Format ("Environment {0} already has observer {1} registered", name, observer.ObserverIdentifier));
       }
     }
 
@@ -404,13 +454,13 @@ namespace Neodroid.Environments {
     }
 
     public void Register (ConfigurableGameObject configurable) {
-      if (!_configurables.ContainsKey (configurable.GetConfigurableIdentifier ())) {
+      if (!_configurables.ContainsKey (configurable.ConfigurableIdentifier)) {
         if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered configurable {1}", name, configurable.GetConfigurableIdentifier ()));
-        _configurables.Add (configurable.GetConfigurableIdentifier (), configurable);
+          Debug.Log (string.Format ("Environment {0} has registered configurable {1}", name, configurable.ConfigurableIdentifier));
+        _configurables.Add (configurable.ConfigurableIdentifier, configurable);
       } else {
         if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, configurable.GetConfigurableIdentifier ()));
+          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, configurable.ConfigurableIdentifier));
       }
     }
 
@@ -425,11 +475,33 @@ namespace Neodroid.Environments {
       }
     }
 
+    public void Register (Resetable resetable, string identifier) {
+      if (!_resetables.ContainsKey (identifier)) {
+        if (_debug)
+          Debug.Log (string.Format ("Environment {0} has registered resetables {1}", name, identifier));
+        _resetables.Add (identifier, resetable);
+      } else {
+        if (_debug)
+          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, identifier));
+      }
+    }
+
+    public void Register (Resetable resetable) {
+      if (!_resetables.ContainsKey (resetable.ResetableIdentifier)) {
+        if (_debug)
+          Debug.Log (string.Format ("Environment {0} has registered resetables {1}", name, resetable.ResetableIdentifier));
+        _resetables.Add (resetable.ResetableIdentifier, resetable);
+      } else {
+        if (_debug)
+          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, resetable.ResetableIdentifier));
+      }
+    }
+
     public void UnRegisterActor (string identifier) {
-      if (_actors.ContainsKey (identifier))
+      if (RegisteredActors.ContainsKey (identifier))
       if (_debug)
         Debug.Log (string.Format ("Environment {0} unregistered actor {1}", name, identifier));
-      _actors.Remove (identifier);
+      RegisteredActors.Remove (identifier);
     }
 
     public void UnRegisterObserver (string identifier) {

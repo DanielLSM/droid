@@ -36,9 +36,7 @@ namespace Neodroid.Observers {
       _data = Encoding.ASCII.GetBytes (str_rep);
     }
 
-    public override string GetObserverIdentifier () {
-      return name + "NearestByTag";
-    }
+    public override string ObserverIdentifier{ get { return name + "NearestByTag"; } }
 
     void FindNearest () {
       var candidates = FindObjectsOfType<GameObject> ();

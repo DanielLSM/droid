@@ -13,46 +13,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:Neodroid.Utilities:PlayerMotions
   _player_motions:
   - key: 264
-    actor: LunarLanderActor
+    actor: LunarLander
     motor: LegNRigidbodyRotX
     strength: -100
   - key: 258
-    actor: LunarLanderActor
+    actor: LunarLander
     motor: LegSRigidbodyRotX
     strength: -100
   - key: 260
-    actor: LunarLanderActor
+    actor: LunarLander
     motor: LegWRigidbodyRotX
     strength: -100
   - key: 262
-    actor: LunarLanderActor
+    actor: LunarLander
     motor: LegERigidbodyRotX
     strength: -100
   - key: 32
-    actor: LunarLanderActor
+    actor: LunarLander
     motor: LunarLanderRocketY
     strength: 100
   - key: 119
-    actor: LunarLanderActor
+    actor: LunarLander
     motor: LunarLanderRigidbodyRotX
     strength: -10
   - key: 115
-    actor: LunarLanderActor
+    actor: LunarLander
     motor: LunarLanderRigidbodyRotX
     strength: 10
   - key: 97
-    actor: LunarLanderActor
+    actor: LunarLander
     motor: LunarLanderRigidbodyRotZ
     strength: 10
   - key: 100
-    actor: LunarLanderActor
+    actor: LunarLander
     motor: LunarLanderRigidbodyRotZ
     strength: -10
   - key: 113
-    actor: LunarLanderActor
+    actor: LunarLander
     motor: LunarLanderRigidbodyRotY
     strength: -10
   - key: 101
-    actor: LunarLanderActor
+    actor: 'LunarLander         '
     motor: LunarLanderRigidbodyRotY
     strength: 10

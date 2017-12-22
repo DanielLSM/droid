@@ -76,14 +76,14 @@ namespace Neodroid.Windows {
         GUILayout.Label ("Environments");
         if (_show_environment_properties != null) {
           for (int i = 0; i < _show_environment_properties.Length; i++) {
-            _show_environment_properties [i] = EditorGUILayout.Foldout (_show_environment_properties [i], _environments [i].GetEnvironmentIdentifier ());
+            _show_environment_properties [i] = EditorGUILayout.Foldout (_show_environment_properties [i], _environments [i].EnvironmentIdentifier);
             if (_show_environment_properties [i]) {
               _actors = _environments [i].RegisteredActors;
               _observers = _environments [i].RegisteredObservers;
               _configurables = _environments [i].RegisteredConfigurables;
 
               EditorGUILayout.BeginVertical ("Box");
-              _environments [i].enabled = EditorGUILayout.BeginToggleGroup (_environments [i].GetEnvironmentIdentifier (), _environments [i].enabled && _environments [i].gameObject.activeSelf);
+              _environments [i].enabled = EditorGUILayout.BeginToggleGroup (_environments [i].EnvironmentIdentifier, _environments [i].enabled && _environments [i].gameObject.activeSelf);
               EditorGUILayout.ObjectField (_environments [i], typeof(LearningEnvironment), true);
               _environments [i]._coordinate_system = (CoordinateSystem)EditorGUILayout.EnumPopup ("Coordinate system", _environments [i]._coordinate_system);
               EditorGUI.BeginDisabledGroup (_environments [i]._coordinate_system != CoordinateSystem.RelativeToReferencePoint);

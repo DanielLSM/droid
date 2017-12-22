@@ -26,9 +26,7 @@ namespace Neodroid.Observers {
       }
     }
 
-    public override string GetObserverIdentifier () {
-      return name + "EulerTransform";
-    }
+    public override string ObserverIdentifier{ get { return name + "EulerTransform"; } }
       
   }
 }

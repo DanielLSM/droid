@@ -24,7 +24,7 @@ namespace Neodroid.Evaluation {
   public class ReachArea : ObjectiveFunction {
     public bool _based_on_tags = false;
     public Collider _area;
-    public Collider _actor;
+    public GameObject _actor;
     public LearningEnvironment _environment;
 
     public Obstruction[] _obstructions;
@@ -57,7 +57,7 @@ namespace Neodroid.Evaluation {
         _environment.Interrupt ("Actor colliding with obstruction");
         //return -1f;
       }
-      if (_playable_area) {
+      if (_playable_area && _actor) {
         if (!_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
           _environment.Interrupt ("Actor is outside playable area");
         }
@@ -72,7 +72,7 @@ namespace Neodroid.Evaluation {
         _area = FindObjectOfType<Observer> ().gameObject.GetComponent<Collider> ();
       }
       if (!_actor) {
-        _actor = FindObjectOfType<Actor> ().gameObject.GetComponent<Collider> ();
+        _actor = FindObjectOfType<Actor> ().gameObject;
       }
       if (!_environment) {
         _environment = FindObjectOfType<LearningEnvironment> ();
@@ -85,98 +85,108 @@ namespace Neodroid.Evaluation {
       }
 
       NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (
+        this,
         _area.transform,
         OnCollisionEnterChild,
         OnTriggerEnterChild,
         OnCollisionExitChild,
         OnTriggerExitChild,
         OnCollisionStayChild,
-        OnTriggerStayChild);
+        OnTriggerStayChild,
+        _debug);
 
       NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (
+        this,
         _actor.transform,
         OnCollisionEnterChild,
         OnTriggerEnterChild,
         OnCollisionExitChild,
         OnTriggerExitChild,
         OnCollisionStayChild,
-        OnTriggerStayChild);
+        OnTriggerStayChild,
+        _debug);
     }
 
     void OnTriggerEnterChild (GameObject child_game_object, Collider other_game_object) {
-      if (_based_on_tags) {
-        if (child_game_object.tag == _area.tag && other_game_object.tag == _actor.tag) {
-          if (_debug)
-            Debug.Log ("Actor is inside area");
-          _overlapping = ActorOverlapping.INSIDE_AREA;
-        }
-        if (child_game_object.tag == _actor.tag && other_game_object.tag == "Obstruction") {
-          if (_debug)
-            Debug.Log ("Actor is colliding");
-          _colliding = ActorColliding.COLLIDING;
-        }
-      } else {
-        if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
-          if (_debug)
-            Debug.Log ("Actor is inside area");
-          _overlapping = ActorOverlapping.INSIDE_AREA;
-        }
-        if (child_game_object == _actor.gameObject && other_game_object.tag == "Obstruction") {
-          if (_debug)
-            Debug.Log ("Actor is colliding");
-          _colliding = ActorColliding.COLLIDING;
+      if (_actor) {
+        if (_based_on_tags) {
+          if (child_game_object.tag == _area.tag && other_game_object.tag == _actor.tag) {
+            if (_debug)
+              Debug.Log ("Actor is inside area");
+            _overlapping = ActorOverlapping.INSIDE_AREA;
+          }
+          if (child_game_object.tag == _actor.tag && other_game_object.tag == "Obstruction") {
+            if (_debug)
+              Debug.Log ("Actor is colliding");
+            _colliding = ActorColliding.COLLIDING;
+          }
+        } else {
+          if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
+            if (_debug)
+              Debug.Log ("Actor is inside area");
+            _overlapping = ActorOverlapping.INSIDE_AREA;
+          }
+          if (child_game_object == _actor.gameObject && other_game_object.tag == "Obstruction") {
+            if (_debug)
+              Debug.Log ("Actor is colliding");
+            _colliding = ActorColliding.COLLIDING;
+          }
         }
       }
     }
 
     void OnTriggerStayChild (GameObject child_game_object, Collider other_game_object) {
-      if (_based_on_tags) {
-        if (child_game_object.tag == _area.tag && other_game_object.tag == _actor.tag) {
-          if (_debug)
-            Debug.Log ("Actor is inside area");
-          _overlapping = ActorOverlapping.INSIDE_AREA;
-        }
-        if (child_game_object.tag == _actor.tag && other_game_object.tag == "Obstruction") {
-          if (_debug)
-            Debug.Log ("Actor is colliding");
-          _colliding = ActorColliding.COLLIDING;
-        }
-      } else {
-        if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
-          if (_debug)
-            Debug.Log ("Actor is inside area");
-          _overlapping = ActorOverlapping.INSIDE_AREA;
-        }
-        if (child_game_object == _actor.gameObject && other_game_object.tag == "Obstruction") {
-          if (_debug)
-            Debug.Log ("Actor is colliding");
-          _colliding = ActorColliding.COLLIDING;
+      if (_actor) {
+        if (_based_on_tags) {
+          if (child_game_object.tag == _area.tag && other_game_object.tag == _actor.tag) {
+            if (_debug)
+              Debug.Log ("Actor is inside area");
+            _overlapping = ActorOverlapping.INSIDE_AREA;
+          }
+          if (child_game_object.tag == _actor.tag && other_game_object.tag == "Obstruction") {
+            if (_debug)
+              Debug.Log ("Actor is colliding");
+            _colliding = ActorColliding.COLLIDING;
+          }
+        } else {
+          if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
+            if (_debug)
+              Debug.Log ("Actor is inside area");
+            _overlapping = ActorOverlapping.INSIDE_AREA;
+          }
+          if (child_game_object == _actor.gameObject && other_game_object.tag == "Obstruction") {
+            if (_debug)
+              Debug.Log ("Actor is colliding");
+            _colliding = ActorColliding.COLLIDING;
+          }
         }
       }
     }
 
     void OnTriggerExitChild (GameObject child_game_object, Collider other_game_object) {
-      if (_based_on_tags) {
-        if (child_game_object.tag == _area.tag && other_game_object.tag == _actor.tag) {
-          if (_debug)
-            Debug.Log ("Actor is outside area");
-          _overlapping = ActorOverlapping.OUTSIDE_AREA;
-        }
-        if (child_game_object.tag == _actor.tag && other_game_object.tag == "Obstruction") {
-          if (_debug)
-            Debug.Log ("Actor is not colliding");
-          _colliding = ActorColliding.NOT_COLLIDING;
-        }
-      } else {
-        if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
-          if (_debug)
-            Debug.Log ("Actor is outside area");
-          _overlapping = ActorOverlapping.OUTSIDE_AREA;
-        }
-        if (child_game_object == _actor.gameObject && other_game_object.tag == "Obstruction") {
-          if (_debug)
-            Debug.Log ("Actor is not colliding");
-          _colliding = ActorColliding.NOT_COLLIDING;
+      if (_actor) {
+        if (_based_on_tags) {
+          if (child_game_object.tag == _area.tag && other_game_object.tag == _actor.tag) {
+            if (_debug)
+              Debug.Log ("Actor is outside area");
+            _overlapping = ActorOverlapping.OUTSIDE_AREA;
+          }
+          if (child_game_object.tag == _actor.tag && other_game_object.tag == "Obstruction") {
+            if (_debug)
+              Debug.Log ("Actor is not colliding");
+            _colliding = ActorColliding.NOT_COLLIDING;
+          }
+        } else {
+          if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
+            if (_debug)
+              Debug.Log ("Actor is outside area");
+            _overlapping = ActorOverlapping.OUTSIDE_AREA;
+          }
+          if (child_game_object == _actor.gameObject && other_game_object.tag == "Obstruction") {
+            if (_debug)
+              Debug.Log ("Actor is not colliding");
+            _colliding = ActorColliding.NOT_COLLIDING;
+          }
         }
       }
     }

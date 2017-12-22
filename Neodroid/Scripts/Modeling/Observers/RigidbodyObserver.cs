@@ -29,8 +29,6 @@ namespace Neodroid.Observers {
       _data = Encoding.ASCII.GetBytes (str_rep);
     }
 
-    public override string GetObserverIdentifier () {
-      return name + "Rigidbody";
-    }
+    public override string ObserverIdentifier { get { return name + "Rigidbody"; } }
   }
 }
