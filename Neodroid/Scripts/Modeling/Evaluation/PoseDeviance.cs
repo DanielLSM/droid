@@ -22,13 +22,14 @@ namespace Neodroid.Evaluation {
     [SerializeField]
     LearningEnvironment _environment;
     [SerializeField]
-    Obstruction[] _obstructions;
-    [SerializeField]
     BoundingBox _playable_area;
+
     [SerializeField]
-    float peak_reward = 0.0f;
+    Obstruction[] _obstructions;
 
     #endregion
+
+    float peak_reward = 0.0f;
 
     public override float InternalEvaluate () {
       if (!_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {

@@ -1,10 +1,10 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Neodroid.Messaging.Messages {
 
-  [Serializable]
+  [System.Serializable]
   public class Reaction {
     MotorMotion[] _motions;
     Configuration[] _configurations;
@@ -92,7 +92,7 @@ namespace Neodroid.Messaging.Messages {
           configurations_str += configuration.ToString () + "\n";
         }
       }
-      return String.Format (
+      return System.String.Format (
         "<Reaction>\n " +
         "{0},{1},{2},{3},{4}" +
         "\n</Reaction>", _reset, _step, _configure, motions_str, configurations_str);

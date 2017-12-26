@@ -1,10 +1,17 @@
-﻿using System;
+﻿
 using Neodroid.Utilities;
 using Neodroid.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Motors {
-  public class HexTransformMotor : EulerTransformMotor {
+  public class HexTransformMotor : Motor {
+
+    [SerializeField]
+    protected Space _relative_to = Space.Self;
+    [SerializeField]
+    protected bool _no_collisions = true;
+    [SerializeField]
+    protected string _layer_mask = "Obstructions";
 
     string _X;
     string _Y;
@@ -33,28 +40,20 @@ namespace Neodroid.Motors {
       return name + "Transform";
     }
 
-    public override void ApplyMotion (MotorMotion motion) {
-      if (motion.Strength < ValidInput.min_value || motion.Strength > ValidInput.max_value) {
-        Debug.Log ("It does not accept input, outside allowed range");
-        return; // Do nothing
-      }
-      if (Debugging)
-        Debug.Log ("Applying " + motion.ToString () + " To " + name);
+    public override void InnerApplyMotion (MotorMotion motion) {
       if (motion.GetMotorName () == _X) {
-        transform.Translate (Vector3.left * motion.Strength, _space);
+        transform.Translate (Vector3.left * motion.Strength, _relative_to);
       } else if (motion.GetMotorName () == _Y) {
-        transform.Translate (-Vector3.up * motion.Strength, _space);
+        transform.Translate (-Vector3.up * motion.Strength, _relative_to);
       } else if (motion.GetMotorName () == _Z) {
-        transform.Translate (-Vector3.forward * motion.Strength, _space);
+        transform.Translate (-Vector3.forward * motion.Strength, _relative_to);
       } else if (motion.GetMotorName () == _RotX) {
-        transform.Rotate (Vector3.left, motion.Strength, _space);
+        transform.Rotate (Vector3.left, motion.Strength, _relative_to);
       } else if (motion.GetMotorName () == _RotY) {
-        transform.Rotate (Vector3.up, motion.Strength, _space);
+        transform.Rotate (Vector3.up, motion.Strength, _relative_to);
       } else if (motion.GetMotorName () == _RotZ) {
-        transform.Rotate (Vector3.forward, motion.Strength, _space);
+        transform.Rotate (Vector3.forward, motion.Strength, _relative_to);
       }
-
-      EnergySpendSinceReset += EnergyCost * motion.Strength;
     }
   }
 }

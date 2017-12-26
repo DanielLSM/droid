@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UnityEngine;
 
 namespace SceneSpecificAssets.Grasping.Utilities {
 
@@ -55,17 +55,17 @@ namespace SceneSpecificAssets.Grasping.Utilities {
       return MotionState.WasMoving;
     }
 
-    private Action _on_state_update_callback;
+    System.Action _on_state_update_callback;
 
-    public States (Action on_state_update_callback = null) {
+    public States (System.Action on_state_update_callback = null) {
       if (on_state_update_callback != null)
         _on_state_update_callback = on_state_update_callback;
       else
         _on_state_update_callback = null_print;
     }
 
-    private void null_print () {
-      //Debug.Log("null");
+    void null_print () {
+      Debug.Log ("null");
     }
 
     public void TargetIsGrabbed () {

@@ -1,11 +1,20 @@
-﻿using System;
+﻿
 using Neodroid.Utilities;
 using Neodroid.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Motors {
   [RequireComponent (typeof(Rigidbody))]
-  public class HexRigidbodyMotor : RigidbodyMotor {
+  public class HexRigidbodyMotor : Motor {
+
+    [SerializeField]
+    protected Space _relative_to = Space.Self;
+    [SerializeField]
+    protected Rigidbody _rigidbody;
+
+    protected override void Start () {
+      _rigidbody = GetComponent<Rigidbody> ();
+    }
 
     string _X;
     string _Y;
@@ -34,13 +43,7 @@ namespace Neodroid.Motors {
       return name + "Rigidbody";
     }
 
-    public override void ApplyMotion (MotorMotion motion) {
-      if (motion.Strength < ValidInput.min_value || motion.Strength > ValidInput.max_value) {
-        Debug.Log ("It does not accept input, outside allowed range");
-        return; // Do nothing
-      }
-      if (Debugging)
-        Debug.Log ("Applying " + motion.ToString () + " To " + name);
+    public override void InnerApplyMotion (MotorMotion motion) {
       if (motion.GetMotorName () == _X) {
         _rigidbody.AddForce (Vector3.left * motion.Strength);
       } else if (motion.GetMotorName () == _Y) {
@@ -54,8 +57,6 @@ namespace Neodroid.Motors {
       } else if (motion.GetMotorName () == _RotZ) {
         _rigidbody.AddTorque (Vector3.forward * motion.Strength);
       }
-
-      EnergySpendSinceReset += EnergyCost * motion.Strength;
     }
   }
 }

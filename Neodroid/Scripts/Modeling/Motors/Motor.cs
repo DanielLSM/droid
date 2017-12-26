@@ -6,7 +6,7 @@ using System;
 
 namespace Neodroid.Motors {
   [ExecuteInEditMode]
-  [Serializable]
+  [System.Serializable]
   public class Motor : MonoBehaviour {
     #region Fields
 
@@ -108,7 +108,18 @@ namespace Neodroid.Motors {
       return name + "Motor";
     }
 
-    public virtual void ApplyMotion (MotorMotion motion) {
+    public void ApplyMotion (MotorMotion motion) {
+      if (Debugging)
+        print ("Applying " + motion.ToString () + " To " + name);
+      if (motion.Strength < ValidInput.min_value || motion.Strength > ValidInput.max_value) {
+        print (System.String.Format ("It does not accept input {0}, outside allowed range {1} to {2}", motion.Strength, ValidInput.min_value, ValidInput.max_value));
+        return; // Do nothing
+      }
+      InnerApplyMotion (motion);
+      EnergySpendSinceReset += Mathf.Abs (EnergyCost * motion.Strength);
+    }
+
+    public virtual void InnerApplyMotion (MotorMotion motion) {
     }
 
     public virtual float GetEnergySpend () {

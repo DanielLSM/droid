@@ -218,13 +218,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4976817146948698}
-  - component: {fileID: 54750614967881826}
   - component: {fileID: 114315218702530786}
   - component: {fileID: 114289306764140296}
+  - component: {fileID: 114921314780565750}
+  - component: {fileID: 54750614967881826}
   - component: {fileID: 198409972773700914}
   - component: {fileID: 199007738538070398}
   - component: {fileID: 114750374325389064}
-  - component: {fileID: 114921314780565750}
   - component: {fileID: 136255989395678928}
   - component: {fileID: 114764676913768996}
   m_Layer: 0
@@ -279,9 +279,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4654775115328364}
+  - component: {fileID: 114057750773781526}
   - component: {fileID: 54829802733716354}
   - component: {fileID: 153069404109834044}
-  - component: {fileID: 114057750773781526}
   m_Layer: 0
   m_Name: LegE
   m_TagString: Actor
@@ -1390,12 +1390,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _decimal_granularity: 0
-  _min_strength: -100
-  _max_strength: 100
+  _actor: {fileID: 114315218702530786}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 114315218702530786}
   _axis_of_motion: 3
   _relative_to: 1
 --- !u!114 &114074128632045194
@@ -1446,12 +1448,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _decimal_granularity: 0
-  _min_strength: -100
-  _max_strength: 100
+  _actor: {fileID: 114315218702530786}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 114315218702530786}
   _axis_of_motion: 3
   _relative_to: 1
 --- !u!114 &114250313819889842
@@ -1489,12 +1493,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _decimal_granularity: 0
-  _min_strength: -100
-  _max_strength: 100
+  _actor: {fileID: 114315218702530786}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 114315218702530786}
   _axis_of_motion: 3
   _relative_to: 1
 --- !u!114 &114289306764140296
@@ -1508,12 +1514,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b871e7b9fa5f0461cb1f71d327dfe38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _decimal_granularity: 0
-  _min_strength: -100
-  _max_strength: 100
+  _actor: {fileID: 114315218702530786}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -50
+    max_value: 50
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 114315218702530786}
   _axis_of_motion: 0
   _relative_to: 1
   _rotational_motors: 1
@@ -1541,7 +1549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 0}
-  _debug: 0
+  _debugging: 0
 --- !u!114 &114446172442833638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1629,7 +1637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 0}
-  _debug: 0
+  _debugging: 0
   _data: 
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
@@ -1694,12 +1702,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _decimal_granularity: 0
-  _min_strength: -100
-  _max_strength: 100
+  _actor: {fileID: 114315218702530786}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 114315218702530786}
   _axis_of_motion: 3
   _relative_to: 1
 --- !u!114 &114921314780565750
@@ -1713,12 +1723,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8251bf060f8314480a869f5d1dc20d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _decimal_granularity: 0
-  _min_strength: 0
-  _max_strength: 100
+  _actor: {fileID: 114315218702530786}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: 0
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 114315218702530786}
   _axis_of_motion: 1
   _relative_to: 1
 --- !u!120 &120007938194064910
@@ -2535,7 +2547,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -348315777
+  randomSeed: -98865910
   InitialModule:
     serializedVersion: 3
     enabled: 1

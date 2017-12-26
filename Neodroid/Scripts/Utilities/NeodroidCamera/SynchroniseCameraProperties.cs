@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+
 
 namespace Neodroid.Utilities.NeodroidCamera {
   [RequireComponent (typeof(Camera))]
   [ExecuteInEditMode]
-  [Serializable]
+  [System.Serializable]
   public class SynchroniseCameraProperties : MonoBehaviour {
 
     public bool _sync_orthographic_size = true;

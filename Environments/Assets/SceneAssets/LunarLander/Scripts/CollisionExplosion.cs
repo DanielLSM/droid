@@ -2,7 +2,7 @@
 using UnityEngine;
 using Neodroid.Utilities;
 using Neodroid.Environments;
-using System;
+
 
 
 public class CollisionExplosion : Resetable {
@@ -41,7 +41,7 @@ public class CollisionExplosion : Resetable {
 
   void ChildOnCollisionEnter (GameObject child, Collision col) {
     if (Debugging)
-      print (String.Format ("Collision"));
+      print (System.String.Format ("Collision"));
     if (!col.collider.isTrigger) {
       De (child.GetComponent<Rigidbody> (), col.collider.attachedRigidbody);
     }
@@ -49,7 +49,7 @@ public class CollisionExplosion : Resetable {
 
   void ChildOnTriggerEnter (GameObject child, Collider col) {
     if (Debugging)
-      print (String.Format ("Trigger colliding"));
+      print (System.String.Format ("Trigger colliding"));
     if (!col.isTrigger) {
       De (child.GetComponent<Rigidbody> (), col.attachedRigidbody);
     }
@@ -65,7 +65,7 @@ public class CollisionExplosion : Resetable {
       val_other = NeodroidUtilities.KineticEnergy (rb);
     }
     if (Debugging)
-      print (String.Format ("{0} {1}", val, val_other));
+      print (System.String.Format ("{0} {1}", val, val_other));
     if ((val >= _threshold || val_other >= _threshold) && !_has_exploded) {
       _has_exploded = true;
       if (_explosion) {

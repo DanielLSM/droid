@@ -6,7 +6,7 @@ using Neodroid.Messaging;
 using Neodroid.Messaging.Messages;
 using Neodroid.Utilities;
 using UnityEngine;
-using System;
+
 using System.Runtime.InteropServices;
 
 namespace Neodroid.Managers {
@@ -14,10 +14,19 @@ namespace Neodroid.Managers {
 
     #region Fields
 
+    [Header ("Development", order = 99)]
+    [SerializeField]
+    bool _debugging = false;
+
+    [Header ("Connection", order = 100)]
     [SerializeField]
     string _ip_address = "127.0.0.1";
     [SerializeField]
     int _port = 5555;
+
+    [Header ("General", order = 100)]
+    [SerializeField]
+    bool _wait_for_reaction_every_frame = false;
     [SerializeField]
     bool _continue_reaction_on_disconnect = false;
     [SerializeField]
@@ -29,10 +38,7 @@ namespace Neodroid.Managers {
     [SerializeField]
     int _resets = 10;
     //When resetting transforms we run multiple times to ensure that we properly reset hierachies of objects
-    [SerializeField]
-    bool _wait_for_reaction_every_frame = false;
-    [SerializeField]
-    bool _debugging = false;
+
 
     #endregion
 

@@ -5,7 +5,7 @@ using SceneSpecificAssets.Grasping.Utilities;
 using SceneSpecificAssets.Grasping.Grasps;
 using System.Collections.Generic;
 using Neodroid.Utilities;
-using System;
+
 
 namespace SceneSpecificAssets.Grasping {
   public class ScriptedGripper : MonoBehaviour {
@@ -282,13 +282,13 @@ namespace SceneSpecificAssets.Grasping {
       if (other_maybe_graspable) {
         if (child_game_object == _grab_region.gameObject && other_maybe_graspable.gameObject == _target_game_object.gameObject) {
           if (Debugging)
-            print (String.Format ("Target {0} is inside region", other_maybe_graspable.name));
+            print (System.String.Format ("Target {0} is inside region", other_maybe_graspable.name));
           _state.TargetIsInsideRegion ();
         }
 
         if (child_game_object == _begin_grab_region.gameObject && other_maybe_graspable.gameObject == _target_game_object.gameObject && !_state.IsTargetGrabbed ()) {
           if (Debugging)
-            print (String.Format ("Picking up target {0}", other_maybe_graspable.name));
+            print (System.String.Format ("Picking up target {0}", other_maybe_graspable.name));
           _state.PickUpTarget ();
         }
       }
@@ -309,13 +309,13 @@ namespace SceneSpecificAssets.Grasping {
       if (other_maybe_graspable) {
         if (child_game_object == _claw_1.gameObject && other_maybe_graspable.gameObject == _target_game_object.gameObject) {
           if (Debugging)
-            print (String.Format ("Target {0} is touching {1}", other_maybe_graspable.name, child_game_object.name));
+            print (System.String.Format ("Target {0} is touching {1}", other_maybe_graspable.name, child_game_object.name));
           _state.Claw1IsTouchingTarget ();
         }
 
         if (child_game_object == _claw_2.gameObject && other_maybe_graspable.gameObject == _target_game_object.gameObject) {
           if (Debugging)
-            print (String.Format ("Target {0} is touching {1}", other_maybe_graspable.name, child_game_object.name));
+            print (System.String.Format ("Target {0} is touching {1}", other_maybe_graspable.name, child_game_object.name));
           _state.Claw2IsTouchingTarget ();
         }
       }

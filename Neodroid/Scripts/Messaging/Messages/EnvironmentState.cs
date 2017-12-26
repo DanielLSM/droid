@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using Neodroid.Actors;
 using Neodroid.Observers;
@@ -6,7 +6,7 @@ using Neodroid.Configurables;
 using UnityEngine;
 
 namespace Neodroid.Messaging.Messages {
-  [Serializable]
+  [System.Serializable]
   public class EnvironmentState {
     string _environment_name;
 

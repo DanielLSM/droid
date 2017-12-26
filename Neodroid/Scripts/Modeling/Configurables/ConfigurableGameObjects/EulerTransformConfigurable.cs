@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using Neodroid.Utilities;
 using UnityEngine;
 using Neodroid.Messaging.Messages;
@@ -17,7 +17,7 @@ namespace Neodroid.Configurables {
       if (_use_bounding_box_for_range) {
         if (_bounding_box != null) {
           var valid_input = new InputRange ();
-          valid_input.max_value = Math.Min (_bounding_box._bounds.size.x, Math.Min (_bounding_box._bounds.size.y, _bounding_box._bounds.size.z));
+          valid_input.max_value = System.Math.Min (_bounding_box._bounds.size.x, System.Math.Min (_bounding_box._bounds.size.y, _bounding_box._bounds.size.z));
           valid_input.min_value = -valid_input.max_value;
           ValidInput = valid_input;
         }
@@ -26,7 +26,7 @@ namespace Neodroid.Configurables {
 
     public override void ApplyConfiguration (Configuration configuration) {
       if (configuration.ConfigurableValue < ValidInput.min_value || configuration.ConfigurableValue > ValidInput.max_value) {
-        print (String.Format ("It does not accept input, outside allowed range {0} to {1}", ValidInput.min_value, ValidInput.max_value));
+        print (System.String.Format ("It does not accept input, outside allowed range {0} to {1}", ValidInput.min_value, ValidInput.max_value));
         return; // Do nothing
       }
       if (Debugging)

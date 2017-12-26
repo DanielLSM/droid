@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+
 
 public class Traction : MonoBehaviour {
 
@@ -13,7 +13,7 @@ public class Traction : MonoBehaviour {
     if (Input.GetKeyDown (KeyCode.LeftArrow)) {
       foreach (var tentacle in _tentacles) {
         //tentacle.AddRelativeForce (Vector3.left);
-        if (Math.Abs (tentacle.transform.localPosition.x) > 2) {
+        if (System.Math.Abs (tentacle.transform.localPosition.x) > 2) {
           tentacle.transform.localPosition = (tentacle.transform.localPosition - tentacle.transform.right);
         }
       }

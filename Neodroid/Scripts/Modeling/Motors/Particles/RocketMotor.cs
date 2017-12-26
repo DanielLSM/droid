@@ -30,13 +30,7 @@ namespace Neodroid.Motors {
       _fired_this_step = false;
     }
 
-    public override void ApplyMotion (MotorMotion motion) {
-      if (motion.Strength < ValidInput.min_value || motion.Strength > ValidInput.max_value) {
-        Debug.Log ("It does not accept input, outside allowed range");
-        return; // Do nothing
-      }
-      if (Debugging)
-        Debug.Log ("Applying " + motion.ToString () + " To " + name);
+    public override void InnerApplyMotion (MotorMotion motion) {
       switch (_axis_of_motion) {
       case Axis.X:
         if (_relative_to == Space.World) {
@@ -83,7 +77,6 @@ namespace Neodroid.Motors {
       default:
         break;
       }
-      EnergySpendSinceReset += EnergyCost * motion.Strength;
       _fired_this_step = true;
     }
 

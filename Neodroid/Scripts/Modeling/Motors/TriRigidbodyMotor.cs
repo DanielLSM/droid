@@ -1,13 +1,23 @@
-﻿using System;
+﻿
 using Neodroid.Utilities;
 using Neodroid.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Motors {
   [RequireComponent (typeof(Rigidbody))]
-  public class TriRigidbodyMotor : RigidbodyMotor {
+  public class TriRigidbodyMotor : Motor {
 
-    public bool _rotational_motors;
+    [SerializeField]
+    protected Space _relative_to = Space.Self;
+    [SerializeField]
+    protected Rigidbody _rigidbody;
+    [SerializeField]
+    protected bool _rotational_motors;
+
+    protected override void Start () {
+      _rigidbody = GetComponent<Rigidbody> ();
+    }
+
     string _X;
     string _Y;
     string _Z;
@@ -30,13 +40,7 @@ namespace Neodroid.Motors {
       return name + "Rigidbody";
     }
 
-    public override void ApplyMotion (MotorMotion motion) {
-      if (motion.Strength < ValidInput.min_value || motion.Strength > ValidInput.max_value) {
-        Debug.Log ("It does not accept input, outside allowed range");
-        return; // Do nothing
-      }
-      if (Debugging)
-        Debug.Log ("Applying " + motion.ToString () + " To " + name);
+    public override void InnerApplyMotion (MotorMotion motion) {
       if (!_rotational_motors) {
         if (motion.GetMotorName () == _X) {
           if (_relative_to == Space.World) {
@@ -54,7 +58,7 @@ namespace Neodroid.Motors {
           if (_relative_to == Space.World) {
             _rigidbody.AddForce (Vector3.forward * motion.Strength);
           } else {
-            _rigidbody.AddRelativeForce (Vector3.up * motion.Strength);
+            _rigidbody.AddRelativeForce (Vector3.forward * motion.Strength);
           }
         }
       } else {
@@ -78,8 +82,6 @@ namespace Neodroid.Motors {
           }
         }
       }
-
-      EnergySpendSinceReset += EnergyCost * motion.Strength;
     }
   }
 }

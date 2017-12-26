@@ -1,7 +1,7 @@
-﻿using System;
+﻿
 
 namespace Neodroid.Messaging.Messages {
-  [Serializable]
+  [System.Serializable]
   public class MotorMotion {
     string _actor_name;
     string _motor_name;

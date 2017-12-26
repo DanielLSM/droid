@@ -18,20 +18,25 @@ namespace Neodroid.Environments {
 
     #region Fields
 
-    [SerializeField]
-    CoordinateSystem _coordinate_system = CoordinateSystem.LocalCoordinates;
-    [SerializeField]
-    Transform _coordinate_reference_point;
-
-    //infinite
-    [SerializeField]
-    BoundingBox _playable_area;
+    [Header ("References", order = 99)]
     [SerializeField]
     ObjectiveFunction _objective_function;
     [SerializeField]
     SimulationManager _simulation_manager;
+
+    [Header ("Development", order = 100)]
     [SerializeField]
     bool _debugging = false;
+
+    [Header ("General", order = 101)]
+    [SerializeField]
+    Transform _coordinate_reference_point;
+    [SerializeField]
+    CoordinateSystem _coordinate_system = CoordinateSystem.LocalCoordinates;
+
+    [Header ("(Optional)", order = 102)]
+    [SerializeField]
+    BoundingBox _playable_area;
 
     #endregion
 
@@ -48,8 +53,8 @@ namespace Neodroid.Environments {
     Transform[] _poses;
     Pose[] _received_poses;
     Body[] _received_bodies;
-
     Configuration[] _configurations;
+
     Dictionary<string, Resetable> _resetables = new Dictionary<string, Resetable> ();
     Dictionary<string, Actor> _actors = new Dictionary<string, Actor> ();
     Dictionary<string, Observer> _observers = new Dictionary<string, Observer> ();
@@ -180,6 +185,7 @@ namespace Neodroid.Environments {
 
     public void Interrupt (string reason) {
       _interrupted = true;
+      _reset = true;
       if (Debugging) {
         print (System.String.Format ("Was interrupted, because {0}", reason));
       }
@@ -188,8 +194,16 @@ namespace Neodroid.Environments {
     public void PostUpdate () {
       if (_interrupted) {
         _interrupted = false;
-        Reset ();
       }
+      if (_reset) {
+        Reset ();
+        _reset = false;
+      }
+      if (_configure) {
+        Configure ();
+        _configure = false;
+      }
+      UpdateObserversData ();
     }
 
     public void UpdateObserversData () {
@@ -467,15 +481,9 @@ namespace Neodroid.Environments {
     }
 
     void Reset () {
-      if (_reset) {
-        ResetRegisteredObjects ();
-        SetEnvironmentPoses (_child_game_objects, _reset_positions, _reset_rotations);
-        SetEnvironmentBodies (_bodies, _reset_velocities, _reset_angulars);
-      }
-      if (_configure) {
-        Configure ();
-      }
-      UpdateObserversData ();
+      ResetRegisteredObjects ();
+      SetEnvironmentPoses (_child_game_objects, _reset_positions, _reset_rotations);
+      SetEnvironmentBodies (_bodies, _reset_velocities, _reset_angulars);
     }
 
     void Configure () {
@@ -572,7 +580,7 @@ namespace Neodroid.Environments {
       if (bodies != null && bodies.Length > 0) {
         for (int i = 0; i < bodies.Length; i++) {
           if (Debugging)
-            print (String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, velocities [i], angulars [i]));
+            print (System.String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, velocities [i], angulars [i]));
           bodies [i].Sleep ();
           bodies [i].velocity = velocities [i];
           bodies [i].angularVelocity = angulars [i];
@@ -585,7 +593,7 @@ namespace Neodroid.Environments {
       for (int i = 0; i < _child_game_objects.Length; i++) {
         if (i < poses.Length) {
           if (Debugging)
-            print (String.Format ("Setting {0}, position to {1} and rotation to {2}", child_game_objects [i].name, poses [i].position, poses [i].rotation));
+            print (System.String.Format ("Setting {0}, position to {1} and rotation to {2}", child_game_objects [i].name, poses [i].position, poses [i].rotation));
           var pos = poses [i].position;
           var rot = poses [i].rotation;
           if (_playable_area) {
@@ -604,7 +612,7 @@ namespace Neodroid.Environments {
         for (int i = 0; i < bodies.Length; i++) {
           if (i < bods.Length && bods [i] != null) {
             if (Debugging)
-              print (String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, bods [i].Velocity, bods [i].AngularVelocity));
+              print (System.String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, bods [i].Velocity, bods [i].AngularVelocity));
             bodies [i].velocity = bods [i].Velocity;
             bodies [i].angularVelocity = bods [i].AngularVelocity;
           }

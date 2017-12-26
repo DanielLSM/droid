@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading;
-
+﻿
 using Neodroid.Messaging.Messages;
 using NetMQ;
 using NetMQ.Sockets;
@@ -13,13 +11,13 @@ namespace Neodroid.Messaging {
   class MessageServer {
     #region PrivateMembers
 
-    Thread _polling_thread;
-    Thread _wait_for_client_thread;
-    Object _thread_lock = new Object ();
+    System.Threading.Thread _polling_thread;
+    System.Threading.Thread _wait_for_client_thread;
+    System.Object _thread_lock = new System.Object ();
     bool _stop_thread_ = false;
     bool _waiting_for_main_loop_to_send = false;
     bool _use_inter_process_communication = false;
-    bool Debugging = false;
+    bool _debugging = false;
 
     ResponseSocket _socket;
     string _ip_address;
@@ -27,6 +25,15 @@ namespace Neodroid.Messaging {
     byte[] byte_buffer;
 
     #endregion
+
+    public bool Debugging {
+      get {
+        return _debugging;
+      }
+      set {
+        _debugging = value;
+      }
+    }
 
     #region Contstruction
 
@@ -52,14 +59,14 @@ namespace Neodroid.Messaging {
       _socket = new ResponseSocket ();
     }
 
-    public void ListenForClientToConnect (Action callback) {
-      _wait_for_client_thread = new Thread (unused_param => WaitForClientToConnect (callback));
+    public void ListenForClientToConnect (System.Action callback) {
+      _wait_for_client_thread = new System.Threading.Thread (unused_param => WaitForClientToConnect (callback));
       _wait_for_client_thread.IsBackground = true; // Is terminated with foreground threads, when they terminate
       _wait_for_client_thread.Start ();
     }
 
-    public void StartReceiving (Action<Reaction> cmd_callback, Action disconnect_callback, Action<String> debug_callback) {
-      _polling_thread = new Thread (unused_param => PollingThread (cmd_callback, disconnect_callback, debug_callback));
+    public void StartReceiving (System.Action<Reaction> cmd_callback, System.Action disconnect_callback, System.Action<System.String> debug_callback) {
+      _polling_thread = new System.Threading.Thread (unused_param => PollingThread (cmd_callback, disconnect_callback, debug_callback));
       _polling_thread.IsBackground = true; // Is terminated with foreground threads, when they terminate
       _polling_thread.Start ();
     }
@@ -68,7 +75,7 @@ namespace Neodroid.Messaging {
 
     #region Threads
 
-    void WaitForClientToConnect (Action callback) {
+    void WaitForClientToConnect (System.Action callback) {
       if (_use_inter_process_communication) {
         //_socket.Bind ("inproc://neodroid");
         _socket.Bind ("ipc:///tmp/neodroid/messages0");
@@ -79,13 +86,13 @@ namespace Neodroid.Messaging {
       callback ();
     }
 
-    void PollingThread (Action<Reaction> receive_callback, Action disconnect_callback, Action<String> debug_callback) {
+    void PollingThread (System.Action<Reaction> receive_callback, System.Action disconnect_callback, System.Action<System.String> debug_callback) {
       byte[] msg;
       while (_stop_thread_ == false) {
         if (!_waiting_for_main_loop_to_send) {
           try {
             //msg = _socket.TryReceiveFrameBytes ();
-            _socket.TryReceiveFrameBytes (TimeSpan.FromSeconds (2), out msg);
+            _socket.TryReceiveFrameBytes (System.TimeSpan.FromSeconds (2), out msg);
             if (msg != null && msg.Length > 0) {
               var flat_reaction = FBSReaction.GetRootAsFBSReaction (new FlatBuffers.ByteBuffer (msg));
               if (Debugging) {
@@ -95,7 +102,7 @@ namespace Neodroid.Messaging {
               receive_callback (reaction);
               _waiting_for_main_loop_to_send = true;
             }
-          } catch (Exception err) {
+          } catch (System.Exception err) {
             debug_callback (err.ToString ());
           }
         }

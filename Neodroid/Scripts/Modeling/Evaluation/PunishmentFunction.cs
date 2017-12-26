@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System;
+
 using Neodroid.Evaluation;
 using Neodroid.Utilities;
 

@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 
 namespace Neodroid.Evaluation {
-  [Serializable]
+  [System.Serializable]
   public abstract class ObjectiveFunction : MonoBehaviour, HasRegister<Term> {
     #region Fields
 
@@ -20,9 +20,9 @@ namespace Neodroid.Evaluation {
     [SerializeField]
     float _solved_threshold = 0;
     [SerializeField]
-    Term[] _extra_term_go;
+    Term[] _extra_terms;
     [SerializeField]
-    Dictionary<string, Term> _extra_terms = new Dictionary<string, Term> ();
+    Dictionary<string, Term> _extra_terms_dict = new Dictionary<string, Term> ();
     [SerializeField]
     Dictionary<Term, float> _extra_term_weights = new Dictionary<Term, float> ();
 
@@ -30,8 +30,8 @@ namespace Neodroid.Evaluation {
     #endregion
 
     void Awake () {
-      foreach (var go in _extra_term_go) {
-        _extra_terms.Add (go.name, go);
+      foreach (var go in _extra_terms) {
+        _extra_terms_dict.Add (go.name, go);
         _extra_term_weights.Add (go, 1);
       }
     }
@@ -84,19 +84,19 @@ namespace Neodroid.Evaluation {
 
     public virtual float EvaluateExtraTerms () {
       float extra_terms_output = 0;
-      foreach (var term in _extra_terms.Values) {
+      foreach (var term in _extra_terms_dict.Values) {
         extra_terms_output += _extra_term_weights [term] * term.evaluate ();
       }
       return extra_terms_output;
     }
 
     public virtual void Register (Term term) {
-      _extra_terms.Add (term.name, term);
+      _extra_terms_dict.Add (term.name, term);
       _extra_term_weights.Add (term, 1);
     }
 
     public virtual void Register (Term term, string identifier) {
-      _extra_terms.Add (term.name, term);
+      _extra_terms_dict.Add (term.name, term);
       _extra_term_weights.Add (term, 1);
     }
 

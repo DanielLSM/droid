@@ -7,7 +7,7 @@ using Neodroid.Observers;
 using UnityEngine;
 using Neodroid.Environments;
 using System.Xml;
-using System;
+
 using Neodroid.FBS;
 using Neodroid.FBS.Reaction;
 using Neodroid.FBS.State;

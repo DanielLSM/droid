@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Neodroid.Configurables;
 
 namespace Neodroid.Windows {
@@ -10,7 +7,7 @@ namespace Neodroid.Windows {
 
   public class WindowManager : EditorWindow {
 
-    static Type[] _desired_dock_next_toos = new Type[] {
+  static System.Type[] _desired_dock_next_toos = new System.Type[] {
       typeof(RenderTextureConfiguratorWindow),
       typeof(CameraSynchronisationWindow),
       typeof(DebugWindow),

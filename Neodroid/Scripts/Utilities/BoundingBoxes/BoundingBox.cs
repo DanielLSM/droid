@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -79,7 +79,7 @@ namespace Neodroid.Utilities.BoundingBoxes {
     }
 
     string JSONifyVec3 (Vector3 vec) {
-      return String.Format ("[{0},{1},{2}]", vec.x, vec.y, vec.z);
+      return System.String.Format ("[{0},{1},{2}]", vec.x, vec.y, vec.z);
     }
 
     public string BoundingBoxCoordinatesAsJSON {

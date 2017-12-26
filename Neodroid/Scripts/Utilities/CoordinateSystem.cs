@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 
 namespace Neodroid.Utilities {
   public enum CoordinateSystem {

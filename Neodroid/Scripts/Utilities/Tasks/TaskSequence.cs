@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+
 using Neodroid.Utilities;
 
 namespace Neodroid.Task {
@@ -16,10 +16,10 @@ namespace Neodroid.Task {
     void Start () {
       if (_sequence == null || _sequence.Length == 0) {
         _sequence = FindObjectsOfType<GoalObserver> ();
-        Array.Sort (_sequence, (g1, g2) => g1._order_index.CompareTo (g2._order_index));
+        System.Array.Sort (_sequence, (g1, g2) => g1._order_index.CompareTo (g2._order_index));
       }
 
-      Array.Reverse (_sequence);
+      System.Array.Reverse (_sequence);
       _goal_stack = new Stack<GoalObserver> (_sequence);
       _current_goal = PopGoal ();
     }

@@ -8,20 +8,16 @@ namespace Neodroid.Motors {
   public class RigidbodyMotor : Motor {
     [SerializeField]
     protected Axis _axis_of_motion;
-    public Space _relative_to = Space.Self;
+    [SerializeField]
+    protected Space _relative_to = Space.Self;
+    [SerializeField]
     protected Rigidbody _rigidbody;
 
     protected override void Start () {
       _rigidbody = GetComponent<Rigidbody> ();
     }
 
-    public override void ApplyMotion (MotorMotion motion) {
-      if (motion.Strength < ValidInput.min_value || motion.Strength > ValidInput.max_value) {
-        Debug.Log ("It does not accept input, outside allowed range");
-        return; // Do nothing
-      }
-      if (Debugging)
-        Debug.Log ("Applying " + motion.ToString () + " To " + name);
+    public override void InnerApplyMotion (MotorMotion motion) {
       switch (_axis_of_motion) {
       case Axis.X:
         if (_relative_to == Space.World) {
@@ -68,7 +64,6 @@ namespace Neodroid.Motors {
       default:
         break;
       }
-      EnergySpendSinceReset += EnergyCost * motion.Strength;
     }
 
     public override string GetMotorIdentifier () {

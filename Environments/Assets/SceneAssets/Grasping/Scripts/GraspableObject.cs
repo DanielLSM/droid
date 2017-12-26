@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
+
 using SceneSpecificAssets.Grasping.Utilities;
 using SceneSpecificAssets.Grasping.Grasps;
 
