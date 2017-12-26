@@ -15,10 +15,10 @@ namespace Neodroid.Observers {
     public bool _use_environments_coordinates = true;
 
     public override void UpdateData () {
-      if (_environment && _use_environments_coordinates) {
-        _position = _environment.TransformPosition (this.transform.position);
-        _direction = _environment.TransformDirection (this.transform.forward);
-        _rotation = _environment.TransformDirection (this.transform.up);
+      if (ParentEnvironment && _use_environments_coordinates) {
+        _position = ParentEnvironment.TransformPosition (this.transform.position);
+        _direction = ParentEnvironment.TransformDirection (this.transform.forward);
+        _rotation = ParentEnvironment.TransformDirection (this.transform.up);
       } else {
         _position = this.transform.position;
         _direction = this.transform.forward;

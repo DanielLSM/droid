@@ -16,8 +16,8 @@ namespace Neodroid.Configurables {
     }
 
     public override void ApplyConfiguration (Configuration configuration) {
-      if (_debug)
-        Debug.Log ("Applying " + configuration.ToString () + " To " + ConfigurableIdentifier);
+      if (Debugging)
+        print ("Applying " + configuration.ToString () + " To " + ConfigurableIdentifier);
       var velocity = _rigidbody.velocity;
       var angular_velocity = _rigidbody.velocity;
       switch (_axis_of_configuration) {

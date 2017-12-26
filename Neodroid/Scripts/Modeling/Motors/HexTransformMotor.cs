@@ -21,12 +21,12 @@ namespace Neodroid.Motors {
       _RotX = GetMotorIdentifier () + "RotX";
       _RotY = GetMotorIdentifier () + "RotY";
       _RotZ = GetMotorIdentifier () + "RotZ";
-      _actor_game_object = NeodroidUtilities.MaybeRegisterNamedComponent (_actor_game_object, (Motor)this, _X);
-      _actor_game_object = NeodroidUtilities.MaybeRegisterNamedComponent (_actor_game_object, (Motor)this, _Y);
-      _actor_game_object = NeodroidUtilities.MaybeRegisterNamedComponent (_actor_game_object, (Motor)this, _Z);
-      _actor_game_object = NeodroidUtilities.MaybeRegisterNamedComponent (_actor_game_object, (Motor)this, _RotX);
-      _actor_game_object = NeodroidUtilities.MaybeRegisterNamedComponent (_actor_game_object, (Motor)this, _RotY);
-      _actor_game_object = NeodroidUtilities.MaybeRegisterNamedComponent (_actor_game_object, (Motor)this, _RotZ);
+      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent (ParentActor, (Motor)this, _X);
+      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent (ParentActor, (Motor)this, _Y);
+      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent (ParentActor, (Motor)this, _Z);
+      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent (ParentActor, (Motor)this, _RotX);
+      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent (ParentActor, (Motor)this, _RotY);
+      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent (ParentActor, (Motor)this, _RotZ);
     }
 
     public override string GetMotorIdentifier () {
@@ -34,11 +34,11 @@ namespace Neodroid.Motors {
     }
 
     public override void ApplyMotion (MotorMotion motion) {
-      if (motion.Strength < _min_strength || motion.Strength > _max_strength) {
+      if (motion.Strength < ValidInput.min_value || motion.Strength > ValidInput.max_value) {
         Debug.Log ("It does not accept input, outside allowed range");
         return; // Do nothing
       }
-      if (_debug)
+      if (Debugging)
         Debug.Log ("Applying " + motion.ToString () + " To " + name);
       if (motion.GetMotorName () == _X) {
         transform.Translate (Vector3.left * motion.Strength, _space);
@@ -54,7 +54,7 @@ namespace Neodroid.Motors {
         transform.Rotate (Vector3.forward, motion.Strength, _space);
       }
 
-      _energy_spend_since_reset += _energy_cost * motion.Strength;
+      EnergySpendSinceReset += EnergyCost * motion.Strength;
     }
   }
 }

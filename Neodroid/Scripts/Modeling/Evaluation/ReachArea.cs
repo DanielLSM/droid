@@ -93,7 +93,7 @@ namespace Neodroid.Evaluation {
         OnTriggerExitChild,
         OnCollisionStayChild,
         OnTriggerStayChild,
-        _debug);
+        Debugging);
 
       NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (
         this,
@@ -104,30 +104,30 @@ namespace Neodroid.Evaluation {
         OnTriggerExitChild,
         OnCollisionStayChild,
         OnTriggerStayChild,
-        _debug);
+        Debugging);
     }
 
     void OnTriggerEnterChild (GameObject child_game_object, Collider other_game_object) {
       if (_actor) {
         if (_based_on_tags) {
           if (child_game_object.tag == _area.tag && other_game_object.tag == _actor.tag) {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is inside area");
             _overlapping = ActorOverlapping.INSIDE_AREA;
           }
           if (child_game_object.tag == _actor.tag && other_game_object.tag == "Obstruction") {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is colliding");
             _colliding = ActorColliding.COLLIDING;
           }
         } else {
           if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is inside area");
             _overlapping = ActorOverlapping.INSIDE_AREA;
           }
           if (child_game_object == _actor.gameObject && other_game_object.tag == "Obstruction") {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is colliding");
             _colliding = ActorColliding.COLLIDING;
           }
@@ -139,23 +139,23 @@ namespace Neodroid.Evaluation {
       if (_actor) {
         if (_based_on_tags) {
           if (child_game_object.tag == _area.tag && other_game_object.tag == _actor.tag) {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is inside area");
             _overlapping = ActorOverlapping.INSIDE_AREA;
           }
           if (child_game_object.tag == _actor.tag && other_game_object.tag == "Obstruction") {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is colliding");
             _colliding = ActorColliding.COLLIDING;
           }
         } else {
           if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is inside area");
             _overlapping = ActorOverlapping.INSIDE_AREA;
           }
           if (child_game_object == _actor.gameObject && other_game_object.tag == "Obstruction") {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is colliding");
             _colliding = ActorColliding.COLLIDING;
           }
@@ -167,23 +167,23 @@ namespace Neodroid.Evaluation {
       if (_actor) {
         if (_based_on_tags) {
           if (child_game_object.tag == _area.tag && other_game_object.tag == _actor.tag) {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is outside area");
             _overlapping = ActorOverlapping.OUTSIDE_AREA;
           }
           if (child_game_object.tag == _actor.tag && other_game_object.tag == "Obstruction") {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is not colliding");
             _colliding = ActorColliding.NOT_COLLIDING;
           }
         } else {
           if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is outside area");
             _overlapping = ActorOverlapping.OUTSIDE_AREA;
           }
           if (child_game_object == _actor.gameObject && other_game_object.tag == "Obstruction") {
-            if (_debug)
+            if (Debugging)
               Debug.Log ("Actor is not colliding");
             _colliding = ActorColliding.NOT_COLLIDING;
           }

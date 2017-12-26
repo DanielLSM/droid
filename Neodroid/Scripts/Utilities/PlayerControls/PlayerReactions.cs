@@ -9,7 +9,7 @@ namespace Neodroid.Utilities {
   public class PlayerReactions : MonoBehaviour {
 
     public PlayerMotions _player_motions;
-    public bool _debug = false;
+    public bool Debugging = false;
 
     SimulationManager _simulation_manager;
 
@@ -23,7 +23,7 @@ namespace Neodroid.Utilities {
         List<MotorMotion> motions = new List<MotorMotion> ();
         foreach (var player_motion in _player_motions._player_motions) {
           if (Input.GetKey (player_motion.key)) {
-            if (_debug)
+            if (Debugging)
               print (String.Format ("{0} {1} {2}", player_motion.actor, player_motion.motor, player_motion.strength));
             var motion = new MotorMotion (player_motion.actor, player_motion.motor, player_motion.strength);
             motions.Add (motion);
@@ -31,9 +31,9 @@ namespace Neodroid.Utilities {
         }
 
         var reaction = new Reaction (motions.ToArray ());
-        _simulation_manager.Step (reaction);
+        _simulation_manager.ReactInEnvironments (reaction);
       } else {
-        if (_debug)
+        if (Debugging)
           print ("No playermotions scriptable object assigned");
       }
     }

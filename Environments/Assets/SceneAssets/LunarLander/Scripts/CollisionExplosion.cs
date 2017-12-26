@@ -11,7 +11,7 @@ public class CollisionExplosion : Resetable {
   bool _has_exploded = false;
   GameObject _broken_object;
 
-  public bool _debug = false;
+  public bool Debugging = false;
   public Rigidbody _rigidbody;
   public float _threshold = 150;
   public float _explosion_force = 50;
@@ -35,12 +35,12 @@ public class CollisionExplosion : Resetable {
       null,
       null,
       null, 
-      _debug);
+      Debugging);
   }
 
 
   void ChildOnCollisionEnter (GameObject child, Collision col) {
-    if (_debug)
+    if (Debugging)
       print (String.Format ("Collision"));
     if (!col.collider.isTrigger) {
       De (child.GetComponent<Rigidbody> (), col.collider.attachedRigidbody);
@@ -48,7 +48,7 @@ public class CollisionExplosion : Resetable {
   }
 
   void ChildOnTriggerEnter (GameObject child, Collider col) {
-    if (_debug)
+    if (Debugging)
       print (String.Format ("Trigger colliding"));
     if (!col.isTrigger) {
       De (child.GetComponent<Rigidbody> (), col.attachedRigidbody);
@@ -64,7 +64,7 @@ public class CollisionExplosion : Resetable {
     if (other != null) {
       val_other = NeodroidUtilities.KineticEnergy (rb);
     }
-    if (_debug)
+    if (Debugging)
       print (String.Format ("{0} {1}", val, val_other));
     if ((val >= _threshold || val_other >= _threshold) && !_has_exploded) {
       _has_exploded = true;
@@ -111,8 +111,10 @@ public class CollisionExplosion : Resetable {
   public override void Reset () {
     if (_broken_object)
       Destroy (_broken_object);
-    _rigidbody.WakeUp ();
-    _rigidbody.gameObject.SetActive (true);
+    if (_rigidbody) {
+      _rigidbody.WakeUp ();
+      _rigidbody.gameObject.SetActive (true);
+    }
     _has_exploded = false;
   }
 

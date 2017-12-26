@@ -31,6 +31,7 @@ namespace Neodroid.Windows {
     Dictionary<string,Motor> _motors;
     Dictionary<string,Observer> _observers;
     Dictionary<string,ConfigurableGameObject> _configurables;
+  Dictionary<string,Resetable> _resetables;
     Vector2 _scroll_position;
     Texture _icon;
     int _preview_image_size = 100;
@@ -58,10 +59,10 @@ namespace Neodroid.Windows {
         GUILayout.Label (_neodroid_icon, GUILayout.Width (_preview_image_size), GUILayout.Height (_preview_image_size));
 
         EditorGUILayout.BeginVertical ();
-        _simulation_manager._episode_length = EditorGUILayout.IntField ("Episode Length", _simulation_manager._episode_length);
-        _simulation_manager._frame_skips = EditorGUILayout.IntField ("Frame skips", _simulation_manager._frame_skips);
-        _simulation_manager._resets = EditorGUILayout.IntField ("Resets when resetting", _simulation_manager._resets);
-        _simulation_manager._wait_for_reaction_every_frame = EditorGUILayout.Toggle ("Wait For Reaction Every Frame", _simulation_manager._wait_for_reaction_every_frame);
+  _simulation_manager.EpisodeLength = EditorGUILayout.IntField ("Episode Length", _simulation_manager.EpisodeLength);
+  _simulation_manager.FrameSkips = EditorGUILayout.IntField ("Frame skips", _simulation_manager.FrameSkips);
+  _simulation_manager.Resets = EditorGUILayout.IntField ("Resets when resetting", _simulation_manager.Resets);
+  _simulation_manager.WaitForReactionEveryFrame = EditorGUILayout.Toggle ("Wait For Reaction Every Frame", _simulation_manager.WaitForReactionEveryFrame);
         EditorGUILayout.EndVertical ();
 
         EditorGUILayout.EndHorizontal ();
@@ -78,24 +79,29 @@ namespace Neodroid.Windows {
           for (int i = 0; i < _show_environment_properties.Length; i++) {
             _show_environment_properties [i] = EditorGUILayout.Foldout (_show_environment_properties [i], _environments [i].EnvironmentIdentifier);
             if (_show_environment_properties [i]) {
-              _actors = _environments [i].RegisteredActors;
-              _observers = _environments [i].RegisteredObservers;
-              _configurables = _environments [i].RegisteredConfigurables;
+              _actors = _environments [i].Actors;
+              _observers = _environments [i].Observers;
+              _configurables = _environments [i].Configurables;
+              _resetables = _environments [i].Resetables;
 
               EditorGUILayout.BeginVertical ("Box");
-              _environments [i].enabled = EditorGUILayout.BeginToggleGroup (_environments [i].EnvironmentIdentifier, _environments [i].enabled && _environments [i].gameObject.activeSelf);
+              _environments [i].enabled = EditorGUILayout.BeginToggleGroup (_environments [i].EnvironmentIdentifier,
+  _environments [i].enabled && _environments [i].gameObject.activeSelf);
               EditorGUILayout.ObjectField (_environments [i], typeof(LearningEnvironment), true);
-              _environments [i]._coordinate_system = (CoordinateSystem)EditorGUILayout.EnumPopup ("Coordinate system", _environments [i]._coordinate_system);
-              EditorGUI.BeginDisabledGroup (_environments [i]._coordinate_system != CoordinateSystem.RelativeToReferencePoint);
-              _environments [i]._coordinate_reference_point = (Transform)EditorGUILayout.ObjectField ("Reference point", _environments [i]._coordinate_reference_point, typeof(Transform), true);
+  _environments [i].CoordinateSystem = (CoordinateSystem)EditorGUILayout.EnumPopup ("Coordinate system",
+  _environments [i].CoordinateSystem);
+  EditorGUI.BeginDisabledGroup (_environments [i].CoordinateSystem != CoordinateSystem.RelativeToReferencePoint);
+  _environments [i].CoordinateReferencePoint = (Transform)EditorGUILayout.ObjectField ("Reference point",
+  _environments [i].CoordinateReferencePoint, typeof(Transform), true);
               EditorGUI.EndDisabledGroup ();
-              _environments [i]._objective_function = (ObjectiveFunction)EditorGUILayout.ObjectField ("Objective function", _environments [i]._objective_function, typeof(ObjectiveFunction), true);
+  _environments [i].ObjectiveFunction = (ObjectiveFunction)EditorGUILayout.ObjectField ("Objective function",
+  _environments [i].ObjectiveFunction, typeof(ObjectiveFunction), true);
 
               EditorGUILayout.BeginVertical ("Box");
               GUILayout.Label ("Actors");
               foreach (var actor in _actors) {
                 if (actor.Value != null) {
-                  _motors = actor.Value.RegisteredMotors;
+                  _motors = actor.Value.Motors;
 
                   EditorGUILayout.BeginVertical ("Box");
                   actor.Value.enabled = EditorGUILayout.BeginToggleGroup (actor.Key, actor.Value.enabled && actor.Value.gameObject.activeSelf);
@@ -148,6 +154,19 @@ namespace Neodroid.Windows {
               }
               EditorGUILayout.EndVertical ();
 
+  EditorGUILayout.BeginVertical ("Box");
+  GUILayout.Label ("Resetables");
+  foreach (var resetable in _resetables) {
+  if (resetable.Value != null) {
+  EditorGUILayout.BeginVertical ("Box");
+  resetable.Value.enabled = EditorGUILayout.BeginToggleGroup (resetable.Key, resetable.Value.enabled && resetable.Value.gameObject.activeSelf);
+  EditorGUILayout.ObjectField (resetable.Value, typeof(Resetable), true);
+  EditorGUILayout.EndToggleGroup ();
+  EditorGUILayout.EndVertical ();
+  }
+  }
+  EditorGUILayout.EndVertical ();
+
 
               EditorGUILayout.EndToggleGroup ();
               EditorGUILayout.EndVertical ();
@@ -165,11 +184,11 @@ namespace Neodroid.Windows {
           EditorGUI.BeginDisabledGroup (!Application.isPlaying);
 
           if (GUILayout.Button ("Step")) {
-            _simulation_manager.Step (null);
+            _simulation_manager.ReactInEnvironments (null);
           }
 
           if (GUILayout.Button ("Reset")) {
-            _simulation_manager.Step (new Reaction (true));
+  _simulation_manager.ReactInEnvironments (new Reaction (true));
           }
 
           EditorGUI.EndDisabledGroup ();

@@ -8,6 +8,8 @@ table FBSReaction {
   bodies:[FBSBody];
   configurations:[FBSConfiguration];
   reset:bool;
+  configure:bool;
+  step:bool;
   motions:[FBSMotion];
 }
 

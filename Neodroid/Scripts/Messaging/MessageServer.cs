@@ -19,6 +19,7 @@ namespace Neodroid.Messaging {
     bool _stop_thread_ = false;
     bool _waiting_for_main_loop_to_send = false;
     bool _use_inter_process_communication = false;
+    bool Debugging = false;
 
     ResponseSocket _socket;
     string _ip_address;
@@ -29,10 +30,22 @@ namespace Neodroid.Messaging {
 
     #region Contstruction
 
-    public MessageServer (string ip_address = "127.0.0.1", int port = 5555, bool use_inter_process_communication = false) {
+    public MessageServer (string ip_address = "127.0.0.1", int port = 5555, bool use_inter_process_communication = false, bool debug = false) {
+      Debugging = debug;
       _ip_address = ip_address;
       _port = port;
       _use_inter_process_communication = use_inter_process_communication;
+      if (!_use_inter_process_communication) {
+        AsyncIO.ForceDotNet.Force ();
+      }
+      _socket = new ResponseSocket ();
+    }
+
+    public MessageServer (bool debug = false) {
+      Debugging = debug;
+      _ip_address = "127.0.0.1";
+      _port = 5555;
+      _use_inter_process_communication = false;
       if (!_use_inter_process_communication) {
         AsyncIO.ForceDotNet.Force ();
       }
@@ -45,8 +58,8 @@ namespace Neodroid.Messaging {
       _wait_for_client_thread.Start ();
     }
 
-    public void StartReceiving (Action<Reaction> cmd_callback, Action disconnect_callback, Action<String> error_callback) {
-      _polling_thread = new Thread (unused_param => PollingThread (cmd_callback, disconnect_callback, error_callback));
+    public void StartReceiving (Action<Reaction> cmd_callback, Action disconnect_callback, Action<String> debug_callback) {
+      _polling_thread = new Thread (unused_param => PollingThread (cmd_callback, disconnect_callback, debug_callback));
       _polling_thread.IsBackground = true; // Is terminated with foreground threads, when they terminate
       _polling_thread.Start ();
     }
@@ -66,7 +79,7 @@ namespace Neodroid.Messaging {
       callback ();
     }
 
-    void PollingThread (Action<Reaction> receive_callback, Action disconnect_callback, Action<String> error_callback) {
+    void PollingThread (Action<Reaction> receive_callback, Action disconnect_callback, Action<String> debug_callback) {
       byte[] msg;
       while (_stop_thread_ == false) {
         if (!_waiting_for_main_loop_to_send) {
@@ -75,12 +88,15 @@ namespace Neodroid.Messaging {
             _socket.TryReceiveFrameBytes (TimeSpan.FromSeconds (2), out msg);
             if (msg != null && msg.Length > 0) {
               var flat_reaction = FBSReaction.GetRootAsFBSReaction (new FlatBuffers.ByteBuffer (msg));
+              if (Debugging) {
+                debug_callback (flat_reaction.ToString ());
+              }
               var reaction = FBSUtilities.create_reaction (flat_reaction);
               receive_callback (reaction);
               _waiting_for_main_loop_to_send = true;
             }
           } catch (Exception err) {
-            error_callback (err.ToString ());
+            debug_callback (err.ToString ());
           }
         }
       }
@@ -127,7 +143,7 @@ namespace Neodroid.Messaging {
         lock (_thread_lock)
           _stop_thread_ = true;
         if (_use_inter_process_communication) {
-          _socket.Disconnect (("ipc:///tmp/neodroid/messages0"));
+          _socket.Disconnect (("ipc:///tmp/neodroid/messages"));
         } else {
           _socket.Disconnect (("tcp://" + _ip_address + ":" + _port.ToString ()));
         }

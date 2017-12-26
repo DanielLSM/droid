@@ -6,10 +6,11 @@ class FBSObserverData(object):
     NONE = 0
     FBSByteArray = 1
     FBSNumeral = 2
-    FBSString = 3
-    FBSPosition = 4
-    FBSRotation = 5
-    FBSEulerTransform = 6
-    FBSQuaternionTransformObservation = 7
-    FBSBodyObservation = 8
+    FBSNumeralArray = 3
+    FBSString = 4
+    FBSPosition = 5
+    FBSRotation = 6
+    FBSEulerTransform = 7
+    FBSQuaternionTransformObservation = 8
+    FBSBodyObservation = 9
 

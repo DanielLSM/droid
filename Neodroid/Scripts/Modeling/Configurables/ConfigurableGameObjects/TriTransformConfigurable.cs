@@ -1,5 +1,4 @@
-﻿using System;
-using Neodroid.Utilities;
+﻿using Neodroid.Utilities;
 using UnityEngine;
 using Neodroid.Messaging.Messages;
 using Neodroid.Observers;
@@ -16,27 +15,27 @@ namespace Neodroid.Configurables {
       _X = ConfigurableIdentifier + "X";
       _Y = ConfigurableIdentifier + "Y";
       _Z = ConfigurableIdentifier + "Z";
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _X);
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Y);
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _Z);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _X);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _Y);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _Z);
     }
 
 
     public override void ApplyConfiguration (Configuration configuration) {
-      var pos = _environment.TransformPosition (this.transform.position);
+      var pos = ParentEnvironment.TransformPosition (this.transform.position);
       var v = configuration.ConfigurableValue;
-      if (_decimal_granularity >= 0) {
-        v = (float)Math.Round (v, _decimal_granularity);
+      if (ValidInput.decimal_granularity >= 0) {
+        v = (float)System.Math.Round (v, ValidInput.decimal_granularity);
       }
-      if (_min_value != _max_value) {
-        if (v < _min_value || v > _max_value) {
-          Debug.Log (String.Format ("Configurable does not accept input{2}, outside allowed range {0} to {1}", _min_value, _max_value, v));
+      if (ValidInput.min_value.CompareTo (ValidInput.max_value) != 0) {
+        if (v < ValidInput.min_value || v > ValidInput.max_value) {
+          print (System.String.Format ("Configurable does not accept input{2}, outside allowed range {0} to {1}", ValidInput.min_value, ValidInput.max_value, v));
           return; // Do nothing
         }
       }
-      if (_debug)
-        Debug.Log (String.Format ("Applying {0} to {1} configurable", v.ToString (), configuration.ConfigurableName));
-      if (_relative_to_existing_value) {
+      if (Debugging)
+        print (System.String.Format ("Applying {0} to {1} configurable", v.ToString (), configuration.ConfigurableName));
+      if (RelativeToExistingValue) {
         if (configuration.ConfigurableName == _X) {
           pos.Set (v - pos.x, pos.y, pos.z);
         } else if (configuration.ConfigurableName == _Y) {
@@ -53,7 +52,7 @@ namespace Neodroid.Configurables {
           pos.Set (pos.x, pos.y, v);
         }
       }
-      var inv_pos = _environment.InverseTransformPosition (pos);
+      var inv_pos = ParentEnvironment.InverseTransformPosition (pos);
       this.transform.position = inv_pos;
       
     }

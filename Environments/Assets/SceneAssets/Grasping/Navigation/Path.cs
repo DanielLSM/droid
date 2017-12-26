@@ -61,7 +61,7 @@ namespace SceneSpecificAssets.Grasping.Navigation
                     bc[i].globalHandle1 += (direction_back.normalized * distance_previous * handle_scalar);
                     bc[i].globalHandle2 += (direction_forward.normalized * distance_next * handle_scalar);
 
-                    //if (_debug) Debug.DrawLine(bc[i].globalHandle1, bc[i].globalHandle2, Color.blue, 5);
+                    //if (Debugging) Debug.DrawLine(bc[i].globalHandle1, bc[i].globalHandle2, Color.blue, 5);
                 }
             }
         }

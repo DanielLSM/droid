@@ -75,25 +75,25 @@ namespace Neodroid.Windows {
 
       if (GUILayout.Button ("Apply")) {
         if (_simulation_manager != null) {
-          _simulation_manager._debug = _show_simulation_manager_debug; 
+          _simulation_manager.Debugging = _show_simulation_manager_debug; 
         }
-        foreach (var agent in _environments) {
-          agent._debug = _show_environments_debug;
+        foreach (var environment in _environments) {
+  environment.Debugging = _show_environments_debug;
         }
         foreach (var actor in _actors) {
-          actor._debug = _show_actors_debug;
+  actor.Debugging = _show_actors_debug;
         }
         foreach (var motor in _motors) {
-          motor._debug = _show_motors_debug;
+  motor.Debugging = _show_motors_debug;
         }
         foreach (var observer in _observers) {
-          observer._debug = _show_observers_debug;
+  observer.Debugging = _show_observers_debug;
         }
         foreach (var configurable in _configurables) {
-          configurable._debug = _show_configurables_debug;
+  configurable.Debugging = _show_configurables_debug;
         }
         foreach (var objective_functions in _objective_functions) {
-          objective_functions._debug = _show_objective_functions_debug;
+  objective_functions.Debugging = _show_objective_functions_debug;
         }
       }
       

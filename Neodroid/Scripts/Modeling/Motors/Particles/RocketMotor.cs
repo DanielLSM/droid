@@ -13,7 +13,9 @@ namespace Neodroid.Motors {
     protected override void Start () {
       _rigidbody = GetComponent<Rigidbody> ();
       _particle_system = GetComponent<ParticleSystem> ();
-      _min_strength = 0;
+      var valid_input = ValidInput;
+      valid_input.min_value = 0;
+      ValidInput = valid_input;
       RegisterComponent ();
     }
 
@@ -29,11 +31,11 @@ namespace Neodroid.Motors {
     }
 
     public override void ApplyMotion (MotorMotion motion) {
-      if (motion.Strength < _min_strength || motion.Strength > _max_strength) {
+      if (motion.Strength < ValidInput.min_value || motion.Strength > ValidInput.max_value) {
         Debug.Log ("It does not accept input, outside allowed range");
         return; // Do nothing
       }
-      if (_debug)
+      if (Debugging)
         Debug.Log ("Applying " + motion.ToString () + " To " + name);
       switch (_axis_of_motion) {
       case Axis.X:
@@ -81,7 +83,7 @@ namespace Neodroid.Motors {
       default:
         break;
       }
-      _energy_spend_since_reset += _energy_cost * motion.Strength;
+      EnergySpendSinceReset += EnergyCost * motion.Strength;
       _fired_this_step = true;
     }
 

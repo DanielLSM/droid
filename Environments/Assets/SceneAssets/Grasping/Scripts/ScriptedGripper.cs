@@ -56,7 +56,7 @@ namespace SceneSpecificAssets.Grasping {
 
     [Space (1)]
     [Header ("Show debug logs")]
-    public bool _debug = false;
+    public bool Debugging = false;
 
     [Space (1)]
     [Header ("Draw Search Boundary")]
@@ -75,7 +75,7 @@ namespace SceneSpecificAssets.Grasping {
     }
 
     void SetupEnvironment () {
-      NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (this, transform, OnCollisionEnterChild, OnTriggerEnterChild, OnCollisionExitChild, OnTriggerExitChild, OnCollisionStayChild, OnTriggerStayChild, _debug);
+      NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (this, transform, OnCollisionEnterChild, OnTriggerEnterChild, OnCollisionExitChild, OnTriggerExitChild, OnCollisionStayChild, OnTriggerStayChild, Debugging);
     }
 
     #endregion
@@ -281,13 +281,13 @@ namespace SceneSpecificAssets.Grasping {
     void ab (GameObject child_game_object, GraspableObject other_maybe_graspable) {
       if (other_maybe_graspable) {
         if (child_game_object == _grab_region.gameObject && other_maybe_graspable.gameObject == _target_game_object.gameObject) {
-          if (_debug)
+          if (Debugging)
             print (String.Format ("Target {0} is inside region", other_maybe_graspable.name));
           _state.TargetIsInsideRegion ();
         }
 
         if (child_game_object == _begin_grab_region.gameObject && other_maybe_graspable.gameObject == _target_game_object.gameObject && !_state.IsTargetGrabbed ()) {
-          if (_debug)
+          if (Debugging)
             print (String.Format ("Picking up target {0}", other_maybe_graspable.name));
           _state.PickUpTarget ();
         }
@@ -308,13 +308,13 @@ namespace SceneSpecificAssets.Grasping {
       var other_maybe_graspable = collision.gameObject.GetComponentInParent<GraspableObject> ();
       if (other_maybe_graspable) {
         if (child_game_object == _claw_1.gameObject && other_maybe_graspable.gameObject == _target_game_object.gameObject) {
-          if (_debug)
+          if (Debugging)
             print (String.Format ("Target {0} is touching {1}", other_maybe_graspable.name, child_game_object.name));
           _state.Claw1IsTouchingTarget ();
         }
 
         if (child_game_object == _claw_2.gameObject && other_maybe_graspable.gameObject == _target_game_object.gameObject) {
-          if (_debug)
+          if (Debugging)
             print (String.Format ("Target {0} is touching {1}", other_maybe_graspable.name, child_game_object.name));
           _state.Claw2IsTouchingTarget ();
         }
@@ -430,7 +430,7 @@ namespace SceneSpecificAssets.Grasping {
 
     void ApproachTarget (float step_size) {
       transform.position = Vector3.MoveTowards (this.transform.position, _target_grasp.transform.position, step_size);
-      if (_debug)
+      if (Debugging)
         Debug.DrawLine (this.transform.position, _target_grasp.transform.position, Color.green);
     }
 
@@ -439,7 +439,7 @@ namespace SceneSpecificAssets.Grasping {
         _intermediate_target = _path.Next (step_size);
       }
 
-      if (_debug)
+      if (Debugging)
         Debug.DrawRay (_intermediate_target, this.transform.forward, Color.magenta);
 
       if (rotate)
@@ -470,7 +470,7 @@ namespace SceneSpecificAssets.Grasping {
             _intermediate_target = _path.Next(1);
           }
 
-          if (_debug) Debug.DrawRay(_intermediate_target, this.transform.forward, Color.green);
+          if (Debugging) Debug.DrawRay(_intermediate_target, this.transform.forward, Color.green);
           transform.position = Vector3.MoveTowards(this.transform.position, _intermediate_target, 1);
         }
       }

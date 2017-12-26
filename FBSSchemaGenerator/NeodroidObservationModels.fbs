@@ -5,6 +5,7 @@ namespace Neodroid.FBS;
 union FBSObserverData {
   FBSByteArray,
   FBSNumeral,
+  FBSNumeralArray,
   FBSString,
   FBSPosition,
   FBSRotation,
@@ -44,6 +45,10 @@ table FBSByteArray{
 
 table FBSNumeral{
   value:double;
+}
+
+table FBSNumeralArray{
+  vector:[double];
 }
 
 table FBSString{

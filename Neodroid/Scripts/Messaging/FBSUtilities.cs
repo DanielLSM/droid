@@ -22,26 +22,26 @@ namespace Neodroid.Messaging {
       var b = new FlatBufferBuilder (1);
       foreach (var state in states) {
 
-        StringOffset n = b.CreateString (state._environment_name);
+        StringOffset n = b.CreateString (state.EnvironmentName);
 
-        var observers = new Offset<FBSObserver>[state._observers.Values.Count];
+        var observers = new Offset<FBSObserver>[state.Observers.Values.Count];
         int k = 0;
-        foreach (Observer observer in state._observers.Values) {
+        foreach (Observer observer in state.Observers.Values) {
           observers [k++] = build_observer (b, observer);
         }
 
         var observers_vector = FBSState.CreateObserversVector (b, observers);
 
-        FBSState.StartBodiesVector (b, state._bodies.Length);
-        foreach (Rigidbody rig in state._bodies) {
+        FBSState.StartBodiesVector (b, state.Bodies.Length);
+        foreach (Rigidbody rig in state.Bodies) {
           var vel = rig.velocity;
           var ang = rig.angularVelocity;
           FBSBody.CreateFBSBody (b, vel.x, vel.y, vel.z, ang.x, ang.y, ang.z);
         }
         var bodies_vector = b.EndVector ();
 
-        FBSState.StartPosesVector (b, state._poses.Length);
-        foreach (Transform tra in state._poses) {
+        FBSState.StartPosesVector (b, state.Poses.Length);
+        foreach (Transform tra in state.Poses) {
           var pos = tra.position;
           var rot = tra.rotation;
           FBSQuaternionTransform.CreateFBSQuaternionTransform (b, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, rot.w);
@@ -50,27 +50,27 @@ namespace Neodroid.Messaging {
 
 
         Offset<FBSEnvironmentDescription> description_offset = new FlatBuffers.Offset<FBSEnvironmentDescription> ();
-        if (state._description != null) {
+        if (state.Description != null) {
           description_offset = build_description (b, state);
         }
         StringOffset d = new StringOffset ();
-        if (state._debug_message != "") {
-          d = b.CreateString (state._debug_message);
+        if (state.DebugMessage != "") {
+          d = b.CreateString (state.DebugMessage);
         }
 
         FBSState.StartFBSState (b);
         FBSState.AddEnvironmentName (b, n);
         FBSState.AddBodies (b, bodies_vector);
         FBSState.AddPoses (b, poses_vector);
-        FBSState.AddTotalEnergySpent (b, state._total_energy_spent_since_reset);
-        FBSState.AddReward (b, state._reward_for_last_step);
-        FBSState.AddFrameNumber (b, state._last_steps_frame_number);
-        FBSState.AddInterrupted (b, state._interrupted);
+        FBSState.AddTotalEnergySpent (b, state.TotalEnergySpentSinceReset);
+        FBSState.AddReward (b, state.Reward);
+        FBSState.AddFrameNumber (b, state.FrameNumber);
+        FBSState.AddInterrupted (b, state.Interrupted);
         FBSState.AddObservers (b, observers_vector);
-        if (state._description != null) {
+        if (state.Description != null) {
           FBSState.AddEnvironmentDescription (b, description_offset);
         }
-        if (state._debug_message != "") {
+        if (state.DebugMessage != "") {
           FBSState.AddDebugMessage (b, d);
         }
         var offset = FBSState.EndFBSState (b);
@@ -86,7 +86,7 @@ namespace Neodroid.Messaging {
         var configurations = create_configurations (reaction.Value);
         var bodies = create_bodies (reaction.Value);
         var poses = create_poses (reaction.Value);
-        return new Reaction (motions, poses, bodies, configurations, reaction.Value.Reset);
+        return new Reaction (motions, poses, bodies, configurations, reaction.Value.Reset, reaction.Value.Step, reaction.Value.Configure);
       }
       return new Reaction (false);
     }
@@ -99,7 +99,7 @@ namespace Neodroid.Messaging {
       StringOffset n = b.CreateString (identifier);
       FBSMotor.StartFBSMotor (b);
       FBSMotor.AddMotorName (b, n);
-      FBSMotor.AddValidInput (b, FBSRange.CreateFBSRange (b, motor._decimal_granularity, motor._max_strength, motor._min_strength));
+      FBSMotor.AddValidInput (b, FBSRange.CreateFBSRange (b, motor.ValidInput.decimal_granularity, motor.ValidInput.max_value, motor.ValidInput.min_value));
       FBSMotor.AddEnergySpentSinceReset (b, motor.GetEnergySpend ());
       return FBSMotor.EndFBSMotor (b);
     }
@@ -121,7 +121,7 @@ namespace Neodroid.Messaging {
 
 
     static Offset<FBSByteArray> build_byte_array (FlatBufferBuilder b, CameraObserver camera) {
-      var v_offset = FBSByteArray.CreateByteArrayVector (b, camera._data);
+      var v_offset = FBSByteArray.CreateByteArrayVector (b, camera.Data);
       FBSByteArray.StartFBSByteArray (b);
       FBSByteArray.AddDataType (b, FBSByteDataType.PNG);
       FBSByteArray.AddByteArray (b, v_offset);
@@ -171,12 +171,12 @@ namespace Neodroid.Messaging {
     }
 
     static Offset<FBSEnvironmentDescription> build_description (FlatBufferBuilder b, EnvironmentState state) {
-      var actors = new Offset<FBSActor>[state._description._actors.Values.Count];
+      var actors = new Offset<FBSActor>[state.Description.Actors.Values.Count];
       int j = 0;
-      foreach (var actor in state._description._actors) {
-        var motors = new Offset<FBSMotor>[actor.Value._motors.Values.Count];
+      foreach (var actor in state.Description.Actors) {
+        var motors = new Offset<FBSMotor>[actor.Value.Motors.Values.Count];
         int i = 0;
-        foreach (var motor in actor.Value._motors) {
+        foreach (var motor in actor.Value.Motors) {
           motors [i++] = build_motor (b, motor.Value, motor.Key);
         }
         actors [j++] = build_actor (b, motors, actor.Value, actor.Key);
@@ -185,9 +185,9 @@ namespace Neodroid.Messaging {
       var actors_vector = FBSEnvironmentDescription.CreateActorsVector (b, actors);
 
 
-      var configurables = new Offset<FBSConfigurable>[state._description._configurables.Values.Count];
+      var configurables = new Offset<FBSConfigurable>[state.Description.Configurables.Values.Count];
       int k = 0;
-      foreach (var configurable in state._description._configurables) {
+      foreach (var configurable in state.Description.Configurables) {
         configurables [k++] = build_configurable (b, configurable.Value, configurable.Key);
       }
       var configurables_vector = FBSEnvironmentDescription.CreateConfigurablesVector (b, configurables);
@@ -203,7 +203,7 @@ namespace Neodroid.Messaging {
       StringOffset n = b.CreateString (identifier);
       FBSConfigurable.StartFBSConfigurable (b);
       FBSConfigurable.AddConfigurableName (b, n);
-      FBSConfigurable.AddValidInput (b, FBSRange.CreateFBSRange (b, configurable._decimal_granularity, configurable._max_value, configurable._min_value));
+      FBSConfigurable.AddValidInput (b, FBSRange.CreateFBSRange (b, configurable.ValidInput.decimal_granularity, configurable.ValidInput.max_value, configurable.ValidInput.min_value));
       return FBSConfigurable.EndFBSConfigurable (b);
     }
 

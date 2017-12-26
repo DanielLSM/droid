@@ -27,8 +27,10 @@ public struct FBSReaction : IFlatbufferObject
   public FBSConfiguration? Configurations(int j) { int o = __p.__offset(10); return o != 0 ? (FBSConfiguration?)(new FBSConfiguration()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
   public int ConfigurationsLength { get { int o = __p.__offset(10); return o != 0 ? __p.__vector_len(o) : 0; } }
   public bool Reset { get { int o = __p.__offset(12); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
-  public FBSMotion? Motions(int j) { int o = __p.__offset(14); return o != 0 ? (FBSMotion?)(new FBSMotion()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
-  public int MotionsLength { get { int o = __p.__offset(14); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public bool Configure { get { int o = __p.__offset(14); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+  public bool Step { get { int o = __p.__offset(16); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+  public FBSMotion? Motions(int j) { int o = __p.__offset(18); return o != 0 ? (FBSMotion?)(new FBSMotion()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public int MotionsLength { get { int o = __p.__offset(18); return o != 0 ? __p.__vector_len(o) : 0; } }
 
   public static Offset<FBSReaction> CreateFBSReaction(FlatBufferBuilder builder,
       StringOffset environment_nameOffset = default(StringOffset),
@@ -36,18 +38,22 @@ public struct FBSReaction : IFlatbufferObject
       VectorOffset bodiesOffset = default(VectorOffset),
       VectorOffset configurationsOffset = default(VectorOffset),
       bool reset = false,
+      bool configure = false,
+      bool step = false,
       VectorOffset motionsOffset = default(VectorOffset)) {
-    builder.StartObject(6);
+    builder.StartObject(8);
     FBSReaction.AddMotions(builder, motionsOffset);
     FBSReaction.AddConfigurations(builder, configurationsOffset);
     FBSReaction.AddBodies(builder, bodiesOffset);
     FBSReaction.AddPoses(builder, posesOffset);
     FBSReaction.AddEnvironmentName(builder, environment_nameOffset);
+    FBSReaction.AddStep(builder, step);
+    FBSReaction.AddConfigure(builder, configure);
     FBSReaction.AddReset(builder, reset);
     return FBSReaction.EndFBSReaction(builder);
   }
 
-  public static void StartFBSReaction(FlatBufferBuilder builder) { builder.StartObject(6); }
+  public static void StartFBSReaction(FlatBufferBuilder builder) { builder.StartObject(8); }
   public static void AddEnvironmentName(FlatBufferBuilder builder, StringOffset environmentNameOffset) { builder.AddOffset(0, environmentNameOffset.Value, 0); }
   public static void AddPoses(FlatBufferBuilder builder, VectorOffset posesOffset) { builder.AddOffset(1, posesOffset.Value, 0); }
   public static void StartPosesVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(56, numElems, 8); }
@@ -57,7 +63,9 @@ public struct FBSReaction : IFlatbufferObject
   public static VectorOffset CreateConfigurationsVector(FlatBufferBuilder builder, Offset<FBSConfiguration>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
   public static void StartConfigurationsVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
   public static void AddReset(FlatBufferBuilder builder, bool reset) { builder.AddBool(4, reset, false); }
-  public static void AddMotions(FlatBufferBuilder builder, VectorOffset motionsOffset) { builder.AddOffset(5, motionsOffset.Value, 0); }
+  public static void AddConfigure(FlatBufferBuilder builder, bool configure) { builder.AddBool(5, configure, false); }
+  public static void AddStep(FlatBufferBuilder builder, bool step) { builder.AddBool(6, step, false); }
+  public static void AddMotions(FlatBufferBuilder builder, VectorOffset motionsOffset) { builder.AddOffset(7, motionsOffset.Value, 0); }
   public static VectorOffset CreateMotionsVector(FlatBufferBuilder builder, Offset<FBSMotion>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
   public static void StartMotionsVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
   public static Offset<FBSReaction> EndFBSReaction(FlatBufferBuilder builder) {

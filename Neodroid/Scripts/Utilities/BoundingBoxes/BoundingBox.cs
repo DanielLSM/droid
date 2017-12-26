@@ -13,6 +13,7 @@ namespace Neodroid.Utilities.BoundingBoxes {
   public class BoundingBox : MonoBehaviour {
 
     public bool _collider_based = false;
+    public bool _include_children = true;
     public bool _freeze = true;
 
     public Color _line_color = new Color (0f, 1f, 0.4f, 0.74f);
@@ -48,6 +49,18 @@ namespace Neodroid.Utilities.BoundingBoxes {
           _bottom_back_right
         };
       }
+    }
+
+    public Bounds Bounds {
+      get{ return _bounds; }
+    }
+
+    public Vector3 Max {
+      get{ return _bounds.max; }
+    }
+
+    public Vector3 Min {
+      get{ return _bounds.min; }
     }
 
     public string BoundingBoxCoordinatesAsString {
@@ -160,11 +173,14 @@ namespace Neodroid.Utilities.BoundingBoxes {
       var collider = this.GetComponent<BoxCollider> ();
       Bounds bounds = new Bounds (this.transform.position, Vector3.zero); // position and size
 
-      bounds.Encapsulate (collider.bounds);
+      if (collider)
+        bounds.Encapsulate (collider.bounds);
 
-      foreach (var col in _children_colliders) {
-        if (col != collider) {
-          bounds.Encapsulate (col.bounds);
+      if (_include_children) {
+        foreach (var col in _children_colliders) {
+          if (col != collider) {
+            bounds.Encapsulate (col.bounds);
+          }
         }
       }
 
@@ -173,18 +189,26 @@ namespace Neodroid.Utilities.BoundingBoxes {
     }
 
     void FitBoundingBoxToChildrenRenders () {
-      _bounds = new Bounds ();
+      var bounds = new Bounds (this.transform.position, Vector3.zero); 
+
+      var mesh = GetComponent<MeshFilter> ();
+      if (mesh) {
+        Mesh ms = mesh.sharedMesh;
+        int vc = ms.vertexCount;
+        for (int i = 0; i < vc; i++) {
+          bounds.Encapsulate (mesh.transform.TransformPoint (ms.vertices [i]));
+        }
+      }
+
       for (int i = 0; i < _children_meshes.Length; i++) {
         Mesh ms = _children_meshes [i].sharedMesh;
         int vc = ms.vertexCount;
         for (int j = 0; j < vc; j++) {
-          if (i == 0 && j == 0) {
-            _bounds = new Bounds (_children_meshes [i].transform.TransformPoint (ms.vertices [j]), Vector3.zero);
-          } else {
-            _bounds.Encapsulate (_children_meshes [i].transform.TransformPoint (ms.vertices [j]));
-          }
+          bounds.Encapsulate (_children_meshes [i].transform.TransformPoint (ms.vertices [j]));
         }
       }
+
+      _bounds = bounds;
       _bounds_offset = _bounds.center - this.transform.position;
     }
 

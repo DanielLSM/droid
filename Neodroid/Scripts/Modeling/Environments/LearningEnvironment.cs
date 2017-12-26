@@ -10,22 +10,32 @@ using Neodroid.Actors;
 using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
 using Neodroid.Configurables;
+using Neodroid.Utilities.BoundingBoxes;
 using System;
 
 namespace Neodroid.Environments {
   public class LearningEnvironment : MonoBehaviour, HasRegister<Actor>, HasRegister<Observer>, HasRegister<ConfigurableGameObject>, HasRegister<Resetable> {
 
-    #region PublicMembers
+    #region Fields
 
-    public CoordinateSystem _coordinate_system = CoordinateSystem.LocalCoordinates;
-    public Transform _coordinate_reference_point;
+    [SerializeField]
+    CoordinateSystem _coordinate_system = CoordinateSystem.LocalCoordinates;
+    [SerializeField]
+    Transform _coordinate_reference_point;
 
     //infinite
-    public ObjectiveFunction _objective_function;
-    public SimulationManager _simulation_manager;
-    public bool _debug = false;
+    [SerializeField]
+    BoundingBox _playable_area;
+    [SerializeField]
+    ObjectiveFunction _objective_function;
+    [SerializeField]
+    SimulationManager _simulation_manager;
+    [SerializeField]
+    bool _debugging = false;
 
     #endregion
+
+
 
     #region PrivateMembers
 
@@ -50,109 +60,58 @@ namespace Neodroid.Environments {
     float _lastest_reset_time = 0;
     float energy_spent = 0f;
     bool _interrupted = false;
+    bool _reset = false;
+    bool _configure = false;
 
     #endregion
 
     #region UnityCallbacks
 
     void Start () {
-      FindMissingMembers ();
-      AddToEnvironment ();
-      SaveInitialPoses ();
-      StartCoroutine (SaveInitialBodiesIE ());
-    }
-
-    void SaveInitialPoses () {
-      var _ignored_layer = LayerMask.NameToLayer ("IgnoredByNeodroid");
-      _child_game_objects = NeodroidUtilities.RecursiveChildGameObjectsExceptLayer (this.transform, _ignored_layer);
-      _reset_positions = new Vector3[_child_game_objects.Length];
-      _reset_rotations = new Quaternion[_child_game_objects.Length];
-      _poses = new Transform[_child_game_objects.Length];
-      for (int i = 0; i < _child_game_objects.Length; i++) {
-        _reset_positions [i] = _child_game_objects [i].transform.position;
-        _reset_rotations [i] = _child_game_objects [i].transform.rotation;
-        _poses [i] = _child_game_objects [i].transform;
-      }
-    }
-
-    void SaveInitialBodies () {
-      List<Rigidbody> body_list = new List<Rigidbody> ();
-      foreach (var go in _child_game_objects) {
-        var body = go.GetComponent<Rigidbody> ();
-        if (body) {
-          body_list.Add (body);
-        }
-      }
-      _bodies = body_list.ToArray ();
-      _reset_velocities = new Vector3[_bodies.Length];
-      _reset_angulars = new Vector3[_bodies.Length];
-      for (int i = 0; i < _bodies.Length; i++) {
-        _reset_velocities [i] = _bodies [i].velocity;
-        _reset_angulars [i] = _bodies [i].angularVelocity;
-      }
-    }
-
-    IEnumerator SaveInitialBodiesIE () {
-      yield return new WaitForFixedUpdate ();
-      SaveInitialBodies ();
-    }
-
-
-    #endregion
-
-    #region Helpers
-
-
-    void FindMissingMembers () {
       if (!_simulation_manager) {
         _simulation_manager = FindObjectOfType<SimulationManager> ();
       }
       if (!_objective_function) {
         _objective_function = FindObjectOfType<ObjectiveFunction> ();
       }
+      _simulation_manager = NeodroidUtilities.MaybeRegisterComponent (_simulation_manager, this);
+      SaveInitialPoses ();
+      StartCoroutine (SaveInitialBodiesIE ());
     }
 
-    public void UpdateObserversData () {
-      foreach (Observer obs in RegisteredObservers.Values) {
-        if (obs) {
-          obs.UpdateData ();
-        }
+    #endregion
+
+    #region PublicMethods
+
+    #region Getters
+
+
+    public Dictionary<string, Actor> Actors {
+      get {
+        return _actors;
       }
     }
 
-    public EnvironmentState GetCurrentState () {
-      foreach (Actor a in RegisteredActors.Values) {
-        foreach (Motor m in a.RegisteredMotors.Values) {
-          energy_spent += m.GetEnergySpend ();
-        }
+    public Dictionary<string, Observer> Observers {
+      get {
+        return _observers;
       }
+    }
 
-      var reward = 0f;
-      if (_objective_function != null) {
-        reward = _objective_function.Evaluate ();
+    public Dictionary<string, ConfigurableGameObject> Configurables {
+      get {
+        return _configurables;
       }
+    }
 
-      EnvironmentDescription description = null;
-      if (_interrupted) {
-        description = new EnvironmentDescription (
-          _simulation_manager._episode_length, 
-          _simulation_manager._frame_skips, 
-          RegisteredActors, 
-          RegisteredConfigurables, 
-          _objective_function._solved_threshold
-        );
+    public Dictionary<string, Resetable> Resetables {
+      get {
+        return _resetables;
       }
-      return new EnvironmentState (
-        EnvironmentIdentifier,
-        energy_spent,
-        RegisteredObservers,
-        CurrentFrameNumber,
-        reward,
-        _interrupted,
-        _bodies,
-        _poses,
-        description
-      );
+    }
+
+    public string EnvironmentIdentifier {
+      get{ return name; }
     }
 
     public int CurrentFrameNumber {
@@ -163,84 +122,217 @@ namespace Neodroid.Environments {
       return Time.time - _lastest_reset_time;//Time.realtimeSinceStartup;
     }
 
-    public void ExecuteReaction (Reaction reaction) {
-      _current_episode_frame++;
-      if (_simulation_manager._episode_length > 0 && _current_episode_frame > _simulation_manager._episode_length) {
-        if (_debug)
-          Debug.Log ("Maximum episode length reached, resetting");
-        Interrupt ("Maximum episode length reached, resetting");
-      } else if (reaction != null && reaction.Reset) {
-        Interrupt ("Reaction called reset");
+    public bool Debugging {
+      get {
+        return _debugging;
+      }
+      set {
+        _debugging = value;
+      }
+    }
+
+    public SimulationManager SimulationManager {
+      get {
+        return _simulation_manager;
+      }
+      set {
+        _simulation_manager = value;
+      }
+    }
+
+    public ObjectiveFunction ObjectiveFunction {
+      get {
+        return _objective_function;
+      }
+      set {
+        _objective_function = value;
+      }
+    }
+
+    public BoundingBox PlayableArea {
+      get {
+        return _playable_area;
+      }
+      set {
+        _playable_area = value;
+      }
+    }
+
+    public Transform CoordinateReferencePoint {
+      get {
+        return _coordinate_reference_point;
+      }
+      set {
+        _coordinate_reference_point = value;
+      }
+    }
+
+    public CoordinateSystem CoordinateSystem {
+      get {
+        return _coordinate_system;
+      }
+      set {
+        _coordinate_system = value;
+      }
+    }
+
+    #endregion
+
+    public void Interrupt (string reason) {
+      _interrupted = true;
+      if (Debugging) {
+        print (System.String.Format ("Was interrupted, because {0}", reason));
+      }
+    }
+
+    public void PostUpdate () {
+      if (_interrupted) {
+        _interrupted = false;
+        Reset ();
+      }
+    }
+
+    public void UpdateObserversData () {
+      foreach (Observer obs in Observers.Values) {
+        if (obs) {
+          obs.UpdateData ();
+        }
+      }
+    }
+
+    public EnvironmentState React (Reaction reaction) {
+      if (reaction != null) {
         _configurations = reaction.Configurations;
         _received_poses = reaction.Poses;
         _received_bodies = reaction.Bodies;
-      } else if (reaction != null && reaction.Motions != null && reaction.Motions.Length > 0)
-        foreach (MotorMotion motion in reaction.Motions) {
-          if (_debug)
-            Debug.Log ("Applying " + motion.ToString () + " To " + name + "'s actors");
-          var motion_actor_name = motion.GetActorName ();
-          if (RegisteredActors.ContainsKey (motion_actor_name) && RegisteredActors [motion_actor_name] != null) {
-            RegisteredActors [motion_actor_name].ApplyMotion (motion);
-          } else {
-            if (_debug)
-              Debug.Log ("Could find not actor with the specified name: " + motion_actor_name);
-          }
-        }
-          
-      UpdateObserversData ();
+        _configure = reaction.Configure;
+        _reset = reaction.Reset;
+      }
+      if (reaction != null && !_reset) {
+        Step (reaction);
+        return GetState ();
+      }
+      Interrupt ("Resetting because of reaction");
+      return GetState ();
     }
 
-    public void Configure () {
-      if (_received_poses != null) {
-        SetEnvironmentPoses (_child_game_objects, _received_poses);
-      }
-      if (_received_bodies != null) {
-        SetEnvironmentBodies (_bodies, _received_bodies);
-      }
-      if (_configurations != null) {
-        foreach (var configuration in _configurations) {
-          if (_configurables.ContainsKey (configuration.ConfigurableName)) {
-            _configurables [configuration.ConfigurableName].ApplyConfiguration (configuration);
-          } else {
-            if (_debug)
-              Debug.Log ("Could find not configurable with the specified name: " + configuration.ConfigurableName);
-          }
-        }
+
+    #region Registration
+
+    public void Register (Actor actor) {
+      if (!Actors.ContainsKey (actor.ActorIdentifier)) {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} has registered actor {1}", name, actor.ActorIdentifier));
+        Actors.Add (actor.ActorIdentifier, actor);
+      } else {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} already has actor {1} registered", name, actor.ActorIdentifier));
       }
     }
 
-    void AddToEnvironment () {
-      _simulation_manager = NeodroidUtilities.MaybeRegisterComponent (_simulation_manager, this);
+    public void Register (Actor actor, string identifier) {
+      if (!Actors.ContainsKey (identifier)) {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} has registered actor {1}", name, identifier));
+        Actors.Add (identifier, actor);
+      } else {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} already has actor {1} registered", name, identifier));
+      }
     }
+
+    public void Register (Observer observer) {
+      if (!_observers.ContainsKey (observer.ObserverIdentifier)) {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} has registered observer {1}", name, observer.ObserverIdentifier));
+        _observers.Add (observer.ObserverIdentifier, observer);
+      } else {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} already has observer {1} registered", name, observer.ObserverIdentifier));
+      }
+    }
+
+    public void Register (Observer observer, string identifier) {
+      if (!_observers.ContainsKey (identifier)) {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} has registered observer {1}", name, identifier));
+        _observers.Add (identifier, observer);
+      } else {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} already has observer {1} registered", name, identifier));
+      }
+    }
+
+    public void Register (ConfigurableGameObject configurable) {
+      if (!_configurables.ContainsKey (configurable.ConfigurableIdentifier)) {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} has registered configurable {1}", name, configurable.ConfigurableIdentifier));
+        _configurables.Add (configurable.ConfigurableIdentifier, configurable);
+      } else {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, configurable.ConfigurableIdentifier));
+      }
+    }
+
+    public void Register (ConfigurableGameObject configurable, string identifier) {
+      if (!_configurables.ContainsKey (identifier)) {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} has registered configurable {1}", name, identifier));
+        _configurables.Add (identifier, configurable);
+      } else {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, identifier));
+      }
+    }
+
+    public void Register (Resetable resetable, string identifier) {
+      if (!_resetables.ContainsKey (identifier)) {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} has registered resetables {1}", name, identifier));
+        _resetables.Add (identifier, resetable);
+      } else {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, identifier));
+      }
+    }
+
+    public void Register (Resetable resetable) {
+      if (!_resetables.ContainsKey (resetable.ResetableIdentifier)) {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} has registered resetables {1}", name, resetable.ResetableIdentifier));
+        _resetables.Add (resetable.ResetableIdentifier, resetable);
+      } else {
+        if (Debugging)
+          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, resetable.ResetableIdentifier));
+      }
+    }
+
+    public void UnRegisterActor (string identifier) {
+      if (Actors.ContainsKey (identifier))
+      if (Debugging)
+        Debug.Log (string.Format ("Environment {0} unregistered actor {1}", name, identifier));
+      Actors.Remove (identifier);
+    }
+
+    public void UnRegisterObserver (string identifier) {
+      if (_observers.ContainsKey (identifier))
+      if (Debugging)
+        Debug.Log (string.Format ("Environment {0} unregistered observer {1}", name, identifier));
+      _observers.Remove (identifier);
+    }
+
+    public void UnRegisterConfigurable (string identifier) {
+      if (_configurables.ContainsKey (identifier))
+      if (Debugging)
+        Debug.Log (string.Format ("Environment {0} unregistered configurable {1}", name, identifier));
+      _configurables.Remove (identifier);
+    }
+
 
 
     #endregion
 
-    #region PublicMethods
-
-    public Dictionary<string, Actor> RegisteredActors {
-      get {
-        return _actors;
-      }
-    }
-
-    public Dictionary<string, Observer> RegisteredObservers {
-      get {
-        return _observers;
-      }
-    }
-
-    public Dictionary<string, ConfigurableGameObject> RegisteredConfigurables {
-      get {
-        return _configurables;
-      }
-    }
-
-    public Dictionary<string, Resetable> RegisteredResetable {
-      get {
-        return _resetables;
-      }
-    }
+    #region Transformations
 
     public Vector3 TransformPosition (Vector3 position) {
       if (_coordinate_system == CoordinateSystem.RelativeToReferencePoint) {
@@ -298,54 +390,160 @@ namespace Neodroid.Environments {
       }
     }
 
-    public void Interrupt (string reason) {
-      _interrupted = true;
-      if (_debug) {
-        print (System.String.Format ("Was interrupted, because {0}", reason));
+    #endregion
+
+    #endregion
+
+    #region PrivateMethods
+
+    void SaveInitialPoses () {
+      var _ignored_layer = LayerMask.NameToLayer ("IgnoredByNeodroid");
+      _child_game_objects = NeodroidUtilities.RecursiveChildGameObjectsExceptLayer (this.transform, _ignored_layer);
+      _reset_positions = new Vector3[_child_game_objects.Length];
+      _reset_rotations = new Quaternion[_child_game_objects.Length];
+      _poses = new Transform[_child_game_objects.Length];
+      for (int i = 0; i < _child_game_objects.Length; i++) {
+        _reset_positions [i] = _child_game_objects [i].transform.position;
+        _reset_rotations [i] = _child_game_objects [i].transform.rotation;
+        _poses [i] = _child_game_objects [i].transform;
       }
     }
 
-    public void PostUpdate () {
-      if (_interrupted) {
-        _interrupted = false;
-        Reset ();
+    void SaveInitialBodies () {
+      List<Rigidbody> body_list = new List<Rigidbody> ();
+      foreach (var go in _child_game_objects) {
+        var body = go.GetComponent<Rigidbody> ();
+        if (body) {
+          body_list.Add (body);
+        }
       }
+      _bodies = body_list.ToArray ();
+      _reset_velocities = new Vector3[_bodies.Length];
+      _reset_angulars = new Vector3[_bodies.Length];
+      for (int i = 0; i < _bodies.Length; i++) {
+        _reset_velocities [i] = _bodies [i].velocity;
+        _reset_angulars [i] = _bodies [i].angularVelocity;
+      }
+    }
+
+    IEnumerator SaveInitialBodiesIE () {
+      yield return new WaitForFixedUpdate ();
+      SaveInitialBodies ();
+    }
+
+    EnvironmentState GetState () {
+      foreach (Actor a in Actors.Values) {
+        foreach (Motor m in a.Motors.Values) {
+          energy_spent += m.GetEnergySpend ();
+        }
+      }
+
+      var reward = 0f;
+      if (_objective_function != null) {
+        reward = _objective_function.Evaluate ();
+      }
+
+      EnvironmentDescription description = null;
+      if (_reset) {
+        description = new EnvironmentDescription (
+          _simulation_manager.EpisodeLength, 
+          _simulation_manager.FrameSkips, 
+          Actors, 
+          Configurables, 
+          _objective_function.SolvedThreshold
+        );
+      }
+      return new EnvironmentState (
+        EnvironmentIdentifier,
+        energy_spent,
+        Observers,
+        CurrentFrameNumber,
+        reward,
+        _interrupted,
+        _bodies,
+        _poses,
+        description
+      );
     }
 
     void Reset () {
-      ResetRegisteredObjects ();
-      SetEnvironmentPoses (_child_game_objects, _reset_positions, _reset_rotations);
-      SetEnvironmentBodies (_bodies, _reset_velocities, _reset_angulars);
-      Configure ();
+      if (_reset) {
+        ResetRegisteredObjects ();
+        SetEnvironmentPoses (_child_game_objects, _reset_positions, _reset_rotations);
+        SetEnvironmentBodies (_bodies, _reset_velocities, _reset_angulars);
+      }
+      if (_configure) {
+        Configure ();
+      }
+      UpdateObserversData ();
     }
 
-    public string EnvironmentIdentifier {
-      get{ return name; }
+    void Configure () {
+      if (_received_poses != null) {
+        SetEnvironmentPoses (_child_game_objects, _received_poses);
+      }
+      if (_received_bodies != null) {
+        SetEnvironmentBodies (_bodies, _received_bodies);
+      }
+      if (_configurations != null) {
+        foreach (var configuration in _configurations) {
+          if (_configurables.ContainsKey (configuration.ConfigurableName)) {
+            _configurables [configuration.ConfigurableName].ApplyConfiguration (configuration);
+          } else {
+            if (Debugging)
+              Debug.Log ("Could find not configurable with the specified name: " + configuration.ConfigurableName);
+          }
+        }
+      }
+    }
+
+    void Step (Reaction reaction) {
+      _current_episode_frame++;
+      if (_simulation_manager.EpisodeLength > 0 && _current_episode_frame > _simulation_manager.EpisodeLength) {
+        if (Debugging)
+          Debug.Log ("Maximum episode length reached, resetting");
+        Interrupt ("Maximum episode length reached, resetting");
+      } else if (reaction != null && reaction.Motions != null && reaction.Motions.Length > 0)
+        foreach (MotorMotion motion in reaction.Motions) {
+          if (Debugging)
+            Debug.Log ("Applying " + motion.ToString () + " To " + name + "'s actors");
+          var motion_actor_name = motion.GetActorName ();
+          if (Actors.ContainsKey (motion_actor_name) && Actors [motion_actor_name] != null) {
+            Actors [motion_actor_name].ApplyMotion (motion);
+          } else {
+            if (Debugging)
+              Debug.Log ("Could find not actor with the specified name: " + motion_actor_name);
+          }
+        }
+
+      UpdateObserversData ();
     }
 
     void ResetRegisteredObjects () {
-      foreach (var resetable in _resetables.Values) {
+      if (Debugging)
+        Debug.Log ("Resetting registed objects");
+      foreach (var resetable in Resetables.Values) {
         if (resetable != null) {
           resetable.Reset ();
         }
       }
-      if (_debug)
-        Debug.Log ("Resetting registed objects");
-      foreach (var actor in RegisteredActors.Values) {
+      foreach (var actor in Actors.Values) {
         if (actor) {
           actor.Reset ();
         }
       }
-      foreach (var observer in _observers.Values) {
+      foreach (var observer in Observers.Values) {
         if (observer) {
           observer.Reset ();
         }
       }
     }
 
+    #region EnvironmentStateSetters
+
     void SetEnvironmentPoses (GameObject[] child_game_objects, Vector3[] positions, Quaternion[] rotations) {
       if (_simulation_manager) {
-        for (int resets = 0; resets < _simulation_manager._resets; resets++) {
+        for (int resets = 0; resets < _simulation_manager.Resets; resets++) {
           for (int i = 0; i < child_game_objects.Length; i++) {
             if (child_game_objects [i] != null) {
               var rigid_body = child_game_objects [i].GetComponent<Rigidbody> ();
@@ -373,8 +571,8 @@ namespace Neodroid.Environments {
     void SetEnvironmentBodies (Rigidbody[] bodies, Vector3[] velocities, Vector3[] angulars) {
       if (bodies != null && bodies.Length > 0) {
         for (int i = 0; i < bodies.Length; i++) {
-          if (_debug)
-            print (String.Format ("Resetting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, velocities [i], angulars [i]));
+          if (Debugging)
+            print (String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, velocities [i], angulars [i]));
           bodies [i].Sleep ();
           bodies [i].velocity = velocities [i];
           bodies [i].angularVelocity = angulars [i];
@@ -386,10 +584,17 @@ namespace Neodroid.Environments {
     void SetEnvironmentPoses (GameObject[] child_game_objects, Pose[] poses) {
       for (int i = 0; i < _child_game_objects.Length; i++) {
         if (i < poses.Length) {
-          if (_debug)
-            print (String.Format ("Resetting {0}, position to {1} and rotation to {2}", child_game_objects [i].name, poses [i].position, poses [i].rotation));
-          child_game_objects [i].transform.position = poses [i].position;
-          child_game_objects [i].transform.rotation = poses [i].rotation;
+          if (Debugging)
+            print (String.Format ("Setting {0}, position to {1} and rotation to {2}", child_game_objects [i].name, poses [i].position, poses [i].rotation));
+          var pos = poses [i].position;
+          var rot = poses [i].rotation;
+          if (_playable_area) {
+            NeodroidUtilities.Vector3Clamp (ref pos, _playable_area.Min, _playable_area.Max);
+          }
+          child_game_objects [i].transform.position = pos;
+          child_game_objects [i].transform.rotation = rot;
+
+
         }
       }
     }
@@ -397,133 +602,18 @@ namespace Neodroid.Environments {
     void SetEnvironmentBodies (Rigidbody[] bodies, Body[] bods) {
       if (bodies != null && bodies.Length > 0) {
         for (int i = 0; i < bodies.Length; i++) {
-          if (bods [i] != null) {
-            if (_debug)
+          if (i < bods.Length && bods [i] != null) {
+            if (Debugging)
               print (String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, bods [i].Velocity, bods [i].AngularVelocity));
             bodies [i].velocity = bods [i].Velocity;
             bodies [i].angularVelocity = bods [i].AngularVelocity;
           }
         }
       }
+      #endregion
+
+      #endregion
+
     }
-
-    #region Registration
-
-    public void Register (Actor actor) {
-      if (!RegisteredActors.ContainsKey (actor.ActorIdentifier)) {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered actor {1}", name, actor.ActorIdentifier));
-        RegisteredActors.Add (actor.ActorIdentifier, actor);
-      } else {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has actor {1} registered", name, actor.ActorIdentifier));
-      }
-    }
-
-    public void Register (Actor actor, string identifier) {
-      if (!RegisteredActors.ContainsKey (identifier)) {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered actor {1}", name, identifier));
-        RegisteredActors.Add (identifier, actor);
-      } else {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has actor {1} registered", name, identifier));
-      }
-    }
-
-    public void Register (Observer observer) {
-      if (!_observers.ContainsKey (observer.ObserverIdentifier)) {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered observer {1}", name, observer.ObserverIdentifier));
-        _observers.Add (observer.ObserverIdentifier, observer);
-      } else {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has observer {1} registered", name, observer.ObserverIdentifier));
-      }
-    }
-
-    public void Register (Observer observer, string identifier) {
-      if (!_observers.ContainsKey (identifier)) {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered observer {1}", name, identifier));
-        _observers.Add (identifier, observer);
-      } else {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has observer {1} registered", name, identifier));
-      }
-    }
-
-    public void Register (ConfigurableGameObject configurable) {
-      if (!_configurables.ContainsKey (configurable.ConfigurableIdentifier)) {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered configurable {1}", name, configurable.ConfigurableIdentifier));
-        _configurables.Add (configurable.ConfigurableIdentifier, configurable);
-      } else {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, configurable.ConfigurableIdentifier));
-      }
-    }
-
-    public void Register (ConfigurableGameObject configurable, string identifier) {
-      if (!_configurables.ContainsKey (identifier)) {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered configurable {1}", name, identifier));
-        _configurables.Add (identifier, configurable);
-      } else {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, identifier));
-      }
-    }
-
-    public void Register (Resetable resetable, string identifier) {
-      if (!_resetables.ContainsKey (identifier)) {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered resetables {1}", name, identifier));
-        _resetables.Add (identifier, resetable);
-      } else {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, identifier));
-      }
-    }
-
-    public void Register (Resetable resetable) {
-      if (!_resetables.ContainsKey (resetable.ResetableIdentifier)) {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} has registered resetables {1}", name, resetable.ResetableIdentifier));
-        _resetables.Add (resetable.ResetableIdentifier, resetable);
-      } else {
-        if (_debug)
-          Debug.Log (string.Format ("Environment {0} already has configurable {1} registered", name, resetable.ResetableIdentifier));
-      }
-    }
-
-    public void UnRegisterActor (string identifier) {
-      if (RegisteredActors.ContainsKey (identifier))
-      if (_debug)
-        Debug.Log (string.Format ("Environment {0} unregistered actor {1}", name, identifier));
-      RegisteredActors.Remove (identifier);
-    }
-
-    public void UnRegisterObserver (string identifier) {
-      if (_observers.ContainsKey (identifier))
-      if (_debug)
-        Debug.Log (string.Format ("Environment {0} unregistered observer {1}", name, identifier));
-      _observers.Remove (identifier);
-    }
-
-    public void UnRegisterConfigurable (string identifier) {
-      if (_configurables.ContainsKey (identifier))
-      if (_debug)
-        Debug.Log (string.Format ("Environment {0} unregistered configurable {1}", name, identifier));
-      _configurables.Remove (identifier);
-    }
-
-
-
-    #endregion
-
-    #endregion
-
-
   }
 }

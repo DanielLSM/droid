@@ -16,21 +16,23 @@ namespace Neodroid.Configurables {
       AddToEnvironment ();
       if (_use_bounding_box_for_range) {
         if (_bounding_box != null) {
-          _max_value = Math.Min (_bounding_box._bounds.size.x, Math.Min (_bounding_box._bounds.size.y, _bounding_box._bounds.size.z));
-          _min_value = -_max_value;
+          var valid_input = new InputRange ();
+          valid_input.max_value = Math.Min (_bounding_box._bounds.size.x, Math.Min (_bounding_box._bounds.size.y, _bounding_box._bounds.size.z));
+          valid_input.min_value = -valid_input.max_value;
+          ValidInput = valid_input;
         }
       }
     }
 
     public override void ApplyConfiguration (Configuration configuration) {
-      if (configuration.ConfigurableValue < _min_value || configuration.ConfigurableValue > _max_value) {
-        Debug.Log (String.Format ("It does not accept input, outside allowed range {0} to {1}", _min_value, _max_value));
+      if (configuration.ConfigurableValue < ValidInput.min_value || configuration.ConfigurableValue > ValidInput.max_value) {
+        print (String.Format ("It does not accept input, outside allowed range {0} to {1}", ValidInput.min_value, ValidInput.max_value));
         return; // Do nothing
       }
-      if (_debug)
-        Debug.Log ("Applying " + configuration.ToString () + " To " + ConfigurableIdentifier);
-      var pos = _environment.TransformPosition (this.transform.position);
-      var dir = _environment.TransformDirection (this.transform.forward);
+      if (Debugging)
+        print ("Applying " + configuration.ToString () + " To " + ConfigurableIdentifier);
+      var pos = ParentEnvironment.TransformPosition (this.transform.position);
+      var dir = ParentEnvironment.TransformDirection (this.transform.forward);
       switch (_axis_of_configuration) {
       case Axis.X:
         pos.Set (configuration.ConfigurableValue - pos.x, pos.y, pos.z);
@@ -53,8 +55,8 @@ namespace Neodroid.Configurables {
       default:
         break;
       }
-      var inv_pos = _environment.InverseTransformPosition (pos);
-      var inv_dir = _environment.InverseTransformDirection (dir);
+      var inv_pos = ParentEnvironment.InverseTransformPosition (pos);
+      var inv_dir = ParentEnvironment.InverseTransformDirection (dir);
       transform.position = inv_pos;
       transform.rotation = Quaternion.identity;
       transform.Rotate (inv_dir);

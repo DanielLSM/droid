@@ -13,12 +13,13 @@ public enum FBSObserverData : byte
  NONE = 0,
  FBSByteArray = 1,
  FBSNumeral = 2,
- FBSString = 3,
- FBSPosition = 4,
- FBSRotation = 5,
- FBSEulerTransform = 6,
- FBSQuaternionTransformObservation = 7,
- FBSBodyObservation = 8,
+ FBSNumeralArray = 3,
+ FBSString = 4,
+ FBSPosition = 5,
+ FBSRotation = 6,
+ FBSEulerTransform = 7,
+ FBSQuaternionTransformObservation = 8,
+ FBSBodyObservation = 9,
 };
 
 public enum FBSByteDataType : byte
@@ -184,6 +185,36 @@ public struct FBSNumeral : IFlatbufferObject
   public static Offset<FBSNumeral> EndFBSNumeral(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     return new Offset<FBSNumeral>(o);
+  }
+};
+
+public struct FBSNumeralArray : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static FBSNumeralArray GetRootAsFBSNumeralArray(ByteBuffer _bb) { return GetRootAsFBSNumeralArray(_bb, new FBSNumeralArray()); }
+  public static FBSNumeralArray GetRootAsFBSNumeralArray(ByteBuffer _bb, FBSNumeralArray obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
+  public FBSNumeralArray __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public double Vector(int j) { int o = __p.__offset(4); return o != 0 ? __p.bb.GetDouble(__p.__vector(o) + j * 8) : (double)0; }
+  public int VectorLength { get { int o = __p.__offset(4); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public ArraySegment<byte>? GetVectorBytes() { return __p.__vector_as_arraysegment(4); }
+
+  public static Offset<FBSNumeralArray> CreateFBSNumeralArray(FlatBufferBuilder builder,
+      VectorOffset vectorOffset = default(VectorOffset)) {
+    builder.StartObject(1);
+    FBSNumeralArray.AddVector(builder, vectorOffset);
+    return FBSNumeralArray.EndFBSNumeralArray(builder);
+  }
+
+  public static void StartFBSNumeralArray(FlatBufferBuilder builder) { builder.StartObject(1); }
+  public static void AddVector(FlatBufferBuilder builder, VectorOffset vectorOffset) { builder.AddOffset(0, vectorOffset.Value, 0); }
+  public static VectorOffset CreateVectorVector(FlatBufferBuilder builder, double[] data) { builder.StartVector(8, data.Length, 8); for (int i = data.Length - 1; i >= 0; i--) builder.AddDouble(data[i]); return builder.EndVector(); }
+  public static void StartVectorVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(8, numElems, 8); }
+  public static Offset<FBSNumeralArray> EndFBSNumeralArray(FlatBufferBuilder builder) {
+    int o = builder.EndObject();
+    return new Offset<FBSNumeralArray>(o);
   }
 };
 

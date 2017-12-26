@@ -24,15 +24,15 @@ namespace Neodroid.Configurables {
       _G = ConfigurableIdentifier + "G";
       _B = ConfigurableIdentifier + "B";
       _A = ConfigurableIdentifier + "A";
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _R);
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _G);
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _B);
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _A);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _R);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _G);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _B);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _A);
     }
 
     public override void ApplyConfiguration (Configuration configuration) {
-      if (_debug)
-        Debug.Log ("Applying " + configuration.ToString () + " To " + ConfigurableIdentifier);
+      if (Debugging)
+        print ("Applying " + configuration.ToString () + " To " + ConfigurableIdentifier);
       foreach (var mat in _renderer.materials) {
         var c = mat.color;
 

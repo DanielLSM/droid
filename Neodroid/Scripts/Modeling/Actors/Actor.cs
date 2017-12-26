@@ -5,19 +5,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
-using System;
-using System.Runtime.Remoting.Messaging;
 
 namespace Neodroid.Actors {
   [ExecuteInEditMode]
   //[RequireComponent (typeof(Collider))]
   public class Actor : MonoBehaviour, HasRegister<Motor> {
 
-    public Dictionary<string, Motor> _motors;
+    #region Fields
 
-    public LearningEnvironment _environment;
+    [Header ("References", order = 99)]
+    [SerializeField]
+    LearningEnvironment _environment;
 
-    public bool _debug = false;
+    [Header ("Development", order = 100)]
+    [SerializeField]
+    bool _debugging = false;
+
+    [Header ("General", order = 101)]
+    [SerializeField]
+    Dictionary<string, Motor> _motors;
+
+
+    #endregion
 
     void Awake () {
       Setup ();
@@ -29,7 +38,7 @@ namespace Neodroid.Actors {
       if (_environment != null) {
         _environment.UnRegisterActor (ActorIdentifier);
       }
-      _environment = NeodroidUtilities.MaybeRegisterComponent (_environment, this);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent (ParentEnvironment, this);
     }
 
     #if UNITY_EDITOR
@@ -40,35 +49,32 @@ namespace Neodroid.Actors {
 
 
     public void ApplyMotion (MotorMotion motion) {
-      if (_debug)
-        Debug.Log ("Applying " + motion.ToString () + " To " + name + "'s motors");
+      if (Debugging)
+        print ("Applying " + motion.ToString () + " To " + name + "'s motors");
       var motion_motor_name = motion.GetMotorName ();
       if (_motors.ContainsKey (motion_motor_name) && _motors [motion_motor_name] != null) {
         _motors [motion_motor_name].ApplyMotion (motion);
       } else {
-        if (_debug)
-          Debug.Log ("Could find not motor with the specified name: " + motion_motor_name);
+        if (Debugging)
+          print ("Could find not motor with the specified name: " + motion_motor_name);
       }
 
     }
 
-
-    public Dictionary<string, Motor> GetMotors () {
-      return _motors;
-    }
-
     public void AddMotor (Motor motor, string identifier) {
-      if (_debug)
-        Debug.Log ("Actor " + name + " has motor " + identifier);
+      if (Debugging)
+        print ("Actor " + name + " has motor " + identifier);
       if (_motors == null)
         _motors = new Dictionary<string, Motor> ();
       if (!_motors.ContainsKey (identifier)) {
         _motors.Add (identifier, motor);
       } else {
-        if (_debug)
-          Debug.Log (String.Format ("A motor with the identifier {0} is already registered", identifier));
+        if (Debugging)
+          print (System.String.Format ("A motor with the identifier {0} is already registered", identifier));
       }
     }
+
+    #region Getters
 
     public string ActorIdentifier { get { return name; } }
 
@@ -80,7 +86,7 @@ namespace Neodroid.Actors {
       AddMotor (motor, identifier);
     }
 
-    public Dictionary<string, Motor> RegisteredMotors {
+    public Dictionary<string, Motor> Motors {
       get {
         return _motors;
       }
@@ -91,12 +97,27 @@ namespace Neodroid.Actors {
     }
 
     public void RefreshStart () {
-      Start ();
     }
 
-    protected virtual void Start () {
+    public LearningEnvironment ParentEnvironment {
+      get {
+        return _environment;
+      }
+      set {
+        _environment = value;
+      }
     }
 
+    public bool Debugging {
+      get {
+        return _debugging;
+      }
+      set {
+        _debugging = value;
+      }
+    }
+
+    #endregion
 
     public virtual void Reset () {
       if (_motors != null) {

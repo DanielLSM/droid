@@ -8,27 +8,92 @@ using UnityEngine;
 namespace Neodroid.Messaging.Messages {
   [Serializable]
   public class EnvironmentState {
-    public string _environment_name;
-    public float _total_energy_spent_since_reset;
-    public int _last_steps_frame_number;
-    public bool _interrupted;
-    public string _debug_message;
+    string _environment_name;
 
-    public Rigidbody[] _bodies;
-    public Transform[] _poses;
+    public string EnvironmentName {
+      get {
+        return _environment_name;
+      }
+    }
 
-    public Dictionary<string, Observer> _observers;
+    float _total_energy_spent_since_reset;
 
-    public EnvironmentDescription _description;
+    public float TotalEnergySpentSinceReset {
+      get {
+        return _total_energy_spent_since_reset;
+      }
+    }
 
-    public float _reward_for_last_step;
+    int _frame_number;
+
+    public int FrameNumber {
+      get {
+        return _frame_number;
+      }
+    }
+
+    bool _interrupted;
+
+    public bool Interrupted {
+      get {
+        return _interrupted;
+      }
+    }
+
+    string _debug_message;
+
+    public string DebugMessage {
+      get {
+        return _debug_message;
+      }
+    }
+
+    Rigidbody[] _bodies;
+
+    public Rigidbody[] Bodies {
+      get {
+        return _bodies;
+      }
+    }
+
+    Transform[] _poses;
+
+    public Transform[] Poses {
+      get {
+        return _poses;
+      }
+    }
+
+    Dictionary<string, Observer> _observers;
+
+    public Dictionary<string, Observer> Observers {
+      get {
+        return _observers;
+      }
+    }
+
+    EnvironmentDescription _description;
+
+    public EnvironmentDescription Description {
+      get {
+        return _description;
+      }
+    }
+
+    float _reward;
+
+    public float Reward {
+      get {
+        return _reward;
+      }
+    }
 
     public EnvironmentState (
       string environment_name,
       float total_energy_spent_since_reset,
       Dictionary<string, Observer> observers,
-      int last_steps_frame_number,
-      float reward_for_last_step,
+      int frame_number,
+      float reward,
       bool interrupted,
       Rigidbody[] bodies,
       Transform[] poses,
@@ -38,16 +103,13 @@ namespace Neodroid.Messaging.Messages {
       _environment_name = environment_name;
       _total_energy_spent_since_reset = total_energy_spent_since_reset;
       _observers = observers;
-      _reward_for_last_step = reward_for_last_step;
-      _last_steps_frame_number = last_steps_frame_number;
+      _reward = reward;
+      _frame_number = frame_number;
       _interrupted = interrupted;
       _description = description;
       _bodies = bodies;
       _poses = poses;
     }
-
-    public EnvironmentState () {
-
-    }
+      
   }
 }

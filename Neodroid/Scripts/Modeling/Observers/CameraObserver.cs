@@ -14,7 +14,7 @@ namespace Neodroid.Observers {
     }
 
     protected virtual void Update () {
-      _data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG ();
+      Data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG ();
     }
 
     public override void UpdateData () {

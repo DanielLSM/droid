@@ -8,21 +8,26 @@ using System.Runtime.InteropServices;
 namespace Neodroid.Evaluation {
   [Serializable]
   public abstract class ObjectiveFunction : MonoBehaviour, HasRegister<Term> {
+    #region Fields
 
-    public bool _debug = false;
+    [Header ("Development", order = 99)]
+    [SerializeField]
+    bool _debugging = false;
 
-    public float _solved_threshold = 0;
+    [Header ("References", order = 100)]
 
-    public Term[] _extra_term_go;
+    [Header ("General", order = 101)]
+    [SerializeField]
+    float _solved_threshold = 0;
+    [SerializeField]
+    Term[] _extra_term_go;
+    [SerializeField]
+    Dictionary<string, Term> _extra_terms = new Dictionary<string, Term> ();
+    [SerializeField]
+    Dictionary<Term, float> _extra_term_weights = new Dictionary<Term, float> ();
 
-    public Dictionary<string, Term> _extra_terms = new Dictionary<string, Term> ();
-    public Dictionary<Term, float> _extra_term_weights = new Dictionary<Term, float> ();
 
-    /*[SerializeField]
-        public StringGameObjectDictionary _extra_terms_serial = StringGameObjectDictionary.New<StringGameObjectDictionary>();
-        public Dictionary<string, GameObject> _extra_terms {
-          get { return _extra_terms_serial.dictionary; }
-        }*/
+    #endregion
 
     void Awake () {
       foreach (var go in _extra_term_go) {
@@ -41,7 +46,7 @@ namespace Neodroid.Evaluation {
       signal += InternalEvaluate ();
       signal += EvaluateExtraTerms ();
 
-      if (_debug) {
+      if (Debugging) {
         print (signal);
       }
       return signal;
@@ -54,6 +59,23 @@ namespace Neodroid.Evaluation {
     public virtual void InternalReset () {
     }
 
+    public bool Debugging {
+      get {
+        return _debugging;
+      }
+      set { 
+        _debugging = value;
+      }
+    }
+
+    public float SolvedThreshold {
+      get {
+        return _solved_threshold;
+      }
+      set {
+        _solved_threshold = value;
+      }
+    }
 
     public virtual void AdjustExtraTermsWeights (Term term, float new_weight) {
       if (_extra_term_weights.ContainsKey (term))

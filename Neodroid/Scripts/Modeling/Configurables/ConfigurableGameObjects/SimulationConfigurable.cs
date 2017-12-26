@@ -24,17 +24,17 @@ namespace Neodroid.Configurables {
       _width = ConfigurableIdentifier + "Width";
       _height = ConfigurableIdentifier + "Height";
       _fullscreen = ConfigurableIdentifier + "Fullscreen";
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _quality_level);
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _target_frame_rate);
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _width);
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _height);
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _fullscreen);
-      _environment = NeodroidUtilities.MaybeRegisterNamedComponent (_environment, (ConfigurableGameObject)this, _time_scale);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _quality_level);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _target_frame_rate);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _width);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _height);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _fullscreen);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _time_scale);
     }
 
     public override void ApplyConfiguration (Configuration configuration) {
-      if (_debug)
-        Debug.Log ("Applying " + configuration.ToString () + " To " + ConfigurableIdentifier);
+      if (Debugging)
+        print ("Applying " + configuration.ToString () + " To " + ConfigurableIdentifier);
 
       if (configuration.ConfigurableName == _quality_level) {
         QualitySettings.SetQualityLevel ((int)(configuration.ConfigurableValue), true);

@@ -7,11 +7,49 @@ namespace Neodroid.Observers {
   [ExecuteInEditMode]
   [System.Serializable]
   public class Observer : MonoBehaviour {
+    #region Fields
 
-    public LearningEnvironment _environment;
+    [Header ("References", order = 99)]
+    [SerializeField]
+    LearningEnvironment _environment;
 
-    public bool _debug = false;
-    public byte[] _data = new byte[] { };
+    [Header ("Development", order = 100)]
+    [SerializeField]
+    bool _debugging = false;
+
+    [Header ("General", order = 101)]
+    [SerializeField]
+    byte[] _data = new byte[] { };
+
+
+    #endregion
+
+    public LearningEnvironment ParentEnvironment {
+      get {
+        return _environment;
+      }
+      set {
+        _environment = value;
+      }
+    }
+
+    public bool Debugging {
+      get {
+        return _debugging;
+      }
+      set {
+        _debugging = value;
+      }
+    }
+
+    public byte[] Data {
+      get {
+        return _data;
+      }
+      set {
+        _data = value;
+      }
+    }
 
     protected virtual void Awake () {
       Setup ();
@@ -30,7 +68,7 @@ namespace Neodroid.Observers {
     }
 
     protected void Setup () {
-      _environment = NeodroidUtilities.MaybeRegisterComponent (_environment, this);
+      ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent (ParentEnvironment, this);
     }
 
     public virtual void UpdateData () {

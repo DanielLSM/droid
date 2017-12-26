@@ -8,20 +8,69 @@ namespace Neodroid.Motors {
   [ExecuteInEditMode]
   [Serializable]
   public class Motor : MonoBehaviour {
-    public bool _debug = false;
-    public int _decimal_granularity = 0;
-    public float _min_strength = -100;
-    public float _max_strength = 100;
-    public float _energy_cost = 1;
-    protected float _energy_spend_since_reset = 0;
-    public Actor _actor_game_object;
+    #region Fields
+
+    [Header ("References", order = 99)]
+    [SerializeField]
+    Actor _actor;
+
+    [Header ("Development", order = 100)]
+    [SerializeField]
+    bool _debugging = false;
+
+    [Header ("General", order = 101)]
+    [SerializeField]
+    InputRange _valid_input = new InputRange { decimal_granularity = 0, min_value = -10, max_value = 10 };
+    [SerializeField]
+    float _energy_spend_since_reset = 0;
+    [SerializeField]
+    float _energy_cost = 0;
+
+
+    #endregion
+
+    public Actor ParentActor {
+      get {
+        return _actor;
+      }
+      set {
+        _actor = value;
+      }
+    }
+
+    public float EnergySpendSinceReset {
+      get {
+        return _energy_spend_since_reset;
+      }
+      set {
+        _energy_spend_since_reset = value;
+      }
+    }
+
+    public float EnergyCost {
+      get {
+        return _energy_cost;
+      }
+      set {
+        _energy_cost = value;
+      }
+    }
+
+    public InputRange ValidInput {
+      get {
+        return _valid_input;
+      }
+      set {
+        _valid_input = value;
+      }
+    }
 
     protected virtual  void Awake () {
       RegisterComponent ();
     }
 
     public virtual void RegisterComponent () {
-      _actor_game_object = NeodroidUtilities.MaybeRegisterComponent (_actor_game_object, this);
+      _actor = NeodroidUtilities.MaybeRegisterComponent (_actor, this);
     }
 
     #if UNITY_EDITOR
@@ -32,6 +81,15 @@ namespace Neodroid.Motors {
 
     protected virtual void Start () {
 
+    }
+
+    public bool Debugging {
+      get {
+        return _debugging;
+      }
+      set {
+        _debugging = value;
+      }
     }
 
     public void RefreshAwake () {

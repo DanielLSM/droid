@@ -16,10 +16,10 @@ namespace Neodroid.Observers {
 
     public override void UpdateData () {
       FindNearest ();
-      if (_environment) {
-        _position = _environment.TransformPosition (_nearest_object.transform.position);
-        _direction = _environment.TransformDirection (_nearest_object.transform.forward);
-        _rotation = _environment.TransformDirection (_nearest_object.transform.up);
+      if (ParentEnvironment) {
+        _position = ParentEnvironment.TransformPosition (_nearest_object.transform.position);
+        _direction = ParentEnvironment.TransformDirection (_nearest_object.transform.forward);
+        _rotation = ParentEnvironment.TransformDirection (_nearest_object.transform.up);
       } else {
         _position = _nearest_object.transform.position;
         _direction = _nearest_object.transform.forward;
@@ -33,7 +33,7 @@ namespace Neodroid.Observers {
         str_rep += "\"NearestIdentifier\": \"" + "None";
       }
       str_rep += "\"}";
-      _data = Encoding.ASCII.GetBytes (str_rep);
+      Data = Encoding.ASCII.GetBytes (str_rep);
     }
 
     public override string ObserverIdentifier{ get { return name + "NearestByTag"; } }

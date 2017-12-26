@@ -13,9 +13,9 @@ namespace Neodroid.Observers {
     public bool _use_environments_coordinates = true;
 
     public override void UpdateData () {
-      if (_environment && _use_environments_coordinates) {
-        _position = _environment.TransformPosition (this.transform.position);
-        _rotation = Quaternion.Euler (_environment.TransformDirection (this.transform.forward));
+      if (ParentEnvironment && _use_environments_coordinates) {
+        _position = ParentEnvironment.TransformPosition (this.transform.position);
+        _rotation = Quaternion.Euler (ParentEnvironment.TransformDirection (this.transform.forward));
       } else {
         _position = this.transform.position;
         _rotation = this.transform.rotation;

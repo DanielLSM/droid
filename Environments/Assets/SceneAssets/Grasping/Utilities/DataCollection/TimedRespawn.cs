@@ -7,7 +7,7 @@ using Neodroid.Utilities;
 namespace SceneSpecificAssets.Grasping.Utilities.DataCollection {
   public class TimedRespawn : MonoBehaviour {
 
-    public bool _debug;
+    public bool Debugging;
     public GraspableObject _graspable_object;
     public ScriptedGripper _gripper;
     Grasp _grasp;
@@ -32,7 +32,7 @@ namespace SceneSpecificAssets.Grasping.Utilities.DataCollection {
       _initial_position = _rigid_body.transform.position;
       _initial_rotation = _rigid_body.transform.rotation;
 
-      NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (this, transform, OnCollisionEnterChild, OnTriggerEnterChild, OnCollisionExitChild, OnTriggerExitChild, OnCollisionStayChild, OnTriggerStayChild, _debug);
+      NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (this, transform, OnCollisionEnterChild, OnTriggerEnterChild, OnCollisionExitChild, OnTriggerExitChild, OnCollisionStayChild, OnTriggerStayChild, Debugging);
     }
 
     void OnTriggerStayChild (GameObject child_game_object, Collider collider) {

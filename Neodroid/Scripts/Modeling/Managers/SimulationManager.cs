@@ -7,22 +7,132 @@ using Neodroid.Messaging.Messages;
 using Neodroid.Utilities;
 using UnityEngine;
 using System;
+using System.Runtime.InteropServices;
 
 namespace Neodroid.Managers {
   public class SimulationManager : MonoBehaviour, HasRegister<LearningEnvironment> {
 
-    #region PublicMembers
+    #region Fields
 
-    public string _ip_address = "127.0.0.1";
-    public int _port = 5555;
-    public bool _continue_reaction_on_disconnect = false;
-    public int _episode_length = 1000;
-    public int _frame_skips = 0;
-    public float _simulation_time_scale = 1;
-    public int _resets = 10;
+    [SerializeField]
+    string _ip_address = "127.0.0.1";
+    [SerializeField]
+    int _port = 5555;
+    [SerializeField]
+    bool _continue_reaction_on_disconnect = false;
+    [SerializeField]
+    int _episode_length = 1000;
+    [SerializeField]
+    int _frame_skips = 0;
+    [SerializeField]
+    float _simulation_time_scale = 1;
+    [SerializeField]
+    int _resets = 10;
     //When resetting transforms we run multiple times to ensure that we properly reset hierachies of objects
-    public bool _wait_for_reaction_every_frame = false;
-    public bool _debug = false;
+    [SerializeField]
+    bool _wait_for_reaction_every_frame = false;
+    [SerializeField]
+    bool _debugging = false;
+
+    #endregion
+
+    #region Getters
+
+    public string IpAddress {
+      get {
+        return _ip_address;
+      }
+      set { 
+        _ip_address = value;
+      }
+    }
+
+    public int Port {
+      get {
+        return _port;
+      }
+      set { 
+        _port = value;
+      }
+    }
+
+    public bool ContinueReactionOnDisconnect {
+      get {
+        return _continue_reaction_on_disconnect;
+      }
+      set { 
+        _continue_reaction_on_disconnect = value;
+      }
+    }
+
+    public int EpisodeLength {
+      get {
+        return _episode_length;
+      }
+      set { 
+        _episode_length = value;
+      }
+    }
+
+    public int FrameSkips {
+      get {
+        return _frame_skips;
+      }
+      set { 
+        _frame_skips = value;
+      }
+    }
+
+    public float SimulationTimeScale {
+      get {
+        return _simulation_time_scale;
+      }
+      set { 
+        _simulation_time_scale = value;
+      }
+    }
+
+    public int Resets {
+      get {
+        return _resets;
+      }
+      set { 
+        _resets = value;
+      }
+    }
+
+    public bool WaitForReactionEveryFrame {
+      get {
+        return _wait_for_reaction_every_frame;
+      }
+      set { 
+        _wait_for_reaction_every_frame = value;
+      }
+    }
+
+    public bool Debugging {
+      get {
+        return _debugging;
+      }
+      set { 
+        _debugging = value;
+      }
+    }
+
+    public bool IsSimulationUpdated () {
+      return _is_simulation_updated;
+    }
+
+    public bool IsSimulationPaused () {
+      return Time.timeScale == 0;
+    }
+
+    public bool WaitForReaction {
+      get{ return _waiting_for_reaction; }
+      set {
+        _wait_for_reaction_every_frame = value;
+      }
+    }
 
     #endregion
 
@@ -43,7 +153,6 @@ namespace Neodroid.Managers {
     void Start () {
       FetchCommmandLineArguments ();
       StartMessagingServer ();
-      ResumeSimulation ();
     }
 
     void FixedUpdate () {
@@ -60,15 +169,13 @@ namespace Neodroid.Managers {
     }
 
     void Update () {
-      if (!_waiting_for_reaction && _reaction != null) {
-        ResumeSimulation ();
-
-        var states = Step (_reaction);
+      if (!_wait_for_reaction_every_frame || (_reaction != null && _reaction.Step)) {
+        ResumeSimulation (_simulation_time_scale);
+      }
+      if (!_waiting_for_reaction) {
+        var states = ReactInEnvironments (_reaction);
         SendEnvironmentStates (states);
         _waiting_for_reaction = true;
-      }
-      if (!_wait_for_reaction_every_frame) {
-        ResumeSimulation ();
       }
     }
 
@@ -76,20 +183,16 @@ namespace Neodroid.Managers {
 
     #region PublicMethods
 
-    public EnvironmentState[] Step (Reaction reaction) {
+    public EnvironmentState[] ReactInEnvironments (Reaction reaction) {
+      var states = new EnvironmentState[_environments.Values.Count];
+      var i = 0;
       foreach (var environment in _environments.Values) {
-        environment.ExecuteReaction (reaction);
+        states [i++] = environment.React (reaction);
       }
-      return GatherStates ();
+      return states;
     }
 
-    public bool IsSimulationUpdated () {
-      return _is_simulation_updated;
-    }
 
-    public bool IsSimulationPaused () {
-      return Time.timeScale == 0;
-    }
 
     public string GetStatus () {
       if (_client_connected)
@@ -98,24 +201,16 @@ namespace Neodroid.Managers {
         return "Not Connected";
     }
 
-
-    public bool WaitForReaction {
-      get{ return _waiting_for_reaction; }
-      set {
-        _wait_for_reaction_every_frame = value;
-      }
-    }
-
     #region Registration
 
     public void Register (LearningEnvironment environment) {
-      if (_debug)
+      if (Debugging)
         Debug.Log (string.Format ("Manager {0} has environment {1}", name, environment.EnvironmentIdentifier));
       _environments.Add (environment.EnvironmentIdentifier, environment);
     }
 
     public void Register (LearningEnvironment environment, string identifier) {
-      if (_debug)
+      if (Debugging)
         Debug.Log (string.Format ("Manager {0} has environment {1}", name, identifier));
       _environments.Add (identifier, environment);
     }
@@ -136,24 +231,15 @@ namespace Neodroid.Managers {
       }
     }
 
-    EnvironmentState[] GatherStates () {
-      var states = new EnvironmentState[_environments.Values.Count];
-      var i = 0;
-      foreach (var environment in _environments.Values) {
-        states [i++] = environment.GetCurrentState ();
-      }
-      return states;
-    }
-
 
     void PauseSimulation () {
       Time.timeScale = 0;
       Time.fixedDeltaTime = 0.02F * Time.timeScale;
     }
 
-    void ResumeSimulation () {
-      if (_simulation_time_scale > 0) {
-        Time.timeScale = _simulation_time_scale;
+    void ResumeSimulation (float simulation_time_scale) {
+      if (simulation_time_scale > 0) {
+        Time.timeScale = simulation_time_scale;
         Time.fixedDeltaTime = 0.02F * Time.timeScale;
       } else {
         Time.timeScale = 1;
@@ -176,9 +262,9 @@ namespace Neodroid.Managers {
 
     void StartMessagingServer () {
       if (_ip_address != "" || _port != 0)
-        _message_server = new MessageServer (_ip_address, _port);
+        _message_server = new MessageServer (_ip_address, _port, false, Debugging);
       else
-        _message_server = new MessageServer ();
+        _message_server = new MessageServer (Debugging);
 
       _message_server.ListenForClientToConnect (OnConnectCallback);
     }
@@ -190,7 +276,7 @@ namespace Neodroid.Managers {
 
     void OnReceiveCallback (Reaction reaction) {
       _client_connected = true;
-      if (_debug)
+      if (Debugging)
         Debug.Log ("Received: " + reaction.ToString ());
       _reaction = reaction;
       _waiting_for_reaction = false;
@@ -198,19 +284,19 @@ namespace Neodroid.Managers {
 
     void OnDisconnectCallback () {
       _client_connected = false;
-      if (_debug)
+      if (Debugging)
         Debug.Log ("Client disconnected.");
     }
 
-    void OnErrorCallback (string error) {
-      if (_debug)
-        Debug.Log ("ErrorCallback: " + error);
+    void OnDebugCallback (string error) {
+      if (Debugging)
+        Debug.Log ("DebugCallback: " + error);
     }
 
     void OnConnectCallback () {
-      if (_debug)
+      if (Debugging)
         Debug.Log ("Client connected.");
-      _message_server.StartReceiving (OnReceiveCallback, OnDisconnectCallback, OnErrorCallback);
+      _message_server.StartReceiving (OnReceiveCallback, OnDisconnectCallback, OnDebugCallback);
     }
 
     void OnInterruptCallback () {

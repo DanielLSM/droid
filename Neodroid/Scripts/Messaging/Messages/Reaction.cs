@@ -11,32 +11,44 @@ namespace Neodroid.Messaging.Messages {
     Pose[] _poses;
     Body[] _bodies;
     bool _reset = false;
+    bool _step = true;
+    bool _configure = false;
 
     public Reaction (MotorMotion[] motions) {
       _motions = motions;
       _reset = false;
+      _step = true;
+      _configure = false;
     }
 
     public Reaction (MotorMotion[] motions,
                      Pose[] poses,
                      Body[] bodies,
                      Configuration[] configurations,
-                     bool reset) {
+                     bool reset,
+                     bool step = true,
+                     bool configure = false) {
       _motions = motions;
       _configurations = configurations;
       _poses = poses;
       _bodies = bodies;
       _reset = reset; 
+      _step = step;
+      _configure = configure;
     }
 
     public Reaction (Configuration[] configurations) {
       _configurations = configurations;
       _reset = true; 
+      _step = true;
+      _configure = false;
     }
 
 
-    public Reaction (bool reset) {
+    public Reaction (bool reset, bool step = true, bool configure = false) {
       _reset = reset;
+      _step = step;
+      _configure = configure;
     }
 
     public MotorMotion[] Motions {
@@ -45,6 +57,14 @@ namespace Neodroid.Messaging.Messages {
 
     public bool Reset {
       get { return _reset; }
+    }
+
+    public bool Step {
+      get { return _step; }
+    }
+
+    public bool Configure {
+      get { return _configure; }
     }
 
     public Configuration[] Configurations {
@@ -72,7 +92,10 @@ namespace Neodroid.Messaging.Messages {
           configurations_str += configuration.ToString () + "\n";
         }
       }
-      return "<Reaction>\n" + _reset + ",\n " + motions_str + ",\n " + configurations_str + "\n</Reaction>";
+      return String.Format (
+        "<Reaction>\n " +
+        "{0},{1},{2},{3},{4}" +
+        "\n</Reaction>", _reset, _step, _configure, motions_str, configurations_str);
     }
   }
 }

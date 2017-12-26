@@ -11,17 +11,28 @@ using Neodroid.Observers;
 
 namespace Neodroid.Evaluation {
   public class PoseDeviance : ObjectiveFunction {
-    public EulerTransformObserver _goal;
-    public Actor _actor;
-    public LearningEnvironment _environment;
 
-    public Obstruction[] _obstructions;
-    public BoundingBox _playable_area;
-    public float peak_reward = 0.0f;
+    #region Fields
+
+    [Header ("Specific", order = 102)]
+    [SerializeField]
+    Transform _goal;
+    [SerializeField]
+    Actor _actor;
+    [SerializeField]
+    LearningEnvironment _environment;
+    [SerializeField]
+    Obstruction[] _obstructions;
+    [SerializeField]
+    BoundingBox _playable_area;
+    [SerializeField]
+    float peak_reward = 0.0f;
+
+    #endregion
 
     public override float InternalEvaluate () {
       if (!_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
-        if (_debug)
+        if (Debugging)
           print ("Outside playable area");
         _environment.Interrupt ("Outside playable area");
       }
@@ -38,7 +49,7 @@ namespace Neodroid.Evaluation {
       }
 
       if (distance < 0.5) {
-        if (_debug)
+        if (Debugging)
           print ("Within range of goal");
         reward += 100f;
         _environment.Interrupt ("Within range of goal");
@@ -52,7 +63,7 @@ namespace Neodroid.Evaluation {
 
     private void Awake () {
       if (!_goal) {
-        _goal = FindObjectOfType<EulerTransformObserver> ();
+        _goal = FindObjectOfType<Transform> ();
       }
       if (!_actor) {
         _actor = FindObjectOfType<Actor> ();
