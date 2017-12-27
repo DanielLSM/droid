@@ -36,6 +36,7 @@ table FBSConfigurable {
 
 table FBSActor {
   actor_name:string;
+  alive:bool;
   motors:[FBSMotor];
 }
 

@@ -65,7 +65,6 @@ namespace Neodroid.Environments {
     float _lastest_reset_time = 0;
     float energy_spent = 0f;
     bool _interrupted = false;
-    bool _reset = false;
     bool _configure = false;
 
     #endregion
@@ -185,7 +184,6 @@ namespace Neodroid.Environments {
 
     public void Interrupt (string reason) {
       _interrupted = true;
-      _reset = true;
       if (Debugging) {
         print (System.String.Format ("Was interrupted, because {0}", reason));
       }
@@ -194,10 +192,7 @@ namespace Neodroid.Environments {
     public void PostUpdate () {
       if (_interrupted) {
         _interrupted = false;
-      }
-      if (_reset) {
         Reset ();
-        _reset = false;
       }
       if (_configure) {
         Configure ();
@@ -215,18 +210,16 @@ namespace Neodroid.Environments {
     }
 
     public EnvironmentState React (Reaction reaction) {
-      if (reaction != null) {
-        _configurations = reaction.Configurations;
-        _received_poses = reaction.Poses;
-        _received_bodies = reaction.Bodies;
-        _configure = reaction.Configure;
-        _reset = reaction.Reset;
-      }
-      if (reaction != null && !_reset) {
+      _configurations = reaction.Configurations;
+      _received_poses = reaction.Poses;
+      _received_bodies = reaction.Bodies;
+      _configure = reaction.Configure;
+
+      if (reaction.Step) {
         Step (reaction);
-        return GetState ();
+      } else if (reaction.Reset) {
+        Interrupt ("Resetting because of reaction");
       }
-      Interrupt ("Resetting because of reaction");
       return GetState ();
     }
 
@@ -458,7 +451,7 @@ namespace Neodroid.Environments {
       }
 
       EnvironmentDescription description = null;
-      if (_reset) {
+      if (_interrupted) {
         description = new EnvironmentDescription (
           _simulation_manager.EpisodeLength, 
           _simulation_manager.FrameSkips, 

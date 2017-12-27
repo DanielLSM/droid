@@ -178,21 +178,25 @@ public struct FBSActor : IFlatbufferObject
 
   public string ActorName { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
   public ArraySegment<byte>? GetActorNameBytes() { return __p.__vector_as_arraysegment(4); }
-  public FBSMotor? Motors(int j) { int o = __p.__offset(6); return o != 0 ? (FBSMotor?)(new FBSMotor()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
-  public int MotorsLength { get { int o = __p.__offset(6); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public bool Alive { get { int o = __p.__offset(6); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+  public FBSMotor? Motors(int j) { int o = __p.__offset(8); return o != 0 ? (FBSMotor?)(new FBSMotor()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public int MotorsLength { get { int o = __p.__offset(8); return o != 0 ? __p.__vector_len(o) : 0; } }
 
   public static Offset<FBSActor> CreateFBSActor(FlatBufferBuilder builder,
       StringOffset actor_nameOffset = default(StringOffset),
+      bool alive = false,
       VectorOffset motorsOffset = default(VectorOffset)) {
-    builder.StartObject(2);
+    builder.StartObject(3);
     FBSActor.AddMotors(builder, motorsOffset);
     FBSActor.AddActorName(builder, actor_nameOffset);
+    FBSActor.AddAlive(builder, alive);
     return FBSActor.EndFBSActor(builder);
   }
 
-  public static void StartFBSActor(FlatBufferBuilder builder) { builder.StartObject(2); }
+  public static void StartFBSActor(FlatBufferBuilder builder) { builder.StartObject(3); }
   public static void AddActorName(FlatBufferBuilder builder, StringOffset actorNameOffset) { builder.AddOffset(0, actorNameOffset.Value, 0); }
-  public static void AddMotors(FlatBufferBuilder builder, VectorOffset motorsOffset) { builder.AddOffset(1, motorsOffset.Value, 0); }
+  public static void AddAlive(FlatBufferBuilder builder, bool alive) { builder.AddBool(1, alive, false); }
+  public static void AddMotors(FlatBufferBuilder builder, VectorOffset motorsOffset) { builder.AddOffset(2, motorsOffset.Value, 0); }
   public static VectorOffset CreateMotorsVector(FlatBufferBuilder builder, Offset<FBSMotor>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
   public static void StartMotorsVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
   public static Offset<FBSActor> EndFBSActor(FlatBufferBuilder builder) {

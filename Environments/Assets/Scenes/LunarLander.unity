@@ -300,6 +300,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &161967754 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114315218702530786, guid: 6eb4ee769c23c46988ee311220cbbded,
+    type: 2}
+  m_PrefabInternal: {fileID: 934752434}
+  m_Script: {fileID: 11500000, guid: b8b7c65bfbcfa4ac381370b0b8eef1bc, type: 3}
 --- !u!4 &362436251 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4976817146948698, guid: 6eb4ee769c23c46988ee311220cbbded,
@@ -516,8 +522,8 @@ GameObject:
   - component: {fileID: 903194208}
   - component: {fileID: 903194211}
   - component: {fileID: 903194210}
-  - component: {fileID: 903194209}
   - component: {fileID: 903194212}
+  - component: {fileID: 903194209}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -610,18 +616,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 903194203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f5c2538e2c745a6b298603cd6a9737, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b8b52bd0a9314404a804e45a87dff77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
   _solved_threshold: 0
   _extra_terms: []
-  _based_on_tags: 0
   _area: {fileID: 675183322}
-  _actor: {fileID: 0}
+  _actor: {fileID: 161967754}
   _environment: {fileID: 0}
   _obstructions: []
   _playable_area: {fileID: 903194210}
+  _resting_time: 3
 --- !u!114 &903194210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,6 +674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Debugging: 0
   _rigidbody: {fileID: 362436253}
+  _actor: {fileID: 161967754}
   _threshold: 100
   _explosion_force: 50
   _explosion: {fileID: 0}

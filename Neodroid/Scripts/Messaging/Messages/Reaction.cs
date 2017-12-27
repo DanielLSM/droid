@@ -14,11 +14,26 @@ namespace Neodroid.Messaging.Messages {
     bool _step = true;
     bool _configure = false;
 
+    #region Constructors
+
     public Reaction (MotorMotion[] motions) {
       _motions = motions;
       _reset = false;
       _step = true;
       _configure = false;
+    }
+
+    public Reaction (Configuration[] configurations) {
+      _configurations = configurations;
+      _reset = true; 
+      _step = false;
+      _configure = true;
+    }
+
+    public Reaction (bool reset, bool step = false, bool configure = false) {
+      _reset = reset;
+      _step = step;
+      _configure = configure;
     }
 
     public Reaction (MotorMotion[] motions,
@@ -37,19 +52,9 @@ namespace Neodroid.Messaging.Messages {
       _configure = configure;
     }
 
-    public Reaction (Configuration[] configurations) {
-      _configurations = configurations;
-      _reset = true; 
-      _step = true;
-      _configure = false;
-    }
+    #endregion
 
-
-    public Reaction (bool reset, bool step = true, bool configure = false) {
-      _reset = reset;
-      _step = step;
-      _configure = configure;
-    }
+    #region Getters
 
     public MotorMotion[] Motions {
       get { return _motions; }
@@ -78,6 +83,8 @@ namespace Neodroid.Messaging.Messages {
     public Body[] Bodies {
       get { return _bodies; }
     }
+
+    #endregion
 
     public override string ToString () {
       string motions_str = "";

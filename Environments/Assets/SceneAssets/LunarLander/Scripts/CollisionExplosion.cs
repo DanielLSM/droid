@@ -2,6 +2,7 @@
 using UnityEngine;
 using Neodroid.Utilities;
 using Neodroid.Environments;
+using Neodroid.Actors;
 
 
 
@@ -13,6 +14,7 @@ public class CollisionExplosion : Resetable {
 
   public bool Debugging = false;
   public Rigidbody _rigidbody;
+  public Actor _actor;
   public float _threshold = 150;
   public float _explosion_force = 50;
   public ParticleSystem _explosion;
@@ -67,6 +69,7 @@ public class CollisionExplosion : Resetable {
     if (Debugging)
       print (System.String.Format ("{0} {1}", val, val_other));
     if ((val >= _threshold || val_other >= _threshold) && !_has_exploded) {
+      _actor.Kill ();
       _has_exploded = true;
       if (_explosion) {
         _explosion.Play ();

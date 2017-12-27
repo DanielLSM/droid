@@ -8,6 +8,7 @@ using Neodroid.Messaging.CustomFBS;
 using Neodroid.FBS.Reaction;
 
 namespace Neodroid.Messaging {
+  [System.Serializable]
   class MessageServer {
     #region PrivateMembers
 
@@ -26,14 +27,79 @@ namespace Neodroid.Messaging {
 
     #endregion
 
-    public bool Debugging {
-      get {
-        return _debugging;
+    #region PrivateMethods
+
+    #region Threads
+
+    void WaitForClientToConnect (System.Action callback) {
+      if (_use_inter_process_communication) {
+        _socket.Bind ("ipc:///tmp/neodroid/messages");
+        //_socket.Bind ("inproc://neodroid");
+        //_socket.Bind ("epgm://" + _ip_address + ":" + _port.ToString ()); // for pub/sub sockets
+      } else {
+        _socket.Bind ("tcp://" + _ip_address + ":" + _port.ToString ());
       }
-      set {
-        _debugging = value;
+      callback ();
+    }
+
+    void PollingThread (System.Action<Reaction> receive_callback, System.Action disconnect_callback, System.Action<System.String> debug_callback) {
+      byte[] msg;
+      while (_stop_thread_ == false) {
+        if (!_waiting_for_main_loop_to_send) {
+          try {
+            _socket.TryReceiveFrameBytes (System.TimeSpan.FromSeconds (2), out msg);
+            if (msg != null && msg.Length > 0) {
+              var flat_reaction = FBSReaction.GetRootAsFBSReaction (new FlatBuffers.ByteBuffer (msg));
+              if (Debugging) {
+                debug_callback (flat_reaction.ToString ());
+              }
+              var reaction = FBSReactionUtilities.create_reaction (flat_reaction);
+              receive_callback (reaction);
+              _waiting_for_main_loop_to_send = true;
+            }
+          } catch (System.Exception err) {
+            debug_callback (err.ToString ());
+          }
+        }
+      }
+
+      if (_use_inter_process_communication) {
+        _socket.Disconnect (("inproc://neodroid"));
+      } else {
+        _socket.Disconnect (("tcp://" + _ip_address + ":" + _port.ToString ()));
+      }
+      try {
+        _socket.Dispose ();
+        _socket.Close ();
+      } finally {
+        NetMQConfig.Cleanup (false);
       }
     }
+
+    #endregion
+
+    #endregion
+
+    #region PublicMethods
+
+    public void SendEnvironmentStates (EnvironmentState[] environment_states) {
+      byte_buffer = FBSStateUtilities.build_states (environment_states);
+      _socket.SendFrame (byte_buffer);
+      _waiting_for_main_loop_to_send = false;
+    }
+
+    public void ListenForClientToConnect (System.Action callback) {
+      _wait_for_client_thread = new System.Threading.Thread (unused_param => WaitForClientToConnect (callback));
+      _wait_for_client_thread.IsBackground = true; // Is terminated with foreground threads, when they terminate
+      _wait_for_client_thread.Start ();
+    }
+
+    public void StartReceiving (System.Action<Reaction> cmd_callback, System.Action disconnect_callback, System.Action<System.String> debug_callback) {
+      _polling_thread = new System.Threading.Thread (unused_param => PollingThread (cmd_callback, disconnect_callback, debug_callback));
+      _polling_thread.IsBackground = true; // Is terminated with foreground threads, when they terminate
+      _polling_thread.Start ();
+    }
+
 
     #region Contstruction
 
@@ -59,83 +125,23 @@ namespace Neodroid.Messaging {
       _socket = new ResponseSocket ();
     }
 
-    public void ListenForClientToConnect (System.Action callback) {
-      _wait_for_client_thread = new System.Threading.Thread (unused_param => WaitForClientToConnect (callback));
-      _wait_for_client_thread.IsBackground = true; // Is terminated with foreground threads, when they terminate
-      _wait_for_client_thread.Start ();
-    }
 
-    public void StartReceiving (System.Action<Reaction> cmd_callback, System.Action disconnect_callback, System.Action<System.String> debug_callback) {
-      _polling_thread = new System.Threading.Thread (unused_param => PollingThread (cmd_callback, disconnect_callback, debug_callback));
-      _polling_thread.IsBackground = true; // Is terminated with foreground threads, when they terminate
-      _polling_thread.Start ();
-    }
 
     #endregion
 
-    #region Threads
+    #region Getters
 
-    void WaitForClientToConnect (System.Action callback) {
-      if (_use_inter_process_communication) {
-        //_socket.Bind ("inproc://neodroid");
-        _socket.Bind ("ipc:///tmp/neodroid/messages0");
-        //_socket.Bind ("epgm://" + _ip_address + ":" + _port.ToString ()); // for pub/sub sockets
-      } else {
-        _socket.Bind ("tcp://" + _ip_address + ":" + _port.ToString ());
+    public bool Debugging {
+      get {
+        return _debugging;
       }
-      callback ();
+      set {
+        _debugging = value;
+      }
     }
 
-    void PollingThread (System.Action<Reaction> receive_callback, System.Action disconnect_callback, System.Action<System.String> debug_callback) {
-      byte[] msg;
-      while (_stop_thread_ == false) {
-        if (!_waiting_for_main_loop_to_send) {
-          try {
-            //msg = _socket.TryReceiveFrameBytes ();
-            _socket.TryReceiveFrameBytes (System.TimeSpan.FromSeconds (2), out msg);
-            if (msg != null && msg.Length > 0) {
-              var flat_reaction = FBSReaction.GetRootAsFBSReaction (new FlatBuffers.ByteBuffer (msg));
-              if (Debugging) {
-                debug_callback (flat_reaction.ToString ());
-              }
-              var reaction = FBSUtilities.create_reaction (flat_reaction);
-              receive_callback (reaction);
-              _waiting_for_main_loop_to_send = true;
-            }
-          } catch (System.Exception err) {
-            debug_callback (err.ToString ());
-          }
-        }
-      }
-
-      if (_use_inter_process_communication) {
-        _socket.Disconnect (("inproc://neodroid"));
-      } else {
-        _socket.Disconnect (("tcp://" + _ip_address + ":" + _port.ToString ()));
-      }
-      try {
-        _socket.Dispose ();
-        _socket.Close ();
-      } finally {
-        NetMQConfig.Cleanup (false);
-      }
-    }
 
     #endregion
-
-    #region PublicMethods
-
-    /*public void SendEnvironmentState (EnvironmentState environment_state) {
-      byte_buffer = FBSUtilities.build_state (environment_state);
-      _socket.SendFrame (byte_buffer);
-      _waiting_for_main_loop_to_send = false; 
-    }*/
-
-    public void SendEnvironmentStates (EnvironmentState[] environment_states) {
-      byte_buffer = FBSUtilities.build_states (environment_states);
-      _socket.SendFrame (byte_buffer);
-      _waiting_for_main_loop_to_send = false;
-    }
 
     #endregion
 

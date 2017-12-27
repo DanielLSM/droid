@@ -175,7 +175,7 @@ namespace Neodroid.Managers {
     }
 
     void Update () {
-      if (!_wait_for_reaction_every_frame || (_reaction != null && _reaction.Step)) {
+      if (!_wait_for_reaction_every_frame || (!_waiting_for_reaction && _reaction.Step)) {
         ResumeSimulation (_simulation_time_scale);
       }
       if (!_waiting_for_reaction) {
@@ -274,7 +274,6 @@ namespace Neodroid.Managers {
 
       _message_server.ListenForClientToConnect (OnConnectCallback);
     }
-
 
     #endregion
 

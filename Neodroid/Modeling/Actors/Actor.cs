@@ -28,6 +28,8 @@ namespace Neodroid.Actors {
 
     #endregion
 
+    bool _alive = true;
+
     void Awake () {
       Setup ();
     }
@@ -47,18 +49,33 @@ namespace Neodroid.Actors {
     }
     #endif
 
+    public bool Alive {
+      get {
+        return _alive;
+      }
+    }
+
+
+
+    public void Kill () {
+      _alive = false;
+    }
 
     public void ApplyMotion (MotorMotion motion) {
-      if (Debugging)
-        print ("Applying " + motion.ToString () + " To " + name + "'s motors");
-      var motion_motor_name = motion.GetMotorName ();
-      if (_motors.ContainsKey (motion_motor_name) && _motors [motion_motor_name] != null) {
-        _motors [motion_motor_name].ApplyMotion (motion);
+      if (_alive) {
+        if (Debugging)
+          print ("Applying " + motion.ToString () + " To " + name + "'s motors");
+        var motion_motor_name = motion.GetMotorName ();
+        if (_motors.ContainsKey (motion_motor_name) && _motors [motion_motor_name] != null) {
+          _motors [motion_motor_name].ApplyMotion (motion);
+        } else {
+          if (Debugging)
+            print ("Could find not motor with the specified name: " + motion_motor_name);
+        }
       } else {
         if (Debugging)
-          print ("Could find not motor with the specified name: " + motion_motor_name);
+          print ("Actor is dead, cannot apply motion");
       }
-
     }
 
     public void AddMotor (Motor motor, string identifier) {
@@ -127,6 +144,7 @@ namespace Neodroid.Actors {
           }
         }
       }
+      _alive = true;
     }
   }
 }
