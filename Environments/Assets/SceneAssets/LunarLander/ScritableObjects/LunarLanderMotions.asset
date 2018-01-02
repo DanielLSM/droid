@@ -15,19 +15,19 @@ MonoBehaviour:
   - key: 264
     actor: LunarLander
     motor: LegNRigidbodyRotX
-    strength: -10
+    strength: -100
   - key: 258
     actor: LunarLander
     motor: LegSRigidbodyRotX
-    strength: -10
+    strength: -100
   - key: 260
     actor: LunarLander
     motor: LegWRigidbodyRotX
-    strength: -10
+    strength: -100
   - key: 262
     actor: LunarLander
     motor: LegERigidbodyRotX
-    strength: -10
+    strength: -100
   - key: 32
     actor: LunarLander
     motor: LunarLanderRocketY

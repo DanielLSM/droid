@@ -40,8 +40,6 @@ namespace Neodroid.Environments {
 
     #endregion
 
-
-
     #region PrivateMembers
 
     Vector3[] _reset_positions;
@@ -66,6 +64,8 @@ namespace Neodroid.Environments {
     float energy_spent = 0f;
     bool _interrupted = false;
     bool _configure = false;
+    bool _describe = false;
+    bool _interruptible = true;
 
     #endregion
 
@@ -183,9 +183,11 @@ namespace Neodroid.Environments {
     #endregion
 
     public void Interrupt (string reason) {
-      _interrupted = true;
-      if (Debugging) {
-        print (System.String.Format ("Was interrupted, because {0}", reason));
+      if (_interruptible) {
+        _interrupted = true;
+        if (Debugging) {
+          print (System.String.Format ("Was interrupted, because {0}", reason));
+        }
       }
     }
 
@@ -193,10 +195,12 @@ namespace Neodroid.Environments {
       if (_interrupted) {
         _interrupted = false;
         Reset ();
+        UpdateConfigurableValues ();
       }
       if (_configure) {
-        Configure ();
         _configure = false;
+        Configure ();
+        UpdateConfigurableValues ();
       }
       UpdateObserversData ();
     }
@@ -209,15 +213,25 @@ namespace Neodroid.Environments {
       }
     }
 
+    public void UpdateConfigurableValues () {
+      foreach (ConfigurableGameObject con in Configurables.Values) {
+        if (con) {
+          con.UpdateCurrentValue ();
+        }
+      }
+    }
+
     public EnvironmentState React (Reaction reaction) {
       _configurations = reaction.Configurations;
       _received_poses = reaction.Poses;
       _received_bodies = reaction.Bodies;
-      _configure = reaction.Configure;
+      _configure = reaction.Parameters.Configure;
+      _describe = reaction.Parameters.Describe;
+      _interruptible = reaction.Parameters.Interruptible;
 
-      if (reaction.Step) {
+      if (reaction.Parameters.Step) {
         Step (reaction);
-      } else if (reaction.Reset) {
+      } else if (reaction.Parameters.Reset) {
         Interrupt ("Resetting because of reaction");
       }
       return GetState ();
@@ -413,6 +427,10 @@ namespace Neodroid.Environments {
         _reset_positions [i] = _child_game_objects [i].transform.position;
         _reset_rotations [i] = _child_game_objects [i].transform.rotation;
         _poses [i] = _child_game_objects [i].transform;
+        var maybe_joint = _child_game_objects [i].GetComponent<Joint> ();
+        if (maybe_joint != null) {
+          maybe_joint.gameObject.AddComponent<JointFix> ();
+        }
       }
     }
 
@@ -451,14 +469,19 @@ namespace Neodroid.Environments {
       }
 
       EnvironmentDescription description = null;
-      if (_interrupted) {
+      if (_describe) {
+        var threshold = 0f;
+        if (_objective_function != null) {
+          threshold = _objective_function.SolvedThreshold;
+        }
         description = new EnvironmentDescription (
           _simulation_manager.EpisodeLength, 
           _simulation_manager.FrameSkips, 
           Actors, 
           Configurables, 
-          _objective_function.SolvedThreshold
+          threshold
         );
+        _describe = false;
       }
       return new EnvironmentState (
         EnvironmentIdentifier,
@@ -555,6 +578,9 @@ namespace Neodroid.Environments {
               if (rigid_body)
                 rigid_body.WakeUp ();
 
+              var joint_fix = child_game_objects [i].GetComponent<JointFix> ();
+              if (joint_fix)
+                joint_fix.Reset ();
               var animation = child_game_objects [i].GetComponent<Animation> ();
               if (animation)
                 animation.Rewind ();

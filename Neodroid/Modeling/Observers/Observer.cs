@@ -17,9 +17,8 @@ namespace Neodroid.Observers {
     [SerializeField]
     bool _debugging = false;
 
-    [Header ("General", order = 101)]
-    [SerializeField]
-    byte[] _data = new byte[] { };
+    //[Header ("General", order = 101)]
+
 
 
     #endregion
@@ -42,14 +41,7 @@ namespace Neodroid.Observers {
       }
     }
 
-    public byte[] Data {
-      get {
-        return _data;
-      }
-      set {
-        _data = value;
-      }
-    }
+
 
     protected virtual void Awake () {
       Setup ();

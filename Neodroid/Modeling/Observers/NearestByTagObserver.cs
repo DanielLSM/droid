@@ -33,7 +33,7 @@ namespace Neodroid.Observers {
         str_rep += "\"NearestIdentifier\": \"" + "None";
       }
       str_rep += "\"}";
-      Data = Encoding.ASCII.GetBytes (str_rep);
+      //Data = Encoding.ASCII.GetBytes (str_rep);
     }
 
     public override string ObserverIdentifier{ get { return name + "NearestByTag"; } }

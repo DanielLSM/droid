@@ -22,6 +22,7 @@ namespace Neodroid.Evaluation {
 
     ActorOverlapping _overlapping = ActorOverlapping.OUTSIDE_AREA;
     bool _is_resting = false;
+    Coroutine wait_for_resting;
 
     public override float InternalEvaluate () {
 
@@ -40,6 +41,8 @@ namespace Neodroid.Evaluation {
     }
 
     public override void InternalReset () {
+      if (wait_for_resting != null)
+        StopCoroutine (wait_for_resting);
       _is_resting = false;
     }
 
@@ -95,7 +98,9 @@ namespace Neodroid.Evaluation {
           if (Debugging)
             Debug.Log ("Actor is inside area");
           _overlapping = ActorOverlapping.INSIDE_AREA;
-          StartCoroutine (WaitForResting ());
+          if (wait_for_resting != null)
+            StopCoroutine (wait_for_resting);
+          wait_for_resting = StartCoroutine (WaitForResting ());
         }
       }
 
@@ -120,8 +125,8 @@ namespace Neodroid.Evaluation {
           if (Debugging)
             Debug.Log ("Actor is outside area");
           _overlapping = ActorOverlapping.OUTSIDE_AREA;
-
-          StopCoroutine ("WaitForSeconds");
+          if (wait_for_resting != null)
+            StopCoroutine (wait_for_resting);
         }
       }
     }

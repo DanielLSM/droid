@@ -44,6 +44,7 @@ public struct FBSPosition : IFlatbufferObject
   public static void AddPosition(FlatBufferBuilder builder, Offset<FBSVector3> positionOffset) { builder.AddStruct(0, positionOffset.Value, 0); }
   public static Offset<FBSPosition> EndFBSPosition(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // position
     return new Offset<FBSPosition>(o);
   }
 };
@@ -63,6 +64,7 @@ public struct FBSRotation : IFlatbufferObject
   public static void AddRotation(FlatBufferBuilder builder, Offset<FBSVector3> rotationOffset) { builder.AddStruct(0, rotationOffset.Value, 0); }
   public static Offset<FBSRotation> EndFBSRotation(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // rotation
     return new Offset<FBSRotation>(o);
   }
 };
@@ -86,6 +88,9 @@ public struct FBSEulerTransform : IFlatbufferObject
   public static void AddDirection(FlatBufferBuilder builder, Offset<FBSVector3> directionOffset) { builder.AddStruct(2, directionOffset.Value, 0); }
   public static Offset<FBSEulerTransform> EndFBSEulerTransform(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // position
+    builder.Required(o, 6);  // rotation
+    builder.Required(o, 8);  // direction
     return new Offset<FBSEulerTransform>(o);
   }
 };
@@ -105,6 +110,7 @@ public struct FBSQuaternionTransformObservation : IFlatbufferObject
   public static void AddTransform(FlatBufferBuilder builder, Offset<FBSQuaternionTransform> transformOffset) { builder.AddStruct(0, transformOffset.Value, 0); }
   public static Offset<FBSQuaternionTransformObservation> EndFBSQuaternionTransformObservation(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // transform
     return new Offset<FBSQuaternionTransformObservation>(o);
   }
 };
@@ -124,6 +130,7 @@ public struct FBSBodyObservation : IFlatbufferObject
   public static void AddBody(FlatBufferBuilder builder, Offset<FBSBody> bodyOffset) { builder.AddStruct(0, bodyOffset.Value, 0); }
   public static Offset<FBSBodyObservation> EndFBSBodyObservation(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // body
     return new Offset<FBSBodyObservation>(o);
   }
 };
@@ -158,6 +165,7 @@ public struct FBSByteArray : IFlatbufferObject
   public static void AddDataType(FlatBufferBuilder builder, FBSByteDataType dataType) { builder.AddByte(1, (byte)dataType, 0); }
   public static Offset<FBSByteArray> EndFBSByteArray(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // byte_array
     return new Offset<FBSByteArray>(o);
   }
 };
@@ -214,6 +222,7 @@ public struct FBSNumeralArray : IFlatbufferObject
   public static void StartVectorVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(8, numElems, 8); }
   public static Offset<FBSNumeralArray> EndFBSNumeralArray(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // vector
     return new Offset<FBSNumeralArray>(o);
   }
 };
@@ -241,6 +250,7 @@ public struct FBSString : IFlatbufferObject
   public static void AddValue(FlatBufferBuilder builder, StringOffset valueOffset) { builder.AddOffset(0, valueOffset.Value, 0); }
   public static Offset<FBSString> EndFBSString(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // value
     return new Offset<FBSString>(o);
   }
 };

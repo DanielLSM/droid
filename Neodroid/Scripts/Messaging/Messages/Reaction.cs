@@ -10,46 +10,17 @@ namespace Neodroid.Messaging.Messages {
     Configuration[] _configurations;
     Pose[] _poses;
     Body[] _bodies;
-    bool _reset = false;
-    bool _step = true;
-    bool _configure = false;
+    ReactionParameters _parameters = new ReactionParameters ();
+
 
     #region Constructors
 
-    public Reaction (MotorMotion[] motions) {
-      _motions = motions;
-      _reset = false;
-      _step = true;
-      _configure = false;
-    }
-
-    public Reaction (Configuration[] configurations) {
-      _configurations = configurations;
-      _reset = true; 
-      _step = false;
-      _configure = true;
-    }
-
-    public Reaction (bool reset, bool step = false, bool configure = false) {
-      _reset = reset;
-      _step = step;
-      _configure = configure;
-    }
-
-    public Reaction (MotorMotion[] motions,
-                     Pose[] poses,
-                     Body[] bodies,
-                     Configuration[] configurations,
-                     bool reset,
-                     bool step = true,
-                     bool configure = false) {
+    public Reaction (ReactionParameters parameters, MotorMotion[] motions, Configuration[] configurations, Pose[] poses, Body[] bodies) {
+      _parameters = parameters;
       _motions = motions;
       _configurations = configurations;
       _poses = poses;
       _bodies = bodies;
-      _reset = reset; 
-      _step = step;
-      _configure = configure;
     }
 
     #endregion
@@ -58,18 +29,6 @@ namespace Neodroid.Messaging.Messages {
 
     public MotorMotion[] Motions {
       get { return _motions; }
-    }
-
-    public bool Reset {
-      get { return _reset; }
-    }
-
-    public bool Step {
-      get { return _step; }
-    }
-
-    public bool Configure {
-      get { return _configure; }
     }
 
     public Configuration[] Configurations {
@@ -82,6 +41,10 @@ namespace Neodroid.Messaging.Messages {
 
     public Body[] Bodies {
       get { return _bodies; }
+    }
+
+    public ReactionParameters Parameters {
+      get { return _parameters; }
     }
 
     #endregion
@@ -101,8 +64,8 @@ namespace Neodroid.Messaging.Messages {
       }
       return System.String.Format (
         "<Reaction>\n " +
-        "{0},{1},{2},{3},{4}" +
-        "\n</Reaction>", _reset, _step, _configure, motions_str, configurations_str);
+        "{0},{1},{2}" +
+        "\n</Reaction>", Parameters.ToString (), motions_str, configurations_str);
     }
   }
 }

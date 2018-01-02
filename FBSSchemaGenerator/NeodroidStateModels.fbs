@@ -10,7 +10,7 @@ struct FBSRange{
 }
 
 table FBSState {
-  environment_name:string;
+  environment_name:string (key);
   frame_number:int;
   reward:float;
   poses:[FBSQuaternionTransform];
@@ -30,25 +30,26 @@ table FBSEnvironmentDescription {
 }
 
 table FBSConfigurable {
-  configurable_name:string;
-  valid_input:FBSRange;
+  configurable_name:string (key);
+  valid_input:FBSRange(required);
+  current_value:FBSObserverData; //(required);
 }
 
 table FBSActor {
-  actor_name:string;
+  actor_name:string (key);
   alive:bool;
   motors:[FBSMotor];
 }
 
 table FBSMotor{
-  motor_name:string;
-  valid_input:FBSRange;
+  motor_name:string (key);
+  valid_input:FBSRange(required);
   energy_spent_since_reset:float;
 }
 
 table FBSObserver {
-  observer_name:string;
-  observation:FBSObserverData;
+  observer_name:string (key);
+  observation:FBSObserverData; //(required);
 }
 
 root_type FBSState;

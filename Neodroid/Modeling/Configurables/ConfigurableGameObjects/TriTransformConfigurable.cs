@@ -6,10 +6,21 @@ using Neodroid.Observers;
 namespace Neodroid.Configurables {
 
   public class TriTransformConfigurable : EulerTransformConfigurable {
-
+    [Header ("Specfic", order = 102)]
+    [SerializeField]
+    Vector3 _position;
+    [SerializeField]
     string _X;
+    [SerializeField]
     string _Y;
+    [SerializeField]
     string _Z;
+
+    public Vector3 Position {
+      get {
+        return _position;
+      }
+    }
 
     protected override void AddToEnvironment () {
       _X = ConfigurableIdentifier + "X";
@@ -20,6 +31,10 @@ namespace Neodroid.Configurables {
       ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent (ParentEnvironment, (ConfigurableGameObject)this, _Z);
     }
 
+
+    public override void UpdateCurrentValue () {
+      _position = ParentEnvironment.TransformPosition (this.transform.position);
+    }
 
     public override void ApplyConfiguration (Configuration configuration) {
       var pos = ParentEnvironment.TransformPosition (this.transform.position);

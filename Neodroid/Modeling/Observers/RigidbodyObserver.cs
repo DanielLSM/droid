@@ -26,7 +26,7 @@ namespace Neodroid.Observers {
       str_rep += "\"Velocity\": \"" + _velocity;
       str_rep += "\", \"AngularVelocity\": \"" + _angular_velocity;
       str_rep += "\"}";
-      Data = Encoding.ASCII.GetBytes (str_rep);
+      //Data = Encoding.ASCII.GetBytes (str_rep);
     }
 
     public override string ObserverIdentifier { get { return name + "Rigidbody"; } }

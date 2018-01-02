@@ -23,15 +23,22 @@ namespace Neodroid.Messaging {
         var configurations = create_configurations (reaction.Value);
         var bodies = create_bodies (reaction.Value);
         var poses = create_poses (reaction.Value);
-        return new Reaction (motions, poses, bodies, configurations, reaction.Value.Reset, reaction.Value.Step, reaction.Value.Configure);
+        var parameters = create_parameters (reaction.Value);
+        return new Reaction (parameters, motions, configurations, poses, bodies);
       }
-      return new Reaction (false);
+      return new Reaction (null, null, null, null, null);
     }
 
     #endregion
 
     #region PrivateMethods
 
+    static ReactionParameters create_parameters (FBSReaction reaction) {
+      if (reaction.Parameters.HasValue) {
+        return new ReactionParameters (reaction.Parameters.Value.Interruptible, reaction.Parameters.Value.Step, reaction.Parameters.Value.Reset, reaction.Parameters.Value.Configure, reaction.Parameters.Value.Describe);
+      }
+      return new ReactionParameters ();
+    }
 
     static Configuration[] create_configurations (FBSReaction reaction) {
       var l = reaction.ConfigurationsLength;

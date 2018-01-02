@@ -6,9 +6,13 @@ namespace Neodroid.Observers {
   [ExecuteInEditMode]
   [System.Serializable]
   public class QuaternionTransformObserver : Observer {
-
-    public Vector3 _position;
-    public Quaternion _rotation;
+    [Header ("Specfic", order = 102)]
+    [SerializeField]
+    ObservationSpace _space = ObservationSpace.Environment;
+    [SerializeField]
+    Vector3 _position;
+    [SerializeField]
+    Quaternion _rotation;
 
     public bool _use_environments_coordinates = true;
 
@@ -19,6 +23,24 @@ namespace Neodroid.Observers {
       } else {
         _position = this.transform.position;
         _rotation = this.transform.rotation;
+      }
+    }
+
+    public ObservationSpace Space {
+      get {
+        return _space;
+      }
+    }
+
+    public Vector3 Position {
+      get {
+        return _position;
+      }
+    }
+
+    public Quaternion Rotation {
+      get {
+        return _rotation;
       }
     }
 

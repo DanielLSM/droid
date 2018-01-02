@@ -52,6 +52,9 @@ namespace Neodroid.Configurables {
       }
     }
 
+    public virtual void UpdateCurrentValue () {
+    }
+
     protected virtual void Start () {
     }
 

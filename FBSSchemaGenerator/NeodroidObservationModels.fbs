@@ -17,29 +17,29 @@ union FBSObserverData {
 enum FBSByteDataType:ubyte{ PNG, JPEG, Other }
 
 table FBSPosition {
-  position:FBSVector3;
+  position:FBSVector3 (required);
 }
 
 table FBSRotation {
-  rotation:FBSVector3;
+  rotation:FBSVector3 (required);
 }
 
 table FBSEulerTransform {
-  position:FBSVector3;
-  rotation:FBSVector3;
-  direction:FBSVector3;
+  position:FBSVector3 (required);
+  rotation:FBSVector3 (required);
+  direction:FBSVector3 (required);
 }
 
 table FBSQuaternionTransformObservation {
-  transform:FBSQuaternionTransform;
+  transform:FBSQuaternionTransform (required);
 }
 
 table FBSBodyObservation{
-  body:FBSBody;
+  body:FBSBody (required);
 }
 
 table FBSByteArray{
-  byte_array:[ubyte];
+  byte_array:[ubyte] (required);
   data_type:FBSByteDataType;
 }
 
@@ -48,11 +48,11 @@ table FBSNumeral{
 }
 
 table FBSNumeralArray{
-  vector:[double];
+  vector:[double] (required);
 }
 
 table FBSString{
-  value:string;
+  value:string (required);
 }
 
 file_identifier "OBSE";

@@ -30,7 +30,8 @@ namespace Neodroid.Utilities {
           }
         }
 
-        var reaction = new Reaction (motions.ToArray ());
+        var parameters = new ReactionParameters (true, true);
+        var reaction = new Reaction (parameters, motions.ToArray (), null, null, null);
         _simulation_manager.ReactInEnvironments (reaction);
       } else {
         if (Debugging)

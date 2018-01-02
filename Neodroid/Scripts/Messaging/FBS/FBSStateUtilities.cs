@@ -102,7 +102,7 @@ namespace Neodroid.Messaging {
     }
 
     static Offset<FBSEulerTransform> build_euler_transform (FlatBufferBuilder b, EulerTransformObserver observer) {
-      Vector3 pos = observer._position, rot = observer._rotation, dir = observer._direction;
+      Vector3 pos = observer.Position, rot = observer.Rotation, dir = observer.Direction;
       FBSEulerTransform.StartFBSEulerTransform (b);
       FBSEulerTransform.AddPosition (b, FBSVector3.CreateFBSVector3 (b, pos.x, pos.y, pos.z));
       FBSEulerTransform.AddRotation (b, FBSVector3.CreateFBSVector3 (b, rot.x, rot.y, rot.z));
@@ -110,6 +110,13 @@ namespace Neodroid.Messaging {
       return FBSEulerTransform.EndFBSEulerTransform (b);
     }
 
+    static Offset<FBSQuaternionTransformObservation> build_quaternion_transform (FlatBufferBuilder b, QuaternionTransformObserver observer) {
+      Vector3 pos = observer.Position;
+      Quaternion rot = observer.Rotation;
+      FBSQuaternionTransformObservation.StartFBSQuaternionTransformObservation (b);
+      FBSQuaternionTransformObservation.AddTransform (b, FBSQuaternionTransform.CreateFBSQuaternionTransform (b, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, rot.w));
+      return FBSQuaternionTransformObservation.EndFBSQuaternionTransformObservation (b);
+    }
 
     static Offset<FBSByteArray> build_byte_array (FlatBufferBuilder b, CameraObserver camera) {
       var v_offset = FBSByteArray.CreateByteArrayVector (b, camera.Data);
@@ -136,30 +143,30 @@ namespace Neodroid.Messaging {
     }
 
     static Offset<FBSObserver> build_observer (FlatBufferBuilder b, Observer observer) {
-      if (observer) {
-        StringOffset n = b.CreateString (observer.ObserverIdentifier);
-        int observation_offset = 0;
-        FBSObserverData observation_type = FBSObserverData.NONE;
-        if (observer.GetType () == typeof(EulerTransformObserver)) {
-          observation_offset = build_euler_transform (b, (EulerTransformObserver)observer).Value;
-          observation_type = FBSObserverData.FBSEulerTransform;
-        } else if (observer.GetType () == typeof(CameraObserver)) {
-          observation_offset = build_byte_array (b, (CameraObserver)observer).Value;
-          observation_type = FBSObserverData.FBSByteArray;
-        } /*else if (observer.GetType () == typeof(QuaternionTransformObserver)) {
-        observation_offset = build_byte_array (b, (QuaternionTransformObserver)observer).Value;
-      observation_type = FBSObserverData.FBSByteArray;
-    }*/
-        FBSObserver.StartFBSObserver (b);
-        FBSObserver.AddObserverName (b, n);
-        FBSObserver.AddObservationType (b, observation_type);
-        if (observation_offset != 0) {
-          FBSObserver.AddObservation (b, observation_offset);
-        }
-        return FBSObserver.EndFBSObserver (b);
+      StringOffset n = b.CreateString (observer.ObserverIdentifier);
+      int observation_offset = 0;
+      FBSObserverData observation_type = FBSObserverData.NONE;
+      if (observer is EulerTransformObserver) {
+        observation_offset = build_euler_transform (b, (EulerTransformObserver)observer).Value;
+        observation_type = FBSObserverData.FBSEulerTransform;
+      } else if (observer is CameraObserver) {
+        observation_offset = build_byte_array (b, (CameraObserver)observer).Value;
+        observation_type = FBSObserverData.FBSByteArray;
+      } else if (observer is QuaternionTransformObserver) {
+        observation_offset = build_quaternion_transform (b, (QuaternionTransformObserver)observer).Value;
+        observation_type = FBSObserverData.FBSByteArray;
+        //} else if (observer is NearestByTagObserver) {
+        //  observation_offset = build_quaternion_transform (b, (QuaternionTransformObserver)observer).Value;
+        //  observation_type = FBSObserverData.FBSByteArray;
+      } else {
+        return FBSObserver.CreateFBSObserver (b, n);
       }
       FBSObserver.StartFBSObserver (b);
+      FBSObserver.AddObserverName (b, n);
+      FBSObserver.AddObservationType (b, observation_type);
+      FBSObserver.AddObservation (b, observation_offset);
       return FBSObserver.EndFBSObserver (b);
+
     }
 
     static Offset<FBSEnvironmentDescription> build_description (FlatBufferBuilder b, EnvironmentState state) {
@@ -191,11 +198,44 @@ namespace Neodroid.Messaging {
       return FBSEnvironmentDescription.EndFBSEnvironmentDescription (b);
     }
 
+    static Offset<FBSPosition> build_pos_transform (FlatBufferBuilder b, TriTransformConfigurable observer) {
+      Vector3 pos = observer.Position;
+      FBSPosition.StartFBSPosition (b);
+      FBSPosition.AddPosition (b, FBSVector3.CreateFBSVector3 (b, pos.x, pos.y, pos.z));
+      return FBSPosition.EndFBSPosition (b);
+    }
+
+    static Offset<FBSQuaternionTransformObservation> build_quaternion_transform (FlatBufferBuilder b, QuaternionTransformConfigurable observer) {
+      Vector3 pos = observer.Position;
+      Quaternion rot = observer.Rotation;
+      FBSQuaternionTransformObservation.StartFBSQuaternionTransformObservation (b);
+      FBSQuaternionTransformObservation.AddTransform (b, FBSQuaternionTransform.CreateFBSQuaternionTransform (b, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, rot.w));
+      return FBSQuaternionTransformObservation.EndFBSQuaternionTransformObservation (b);
+    }
+
     static Offset<FBSConfigurable> build_configurable (FlatBufferBuilder b, ConfigurableGameObject configurable, string identifier) {
       StringOffset n = b.CreateString (identifier);
+
+      int observation_offset = 0;
+      FBSObserverData observation_type = FBSObserverData.NONE;
+      if (configurable is QuaternionTransformConfigurable) {
+        observation_offset = build_quaternion_transform (b, (QuaternionTransformConfigurable)configurable).Value;
+        observation_type = FBSObserverData.FBSQuaternionTransformObservation;
+      } else if (configurable is TriTransformConfigurable) {
+        observation_offset = build_pos_transform (b, (TriTransformConfigurable)configurable).Value;
+        observation_type = FBSObserverData.FBSPosition;
+      } else {
+        FBSConfigurable.StartFBSConfigurable (b);
+        FBSConfigurable.AddConfigurableName (b, n);
+        FBSConfigurable.AddValidInput (b, FBSRange.CreateFBSRange (b, configurable.ValidInput.decimal_granularity, configurable.ValidInput.max_value, configurable.ValidInput.min_value));
+        return FBSConfigurable.EndFBSConfigurable (b);
+      }
+
       FBSConfigurable.StartFBSConfigurable (b);
       FBSConfigurable.AddConfigurableName (b, n);
       FBSConfigurable.AddValidInput (b, FBSRange.CreateFBSRange (b, configurable.ValidInput.decimal_granularity, configurable.ValidInput.max_value, configurable.ValidInput.min_value));
+      FBSConfigurable.AddCurrentValue (b, observation_offset);
+      FBSConfigurable.AddCurrentValueType (b, observation_type);
       return FBSConfigurable.EndFBSConfigurable (b);
     }
 

@@ -188,7 +188,8 @@ namespace Neodroid.Windows {
           }
 
           if (GUILayout.Button ("Reset")) {
-  _simulation_manager.ReactInEnvironments (new Reaction (true));
+  var parameters = new ReactionParameters(false,true,false,false);
+  _simulation_manager.ReactInEnvironments (new Reaction ( parameters,null,null,null,null));
           }
 
           EditorGUI.EndDisabledGroup ();

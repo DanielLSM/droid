@@ -50,6 +50,7 @@ public struct FBSState : IFlatbufferObject
   public float TotalEnergySpent { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
   public FBSObserver? Observers(int j) { int o = __p.__offset(18); return o != 0 ? (FBSObserver?)(new FBSObserver()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
   public int ObserversLength { get { int o = __p.__offset(18); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSObserver? ObserversByKey(string key) { int o = __p.__offset(18); return o != 0 ? FBSObserver.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
   public FBSEnvironmentDescription? EnvironmentDescription { get { int o = __p.__offset(20); return o != 0 ? (FBSEnvironmentDescription?)(new FBSEnvironmentDescription()).__assign(__p.__indirect(o + __p.bb_pos), __p.bb) : null; } }
   public string DebugMessage { get { int o = __p.__offset(22); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
   public ArraySegment<byte>? GetDebugMessageBytes() { return __p.__vector_as_arraysegment(22); }
@@ -96,9 +97,36 @@ public struct FBSState : IFlatbufferObject
   public static void AddDebugMessage(FlatBufferBuilder builder, StringOffset debugMessageOffset) { builder.AddOffset(9, debugMessageOffset.Value, 0); }
   public static Offset<FBSState> EndFBSState(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // environment_name
     return new Offset<FBSState>(o);
   }
   public static void FinishFBSStateBuffer(FlatBufferBuilder builder, Offset<FBSState> offset) { builder.Finish(offset.Value, "STAT"); }
+
+  public static VectorOffset CreateSortedVectorOfFBSState(FlatBufferBuilder builder, Offset<FBSState>[] offsets) {
+    Array.Sort(offsets, (Offset<FBSState> o1, Offset<FBSState> o2) => Table.CompareStrings(Table.__offset(4, o1.Value, builder.DataBuffer), Table.__offset(4, o2.Value, builder.DataBuffer), builder.DataBuffer));
+    return builder.CreateVectorOfTables(offsets);
+  }
+
+  public static FBSState? __lookup_by_key(int vectorLocation, string key, ByteBuffer bb) {
+    byte[] byteKey = System.Text.Encoding.UTF8.GetBytes(key);
+    int span = bb.GetInt(vectorLocation - 4);
+    int start = 0;
+    while (span != 0) {
+      int middle = span / 2;
+      int tableOffset = Table.__indirect(vectorLocation + 4 * (start + middle), bb);
+      int comp = Table.CompareStrings(Table.__offset(4, bb.Length - tableOffset, bb), byteKey, bb);
+      if (comp > 0) {
+        span = middle;
+      } else if (comp < 0) {
+        middle++;
+        start += middle;
+        span -= middle;
+      } else {
+        return new FBSState().__assign(tableOffset, bb);
+      }
+    }
+    return null;
+  }
 };
 
 public struct FBSEnvironmentDescription : IFlatbufferObject
@@ -114,8 +142,10 @@ public struct FBSEnvironmentDescription : IFlatbufferObject
   public float SolvedThreshold { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
   public FBSActor? Actors(int j) { int o = __p.__offset(8); return o != 0 ? (FBSActor?)(new FBSActor()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
   public int ActorsLength { get { int o = __p.__offset(8); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSActor? ActorsByKey(string key) { int o = __p.__offset(8); return o != 0 ? FBSActor.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
   public FBSConfigurable? Configurables(int j) { int o = __p.__offset(10); return o != 0 ? (FBSConfigurable?)(new FBSConfigurable()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
   public int ConfigurablesLength { get { int o = __p.__offset(10); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSConfigurable? ConfigurablesByKey(string key) { int o = __p.__offset(10); return o != 0 ? FBSConfigurable.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
 
   public static Offset<FBSEnvironmentDescription> CreateFBSEnvironmentDescription(FlatBufferBuilder builder,
       int max_episode_length = 0,
@@ -157,13 +187,45 @@ public struct FBSConfigurable : IFlatbufferObject
   public string ConfigurableName { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
   public ArraySegment<byte>? GetConfigurableNameBytes() { return __p.__vector_as_arraysegment(4); }
   public FBSRange? ValidInput { get { int o = __p.__offset(6); return o != 0 ? (FBSRange?)(new FBSRange()).__assign(o + __p.bb_pos, __p.bb) : null; } }
+  public Neodroid.FBS.FBSObserverData CurrentValueType { get { int o = __p.__offset(8); return o != 0 ? (Neodroid.FBS.FBSObserverData)__p.bb.Get(o + __p.bb_pos) : Neodroid.FBS.FBSObserverData.NONE; } }
+  public TTable? CurrentValue<TTable>() where TTable : struct, IFlatbufferObject { int o = __p.__offset(10); return o != 0 ? (TTable?)__p.__union<TTable>(o) : null; }
 
-  public static void StartFBSConfigurable(FlatBufferBuilder builder) { builder.StartObject(2); }
+  public static void StartFBSConfigurable(FlatBufferBuilder builder) { builder.StartObject(4); }
   public static void AddConfigurableName(FlatBufferBuilder builder, StringOffset configurableNameOffset) { builder.AddOffset(0, configurableNameOffset.Value, 0); }
   public static void AddValidInput(FlatBufferBuilder builder, Offset<FBSRange> validInputOffset) { builder.AddStruct(1, validInputOffset.Value, 0); }
+  public static void AddCurrentValueType(FlatBufferBuilder builder, Neodroid.FBS.FBSObserverData currentValueType) { builder.AddByte(2, (byte)currentValueType, 0); }
+  public static void AddCurrentValue(FlatBufferBuilder builder, int currentValueOffset) { builder.AddOffset(3, currentValueOffset, 0); }
   public static Offset<FBSConfigurable> EndFBSConfigurable(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // configurable_name
+    builder.Required(o, 6);  // valid_input
     return new Offset<FBSConfigurable>(o);
+  }
+
+  public static VectorOffset CreateSortedVectorOfFBSConfigurable(FlatBufferBuilder builder, Offset<FBSConfigurable>[] offsets) {
+    Array.Sort(offsets, (Offset<FBSConfigurable> o1, Offset<FBSConfigurable> o2) => Table.CompareStrings(Table.__offset(4, o1.Value, builder.DataBuffer), Table.__offset(4, o2.Value, builder.DataBuffer), builder.DataBuffer));
+    return builder.CreateVectorOfTables(offsets);
+  }
+
+  public static FBSConfigurable? __lookup_by_key(int vectorLocation, string key, ByteBuffer bb) {
+    byte[] byteKey = System.Text.Encoding.UTF8.GetBytes(key);
+    int span = bb.GetInt(vectorLocation - 4);
+    int start = 0;
+    while (span != 0) {
+      int middle = span / 2;
+      int tableOffset = Table.__indirect(vectorLocation + 4 * (start + middle), bb);
+      int comp = Table.CompareStrings(Table.__offset(4, bb.Length - tableOffset, bb), byteKey, bb);
+      if (comp > 0) {
+        span = middle;
+      } else if (comp < 0) {
+        middle++;
+        start += middle;
+        span -= middle;
+      } else {
+        return new FBSConfigurable().__assign(tableOffset, bb);
+      }
+    }
+    return null;
   }
 };
 
@@ -181,6 +243,7 @@ public struct FBSActor : IFlatbufferObject
   public bool Alive { get { int o = __p.__offset(6); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
   public FBSMotor? Motors(int j) { int o = __p.__offset(8); return o != 0 ? (FBSMotor?)(new FBSMotor()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
   public int MotorsLength { get { int o = __p.__offset(8); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSMotor? MotorsByKey(string key) { int o = __p.__offset(8); return o != 0 ? FBSMotor.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
 
   public static Offset<FBSActor> CreateFBSActor(FlatBufferBuilder builder,
       StringOffset actor_nameOffset = default(StringOffset),
@@ -201,7 +264,34 @@ public struct FBSActor : IFlatbufferObject
   public static void StartMotorsVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
   public static Offset<FBSActor> EndFBSActor(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // actor_name
     return new Offset<FBSActor>(o);
+  }
+
+  public static VectorOffset CreateSortedVectorOfFBSActor(FlatBufferBuilder builder, Offset<FBSActor>[] offsets) {
+    Array.Sort(offsets, (Offset<FBSActor> o1, Offset<FBSActor> o2) => Table.CompareStrings(Table.__offset(4, o1.Value, builder.DataBuffer), Table.__offset(4, o2.Value, builder.DataBuffer), builder.DataBuffer));
+    return builder.CreateVectorOfTables(offsets);
+  }
+
+  public static FBSActor? __lookup_by_key(int vectorLocation, string key, ByteBuffer bb) {
+    byte[] byteKey = System.Text.Encoding.UTF8.GetBytes(key);
+    int span = bb.GetInt(vectorLocation - 4);
+    int start = 0;
+    while (span != 0) {
+      int middle = span / 2;
+      int tableOffset = Table.__indirect(vectorLocation + 4 * (start + middle), bb);
+      int comp = Table.CompareStrings(Table.__offset(4, bb.Length - tableOffset, bb), byteKey, bb);
+      if (comp > 0) {
+        span = middle;
+      } else if (comp < 0) {
+        middle++;
+        start += middle;
+        span -= middle;
+      } else {
+        return new FBSActor().__assign(tableOffset, bb);
+      }
+    }
+    return null;
   }
 };
 
@@ -225,7 +315,35 @@ public struct FBSMotor : IFlatbufferObject
   public static void AddEnergySpentSinceReset(FlatBufferBuilder builder, float energySpentSinceReset) { builder.AddFloat(2, energySpentSinceReset, 0.0f); }
   public static Offset<FBSMotor> EndFBSMotor(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // motor_name
+    builder.Required(o, 6);  // valid_input
     return new Offset<FBSMotor>(o);
+  }
+
+  public static VectorOffset CreateSortedVectorOfFBSMotor(FlatBufferBuilder builder, Offset<FBSMotor>[] offsets) {
+    Array.Sort(offsets, (Offset<FBSMotor> o1, Offset<FBSMotor> o2) => Table.CompareStrings(Table.__offset(4, o1.Value, builder.DataBuffer), Table.__offset(4, o2.Value, builder.DataBuffer), builder.DataBuffer));
+    return builder.CreateVectorOfTables(offsets);
+  }
+
+  public static FBSMotor? __lookup_by_key(int vectorLocation, string key, ByteBuffer bb) {
+    byte[] byteKey = System.Text.Encoding.UTF8.GetBytes(key);
+    int span = bb.GetInt(vectorLocation - 4);
+    int start = 0;
+    while (span != 0) {
+      int middle = span / 2;
+      int tableOffset = Table.__indirect(vectorLocation + 4 * (start + middle), bb);
+      int comp = Table.CompareStrings(Table.__offset(4, bb.Length - tableOffset, bb), byteKey, bb);
+      if (comp > 0) {
+        span = middle;
+      } else if (comp < 0) {
+        middle++;
+        start += middle;
+        span -= middle;
+      } else {
+        return new FBSMotor().__assign(tableOffset, bb);
+      }
+    }
+    return null;
   }
 };
 
@@ -260,7 +378,34 @@ public struct FBSObserver : IFlatbufferObject
   public static void AddObservation(FlatBufferBuilder builder, int observationOffset) { builder.AddOffset(2, observationOffset, 0); }
   public static Offset<FBSObserver> EndFBSObserver(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // observer_name
     return new Offset<FBSObserver>(o);
+  }
+
+  public static VectorOffset CreateSortedVectorOfFBSObserver(FlatBufferBuilder builder, Offset<FBSObserver>[] offsets) {
+    Array.Sort(offsets, (Offset<FBSObserver> o1, Offset<FBSObserver> o2) => Table.CompareStrings(Table.__offset(4, o1.Value, builder.DataBuffer), Table.__offset(4, o2.Value, builder.DataBuffer), builder.DataBuffer));
+    return builder.CreateVectorOfTables(offsets);
+  }
+
+  public static FBSObserver? __lookup_by_key(int vectorLocation, string key, ByteBuffer bb) {
+    byte[] byteKey = System.Text.Encoding.UTF8.GetBytes(key);
+    int span = bb.GetInt(vectorLocation - 4);
+    int start = 0;
+    while (span != 0) {
+      int middle = span / 2;
+      int tableOffset = Table.__indirect(vectorLocation + 4 * (start + middle), bb);
+      int comp = Table.CompareStrings(Table.__offset(4, bb.Length - tableOffset, bb), byteKey, bb);
+      if (comp > 0) {
+        span = middle;
+      } else if (comp < 0) {
+        middle++;
+        start += middle;
+        span -= middle;
+      } else {
+        return new FBSObserver().__assign(tableOffset, bb);
+      }
+    }
+    return null;
   }
 };
 

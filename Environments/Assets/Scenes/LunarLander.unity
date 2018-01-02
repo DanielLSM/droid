@@ -560,6 +560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
+  _test_environments: 0
   _ip_address: 127.0.0.1
   _port: 5555
   _wait_for_reaction_every_frame: 0
@@ -797,9 +798,99 @@ Prefab:
       propertyPath: _valid_input.max_value
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 114210576974479446, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: _rigidbody
+      value: 
+      objectReference: {fileID: 1251179787}
+    - target: {fileID: 114210576974479446, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: _valid_input.min_value
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114273677122263932, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: _valid_input.min_value
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114908399006713626, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: _valid_input.min_value
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114057750773781526, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: _valid_input.min_value
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114210576974479446, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: _valid_input.max_value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114273677122263932, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: _valid_input.max_value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114908399006713626, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: _valid_input.max_value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114057750773781526, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: _valid_input.max_value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 153069404109834044, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: m_ProjectionMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153960631144932976, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: m_ProjectionMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153130343520678028, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: m_ProjectionMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153796671784351298, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: m_ProjectionMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153069404109834044, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: m_ConnectedMassScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 153960631144932976, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: m_ConnectedMassScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 153130343520678028, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: m_ConnectedMassScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 153796671784351298, guid: 6eb4ee769c23c46988ee311220cbbded,
+        type: 2}
+      propertyPath: m_ConnectedMassScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6eb4ee769c23c46988ee311220cbbded, type: 2}
   m_IsPrefabParent: 0
+--- !u!54 &1251179787 stripped
+Rigidbody:
+  m_PrefabParentObject: {fileID: 54431746699967946, guid: 6eb4ee769c23c46988ee311220cbbded,
+    type: 2}
+  m_PrefabInternal: {fileID: 934752434}
 --- !u!1 &1382328483
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +904,7 @@ GameObject:
   - component: {fileID: 1382328485}
   - component: {fileID: 1382328490}
   - component: {fileID: 1382328489}
+  - component: {fileID: 1382328488}
   m_Layer: 0
   m_Name: LandingPad
   m_TagString: Untagged
@@ -887,6 +979,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1382328483}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1382328488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1382328483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20678454752714027aac65984404caf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _environment: {fileID: 903194204}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _relative_to_existing_value: 0
+  _axis_of_configuration: 0
+  _use_bounding_box_for_range: 0
+  _bounding_box: {fileID: 0}
+  _current_position: {x: 0, y: 0, z: 0}
+  _X: 
+  _Y: 
+  _Z: 
 --- !u!114 &1382328489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,11 +1038,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 903194204}
   _debugging: 0
-  _data: 
+  _space: 2
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _direction: {x: 0, y: 0, z: 0}
-  _use_environments_coordinates: 1
 --- !u!1 &1935888378
 GameObject:
   m_ObjectHideFlags: 0

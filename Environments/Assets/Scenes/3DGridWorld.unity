@@ -970,7 +970,7 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 593
+      value: 592
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
@@ -1083,11 +1083,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _data: 
+  _space: 2
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _direction: {x: 0, y: 0, z: 0}
-  _use_environments_coordinates: 1
 --- !u!114 &745076144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,6 +1108,10 @@ MonoBehaviour:
   _axis_of_configuration: 0
   _use_bounding_box_for_range: 0
   _bounding_box: {fileID: 1943801935}
+  _current_position: {x: 0, y: 0, z: 0}
+  _X: 
+  _Y: 
+  _Z: 
 --- !u!1 &1014882065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,11 +1294,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _data: 
+  _space: 2
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _direction: {x: 0, y: 0, z: 0}
-  _use_environments_coordinates: 1
 --- !u!1 &1184716152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,11 +1763,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _data: 
+  _space: 2
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _direction: {x: 0, y: 0, z: 0}
-  _use_environments_coordinates: 1
 --- !u!23 &1544235447
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1907,7 +1908,7 @@ GameObject:
   - component: {fileID: 1650564494}
   - component: {fileID: 1650564490}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Actor
   m_TagString: Actor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1992,11 +1993,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _data: 
+  _space: 2
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _direction: {x: 0, y: 0, z: 0}
-  _use_environments_coordinates: 0
 --- !u!114 &1650564491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2012,12 +2012,11 @@ MonoBehaviour:
   _debugging: 0
   _valid_input:
     decimal_granularity: 0
-    min_value: -10
-    max_value: 10
+    min_value: -1
+    max_value: 1
   _energy_spend_since_reset: 0
   _energy_cost: 0
-  _axis_of_motion: 0
-  _space: 1
+  _relative_to: 1
   _rotational_motors: 0
   _no_collisions: 1
   _layer_mask: Obstructions
@@ -2034,7 +2033,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _data: 
   _position: {x: 1, y: 0, z: 0}
   _rotation: {x: 0, y: 1, z: 0}
   _direction: {x: 0, y: 0, z: 1}
@@ -2073,6 +2071,10 @@ MonoBehaviour:
   _axis_of_configuration: 0
   _use_bounding_box_for_range: 0
   _bounding_box: {fileID: 0}
+  _current_position: {x: 0, y: 0, z: 0}
+  _X: 
+  _Y: 
+  _Z: 
 --- !u!1001 &1663177657
 Prefab:
   m_ObjectHideFlags: 0
@@ -2364,12 +2366,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4675f9235ecc46a5982e50590d858cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coordinate_system: 2
-  _coordinate_reference_point: {fileID: 1650564486}
-  _playable_area: {fileID: 1943801935}
   _objective_function: {fileID: 1943801934}
   _simulation_manager: {fileID: 1943801933}
-  _debugging: 0
+  _debugging: 1
+  _coordinate_reference_point: {fileID: 1650564486}
+  _coordinate_system: 2
+  _playable_area: {fileID: 1943801935}
 --- !u!114 &1943801933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2381,15 +2383,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6fd2ea575694a1297adb4aa84e0523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugging: 0
+  _test_environments: 0
   _ip_address: 127.0.0.1
   _port: 5555
+  _wait_for_reaction_every_frame: 1
   _continue_reaction_on_disconnect: 0
   _episode_length: 100
   _frame_skips: 0
   _simulation_time_scale: 1
   _resets: 6
-  _wait_for_reaction_every_frame: 1
-  _debugging: 0
 --- !u!114 &1943801934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2403,15 +2406,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debugging: 0
   _solved_threshold: 0
-  _extra_term_go:
-  - {fileID: 1943801936}
-  - {fileID: 1943801937}
+  _extra_terms: []
   _goal: {fileID: 745076139}
   _actor: {fileID: 1650564493}
   _environment: {fileID: 1943801932}
-  _obstructions: []
   _playable_area: {fileID: 1943801935}
-  peak_reward: 0
+  _obstructions: []
 --- !u!114 &1943801935
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,59 +20,88 @@ public struct FBSReaction : IFlatbufferObject
 
   public string EnvironmentName { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
   public ArraySegment<byte>? GetEnvironmentNameBytes() { return __p.__vector_as_arraysegment(4); }
-  public Neodroid.FBS.FBSQuaternionTransform? Poses(int j) { int o = __p.__offset(6); return o != 0 ? (Neodroid.FBS.FBSQuaternionTransform?)(new Neodroid.FBS.FBSQuaternionTransform()).__assign(__p.__vector(o) + j * 56, __p.bb) : null; }
-  public int PosesLength { get { int o = __p.__offset(6); return o != 0 ? __p.__vector_len(o) : 0; } }
-  public Neodroid.FBS.FBSBody? Bodies(int j) { int o = __p.__offset(8); return o != 0 ? (Neodroid.FBS.FBSBody?)(new Neodroid.FBS.FBSBody()).__assign(__p.__vector(o) + j * 48, __p.bb) : null; }
-  public int BodiesLength { get { int o = __p.__offset(8); return o != 0 ? __p.__vector_len(o) : 0; } }
-  public FBSConfiguration? Configurations(int j) { int o = __p.__offset(10); return o != 0 ? (FBSConfiguration?)(new FBSConfiguration()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
-  public int ConfigurationsLength { get { int o = __p.__offset(10); return o != 0 ? __p.__vector_len(o) : 0; } }
-  public bool Reset { get { int o = __p.__offset(12); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
-  public bool Configure { get { int o = __p.__offset(14); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
-  public bool Step { get { int o = __p.__offset(16); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
-  public FBSMotion? Motions(int j) { int o = __p.__offset(18); return o != 0 ? (FBSMotion?)(new FBSMotion()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
-  public int MotionsLength { get { int o = __p.__offset(18); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSReactionParameters? Parameters { get { int o = __p.__offset(6); return o != 0 ? (FBSReactionParameters?)(new FBSReactionParameters()).__assign(o + __p.bb_pos, __p.bb) : null; } }
+  public Neodroid.FBS.FBSQuaternionTransform? Poses(int j) { int o = __p.__offset(8); return o != 0 ? (Neodroid.FBS.FBSQuaternionTransform?)(new Neodroid.FBS.FBSQuaternionTransform()).__assign(__p.__vector(o) + j * 56, __p.bb) : null; }
+  public int PosesLength { get { int o = __p.__offset(8); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public Neodroid.FBS.FBSBody? Bodies(int j) { int o = __p.__offset(10); return o != 0 ? (Neodroid.FBS.FBSBody?)(new Neodroid.FBS.FBSBody()).__assign(__p.__vector(o) + j * 48, __p.bb) : null; }
+  public int BodiesLength { get { int o = __p.__offset(10); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSConfiguration? Configurations(int j) { int o = __p.__offset(12); return o != 0 ? (FBSConfiguration?)(new FBSConfiguration()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public int ConfigurationsLength { get { int o = __p.__offset(12); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSConfiguration? ConfigurationsByKey(string key) { int o = __p.__offset(12); return o != 0 ? FBSConfiguration.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
+  public FBSMotion? Motions(int j) { int o = __p.__offset(14); return o != 0 ? (FBSMotion?)(new FBSMotion()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public int MotionsLength { get { int o = __p.__offset(14); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSMotion? MotionsByKey(string key) { int o = __p.__offset(14); return o != 0 ? FBSMotion.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
 
-  public static Offset<FBSReaction> CreateFBSReaction(FlatBufferBuilder builder,
-      StringOffset environment_nameOffset = default(StringOffset),
-      VectorOffset posesOffset = default(VectorOffset),
-      VectorOffset bodiesOffset = default(VectorOffset),
-      VectorOffset configurationsOffset = default(VectorOffset),
-      bool reset = false,
-      bool configure = false,
-      bool step = false,
-      VectorOffset motionsOffset = default(VectorOffset)) {
-    builder.StartObject(8);
-    FBSReaction.AddMotions(builder, motionsOffset);
-    FBSReaction.AddConfigurations(builder, configurationsOffset);
-    FBSReaction.AddBodies(builder, bodiesOffset);
-    FBSReaction.AddPoses(builder, posesOffset);
-    FBSReaction.AddEnvironmentName(builder, environment_nameOffset);
-    FBSReaction.AddStep(builder, step);
-    FBSReaction.AddConfigure(builder, configure);
-    FBSReaction.AddReset(builder, reset);
-    return FBSReaction.EndFBSReaction(builder);
-  }
-
-  public static void StartFBSReaction(FlatBufferBuilder builder) { builder.StartObject(8); }
+  public static void StartFBSReaction(FlatBufferBuilder builder) { builder.StartObject(6); }
   public static void AddEnvironmentName(FlatBufferBuilder builder, StringOffset environmentNameOffset) { builder.AddOffset(0, environmentNameOffset.Value, 0); }
-  public static void AddPoses(FlatBufferBuilder builder, VectorOffset posesOffset) { builder.AddOffset(1, posesOffset.Value, 0); }
+  public static void AddParameters(FlatBufferBuilder builder, Offset<FBSReactionParameters> parametersOffset) { builder.AddStruct(1, parametersOffset.Value, 0); }
+  public static void AddPoses(FlatBufferBuilder builder, VectorOffset posesOffset) { builder.AddOffset(2, posesOffset.Value, 0); }
   public static void StartPosesVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(56, numElems, 8); }
-  public static void AddBodies(FlatBufferBuilder builder, VectorOffset bodiesOffset) { builder.AddOffset(2, bodiesOffset.Value, 0); }
+  public static void AddBodies(FlatBufferBuilder builder, VectorOffset bodiesOffset) { builder.AddOffset(3, bodiesOffset.Value, 0); }
   public static void StartBodiesVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(48, numElems, 8); }
-  public static void AddConfigurations(FlatBufferBuilder builder, VectorOffset configurationsOffset) { builder.AddOffset(3, configurationsOffset.Value, 0); }
+  public static void AddConfigurations(FlatBufferBuilder builder, VectorOffset configurationsOffset) { builder.AddOffset(4, configurationsOffset.Value, 0); }
   public static VectorOffset CreateConfigurationsVector(FlatBufferBuilder builder, Offset<FBSConfiguration>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
   public static void StartConfigurationsVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
-  public static void AddReset(FlatBufferBuilder builder, bool reset) { builder.AddBool(4, reset, false); }
-  public static void AddConfigure(FlatBufferBuilder builder, bool configure) { builder.AddBool(5, configure, false); }
-  public static void AddStep(FlatBufferBuilder builder, bool step) { builder.AddBool(6, step, false); }
-  public static void AddMotions(FlatBufferBuilder builder, VectorOffset motionsOffset) { builder.AddOffset(7, motionsOffset.Value, 0); }
+  public static void AddMotions(FlatBufferBuilder builder, VectorOffset motionsOffset) { builder.AddOffset(5, motionsOffset.Value, 0); }
   public static VectorOffset CreateMotionsVector(FlatBufferBuilder builder, Offset<FBSMotion>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
   public static void StartMotionsVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
   public static Offset<FBSReaction> EndFBSReaction(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // environment_name
+    builder.Required(o, 6);  // parameters
     return new Offset<FBSReaction>(o);
   }
   public static void FinishFBSReactionBuffer(FlatBufferBuilder builder, Offset<FBSReaction> offset) { builder.Finish(offset.Value, "REAC"); }
+
+  public static VectorOffset CreateSortedVectorOfFBSReaction(FlatBufferBuilder builder, Offset<FBSReaction>[] offsets) {
+    Array.Sort(offsets, (Offset<FBSReaction> o1, Offset<FBSReaction> o2) => Table.CompareStrings(Table.__offset(4, o1.Value, builder.DataBuffer), Table.__offset(4, o2.Value, builder.DataBuffer), builder.DataBuffer));
+    return builder.CreateVectorOfTables(offsets);
+  }
+
+  public static FBSReaction? __lookup_by_key(int vectorLocation, string key, ByteBuffer bb) {
+    byte[] byteKey = System.Text.Encoding.UTF8.GetBytes(key);
+    int span = bb.GetInt(vectorLocation - 4);
+    int start = 0;
+    while (span != 0) {
+      int middle = span / 2;
+      int tableOffset = Table.__indirect(vectorLocation + 4 * (start + middle), bb);
+      int comp = Table.CompareStrings(Table.__offset(4, bb.Length - tableOffset, bb), byteKey, bb);
+      if (comp > 0) {
+        span = middle;
+      } else if (comp < 0) {
+        middle++;
+        start += middle;
+        span -= middle;
+      } else {
+        return new FBSReaction().__assign(tableOffset, bb);
+      }
+    }
+    return null;
+  }
+};
+
+public struct FBSReactionParameters : IFlatbufferObject
+{
+  private Struct __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
+  public FBSReactionParameters __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public bool Interruptible { get { return 0!=__p.bb.Get(__p.bb_pos + 0); } }
+  public bool Step { get { return 0!=__p.bb.Get(__p.bb_pos + 1); } }
+  public bool Reset { get { return 0!=__p.bb.Get(__p.bb_pos + 2); } }
+  public bool Configure { get { return 0!=__p.bb.Get(__p.bb_pos + 3); } }
+  public bool Describe { get { return 0!=__p.bb.Get(__p.bb_pos + 4); } }
+
+  public static Offset<FBSReactionParameters> CreateFBSReactionParameters(FlatBufferBuilder builder, bool Interruptible, bool Step, bool Reset, bool Configure, bool Describe) {
+    builder.Prep(1, 5);
+    builder.PutBool(Describe);
+    builder.PutBool(Configure);
+    builder.PutBool(Reset);
+    builder.PutBool(Step);
+    builder.PutBool(Interruptible);
+    return new Offset<FBSReactionParameters>(builder.Offset);
+  }
 };
 
 public struct FBSMotion : IFlatbufferObject
@@ -107,7 +136,35 @@ public struct FBSMotion : IFlatbufferObject
   public static void AddStrength(FlatBufferBuilder builder, double strength) { builder.AddDouble(2, strength, 0.0); }
   public static Offset<FBSMotion> EndFBSMotion(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // actor_name
+    builder.Required(o, 6);  // motor_name
     return new Offset<FBSMotion>(o);
+  }
+
+  public static VectorOffset CreateSortedVectorOfFBSMotion(FlatBufferBuilder builder, Offset<FBSMotion>[] offsets) {
+    Array.Sort(offsets, (Offset<FBSMotion> o1, Offset<FBSMotion> o2) => Table.CompareStrings(Table.__offset(4, o1.Value, builder.DataBuffer), Table.__offset(4, o2.Value, builder.DataBuffer), builder.DataBuffer));
+    return builder.CreateVectorOfTables(offsets);
+  }
+
+  public static FBSMotion? __lookup_by_key(int vectorLocation, string key, ByteBuffer bb) {
+    byte[] byteKey = System.Text.Encoding.UTF8.GetBytes(key);
+    int span = bb.GetInt(vectorLocation - 4);
+    int start = 0;
+    while (span != 0) {
+      int middle = span / 2;
+      int tableOffset = Table.__indirect(vectorLocation + 4 * (start + middle), bb);
+      int comp = Table.CompareStrings(Table.__offset(4, bb.Length - tableOffset, bb), byteKey, bb);
+      if (comp > 0) {
+        span = middle;
+      } else if (comp < 0) {
+        middle++;
+        start += middle;
+        span -= middle;
+      } else {
+        return new FBSMotion().__assign(tableOffset, bb);
+      }
+    }
+    return null;
   }
 };
 
@@ -138,7 +195,34 @@ public struct FBSConfiguration : IFlatbufferObject
   public static void AddConfigurableValue(FlatBufferBuilder builder, double configurableValue) { builder.AddDouble(1, configurableValue, 0.0); }
   public static Offset<FBSConfiguration> EndFBSConfiguration(FlatBufferBuilder builder) {
     int o = builder.EndObject();
+    builder.Required(o, 4);  // configurable_name
     return new Offset<FBSConfiguration>(o);
+  }
+
+  public static VectorOffset CreateSortedVectorOfFBSConfiguration(FlatBufferBuilder builder, Offset<FBSConfiguration>[] offsets) {
+    Array.Sort(offsets, (Offset<FBSConfiguration> o1, Offset<FBSConfiguration> o2) => Table.CompareStrings(Table.__offset(4, o1.Value, builder.DataBuffer), Table.__offset(4, o2.Value, builder.DataBuffer), builder.DataBuffer));
+    return builder.CreateVectorOfTables(offsets);
+  }
+
+  public static FBSConfiguration? __lookup_by_key(int vectorLocation, string key, ByteBuffer bb) {
+    byte[] byteKey = System.Text.Encoding.UTF8.GetBytes(key);
+    int span = bb.GetInt(vectorLocation - 4);
+    int start = 0;
+    while (span != 0) {
+      int middle = span / 2;
+      int tableOffset = Table.__indirect(vectorLocation + 4 * (start + middle), bb);
+      int comp = Table.CompareStrings(Table.__offset(4, bb.Length - tableOffset, bb), byteKey, bb);
+      if (comp > 0) {
+        span = middle;
+      } else if (comp < 0) {
+        middle++;
+        start += middle;
+        span -= middle;
+      } else {
+        return new FBSConfiguration().__assign(tableOffset, bb);
+      }
+    }
+    return null;
   }
 };
 

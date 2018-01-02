@@ -6,8 +6,11 @@ namespace Neodroid.Observers {
   [ExecuteInEditMode]
   [RequireComponent (typeof(Camera))]
   public class CameraObserver : Observer {
-
+    [Header ("Specific", order = 102)]
+    [SerializeField]
     Camera _camera;
+    [SerializeField]
+    byte[] _data = new byte[] { };
 
     protected override void Start () {
       _camera = this.GetComponent<Camera> ();
@@ -17,8 +20,17 @@ namespace Neodroid.Observers {
       Data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG ();
     }
 
+    public byte[] Data {
+      get {
+        return _data;
+      }
+      set {
+        _data = value;
+      }
+    }
+
     public override void UpdateData () {
-      //_data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG ();
+      //Data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG ();
     }
 
     public override string ObserverIdentifier { get { return name + "Camera"; } }

@@ -3,24 +3,30 @@ include "NeodroidSharedModels.fbs";
 namespace Neodroid.FBS.Reaction;
 
 table FBSReaction {
-  environment_name:string;
+  environment_name:string (key);
+  parameters:FBSReactionParameters (required);
   poses:[FBSQuaternionTransform];
   bodies:[FBSBody];
   configurations:[FBSConfiguration];
-  reset:bool;
-  configure:bool;
-  step:bool;
   motions:[FBSMotion];
 }
 
+struct FBSReactionParameters{
+  interruptible:bool;
+  step:bool;
+  reset:bool;
+  configure:bool;
+  describe:bool;
+}
+
 table FBSMotion {
-  actor_name:string;
-  motor_name:string;
+  actor_name:string (key);
+  motor_name:string (required);
   strength:double;
 }
 
 table FBSConfiguration {
-  configurable_name:string;
+  configurable_name:string (key);
   configurable_value:double;
 }
 

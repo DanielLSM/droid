@@ -17,6 +17,8 @@ namespace Neodroid.Managers {
     [Header ("Development", order = 99)]
     [SerializeField]
     bool _debugging = false;
+    [SerializeField]
+    bool _test_environments = false;
 
     [Header ("Connection", order = 100)]
     [SerializeField]
@@ -175,7 +177,11 @@ namespace Neodroid.Managers {
     }
 
     void Update () {
-      if (!_wait_for_reaction_every_frame || (!_waiting_for_reaction && _reaction.Step)) {
+      if (_test_environments) {
+        ResumeSimulation (_simulation_time_scale);
+        ReactInEnvironments (_reaction);
+      }
+      if (!_wait_for_reaction_every_frame || (!_waiting_for_reaction && _reaction.Parameters.Step)) {
         ResumeSimulation (_simulation_time_scale);
       }
       if (!_waiting_for_reaction) {
