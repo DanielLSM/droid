@@ -23,6 +23,9 @@ namespace Neodroid.Messaging.Messages {
       _bodies = bodies;
     }
 
+    public Reaction () {
+    }
+
     #endregion
 
     #region Getters

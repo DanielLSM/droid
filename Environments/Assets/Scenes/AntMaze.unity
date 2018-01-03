@@ -497,7 +497,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _data: 
   _space: 0
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
@@ -702,7 +701,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _data: 
   _space: 0
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
@@ -841,7 +839,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _data: 
   _space: 2
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
@@ -2624,7 +2621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
-  _test_environments: 0
+  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
   _wait_for_reaction_every_frame: 0
@@ -2850,7 +2847,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _data: 
   _space: 0
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
@@ -3560,7 +3556,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _data: 
   _space: 0
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}

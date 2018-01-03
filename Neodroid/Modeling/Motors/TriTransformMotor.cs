@@ -42,28 +42,31 @@ namespace Neodroid.Motors {
       int layer_mask = 1 << LayerMask.NameToLayer (_layer_mask);
       if (!_rotational_motors) {
         if (motion.GetMotorName () == _X) {
+          var vec = Vector3.right * motion.Strength;
           if (_no_collisions) {
-            if (!Physics.Raycast (transform.position, Vector3.left, motion.Strength, layer_mask)) {
-              transform.Translate (Vector3.left * motion.Strength, _relative_to);
+            if (!Physics.Raycast (transform.position, vec, Mathf.Abs (motion.Strength), layer_mask)) {
+              transform.Translate (vec, _relative_to);
             }
           } else {
-            transform.Translate (Vector3.left * motion.Strength, _relative_to);
+            transform.Translate (vec, _relative_to);
           }
         } else if (motion.GetMotorName () == _Y) {
+          var vec = -Vector3.up * motion.Strength;
           if (_no_collisions) {
-            if (!Physics.Raycast (transform.position, -Vector3.up, motion.Strength, layer_mask)) {
-              transform.Translate (-Vector3.up * motion.Strength, _relative_to);
+            if (!Physics.Raycast (transform.position, vec, Mathf.Abs (motion.Strength), layer_mask)) {
+              transform.Translate (vec, _relative_to);
             }
           } else {
-            transform.Translate (-Vector3.up * motion.Strength, _relative_to);
+            transform.Translate (vec, _relative_to);
           }
         } else if (motion.GetMotorName () == _Z) {
+          var vec = -Vector3.forward * motion.Strength;
           if (_no_collisions) {
-            if (!Physics.Raycast (transform.position, -Vector3.forward, motion.Strength, layer_mask)) {
-              transform.Translate (-Vector3.forward * motion.Strength, _relative_to);
+            if (!Physics.Raycast (transform.position, vec, Mathf.Abs (motion.Strength), layer_mask)) {
+              transform.Translate (vec, _relative_to);
             }
           } else {
-            transform.Translate (-Vector3.forward * motion.Strength, _relative_to);
+            transform.Translate (vec, _relative_to);
           }
         }
       } else {

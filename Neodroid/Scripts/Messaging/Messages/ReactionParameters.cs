@@ -2,12 +2,13 @@
 
 namespace Neodroid.Messaging.Messages {
   public class ReactionParameters {
-
-    bool _reset = false;
+    bool _interruptible = false;
+    //bool _reply = false;
     bool _step = false;
+    bool _reset = false;
     bool _configure = false;
     bool _describe = false;
-    bool _interruptible = false;
+
 
     public ReactionParameters (bool interruptible = false, bool step = false, bool reset = false, bool configure = false, bool describe = false) {
       _interruptible = interruptible;
@@ -20,6 +21,12 @@ namespace Neodroid.Messaging.Messages {
     public bool Interruptible {
       get { return _interruptible; }
     }
+
+    /*public bool Reply {
+      
+      get { return _reply; }
+      set { _reply = value; }
+    }*/
 
     public bool Describe {
       get { return _describe; }

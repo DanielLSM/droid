@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 457600778}
   m_IndirectSpecularColor: {r: 0.1802845, g: 0.22571647, b: 0.30692315, a: 1}
 --- !u!157 &3
 LightmapSettings:
@@ -155,12 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b7c65bfbcfa4ac381370b0b8eef1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _debug: 0
+  _environment: {fileID: 1074217681}
+  _debugging: 0
 --- !u!1 &70876260
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,7 +765,7 @@ Light:
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 0}
+  m_Flare: {fileID: 12100000, guid: d658006f573c00e40a9bc0095afa70fe, type: 2}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1186,7 +1182,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4026015992846548, guid: 80c86a01849df45e1bf07e2d398a4cc0, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 80c86a01849df45e1bf07e2d398a4cc0, type: 2}
@@ -1461,11 +1457,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _bidirectional: 1
+  _actor: {fileID: 40810165}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 0}
   _axis_of_motion: 4
+  _relative_to: 1
+  _rigidbody: {fileID: 623426639}
 --- !u!114 &623426641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1477,14 +1479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 1074217681}
+  _debugging: 0
 --- !u!1 &649865751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1748,10 +1744,10 @@ Transform:
   m_GameObject: {fileID: 749158505}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 1.2}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
-  m_Father: {fileID: 1074217680}
-  m_RootOrder: 6
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &750216762
 Prefab:
@@ -2243,13 +2239,9 @@ Transform:
   - {fileID: 649865752}
   - {fileID: 1945096079}
   - {fileID: 523631426}
-  - {fileID: 749158509}
-  - {fileID: 1745608749}
-  - {fileID: 1095187452}
   - {fileID: 560946845}
-  - {fileID: 1311024856}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1074217681
 MonoBehaviour:
@@ -2259,15 +2251,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1074217679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 076ab8e7022b7407d952eb4ba5bb19ac, type: 3}
+  m_Script: {fileID: 11500000, guid: f4675f9235ecc46a5982e50590d858cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _episode_length: 1000
-  _resets: 6
-  _wait_for_reaction_every_frame: 0
-  _coordinate_system: 0
+  _objective_function: {fileID: 0}
+  _simulation_manager: {fileID: 0}
+  _debugging: 0
   _coordinate_reference_point: {fileID: 0}
-  _debug: 0
+  _coordinate_system: 1
+  _playable_area: {fileID: 0}
 --- !u!114 &1074217682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2276,15 +2268,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1074217679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c35a62be302bd4a77838aa6081f3d917, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d6fd2ea575694a1297adb4aa84e0523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugging: 0
+  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
-  _continue_lastest_reaction_on_disconnect: 0
-  _objective_function: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _debug: 0
+  _wait_every_frame: 0
+  _update_fixed_time_scale: 0
+  _continue_on_disconnect: 0
+  _episode_length: 1000
+  _frame_skips: 0
+  _simulation_time_scale: 1
+  _resets: 10
 --- !u!1 &1077005999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,11 +2376,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _bidirectional: 1
+  _actor: {fileID: 40810165}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 0}
   _axis_of_motion: 5
+  _relative_to: 1
+  _rigidbody: {fileID: 1077006001}
 --- !u!114 &1077006004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2395,14 +2398,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 1074217681}
+  _debugging: 0
 --- !u!1 &1077466876
 GameObject:
   m_ObjectHideFlags: 0
@@ -2599,8 +2596,8 @@ Transform:
   - {fileID: 1632271551}
   - {fileID: 2123375039}
   - {fileID: 2014939000}
-  m_Father: {fileID: 1074217680}
-  m_RootOrder: 8
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1114784978
 GameObject:
@@ -2696,11 +2693,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _bidirectional: 1
+  _actor: {fileID: 40810165}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 0}
   _axis_of_motion: 3
+  _relative_to: 1
+  _rigidbody: {fileID: 1114784980}
 --- !u!114 &1114784983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2712,14 +2715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 1074217681}
+  _debugging: 0
 --- !u!1001 &1118533972
 Prefab:
   m_ObjectHideFlags: 0
@@ -2971,8 +2968,8 @@ Transform:
   - {fileID: 978422616}
   - {fileID: 759217780}
   - {fileID: 388378863}
-  m_Father: {fileID: 1074217680}
-  m_RootOrder: 10
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1426208517
 GameObject:
@@ -3419,7 +3416,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1745608748}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3427,8 +3424,8 @@ Transform:
   - {fileID: 615081212}
   - {fileID: 925470189}
   - {fileID: 1935282402}
-  m_Father: {fileID: 1074217680}
-  m_RootOrder: 7
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1750941627
 Prefab:
@@ -3575,11 +3572,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _bidirectional: 1
+  _actor: {fileID: 40810165}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 0}
   _axis_of_motion: 3
+  _relative_to: 1
+  _rigidbody: {fileID: 1763488581}
 --- !u!114 &1763488584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3591,14 +3594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 1074217681}
+  _debugging: 0
 --- !u!1 &1767640685
 GameObject:
   m_ObjectHideFlags: 0
@@ -3694,11 +3691,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _bidirectional: 1
+  _actor: {fileID: 40810165}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 0}
   _axis_of_motion: 3
+  _relative_to: 1
+  _rigidbody: {fileID: 1767640688}
 --- !u!114 &1767640690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3710,14 +3713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 1074217681}
+  _debugging: 0
 --- !u!1001 &1767672676
 Prefab:
   m_ObjectHideFlags: 0
@@ -3939,11 +3936,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _bidirectional: 1
+  _actor: {fileID: 40810165}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 0}
   _axis_of_motion: 4
+  _relative_to: 1
+  _rigidbody: {fileID: 1920757645}
 --- !u!114 &1920757648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3955,14 +3958,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 1074217681}
+  _debugging: 0
 --- !u!1 &1935282401
 GameObject:
   m_ObjectHideFlags: 0
@@ -4596,11 +4593,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e93fcf92ec4e48b8cebe8a5a25db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _bidirectional: 1
+  _actor: {fileID: 40810165}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 0}
   _axis_of_motion: 5
+  _relative_to: 1
+  _rigidbody: {fileID: 2128380520}
 --- !u!114 &2128380522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4612,14 +4615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6353022dea724e48887a02466b60432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 1074217681}
+  _debugging: 0
 --- !u!1 &2130070973
 GameObject:
   m_ObjectHideFlags: 0

@@ -184,10 +184,10 @@ namespace Neodroid.Environments {
 
     public void Interrupt (string reason) {
       if (_interruptible) {
-        _interrupted = true;
         if (Debugging) {
           print (System.String.Format ("Was interrupted, because {0}", reason));
         }
+        _interrupted = true;
       }
     }
 

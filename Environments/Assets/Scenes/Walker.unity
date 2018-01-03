@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 71763082}
   m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571343, b: 0.30692208, a: 1}
 --- !u!157 &3
 LightmapSettings:
@@ -152,7 +152,7 @@ Light:
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 0}
+  m_Flare: {fileID: 12100000, guid: d658006f573c00e40a9bc0095afa70fe, type: 2}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
@@ -262,8 +262,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
-  m_Father: {fileID: 2076292204}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1850788717
 MeshRenderer:
@@ -352,7 +352,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3a2f1d54745dd44c0b41f6f4bfaa661a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -402,7 +402,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 2076292204}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2076292201
 GameObject:
@@ -434,11 +434,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4675f9235ecc46a5982e50590d858cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coordinate_system: 1
-  _coordinate_reference_point: {fileID: 0}
   _objective_function: {fileID: 2076292206}
   _simulation_manager: {fileID: 0}
-  _debug: 0
+  _debugging: 0
+  _coordinate_reference_point: {fileID: 0}
+  _coordinate_system: 1
+  _playable_area: {fileID: 0}
 --- !u!114 &2076292203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,14 +451,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6fd2ea575694a1297adb4aa84e0523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugging: 0
+  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
-  _continue_reaction_on_disconnect: 0
+  _wait_every_frame: 0
+  _update_fixed_time_scale: 0
+  _continue_on_disconnect: 0
   _episode_length: 1000
   _frame_skips: 0
+  _simulation_time_scale: 1
   _resets: 20
-  _wait_for_reaction_every_frame: 0
-  _debug: 0
 --- !u!4 &2076292204
 Transform:
   m_ObjectHideFlags: 0
@@ -468,11 +472,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1850788716}
   - {fileID: 2022436479}
   - {fileID: 1633939344}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2076292205
 MonoBehaviour:
@@ -486,7 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player_motions: {fileID: 11400000, guid: 3851e9370b5544672b17572b26901290, type: 2}
-  _debug: 0
+  Debugging: 0
 --- !u!114 &2076292206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,9 +501,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f5c2538e2c745a6b298603cd6a9737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
+  _debugging: 0
+  _extra_terms: []
   _solved_threshold: 0
-  _extra_term_go: []
   _based_on_tags: 0
   _area: {fileID: 2022436477}
   _actor: {fileID: 1004172349}

@@ -7,8 +7,6 @@ using Neodroid.Messaging.Messages;
 using Neodroid.Utilities;
 using UnityEngine;
 
-using System.Runtime.InteropServices;
-
 namespace Neodroid.Managers {
   public class SimulationManager : MonoBehaviour, HasRegister<LearningEnvironment> {
 
@@ -18,7 +16,7 @@ namespace Neodroid.Managers {
     [SerializeField]
     bool _debugging = false;
     [SerializeField]
-    bool _test_environments = false;
+    bool _test_motors = false;
 
     [Header ("Connection", order = 100)]
     [SerializeField]
@@ -28,9 +26,12 @@ namespace Neodroid.Managers {
 
     [Header ("General", order = 100)]
     [SerializeField]
-    bool _wait_for_reaction_every_frame = false;
+    bool _wait_every_frame = false;
     [SerializeField]
-    bool _continue_reaction_on_disconnect = false;
+    bool _update_fixed_time_scale = false;
+    // When true, MAJOR slow downs due to PHYSX updates on change.
+    [SerializeField]
+    bool _continue_on_disconnect = false;
     [SerializeField]
     int _episode_length = 1000;
     [SerializeField]
@@ -39,12 +40,24 @@ namespace Neodroid.Managers {
     float _simulation_time_scale = 1;
     [SerializeField]
     int _resets = 10;
+
+    bool _reply = false;
+
     //When resetting transforms we run multiple times to ensure that we properly reset hierachies of objects
 
 
     #endregion
 
     #region Getters
+
+    public bool TestMotors {
+      get {
+        return _test_motors;
+      }
+      set {
+        _test_motors = value;
+      }
+    }
 
     public string IpAddress {
       get {
@@ -64,12 +77,12 @@ namespace Neodroid.Managers {
       }
     }
 
-    public bool ContinueReactionOnDisconnect {
+    public bool ContinueOnDisconnect {
       get {
-        return _continue_reaction_on_disconnect;
+        return _continue_on_disconnect;
       }
       set { 
-        _continue_reaction_on_disconnect = value;
+        _continue_on_disconnect = value;
       }
     }
 
@@ -109,12 +122,21 @@ namespace Neodroid.Managers {
       }
     }
 
-    public bool WaitForReactionEveryFrame {
+    public Reaction CurrentReaction {
       get {
-        return _wait_for_reaction_every_frame;
+        return _reaction;
       }
       set { 
-        _wait_for_reaction_every_frame = value;
+        _reaction = value;
+      }
+    }
+
+    public bool WaitEveryFrame {
+      get {
+        return _wait_every_frame;
+      }
+      set { 
+        _wait_every_frame = value;
       }
     }
 
@@ -127,19 +149,8 @@ namespace Neodroid.Managers {
       }
     }
 
-    public bool IsSimulationUpdated () {
-      return _is_simulation_updated;
-    }
-
     public bool IsSimulationPaused () {
       return Time.timeScale == 0;
-    }
-
-    public bool WaitForReaction {
-      get{ return _waiting_for_reaction; }
-      set {
-        _wait_for_reaction_every_frame = value;
-      }
     }
 
     #endregion
@@ -148,11 +159,8 @@ namespace Neodroid.Managers {
 
     Dictionary<string, LearningEnvironment> _environments = new Dictionary<string, LearningEnvironment> ();
     MessageServer _message_server;
-
-    bool _is_simulation_updated = false;
-    bool _client_connected = false;
-    Reaction _reaction = null;
-    bool _waiting_for_reaction = true;
+    System.Random _random_generator;
+    Reaction _reaction = new Reaction ();
 
     #endregion
 
@@ -161,33 +169,31 @@ namespace Neodroid.Managers {
     void Start () {
       FetchCommmandLineArguments ();
       StartMessagingServer ();
+      _random_generator = new System.Random ();
     }
 
     void FixedUpdate () {
-      if (_wait_for_reaction_every_frame) {
+      if (WaitEveryFrame) {
         PauseSimulation ();
       }
     }
 
     void LateUpdate () {
-      if (!_is_simulation_updated) {
-        _is_simulation_updated = true;
-      }
       PostUpdate ();
     }
 
     void Update () {
-      if (_test_environments) {
+      if (TestMotors) {
         ResumeSimulation (_simulation_time_scale);
-        ReactInEnvironments (_reaction);
+        ReactInEnvironments (SampleTestReaction ());
+        return;
       }
-      if (!_wait_for_reaction_every_frame || (!_waiting_for_reaction && _reaction.Parameters.Step)) {
+      if (!WaitEveryFrame || CurrentReaction.Parameters.Step) {
         ResumeSimulation (_simulation_time_scale);
       }
-      if (!_waiting_for_reaction) {
-        var states = ReactInEnvironments (_reaction);
-        SendEnvironmentStates (states);
-        _waiting_for_reaction = true;
+      if (_reply) {
+        SendEnvironmentStates (ReactInEnvironments (CurrentReaction));
+        _reply = false;
       }
     }
 
@@ -207,7 +213,7 @@ namespace Neodroid.Managers {
 
 
     public string GetStatus () {
-      if (_client_connected)
+      if (_message_server._client_connected)
         return "Connected";
       else
         return "Not Connected";
@@ -233,6 +239,20 @@ namespace Neodroid.Managers {
 
     #region PrivateMethods
 
+    Reaction SampleTestReaction () {
+      var motions = new List<MotorMotion> ();
+      foreach (var environment in _environments) {
+        foreach (var actor in environment.Value.Actors) {
+          foreach (var motor in actor.Value.Motors) {
+            var strength = _random_generator.Next ((int)(motor.Value.ValidInput.min_value), (int)(motor.Value.ValidInput.max_value + 1));
+            motions.Add (new MotorMotion (actor.Key, motor.Key, strength));
+          }
+        }
+        break;
+      }
+      return new Reaction (new ReactionParameters (true, true), motions.ToArray (), null, null, null);
+    }
+
     void SendEnvironmentStates (EnvironmentState[] states) {
       _message_server.SendEnvironmentStates (states);
     }
@@ -241,21 +261,25 @@ namespace Neodroid.Managers {
       foreach (var environment in _environments.Values) {
         environment.PostUpdate ();
       }
+      CurrentReaction = new Reaction ();
     }
 
 
     void PauseSimulation () {
       Time.timeScale = 0;
-      Time.fixedDeltaTime = 0.02F * Time.timeScale;
+      if (_update_fixed_time_scale)
+        Time.fixedDeltaTime = 0.02F * Time.timeScale;
     }
 
     void ResumeSimulation (float simulation_time_scale) {
       if (simulation_time_scale > 0) {
         Time.timeScale = simulation_time_scale;
-        Time.fixedDeltaTime = 0.02F * Time.timeScale;
+        if (_update_fixed_time_scale)
+          Time.fixedDeltaTime = 0.02F * Time.timeScale;
       } else {
         Time.timeScale = 1;
-        Time.fixedDeltaTime = 0.02F * Time.timeScale;
+        if (_update_fixed_time_scale)
+          Time.fixedDeltaTime = 0.02F * Time.timeScale;
       }
     }
 
@@ -286,15 +310,13 @@ namespace Neodroid.Managers {
     #region Callbacks
 
     void OnReceiveCallback (Reaction reaction) {
-      _client_connected = true;
       if (Debugging)
-        Debug.Log ("Received: " + reaction.ToString ());
-      _reaction = reaction;
-      _waiting_for_reaction = false;
+        print ("Received: " + reaction.ToString ());
+      CurrentReaction = reaction;
+      _reply = true;
     }
 
     void OnDisconnectCallback () {
-      _client_connected = false;
       if (Debugging)
         Debug.Log ("Client disconnected.");
     }

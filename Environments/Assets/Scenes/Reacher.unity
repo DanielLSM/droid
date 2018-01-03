@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f0742823962d31b4ebfa4be9309ddd4e, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -149,7 +149,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4129864042203872, guid: 9e9875463c1ed451bb25878f63e0cdc7, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114271565463949058, guid: 9e9875463c1ed451bb25878f63e0cdc7,
         type: 2}
@@ -499,11 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 433336211}
-  _has_configurable: 0
-  _configurable_name: 
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _debugging: 0
   _order_index: 2
   _draw_names: 1
 --- !u!43 &291461660
@@ -749,12 +745,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 564
+      value: 532
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 249.5
+      value: 291
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
@@ -856,13 +852,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cc82c8811d24dc3a0d0343649a363b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _has_observer: 0
-  _observer_name: 
   _environment: {fileID: 433336211}
-  _debug: 0
-  _decimal_granularity: 0
-  _min_value: -100
-  _max_value: 100
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
   _relative_to_existing_value: 0
 --- !u!1001 &400567946
 Prefab:
@@ -901,7 +896,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4907746387462468, guid: 161c5a6820fb14b35ab51338756ccc70, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114390874089218866, guid: 161c5a6820fb14b35ab51338756ccc70,
         type: 2}
@@ -970,7 +965,7 @@ Transform:
   - {fileID: 2050422325}
   - {fileID: 1363222654}
   m_Father: {fileID: 433336212}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 251.4, z: 0}
 --- !u!111 &422333793
 Animation:
@@ -1018,9 +1013,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f5c2538e2c745a6b298603cd6a9737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
+  _debugging: 0
+  _extra_terms: []
   _solved_threshold: 0
-  _extra_term_go: []
   _based_on_tags: 0
   _area: {fileID: 710721100}
   _actor: {fileID: 1678840424}
@@ -1038,11 +1033,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4675f9235ecc46a5982e50590d858cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coordinate_system: 1
-  _coordinate_reference_point: {fileID: 0}
   _objective_function: {fileID: 0}
   _simulation_manager: {fileID: 0}
-  _debug: 0
+  _debugging: 0
+  _coordinate_reference_point: {fileID: 0}
+  _coordinate_system: 1
+  _playable_area: {fileID: 0}
 --- !u!4 &433336212
 Transform:
   m_ObjectHideFlags: 0
@@ -1053,13 +1049,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1505300453}
   - {fileID: 1939050571}
   - {fileID: 422333792}
   - {fileID: 1803486973}
   - {fileID: 987006710}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &433336213
 MonoBehaviour:
@@ -1072,14 +1067,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6fd2ea575694a1297adb4aa84e0523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugging: 0
+  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
-  _continue_reaction_on_disconnect: 0
+  _wait_every_frame: 0
+  _update_fixed_time_scale: 0
+  _continue_on_disconnect: 0
   _episode_length: 1000
   _frame_skips: 0
+  _simulation_time_scale: 1
   _resets: 6
-  _wait_for_reaction_every_frame: 0
-  _debug: 1
 --- !u!65 &433336215
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1104,6 +1102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider_based: 1
+  _include_children: 1
   _freeze: 1
   _line_color: {r: 0.8206897, g: 0, b: 1, a: 0.74}
   _bounds:
@@ -1146,14 +1145,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d70508e520cd84f69b7e0974dcbc5629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _decimal_granularity: 0
-  _min_strength: -100
-  _max_strength: 100
+  _actor: {fileID: 709803750}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 709803750}
-  _axis_of_motion: 0
-  _space: 1
+  _relative_to: 1
   _rotational_motors: 0
   _no_collisions: 1
   _layer_mask: Obstructions
@@ -1169,17 +1169,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20678454752714027aac65984404caf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _has_observer: 0
-  _observer_name: 
   _environment: {fileID: 433336211}
-  _debug: 0
-  _decimal_granularity: 0
-  _min_value: -100
-  _max_value: 100
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
   _relative_to_existing_value: 0
   _axis_of_configuration: 0
   _use_bounding_box_for_range: 0
   _bounding_box: {fileID: 0}
+  _position: {x: 0, y: 0, z: 0}
+  _X: 
+  _Y: 
+  _Z: 
 --- !u!114 &709803749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,11 +1196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 433336211}
-  _has_configurable: 0
-  _configurable_name: 
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _debugging: 0
 --- !u!114 &709803750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1211,7 +1210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 433336211}
-  _debug: 0
+  _debugging: 0
 --- !u!54 &709803751
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1356,11 +1355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 433336211}
-  _has_configurable: 0
-  _configurable_name: 
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _debugging: 0
   _order_index: 1
   _draw_names: 1
 --- !u!33 &710721098
@@ -2232,13 +2227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cc82c8811d24dc3a0d0343649a363b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _has_observer: 0
-  _observer_name: 
   _environment: {fileID: 433336211}
-  _debug: 0
-  _decimal_granularity: 0
-  _min_value: -100
-  _max_value: 100
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
   _relative_to_existing_value: 0
 --- !u!21 &1203184135
 Material:
@@ -2542,11 +2536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 433336211}
-  _has_configurable: 0
-  _configurable_name: 
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _debugging: 0
   _order_index: 4
   _draw_names: 1
 --- !u!21 &1371373111
@@ -2734,13 +2724,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cc82c8811d24dc3a0d0343649a363b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _has_observer: 0
-  _observer_name: 
   _environment: {fileID: 433336211}
-  _debug: 0
-  _decimal_granularity: 0
-  _min_value: -100
-  _max_value: 100
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
   _relative_to_existing_value: 0
 --- !u!21 &1454623397
 Material:
@@ -2874,14 +2863,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0428dcb93f94eb09ef9d30df376ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
-  _decimal_granularity: 0
-  _min_strength: -100
-  _max_strength: 100
+  _actor: {fileID: 709803750}
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _energy_spend_since_reset: 0
   _energy_cost: 1
-  _actor_game_object: {fileID: 709803750}
   _axis_of_motion: 0
-  _space: 1
+  _relative_to: 1
 --- !u!54 &1498498904
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3043,8 +3034,8 @@ Transform:
   - {fileID: 394444002}
   - {fileID: 2107107824}
   - {fileID: 1173944697}
-  m_Father: {fileID: 433336212}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1505300454
 MonoBehaviour:
@@ -3057,13 +3048,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cc82c8811d24dc3a0d0343649a363b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _has_observer: 0
-  _observer_name: 
   _environment: {fileID: 433336211}
-  _debug: 0
-  _decimal_granularity: 0
-  _min_value: -100
-  _max_value: 100
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
   _relative_to_existing_value: 0
 --- !u!135 &1678840424
 SphereCollider:
@@ -3175,13 +3165,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cc82c8811d24dc3a0d0343649a363b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _has_observer: 0
-  _observer_name: 
   _environment: {fileID: 433336211}
-  _debug: 0
-  _decimal_granularity: 0
-  _min_value: -100
-  _max_value: 100
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
   _relative_to_existing_value: 0
 --- !u!1 &1793241826
 GameObject:
@@ -3319,7 +3308,7 @@ Transform:
   - {fileID: 1915265700}
   - {fileID: 1498498902}
   m_Father: {fileID: 433336212}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1915265699
 GameObject:
@@ -3652,11 +3641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 433336211}
-  _has_configurable: 0
-  _configurable_name: 
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _debugging: 0
   _order_index: 3
   _draw_names: 1
 --- !u!1 &2079893295
@@ -3877,11 +3862,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cc82c8811d24dc3a0d0343649a363b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _has_observer: 0
-  _observer_name: 
   _environment: {fileID: 433336211}
-  _debug: 0
-  _decimal_granularity: 0
-  _min_value: -100
-  _max_value: 100
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
   _relative_to_existing_value: 0

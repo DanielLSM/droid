@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f0742823962d31b4ebfa4be9309ddd4e, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -159,14 +159,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6fd2ea575694a1297adb4aa84e0523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugging: 0
+  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
-  _continue_lastest_reaction_on_disconnect: 0
+  _wait_every_frame: 0
+  _update_fixed_time_scale: 0
+  _continue_on_disconnect: 0
   _episode_length: 600
   _frame_skips: 0
+  _simulation_time_scale: 1
   _resets: 6
-  _wait_for_reaction_every_frame: 0
-  _debug: 0
 --- !u!114 &47029964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +182,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 1828114874}
-  _debug: 0
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
+  _relative_to_existing_value: 0
 --- !u!108 &91493383 stripped
 Light:
   m_PrefabParentObject: {fileID: 108064426772399630, guid: 6f1ff38442c544cf19a2f6370122ccf9,
@@ -349,7 +357,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1006304100296672, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
@@ -483,12 +491,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 760.5
+      value: 532
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 332.5
+      value: 291
       objectReference: {fileID: 0}
     - target: {fileID: 224267871597078786, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
@@ -818,7 +826,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1006304100296672, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
@@ -982,7 +990,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1006304100296672, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
@@ -1161,7 +1169,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1006304100296672, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
@@ -1331,7 +1339,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1006304100296672, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f1ff38442c544cf19a2f6370122ccf9, type: 2}

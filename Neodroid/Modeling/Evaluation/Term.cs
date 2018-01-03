@@ -7,6 +7,6 @@ namespace Neodroid.Evaluation {
     //ScriptableObject {
 
 
-    public abstract float evaluate ();
+    public abstract float Evaluate ();
   }
 }

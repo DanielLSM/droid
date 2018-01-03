@@ -56,6 +56,7 @@ namespace Neodroid.Configurables {
     }
 
     protected virtual void Start () {
+      UpdateCurrentValue ();
     }
 
     protected virtual void Awake () {

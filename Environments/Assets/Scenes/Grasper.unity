@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: b9be0c15efe8ad9489fdeead114d8ec5, type: 2}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 1571327022}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
@@ -1388,7 +1388,7 @@ Light:
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 0}
+  m_Flare: {fileID: 12100000, guid: d658006f573c00e40a9bc0095afa70fe, type: 2}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1430,8 +1430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 1776001159}
-  _debug: 0
-  _data: 
+  _debugging: 0
   _position: {x: 0, y: 0.7110001, z: 0.4}
   _rotation: {x: 0, y: 1, z: 0}
   _direction: {x: 0, y: 0, z: 1}
@@ -1454,8 +1453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _environment: {fileID: 1776001159}
-  _debug: 0
-  _data: 
+  _debugging: 0
   _velocity: {x: 0, y: 0, z: 0}
   _angular_velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &1631750776
@@ -1469,13 +1467,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5deada7b6965c504b80d979e9f1e6d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _has_observer: 0
-  _observer_name: 
   _environment: {fileID: 1776001159}
-  _debug: 0
-  _decimal_granularity: 0
-  _min_value: -100
-  _max_value: 100
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
   _relative_to_existing_value: 0
   _axis_of_configuration: 0
 --- !u!1 &1642584170
@@ -1518,13 +1515,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 497ef4eca726242399e3c86ba3d25904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _has_observer: 0
-  _observer_name: 
   _environment: {fileID: 1776001159}
-  _debug: 0
-  _decimal_granularity: 0
-  _min_value: 0
-  _max_value: 6
+  _debugging: 0
+  _valid_input:
+    decimal_granularity: 0
+    min_value: -10
+    max_value: 10
   _relative_to_existing_value: 0
   _object_to_spawn: {fileID: 1329011595349424, guid: 3012e5ed0dc6544658a7c5508f910469,
     type: 2}
@@ -1627,12 +1623,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 593
+      value: 532
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 273.5
+      value: 291
       objectReference: {fileID: 0}
     - target: {fileID: 224279774314885746, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
@@ -1834,11 +1830,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4675f9235ecc46a5982e50590d858cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coordinate_system: 1
-  _coordinate_reference_point: {fileID: 0}
   _objective_function: {fileID: 0}
   _simulation_manager: {fileID: 0}
-  _debug: 1
+  _debugging: 0
+  _coordinate_reference_point: {fileID: 0}
+  _coordinate_system: 1
+  _playable_area: {fileID: 0}
 --- !u!114 &1776001160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1851,6 +1848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider_based: 1
+  _include_children: 1
   _freeze: 1
   _line_color: {r: 0, g: 1, b: 0.4, a: 0.74}
   _bounds:
@@ -1870,15 +1868,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6fd2ea575694a1297adb4aa84e0523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugging: 0
+  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
-  _continue_reaction_on_disconnect: 0
+  _wait_every_frame: 0
+  _update_fixed_time_scale: 0
+  _continue_on_disconnect: 0
   _episode_length: 1000
   _frame_skips: 0
   _simulation_time_scale: 1
   _resets: 6
-  _wait_for_reaction_every_frame: 0
-  _debug: 0
 --- !u!65 &1776001162
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1902,15 +1902,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb3ea73696124320971daeae2f4b29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
+  _debugging: 0
+  _extra_terms: []
   _solved_threshold: 0
-  _extra_term_go: []
+  _sparse: 1
   _goal: {fileID: 0}
   _actor: {fileID: 1631750774}
   _environment: {fileID: 1776001159}
-  _obstructions: []
   _playable_area: {fileID: 1776001160}
-  peak_reward: 0
+  _obstructions: []
 --- !u!1001 &1864887520
 Prefab:
   m_ObjectHideFlags: 0

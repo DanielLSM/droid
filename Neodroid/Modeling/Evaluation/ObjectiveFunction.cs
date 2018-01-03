@@ -15,10 +15,6 @@ namespace Neodroid.Evaluation {
     bool _debugging = false;
 
     [Header ("References", order = 100)]
-
-    [Header ("General", order = 101)]
-    [SerializeField]
-    float _solved_threshold = 0;
     [SerializeField]
     Term[] _extra_terms;
     [SerializeField]
@@ -26,13 +22,17 @@ namespace Neodroid.Evaluation {
     [SerializeField]
     Dictionary<Term, float> _extra_term_weights = new Dictionary<Term, float> ();
 
+    [Header ("General", order = 101)]
+    [SerializeField]
+    float _solved_threshold = 0;
+
+
 
     #endregion
 
     void Awake () {
       foreach (var go in _extra_terms) {
-        _extra_terms_dict.Add (go.name, go);
-        _extra_term_weights.Add (go, 1);
+        Register (go);
       }
     }
 
@@ -85,12 +85,20 @@ namespace Neodroid.Evaluation {
     public virtual float EvaluateExtraTerms () {
       float extra_terms_output = 0;
       foreach (var term in _extra_terms_dict.Values) {
-        extra_terms_output += _extra_term_weights [term] * term.evaluate ();
+        if (Debugging) {
+          print (String.Format ("Extra term: {0}", term));
+        }
+        extra_terms_output += _extra_term_weights [term] * term.Evaluate ();
+      }
+      if (Debugging) {
+        print (String.Format ("Extra terms signal: {0}", extra_terms_output));
       }
       return extra_terms_output;
     }
 
     public virtual void Register (Term term) {
+      if (Debugging)
+        print (String.Format ("Term registered: {0}", term));
       _extra_terms_dict.Add (term.name, term);
       _extra_term_weights.Add (term, 1);
     }

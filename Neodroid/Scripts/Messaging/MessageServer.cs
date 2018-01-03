@@ -10,6 +10,12 @@ using Neodroid.FBS.Reaction;
 namespace Neodroid.Messaging {
   [System.Serializable]
   class MessageServer {
+    #region PublicMembers
+
+    public bool _client_connected = false;
+
+    #endregion
+
     #region PrivateMembers
 
     System.Threading.Thread _polling_thread;
@@ -40,6 +46,7 @@ namespace Neodroid.Messaging {
         _socket.Bind ("tcp://" + _ip_address + ":" + _port.ToString ());
       }
       callback ();
+      _client_connected = true;
     }
 
     void PollingThread (System.Action<Reaction> receive_callback, System.Action disconnect_callback, System.Action<System.String> debug_callback) {

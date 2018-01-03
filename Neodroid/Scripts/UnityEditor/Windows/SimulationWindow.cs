@@ -62,7 +62,8 @@ namespace Neodroid.Windows {
   _simulation_manager.EpisodeLength = EditorGUILayout.IntField ("Episode Length", _simulation_manager.EpisodeLength);
   _simulation_manager.FrameSkips = EditorGUILayout.IntField ("Frame skips", _simulation_manager.FrameSkips);
   _simulation_manager.Resets = EditorGUILayout.IntField ("Resets when resetting", _simulation_manager.Resets);
-  _simulation_manager.WaitForReactionEveryFrame = EditorGUILayout.Toggle ("Wait For Reaction Every Frame", _simulation_manager.WaitForReactionEveryFrame);
+  _simulation_manager.WaitEveryFrame = EditorGUILayout.Toggle ("Wait Every Frame", _simulation_manager.WaitEveryFrame);
+  _simulation_manager.TestMotors = EditorGUILayout.Toggle ("Test Motors", _simulation_manager.TestMotors);
         EditorGUILayout.EndVertical ();
 
         EditorGUILayout.EndHorizontal ();
@@ -184,12 +185,11 @@ namespace Neodroid.Windows {
           EditorGUI.BeginDisabledGroup (!Application.isPlaying);
 
           if (GUILayout.Button ("Step")) {
-            _simulation_manager.ReactInEnvironments (null);
+  _simulation_manager.ReactInEnvironments(new Reaction ( new ReactionParameters(true,true,false,false,false) ,null,null,null,null));
           }
 
           if (GUILayout.Button ("Reset")) {
-  var parameters = new ReactionParameters(false,true,false,false);
-  _simulation_manager.ReactInEnvironments (new Reaction ( parameters,null,null,null,null));
+  _simulation_manager.ReactInEnvironments(new Reaction ( new ReactionParameters(true,false,true,false,false) ,null,null,null,null));
           }
 
           EditorGUI.EndDisabledGroup ();

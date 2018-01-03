@@ -29,8 +29,10 @@ namespace Neodroid.Utilities {
             motions.Add (motion);
           }
         }
-
-        var parameters = new ReactionParameters (true, true);
+        var step = false;
+        if (motions.Count > 0)
+          step = true;
+        var parameters = new ReactionParameters (true, step);
         var reaction = new Reaction (parameters, motions.ToArray (), null, null, null);
         _simulation_manager.ReactInEnvironments (reaction);
       } else {
