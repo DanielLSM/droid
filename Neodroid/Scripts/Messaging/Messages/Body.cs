@@ -13,11 +13,11 @@ namespace Neodroid.Messaging.Messages {
       _ang = ang;
     }
 
-    public Vector3 Velocity {
+    public Vector3 velocity {
       get{ return _vel; }
     }
 
-    public Vector3 AngularVelocity {
+    public Vector3 angularVelocity {
       get{ return _ang; }
     }
   }

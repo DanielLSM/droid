@@ -1,32 +1,31 @@
-﻿using System;
-
-namespace Neodroid.Messaging.Messages {
+﻿namespace Neodroid.Messaging.Messages {
   public class ReactionParameters {
-    bool _interruptible = false;
-    //bool _reply = false;
+    bool _terminable = false;
     bool _step = false;
     bool _reset = false;
     bool _configure = false;
     bool _describe = false;
+    bool _episode_count = true;
 
 
-    public ReactionParameters (bool interruptible = false, bool step = false, bool reset = false, bool configure = false, bool describe = false) {
-      _interruptible = interruptible;
+    public ReactionParameters (bool terminable = false, bool step = false, bool reset = false, bool configure = false, bool describe = false, bool episode_count = true) {
+      _terminable = terminable;
       _reset = reset;
       _step = step;
       _configure = configure;
       _describe = describe;
+      _episode_count = episode_count;
     }
 
-    public bool Interruptible {
-      get { return _interruptible; }
+    public bool EpisodeCount {
+      get {
+        return _episode_count;
+      }
     }
 
-    /*public bool Reply {
-      
-      get { return _reply; }
-      set { _reply = value; }
-    }*/
+    public bool Terminable {
+      get { return _terminable; }
+    }
 
     public bool Describe {
       get { return _describe; }
@@ -47,13 +46,14 @@ namespace Neodroid.Messaging.Messages {
     public override string ToString () {
       return System.String.Format (
         "<ReactionParameters>\n " +
-        "Interruptible:{0},\nStep:{1},\nReset:{2},\nConfigure:{3},\nDescribe:{4}" +
+        "Terminable:{0},\nStep:{1},\nReset:{2},\nConfigure:{3},\nDescribe:{4}\nDescribe:{5}" +
         "\n</ReactionParameters>\n", 
-        Interruptible.ToString (),
+        Terminable.ToString (),
         Step.ToString (),
         Reset.ToString (),
         Configure.ToString (),
-        Describe.ToString ());
+        Describe.ToString (),
+        EpisodeCount.ToString ());
     }
   }
 

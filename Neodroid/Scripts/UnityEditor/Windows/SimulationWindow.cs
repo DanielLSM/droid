@@ -31,7 +31,7 @@ namespace Neodroid.Windows {
     Dictionary<string,Motor> _motors;
     Dictionary<string,Observer> _observers;
     Dictionary<string,ConfigurableGameObject> _configurables;
-  Dictionary<string,Resetable> _resetables;
+    Dictionary<string,Resetable> _resetables;
     Vector2 _scroll_position;
     Texture _icon;
     int _preview_image_size = 100;
@@ -59,11 +59,11 @@ namespace Neodroid.Windows {
         GUILayout.Label (_neodroid_icon, GUILayout.Width (_preview_image_size), GUILayout.Height (_preview_image_size));
 
         EditorGUILayout.BeginVertical ();
-  _simulation_manager.EpisodeLength = EditorGUILayout.IntField ("Episode Length", _simulation_manager.EpisodeLength);
-  _simulation_manager.FrameSkips = EditorGUILayout.IntField ("Frame skips", _simulation_manager.FrameSkips);
-  _simulation_manager.Resets = EditorGUILayout.IntField ("Resets when resetting", _simulation_manager.Resets);
-  _simulation_manager.WaitEveryFrame = EditorGUILayout.Toggle ("Wait Every Frame", _simulation_manager.WaitEveryFrame);
-  _simulation_manager.TestMotors = EditorGUILayout.Toggle ("Test Motors", _simulation_manager.TestMotors);
+        _simulation_manager.EpisodeLength = EditorGUILayout.IntField ("Episode Length", _simulation_manager.EpisodeLength);
+        _simulation_manager.FrameSkips = EditorGUILayout.IntField ("Frame skips", _simulation_manager.FrameSkips);
+        _simulation_manager.Resets = EditorGUILayout.IntField ("Resets when resetting", _simulation_manager.Resets);
+        _simulation_manager.WaitEvery = (WaitOn)EditorGUILayout.EnumPopup ("Wait Every Frame", _simulation_manager.WaitEvery);
+        _simulation_manager.TestMotors = EditorGUILayout.Toggle ("Test Motors", _simulation_manager.TestMotors);
         EditorGUILayout.EndVertical ();
 
         EditorGUILayout.EndHorizontal ();
@@ -87,16 +87,16 @@ namespace Neodroid.Windows {
 
               EditorGUILayout.BeginVertical ("Box");
               _environments [i].enabled = EditorGUILayout.BeginToggleGroup (_environments [i].EnvironmentIdentifier,
-  _environments [i].enabled && _environments [i].gameObject.activeSelf);
+                _environments [i].enabled && _environments [i].gameObject.activeSelf);
               EditorGUILayout.ObjectField (_environments [i], typeof(LearningEnvironment), true);
-  _environments [i].CoordinateSystem = (CoordinateSystem)EditorGUILayout.EnumPopup ("Coordinate system",
-  _environments [i].CoordinateSystem);
-  EditorGUI.BeginDisabledGroup (_environments [i].CoordinateSystem != CoordinateSystem.RelativeToReferencePoint);
-  _environments [i].CoordinateReferencePoint = (Transform)EditorGUILayout.ObjectField ("Reference point",
-  _environments [i].CoordinateReferencePoint, typeof(Transform), true);
+              _environments [i].CoordinateSystem = (CoordinateSystem)EditorGUILayout.EnumPopup ("Coordinate system",
+                _environments [i].CoordinateSystem);
+              EditorGUI.BeginDisabledGroup (_environments [i].CoordinateSystem != CoordinateSystem.RelativeToReferencePoint);
+              _environments [i].CoordinateReferencePoint = (Transform)EditorGUILayout.ObjectField ("Reference point",
+                _environments [i].CoordinateReferencePoint, typeof(Transform), true);
               EditorGUI.EndDisabledGroup ();
-  _environments [i].ObjectiveFunction = (ObjectiveFunction)EditorGUILayout.ObjectField ("Objective function",
-  _environments [i].ObjectiveFunction, typeof(ObjectiveFunction), true);
+              _environments [i].ObjectiveFunction = (ObjectiveFunction)EditorGUILayout.ObjectField ("Objective function",
+                _environments [i].ObjectiveFunction, typeof(ObjectiveFunction), true);
 
               EditorGUILayout.BeginVertical ("Box");
               GUILayout.Label ("Actors");
@@ -155,18 +155,18 @@ namespace Neodroid.Windows {
               }
               EditorGUILayout.EndVertical ();
 
-  EditorGUILayout.BeginVertical ("Box");
-  GUILayout.Label ("Resetables");
-  foreach (var resetable in _resetables) {
-  if (resetable.Value != null) {
-  EditorGUILayout.BeginVertical ("Box");
-  resetable.Value.enabled = EditorGUILayout.BeginToggleGroup (resetable.Key, resetable.Value.enabled && resetable.Value.gameObject.activeSelf);
-  EditorGUILayout.ObjectField (resetable.Value, typeof(Resetable), true);
-  EditorGUILayout.EndToggleGroup ();
-  EditorGUILayout.EndVertical ();
-  }
-  }
-  EditorGUILayout.EndVertical ();
+              EditorGUILayout.BeginVertical ("Box");
+              GUILayout.Label ("Resetables");
+              foreach (var resetable in _resetables) {
+                if (resetable.Value != null) {
+                  EditorGUILayout.BeginVertical ("Box");
+                  resetable.Value.enabled = EditorGUILayout.BeginToggleGroup (resetable.Key, resetable.Value.enabled && resetable.Value.gameObject.activeSelf);
+                  EditorGUILayout.ObjectField (resetable.Value, typeof(Resetable), true);
+                  EditorGUILayout.EndToggleGroup ();
+                  EditorGUILayout.EndVertical ();
+                }
+              }
+              EditorGUILayout.EndVertical ();
 
 
               EditorGUILayout.EndToggleGroup ();
@@ -185,11 +185,11 @@ namespace Neodroid.Windows {
           EditorGUI.BeginDisabledGroup (!Application.isPlaying);
 
           if (GUILayout.Button ("Step")) {
-  _simulation_manager.ReactInEnvironments(new Reaction ( new ReactionParameters(true,true,false,false,false) ,null,null,null,null));
+            _simulation_manager.ReactInEnvironments (new Reaction (new ReactionParameters (true, true, false, false, false), null, null, null));
           }
 
           if (GUILayout.Button ("Reset")) {
-  _simulation_manager.ReactInEnvironments(new Reaction ( new ReactionParameters(true,false,true,false,false) ,null,null,null,null));
+            _simulation_manager.ReactInEnvironments (new Reaction (new ReactionParameters (true, false, true, false, false), null, null, null));
           }
 
           EditorGUI.EndDisabledGroup ();

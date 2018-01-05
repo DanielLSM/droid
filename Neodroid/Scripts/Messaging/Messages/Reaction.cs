@@ -8,19 +8,17 @@ namespace Neodroid.Messaging.Messages {
   public class Reaction {
     MotorMotion[] _motions;
     Configuration[] _configurations;
-    Pose[] _poses;
-    Body[] _bodies;
+    Unobservables _unobservables = new Unobservables (null, new Pose[] { });
     ReactionParameters _parameters = new ReactionParameters ();
 
 
     #region Constructors
 
-    public Reaction (ReactionParameters parameters, MotorMotion[] motions, Configuration[] configurations, Pose[] poses, Body[] bodies) {
+    public Reaction (ReactionParameters parameters, MotorMotion[] motions, Configuration[] configurations, Unobservables unobservables) {
       _parameters = parameters;
       _motions = motions;
       _configurations = configurations;
-      _poses = poses;
-      _bodies = bodies;
+      _unobservables = unobservables;
     }
 
     public Reaction () {
@@ -38,16 +36,14 @@ namespace Neodroid.Messaging.Messages {
       get { return _configurations; }
     }
 
-    public Pose[] Poses {
-      get { return _poses; }
-    }
-
-    public Body[] Bodies {
-      get { return _bodies; }
-    }
-
     public ReactionParameters Parameters {
       get { return _parameters; }
+    }
+
+    public Unobservables Unobservables {
+      get {
+        return _unobservables;
+      }
     }
 
     #endregion

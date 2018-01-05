@@ -8,6 +8,40 @@ namespace Neodroid.FBS
 using global::System;
 using global::FlatBuffers;
 
+public struct FBSUnobservables : IFlatbufferObject
+{
+  private Table __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public static FBSUnobservables GetRootAsFBSUnobservables(ByteBuffer _bb) { return GetRootAsFBSUnobservables(_bb, new FBSUnobservables()); }
+  public static FBSUnobservables GetRootAsFBSUnobservables(ByteBuffer _bb, FBSUnobservables obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
+  public FBSUnobservables __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public FBSQuaternionTransform? Poses(int j) { int o = __p.__offset(4); return o != 0 ? (FBSQuaternionTransform?)(new FBSQuaternionTransform()).__assign(__p.__vector(o) + j * 56, __p.bb) : null; }
+  public int PosesLength { get { int o = __p.__offset(4); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSBody? Bodies(int j) { int o = __p.__offset(6); return o != 0 ? (FBSBody?)(new FBSBody()).__assign(__p.__vector(o) + j * 48, __p.bb) : null; }
+  public int BodiesLength { get { int o = __p.__offset(6); return o != 0 ? __p.__vector_len(o) : 0; } }
+
+  public static Offset<FBSUnobservables> CreateFBSUnobservables(FlatBufferBuilder builder,
+      VectorOffset posesOffset = default(VectorOffset),
+      VectorOffset bodiesOffset = default(VectorOffset)) {
+    builder.StartObject(2);
+    FBSUnobservables.AddBodies(builder, bodiesOffset);
+    FBSUnobservables.AddPoses(builder, posesOffset);
+    return FBSUnobservables.EndFBSUnobservables(builder);
+  }
+
+  public static void StartFBSUnobservables(FlatBufferBuilder builder) { builder.StartObject(2); }
+  public static void AddPoses(FlatBufferBuilder builder, VectorOffset posesOffset) { builder.AddOffset(0, posesOffset.Value, 0); }
+  public static void StartPosesVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(56, numElems, 8); }
+  public static void AddBodies(FlatBufferBuilder builder, VectorOffset bodiesOffset) { builder.AddOffset(1, bodiesOffset.Value, 0); }
+  public static void StartBodiesVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(48, numElems, 8); }
+  public static Offset<FBSUnobservables> EndFBSUnobservables(FlatBufferBuilder builder) {
+    int o = builder.EndObject();
+    return new Offset<FBSUnobservables>(o);
+  }
+};
+
 public struct FBSVector3 : IFlatbufferObject
 {
   private Struct __p;

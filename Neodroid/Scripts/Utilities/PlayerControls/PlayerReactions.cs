@@ -33,7 +33,7 @@ namespace Neodroid.Utilities {
         if (motions.Count > 0)
           step = true;
         var parameters = new ReactionParameters (true, step);
-        var reaction = new Reaction (parameters, motions.ToArray (), null, null, null);
+        var reaction = new Reaction (parameters, motions.ToArray (), null, null);
         _simulation_manager.ReactInEnvironments (reaction);
       } else {
         if (Debugging)

@@ -21,21 +21,34 @@ namespace Neodroid.Messaging {
       if (reaction.HasValue) {
         var motions = create_motions (reaction.Value);
         var configurations = create_configurations (reaction.Value);
-        var bodies = create_bodies (reaction.Value);
-        var poses = create_poses (reaction.Value);
+        var unobservables = create_unobservables (reaction.Value);
         var parameters = create_parameters (reaction.Value);
-        return new Reaction (parameters, motions, configurations, poses, bodies);
+        return new Reaction (parameters, motions, configurations, unobservables);
       }
-      return new Reaction (null, null, null, null, null);
+      return new Reaction (null, null, null, null);
     }
 
     #endregion
 
     #region PrivateMethods
 
+    static Unobservables create_unobservables (FBSReaction reaction) {
+      
+      var bodies = create_bodies (reaction.Unobservables.Value);
+
+      var poses = create_poses (reaction.Unobservables.Value);
+      return new Unobservables (bodies, poses);
+    }
+
     static ReactionParameters create_parameters (FBSReaction reaction) {
       if (reaction.Parameters.HasValue) {
-        return new ReactionParameters (reaction.Parameters.Value.Interruptible, reaction.Parameters.Value.Step, reaction.Parameters.Value.Reset, reaction.Parameters.Value.Configure, reaction.Parameters.Value.Describe);
+        return new ReactionParameters (
+          reaction.Parameters.Value.Terminable,
+          reaction.Parameters.Value.Step,
+          reaction.Parameters.Value.Reset,
+          reaction.Parameters.Value.Configure,
+          reaction.Parameters.Value.Describe,
+          reaction.Parameters.Value.EpisodeCount);
       }
       return new ReactionParameters ();
     }
@@ -58,6 +71,41 @@ namespace Neodroid.Messaging {
       return motions;
     }
 
+
+    static Configuration create_configuration (FBSConfiguration? configuration) {
+      if (configuration.HasValue) {
+        return new Configuration (configuration.Value.ConfigurableName, (float)configuration.Value.ConfigurableValue);
+      }
+      return null;
+    }
+
+    static MotorMotion create_motion (FBSMotion? motion) {
+      if (motion.HasValue) {
+        return new MotorMotion (motion.Value.ActorName, motion.Value.MotorName, (float)motion.Value.Strength);
+      }
+      return null;
+    }
+
+
+    static Pose[] create_poses (FBSUnobservables unobservables) {
+      var l = unobservables.PosesLength;
+      Pose[] poses = new Pose[l ];
+      for (var i = 0; i < l; i++) {
+        poses [i] = create_pose (unobservables.Poses (i));
+      }
+      return poses;
+    }
+
+    static Body[] create_bodies (FBSUnobservables unobservables) {
+      var l = unobservables.BodiesLength;
+      Body[] bodies = new Body[l];
+      for (var i = 0; i < l; i++) {
+        bodies [i] = create_body (unobservables.Bodies (i));
+      }
+      return bodies;
+    }
+
+
     static Pose create_pose (FBSQuaternionTransform? trans) {
       if (trans.HasValue) {
         var position = trans.Value.Position;
@@ -78,39 +126,6 @@ namespace Neodroid.Messaging {
         return new Body (vec3_vel, vec3_ang);
       }
       return null;
-    }
-
-    static Configuration create_configuration (FBSConfiguration? configuration) {
-      if (configuration.HasValue) {
-        return new Configuration (configuration.Value.ConfigurableName, (float)configuration.Value.ConfigurableValue);
-      }
-      return null;
-    }
-
-    static MotorMotion create_motion (FBSMotion? motion) {
-      if (motion.HasValue) {
-        return new MotorMotion (motion.Value.ActorName, motion.Value.MotorName, (float)motion.Value.Strength);
-      }
-      return null;
-    }
-
-
-    static Pose[] create_poses (FBSReaction reaction) {
-      var l = reaction.PosesLength;
-      Pose[] poses = new Pose[l ];
-      for (var i = 0; i < l; i++) {
-        poses [i] = create_pose (reaction.Poses (i));
-      }
-      return poses;
-    }
-
-    static Body[] create_bodies (FBSReaction reaction) {
-      var l = reaction.BodiesLength;
-      Body[] bodies = new Body[l];
-      for (var i = 0; i < l; i++) {
-        bodies [i] = create_body (reaction.Bodies (i));
-      }
-      return bodies;
     }
 
     #endregion

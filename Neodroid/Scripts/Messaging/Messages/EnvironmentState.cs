@@ -32,11 +32,11 @@ namespace Neodroid.Messaging.Messages {
       }
     }
 
-    bool _interrupted;
+    bool _terminated;
 
-    public bool Interrupted {
+    public bool Terminated {
       get {
-        return _interrupted;
+        return _terminated;
       }
     }
 
@@ -48,21 +48,6 @@ namespace Neodroid.Messaging.Messages {
       }
     }
 
-    Rigidbody[] _bodies;
-
-    public Rigidbody[] Bodies {
-      get {
-        return _bodies;
-      }
-    }
-
-    Transform[] _poses;
-
-    public Transform[] Poses {
-      get {
-        return _poses;
-      }
-    }
 
     Dictionary<string, Observer> _observers;
 
@@ -88,13 +73,21 @@ namespace Neodroid.Messaging.Messages {
       }
     }
 
+    Unobservables _unobservables;
+
+    public Unobservables Unobservables {
+      get {
+        return _unobservables;
+      }
+    }
+
     public EnvironmentState (
       string environment_name,
       float total_energy_spent_since_reset,
       Dictionary<string, Observer> observers,
       int frame_number,
       float reward,
-      bool interrupted,
+      bool terminated,
       Rigidbody[] bodies,
       Transform[] poses,
       EnvironmentDescription description = null,
@@ -105,10 +98,9 @@ namespace Neodroid.Messaging.Messages {
       _observers = observers;
       _reward = reward;
       _frame_number = frame_number;
-      _interrupted = interrupted;
+      _terminated = terminated;
       _description = description;
-      _bodies = bodies;
-      _poses = poses;
+      _unobservables = new Unobservables (bodies, poses);
     }
       
   }

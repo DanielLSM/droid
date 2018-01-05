@@ -12,15 +12,20 @@ struct FBSRange{
 table FBSState {
   environment_name:string (key);
   frame_number:int;
+
   reward:float;
-  poses:[FBSQuaternionTransform];
-  bodies:[FBSBody];
-  interrupted:bool;
+  terminated:bool;
   total_energy_spent:float;
+
   observers:[FBSObserver];
+
+  unobservables:FBSUnobservables;
   environment_description:FBSEnvironmentDescription;
+
   debug_message:string;
 }
+
+
 
 table FBSEnvironmentDescription {
   max_episode_length:int;

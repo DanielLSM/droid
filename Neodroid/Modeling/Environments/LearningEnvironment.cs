@@ -62,10 +62,10 @@ namespace Neodroid.Environments {
     int _current_episode_frame = 0;
     float _lastest_reset_time = 0;
     float energy_spent = 0f;
-    bool _interrupted = false;
+    bool _terminated = false;
     bool _configure = false;
     bool _describe = false;
-    bool _interruptible = true;
+    bool _terminable = true;
 
     #endregion
 
@@ -182,18 +182,18 @@ namespace Neodroid.Environments {
 
     #endregion
 
-    public void Interrupt (string reason) {
-      if (_interruptible) {
+    public void Terminate (string reason) {
+      if (_terminable) {
         if (Debugging) {
           print (System.String.Format ("Was interrupted, because {0}", reason));
         }
-        _interrupted = true;
+        _terminated = true;
       }
     }
 
     public void PostUpdate () {
-      if (_interrupted) {
-        _interrupted = false;
+      if (_terminated) {
+        _terminated = false;
         Reset ();
         UpdateConfigurableValues ();
       }
@@ -223,16 +223,18 @@ namespace Neodroid.Environments {
 
     public EnvironmentState React (Reaction reaction) {
       _configurations = reaction.Configurations;
-      _received_poses = reaction.Poses;
-      _received_bodies = reaction.Bodies;
+      if (reaction.Unobservables != null) {
+        _received_poses = reaction.Unobservables.Poses;
+        _received_bodies = reaction.Unobservables.Bodies;
+      }
       _configure = reaction.Parameters.Configure;
       _describe = reaction.Parameters.Describe;
-      _interruptible = reaction.Parameters.Interruptible;
+      _terminable = reaction.Parameters.Terminable;
 
       if (reaction.Parameters.Step) {
         Step (reaction);
       } else if (reaction.Parameters.Reset) {
-        Interrupt ("Resetting because of reaction");
+        Terminate ("Resetting because of reaction");
       }
       return GetState ();
     }
@@ -489,7 +491,7 @@ namespace Neodroid.Environments {
         Observers,
         CurrentFrameNumber,
         reward,
-        _interrupted,
+        _terminated,
         _bodies,
         _poses,
         description
@@ -522,12 +524,10 @@ namespace Neodroid.Environments {
     }
 
     void Step (Reaction reaction) {
-      _current_episode_frame++;
-      if (_simulation_manager.EpisodeLength > 0 && _current_episode_frame > _simulation_manager.EpisodeLength) {
-        if (Debugging)
-          Debug.Log ("Maximum episode length reached, resetting");
-        Interrupt ("Maximum episode length reached, resetting");
-      } else if (reaction != null && reaction.Motions != null && reaction.Motions.Length > 0)
+      if (reaction.Parameters.EpisodeCount) {
+        _current_episode_frame++;
+      }
+      if (reaction != null && reaction.Motions != null && reaction.Motions.Length > 0)
         foreach (MotorMotion motion in reaction.Motions) {
           if (Debugging)
             Debug.Log ("Applying " + motion.ToString () + " To " + name + "'s actors");
@@ -539,7 +539,11 @@ namespace Neodroid.Environments {
               Debug.Log ("Could find not actor with the specified name: " + motion_actor_name);
           }
         }
-
+      if (_simulation_manager.EpisodeLength > 0 && _current_episode_frame > _simulation_manager.EpisodeLength) {
+        if (Debugging)
+          Debug.Log ("Maximum episode length reached, resetting");
+        Terminate ("Maximum episode length reached, resetting");
+      } 
       UpdateObserversData ();
     }
 
@@ -631,9 +635,9 @@ namespace Neodroid.Environments {
         for (int i = 0; i < bodies.Length; i++) {
           if (i < bods.Length && bods [i] != null) {
             if (Debugging)
-              print (System.String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, bods [i].Velocity, bods [i].AngularVelocity));
-            bodies [i].velocity = bods [i].Velocity;
-            bodies [i].angularVelocity = bods [i].AngularVelocity;
+              print (System.String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, bods [i].velocity, bods [i].angularVelocity));
+            bodies [i].velocity = bods [i].velocity;
+            bodies [i].angularVelocity = bods [i].angularVelocity;
           }
         }
       }

@@ -38,7 +38,7 @@ namespace Neodroid.Evaluation {
       if (!_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
         if (Debugging)
           print ("Outside playable area");
-        _environment.Interrupt ("Outside playable area");
+        _environment.Terminate ("Outside playable area");
       }
         
       var distance = Mathf.Abs (Vector3.Distance (_goal.transform.position, _actor.transform.position));
@@ -59,7 +59,7 @@ namespace Neodroid.Evaluation {
         if (Debugging)
           print ("Within range of goal");
         reward += 100f;
-        _environment.Interrupt ("Within range of goal");
+        _environment.Terminate ("Within range of goal");
       }
       return reward;
     }

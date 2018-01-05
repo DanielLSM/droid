@@ -34,21 +34,27 @@ namespace Neodroid.Messaging {
 
         var observers_vector = FBSState.CreateObserversVector (b, observers);
 
-        FBSState.StartBodiesVector (b, state.Bodies.Length);
-        foreach (Rigidbody rig in state.Bodies) {
+        FBSUnobservables.StartBodiesVector (b, state.Unobservables.Bodies.Length);
+        foreach (Body rig in state.Unobservables.Bodies) {
           var vel = rig.velocity;
           var ang = rig.angularVelocity;
           FBSBody.CreateFBSBody (b, vel.x, vel.y, vel.z, ang.x, ang.y, ang.z);
         }
         var bodies_vector = b.EndVector ();
 
-        FBSState.StartPosesVector (b, state.Poses.Length);
-        foreach (Transform tra in state.Poses) {
+        FBSUnobservables.StartPosesVector (b, state.Unobservables.Poses.Length);
+        foreach (Pose tra in state.Unobservables.Poses) {
           var pos = tra.position;
           var rot = tra.rotation;
           FBSQuaternionTransform.CreateFBSQuaternionTransform (b, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, rot.w);
         }
         var poses_vector = b.EndVector ();
+
+        FBSUnobservables.StartFBSUnobservables (b);
+        FBSUnobservables.AddPoses (b, poses_vector);
+        FBSUnobservables.AddBodies (b, bodies_vector);
+        var unobservables = FBSUnobservables.EndFBSUnobservables (b);
+
 
 
         Offset<FBSEnvironmentDescription> description_offset = new FlatBuffers.Offset<FBSEnvironmentDescription> ();
@@ -62,12 +68,11 @@ namespace Neodroid.Messaging {
 
         FBSState.StartFBSState (b);
         FBSState.AddEnvironmentName (b, n);
-        FBSState.AddBodies (b, bodies_vector);
-        FBSState.AddPoses (b, poses_vector);
+        FBSState.AddUnobservables (b, unobservables);
         FBSState.AddTotalEnergySpent (b, state.TotalEnergySpentSinceReset);
         FBSState.AddReward (b, state.Reward);
         FBSState.AddFrameNumber (b, state.FrameNumber);
-        FBSState.AddInterrupted (b, state.Interrupted);
+        FBSState.AddTerminated (b, state.Terminated);
         FBSState.AddObservers (b, observers_vector);
         if (state.Description != null) {
           FBSState.AddEnvironmentDescription (b, description_offset);

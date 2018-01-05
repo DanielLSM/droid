@@ -27,13 +27,13 @@ namespace Neodroid.Evaluation {
     public override float InternalEvaluate () {
 
       if (_overlapping == ActorOverlapping.INSIDE_AREA && _is_resting && _actor.Alive) {
-        _environment.Interrupt ("Inside goal area");
+        _environment.Terminate ("Inside goal area");
         return 1f;
       }
         
       if (_playable_area && _actor) {
         if (!_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
-          _environment.Interrupt ("Actor is outside playable area");
+          _environment.Terminate ("Actor is outside playable area");
         }
       }
         

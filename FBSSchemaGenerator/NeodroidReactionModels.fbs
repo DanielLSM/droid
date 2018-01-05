@@ -4,19 +4,25 @@ namespace Neodroid.FBS.Reaction;
 
 table FBSReaction {
   environment_name:string (key);
+
   parameters:FBSReactionParameters (required);
-  poses:[FBSQuaternionTransform];
-  bodies:[FBSBody];
-  configurations:[FBSConfiguration];
+
   motions:[FBSMotion];
+
+  unobservables:FBSUnobservables;
+  configurations:[FBSConfiguration];
 }
 
 struct FBSReactionParameters{
-  interruptible:bool;
+  terminable:bool;
+
   step:bool;
+
   reset:bool;
   configure:bool;
   describe:bool;
+
+  episode_count:bool;
 }
 
 table FBSMotion {

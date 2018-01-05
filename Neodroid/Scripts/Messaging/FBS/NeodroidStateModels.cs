@@ -42,59 +42,51 @@ public struct FBSState : IFlatbufferObject
   public ArraySegment<byte>? GetEnvironmentNameBytes() { return __p.__vector_as_arraysegment(4); }
   public int FrameNumber { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
   public float Reward { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
-  public Neodroid.FBS.FBSQuaternionTransform? Poses(int j) { int o = __p.__offset(10); return o != 0 ? (Neodroid.FBS.FBSQuaternionTransform?)(new Neodroid.FBS.FBSQuaternionTransform()).__assign(__p.__vector(o) + j * 56, __p.bb) : null; }
-  public int PosesLength { get { int o = __p.__offset(10); return o != 0 ? __p.__vector_len(o) : 0; } }
-  public Neodroid.FBS.FBSBody? Bodies(int j) { int o = __p.__offset(12); return o != 0 ? (Neodroid.FBS.FBSBody?)(new Neodroid.FBS.FBSBody()).__assign(__p.__vector(o) + j * 48, __p.bb) : null; }
-  public int BodiesLength { get { int o = __p.__offset(12); return o != 0 ? __p.__vector_len(o) : 0; } }
-  public bool Interrupted { get { int o = __p.__offset(14); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
-  public float TotalEnergySpent { get { int o = __p.__offset(16); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
-  public FBSObserver? Observers(int j) { int o = __p.__offset(18); return o != 0 ? (FBSObserver?)(new FBSObserver()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
-  public int ObserversLength { get { int o = __p.__offset(18); return o != 0 ? __p.__vector_len(o) : 0; } }
-  public FBSObserver? ObserversByKey(string key) { int o = __p.__offset(18); return o != 0 ? FBSObserver.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
-  public FBSEnvironmentDescription? EnvironmentDescription { get { int o = __p.__offset(20); return o != 0 ? (FBSEnvironmentDescription?)(new FBSEnvironmentDescription()).__assign(__p.__indirect(o + __p.bb_pos), __p.bb) : null; } }
-  public string DebugMessage { get { int o = __p.__offset(22); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
-  public ArraySegment<byte>? GetDebugMessageBytes() { return __p.__vector_as_arraysegment(22); }
+  public bool Terminated { get { int o = __p.__offset(10); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+  public float TotalEnergySpent { get { int o = __p.__offset(12); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
+  public FBSObserver? Observers(int j) { int o = __p.__offset(14); return o != 0 ? (FBSObserver?)(new FBSObserver()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public int ObserversLength { get { int o = __p.__offset(14); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSObserver? ObserversByKey(string key) { int o = __p.__offset(14); return o != 0 ? FBSObserver.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
+  public Neodroid.FBS.FBSUnobservables? Unobservables { get { int o = __p.__offset(16); return o != 0 ? (Neodroid.FBS.FBSUnobservables?)(new Neodroid.FBS.FBSUnobservables()).__assign(__p.__indirect(o + __p.bb_pos), __p.bb) : null; } }
+  public FBSEnvironmentDescription? EnvironmentDescription { get { int o = __p.__offset(18); return o != 0 ? (FBSEnvironmentDescription?)(new FBSEnvironmentDescription()).__assign(__p.__indirect(o + __p.bb_pos), __p.bb) : null; } }
+  public string DebugMessage { get { int o = __p.__offset(20); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public ArraySegment<byte>? GetDebugMessageBytes() { return __p.__vector_as_arraysegment(20); }
 
   public static Offset<FBSState> CreateFBSState(FlatBufferBuilder builder,
       StringOffset environment_nameOffset = default(StringOffset),
       int frame_number = 0,
       float reward = 0.0f,
-      VectorOffset posesOffset = default(VectorOffset),
-      VectorOffset bodiesOffset = default(VectorOffset),
-      bool interrupted = false,
+      bool terminated = false,
       float total_energy_spent = 0.0f,
       VectorOffset observersOffset = default(VectorOffset),
+      Offset<Neodroid.FBS.FBSUnobservables> unobservablesOffset = default(Offset<Neodroid.FBS.FBSUnobservables>),
       Offset<FBSEnvironmentDescription> environment_descriptionOffset = default(Offset<FBSEnvironmentDescription>),
       StringOffset debug_messageOffset = default(StringOffset)) {
-    builder.StartObject(10);
+    builder.StartObject(9);
     FBSState.AddDebugMessage(builder, debug_messageOffset);
     FBSState.AddEnvironmentDescription(builder, environment_descriptionOffset);
+    FBSState.AddUnobservables(builder, unobservablesOffset);
     FBSState.AddObservers(builder, observersOffset);
     FBSState.AddTotalEnergySpent(builder, total_energy_spent);
-    FBSState.AddBodies(builder, bodiesOffset);
-    FBSState.AddPoses(builder, posesOffset);
     FBSState.AddReward(builder, reward);
     FBSState.AddFrameNumber(builder, frame_number);
     FBSState.AddEnvironmentName(builder, environment_nameOffset);
-    FBSState.AddInterrupted(builder, interrupted);
+    FBSState.AddTerminated(builder, terminated);
     return FBSState.EndFBSState(builder);
   }
 
-  public static void StartFBSState(FlatBufferBuilder builder) { builder.StartObject(10); }
+  public static void StartFBSState(FlatBufferBuilder builder) { builder.StartObject(9); }
   public static void AddEnvironmentName(FlatBufferBuilder builder, StringOffset environmentNameOffset) { builder.AddOffset(0, environmentNameOffset.Value, 0); }
   public static void AddFrameNumber(FlatBufferBuilder builder, int frameNumber) { builder.AddInt(1, frameNumber, 0); }
   public static void AddReward(FlatBufferBuilder builder, float reward) { builder.AddFloat(2, reward, 0.0f); }
-  public static void AddPoses(FlatBufferBuilder builder, VectorOffset posesOffset) { builder.AddOffset(3, posesOffset.Value, 0); }
-  public static void StartPosesVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(56, numElems, 8); }
-  public static void AddBodies(FlatBufferBuilder builder, VectorOffset bodiesOffset) { builder.AddOffset(4, bodiesOffset.Value, 0); }
-  public static void StartBodiesVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(48, numElems, 8); }
-  public static void AddInterrupted(FlatBufferBuilder builder, bool interrupted) { builder.AddBool(5, interrupted, false); }
-  public static void AddTotalEnergySpent(FlatBufferBuilder builder, float totalEnergySpent) { builder.AddFloat(6, totalEnergySpent, 0.0f); }
-  public static void AddObservers(FlatBufferBuilder builder, VectorOffset observersOffset) { builder.AddOffset(7, observersOffset.Value, 0); }
+  public static void AddTerminated(FlatBufferBuilder builder, bool terminated) { builder.AddBool(3, terminated, false); }
+  public static void AddTotalEnergySpent(FlatBufferBuilder builder, float totalEnergySpent) { builder.AddFloat(4, totalEnergySpent, 0.0f); }
+  public static void AddObservers(FlatBufferBuilder builder, VectorOffset observersOffset) { builder.AddOffset(5, observersOffset.Value, 0); }
   public static VectorOffset CreateObserversVector(FlatBufferBuilder builder, Offset<FBSObserver>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
   public static void StartObserversVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
-  public static void AddEnvironmentDescription(FlatBufferBuilder builder, Offset<FBSEnvironmentDescription> environmentDescriptionOffset) { builder.AddOffset(8, environmentDescriptionOffset.Value, 0); }
-  public static void AddDebugMessage(FlatBufferBuilder builder, StringOffset debugMessageOffset) { builder.AddOffset(9, debugMessageOffset.Value, 0); }
+  public static void AddUnobservables(FlatBufferBuilder builder, Offset<Neodroid.FBS.FBSUnobservables> unobservablesOffset) { builder.AddOffset(6, unobservablesOffset.Value, 0); }
+  public static void AddEnvironmentDescription(FlatBufferBuilder builder, Offset<FBSEnvironmentDescription> environmentDescriptionOffset) { builder.AddOffset(7, environmentDescriptionOffset.Value, 0); }
+  public static void AddDebugMessage(FlatBufferBuilder builder, StringOffset debugMessageOffset) { builder.AddOffset(8, debugMessageOffset.Value, 0); }
   public static Offset<FBSState> EndFBSState(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     builder.Required(o, 4);  // environment_name

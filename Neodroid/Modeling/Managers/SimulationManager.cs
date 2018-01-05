@@ -6,8 +6,16 @@ using Neodroid.Messaging;
 using Neodroid.Messaging.Messages;
 using Neodroid.Utilities;
 using UnityEngine;
+using System;
 
 namespace Neodroid.Managers {
+  public enum WaitOn {
+    Never,
+    FixedUpdate,
+    Update
+    // Frame
+  }
+
   public class SimulationManager : MonoBehaviour, HasRegister<LearningEnvironment> {
 
     #region Fields
@@ -26,7 +34,7 @@ namespace Neodroid.Managers {
 
     [Header ("General", order = 100)]
     [SerializeField]
-    bool _wait_every_frame = false;
+    WaitOn _wait_every = WaitOn.FixedUpdate;
     [SerializeField]
     bool _update_fixed_time_scale = false;
     // When true, MAJOR slow downs due to PHYSX updates on change.
@@ -131,12 +139,12 @@ namespace Neodroid.Managers {
       }
     }
 
-    public bool WaitEveryFrame {
+    public WaitOn WaitEvery {
       get {
-        return _wait_every_frame;
+        return _wait_every;
       }
       set { 
-        _wait_every_frame = value;
+        _wait_every = value;
       }
     }
 
@@ -173,7 +181,7 @@ namespace Neodroid.Managers {
     }
 
     void FixedUpdate () {
-      if (WaitEveryFrame) {
+      if (WaitEvery == WaitOn.FixedUpdate) {
         PauseSimulation ();
       }
     }
@@ -183,12 +191,15 @@ namespace Neodroid.Managers {
     }
 
     void Update () {
+      if (WaitEvery == WaitOn.Update) {
+        PauseSimulation ();
+      }
       if (TestMotors) {
         ResumeSimulation (_simulation_time_scale);
         ReactInEnvironments (SampleTestReaction ());
         return;
       }
-      if (!WaitEveryFrame || CurrentReaction.Parameters.Step) {
+      if (WaitEvery == WaitOn.Never || CurrentReaction.Parameters.Step) {
         ResumeSimulation (_simulation_time_scale);
       }
       if (_reply) {
@@ -250,7 +261,7 @@ namespace Neodroid.Managers {
         }
         break;
       }
-      return new Reaction (new ReactionParameters (true, true), motions.ToArray (), null, null, null);
+      return new Reaction (new ReactionParameters (true, true), motions.ToArray (), null, null);
     }
 
     void SendEnvironmentStates (EnvironmentState[] states) {
