@@ -18,7 +18,7 @@ public class DaylightSimulator : Resetable {
 
   public Gradient _light_gradient = NeodroidUtilities.DefaultGradient ();
   public Gradient _fog_gradient = NeodroidUtilities.DefaultGradient ();
-  public AnimationCurve _fog_density_curve = new AnimationCurve (new Keyframe (0, 0), new Keyframe (1, 1));
+  public AnimationCurve _fog_density_curve = NeodroidUtilities.DefaultAnimationCurve ();
   public float fogScale = 0.2f;
 
   public float _day_atmosphere_thickness = 0.88f;

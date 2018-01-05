@@ -14,21 +14,21 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
-  m_Fog: 0
-  m_FogColor: {r: 1, g: 1, b: 1, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.8129034, g: 0.79135144, b: 0.7012949, a: 0.05743044}
   m_FogMode: 3
-  m_FogDensity: 0.12489299
+  m_FogDensity: 0.13322353
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
+  m_AmbientSkyColor: {r: 0.58747995, g: 0.5128532, b: 0.21547693, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.5879225
+  m_AmbientIntensity: 0.18936051
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 906b66e06bb384e14a1881c9d9165e75, type: 2}
-  m_HaloStrength: 0.5
-  m_FlareStrength: 1
+  m_HaloStrength: 0.153
+  m_FlareStrength: 0.673
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
@@ -48,7 +48,7 @@ LightmapSettings:
     serializedVersion: 2
     m_BounceScale: 1
     m_IndirectOutputScale: 1.302
-    m_AlbedoBoost: 2.77
+    m_AlbedoBoost: 3.24
     m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
     m_EnableBakedLightmaps: 0
@@ -64,7 +64,8 @@ LightmapSettings:
     m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
     m_Padding: 2
-    m_LightmapParameters: {fileID: 0}
+    m_LightmapParameters: {fileID: 15200, guid: 0000000000000000f000000000000000,
+      type: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
     m_FinalGather: 0
@@ -195,51 +196,43 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.6545062
+      value: 0.00904199
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.0018751138
+      value: -0.0000026069642
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.6516123
+      value: 0.009041989
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.38343126
+      value: 0.9999182
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114841559945186668, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
-        type: 2}
-      propertyPath: _max_intensity
-      value: 1.64
-      objectReference: {fileID: 0}
-    - target: {fileID: 114841559945186668, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Intensity
-      value: 0.96569145
+      value: 0.31349903
       objectReference: {fileID: 0}
-    - target: {fileID: 114841559945186668, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+    - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
-      propertyPath: _speed_multiplier
-      value: 5
+      propertyPath: m_Color.r
+      value: 0.58747995
+      objectReference: {fileID: 0}
+    - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.5128532
+      objectReference: {fileID: 0}
+    - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.21547693
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}

@@ -78,6 +78,10 @@ namespace Neodroid.Utilities {
       }
     }
 
+    public static AnimationCurve DefaultAnimationCurve () {
+      return new AnimationCurve (new Keyframe (1, 1), new Keyframe (0, 0));
+    }
+
     public static Gradient DefaultGradient () {
 
       var gradient = new Gradient () {

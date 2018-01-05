@@ -36,7 +36,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1516619755633506}
-  m_LocalRotation: {x: 0.34827757, y: -0.00008283434, z: 0.34827697, w: 0.87029076}
+  m_LocalRotation: {x: 0.55033517, y: -0.006066139, z: 0.5464776, w: 0.6312343}
   m_LocalPosition: {x: -5.5, y: 11.5, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -53,7 +53,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.90672624
+  m_Intensity: 1.2370297
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -85,12 +85,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1516619755633506}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19374b37c047439abcabc1d04c8d590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _max_intensity: 1.34
+  _max_intensity: 1.64
   _min_intensity: 0.02
   _min_point: -0.2
   _max_ambient: 1
@@ -98,24 +98,24 @@ MonoBehaviour:
   _min_ambient_point: -0.2
   _light_gradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 1, g: 1, b: 1, a: 1}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0, g: 0.14655173, b: 0.25, a: 1}
+    key1: {r: 0.9191176, g: 0.71963364, b: 0.19598834, a: 1}
+    key2: {r: 0.9485294, g: 0.8421325, b: 0.3975454, a: 1}
+    key3: {r: 1, g: 1, b: 1, a: 0}
+    key4: {r: 1, g: 1, b: 1, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 0
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
+    ctime0: 5590
+    ctime1: 15420
+    ctime2: 19853
+    ctime3: 35659
+    ctime4: 65535
     ctime5: 0
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 0
+    atime1: 65535
     atime2: 65535
     atime3: 0
     atime4: 0
@@ -123,28 +123,28 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 3
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
   _fog_gradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 1, g: 1, b: 1, a: 1}
-    key3: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0.35294116, g: 0.35294116, b: 0.35294116, a: 0.06666667}
+    key1: {r: 0.9705882, g: 0.94164777, b: 0.820718, a: 0.015686275}
+    key2: {r: 0.8074178, g: 0.90520674, b: 0.9632353, a: 1}
+    key3: {r: 1, g: 1, b: 1, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 0
-    ctime2: 65535
-    ctime3: 0
+    ctime0: 964
+    ctime1: 15613
+    ctime2: 43754
+    ctime3: 42405
     ctime4: 0
     ctime5: 0
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 0
+    atime1: 65535
     atime2: 65535
     atime3: 0
     atime4: 0
@@ -153,25 +153,25 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_NumColorKeys: 3
-    m_NumAlphaKeys: 3
+    m_NumAlphaKeys: 2
   _fog_density_curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      time: 0.020638065
+      value: 1.0119085
+      inSlope: -2.4553196
+      outSlope: -2.4553196
       tangentMode: 0
     - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 0.99172974
+      value: -0.0119133
+      inSlope: -0.1584887
+      outSlope: -0.1584887
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   fogScale: 0.2
   _day_atmosphere_thickness: 0.88
   _night_atmosphere_thickness: 1.03
@@ -238,7 +238,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 498550988
+  randomSeed: -750940486
   InitialModule:
     serializedVersion: 3
     enabled: 1
