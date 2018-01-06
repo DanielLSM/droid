@@ -33,11 +33,14 @@ namespace Neodroid.Messaging {
     #region PrivateMethods
 
     static Unobservables create_unobservables (FBSReaction reaction) {
-      
-      var bodies = create_bodies (reaction.Unobservables.Value);
+      if (reaction.Unobservables.HasValue) {
+        var bodies = create_bodies (reaction.Unobservables.Value);
 
-      var poses = create_poses (reaction.Unobservables.Value);
-      return new Unobservables (bodies, poses);
+        var poses = create_poses (reaction.Unobservables.Value);
+      
+        return new Unobservables (bodies, poses);
+      }
+      return new Unobservables ();
     }
 
     static ReactionParameters create_parameters (FBSReaction reaction) {

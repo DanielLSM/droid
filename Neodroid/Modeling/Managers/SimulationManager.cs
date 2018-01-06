@@ -41,13 +41,11 @@ namespace Neodroid.Managers {
     [SerializeField]
     bool _continue_on_disconnect = false;
     [SerializeField]
-    int _episode_length = 1000;
-    [SerializeField]
     int _frame_skips = 0;
     [SerializeField]
     float _simulation_time_scale = 1;
     [SerializeField]
-    int _resets = 10;
+    int _reset_iterations = 10;
 
     bool _reply = false;
 
@@ -94,15 +92,6 @@ namespace Neodroid.Managers {
       }
     }
 
-    public int EpisodeLength {
-      get {
-        return _episode_length;
-      }
-      set { 
-        _episode_length = value;
-      }
-    }
-
     public int FrameSkips {
       get {
         return _frame_skips;
@@ -121,12 +110,12 @@ namespace Neodroid.Managers {
       }
     }
 
-    public int Resets {
+    public int ResetIterations {
       get {
-        return _resets;
+        return _reset_iterations;
       }
       set { 
-        _resets = value;
+        _reset_iterations = value;
       }
     }
 
@@ -169,6 +158,7 @@ namespace Neodroid.Managers {
     MessageServer _message_server;
     System.Random _random_generator;
     Reaction _reaction = new Reaction ();
+
 
     #endregion
 
@@ -261,7 +251,9 @@ namespace Neodroid.Managers {
         }
         break;
       }
-      return new Reaction (new ReactionParameters (true, true), motions.ToArray (), null, null);
+      var rp = new ReactionParameters (true, true);
+      rp.BeforeObservation = false;
+      return new Reaction (rp, motions.ToArray (), null, null);
     }
 
     void SendEnvironmentStates (EnvironmentState[] states) {
@@ -272,7 +264,11 @@ namespace Neodroid.Managers {
       foreach (var environment in _environments.Values) {
         environment.PostUpdate ();
       }
+    }
+
+    void SetDefaultReaction () {
       CurrentReaction = new Reaction ();
+      CurrentReaction.Parameters.BeforeObservation = false;
     }
 
 
@@ -324,6 +320,7 @@ namespace Neodroid.Managers {
       if (Debugging)
         print ("Received: " + reaction.ToString ());
       CurrentReaction = reaction;
+      CurrentReaction.Parameters.BeforeObservation = true;
       _reply = true;
     }
 

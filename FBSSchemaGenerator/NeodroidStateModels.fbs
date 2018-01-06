@@ -25,8 +25,6 @@ table FBSState {
   debug_message:string;
 }
 
-
-
 table FBSEnvironmentDescription {
   max_episode_length:int;
   solved_threshold:float;
@@ -37,7 +35,7 @@ table FBSEnvironmentDescription {
 table FBSConfigurable {
   configurable_name:string (key);
   valid_input:FBSRange(required);
-  current_value:FBSObserverData; //(required);
+  observation:FBSObserverData; //(required);
 }
 
 table FBSActor {

@@ -21,7 +21,7 @@ namespace Neodroid.Configurables {
 
     [Header ("General", order = 101)]
     [SerializeField]
-    InputRange _valid_input = new InputRange { decimal_granularity = 0, min_value = -10, max_value = 10 };
+    InputRange _valid_input = new InputRange { decimal_granularity = 0, min_value = 0, max_value = 0 };
     [SerializeField]
     bool _relative_to_existing_value = false;
 
@@ -52,11 +52,11 @@ namespace Neodroid.Configurables {
       }
     }
 
-    public virtual void UpdateCurrentValue () {
+    public virtual void UpdateObservation () {
     }
 
     protected virtual void Start () {
-      UpdateCurrentValue ();
+      UpdateObservation ();
     }
 
     protected virtual void Awake () {

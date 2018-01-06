@@ -33,6 +33,8 @@ namespace Neodroid.Environments {
     Transform _coordinate_reference_point;
     [SerializeField]
     CoordinateSystem _coordinate_system = CoordinateSystem.LocalCoordinates;
+    [SerializeField]
+    int _episode_length = 1000;
 
     [Header ("(Optional)", order = 102)]
     [SerializeField]
@@ -99,6 +101,15 @@ namespace Neodroid.Environments {
     public Dictionary<string, Observer> Observers {
       get {
         return _observers;
+      }
+    }
+
+    public int EpisodeLength {
+      get {
+        return _episode_length;
+      }
+      set { 
+        _episode_length = value;
       }
     }
 
@@ -216,20 +227,22 @@ namespace Neodroid.Environments {
     public void UpdateConfigurableValues () {
       foreach (ConfigurableGameObject con in Configurables.Values) {
         if (con) {
-          con.UpdateCurrentValue ();
+          con.UpdateObservation ();
         }
       }
     }
 
     public EnvironmentState React (Reaction reaction) {
-      _configurations = reaction.Configurations;
-      if (reaction.Unobservables != null) {
-        _received_poses = reaction.Unobservables.Poses;
-        _received_bodies = reaction.Unobservables.Bodies;
+      if (reaction.Parameters.BeforeObservation) {
+        _configurations = reaction.Configurations;
+        _configure = reaction.Parameters.Configure;
+        _describe = reaction.Parameters.Describe;
+        _terminable = reaction.Parameters.Terminable;
+        if (_configure && reaction.Unobservables != null) {
+          _received_poses = reaction.Unobservables.Poses;
+          _received_bodies = reaction.Unobservables.Bodies;
+        }
       }
-      _configure = reaction.Parameters.Configure;
-      _describe = reaction.Parameters.Describe;
-      _terminable = reaction.Parameters.Terminable;
 
       if (reaction.Parameters.Step) {
         Step (reaction);
@@ -477,7 +490,7 @@ namespace Neodroid.Environments {
           threshold = _objective_function.SolvedThreshold;
         }
         description = new EnvironmentDescription (
-          _simulation_manager.EpisodeLength, 
+          EpisodeLength, 
           _simulation_manager.FrameSkips, 
           Actors, 
           Configurables, 
@@ -506,10 +519,22 @@ namespace Neodroid.Environments {
 
     void Configure () {
       if (_received_poses != null) {
-        SetEnvironmentPoses (_child_game_objects, _received_poses);
+        var positions = new Vector3[_received_poses.Length];
+        var rotations = new Quaternion[_received_poses.Length];
+        for (var i = 0; i < _received_poses.Length; i++) {
+          positions [i] = _received_poses [i].position;
+          rotations [i] = _received_poses [i].rotation;
+        }
+        SetEnvironmentPoses (_child_game_objects, positions, rotations);
       }
       if (_received_bodies != null) {
-        SetEnvironmentBodies (_bodies, _received_bodies);
+        var vels = new Vector3[_received_bodies.Length];
+        var angs = new Vector3[_received_bodies.Length];
+        for (var i = 0; i < _received_bodies.Length; i++) {
+          vels [i] = _received_bodies [i].velocity;
+          angs [i] = _received_bodies [i].angularVelocity;
+        }
+        SetEnvironmentBodies (_bodies, vels, angs);
       }
       if (_configurations != null) {
         foreach (var configuration in _configurations) {
@@ -539,7 +564,7 @@ namespace Neodroid.Environments {
               Debug.Log ("Could find not actor with the specified name: " + motion_actor_name);
           }
         }
-      if (_simulation_manager.EpisodeLength > 0 && _current_episode_frame > _simulation_manager.EpisodeLength) {
+      if (EpisodeLength > 0 && _current_episode_frame > EpisodeLength) {
         if (Debugging)
           Debug.Log ("Maximum episode length reached, resetting");
         Terminate ("Maximum episode length reached, resetting");
@@ -571,9 +596,9 @@ namespace Neodroid.Environments {
 
     void SetEnvironmentPoses (GameObject[] child_game_objects, Vector3[] positions, Quaternion[] rotations) {
       if (_simulation_manager) {
-        for (int resets = 0; resets < _simulation_manager.Resets; resets++) {
+        for (int iterations = 0; iterations < _simulation_manager.ResetIterations; iterations++) {
           for (int i = 0; i < child_game_objects.Length; i++) {
-            if (child_game_objects [i] != null) {
+            if (child_game_objects [i] != null && i < positions.Length && i < rotations.Length) {
               var rigid_body = child_game_objects [i].GetComponent<Rigidbody> ();
               if (rigid_body)
                 rigid_body.Sleep ();
@@ -602,49 +627,22 @@ namespace Neodroid.Environments {
     void SetEnvironmentBodies (Rigidbody[] bodies, Vector3[] velocities, Vector3[] angulars) {
       if (bodies != null && bodies.Length > 0) {
         for (int i = 0; i < bodies.Length; i++) {
-          if (Debugging)
-            print (System.String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, velocities [i], angulars [i]));
-          bodies [i].Sleep ();
-          bodies [i].velocity = velocities [i];
-          bodies [i].angularVelocity = angulars [i];
-          bodies [i].WakeUp ();
-        }
-      }
-    }
-
-    void SetEnvironmentPoses (GameObject[] child_game_objects, Pose[] poses) {
-      for (int i = 0; i < _child_game_objects.Length; i++) {
-        if (i < poses.Length) {
-          if (Debugging)
-            print (System.String.Format ("Setting {0}, position to {1} and rotation to {2}", child_game_objects [i].name, poses [i].position, poses [i].rotation));
-          var pos = poses [i].position;
-          var rot = poses [i].rotation;
-          if (_playable_area) {
-            NeodroidUtilities.Vector3Clamp (ref pos, _playable_area.Min, _playable_area.Max);
-          }
-          child_game_objects [i].transform.position = pos;
-          child_game_objects [i].transform.rotation = rot;
-
-
-        }
-      }
-    }
-
-    void SetEnvironmentBodies (Rigidbody[] bodies, Body[] bods) {
-      if (bodies != null && bodies.Length > 0) {
-        for (int i = 0; i < bodies.Length; i++) {
-          if (i < bods.Length && bods [i] != null) {
+          if (i < bodies.Length && bodies [i] != null && i < velocities.Length && i < angulars.Length) {
             if (Debugging)
-              print (System.String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, bods [i].velocity, bods [i].angularVelocity));
-            bodies [i].velocity = bods [i].velocity;
-            bodies [i].angularVelocity = bods [i].angularVelocity;
+              print (System.String.Format ("Setting {0}, velocity to {1} and angular velocity to {2}", bodies [i].name, velocities [i], angulars [i]));
+            bodies [i].Sleep ();
+            bodies [i].velocity = velocities [i];
+            bodies [i].angularVelocity = angulars [i];
+            bodies [i].WakeUp ();
           }
         }
       }
-      #endregion
-
-      #endregion
-
     }
+
+    #endregion
+
+    #endregion
+
+    
   }
 }

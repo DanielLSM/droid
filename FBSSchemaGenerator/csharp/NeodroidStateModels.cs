@@ -179,14 +179,14 @@ public struct FBSConfigurable : IFlatbufferObject
   public string ConfigurableName { get { int o = __p.__offset(4); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
   public ArraySegment<byte>? GetConfigurableNameBytes() { return __p.__vector_as_arraysegment(4); }
   public FBSRange? ValidInput { get { int o = __p.__offset(6); return o != 0 ? (FBSRange?)(new FBSRange()).__assign(o + __p.bb_pos, __p.bb) : null; } }
-  public Neodroid.FBS.FBSObserverData CurrentValueType { get { int o = __p.__offset(8); return o != 0 ? (Neodroid.FBS.FBSObserverData)__p.bb.Get(o + __p.bb_pos) : Neodroid.FBS.FBSObserverData.NONE; } }
-  public TTable? CurrentValue<TTable>() where TTable : struct, IFlatbufferObject { int o = __p.__offset(10); return o != 0 ? (TTable?)__p.__union<TTable>(o) : null; }
+  public Neodroid.FBS.FBSObserverData ObservationType { get { int o = __p.__offset(8); return o != 0 ? (Neodroid.FBS.FBSObserverData)__p.bb.Get(o + __p.bb_pos) : Neodroid.FBS.FBSObserverData.NONE; } }
+  public TTable? Observation<TTable>() where TTable : struct, IFlatbufferObject { int o = __p.__offset(10); return o != 0 ? (TTable?)__p.__union<TTable>(o) : null; }
 
   public static void StartFBSConfigurable(FlatBufferBuilder builder) { builder.StartObject(4); }
   public static void AddConfigurableName(FlatBufferBuilder builder, StringOffset configurableNameOffset) { builder.AddOffset(0, configurableNameOffset.Value, 0); }
   public static void AddValidInput(FlatBufferBuilder builder, Offset<FBSRange> validInputOffset) { builder.AddStruct(1, validInputOffset.Value, 0); }
-  public static void AddCurrentValueType(FlatBufferBuilder builder, Neodroid.FBS.FBSObserverData currentValueType) { builder.AddByte(2, (byte)currentValueType, 0); }
-  public static void AddCurrentValue(FlatBufferBuilder builder, int currentValueOffset) { builder.AddOffset(3, currentValueOffset, 0); }
+  public static void AddObservationType(FlatBufferBuilder builder, Neodroid.FBS.FBSObserverData observationType) { builder.AddByte(2, (byte)observationType, 0); }
+  public static void AddObservation(FlatBufferBuilder builder, int observationOffset) { builder.AddOffset(3, observationOffset, 0); }
   public static Offset<FBSConfigurable> EndFBSConfigurable(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     builder.Required(o, 4);  // configurable_name

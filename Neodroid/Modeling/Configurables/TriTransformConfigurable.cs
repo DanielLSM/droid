@@ -5,15 +5,13 @@ using Neodroid.Observers;
 
 namespace Neodroid.Configurables {
 
-  public class TriTransformConfigurable : EulerTransformConfigurable {
-    [Header ("Specfic", order = 102)]
+  public class TriTransformConfigurable : SingleEulerTransformConfigurable {
+    [Header ("Observation", order = 103)]
     [SerializeField]
     Vector3 _position;
-    [SerializeField]
+
     string _X;
-    [SerializeField]
     string _Y;
-    [SerializeField]
     string _Z;
 
     public Vector3 Position {
@@ -32,7 +30,7 @@ namespace Neodroid.Configurables {
     }
 
 
-    public override void UpdateCurrentValue () {
+    public override void UpdateObservation () {
       _position = ParentEnvironment.TransformPosition (this.transform.position);
     }
 
@@ -40,7 +38,7 @@ namespace Neodroid.Configurables {
       var pos = ParentEnvironment.TransformPosition (this.transform.position);
       var v = configuration.ConfigurableValue;
       if (ValidInput.decimal_granularity >= 0) {
-        v = (float)System.Math.Round (v, ValidInput.decimal_granularity);
+        v = (int)System.Math.Round (v, ValidInput.decimal_granularity);
       }
       if (ValidInput.min_value.CompareTo (ValidInput.max_value) != 0) {
         if (v < ValidInput.min_value || v > ValidInput.max_value) {

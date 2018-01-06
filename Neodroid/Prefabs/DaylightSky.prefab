@@ -36,7 +36,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1516619755633506}
-  m_LocalRotation: {x: 0.55033517, y: -0.006066139, z: 0.5464776, w: 0.6312343}
+  m_LocalRotation: {x: 0.63710356, y: -0.0005878936, z: 0.6354995, w: 0.43616423}
   m_LocalPosition: {x: -5.5, y: 11.5, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -53,7 +53,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.2370297
+  m_Intensity: 1.044345
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -127,18 +127,18 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _fog_gradient:
     serializedVersion: 2
-    key0: {r: 0.35294116, g: 0.35294116, b: 0.35294116, a: 0.06666667}
-    key1: {r: 0.9705882, g: 0.94164777, b: 0.820718, a: 0.015686275}
+    key0: {r: 0.25735295, g: 0.25735295, b: 0.25735295, a: 0.08235294}
+    key1: {r: 0.9705882, g: 0.94164777, b: 0.820718, a: 0}
     key2: {r: 0.8074178, g: 0.90520674, b: 0.9632353, a: 1}
     key3: {r: 1, g: 1, b: 1, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 964
+    ctime0: 6168
     ctime1: 15613
     ctime2: 43754
-    ctime3: 42405
+    ctime3: 35659
     ctime4: 0
     ctime5: 0
     ctime6: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   _night_atmosphere_thickness: 1.03
   _start_rotation: {x: 0, y: 0, z: 0, w: 1}
   _rotation: {x: 1, y: 0, z: 1}
-  _speed_multiplier: 1
+  _speed_multiplier: 6
 --- !u!198 &198395718420802154
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -185,7 +185,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1516619755633506}
   serializedVersion: 5
-  lengthInSec: 0.1
+  lengthInSec: 999
   simulationSpeed: 1
   stopAction: 0
   looping: 1
@@ -238,7 +238,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -750940486
+  randomSeed: -1046883673
   InitialModule:
     serializedVersion: 3
     enabled: 1

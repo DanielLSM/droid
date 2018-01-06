@@ -6,12 +6,32 @@ namespace Neodroid.Observers {
 
   [ExecuteInEditMode]
   [RequireComponent (typeof(Rigidbody))]
-  public class RigidbodyObserver : Observer {
-
-    public Vector3 _velocity;
-    public Vector3 _angular_velocity;
+  public class RigidbodyObserver : Observer, HasRigidbodyProperties {
+    [Header ("Observation", order = 103)]
+    [SerializeField]
+    Vector3 _velocity;
+    [SerializeField]
+    Vector3 _angular_velocity;
 
     Rigidbody _rigidbody;
+
+    public Vector3 Velocity {
+      get {
+        return _velocity;
+      }
+      set {
+        _velocity = value;
+      }
+    }
+
+    public Vector3 AngularVelocity {
+      get {
+        return _angular_velocity;
+      }
+      set {
+        _angular_velocity = value;
+      }
+    }
 
 
     protected override void Start () {

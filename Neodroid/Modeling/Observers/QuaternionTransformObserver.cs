@@ -9,6 +9,8 @@ namespace Neodroid.Observers {
     [Header ("Specfic", order = 102)]
     [SerializeField]
     ObservationSpace _space = ObservationSpace.Environment;
+
+    [Header ("Observation", order = 103)]
     [SerializeField]
     Vector3 _position;
     [SerializeField]

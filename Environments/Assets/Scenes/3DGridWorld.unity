@@ -15,15 +15,15 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
   m_Fog: 0
-  m_FogColor: {r: 1, g: 1, b: 1, a: 1}
+  m_FogColor: {r: 0.88773304, g: 0.9231436, b: 0.89308584, a: 0.044776678}
   m_FogMode: 3
-  m_FogDensity: 0
+  m_FogDensity: 0.054102506
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
+  m_AmbientSkyColor: {r: 0.98125464, g: 0.9425053, b: 0.7805885, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.01
+  m_AmbientIntensity: 0.46172038
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 906b66e06bb384e14a1881c9d9165e75, type: 2}
@@ -1113,7 +1113,7 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 592
+      value: 583.5
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
@@ -1251,7 +1251,7 @@ MonoBehaviour:
   _axis_of_configuration: 0
   _use_bounding_box_for_range: 0
   _bounding_box: {fileID: 1943801935}
-  _position: {x: 0, y: 0, z: 0}
+  _position: {x: 0, y: 6, z: 4}
   _X: GoalTransformX
   _Y: GoalTransformY
   _Z: GoalTransformZ
@@ -1613,23 +1613,43 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.25280982
+      value: 0.19610912
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.00010360676
+      value: -0.0023122558
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.25963992
+      value: 0.19605768
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.93202704
+      value: 0.9607795
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.98125464
+      objectReference: {fileID: 0}
+    - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9425053
+      objectReference: {fileID: 0}
+    - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.7805885
+      objectReference: {fileID: 0}
+    - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+        type: 2}
+      propertyPath: m_Intensity
+      value: 0.7591788
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
@@ -2469,7 +2489,7 @@ MonoBehaviour:
   _axis_of_configuration: 0
   _use_bounding_box_for_range: 0
   _bounding_box: {fileID: 0}
-  _position: {x: 0, y: 0, z: 0}
+  _position: {x: 0, y: 1, z: -2}
   _X: ActorTransformX
   _Y: ActorTransformY
   _Z: ActorTransformZ
@@ -2710,7 +2730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objective_function: {fileID: 1943801934}
   _simulation_manager: {fileID: 1943801933}
-  _debugging: 0
+  _debugging: 1
   _coordinate_reference_point: {fileID: 0}
   _coordinate_system: 0
   _playable_area: {fileID: 1943801935}
@@ -2726,7 +2746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
-  _test_motors: 1
+  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
   _wait_every: 1
@@ -2735,7 +2755,7 @@ MonoBehaviour:
   _episode_length: 100
   _frame_skips: 0
   _simulation_time_scale: 1
-  _resets: 6
+  _reset_iterations: 10
 --- !u!114 &1943801934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2796,7 +2816,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1943801930}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a1c2f6fda1324e1dbb824ee2e6e7321, type: 3}
   m_Name: 

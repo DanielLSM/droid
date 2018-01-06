@@ -9,6 +9,7 @@ namespace Neodroid.Observers {
     [Header ("Specific", order = 102)]
     [SerializeField]
     Camera _camera;
+    [Header ("Observation", order = 103)]
     [SerializeField]
     byte[] _data = new byte[] { };
 
@@ -30,7 +31,7 @@ namespace Neodroid.Observers {
     }
 
     public override void UpdateData () {
-      //Data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG ();
+      //Data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG (); // Must be done on the main thread
     }
 
     public override string ObserverIdentifier { get { return name + "Camera"; } }

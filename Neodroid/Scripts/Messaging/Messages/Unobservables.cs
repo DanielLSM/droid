@@ -33,8 +33,23 @@ namespace Neodroid.Messaging.Messages {
       _poses = poses;
     }
 
+    public Unobservables () {
+    }
+
     public override string ToString () {
-      return "";
+      var poses_str = "";
+      if (Poses != null) {
+        foreach (Pose pose in Poses) {
+          poses_str += pose.ToString () + "\n";
+        }
+      }
+      var bodies_str = "";
+      if (Bodies != null) {
+        foreach (Body body in Bodies) {
+          bodies_str += body.ToString () + "\n";
+        }
+      }
+      return System.String.Format ("<Unobservables>\n {0},{1}\n</Unobservables>\n", poses_str, bodies_str);
     }
 
   }

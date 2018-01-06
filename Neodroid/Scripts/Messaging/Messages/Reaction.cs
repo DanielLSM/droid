@@ -22,6 +22,7 @@ namespace Neodroid.Messaging.Messages {
     }
 
     public Reaction () {
+      _parameters.BeforeObservation = false;
     }
 
     #endregion
@@ -63,8 +64,8 @@ namespace Neodroid.Messaging.Messages {
       }
       return System.String.Format (
         "<Reaction>\n " +
-        "{0},{1},{2}" +
-        "\n</Reaction>", Parameters.ToString (), motions_str, configurations_str);
+        "{0},{1},{2},{3}" +
+        "\n</Reaction>", Parameters.ToString (), motions_str, configurations_str, Unobservables.ToString ());
     }
   }
 }

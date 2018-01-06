@@ -12,6 +12,7 @@ using Neodroid.FBS;
 using Neodroid.FBS.Reaction;
 using Neodroid.FBS.State;
 using Neodroid.Messaging.Messages;
+using Neodroid.Utilities;
 
 
 
@@ -106,7 +107,7 @@ namespace Neodroid.Messaging {
       return FBSQuaternionTransformObservation.EndFBSQuaternionTransformObservation (b);
     }
 
-    static Offset<FBSEulerTransform> build_euler_transform (FlatBufferBuilder b, EulerTransformObserver observer) {
+    static Offset<FBSEulerTransform> build_euler_transform (FlatBufferBuilder b, HasEulerTransformProperties observer) {
       Vector3 pos = observer.Position, rot = observer.Rotation, dir = observer.Direction;
       FBSEulerTransform.StartFBSEulerTransform (b);
       FBSEulerTransform.AddPosition (b, FBSVector3.CreateFBSVector3 (b, pos.x, pos.y, pos.z));
@@ -152,7 +153,7 @@ namespace Neodroid.Messaging {
       int observation_offset = 0;
       FBSObserverData observation_type = FBSObserverData.NONE;
       if (observer is EulerTransformObserver) {
-        observation_offset = build_euler_transform (b, (EulerTransformObserver)observer).Value;
+        observation_offset = build_euler_transform (b, (HasEulerTransformProperties)observer).Value;
         observation_type = FBSObserverData.FBSEulerTransform;
       } else if (observer is CameraObserver) {
         observation_offset = build_byte_array (b, (CameraObserver)observer).Value;
@@ -198,6 +199,8 @@ namespace Neodroid.Messaging {
 
 
       FBSEnvironmentDescription.StartFBSEnvironmentDescription (b);
+      FBSEnvironmentDescription.AddMaxEpisodeLength (b, state.Description.MaxSteps);
+      FBSEnvironmentDescription.AddSolvedThreshold (b, state.Description.SolvedThreshold);
       FBSEnvironmentDescription.AddActors (b, actors_vector);
       FBSEnvironmentDescription.AddConfigurables (b, configurables_vector);
       return FBSEnvironmentDescription.EndFBSEnvironmentDescription (b);
@@ -229,6 +232,9 @@ namespace Neodroid.Messaging {
       } else if (configurable is TriTransformConfigurable) {
         observation_offset = build_pos_transform (b, (TriTransformConfigurable)configurable).Value;
         observation_type = FBSObserverData.FBSPosition;
+      } else if (configurable is EulerTransformConfigurable) {
+        observation_offset = build_euler_transform (b, (HasEulerTransformProperties)configurable).Value;
+        observation_type = FBSObserverData.FBSEulerTransform;
       } else {
         FBSConfigurable.StartFBSConfigurable (b);
         FBSConfigurable.AddConfigurableName (b, n);
@@ -239,8 +245,8 @@ namespace Neodroid.Messaging {
       FBSConfigurable.StartFBSConfigurable (b);
       FBSConfigurable.AddConfigurableName (b, n);
       FBSConfigurable.AddValidInput (b, FBSRange.CreateFBSRange (b, configurable.ValidInput.decimal_granularity, configurable.ValidInput.max_value, configurable.ValidInput.min_value));
-      FBSConfigurable.AddCurrentValue (b, observation_offset);
-      FBSConfigurable.AddCurrentValueType (b, observation_type);
+      FBSConfigurable.AddObservation (b, observation_offset);
+      FBSConfigurable.AddObservationType (b, observation_type);
       return FBSConfigurable.EndFBSConfigurable (b);
     }
 

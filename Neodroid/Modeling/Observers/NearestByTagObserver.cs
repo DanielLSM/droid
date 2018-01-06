@@ -5,14 +5,39 @@ using UnityEngine;
 using System.Text;
 
 namespace Neodroid.Observers {
-  public class NearestByTagObserver : Observer {
- 
-    public Vector3 _position;
-    public Vector3 _rotation;
-    public Vector3 _direction;
-
+  public class NearestByTagObserver : Observer, HasEulerTransformProperties {
+    [Header ("Specific", order = 102)]
+    [SerializeField]
     GameObject _nearest_object;
-    public string _tag = "";
+    [SerializeField]
+    string _tag = "";
+
+    [Header ("Observation", order = 103)]
+    [SerializeField]
+    Vector3 _position;
+    [SerializeField]
+    Vector3 _rotation;
+    [SerializeField]
+    Vector3 _direction;
+
+    public Vector3 Position {
+      get {
+        return _position;
+      }
+    }
+
+    public Vector3 Rotation {
+      get {
+        return _rotation;
+      }
+    }
+
+    public Vector3 Direction {
+      get {
+        return _direction;
+      }
+    }
+
 
     public override void UpdateData () {
       FindNearest ();

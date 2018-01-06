@@ -59,10 +59,9 @@ namespace Neodroid.Windows {
         GUILayout.Label (_neodroid_icon, GUILayout.Width (_preview_image_size), GUILayout.Height (_preview_image_size));
 
         EditorGUILayout.BeginVertical ();
-        _simulation_manager.EpisodeLength = EditorGUILayout.IntField ("Episode Length", _simulation_manager.EpisodeLength);
-        _simulation_manager.FrameSkips = EditorGUILayout.IntField ("Frame skips", _simulation_manager.FrameSkips);
-        _simulation_manager.Resets = EditorGUILayout.IntField ("Resets when resetting", _simulation_manager.Resets);
-        _simulation_manager.WaitEvery = (WaitOn)EditorGUILayout.EnumPopup ("Wait Every Frame", _simulation_manager.WaitEvery);
+        _simulation_manager.FrameSkips = EditorGUILayout.IntField ("Frame Skips", _simulation_manager.FrameSkips);
+  _simulation_manager.ResetIterations = EditorGUILayout.IntField ("Reset Iterations", _simulation_manager.ResetIterations);
+        _simulation_manager.WaitEvery = (WaitOn)EditorGUILayout.EnumPopup ("Wait Every", _simulation_manager.WaitEvery);
         _simulation_manager.TestMotors = EditorGUILayout.Toggle ("Test Motors", _simulation_manager.TestMotors);
         EditorGUILayout.EndVertical ();
 
@@ -97,6 +96,7 @@ namespace Neodroid.Windows {
               EditorGUI.EndDisabledGroup ();
               _environments [i].ObjectiveFunction = (ObjectiveFunction)EditorGUILayout.ObjectField ("Objective function",
                 _environments [i].ObjectiveFunction, typeof(ObjectiveFunction), true);
+  _environments [i].EpisodeLength = EditorGUILayout.IntField ("Episode Length", _environments [i].EpisodeLength);
 
               EditorGUILayout.BeginVertical ("Box");
               GUILayout.Label ("Actors");

@@ -99,6 +99,7 @@ public class CollisionExplosion : Resetable {
     }
     yield return new WaitForSeconds (wait_time);
     Destroy (explosion);
+    _environment.Terminate ("Actor exploded");
   }
 
   protected virtual void Awake () {

@@ -35,7 +35,7 @@ namespace Neodroid.Evaluation {
     float peak_reward = 0.0f;
 
     public override float InternalEvaluate () {
-      if (!_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
+      if (_playable_area != null && !_playable_area._bounds.Intersects (_actor.GetComponent<Collider> ().bounds)) {
         if (Debugging)
           print ("Outside playable area");
         _environment.Terminate ("Outside playable area");
@@ -58,7 +58,7 @@ namespace Neodroid.Evaluation {
       if (distance < 0.5) {
         if (Debugging)
           print ("Within range of goal");
-        reward += 100f;
+        reward += 10f;
         _environment.Terminate ("Within range of goal");
       }
       return reward;

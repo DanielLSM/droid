@@ -6,11 +6,13 @@ using Neodroid.Utilities.BoundingBoxes;
 using System.Collections.Specialized;
 
 namespace Neodroid.Configurables {
-  public class EulerTransformConfigurable : ConfigurableGameObject {
+  public class SingleEulerTransformConfigurable : ConfigurableGameObject {
 
     public Axis _axis_of_configuration;
     public bool _use_bounding_box_for_range = false;
     public BoundingBox _bounding_box;
+    [SerializeField]
+    Vector3 current_value;
 
     protected override void Awake () {
       AddToEnvironment ();
