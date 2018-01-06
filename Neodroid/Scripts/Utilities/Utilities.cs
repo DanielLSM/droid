@@ -158,7 +158,6 @@ namespace Neodroid.Utilities {
           sensor.OnCollisionStayDelegate = OnCollisionStayChild;
         if (debug)
           Debug.Log (caller.name + " has created " + sensor.name + " on " + child.name + " under parent " + parent.name);
-        
       }
     }
 

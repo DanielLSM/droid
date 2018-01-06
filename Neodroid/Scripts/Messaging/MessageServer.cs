@@ -27,6 +27,7 @@ namespace Neodroid.Messaging {
     bool _debugging = false;
 
     ResponseSocket _socket;
+    //PairSocket _socket;
     string _ip_address;
     int _port;
     byte[] byte_buffer;
@@ -119,17 +120,10 @@ namespace Neodroid.Messaging {
         AsyncIO.ForceDotNet.Force ();
       }
       _socket = new ResponseSocket ();
+      //_socket = new PairSocket ();
     }
 
-    public MessageServer (bool debug = false) {
-      Debugging = debug;
-      _ip_address = "127.0.0.1";
-      _port = 5555;
-      _use_inter_process_communication = false;
-      if (!_use_inter_process_communication) {
-        AsyncIO.ForceDotNet.Force ();
-      }
-      _socket = new ResponseSocket ();
+    public MessageServer (bool debug = false) : this ("127.0.0.1", 5555, false, debug) {
     }
 
 
