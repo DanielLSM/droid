@@ -295,7 +295,7 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 583.5
+      value: 510.5
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
@@ -363,8 +363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246cc59c7a84ea44f87f6b70acfe30c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 362436251}
   offset: {x: 0, y: 13, z: 0}
+  target: {fileID: 362436251}
 --- !u!124 &411294101
 Behaviour:
   m_ObjectHideFlags: 0
@@ -534,12 +534,12 @@ MonoBehaviour:
     max_value: 0
   _relative_to_existing_value: 0
   _axis_of_configuration: 0
-  _use_bounding_box_for_range: 0
   _bounding_box: {fileID: 0}
+  _use_bounding_box_for_range: 0
   current_value: {x: 0, y: 0, z: 0}
+  _direction: {x: -0.015881147, y: 0.009075678, z: 0.9998327}
   _position: {x: -13.898895, y: 2.147082, z: 14.282138}
   _rotation: {x: -0.022191504, y: 0.9997093, z: -0.009427044}
-  _direction: {x: -0.015881147, y: 0.009075678, z: 0.9998327}
 --- !u!54 &896623124 stripped
 Rigidbody:
   m_PrefabParentObject: {fileID: 54673878557131514, guid: 6eb4ee769c23c46988ee311220cbbded,
@@ -598,10 +598,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
-  _testing_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
-  _continue_on_disconnect: 0
+  _testing_motors: 0
   _wait_every: 1
   _update_fixed_time_scale: 0
   _frame_skips: 0
@@ -661,8 +660,8 @@ MonoBehaviour:
   _debugging: 0
   _extra_terms: []
   _solved_threshold: 0
-  _area: {fileID: 675183322}
   _actor: {fileID: 161967754}
+  _area: {fileID: 675183322}
   _environment: {fileID: 0}
   _obstructions: []
   _playable_area: {fileID: 903194210}
@@ -678,16 +677,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e918915125b4fdfb1a4025246b5ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider_based: 1
-  _include_children: 1
-  _freeze: 1
-  _line_color: {r: 0, g: 1, b: 0.4, a: 0.74}
   _bounds:
     m_Center: {x: -4.133423, y: -125.6022, z: 10.16571}
     m_Extent: {x: 300, y: 175.5, z: 300}
   _bounds_offset: {x: -0.00000667572, y: -125.500015, z: 0.0000047683716}
-  _setup_on_awake: 1
   _camera: {fileID: 0}
+  _collider_based: 1
+  _freeze: 1
+  _include_children: 1
+  _line_color: {r: 0, g: 1, b: 0.4, a: 0.74}
+  _setup_on_awake: 1
 --- !u!65 &903194211
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -711,17 +710,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804e3f1dfbc7f4690b9594d565484f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Debugging: 0
-  _rigidbody: {fileID: 362436253}
   _actor: {fileID: 161967754}
-  _threshold: 1
-  _explosion_force: 1
-  _explosion: {fileID: 0}
-  _explosion_prefab: {fileID: 1199480351837226, guid: 580ccf4ed0aa14e71910621209de8d5c,
-    type: 2}
   _broken_object_prefab: {fileID: 1524659847642198, guid: 78319db9524e54cb6b3f01bea4245a2f,
     type: 2}
   _environment: {fileID: 903194204}
+  _explosion: {fileID: 0}
+  _explosion_force: 1
+  _explosion_prefab: {fileID: 1199480351837226, guid: 580ccf4ed0aa14e71910621209de8d5c,
+    type: 2}
+  _rigidbody: {fileID: 362436253}
+  _threshold: 1
+  Debugging: 0
 --- !u!1001 &934752434
 Prefab:
   m_ObjectHideFlags: 0
@@ -1283,12 +1282,12 @@ MonoBehaviour:
     max_value: 0
   _relative_to_existing_value: 0
   _axis_of_configuration: 0
-  _use_bounding_box_for_range: 0
   _bounding_box: {fileID: 0}
+  _use_bounding_box_for_range: 0
   current_value: {x: 0, y: 0, z: 0}
+  _direction: {x: -0.62759835, y: -0.061222807, z: 0.7761264}
   _position: {x: -10.883416, y: 12.647809, z: 10.165706}
   _rotation: {x: -0.048263688, y: 0.9980453, z: 0.039700918}
-  _direction: {x: -0.62759835, y: -0.061222807, z: 0.7761264}
 --- !u!54 &1251179787 stripped
 Rigidbody:
   m_PrefabParentObject: {fileID: 54431746699967946, guid: 6eb4ee769c23c46988ee311220cbbded,
@@ -1392,10 +1391,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 903194204}
   _debugging: 0
-  _space: 2
+  _direction: {x: 0, y: 0, z: 0}
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
+  _space: 2
 --- !u!54 &1830059497 stripped
 Rigidbody:
   m_PrefabParentObject: {fileID: 54829802733716354, guid: 6eb4ee769c23c46988ee311220cbbded,

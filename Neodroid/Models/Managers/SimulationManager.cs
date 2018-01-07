@@ -69,7 +69,6 @@ namespace Neodroid.Managers {
         ReactInEnvironments (SampleTestReaction ());
         return;
       }
-      print (CurrentReaction.Parameters.Step);
       if (WaitEvery == WaitOn.Never || CurrentReaction.Parameters.Step)
         ResumeSimulation (_simulation_time_scale);
     }
