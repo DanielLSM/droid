@@ -300,7 +300,7 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 273.5
+      value: 274
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
@@ -714,7 +714,7 @@ MonoBehaviour:
   Debugging: 0
   _rigidbody: {fileID: 362436253}
   _actor: {fileID: 161967754}
-  _threshold: 5
+  _threshold: 4
   _explosion_force: 1
   _explosion: {fileID: 0}
   _explosion_prefab: {fileID: 1199480351837226, guid: 580ccf4ed0aa14e71910621209de8d5c,
