@@ -1,55 +1,30 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Assets.Neodroid.Models.Actors;
 using Neodroid.Configurables;
-using Neodroid.Actors;
 
 namespace Neodroid.Messaging.Messages {
   public class EnvironmentDescription {
-
-    Dictionary<string, Actor> _actors;
-
-    Dictionary<string, ConfigurableGameObject> _configurables;
-    int _max_steps;
-    int _frame_skips;
-    float _solved_threshold;
-
-    public EnvironmentDescription (int max_steps, int frame_skips, Dictionary<string, Actor> actors, Dictionary<string, ConfigurableGameObject> configurables, float solved_threshold) {
-      _configurables = configurables;
-      _actors = actors;
-      _max_steps = max_steps;
-      _frame_skips = frame_skips;
-      _solved_threshold = solved_threshold;
+    public EnvironmentDescription(
+      int max_steps,
+      int frame_skips,
+      Dictionary<string, Actor> actors,
+      Dictionary<string, ConfigurableGameObject> configurables,
+      float solved_threshold) {
+      Configurables = configurables;
+      Actors = actors;
+      MaxSteps = max_steps;
+      FrameSkips = frame_skips;
+      SolvedThreshold = solved_threshold;
     }
 
-    public Dictionary<string, Actor> Actors {
-      get {
-        return _actors;
-      }
-    }
+    public Dictionary<string, Actor> Actors { get; private set; }
 
-    public Dictionary<string, ConfigurableGameObject> Configurables {
-      get {
-        return _configurables;
-      }
-    }
+    public Dictionary<string, ConfigurableGameObject> Configurables { get; private set; }
 
-    public int MaxSteps {
-      get {
-        return _max_steps;
-      }
-    }
+    public int MaxSteps { get; private set; }
 
-    public int FrameSkips {
-      get {
-        return _frame_skips;
-      }
-    }
+    public int FrameSkips { get; private set; }
 
-    public float SolvedThreshold {
-      get {
-        return _solved_threshold;
-      }
-    }
+    public float SolvedThreshold { get; private set; }
   }
 }
-

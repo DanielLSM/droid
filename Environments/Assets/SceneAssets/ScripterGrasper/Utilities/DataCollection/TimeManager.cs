@@ -1,26 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SceneSpecificAssets.Grasping.Utilities.DataCollection
-{
-    public class TimeManager : MonoBehaviour
-    {
-        [Range(0.0f, 10.0f)]
-        public float _time_scale = 1f;
-        float interval_size = 0.02f;
+namespace SceneSpecificAssets.Grasping.Utilities.DataCollection {
+  public class TimeManager : MonoBehaviour {
+    [Range(
+      0.0f,
+      10.0f)]
+    public float _time_scale = 1f;
 
-        // Use this for initialization
-        void Start()
-        {
-            Time.timeScale = _time_scale;
-            Time.fixedDeltaTime = interval_size * Time.timeScale;
-        }
+    private readonly float interval_size = 0.02f;
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+    // Use this for initialization
+    private void Start() {
+      Time.timeScale = _time_scale;
+      Time.fixedDeltaTime = interval_size * Time.timeScale;
     }
+
+    // Update is called once per frame
+    private void Update() { }
+  }
 }

@@ -1,31 +1,16 @@
-﻿
-
-namespace Neodroid.Messaging.Messages
-{
-    public class Configuration
-    {
-
-        string _configurable_name;
-        float _configurable_value;
-
-        public Configuration(string configurable_name, float configurable_value)
-        {
-            _configurable_name = configurable_name;
-            _configurable_value = configurable_value;
-        }
-
-        public string ConfigurableName {
-            get { return _configurable_name; }
-        }
-
-        public float ConfigurableValue {
-            get { return _configurable_value; }
-        }
-
-        public override string ToString()
-        {
-            return "<Configuration> " + _configurable_name + ", " + _configurable_value + " </Configuration>";
-        }
+﻿namespace Neodroid.Messaging.Messages {
+  public class Configuration {
+    public Configuration(string configurable_name, float configurable_value) {
+      ConfigurableName = configurable_name;
+      ConfigurableValue = configurable_value;
     }
-}
 
+    public string ConfigurableName { get; private set; }
+
+    public float ConfigurableValue { get; private set; }
+
+    public override string ToString() {
+      return "<Configuration> " + ConfigurableName + ", " + ConfigurableValue + " </Configuration>";
+    }
+  }
+}

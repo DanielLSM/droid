@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 
-
 namespace Neodroid.Segmentation {
-
   [System.Serializable]
   public struct SegmentationColorByTag {
     public string tag;
@@ -14,5 +12,4 @@ namespace Neodroid.Segmentation {
     public GameObject game_object;
     public Color color;
   }
-
 }

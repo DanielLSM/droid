@@ -1,6 +1,5 @@
 ﻿
 
-
 namespace Neodroid.Utilities {
   [System.Serializable]
   public struct InputRange {
@@ -9,4 +8,3 @@ namespace Neodroid.Utilities {
     public float max_value;
   }
 }
-

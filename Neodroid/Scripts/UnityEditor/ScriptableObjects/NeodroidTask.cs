@@ -1,27 +1,23 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
 using Neodroid.Utilities;
 using UnityEditor;
+using UnityEngine;
 
 namespace Neodroid.Task {
+  public static class CreateNeodroidTask {
+    [MenuItem("Neodroid/Create/ScriptableObjects/NeodroidTask")]
+    public static void CreateNeodroidTaskAsset() {
+      var asset = ScriptableObject.CreateInstance<NeodroidTask>();
 
-        public class CreateNeodroidTask
-        {
-[MenuItem("Neodroid/Create/ScriptableObjects/NeodroidTask")]
-            public static void CreateNeodroidTaskAsset()
-            {
-                var asset = ScriptableObject.CreateInstance<NeodroidTask>();
+      AssetDatabase.CreateAsset(
+                                asset,
+                                "Assets/NewNeodroidTask.asset");
+      AssetDatabase.SaveAssets();
 
-                AssetDatabase.CreateAsset(asset, "Assets/NewNeodroidTask.asset");
-                AssetDatabase.SaveAssets();
+      EditorUtility.FocusProjectWindow();
 
-                EditorUtility.FocusProjectWindow();
-
-                Selection.activeObject = asset;
-            }
-        }
+      Selection.activeObject = asset;
+    }
+  }
 }
 #endif
-
-
-

@@ -1,137 +1,148 @@
-﻿using System.Collections.Generic;
-using FlatBuffers;
-using Neodroid.Actors;
-using Neodroid.Configurables;
-using Neodroid.Motors;
-using Neodroid.Observers;
-using UnityEngine;
-using Neodroid.Environments;
-using System.Xml;
-
-using Neodroid.FBS;
+﻿using Neodroid.FBS;
 using Neodroid.FBS.Reaction;
-using Neodroid.FBS.State;
 using Neodroid.Messaging.Messages;
+using UnityEngine;
 
 namespace Neodroid.Messaging {
   public static class FBSReactionUtilities {
     #region PublicMethods
 
-    public static Reaction create_reaction (FBSReaction? reaction) {
+    public static Reaction create_reaction(FBSReaction? reaction) {
       if (reaction.HasValue) {
-        var motions = create_motions (reaction.Value);
-        var configurations = create_configurations (reaction.Value);
-        var unobservables = create_unobservables (reaction.Value);
-        var parameters = create_parameters (reaction.Value);
-        return new Reaction (parameters, motions, configurations, unobservables);
+        var motions = create_motions(reaction.Value);
+        var configurations = create_configurations(reaction.Value);
+        var unobservables = create_unobservables(reaction.Value);
+        var parameters = create_parameters(reaction.Value);
+        return new Reaction(
+                            parameters,
+                            motions,
+                            configurations,
+                            unobservables);
       }
-      return new Reaction (null, null, null, null);
+
+      return new Reaction(
+                          null,
+                          null,
+                          null,
+                          null);
     }
 
     #endregion
 
     #region PrivateMethods
 
-    static Unobservables create_unobservables (FBSReaction reaction) {
+    private static Unobservables create_unobservables(FBSReaction reaction) {
       if (reaction.Unobservables.HasValue) {
-        var bodies = create_bodies (reaction.Unobservables.Value);
+        var bodies = create_bodies(reaction.Unobservables.Value);
 
-        var poses = create_poses (reaction.Unobservables.Value);
-      
-        return new Unobservables (bodies, poses);
+        var poses = create_poses(reaction.Unobservables.Value);
+
+        return new Unobservables(
+                                 bodies,
+                                 poses);
       }
-      return new Unobservables ();
+
+      return new Unobservables();
     }
 
-    static ReactionParameters create_parameters (FBSReaction reaction) {
-      if (reaction.Parameters.HasValue) {
-        return new ReactionParameters (
-          reaction.Parameters.Value.Terminable,
-          reaction.Parameters.Value.Step,
-          reaction.Parameters.Value.Reset,
-          reaction.Parameters.Value.Configure,
-          reaction.Parameters.Value.Describe,
-          reaction.Parameters.Value.EpisodeCount);
-      }
-      return new ReactionParameters ();
+    private static ReactionParameters create_parameters(FBSReaction reaction) {
+      if (reaction.Parameters.HasValue)
+        return new ReactionParameters(
+                                      reaction.Parameters.Value.Terminable,
+                                      reaction.Parameters.Value.Step,
+                                      reaction.Parameters.Value.Reset,
+                                      reaction.Parameters.Value.Configure,
+                                      reaction.Parameters.Value.Describe,
+                                      reaction.Parameters.Value.EpisodeCount);
+      return new ReactionParameters();
     }
 
-    static Configuration[] create_configurations (FBSReaction reaction) {
+    private static Configuration[] create_configurations(FBSReaction reaction) {
       var l = reaction.ConfigurationsLength;
-      Configuration[] configurations = new Configuration[l];
-      for (var i = 0; i < l; i++) {
-        configurations [i] = create_configuration (reaction.Configurations (i));
-      }
+      var configurations = new Configuration[l];
+      for (var i = 0; i < l; i++) configurations[i] = create_configuration(reaction.Configurations(i));
       return configurations;
     }
 
-    static MotorMotion[] create_motions (FBSReaction reaction) {
+    private static MotorMotion[] create_motions(FBSReaction reaction) {
       var l = reaction.MotionsLength;
-      MotorMotion[] motions = new MotorMotion[l ];
-      for (var i = 0; i < l; i++) {
-        motions [i] = create_motion (reaction.Motions (i));
-      }
+      var motions = new MotorMotion[l];
+      for (var i = 0; i < l; i++) motions[i] = create_motion(reaction.Motions(i));
       return motions;
     }
 
-
-    static Configuration create_configuration (FBSConfiguration? configuration) {
-      if (configuration.HasValue) {
-        return new Configuration (configuration.Value.ConfigurableName, (float)configuration.Value.ConfigurableValue);
-      }
+    private static Configuration create_configuration(FBSConfiguration? configuration) {
+      if (configuration.HasValue)
+        return new Configuration(
+                                 configuration.Value.ConfigurableName,
+                                 (float)configuration.Value.ConfigurableValue);
       return null;
     }
 
-    static MotorMotion create_motion (FBSMotion? motion) {
-      if (motion.HasValue) {
-        return new MotorMotion (motion.Value.ActorName, motion.Value.MotorName, (float)motion.Value.Strength);
-      }
+    private static MotorMotion create_motion(FBSMotion? motion) {
+      if (motion.HasValue)
+        return new MotorMotion(
+                               motion.Value.ActorName,
+                               motion.Value.MotorName,
+                               (float)motion.Value.Strength);
       return null;
     }
 
-
-    static Pose[] create_poses (FBSUnobservables unobservables) {
+    private static Pose[] create_poses(FBSUnobservables unobservables) {
       var l = unobservables.PosesLength;
-      Pose[] poses = new Pose[l ];
-      for (var i = 0; i < l; i++) {
-        poses [i] = create_pose (unobservables.Poses (i));
-      }
+      var poses = new Pose[l];
+      for (var i = 0; i < l; i++) poses[i] = create_pose(unobservables.Poses(i));
       return poses;
     }
 
-    static Body[] create_bodies (FBSUnobservables unobservables) {
+    private static Body[] create_bodies(FBSUnobservables unobservables) {
       var l = unobservables.BodiesLength;
-      Body[] bodies = new Body[l];
-      for (var i = 0; i < l; i++) {
-        bodies [i] = create_body (unobservables.Bodies (i));
-      }
+      var bodies = new Body[l];
+      for (var i = 0; i < l; i++) bodies[i] = create_body(unobservables.Bodies(i));
       return bodies;
     }
 
-
-    static Pose create_pose (FBSQuaternionTransform? trans) {
+    private static Pose create_pose(FBSQuaternionTransform? trans) {
       if (trans.HasValue) {
         var position = trans.Value.Position;
         var rotation = trans.Value.Rotation;
-        var vec3_pos = new Vector3 ((float)position.X, (float)position.Y, (float)position.Z);
-        var quat_rot = new Quaternion ((float)rotation.X, (float)rotation.Y, (float)rotation.Z, (float)rotation.W);
-        return new Pose (vec3_pos, quat_rot);
+        var vec3_pos = new Vector3(
+                                   (float)position.X,
+                                   (float)position.Y,
+                                   (float)position.Z);
+        var quat_rot = new Quaternion(
+                                      (float)rotation.X,
+                                      (float)rotation.Y,
+                                      (float)rotation.Z,
+                                      (float)rotation.W);
+        return new Pose(
+                        vec3_pos,
+                        quat_rot);
       }
-      return new Pose ();
+
+      return new Pose();
     }
 
-    static Body create_body (FBSBody? body) {
+    private static Body create_body(FBSBody? body) {
       if (body.HasValue) {
         var vel = body.Value.Velocity;
         var ang = body.Value.AngularVelocity;
-        var vec3_vel = new Vector3 ((float)vel.X, (float)vel.Y, (float)vel.Z);
-        var vec3_ang = new Vector3 ((float)ang.X, (float)ang.Y, (float)ang.Z);
-        return new Body (vec3_vel, vec3_ang);
+        var vec3_vel = new Vector3(
+                                   (float)vel.X,
+                                   (float)vel.Y,
+                                   (float)vel.Z);
+        var vec3_ang = new Vector3(
+                                   (float)ang.X,
+                                   (float)ang.Y,
+                                   (float)ang.Z);
+        return new Body(
+                        vec3_vel,
+                        vec3_ang);
       }
+
       return null;
     }
 
     #endregion
   }
 }
-

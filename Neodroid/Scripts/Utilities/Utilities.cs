@@ -1,144 +1,169 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
-using UnityEditor.SceneManagement;
+
 #endif
 
 namespace Neodroid.Utilities {
   public static class NeodroidUtilities {
-    #if UNITY_EDITOR
-    public static void DrawString (string text, Vector3 worldPos, Color? color = null, float oX = 0, float oY = 0) {
-
-      UnityEditor.Handles.BeginGUI ();
-
-      var restoreColor = GUI.color;
-
-      if (color.HasValue)
-        GUI.color = color.Value;
-      var view = UnityEditor.SceneView.currentDrawingSceneView;
-      Vector3 screenPos = view.camera.WorldToScreenPoint (worldPos);
-
-      if (screenPos.y < 0 || screenPos.y > Screen.height || screenPos.x < 0 || screenPos.x > Screen.width || screenPos.z < 0) {
-        GUI.color = restoreColor;
-        UnityEditor.Handles.EndGUI ();
-        return;
-      }
-
-      UnityEditor.Handles.Label (TransformByPixel (worldPos, oX, oY), text);
-
-      GUI.color = restoreColor;
-      UnityEditor.Handles.EndGUI ();
-    }
-
-    public static Vector3 TransformByPixel (Vector3 position, float x, float y) {
-      return TransformByPixel (position, new Vector3 (x, y));
-    }
-
-    public static Vector3 TransformByPixel (Vector3 position, Vector3 translateBy) {
-      Camera cam = UnityEditor.SceneView.currentDrawingSceneView.camera;
-      if (cam)
-        return cam.ScreenToWorldPoint (cam.WorldToScreenPoint (position) + translateBy);
-      else
-        return position;
-    }
-    #endif
-
     public static float KineticEnergy (Rigidbody rb) {
-      return 0.5f * rb.mass * Mathf.Pow (rb.velocity.magnitude, 2); // mass in kg, velocity in meters per second, result is joules
+      return 0.5f
+      * rb.mass
+      * Mathf.Pow (
+        rb.velocity.magnitude,
+        2); // mass in kg, velocity in meters per second, result is joules
     }
 
     public static Vector3 Vector3Clamp (ref Vector3 vec, Vector3 min_point, Vector3 max_point) {
-      vec.x = Mathf.Clamp (vec.x, min_point.x, max_point.x);
-      vec.y = Mathf.Clamp (vec.y, min_point.y, max_point.y);
-      vec.z = Mathf.Clamp (vec.z, min_point.z, max_point.z);
+      vec.x = Mathf.Clamp (
+        vec.x,
+        min_point.x,
+        max_point.x);
+      vec.y = Mathf.Clamp (
+        vec.y,
+        min_point.y,
+        max_point.y);
+      vec.z = Mathf.Clamp (
+        vec.z,
+        min_point.z,
+        max_point.z);
       return vec;
     }
 
     public static void DrawLine (Vector3 p1, Vector3 p2, float width) {
-      int count = Mathf.CeilToInt (width); // how many lines are needed.
-      if (count == 1)
-        Gizmos.DrawLine (p1, p2);
-      else {
-        Camera c = Camera.current;
+      var count = Mathf.CeilToInt (width); // how many lines are needed.
+      if (count == 1) {
+        Gizmos.DrawLine (
+          p1,
+          p2);
+      } else {
+        var c = Camera.current;
         if (c == null) {
           Debug.LogError ("Camera.current is null");
           return;
         }
-        Vector3 v1 = (p2 - p1).normalized; // line direction
-        Vector3 v2 = (c.transform.position - p1).normalized; // direction to camera
-        Vector3 n = Vector3.Cross (v1, v2); // normal vector
-        for (int i = 0; i < count; i++) {
+
+        var v1 = (p2 - p1).normalized; // line direction
+        var v2 = (c.transform.position - p1).normalized; // direction to camera
+        var n = Vector3.Cross (
+                  v1,
+                  v2); // normal vector
+        for (var i = 0; i < count; i++) {
           //Vector3 o = n * width ((float)i / (count - 1) - 0.5f);
-          Vector3 o = n * width * ((float)i / (count - 1) - 0.5f);
-          Gizmos.DrawLine (p1 + o, p2 + o);
+          var o = n * width * ((float)i / (count - 1) - 0.5f);
+          Gizmos.DrawLine (
+            p1 + o,
+            p2 + o);
         }
       }
     }
 
     public static AnimationCurve DefaultAnimationCurve () {
-      return new AnimationCurve (new Keyframe (1, 1), new Keyframe (0, 0));
+      return new AnimationCurve (
+        new Keyframe (
+          1,
+          1),
+        new Keyframe (
+          0,
+          0));
     }
 
     public static Gradient DefaultGradient () {
-
-      var gradient = new Gradient () {
+      var gradient = new Gradient {
         // The number of keys must be specified in this array initialiser
         colorKeys = new GradientColorKey[3] {
           // Add your colour and specify the stop point
-          new GradientColorKey (new Color (1, 1, 1), 0),
-          new GradientColorKey (new Color (1, 1, 1), 1f),
-          new GradientColorKey (new Color (1, 1, 1), 0)
+          new GradientColorKey (
+            new Color (
+              1,
+              1,
+              1),
+            0),
+          new GradientColorKey (
+            new Color (
+              1,
+              1,
+              1),
+            1f),
+          new GradientColorKey (
+            new Color (
+              1,
+              1,
+              1),
+            0)
         },
         // This sets the alpha to 1 at both ends of the gradient
         alphaKeys = new GradientAlphaKey[3] {
-          new GradientAlphaKey (1, 0),
-          new GradientAlphaKey (1, 1),
-          new GradientAlphaKey (1, 0),
+          new GradientAlphaKey (
+            1,
+            0),
+          new GradientAlphaKey (
+            1,
+            1),
+          new GradientAlphaKey (
+            1,
+            0)
         }
       };
 
       return gradient;
     }
 
-    public static Texture2D RenderTextureImage (Camera camera) { // From unity documentation, https://docs.unity3d.com/ScriptReference/Camera.Render.html
-      RenderTexture current_render_texture = RenderTexture.active;
+    public static Texture2D RenderTextureImage (Camera camera) {
+      // From unity documentation, https://docs.unity3d.com/ScriptReference/Camera.Render.html
+      var current_render_texture = RenderTexture.active;
       RenderTexture.active = camera.targetTexture;
       camera.Render ();
-      Texture2D texture = new Texture2D (camera.targetTexture.width, camera.targetTexture.height);
-      texture.ReadPixels (new Rect (0, 0, camera.targetTexture.width, camera.targetTexture.height), 0, 0);
+      var texture = new Texture2D (
+                      camera.targetTexture.width,
+                      camera.targetTexture.height);
+      texture.ReadPixels (
+        new Rect (
+          0,
+          0,
+          camera.targetTexture.width,
+          camera.targetTexture.height),
+        0,
+        0);
       texture.Apply ();
       RenderTexture.active = current_render_texture;
       return texture;
     }
 
-    public static void RegisterCollisionTriggerCallbacksOnChildren (Component caller,
-                                                                    Transform parent,
-                                                                    ChildSensor.OnChildCollisionEnterDelegate OnCollisionEnterChild,
-                                                                    ChildSensor.OnChildTriggerEnterDelegate OnTriggerEnterChild = null,
-                                                                    ChildSensor.OnChildCollisionExitDelegate OnCollisionExitChild = null,
-                                                                    ChildSensor.OnChildTriggerExitDelegate OnTriggerExitChild = null,
-                                                                    ChildSensor.OnChildCollisionStayDelegate OnCollisionStayChild = null,
-                                                                    ChildSensor.OnChildTriggerStayDelegate OnTriggerStayChild = null,
-                                                                    bool debug = false) {
+    public static void RegisterCollisionTriggerCallbacksOnChildren (
+      Component caller,
+      Transform parent,
+      ChildSensor.OnChildCollisionEnterDelegate OnCollisionEnterChild,
+      ChildSensor.OnChildTriggerEnterDelegate OnTriggerEnterChild = null,
+      ChildSensor.OnChildCollisionExitDelegate OnCollisionExitChild = null,
+      ChildSensor.OnChildTriggerExitDelegate OnTriggerExitChild = null,
+      ChildSensor.OnChildCollisionStayDelegate OnCollisionStayChild = null,
+      ChildSensor.OnChildTriggerStayDelegate OnTriggerStayChild = null,
+      bool debug = false) {
       var childrenWithColliders = parent.GetComponentsInChildren<Collider> ();
 
-      foreach (Collider child in childrenWithColliders) {
+      foreach (var child in childrenWithColliders) {
         var child_sensors = child.GetComponents<ChildSensor> ();
         ChildSensor sensor = null;
-        for (var i = 0; i < child_sensors.Length; i++) {
-          var child_sensor = child_sensors [i];
+        foreach (var child_sensor in child_sensors) {
           if (child_sensor._caller != null && child_sensor._caller == caller) {
             sensor = child_sensor;
             break;
-          } else if (child_sensor._caller == null) {
+          }
+
+          if (child_sensor._caller == null) {
             child_sensor._caller = caller;
             sensor = child_sensor;
             break;
           }
         }
+
         if (sensor == null) {
           sensor = child.gameObject.AddComponent<ChildSensor> ();
           sensor._caller = caller;
@@ -157,102 +182,161 @@ namespace Neodroid.Utilities {
         if (OnCollisionStayChild != null)
           sensor.OnCollisionStayDelegate = OnCollisionStayChild;
         if (debug)
-          Debug.Log (caller.name + " has created " + sensor.name + " on " + child.name + " under parent " + parent.name);
+          Debug.Log (
+            caller.name
+            + " has created "
+            + sensor.name
+            + " on "
+            + child.name
+            + " under parent "
+            + parent.name);
       }
     }
 
-    public static string ColorArrayToString (Color[] colors) {
-      string s = "";
-      foreach (Color color in colors) {
+    public static string ColorArrayToString (IEnumerable<Color> colors) {
+      var s = "";
+      foreach (var color in colors)
         s += color.ToString ();
-      }
       return s;
     }
 
-    public static Recipient MaybeRegisterComponent<Recipient, Caller> (Recipient r, Caller c) where Recipient : Object, HasRegister<Caller> where Caller : Component {
+    public static Recipient MaybeRegisterComponent<Recipient, Caller> (Recipient r, Caller c)
+      where Recipient : Object, IHasRegister<Caller>
+      where Caller : Component {
       Recipient component;
-      if (r != null) {
-        component = r;  //.GetComponent<Recipient>();
-      } else if (c.GetComponentInParent<Recipient> () != null) {
+      if (r != null)
+        component = r; //.GetComponent<Recipient>();
+      else if (c.GetComponentInParent<Recipient> () != null)
         component = c.GetComponentInParent<Recipient> ();
-      } else {
+      else
         component = Object.FindObjectOfType<Recipient> ();
-      }
-      if (component != null) {
+      if (component != null)
         component.Register (c);
-      } else {
-        Debug.Log (System.String.Format ("Could not find a {0} recipient during registeration", typeof(Recipient).ToString ()));
-      }
+      else
+        Debug.Log (
+          string.Format (
+            "Could not find a {0} recipient during registeration",
+            typeof(Recipient)));
       return component;
     }
 
-    public static Recipient MaybeRegisterNamedComponent<Recipient, Caller> (Recipient r, Caller c, string identifier) where Recipient : Object, HasRegister<Caller> where Caller : Component {
+    public static Recipient MaybeRegisterNamedComponent<Recipient, Caller> (
+      Recipient r,
+      Caller c,
+      string identifier)
+      where Recipient : Object, IHasRegister<Caller>
+      where Caller : Component {
       Recipient component;
-      if (r != null) {
+      if (r != null)
         component = r;
-      } else if (c.GetComponentInParent<Recipient> () != null) {
+      else if (c.GetComponentInParent<Recipient> () != null)
         component = c.GetComponentInParent<Recipient> ();
-      } else {
+      else
         component = Object.FindObjectOfType<Recipient> ();
-      }
-      if (component != null) {
-        component.Register (c, identifier);
-      } else {
-        Debug.Log (System.String.Format ("Could not find a {0} recipient during registeration", typeof(Recipient).ToString ()));
-      }
+      if (component != null)
+        component.Register (
+          c,
+          identifier);
+      else
+        Debug.Log (
+          string.Format (
+            "Could not find a {0} recipient during registeration",
+            typeof(Recipient)));
       return component;
     }
 
-
-    /// Use this method to get all loaded objects of some type, including inactive objects. 
+    /// Use this method to get all loaded objects of some type, including inactive objects.
     /// This is an alternative to Resources.FindObjectsOfTypeAll (returns project assets, including prefabs), and GameObject.FindObjectsOfTypeAll (deprecated).
-    public static T[] FindAllObjectsOfTypeInScene<T> () {//(Scene scene) {
-      List<T> results = new List<T> ();
-      for (int i = 0; i < SceneManager.sceneCount; i++) {
+    public static T[] FindAllObjectsOfTypeInScene<T> () {
+      //(Scene scene) {
+      var results = new List<T> ();
+      for (var i = 0; i < SceneManager.sceneCount; i++) {
         var s = SceneManager.GetSceneAt (i); // maybe EditorSceneManager
-        if (s.isLoaded) {
-          var allGameObjects = s.GetRootGameObjects ();
-          for (int j = 0; j < allGameObjects.Length; j++) {
-            var go = allGameObjects [j];
-            results.AddRange (go.GetComponentsInChildren<T> (true));
-          }
+        if (!s.isLoaded)
+          continue;
+        var all_game_objects = s.GetRootGameObjects ();
+        foreach (var go in all_game_objects) {
+          results.AddRange (go.GetComponentsInChildren<T> (true));
         }
       }
+
       return results.ToArray ();
     }
 
     public static GameObject[] FindAllGameObjectsExceptLayer (int layer) {
-      var goa = GameObject.FindObjectsOfType<GameObject> ();
+      var goa = Object.FindObjectsOfType<GameObject> ();
       var gol = new List<GameObject> ();
-      foreach (var go in goa) {
-        if (go.layer != layer) {
+      foreach (var go in goa)
+        if (go.layer != layer)
           gol.Add (go);
-        }
-      }
-      if (gol.Count == 0) {
-        return null;
-      }
-      return gol.ToArray ();
+      return gol.Count == 0 ? null : gol.ToArray ();
     }
 
     public static GameObject[] RecursiveChildGameObjectsExceptLayer (Transform parent, int layer) {
       var gol = new List<GameObject> ();
-      foreach (Transform go in parent) {
-        if (go) {
-          if (go.gameObject.layer != layer) {
-            gol.Add (go.gameObject);
-            var children = RecursiveChildGameObjectsExceptLayer (go, layer);
-            if (children != null && children.Length > 0) {
-              gol.AddRange (children);
-            }
-          }
+      foreach (Transform go in parent)
+        if (go)
+        if (go.gameObject.layer != layer) {
+          gol.Add (go.gameObject);
+          var children = RecursiveChildGameObjectsExceptLayer (
+                             go,
+                             layer);
+          if (children != null && children.Length > 0)
+            gol.AddRange (children);
         }
-      }
-      if (gol.Count == 0) {
-        return null;
-      }
-      return gol.ToArray ();
+
+      return gol.Count == 0 ? null : gol.ToArray ();
     }
+    #if UNITY_EDITOR
+    public static void DrawString(
+      string text,
+      Vector3 worldPos,
+      Color? color = null,
+      float oX = 0,
+      float oY = 0) {
+      Handles.BeginGUI();
+
+      var restoreColor = GUI.color;
+
+      if (color.HasValue)
+        GUI.color = color.Value;
+      var view = SceneView.currentDrawingSceneView;
+      var screenPos = view.camera.WorldToScreenPoint(worldPos);
+
+      if (screenPos.y < 0
+          || screenPos.y > Screen.height
+          || screenPos.x < 0
+          || screenPos.x > Screen.width
+          || screenPos.z < 0) {
+        GUI.color = restoreColor;
+        Handles.EndGUI();
+        return;
+      }
+
+      Handles.Label(
+                    TransformByPixel(
+                                     worldPos,
+                                     oX,
+                                     oY),
+                    text);
+
+      GUI.color = restoreColor;
+      Handles.EndGUI();
+    }
+
+    public static Vector3 TransformByPixel(Vector3 position, float x, float y) {
+      return TransformByPixel(
+                              position,
+                              new Vector3(
+                                          x,
+                                          y));
+    }
+
+    public static Vector3 TransformByPixel(Vector3 position, Vector3 translate_by) {
+      var cam = SceneView.currentDrawingSceneView.camera;
+      return cam ? cam.ScreenToWorldPoint(cam.WorldToScreenPoint(position) + translate_by) : position;
+    }
+    #endif
 
     /** Contains logic for coverting a camera component into a Texture2D. */
     /*public Texture2D ObservationToTex(Camera camera, int width, int height)
@@ -349,5 +433,4 @@ namespace Neodroid.Utilities {
           return observation_matrix_list;
         }*/
   }
-
 }

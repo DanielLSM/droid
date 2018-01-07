@@ -1,47 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SceneSpecificAssets.Grasping.Utilities
-{
+namespace SceneSpecificAssets.Grasping.Utilities {
+  public class IgnoreCollision : MonoBehaviour {
+    // Use this for initialization
+    private void Start() { }
 
-    public class IgnoreCollision : MonoBehaviour
-    {
+    // Update is called once per frame
+    private void Update() { }
 
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.tag == "ignored_by_sub_collider_fish")
-            {
-                Physics.IgnoreCollision(this.GetComponent<Collider>(), collision.collider);
-            }
-        }
-
-        void OnCollisionExit(Collision collision)
-        {
-            if (collision.gameObject.tag == "ignored_by_sub_collider_fish")
-            {
-                Physics.IgnoreCollision(this.GetComponent<Collider>(), collision.collider);
-            }
-        }
-
-        private void OnCollisionStay(Collision collision)
-        {
-            if (collision.gameObject.tag == "ignored_by_sub_collider_fish")
-            {
-                Physics.IgnoreCollision(this.GetComponent<Collider>(), collision.collider);
-            }
-        }
+    private void OnCollisionEnter(Collision collision) {
+      if (collision.gameObject.tag == "ignored_by_sub_collider_fish")
+        Physics.IgnoreCollision(
+                                GetComponent<Collider>(),
+                                collision.collider);
     }
+
+    private void OnCollisionExit(Collision collision) {
+      if (collision.gameObject.tag == "ignored_by_sub_collider_fish")
+        Physics.IgnoreCollision(
+                                GetComponent<Collider>(),
+                                collision.collider);
+    }
+
+    private void OnCollisionStay(Collision collision) {
+      if (collision.gameObject.tag == "ignored_by_sub_collider_fish")
+        Physics.IgnoreCollision(
+                                GetComponent<Collider>(),
+                                collision.collider);
+    }
+  }
 }

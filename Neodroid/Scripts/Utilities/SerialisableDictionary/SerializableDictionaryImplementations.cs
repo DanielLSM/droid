@@ -1,5 +1,3 @@
-
-
 using UnityEngine;
 
 namespace Neodroid.Utilities.SerialisableDictionary {
@@ -17,5 +15,4 @@ namespace Neodroid.Utilities.SerialisableDictionary {
   public class StringGameObjectDictionary : SerializableDictionary<string, GameObject> {
 
   }
-
 }

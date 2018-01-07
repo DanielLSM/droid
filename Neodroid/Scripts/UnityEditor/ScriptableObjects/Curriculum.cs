@@ -1,26 +1,23 @@
-﻿
-#if UNITY_EDITOR
-using Neodroid.Configurables;
-using UnityEngine;
+﻿#if UNITY_EDITOR
 using Neodroid.Utilities;
 using UnityEditor;
+using UnityEngine;
 
 namespace Neodroid.ScriptableObjects {
+  public static class CreateCurriculum {
+    [MenuItem("Neodroid/Create/ScriptableObjects/Curriculum")]
+    public static void CreateCurriculumAsset() {
+      var asset = ScriptableObject.CreateInstance<Curriculum>();
 
-    public class CreateCurriculum
-    {
-  [MenuItem("Neodroid/Create/ScriptableObjects/Curriculum")]
-        public static void CreateCurriculumAsset()
-        {
-            var asset = ScriptableObject.CreateInstance<Curriculum>();
+      AssetDatabase.CreateAsset(
+                                asset,
+                                "Assets/NewCurriculum.asset");
+      AssetDatabase.SaveAssets();
 
-            AssetDatabase.CreateAsset(asset, "Assets/NewCurriculum.asset");
-            AssetDatabase.SaveAssets();
+      EditorUtility.FocusProjectWindow();
 
-            EditorUtility.FocusProjectWindow();
-
-            Selection.activeObject = asset;
-        }
+      Selection.activeObject = asset;
     }
+  }
 }
 #endif

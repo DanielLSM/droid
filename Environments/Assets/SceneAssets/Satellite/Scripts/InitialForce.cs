@@ -1,44 +1,45 @@
 ﻿using UnityEngine;
 
-[RequireComponent (typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
 public class InitialForce : MonoBehaviour {
+  public bool _on_awake = true;
+
+  private Rigidbody _rb;
+  public bool _relative;
+  public bool _torque;
 
   [SerializeField]
-  Vector3 force;
+  private Vector3 force;
 
-  public bool _on_awake = true;
-  public bool _relative = false;
-  public bool _torque = false;
-
-  Rigidbody _rb;
-
-
-  void ApplyInitialForce () {
+  private void ApplyInitialForce() {
     if (_torque) {
       if (_relative)
-        _rb.AddRelativeTorque (force, ForceMode.Impulse);
+        _rb.AddRelativeTorque(
+                              force,
+                              ForceMode.Impulse);
       else
-        _rb.AddTorque (force, ForceMode.Impulse);
+        _rb.AddTorque(
+                      force,
+                      ForceMode.Impulse);
     } else {
       if (_relative)
-        _rb.AddRelativeForce (force, ForceMode.Impulse);
+        _rb.AddRelativeForce(
+                             force,
+                             ForceMode.Impulse);
       else
-        _rb.AddForce (force, ForceMode.Impulse);
+        _rb.AddForce(
+                     force,
+                     ForceMode.Impulse);
     }
   }
 
-  void Awake () {
-    _rb = GetComponent<Rigidbody> ();
+  private void Awake() {
+    _rb = GetComponent<Rigidbody>();
 
-    if (_on_awake) {
-      ApplyInitialForce ();
-    }
+    if (_on_awake) ApplyInitialForce();
   }
 
-  void Start () {
-    if (!_on_awake) {
-      ApplyInitialForce ();
-    }
+  private void Start() {
+    if (!_on_awake) ApplyInitialForce();
   }
-	
 }

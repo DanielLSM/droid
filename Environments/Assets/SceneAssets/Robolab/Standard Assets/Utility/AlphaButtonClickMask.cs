@@ -1,58 +1,53 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
-public class AlphaButtonClickMask : MonoBehaviour, ICanvasRaycastFilter
-{
-    protected Image _image;
+public class AlphaButtonClickMask : MonoBehaviour,
+                                    ICanvasRaycastFilter {
+  protected Image _image;
 
-    public void Start()
-    {
-        _image = GetComponent<Image>();
+  public bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera) {
+    Vector2 localPoint;
+    RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                                                            _image.rectTransform,
+                                                            sp,
+                                                            eventCamera,
+                                                            out localPoint);
 
-        Texture2D tex = _image.sprite.texture as Texture2D;
+    var pivot = _image.rectTransform.pivot;
+    var normalizedLocal = new Vector2(
+                                      pivot.x + localPoint.x / _image.rectTransform.rect.width,
+                                      pivot.y + localPoint.y / _image.rectTransform.rect.height);
+    var uv = new Vector2(
+                         _image.sprite.rect.x + normalizedLocal.x * _image.sprite.rect.width,
+                         _image.sprite.rect.y + normalizedLocal.y * _image.sprite.rect.height);
 
-        bool isInvalid = false;
-        if (tex != null)
-        {
-            try
-            {
-                tex.GetPixels32();
-            }
-            catch (UnityException e)
-            {
-                Debug.LogError(e.Message);
-                isInvalid = true;
-            }
-        }
-        else
-        {
-            isInvalid = true;
-        }
+    uv.x /= _image.sprite.texture.width;
+    uv.y /= _image.sprite.texture.height;
 
-        if (isInvalid)
-        {
-            Debug.LogError("This script need an Image with a readbale Texture2D to work.");
-        }
-    }
+    //uv are inversed, as 0,0 or the rect transform seem to be upper right, then going negativ toward lower left...
+    var c = _image.sprite.texture.GetPixelBilinear(
+                                                   uv.x,
+                                                   uv.y);
 
-    public bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera)
-    {
-        Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_image.rectTransform, sp, eventCamera, out localPoint);
+    return c.a > 0.1f;
+  }
 
-        Vector2 pivot = _image.rectTransform.pivot;
-        Vector2 normalizedLocal = new Vector2(pivot.x + localPoint.x / _image.rectTransform.rect.width, pivot.y + localPoint.y / _image.rectTransform.rect.height);
-        Vector2 uv = new Vector2(
-            _image.sprite.rect.x + normalizedLocal.x * _image.sprite.rect.width,
-            _image.sprite.rect.y + normalizedLocal.y * _image.sprite.rect.height);
+  public void Start() {
+    _image = GetComponent<Image>();
 
-        uv.x /= _image.sprite.texture.width;
-        uv.y /= _image.sprite.texture.height;
+    var tex = _image.sprite.texture;
 
-        //uv are inversed, as 0,0 or the rect transform seem to be upper right, then going negativ toward lower left...
-        Color c = _image.sprite.texture.GetPixelBilinear(uv.x, uv.y);
+    var isInvalid = false;
+    if (tex != null)
+      try {
+        tex.GetPixels32();
+      } catch (UnityException e) {
+        Debug.LogError(e.Message);
+        isInvalid = true;
+      }
+    else
+      isInvalid = true;
 
-        return c.a > 0.1f;
-    }
+    if (isInvalid) Debug.LogError("This script need an Image with a readbale Texture2D to work.");
+  }
 }

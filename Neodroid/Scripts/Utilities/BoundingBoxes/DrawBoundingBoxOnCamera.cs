@@ -1,82 +1,90 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Neodroid.Utilities.BoundingBoxes {
-
-  [RequireComponent (typeof(Camera))]
+  [RequireComponent(typeof(Camera))]
   [ExecuteInEditMode]
   public class DrawBoundingBoxOnCamera : MonoBehaviour {
-    public Material lineMaterial;
+    private List<Color> colors;
     public Color lColor = Color.green;
-    List<Vector3[,]> outlines;
-    List<Vector3[,]> triangles;
-    List<Color> colors;
+    public Material lineMaterial;
+    private List<Vector3[,]> outlines;
+    private List<Vector3[,]> triangles;
 
-    void Awake () {
-      outlines = new List<Vector3[,]> (); 
-      colors = new List<Color> ();
-      triangles = new List<Vector3[,]> ();
+    private void Awake() {
+      outlines = new List<Vector3[,]>();
+      colors = new List<Color>();
+      triangles = new List<Vector3[,]>();
     }
 
-    void Start () {
-    }
+    private void Start() { }
 
-    void OnPostRender () {
+    private void OnPostRender() {
       if (outlines == null)
         return;
-      lineMaterial.SetPass (0);
-      GL.Begin (GL.LINES);
-      for (int j = 0; j < outlines.Count; j++) {
-        GL.Color (colors [j]);
-        for (int i = 0; i < outlines [j].GetLength (0); i++) {
-          GL.Vertex (outlines [j] [i, 0]);
-          GL.Vertex (outlines [j] [i, 1]);
-        }
-      }
-      GL.End ();
-
-      GL.Begin (GL.TRIANGLES);
-
-      for (int j = 0; j < triangles.Count; j++) {
-        GL.Color (colors [j]);
-        for (int i = 0; i < triangles [j].GetLength (0); i++) {
-          GL.Vertex (triangles [j] [i, 0]);
-          GL.Vertex (triangles [j] [i, 1]);
-          GL.Vertex (triangles [j] [i, 2]);
+      lineMaterial.SetPass(0);
+      GL.Begin(GL.LINES);
+      for (var j = 0; j < outlines.Count; j++) {
+        GL.Color(colors[j]);
+        for (var i = 0; i < outlines[j].GetLength(0); i++) {
+          GL.Vertex(
+                    outlines[j][i,
+                                0]);
+          GL.Vertex(
+                    outlines[j][i,
+                                1]);
         }
       }
 
-      GL.End ();
+      GL.End();
+
+      GL.Begin(GL.TRIANGLES);
+
+      for (var j = 0; j < triangles.Count; j++) {
+        GL.Color(colors[j]);
+        for (var i = 0; i < triangles[j].GetLength(0); i++) {
+          GL.Vertex(
+                    triangles[j][i,
+                                 0]);
+          GL.Vertex(
+                    triangles[j][i,
+                                 1]);
+          GL.Vertex(
+                    triangles[j][i,
+                                 2]);
+        }
+      }
+
+      GL.End();
     }
 
-    public void setOutlines (Vector3[,] newOutlines, Color newcolor) {
+    public void setOutlines(Vector3[,] newOutlines, Color newcolor) {
       if (newOutlines == null)
         return;
       if (outlines == null)
         return;
-      if (newOutlines.GetLength (0) > 0) {
-        outlines.Add (newOutlines);
-        colors.Add (newcolor);
+      if (newOutlines.GetLength(0) > 0) {
+        outlines.Add(newOutlines);
+        colors.Add(newcolor);
       }
     }
 
-    public void setOutlines (Vector3[,] newOutlines, Color newcolor, Vector3[,] newTriangles) {
+    public void setOutlines(Vector3[,] newOutlines, Color newcolor, Vector3[,] newTriangles) {
       if (newOutlines == null)
         return;
       if (outlines == null)
         return;
-      if (newOutlines.GetLength (0) > 0) {
-        outlines.Add (newOutlines);
-        colors.Add (newcolor);
-        triangles.Add (newTriangles);
+      if (newOutlines.GetLength(0) > 0) {
+        outlines.Add(newOutlines);
+        colors.Add(newcolor);
+        triangles.Add(newTriangles);
       }
     }
 
-    void Update () {
-      outlines = new List<Vector3[,]> ();
-      colors = new List<Color> ();
-      triangles = new List<Vector3[,]> ();
+    private void Update() {
+      outlines = new List<Vector3[,]>();
+      colors = new List<Color>();
+      triangles = new List<Vector3[,]>();
     }
   }
 }

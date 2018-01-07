@@ -1,44 +1,66 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace Neodroid.Utilities.BoundingBoxes {
-
   [ExecuteInEditMode]
   public class BoundingBox : MonoBehaviour {
-
-    public bool _collider_based = false;
-    public bool _include_children = true;
-    public bool _freeze = true;
-
-    public Color _line_color = new Color (0f, 1f, 0.4f, 0.74f);
+    private Vector3 _bottom_back_left;
+    private Vector3 _bottom_back_right;
+    private Vector3 _bottom_front_left;
+    private Vector3 _bottom_front_right;
 
     [HideInInspector]
     public Bounds _bounds;
+
     [HideInInspector]
     public Vector3 _bounds_offset;
 
-    public bool _setup_on_awake = true;
-
-    Vector3[] _corners;
-
-    Vector3[,] _lines;
-
-    Quaternion _rotation;
-
     public DrawBoundingBoxOnCamera _camera;
+    private Collider[] _children_colliders;
 
-    MeshFilter[] _children_meshes;
-    Collider[] _children_colliders;
+    private MeshFilter[] _children_meshes;
+
+    public bool _collider_based;
+
+    private Vector3[] _corners;
+    public bool _freeze = true;
+
+    public bool _include_children = true;
+
+    // Vector3 startingBoundSize;
+    // Vector3 startingBoundCenterLocal;
+    private Vector3 _last_position;
+    private Quaternion _last_rotation;
+
+    [HideInInspector]
+    //public Vector3 startingScale;
+    private Vector3 _last_scale;
+
+    public Color _line_color = new Color (
+                                 0f,
+                                 1f,
+                                 0.4f,
+                                 0.74f);
+
+    private Vector3[,] _lines;
+
+    private Quaternion _rotation;
+
+    public bool _setup_on_awake = true;
+    private Vector3 _top_back_left;
+    private Vector3 _top_back_right;
+
+    private Vector3 _top_front_left;
+    private Vector3 _top_front_right;
 
     public Vector3[] BoundingBoxCoordinates {
       get {
-        return new Vector3[] {
+        return new[] {
           _top_front_left,
           _top_front_right,
           _top_back_left,
@@ -51,40 +73,30 @@ namespace Neodroid.Utilities.BoundingBoxes {
       }
     }
 
-    public Bounds Bounds {
-      get{ return _bounds; }
-    }
+    public Bounds Bounds { get { return _bounds; } }
 
-    public Vector3 Max {
-      get{ return _bounds.max; }
-    }
+    public Vector3 Max { get { return _bounds.max; } }
 
-    public Vector3 Min {
-      get{ return _bounds.min; }
-    }
+    public Vector3 Min { get { return _bounds.min; } }
 
     public string BoundingBoxCoordinatesAsString {
       get {
-        string str_rep = "";
-        str_rep += "\"_top_front_left\":" + BoundingBoxCoordinates [0].ToString () + ", ";
-        str_rep += "\"_top_front_right\":" + BoundingBoxCoordinates [1].ToString () + ", ";
-        str_rep += "\"_top_back_left\":" + BoundingBoxCoordinates [2].ToString () + ", ";
-        str_rep += "\"_top_back_right\":" + BoundingBoxCoordinates [3].ToString () + ", ";
-        str_rep += "\"_bottom_front_left\":" + BoundingBoxCoordinates [4].ToString () + ", ";
-        str_rep += "\"_bottom_front_right\":" + BoundingBoxCoordinates [5].ToString () + ", ";
-        str_rep += "\"_bottom_back_left\":" + BoundingBoxCoordinates [6].ToString () + ", ";
-        str_rep += "\"_bottom_back_right\":" + BoundingBoxCoordinates [7].ToString ();
+        var str_rep = "";
+        str_rep += "\"_top_front_left\":" + BoundingBoxCoordinates [0] + ", ";
+        str_rep += "\"_top_front_right\":" + BoundingBoxCoordinates [1] + ", ";
+        str_rep += "\"_top_back_left\":" + BoundingBoxCoordinates [2] + ", ";
+        str_rep += "\"_top_back_right\":" + BoundingBoxCoordinates [3] + ", ";
+        str_rep += "\"_bottom_front_left\":" + BoundingBoxCoordinates [4] + ", ";
+        str_rep += "\"_bottom_front_right\":" + BoundingBoxCoordinates [5] + ", ";
+        str_rep += "\"_bottom_back_left\":" + BoundingBoxCoordinates [6] + ", ";
+        str_rep += "\"_bottom_back_right\":" + BoundingBoxCoordinates [7];
         return str_rep;
       }
     }
 
-    string JSONifyVec3 (Vector3 vec) {
-      return System.String.Format ("[{0},{1},{2}]", vec.x, vec.y, vec.z);
-    }
-
     public string BoundingBoxCoordinatesAsJSON {
       get {
-        string str_rep = "{";
+        var str_rep = "{";
         str_rep += "\"_top_front_left\":" + JSONifyVec3 (BoundingBoxCoordinates [0]) + ", ";
         str_rep += "\"_bottom_back_right\":" + JSONifyVec3 (BoundingBoxCoordinates [7]);
         str_rep += "}";
@@ -92,33 +104,24 @@ namespace Neodroid.Utilities.BoundingBoxes {
       }
     }
 
-    Vector3 _top_front_left;
-    Vector3 _top_front_right;
-    Vector3 _top_back_left;
-    Vector3 _top_back_right;
-    Vector3 _bottom_front_left;
-    Vector3 _bottom_front_right;
-    Vector3 _bottom_back_left;
-    Vector3 _bottom_back_right;
+    private string JSONifyVec3 (Vector3 vec) {
+      return string.Format (
+        "[{0},{1},{2}]",
+        vec.x,
+        vec.y,
+        vec.z);
+    }
 
-    [HideInInspector]
-    //public Vector3 startingScale;
-        Vector3 _last_scale;
-    // Vector3 startingBoundSize;
-    // Vector3 startingBoundCenterLocal;
-    Vector3 _last_position;
-    Quaternion _last_rotation;
-
-
-    void Reset () {
+    private void Reset () {
       Awake ();
     }
 
-    void Awake () {
+    private void Awake () {
       if (_setup_on_awake) {
         Setup ();
         CalculateBounds ();
       }
+
       _last_position = transform.position;
       _last_rotation = transform.rotation;
       _last_scale = transform.localScale;
@@ -127,7 +130,7 @@ namespace Neodroid.Utilities.BoundingBoxes {
       _children_colliders = GetComponentsInChildren<Collider> ();
     }
 
-    void Setup () {
+    private void Setup () {
       _camera = FindObjectOfType<DrawBoundingBoxOnCamera> ();
       _children_meshes = GetComponentsInChildren<MeshFilter> ();
       _children_colliders = GetComponentsInChildren<Collider> ();
@@ -138,29 +141,32 @@ namespace Neodroid.Utilities.BoundingBoxes {
       RecalculateLines ();
     }
 
-    void LateUpdate () {
-      if (_freeze) {
+    private void LateUpdate () {
+      if (_freeze)
         return;
-      }
-      if (_children_meshes != GetComponentsInChildren<MeshFilter> ()) {
+      if (_children_meshes != GetComponentsInChildren<MeshFilter> ())
         Reset ();
-      }
-      if (_children_colliders != GetComponentsInChildren<Collider> ()) {
+      if (_children_colliders != GetComponentsInChildren<Collider> ())
         Reset ();
-      }
       if (transform.localScale != _last_scale) {
         ScaleBounds ();
         RecalculatePoints ();
       }
-      if (transform.position != _last_position || transform.rotation != _last_rotation || transform.localScale != _last_scale) {
+
+      if (transform.position != _last_position
+          || transform.rotation != _last_rotation
+          || transform.localScale != _last_scale) {
         RecalculateLines ();
         _last_rotation = transform.rotation;
         _last_position = transform.position;
         _last_scale = transform.localScale;
       }
-      if (_camera) {
-        _camera.setOutlines (_lines, _line_color, new Vector3[0, 0]);
-      }
+
+      if (_camera)
+        _camera.setOutlines (
+          _lines,
+          _line_color,
+          new Vector3[0, 0]);
     }
 
     public void ScaleBounds () {
@@ -168,79 +174,131 @@ namespace Neodroid.Utilities.BoundingBoxes {
       //_bounds.center = transform.TransformPoint(startingBoundCenterLocal);
     }
 
-    void FitBoundingBoxToChildrenColliders () {
+    private void FitBoundingBoxToChildrenColliders () {
+      var col = GetComponent<BoxCollider> ();
+      var bounds = new Bounds (
+                     transform.position,
+                     Vector3.zero); // position and size
 
-      var collider = this.GetComponent<BoxCollider> ();
-      Bounds bounds = new Bounds (this.transform.position, Vector3.zero); // position and size
+      if (col)
+        bounds.Encapsulate (col.bounds);
 
-      if (collider)
-        bounds.Encapsulate (collider.bounds);
-
-      if (_include_children) {
-        foreach (var col in _children_colliders) {
-          if (col != collider) {
-            bounds.Encapsulate (col.bounds);
-          }
-        }
-      }
+      if (_include_children)
+        foreach (var child_col in _children_colliders)
+          if (child_col != col)
+            bounds.Encapsulate (child_col.bounds);
 
       _bounds = bounds;
-      _bounds_offset = bounds.center - this.transform.position;
+      _bounds_offset = bounds.center - transform.position;
     }
 
-    void FitBoundingBoxToChildrenRenders () {
-      var bounds = new Bounds (this.transform.position, Vector3.zero); 
+    private void FitBoundingBoxToChildrenRenders () {
+      var bounds = new Bounds (
+                     transform.position,
+                     Vector3.zero);
 
       var mesh = GetComponent<MeshFilter> ();
       if (mesh) {
-        Mesh ms = mesh.sharedMesh;
-        int vc = ms.vertexCount;
-        for (int i = 0; i < vc; i++) {
+        var ms = mesh.sharedMesh;
+        var vc = ms.vertexCount;
+        for (var i = 0; i < vc; i++)
           bounds.Encapsulate (mesh.transform.TransformPoint (ms.vertices [i]));
-        }
       }
 
-      for (int i = 0; i < _children_meshes.Length; i++) {
-        Mesh ms = _children_meshes [i].sharedMesh;
-        int vc = ms.vertexCount;
-        for (int j = 0; j < vc; j++) {
+      for (var i = 0; i < _children_meshes.Length; i++) {
+        var ms = _children_meshes [i].sharedMesh;
+        var vc = ms.vertexCount;
+        for (var j = 0; j < vc; j++)
           bounds.Encapsulate (_children_meshes [i].transform.TransformPoint (ms.vertices [j]));
-        }
       }
 
       _bounds = bounds;
-      _bounds_offset = _bounds.center - this.transform.position;
+      _bounds_offset = _bounds.center - transform.position;
     }
 
-    void CalculateBounds () {
+    private void CalculateBounds () {
       _rotation = transform.rotation;
-      this.transform.rotation = Quaternion.Euler (0f, 0f, 0f);
+      transform.rotation = Quaternion.Euler (
+        0f,
+        0f,
+        0f);
 
-      if (_collider_based) {
+      if (_collider_based)
         FitBoundingBoxToChildrenColliders ();
-      } else {
+      else
         FitBoundingBoxToChildrenRenders ();
-      }
 
       transform.rotation = _rotation;
     }
 
-    void RecalculatePoints () {
+    private void RecalculatePoints () {
+      _bounds.size = new Vector3 (
+        _bounds.size.x * transform.localScale.x / _last_scale.x,
+        _bounds.size.y * transform.localScale.y / _last_scale.y,
+        _bounds.size.z * transform.localScale.z / _last_scale.z);
+      _bounds_offset = new Vector3 (
+        _bounds_offset.x * transform.localScale.x / _last_scale.x,
+        _bounds_offset.y * transform.localScale.y / _last_scale.y,
+        _bounds_offset.z * transform.localScale.z / _last_scale.z);
 
-      _bounds.size = new Vector3 (_bounds.size.x * transform.localScale.x / _last_scale.x, _bounds.size.y * transform.localScale.y / _last_scale.y, _bounds.size.z * transform.localScale.z / _last_scale.z);
-      _bounds_offset = new Vector3 (_bounds_offset.x * transform.localScale.x / _last_scale.x, _bounds_offset.y * transform.localScale.y / _last_scale.y, _bounds_offset.z * transform.localScale.z / _last_scale.z);
+      _top_front_right = _bounds_offset
+      + Vector3.Scale (
+        _bounds.extents,
+        new Vector3 (
+          1,
+          1,
+          1));
+      _top_front_left = _bounds_offset
+      + Vector3.Scale (
+        _bounds.extents,
+        new Vector3 (
+          -1,
+          1,
+          1));
+      _top_back_left = _bounds_offset
+      + Vector3.Scale (
+        _bounds.extents,
+        new Vector3 (
+          -1,
+          1,
+          -1));
+      _top_back_right = _bounds_offset
+      + Vector3.Scale (
+        _bounds.extents,
+        new Vector3 (
+          1,
+          1,
+          -1));
+      _bottom_front_right = _bounds_offset
+      + Vector3.Scale (
+        _bounds.extents,
+        new Vector3 (
+          1,
+          -1,
+          1));
+      _bottom_front_left = _bounds_offset
+      + Vector3.Scale (
+        _bounds.extents,
+        new Vector3 (
+          -1,
+          -1,
+          1));
+      _bottom_back_left = _bounds_offset
+      + Vector3.Scale (
+        _bounds.extents,
+        new Vector3 (
+          -1,
+          -1,
+          -1));
+      _bottom_back_right = _bounds_offset
+      + Vector3.Scale (
+        _bounds.extents,
+        new Vector3 (
+          1,
+          -1,
+          -1));
 
-
-      _top_front_right = _bounds_offset + Vector3.Scale (_bounds.extents, new Vector3 (1, 1, 1));
-      _top_front_left = _bounds_offset + Vector3.Scale (_bounds.extents, new Vector3 (-1, 1, 1));
-      _top_back_left = _bounds_offset + Vector3.Scale (_bounds.extents, new Vector3 (-1, 1, -1));
-      _top_back_right = _bounds_offset + Vector3.Scale (_bounds.extents, new Vector3 (1, 1, -1));
-      _bottom_front_right = _bounds_offset + Vector3.Scale (_bounds.extents, new Vector3 (1, -1, 1));
-      _bottom_front_left = _bounds_offset + Vector3.Scale (_bounds.extents, new Vector3 (-1, -1, 1));
-      _bottom_back_left = _bounds_offset + Vector3.Scale (_bounds.extents, new Vector3 (-1, -1, -1));
-      _bottom_back_right = _bounds_offset + Vector3.Scale (_bounds.extents, new Vector3 (1, -1, -1));
-
-      _corners = new Vector3[] {
+      _corners = new[] {
         _top_front_right,
         _top_front_left,
         _top_back_left,
@@ -250,74 +308,71 @@ namespace Neodroid.Utilities.BoundingBoxes {
         _bottom_back_left,
         _bottom_back_right
       };
-
     }
 
-    void RecalculateLines () {
+    private void RecalculateLines () {
+      var rot = transform.rotation;
+      var pos = transform.position;
 
-      Quaternion rot = transform.rotation;
-      Vector3 pos = transform.position;
-
-      List<Vector3[]> lines = new List<Vector3[]> ();
+      var lines = new List<Vector3[]> ();
       //int linesCount = 12;
 
-      Vector3[] line;
-      for (int i = 0; i < 4; i++) {
-
+      for (var i = 0; i < 4; i++) {
         //width
-        line = new Vector3[] {
-          rot * _corners [2 * i] + pos,
-          rot * _corners [2 * i + 1] + pos
-        };
+        var line = new[] {
+                                 rot * _corners [2 * i] + pos,
+                                 rot * _corners [2 * i + 1] + pos
+                               };
         lines.Add (line);
 
         //height
-        line = new Vector3[] {
+        line = new[] {
           rot * _corners [i] + pos,
           rot * _corners [i + 4] + pos
         };
         lines.Add (line);
 
         //depth
-        line = new Vector3[] {
+        line = new[] {
           rot * _corners [2 * i] + pos,
           rot * _corners [2 * i + 3 - 4 * (i % 2)] + pos
         };
         lines.Add (line);
-
       }
+
       _lines = new Vector3[lines.Count, 2];
-      for (int j = 0; j < lines.Count; j++) {
-        _lines [j, 0] = lines [j] [0];
-        _lines [j, 1] = lines [j] [1];
+      for (var j = 0; j < lines.Count; j++) {
+        _lines [j,
+          0] = lines [j] [0];
+        _lines [j,
+          1] = lines [j] [1];
       }
     }
 
-    void OnMouseDown () {
+    private void OnMouseDown () {
       //if (_permanent)
       //  return;
       enabled = !enabled;
     }
 
     #if UNITY_EDITOR
-    void OnValidate () {
+    private void OnValidate() {
       if (EditorApplication.isPlaying)
         return;
-      Initialise ();
+      Initialise();
     }
-
 
     #endif
 
-    void OnDrawGizmos () {
-
+    private void OnDrawGizmos () {
       Gizmos.color = _line_color;
-      if (_lines != null) {
-        for (int i = 0; i < _lines.GetLength (0); i++) {
-          Gizmos.DrawLine (_lines [i, 0], _lines [i, 1]);
-        }
-      }
+      if (_lines != null)
+        for (var i = 0; i < _lines.GetLength (0); i++)
+          Gizmos.DrawLine (
+            _lines [i,
+              0],
+            _lines [i,
+              1]);
     }
-
   }
 }

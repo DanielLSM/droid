@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Neodroid.Utilities {
-
-  [CreateAssetMenu (fileName = "Curriculum", menuName = "Neodroid/ScriptableObjects/Curriculum", order = 1)]
+  [CreateAssetMenu (
+    fileName = "Curriculum",
+    menuName = "Neodroid/ScriptableObjects/Curriculum",
+    order = 1)]
   public class Curriculum : ScriptableObject {
     public Level[] _levels;
   }

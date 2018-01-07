@@ -1,139 +1,99 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Neodroid.Segmentation
-{
+namespace Neodroid.Segmentation {
+  [ExecuteInEditMode]
+  public class ChangeMaterialOnRenderByInstance : MonoBehaviour {
+    private Renderer[] _all_renders;
+    private MaterialPropertyBlock _block;
 
-    [ExecuteInEditMode]
-    public class ChangeMaterialOnRenderByInstance : MonoBehaviour
-    {
+    private LinkedList<Color>[] _original_colors;
 
-        public bool _use_shared_materials = false;
+    public Dictionary<GameObject, Color> InstanceColorsDict { get; private set; }
 
-        Dictionary<GameObject, Color> _instance_colors;
-        LinkedList<Color>[] _original_colors;
-        Renderer[] _all_renders;
-        MaterialPropertyBlock _block;
+    public SegmentationColorByInstance[] InstanceColors {
+      get {
+        if (InstanceColorsDict != null) {
+          var instance_color_array = new SegmentationColorByInstance[InstanceColorsDict.Keys.Count];
+          var i = 0;
+          foreach (var key in InstanceColorsDict.Keys) {
+            var seg = new SegmentationColorByInstance {
+                                                        game_object = key,
+                                                        color = InstanceColorsDict[key]
+                                                      };
+            instance_color_array[i] = seg;
+            i++;
+          }
 
-        public Dictionary<GameObject, Color> InstanceColorsDict {
-            get { return _instance_colors; }
+          return instance_color_array;
         }
 
-        public SegmentationColorByInstance[] InstanceColors {
-            get {
-                if (_instance_colors != null)
-                {
-                    var instance_color_array = new SegmentationColorByInstance[_instance_colors.Keys.Count];
-                    int i = 0;
-                    foreach (var key in _instance_colors.Keys)
-                    {
-                        var seg = new SegmentationColorByInstance();
-                        seg.game_object = key;
-                        seg.color = _instance_colors[key];
-                        instance_color_array[i] = seg;
-                        i++;
-                    }
-                    return instance_color_array;
-                }
-                return null;
-            }
-
-            set {
-                foreach (SegmentationColorByInstance seg in value)
-                {
-                    _instance_colors[seg.game_object] = seg.color;
-                }
-            }
-        }
-
-        // Use this for initialization
-        void Start()
-        {
-            Setup();
-        }
-
-        void Awake()
-        {
-            Setup();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            if (_instance_colors == null)
-                Setup();
-            else if (_instance_colors.Keys.Count != FindObjectsOfType<Renderer>().Length)
-            {
-                Setup();
-            }
-        }
-
-        void Setup()
-        {
-            _all_renders = FindObjectsOfType<Renderer>();
-            _block = new MaterialPropertyBlock();
-
-            _instance_colors = new Dictionary<GameObject, Color>(_all_renders.Length);
-            foreach (Renderer renderer in _all_renders)
-            {
-                _instance_colors.Add(renderer.gameObject, Random.ColorHSV());
-            }
-
-
-        }
-
-        void Change()
-        {
-            _original_colors = new LinkedList<Color>[_all_renders.Length];
-
-            for (int i = 0; i < _original_colors.Length; i++)
-            {
-                _original_colors[i] = new LinkedList<Color>();
-            }
-
-            for (int i = 0; i < _all_renders.Length; i++)
-            {
-                foreach (var mat in _all_renders[i].sharedMaterials)
-                {
-                    if (mat != null)
-                    {
-                        _original_colors[i].AddFirst(mat.color);
-                    }
-                    _block.SetColor("_Color", _instance_colors[_all_renders[i].gameObject]);
-                    _all_renders[i].SetPropertyBlock(_block);
-                }
-
-            }
-        }
-
-        void Restore()
-        {
-            for (int i = 0; i < _all_renders.Length; i++)
-            {
-                foreach (var mat in _all_renders[i].sharedMaterials)
-                {
-                    if (mat != null)
-                    {
-                        _block.SetColor("_Color", _original_colors[i].Last.Value);
-                        _original_colors[i].RemoveLast();
-                        _all_renders[i].SetPropertyBlock(_block);
-                    }
-                }
-            }
-        }
-
-        void OnPreRender()
-        { // change
-            Change();
-        }
-
-        void OnPostRender()
-        { // change back
-            Restore();
-        }
-
-
-
+        return null;
+      }
+      set {
+        foreach (var seg in value) InstanceColorsDict[seg.game_object] = seg.color;
+      }
     }
+
+    // Use this for initialization
+    private void Start() { Setup(); }
+
+    private void Awake() { Setup(); }
+
+    // Update is called once per frame
+    private void Update() {
+      if (InstanceColorsDict == null)
+        Setup();
+      else if (InstanceColorsDict.Keys.Count != FindObjectsOfType<Renderer>().Length)
+        Setup();
+    }
+
+    private void Setup() {
+      _all_renders = FindObjectsOfType<Renderer>();
+      _block = new MaterialPropertyBlock();
+
+      InstanceColorsDict = new Dictionary<GameObject, Color>(_all_renders.Length);
+      foreach (var rend in _all_renders)
+        InstanceColorsDict.Add(
+                               rend.gameObject,
+                               Random.ColorHSV());
+    }
+
+    private void Change() {
+      _original_colors = new LinkedList<Color>[_all_renders.Length];
+
+      for (var i = 0; i < _original_colors.Length; i++) _original_colors[i] = new LinkedList<Color>();
+
+      for (var i = 0; i < _all_renders.Length; i++)
+        foreach (var mat in _all_renders[i].sharedMaterials) {
+          if (mat != null) _original_colors[i].AddFirst(mat.color);
+          _block.SetColor(
+                          "_Color",
+                          InstanceColorsDict[_all_renders[i].gameObject]);
+          _all_renders[i].SetPropertyBlock(_block);
+        }
+    }
+
+    private void Restore() {
+      for (var i = 0; i < _all_renders.Length; i++)
+        foreach (var mat in _all_renders[i].sharedMaterials)
+          if (mat != null) {
+            _block.SetColor(
+                            "_Color",
+                            _original_colors[i].Last.Value);
+            _original_colors[i].RemoveLast();
+            _all_renders[i].SetPropertyBlock(_block);
+          }
+    }
+
+    private void OnPreRender() {
+      // change
+      Change();
+    }
+
+    private void OnPostRender() {
+      // change back
+      Restore();
+    }
+  }
 }

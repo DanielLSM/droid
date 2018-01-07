@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿
+using SceneSpecificAssets.Grasping.Utilities;
 
-namespace SceneSpecificAssets.Grasping.Utilities {
-
+namespace Assets.SceneAssets.ScripterGrasper.Utilities {
   #region Enums
+
   public enum MotionState {
     IsAtRest,
     WasMoving,
@@ -22,9 +23,8 @@ namespace SceneSpecificAssets.Grasping.Utilities {
     Closed,
     Open,
     Closing,
-    Opening}
-
-  ;
+    Opening
+  }
 
   public enum ClawState {
     TouchingTarget,
@@ -41,31 +41,89 @@ namespace SceneSpecificAssets.Grasping.Utilities {
   #endregion
 
   public class States {
+    private ClawState _current_claw_1_state,
+      _current_claw_2_state;
 
-    public MotionState GetMotionState<T> (T[] objects, MotionState previous_state, float sensitivity = 0.1f) where T : MotionTracker {
-      foreach (var o in objects) {
+    private GripperState _current_gripper_state;
+    private PathFindingState _current_path_finding_state;
+
+    private TargetState _current_target_state;
+
+    private MotionState _obstruction_motion_state,
+      _target_motion_state;
+
+    private readonly System.Action _on_state_update_callback;
+
+    public States (System.Action on_state_update_callback = null) { 
+      _on_state_update_callback = on_state_update_callback;
+    }
+
+    public ClawState Claw1State {
+      get { return _current_claw_1_state; }
+      set {
+        _current_claw_1_state = value;
+        _on_state_update_callback ();
+      }
+    }
+
+    public ClawState Claw2State {
+      get { return _current_claw_2_state; }
+      set {
+        _current_claw_2_state = value;
+        _on_state_update_callback ();
+      }
+    }
+
+    public TargetState TargetState {
+      get { return _current_target_state; }
+      set {
+        _current_target_state = value;
+        _on_state_update_callback ();
+      }
+    }
+
+    public GripperState GripperState {
+      get { return _current_gripper_state; }
+      set {
+        _current_gripper_state = value;
+        _on_state_update_callback ();
+      }
+    }
+
+    public PathFindingState PathFindingState {
+      get { return _current_path_finding_state; }
+      set {
+        _current_path_finding_state = value;
+        _on_state_update_callback ();
+      }
+    }
+
+    public MotionState ObstructionMotionState {
+      get { return _obstruction_motion_state; }
+      set {
+        _obstruction_motion_state = value;
+        _on_state_update_callback ();
+      }
+    }
+
+    public MotionState TargetMotionState {
+      get { return _target_motion_state; }
+      set {
+        _target_motion_state = value;
+        _on_state_update_callback ();
+      }
+    }
+
+    public MotionState GetMotionState<T> (
+      T[] objects,
+      MotionState previous_state,
+      float sensitivity = 0.1f)
+      where T : MotionTracker {
+      foreach (var o in objects)
         if (o.IsInMotion (sensitivity))
           return MotionState.IsMoving;
-      }
 
-      if (previous_state != MotionState.IsMoving) {
-        return MotionState.IsAtRest;
-      }
-
-      return MotionState.WasMoving;
-    }
-
-    System.Action _on_state_update_callback;
-
-    public States (System.Action on_state_update_callback = null) {
-      if (on_state_update_callback != null)
-        _on_state_update_callback = on_state_update_callback;
-      else
-        _on_state_update_callback = null_print;
-    }
-
-    void null_print () {
-      Debug.Log ("null");
+      return previous_state != MotionState.IsMoving ? MotionState.IsAtRest : MotionState.WasMoving;
     }
 
     public void TargetIsGrabbed () {
@@ -135,11 +193,15 @@ namespace SceneSpecificAssets.Grasping.Utilities {
     }
 
     public bool IsTargetTouchingAndInsideRegion () {
-      return Claw1State == ClawState.TouchingTarget && Claw2State == ClawState.TouchingTarget && TargetState == TargetState.InsideRegion;
+      return Claw1State == ClawState.TouchingTarget
+      && Claw2State == ClawState.TouchingTarget
+      && TargetState == TargetState.InsideRegion;
     }
 
     public bool IsTargetInsideRegionOrTouching () {
-      return Claw1State == ClawState.TouchingTarget || Claw2State == ClawState.TouchingTarget || TargetState == TargetState.InsideRegion;
+      return Claw1State == ClawState.TouchingTarget
+      || Claw2State == ClawState.TouchingTarget
+      || TargetState == TargetState.InsideRegion;
     }
 
     public bool IsGripperOpen () {
@@ -174,7 +236,6 @@ namespace SceneSpecificAssets.Grasping.Utilities {
       //TargetIsNotGrabbed();
     }
 
-
     public void Claw2IsTouchingTarget () {
       Claw2State = ClawState.TouchingTarget;
     }
@@ -203,68 +264,6 @@ namespace SceneSpecificAssets.Grasping.Utilities {
       PathFindingState = PathFindingState.WaitingForTarget;
       Claw1State = ClawState.NotTouchingTarget;
       Claw2State = ClawState.NotTouchingTarget;
-    }
-
-    private TargetState _current_target_state;
-    private MotionState _obstruction_motion_state, _target_motion_state;
-    private PathFindingState _current_path_finding_state;
-    private GripperState _current_gripper_state;
-    private ClawState _current_claw_1_state, _current_claw_2_state;
-
-    public ClawState Claw1State {
-      get { return _current_claw_1_state; }
-      set {
-        _current_claw_1_state = value;
-        _on_state_update_callback ();
-      }
-    }
-
-    public ClawState Claw2State {
-      get { return _current_claw_2_state; }
-      set {
-        _current_claw_2_state = value;
-        _on_state_update_callback ();
-      }
-    }
-
-    public TargetState TargetState {
-      get { return _current_target_state; }
-      set {
-        _current_target_state = value;
-        _on_state_update_callback ();
-      }
-    }
-
-    public GripperState GripperState {
-      get { return _current_gripper_state; }
-      set {
-        _current_gripper_state = value;
-        _on_state_update_callback ();
-      }
-    }
-
-    public PathFindingState PathFindingState {
-      get { return _current_path_finding_state; }
-      set {
-        _current_path_finding_state = value;
-        _on_state_update_callback ();
-      }
-    }
-
-    public MotionState ObstructionMotionState {
-      get { return _obstruction_motion_state; }
-      set {
-        _obstruction_motion_state = value;
-        _on_state_update_callback ();
-      }
-    }
-
-    public MotionState TargetMotionState {
-      get { return _target_motion_state; }
-      set {
-        _target_motion_state = value;
-        _on_state_update_callback ();
-      }
     }
   }
 }

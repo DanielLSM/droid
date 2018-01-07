@@ -1,72 +1,80 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Neodroid.Managers;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
-using Neodroid.Managers;
 
 namespace Neodroid.Windows {
   #if UNITY_EDITOR
-  using UnityEditor.AnimatedValues;
-  using UnityEditor;
-
   public class DemonstrationWindow : EditorWindow {
+    private SimulationManager _environment_manager;
+    private Texture _icon;
+    private int capturedFrame;
 
-    [MenuItem ("Neodroid/DemonstrationWindow")]
-    public static void ShowWindow () {
-  EditorWindow.GetWindow (typeof(DemonstrationWindow));      //Show existing window instance. If one doesn't exist, make one.
+    private string fileName = "Demonstration/frame";
+    private float lastFrameTime;
+    private string recordButton = "Record";
+    private bool recording;
+
+    private string status = "Idle";
+
+    [MenuItem("Neodroid/DemonstrationWindow")]
+    public static void ShowWindow() {
+      GetWindow(
+                typeof(DemonstrationWindow)); //Show existing window instance. If one doesn't exist, make one.
     }
 
-    SimulationManager _environment_manager;
-    Texture _icon;
-
-    void OnEnable () {
-      _icon = (Texture2D)AssetDatabase.LoadAssetAtPath ("Assets/Neodroid/Icons/bullet_red.png", typeof(Texture2D));
-      this.titleContent = new GUIContent ("Neo:Rec", _icon, "Window for recording demonstrations");
+    private void OnEnable() {
+      _icon = (Texture2D)AssetDatabase.LoadAssetAtPath(
+                                                       "Assets/Neodroid/Icons/bullet_red.png",
+                                                       typeof(Texture2D));
+      titleContent = new GUIContent(
+                                    "Neo:Rec",
+                                    _icon,
+                                    "Window for recording demonstrations");
     }
 
+    public void OnInspectorUpdate() { Repaint(); }
 
-    public void OnInspectorUpdate () {
-      this.Repaint ();
-    }
+    private void OnGUI() {
+      fileName = EditorGUILayout.TextField(
+                                           "File Name:",
+                                           fileName);
 
-    string fileName = "Demonstration/frame";
-
-    string status = "Idle";
-    string recordButton = "Record";
-    bool recording = false;
-    float lastFrameTime = 0.0f;
-    int capturedFrame = 0;
-
-    void OnGUI () {
-      fileName = EditorGUILayout.TextField ("File Name:", fileName);
-
-      if (GUILayout.Button (recordButton)) {
-        if (recording) {  //recording
+      if (GUILayout.Button(recordButton))
+        if (recording) {
+          //recording
           status = "Idle...";
           recordButton = "Record";
           recording = false;
-        } else {     // idle
+        } else {
+          // idle
           capturedFrame = 0;
           recordButton = "Stop";
           recording = true;
         }
-      }
-      EditorGUILayout.LabelField ("Status: ", status);
+
+      EditorGUILayout.LabelField(
+                                 "Status: ",
+                                 status);
     }
 
-    void Update () {
-      if (recording) {
+    private void Update() {
+      if (recording)
         if (EditorApplication.isPlaying && !EditorApplication.isPaused) {
-          RecordImages ();
-          Repaint ();
-        } else
+          RecordImages();
+          Repaint();
+        } else {
           status = "Waiting for Editor to Play";
-      }
+        }
     }
 
-    void RecordImages () {
-      if (lastFrameTime < Time.time + (1 / 24f)) { // 24fps
+    private void RecordImages() {
+      if (lastFrameTime < Time.time + 1 / 24f) {
+        // 24fps
         status = "Captured frame" + capturedFrame;
-        ScreenCapture.CaptureScreenshot (fileName + capturedFrame + ".png");
+        ScreenCapture.CaptureScreenshot(fileName + capturedFrame + ".png");
         capturedFrame++;
         lastFrameTime = Time.time;
       }

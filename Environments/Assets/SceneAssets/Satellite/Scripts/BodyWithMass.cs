@@ -1,68 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 [RequireComponent(typeof(Rigidbody))]
 public class BodyWithMass : MonoBehaviour {
+  private const float GRAVITATIONAL_CONSTANT = 667.4f;
 
-  const float GRAVITATIONAL_CONSTANT = 667.4f;
+  private static BodyWithMass[] _attractors;
 
-  static BodyWithMass[] _attractors;
+  private Rigidbody _rigidbody;
 
-	Rigidbody _rigidbody;
+  public float Mass { get { return _rigidbody.mass; } }
 
-  void Start(){
-    if (!_rigidbody) {
-      _rigidbody = GetComponent<Rigidbody> ();
-    }
-    if (_attractors == null) {
-      _attractors = FindObjectsOfType<BodyWithMass> ();
-    }
+  private void Start() {
+    if (!_rigidbody) _rigidbody = GetComponent<Rigidbody>();
+    if (_attractors == null) _attractors = FindObjectsOfType<BodyWithMass>();
   }
 
-  void Update(){
-    if (!_rigidbody) {
-      _rigidbody = GetComponent<Rigidbody> ();
-    }
-    if (_attractors == null) {
-      _attractors = FindObjectsOfType<BodyWithMass> ();
-    }
+  private void Update() {
+    if (!_rigidbody) _rigidbody = GetComponent<Rigidbody>();
+    if (_attractors == null) _attractors = FindObjectsOfType<BodyWithMass>();
   }
 
-	void FixedUpdate ()	{
-		foreach (BodyWithMass attractor in _attractors){
-			if (attractor != this)
-				Attract(attractor);
-		}
-	}
-
-  public float Mass{
-    get{ return _rigidbody.mass; }
+  private void FixedUpdate() {
+    foreach (var attractor in _attractors)
+      if (attractor != this)
+        Attract(attractor);
   }
 
-  void Attract (BodyWithMass other_body)	{
-
-    Vector3 direction = this.transform.position - other_body.transform.position;
+  private void Attract(BodyWithMass other_body) {
+    var direction = transform.position - other_body.transform.position;
     //float distance = direction.sqrMagnitude;
-    float distance = direction.magnitude;
+    var distance = direction.magnitude;
 
-    if (Mathf.Approximately (distance, 0)) {
-      return;
-    }
-      
-    var nom = (this.Mass * other_body.Mass);
+    if (Mathf.Approximately(
+                            distance,
+                            0)) return;
+
+    var nom = Mass * other_body.Mass;
     var denom = distance * distance;
 
-    float force_magnitude =  nom / denom;
+    var force_magnitude = nom / denom;
     force_magnitude *= GRAVITATIONAL_CONSTANT;
-		Vector3 force = direction.normalized * force_magnitude;
+    var force = direction.normalized * force_magnitude;
 
     other_body.ApplyForce(force);
-	}
-
-  public void ApplyForce(Vector3 force){
-    _rigidbody.AddForce (force);
   }
 
+  public void ApplyForce(Vector3 force) { _rigidbody.AddForce(force); }
 }

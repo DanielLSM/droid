@@ -1,22 +1,22 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
+
 namespace Neodroid.Utilities {
+  public static class CreatePlayerMotions {
+    [MenuItem("Neodroid/Create/ScriptableObjects/PlayerMotions")]
+    public static void CreatePlayerMotionsAsset() {
+      var asset = ScriptableObject.CreateInstance<PlayerMotions>();
 
-    public class CreatePlayerMotions
-    {
-[MenuItem("Neodroid/Create/ScriptableObjects/PlayerMotions")]
-        public static void CreatePlayerMotionsAsset()
-        {
-            var asset = ScriptableObject.CreateInstance<PlayerMotions>();
+      AssetDatabase.CreateAsset(
+                                asset,
+                                "Assets/NewPlayerMotions.asset");
+      AssetDatabase.SaveAssets();
 
-            AssetDatabase.CreateAsset(asset, "Assets/NewPlayerMotions.asset");
-            AssetDatabase.SaveAssets();
+      EditorUtility.FocusProjectWindow();
 
-            EditorUtility.FocusProjectWindow();
-
-            Selection.activeObject = asset;
-        }
+      Selection.activeObject = asset;
     }
+  }
 }
 #endif

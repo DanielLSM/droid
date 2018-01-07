@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 namespace Neodroid.Utilities {
-  [CreateAssetMenu (fileName = "PlayerMotions", menuName = "Neodroid/ScriptableObjects/PlayerMotions", order = 1)]
+  [CreateAssetMenu (
+    fileName = "PlayerMotions",
+    menuName = "Neodroid/ScriptableObjects/PlayerMotions",
+    order = 1)]
   public class PlayerMotions : ScriptableObject {
     public PlayerMotion[] _player_motions;
   }
@@ -16,5 +16,4 @@ namespace Neodroid.Utilities {
     public string motor;
     public float strength;
   }
-
 }

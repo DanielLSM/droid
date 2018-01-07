@@ -1,0 +1,2035 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e8882f26-cbc8-4918-9507-75565eaac484" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Environments" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="SegmentationWindow.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SegmentationWindow.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="14" column="48" lean-forward="false" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+              <folding>
+                <marker date="1515355093333" expanded="true" signature="6:91" ph="..." />
+                <marker date="1515355093333" expanded="true" signature="120:4276" ph="{...}" />
+                <marker date="1515355093333" expanded="true" signature="190:4265" ph="{...}" />
+                <marker date="1515355093333" expanded="true" signature="514:648" ph="{...}" />
+                <marker date="1515355093333" expanded="true" signature="678:1103" ph="{...}" />
+                <marker date="1515355093333" expanded="true" signature="1130:4261" ph="{...}" />
+                <marker date="1515355093333" expanded="true" signature="1618:2853" ph="{...}" />
+                <marker date="1515355093333" expanded="true" signature="2899:3307" ph="/* var material_changer = FindObjectOfType&lt;ChangeMaterialOnRenderByTag&gt; (); ... */" />
+                <marker date="1515355093333" expanded="true" signature="3607:4086" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>_low_limit</find>
+      <find>using</find>
+    </findStrings>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/PlayerControls/PlayerReactions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Actors/Actor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/AutoMobileShaderSwitch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ScriptableObjects/Curriculum.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializedPropertyExtension.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/Example.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/ActivateTrigger.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/MessageServer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionary.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/DragRigidbody.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/WaypointCircuit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/SimulationManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/EnvironmentDescription.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/FestoBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Grasps/Grasp.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/General/NeodroidManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/Traction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/ReactionParameters.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SegmentationWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/PlayerMotions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Utilities.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/Curriculum.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/NeodroidTask.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/PunishmentFunction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/States.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/TiltInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/GUIControl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/JointFix.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/PickUpBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/AxisTouchButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ObstacleSpawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Environments/LearningEnvironment.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ScriptedGripper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Tasks/TaskSequence.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/VirtualInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimedRespawn.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/CrossPlatformInputManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Testing/DrawSpaces.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/NotUsed/ImageRecorder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/Path.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/PathFinding.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/EulerTransformConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/BezierCurve.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/HasRegister.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/RigidbodyConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SimulationConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/ChangeMaterialOnRenderByInstance.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SingleEulerTransformConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/ConfigurableGameObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/Difficulty.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/BoundingBox.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/NotUsed/BoundingBoxUtilities.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/SynchroniseCameraProperties.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/FlowCamera.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/IgnoreLightSource.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/TimedObjectActivator.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/PlatformSpecificContent.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/MobileControlRig.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/FestoBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/GUIControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/BezierCurve.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/Traction.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Grasps/Grasp.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/DragRigidbody.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/States.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ScriptedGripper.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/TimedObjectActivator.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/ActivateTrigger.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Tasks/TaskSequence.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimedRespawn.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/NotUsed/ImageRecorder.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/SynchroniseCameraProperties.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Managers/SimulationManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/WaypointCircuit.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/IgnoreLightSource.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Environments/LearningEnvironment.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/PickUpBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/ReactionParameters.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ObstacleSpawner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/BoundingBox.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Testing/DrawSpaces.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/HasRegister.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/PathFinding.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionary.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/ChangeMaterialOnRenderByInstance.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/PlayerControls/PlayerReactions.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/FlowCamera.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/MessageServer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Managers/General/NeodroidManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SingleEulerTransformConfigurable.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/Path.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/AxisTouchButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Utilities.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SimulationConfigurable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/JointFix.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/PunishmentFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SegmentationWindow.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/Example.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/PlayerMotions.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/NeodroidTask.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/Curriculum.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/Difficulty.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/EulerTransformConfigurable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Actors/Actor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/RigidbodyConfigurable.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="24" />
+    <option name="y" value="25" />
+    <option name="width" value="936" />
+    <option name="height" value="1031" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>AsciiDoc</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="SolutionExplorer" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource SolutionExplorer="true" />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="SolutionExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Actors" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Configurables" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Configurables" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="General" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Environments" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Evaluation" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Managers" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Managers" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="General" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Motors" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Motors" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="WheelColliderMotor" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Messaging" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Messaging" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="FBS" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Messaging" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Messages" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="UnityEditor" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="UnityEditor" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ScriptableObjects" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="UnityEditor" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Windows" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="BoundingBoxes" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="BoundingBoxes" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="NotUsed" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Interfaces" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="NeodroidCamera" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="PlayerControls" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ScriptableObjects" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Segmentation" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SerialisableDictionary" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Tasks" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Testing" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Robolab" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Robolab" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Robolab" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Standard Assets" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Robolab" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Standard Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="CrossPlatformInput" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Robolab" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Standard Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="CrossPlatformInput" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Robolab" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Standard Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utility" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ScripterGrasper" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ScripterGrasper" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Grasps" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ScripterGrasper" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Navigation" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ScripterGrasper" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ScripterGrasper" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ScripterGrasper" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="DataCollection" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="SceneAssets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ScripterGrasper" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="DataCollection" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="NotUsed" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scenes" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scenes" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Experiments" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scenes" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Experiments" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Rigidbodies" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-file-system" value="false" />
+        <option name="show-all-items" value="false" />
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8882f26-cbc8-4918-9507-75565eaac484" name="Default" comment="" />
+      <created>1515344368731</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1515344368731</updated>
+      <workItem from="1515344369893" duration="8025000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="8025000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="24" y="25" width="1874" height="1062" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38314176" sideWeight="0.5035678" order="14" side_tool="true" content_ui="tabs" />
+      <window_info id="Unit Tests" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20470718" sideWeight="0.5035678" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32877463" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="NuGet" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26929393" sideWeight="0.5035678" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20470718" sideWeight="0.49643221" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38314176" sideWeight="0.49643221" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20470718" sideWeight="0.5035678" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39979124" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298687" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="0" y="0" width="418" height="862" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Concurrent Activities Diagram" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/TimedObjectActivator.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="39" column="27" lean-forward="false" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
+          <folding>
+            <marker date="1515355345577" expanded="false" signature="0:116" ph="..." />
+            <marker date="1515355345577" expanded="true" signature="164:1740" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="218:1738" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="243:329" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="401:1052" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="478:1046" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1100:1195" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1245:1341" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1392:1514" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1558:1651" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1697:1734" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1790:7276" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1920:7265" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2098:6981" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2750:5469" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2962:5461" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="4331:4770" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="5369:5451" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="6238:6855" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="6317:6847" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="6404:6837" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="6630:6825" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="7074:7261" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/AutoMobileShaderSwitch.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="143" column="18" lean-forward="false" selection-start-line="143" selection-start-column="18" selection-end-line="143" selection-end-column="18" />
+          <folding>
+            <marker date="1515355345577" expanded="false" signature="0:55" ph="..." />
+            <marker date="1515355345577" expanded="true" signature="103:2332" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="159:2330" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="293:2046" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2106:2190" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2244:2326" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2382:6668" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2530:6657" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2708:6379" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3160:3299" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3325:3461" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3488:3613" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3765:5770" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3895:5684" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="4212:4386" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="4467:5380" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="4616:5364" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="6472:6653" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/ActivateTrigger.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="26" lean-forward="false" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+          <folding>
+            <marker date="1515355345573" expanded="true" signature="0:54" ph="..." />
+            <marker date="1515355345573" expanded="true" signature="94:2502" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="143:2500" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="149:249" ph="/* A multi-purpose script which causes an action to occur when ... */" />
+            <marker date="1515355345573" expanded="true" signature="271:587" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="891:2422" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="962:2416" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="1251:2408" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="1510:1778" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/TiltInput.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="34" column="8" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
+          <folding>
+            <marker date="1515355345573" expanded="false" signature="0:55" ph="..." />
+            <marker date="1515355345573" expanded="true" signature="114:2713" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="211:2711" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="285:330" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="596:825" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="659:819" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="853:2401" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="956:1524" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="1806:2395" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="2507:2707" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="2539:2638" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="2774:4567" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="2916:4556" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="3011:4552" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="3404:3502" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="3529:3620" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="3690:3899" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="3755:3811" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="3836:3890" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="3981:4436" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Tasks/TaskSequence.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="7" lean-forward="false" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+          <folding>
+            <marker date="1515351487373" expanded="true" signature="6:92" ph="..." />
+            <marker date="1515351487373" expanded="true" signature="118:922" ph="{...}" />
+            <marker date="1515351487373" expanded="true" signature="187:920" ph="{...}" />
+            <marker date="1515351487373" expanded="true" signature="336:710" ph="{...}" />
+            <marker date="1515351487373" expanded="true" signature="392:582" ph="{...}" />
+            <marker date="1515351487373" expanded="true" signature="840:916" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimedRespawn.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="41" column="78" lean-forward="false" selection-start-line="41" selection-start-column="78" selection-end-line="41" selection-end-column="78" />
+          <folding>
+            <marker date="1515351533569" expanded="false" signature="6:113" ph="..." />
+            <marker date="1515351533569" expanded="true" signature="179:4092" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="225:4090" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="580:1902" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="2173:2323" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="2227:2317" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="2365:2734" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="2776:3036" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="2820:2919" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="2927:3030" ph="/* _rigid_body.isKinematic = true; ... */" />
+            <marker date="1515351533569" expanded="true" signature="3075:3337" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="3119:3219" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="3227:3331" ph="/* _rigid_body.isKinematic = false; ... */" />
+            <marker date="1515351533569" expanded="true" signature="3383:3663" ph="{...}" />
+            <marker date="1515351533569" expanded="true" signature="3840:3931" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/NotUsed/ImageRecorder.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <folding>
+            <marker date="1515351556881" expanded="false" signature="6:35" ph="..." />
+            <marker date="1515351556881" expanded="true" signature="109:1759" ph="{...}" />
+            <marker date="1515351556881" expanded="true" signature="156:1757" ph="{...}" />
+            <marker date="1515351556881" expanded="true" signature="313:382" ph="{...}" />
+            <marker date="1515351556881" expanded="true" signature="410:581" ph="{...}" />
+            <marker date="1515351556881" expanded="true" signature="665:905" ph="{...}" />
+            <marker date="1515351556881" expanded="true" signature="969:1753" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+          <folding>
+            <marker date="1515351597369" expanded="false" signature="6:53" ph="..." />
+            <marker date="1515351597369" expanded="true" signature="81:1061" ph="{...}" />
+            <marker date="1515351597369" expanded="true" signature="164:1059" ph="{...}" />
+            <marker date="1515351597369" expanded="true" signature="246:335" ph="{...}" />
+            <marker date="1515351597369" expanded="true" signature="481:540" ph="{...}" />
+            <marker date="1515351597369" expanded="true" signature="684:1055" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ScriptedGripper.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="730">
+          <caret line="109" column="28" lean-forward="false" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="28" />
+          <folding>
+            <marker date="1515355345577" expanded="false" signature="0:346" ph="..." />
+            <marker date="1515355345577" expanded="true" signature="387:22436" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="436:22434" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="442:4062" ph="Helpers" />
+            <marker date="1515355345577" expanded="true" signature="520:4046" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="560:3198" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="858:937" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1524:1582" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1776:1971" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2248:2712" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2296:2700" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3234:3467" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3520:3661" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3714:4012" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="4068:4534" ph="PrivateMembers" />
+            <marker date="1515355345577" expanded="true" signature="4540:5507" ph="PublicMembers" />
+            <marker date="1515355345577" expanded="true" signature="5513:6898" ph="Setup" />
+            <marker date="1515355345577" expanded="true" signature="5570:5999" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="5647:5768" ph="/* _environment_size = agent_bounds.size.magnitude; ... */" />
+            <marker date="1515355345577" expanded="true" signature="6037:6882" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="6904:8446" ph="UnityCallbacks" />
+            <marker date="1515355345577" expanded="true" signature="6953:7420" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="7448:8430" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="8452:12025" ph="StateTransitions" />
+            <marker date="1515355345577" expanded="true" signature="8524:8887" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="8926:9339" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="9388:9801" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="9843:10045" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="10092:10598" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="10100:10283" ph="/* Vector3 current_motor_position = _motor.transform.localPosition; ... */" />
+            <marker date="1515355345577" expanded="true" signature="10644:11059" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="10962:11053" ph="/* StopCoroutine (&quot;claw_movement&quot;); ... */" />
+            <marker date="1515355345577" expanded="true" signature="11098:11534" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="11140:11528" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="11574:12009" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="11616:12003" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="12031:16713" ph="Collisions" />
+            <marker date="1515355345577" expanded="true" signature="12140:13014" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="12175:13008" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="12317:12571" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="12760:13000" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="13111:13282" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="13378:13549" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="13640:14679" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="13771:14673" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="13908:14218" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="14355:14665" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="14770:15413" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="14778:14906" ph="/* if (collision.gameObject.GetComponent&lt;Obstruction&gt; () != null) { ... */" />
+            <marker date="1515355345577" expanded="true" signature="15037:15407" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="15509:15968" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="15517:15653" ph="/* if (other_game_object.gameObject.GetComponent&lt;Obstruction&gt; () != null) { ... */" />
+            <marker date="1515355345577" expanded="true" signature="16060:16697" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="16068:16196" ph="/* if (collision.gameObject.GetComponent&lt;Obstruction&gt; () != null) { ... */" />
+            <marker date="1515355345577" expanded="true" signature="16327:16691" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="16719:21348" ph="PathFinding" />
+            <marker date="1515355345577" expanded="true" signature="16808:17642" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="17075:17464" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="17330:17456" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="17686:18560" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="17802:18003" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="18648:19884" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="19184:19399" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="19446:19602" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="19935:20330" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="20428:21332" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="21354:22430" ph="/* public GraspableObject TargetGameObject ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/EnvironmentDescription.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="25" column="28" lean-forward="false" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+          <folding>
+            <marker date="1515353597425" expanded="false" signature="6:100" ph="..." />
+            <marker date="1515353597425" expanded="true" signature="140:880" ph="{...}" />
+            <marker date="1515353597425" expanded="true" signature="180:878" ph="{...}" />
+            <marker date="1515353597425" expanded="true" signature="395:564" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/NotUsed/BoundingBoxUtilities.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="367" column="22" lean-forward="false" selection-start-line="367" selection-start-column="22" selection-end-line="367" selection-end-column="22" />
+          <folding>
+            <marker date="1515348951078" expanded="false" signature="6:44" ph="..." />
+            <marker date="1515348951078" expanded="true" signature="88:13718" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="122:13255" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="194:4813" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="202:300" ph="/* p is pos.yition of the center, r is &quot;radius&quot; and c is the color of the box ... */" />
+            <marker date="1515348951078" expanded="true" signature="5208:5806" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="5363:5800" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="5908:10724" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="10849:11201" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="10993:11174" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="11280:12295" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="11485:11632" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="11640:11783" ph="/* var bounds1 = GetTotalColliderBounds(objectTransform); ... */" />
+            <marker date="1515348951078" expanded="true" signature="11790:12038" ph="/* foreach (Transform transform in objectTransform) { ... */" />
+            <marker date="1515348951078" expanded="true" signature="12372:12973" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="12570:12715" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="13027:13251" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="13285:13468" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="13326:13377" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="13497:13716" ph="{...}" />
+            <marker date="1515348951078" expanded="true" signature="13563:13712" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/SimulationManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding>
+            <marker date="1515348951066" expanded="true" signature="48:2438" ph="{...}" />
+            <marker date="1515348951066" expanded="true" signature="71:129" ph="{...}" />
+            <marker date="1515348951066" expanded="true" signature="182:2436" ph="{...}" />
+            <marker date="1515348951066" expanded="true" signature="188:768" ph="Fields" />
+            <marker date="1515348951066" expanded="true" signature="208:254" ph="[...]" />
+            <marker date="1515348951066" expanded="true" signature="774:1304" ph="Getter Setters" />
+            <marker date="1515348951066" expanded="true" signature="925:1023" ph="{...}" />
+            <marker date="1515348951066" expanded="true" signature="1310:1830" ph="UnityCallbacks" />
+            <marker date="1515348951066" expanded="true" signature="1365:1434" ph="{...}" />
+            <marker date="1515348951066" expanded="true" signature="1478:1814" ph="{...}" />
+            <marker date="1515348951066" expanded="true" signature="1559:1685" ph="{...}" />
+            <marker date="1515348951066" expanded="true" signature="1836:2432" ph="PrivateMethods" />
+            <marker date="1515348951066" expanded="true" signature="1895:2018" ph="{...}" />
+            <marker date="1515348951066" expanded="true" signature="2083:2416" ph="{...}" />
+            <marker date="1515348951066" expanded="true" signature="2122:2273" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/WaypointCircuit.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="128" column="14" lean-forward="false" selection-start-line="128" selection-start-column="14" selection-end-line="128" selection-end-column="14" />
+          <folding>
+            <marker date="1515355345577" expanded="false" signature="0:81" ph="..." />
+            <marker date="1515355345577" expanded="true" signature="129:6058" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="178:6056" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="866:971" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1021:1280" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1330:3074" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1982:2811" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1992:2183" ph="/* smooth catmull-rom calculation between the two relevant points ... */" />
+            <marker date="1515355345577" expanded="true" signature="2283:2489" ph="/* 2nd point may have been the 'last' point - a dupe of the first, ... */" />
+            <marker date="1515355345577" expanded="true" signature="3164:3469" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3172:3270" ph="/* comments are no use here... it's the catmull-rom equation. ... */" />
+            <marker date="1515355345577" expanded="true" signature="3517:4227" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3525:3642" ph="/* transfer the position of each point and distances between points to arrays for ... */" />
+            <marker date="1515355345577" expanded="true" signature="3828:4221" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="3974:4213" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="4391:5662" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="4460:5656" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="4969:5370" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="5063:5250" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="5431:5638" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="5713:5809" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="5840:6052" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="5967:6046" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="6108:12263" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="6243:12252" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="6423:11757" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="6677:6736" ph="/* Draw label ... */" />
+            <marker date="1515355345577" expanded="true" signature="6896:7056" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="7082:7240" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="7267:7422" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="7517:9494" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="7570:9486" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="7700:9402" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="8017:8156" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="8190:8457" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="8612:9360" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="10388:10934" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="11349:11607" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="11850:12027" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="12133:12248" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/SynchroniseCameraProperties.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="41" column="31" lean-forward="false" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+          <folding>
+            <marker date="1515351782921" expanded="false" signature="6:32" ph="..." />
+            <marker date="1515351782921" expanded="true" signature="78:2497" ph="{...}" />
+            <marker date="1515351782921" expanded="true" signature="215:2495" ph="{...}" />
+            <marker date="1515351782921" expanded="true" signature="681:1093" ph="{...}" />
+            <marker date="1515351782921" expanded="true" signature="742:1014" ph="{...}" />
+            <marker date="1515351782921" expanded="true" signature="1120:2491" ph="{...}" />
+            <marker date="1515351782921" expanded="true" signature="1141:2412" ph="{...}" />
+            <marker date="1515351782921" expanded="true" signature="1262:1479" ph="{...}" />
+            <marker date="1515351782921" expanded="true" signature="1595:1801" ph="{...}" />
+            <marker date="1515351782921" expanded="true" signature="1915:2117" ph="{...}" />
+            <marker date="1515351782921" expanded="true" signature="2207:2404" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/IgnoreLightSource.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="6" lean-forward="false" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+          <folding>
+            <marker date="1515351948593" expanded="false" signature="6:52" ph="..." />
+            <marker date="1515351948593" expanded="true" signature="98:1306" ph="{...}" />
+            <marker date="1515351948593" expanded="true" signature="171:1304" ph="{...}" />
+            <marker date="1515351948593" expanded="true" signature="350:722" ph="{...}" />
+            <marker date="1515351948593" expanded="true" signature="451:716" ph="{...}" />
+            <marker date="1515351948593" expanded="true" signature="823:960" ph="{...}" />
+            <marker date="1515351948593" expanded="true" signature="993:1130" ph="{...}" />
+            <marker date="1515351948593" expanded="true" signature="1164:1300" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Environments/LearningEnvironment.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="649" column="22" lean-forward="false" selection-start-line="649" selection-start-column="22" selection-end-line="649" selection-end-column="22" />
+          <folding>
+            <marker date="1515353597421" expanded="false" signature="6:324" ph="..." />
+            <marker date="1515353597421" expanded="true" signature="358:23994" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="605:23992" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="673:1238" ph="UnityCallbacks" />
+            <marker date="1515353597421" expanded="true" signature="722:1222" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="1244:1984" ph="Fields" />
+            <marker date="1515353597421" expanded="true" signature="1264:1311" ph="[...]" />
+            <marker date="1515353597421" expanded="true" signature="1462:1511" ph="[...]" />
+            <marker date="1515353597421" expanded="true" signature="1567:1612" ph="[...]" />
+            <marker date="1515353597421" expanded="true" signature="1859:1907" ph="[...]" />
+            <marker date="1515353597421" expanded="true" signature="1990:3109" ph="PrivateMembers" />
+            <marker date="1515353597421" expanded="true" signature="3115:15492" ph="PublicMethods" />
+            <marker date="1515353597421" expanded="true" signature="3142:4625" ph="Getters" />
+            <marker date="1515353597421" expanded="true" signature="3762:3844" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="3979:4071" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="4120:4212" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="4364:4472" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="4519:4609" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="4668:4909" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="4693:4903" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="4940:5210" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="4965:5056" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="5080:5174" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="5250:5346" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="5391:5498" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="5553:6187" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="5597:6001" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="5864:5993" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="6193:13603" ph="Registration" />
+            <marker date="1515353597421" expanded="true" signature="6253:6948" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="6309:6663" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="7007:7658" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="7052:7384" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="7704:8448" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="7770:8154" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="8513:9189" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="8562:8912" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="9253:10057" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="9331:9751" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="10140:10844" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="10193:10563" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="10911:11598" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="10961:11317" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="11646:12409" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="11715:12109" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="12462:12787" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="12843:13179" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="13239:13587" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="13609:15476" ph="Transformations" />
+            <marker date="1515353597421" expanded="true" signature="13689:14076" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="14140:14520" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="14579:14990" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="15056:15460" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="15498:23988" ph="PrivateMethods" />
+            <marker date="1515353597421" expanded="true" signature="15558:16498" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="16129:16492" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="16537:17045" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="16630:16727" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="16921:17039" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="17093:17172" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="17214:18601" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="17519:18099" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="18628:18985" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="19016:20489" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="19053:19522" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="19237:19356" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="19560:20000" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="19734:19852" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="20166:20273" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="20532:21475" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="20736:21208" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="20985:21057" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="21277:21439" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="21519:21893" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="21899:23972" ph="EnvironmentStateSetters" />
+            <marker date="1515353597421" expanded="true" signature="22066:23147" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="22099:23141" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="22355:22997" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="23249:23956" ph="{...}" />
+            <marker date="1515353597421" expanded="true" signature="23448:23950" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/PickUpBehaviour.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="126" column="41" lean-forward="false" selection-start-line="126" selection-start-column="41" selection-end-line="126" selection-end-column="41" />
+          <folding>
+            <marker date="1515355345569" expanded="false" signature="0:19" ph="..." />
+            <marker date="1515355345569" expanded="true" signature="39:7081" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="88:6432" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="232:408" ph="/* readonly VectorPid angularVelocityController = new VectorPid (30.7766f, 0, 0.2553191f); ... */" />
+            <marker date="1515355345569" expanded="true" signature="857:946" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="974:1867" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="1586:1649" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="1900:2147" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="1931:2141" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="2176:2944" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="2207:2342" ph="/* const int layerMask = 1 &lt;&lt; 8; ... */" />
+            <marker date="1515355345569" expanded="true" signature="2651:2938" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="3007:3942" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="3015:3890" ph="/* var angularVelocityError = arm.angularVelocity * -1; ... */" />
+            <marker date="1515355345569" expanded="true" signature="3984:4987" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="3992:4541" ph="/* _body.velocity = Vector3.Lerp (_picked_up_object.transform.position, _pivot_position, _follow_strength); ... */" />
+            <marker date="1515355345569" expanded="true" signature="5024:5514" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="5572:5970" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="6005:6064" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="6098:6160" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="6193:6428" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="6459:7079" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="6668:6765" ph="{...}" />
+            <marker date="1515355345569" expanded="true" signature="6832:7075" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/ReactionParameters.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <marker date="1515352236593" expanded="true" signature="38:1777" ph="{...}" />
+            <marker date="1515352236593" expanded="true" signature="69:108" ph="{...}" />
+            <marker date="1515352236593" expanded="true" signature="144:1775" ph="{...}" />
+            <marker date="1515352236593" expanded="true" signature="578:781" ph="{...}" />
+            <marker date="1515352236593" expanded="true" signature="1284:1771" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/VirtualInput.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="5" column="40" lean-forward="false" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+          <folding>
+            <marker date="1515348951102" expanded="false" signature="6:52" ph="..." />
+            <marker date="1515348951102" expanded="true" signature="103:4385" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="142:4383" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="1026:1590" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="1160:1264" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="1678:2253" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="1814:1922" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="2306:2481" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="2536:2721" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="2885:2967" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="3019:3243" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="3295:3519" ph="{...}" />
+            <marker date="1515348951102" expanded="true" signature="3571:3795" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ObstacleSpawner.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="117" column="5" lean-forward="false" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
+          <folding>
+            <marker date="1515352351137" expanded="false" signature="6:98" ph="..." />
+            <marker date="1515352351137" expanded="true" signature="139:7123" ph="{...}" />
+            <marker date="1515352351137" expanded="true" signature="212:7121" ph="{...}" />
+            <marker date="1515352351137" expanded="true" signature="428:455" ph="[...]" />
+            <marker date="1515352351137" expanded="true" signature="497:524" ph="[...]" />
+            <marker date="1515352351137" expanded="true" signature="723:759" ph="[...]" />
+            <marker date="1515352351137" expanded="true" signature="1076:1110" ph="[...]" />
+            <marker date="1515352351137" expanded="true" signature="1148:1182" ph="[...]" />
+            <marker date="1515352351137" expanded="true" signature="1228:1262" ph="[...]" />
+            <marker date="1515352351137" expanded="true" signature="1300:1334" ph="[...]" />
+            <marker date="1515352351137" expanded="true" signature="1435:1628" ph="{...}" />
+            <marker date="1515352351137" expanded="true" signature="1654:2790" ph="{...}" />
+            <marker date="1515352351137" expanded="true" signature="2818:3118" ph="{...}" />
+            <marker date="1515352351137" expanded="true" signature="3193:6956" ph="{...}" />
+            <marker date="1515352351137" expanded="true" signature="3289:5096" ph="{...}" />
+            <marker date="1515352351137" expanded="true" signature="3334:5088" ph="{...}" />
+            <marker date="1515352351137" expanded="true" signature="4903:5078" ph="/* if (Vector3.Distance(cube_clone.transform.position, GameObject.Find(&quot;EscapePos&quot;).transform.position) &lt; 0.5f) { ... */" />
+            <marker date="1515352351137" expanded="true" signature="5123:6913" ph="{...}" />
+            <marker date="1515352351137" expanded="true" signature="5197:6905" ph="{...}" />
+            <marker date="1515352351137" expanded="true" signature="6716:6895" ph="/* if (Vector3.Distance(sphere_clone.transform.position, GameObject.Find(&quot;EscapePos&quot;).transform.position) &lt; 0.2f) ... */" />
+            <marker date="1515352351137" expanded="true" signature="6993:7071" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Testing/DrawSpaces.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+          <folding>
+            <marker date="1515352506801" expanded="true" signature="49:1495" ph="{...}" />
+            <marker date="1515352506801" expanded="true" signature="93:1493" ph="{...}" />
+            <marker date="1515352506801" expanded="true" signature="127:1187" ph="{...}" />
+            <marker date="1515352506801" expanded="true" signature="1289:1489" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/HasRegister.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="31" lean-forward="false" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+          <folding>
+            <marker date="1515352848425" expanded="true" signature="29:148" ph="{...}" />
+            <marker date="1515352848425" expanded="true" signature="69:146" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/ConfigurableGameObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <folding>
+            <marker date="1515348951058" expanded="false" signature="6:108" ph="..." />
+            <marker date="1515348951058" expanded="true" signature="143:1928" ph="{...}" />
+            <marker date="1515348951058" expanded="true" signature="198:1926" ph="{...}" />
+            <marker date="1515348951058" expanded="true" signature="435:513" ph="{...}" />
+            <marker date="1515348951058" expanded="true" signature="1000:1235" ph="{...}" />
+            <marker date="1515348951058" expanded="true" signature="1319:1922" ph="Fields" />
+            <marker date="1515348951058" expanded="true" signature="1339:1386" ph="[...]" />
+            <marker date="1515348951058" expanded="true" signature="1459:1508" ph="[...]" />
+            <marker date="1515348951058" expanded="true" signature="1564:1609" ph="[...]" />
+            <marker date="1515348951058" expanded="true" signature="1690:1837" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/PathFinding.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="277" column="26" lean-forward="false" selection-start-line="277" selection-start-column="26" selection-end-line="277" selection-end-column="26" />
+          <folding>
+            <marker date="1515352882701" expanded="false" signature="6:74" ph="..." />
+            <marker date="1515352882701" expanded="true" signature="126:14946" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="162:14944" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="236:356" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="549:7341" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="695:6909" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="7004:7310" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="7486:8227" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="8465:12674" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="8869:9123" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="9424:12648" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="9812:10302" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="9909:10025" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="10095:10242" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="10793:12640" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="10805:11055" ph="/* foreach(FastVector3 candidate_point in frontier_set) {  For FastPriorityQueue implementation this is check nec ... */" />
+            <marker date="1515352882701" expanded="true" signature="11984:12191" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="12211:12385" ph="/* if (frontier_set.Count &gt; MAX_VECTORS_IN_QUEUE-1) { For FastPriorityQueue implementation this is check necessar ... */" />
+            <marker date="1515352882701" expanded="true" signature="12772:14224" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="12816:12913" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="13026:14191" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="13303:13810" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="14397:14940" ph="{...}" />
+            <marker date="1515352882701" expanded="true" signature="14683:14856" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionary.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="5" column="32" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="32" />
+          <folding>
+            <marker date="1515352957325" expanded="false" signature="6:52" ph="..." />
+            <marker date="1515352957325" expanded="true" signature="106:1109" ph="{...}" />
+            <marker date="1515352957325" expanded="true" signature="194:1107" ph="{...}" />
+            <marker date="1515352957325" expanded="true" signature="360:538" ph="{...}" />
+            <marker date="1515352957325" expanded="true" signature="576:880" ph="{...}" />
+            <marker date="1515352957325" expanded="true" signature="714:874" ph="{...}" />
+            <marker date="1515352957325" expanded="true" signature="745:866" ph="{...}" />
+            <marker date="1515352957325" expanded="true" signature="910:1103" ph="{...}" />
+            <marker date="1515352957325" expanded="true" signature="990:1075" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/ChangeMaterialOnRenderByInstance.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+          <folding>
+            <marker date="1515352992049" expanded="false" signature="6:52" ph="..." />
+            <marker date="1515352992049" expanded="true" signature="86:3116" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="174:3114" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="446:1218" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="458:1108" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="500:1078" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="679:1028" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="735:955" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="1119:1212" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="1398:1563" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="1590:1949" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="1977:2541" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="2266:2535" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="2570:2959" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="2712:2953" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="2992:3031" ph="{...}" />
+            <marker date="1515352992049" expanded="true" signature="3065:3110" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/PlayerControls/PlayerReactions.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="34" column="27" lean-forward="false" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
+          <folding>
+            <marker date="1515353008737" expanded="false" signature="6:112" ph="..." />
+            <marker date="1515353008737" expanded="true" signature="143:1953" ph="{...}" />
+            <marker date="1515353008737" expanded="true" signature="192:1951" ph="{...}" />
+            <marker date="1515353008737" expanded="true" signature="433:1947" ph="{...}" />
+            <marker date="1515353008737" expanded="true" signature="470:1839" ph="{...}" />
+            <marker date="1515353008737" expanded="true" signature="637:1217" ph="{...}" />
+            <marker date="1515353008737" expanded="true" signature="1414:1546" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/FlowCamera.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+          <folding>
+            <marker date="1515353019897" expanded="true" signature="115:1387" ph="{...}" />
+            <marker date="1515353019897" expanded="true" signature="187:209" ph="[...]" />
+            <marker date="1515353019897" expanded="true" signature="296:320" ph="[...]" />
+            <marker date="1515353019897" expanded="true" signature="411:520" ph="{...}" />
+            <marker date="1515353019897" expanded="true" signature="600:1215" ph="{...}" />
+            <marker date="1515353019897" expanded="true" signature="629:794" ph="{...}" />
+            <marker date="1515353019897" expanded="true" signature="671:787" ph="{...}" />
+            <marker date="1515353019897" expanded="true" signature="1244:1385" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/MessageServer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="586">
+          <caret line="109" column="27" lean-forward="false" selection-start-line="109" selection-start-column="27" selection-end-line="109" selection-end-column="27" />
+          <folding>
+            <marker date="1515353035169" expanded="false" signature="6:169" ph="..." />
+            <marker date="1515353035169" expanded="true" signature="200:5807" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="248:5805" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="254:325" ph="PublicMembers" />
+            <marker date="1515353035169" expanded="true" signature="331:856" ph="PrivateMembers" />
+            <marker date="1515353035169" expanded="true" signature="862:2443" ph="PrivateMethods" />
+            <marker date="1515353035169" expanded="true" signature="890:2427" ph="Threads" />
+            <marker date="1515353035169" expanded="true" signature="964:1188" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="1334:2411" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="1432:2028" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="1664:2016" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="2051:2108" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="2290:2351" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="2360:2405" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="2449:4994" ph="PublicMethods" />
+            <marker date="1515353035169" expanded="true" signature="2549:2714" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="2774:3291" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="2869:3177" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="3433:4046" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="3779:3940" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="4052:4855" ph="Contstruction" />
+            <marker date="1515353035169" expanded="true" signature="4241:4540" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="4861:4978" ph="Getters" />
+            <marker date="1515353035169" expanded="true" signature="5000:5801" ph="Deconstruction" />
+            <marker date="1515353035169" expanded="true" signature="5134:5785" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="5146:5694" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="5422:5489" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="5498:5547" ph="{...}" />
+            <marker date="1515353035169" expanded="true" signature="5701:5779" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/General/NeodroidManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="144" column="17" lean-forward="false" selection-start-line="144" selection-start-column="17" selection-end-line="144" selection-end-column="17" />
+          <folding>
+            <marker date="1515353041921" expanded="false" signature="6:212" ph="..." />
+            <marker date="1515353041921" expanded="true" signature="242:7508" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="291:7506" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="429:477" ph="[...]" />
+            <marker date="1515353041921" expanded="true" signature="533:581" ph="[...]" />
+            <marker date="1515353041921" expanded="true" signature="832:1096" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="940:1090" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="1138:1583" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="1589:2203" ph="Getter Setters" />
+            <marker date="1515353041921" expanded="true" signature="2087:2187" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="2209:2508" ph="PrivateMembers" />
+            <marker date="1515353041921" expanded="true" signature="2514:3353" ph="UnityCallbacks" />
+            <marker date="1515353041921" expanded="true" signature="2563:2676" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="2704:3097" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="2785:2887" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="2989:3091" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="3129:3337" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="3229:3331" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="3359:4996" ph="PrivateMethods" />
+            <marker date="1515353041921" expanded="true" signature="3461:3550" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="3596:4710" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="3692:4295" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="3802:4271" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="4424:4536" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="4780:4840" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="4880:4980" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="5002:5430" ph="PublicMethods" />
+            <marker date="1515353041921" expanded="true" signature="5094:5307" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="5436:6331" ph="HasRegister implementation" />
+            <marker date="1515353041921" expanded="true" signature="5530:5906" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="5985:6315" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="6337:7275" ph="MessageServerCallbacks" />
+            <marker date="1515353041921" expanded="true" signature="6423:6598" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="6640:6777" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="6826:6900" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="6939:7215" ph="{...}" />
+            <marker date="1515353041921" expanded="true" signature="7281:7502" ph="Deconstruction" />
+            <marker date="1515353041921" expanded="true" signature="7424:7486" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SingleEulerTransformConfigurable.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="23" column="30" lean-forward="false" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+          <folding>
+            <marker date="1515353049633" expanded="false" signature="6:133" ph="..." />
+            <marker date="1515353049633" expanded="true" signature="168:3435" ph="{...}" />
+            <marker date="1515353049633" expanded="true" signature="243:3433" ph="{...}" />
+            <marker date="1515353049633" expanded="true" signature="476:549" ph="{...}" />
+            <marker date="1515353049633" expanded="true" signature="587:1341" ph="{...}" />
+            <marker date="1515353049633" expanded="true" signature="689:1335" ph="{...}" />
+            <marker date="1515353049633" expanded="true" signature="734:1230" ph="{...}" />
+            <marker date="1515353049633" expanded="true" signature="1416:3429" ph="{...}" />
+            <marker date="1515353049633" expanded="true" signature="1552:1827" ph="{...}" />
+            <marker date="1515353049633" expanded="true" signature="2112:3166" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/Path.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="14" column="20" lean-forward="false" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+          <folding>
+            <marker date="1515355345577" expanded="false" signature="0:141" ph="..." />
+            <marker date="1515355345577" expanded="true" signature="193:2380" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="245:2378" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="593:764" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="797:1055" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1108:2244" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1156:2238" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="1265:2230" ph="{...}" />
+            <marker date="1515355345577" expanded="true" signature="2287:2374" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/AxisTouchButton.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="734">
+          <caret line="55" column="33" lean-forward="false" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+          <folding>
+            <marker date="1515353141537" expanded="false" signature="6:50" ph="..." />
+            <marker date="1515353141537" expanded="true" signature="101:2725" ph="{...}" />
+            <marker date="1515353141537" expanded="true" signature="204:2723" ph="{...}" />
+            <marker date="1515353141537" expanded="true" signature="262:388" ph="/* designed to work in a pair with another axis touch button ... */" />
+            <marker date="1515353141537" expanded="true" signature="983:1358" ph="{...}" />
+            <marker date="1515353141537" expanded="true" signature="1411:1646" ph="{...}" />
+            <marker date="1515353141537" expanded="true" signature="1676:2079" ph="{...}" />
+            <marker date="1515353141537" expanded="true" signature="1737:1956" ph="{...}" />
+            <marker date="1515353141537" expanded="true" signature="2117:2576" ph="{...}" />
+            <marker date="1515353141537" expanded="true" signature="2125:2234" ph="/* find the other button witch which this button should be paired ... */" />
+            <marker date="1515353141537" expanded="true" signature="2607:2719" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Utilities.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="150" column="10" lean-forward="false" selection-start-line="150" selection-start-column="10" selection-end-line="150" selection-end-column="10" />
+          <folding>
+            <marker date="1515353188437" expanded="false" signature="6:106" ph="..." />
+            <marker date="1515353188437" expanded="true" signature="163:17801" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="205:17799" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="259:473" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="569:1011" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="1082:1960" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="1178:1269" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="1332:1413" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="1709:1946" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="2019:2346" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="2393:5865" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="2429:5834" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="2605:4678" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="4845:5798" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="5929:6739" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="7324:8989" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="7456:8983" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="7609:7922" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="7689:7756" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="7802:7912" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="7952:8063" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="9062:9162" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="9309:9922" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="10112:10762" ph="{...}" />
+            <marker date="1515353188437" expanded="false" signature="10768:11015" ph="/// Use this method to get all loaded objects of some type, including inactive objects. ... " />
+            <marker date="1515353188437" expanded="true" signature="11071:11520" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="11188:11481" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="11397:11473" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="11594:11833" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="11932:12467" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="12073:12408" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="12634:13407" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="13042:13127" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="13488:13701" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="13786:13954" ph="{...}" />
+            <marker date="1515353188437" expanded="true" signature="14048:17795" ph="/* public Texture2D ObservationToTex(Camera camera, int width, int height) ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/BoundingBox.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="211" column="59" lean-forward="false" selection-start-line="211" selection-start-column="59" selection-end-line="211" selection-end-column="59" />
+          <folding>
+            <marker date="1515352433717" expanded="false" signature="6:89" ph="..." />
+            <marker date="1515352433717" expanded="true" signature="142:10319" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="209:10317" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="759:829" ph="/* Vector3 startingBoundSize; ... */" />
+            <marker date="1515352433717" expanded="true" signature="1497:1785" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="1509:1779" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="1532:1770" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="2002:2716" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="2014:2710" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="2765:3049" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="2777:3043" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="3096:3203" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="3231:3254" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="3282:3653" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="3311:3366" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="3681:3881" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="3913:3975" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="4008:4780" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="4269:4332" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="4481:4653" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="4813:5125" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="4821:5119" ph="/* _bounds.size = new Vector3(startingBoundSize.x * transform.localScale.x / startingScale.x, startingBoundSize.y ... */" />
+            <marker date="1515352433717" expanded="true" signature="5181:5673" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="5727:6468" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="5901:6094" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="6152:6377" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="6506:6802" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="6842:8798" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="8571:8791" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="8837:9789" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="9018:9586" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="9061:9224" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="9291:9377" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="9443:9551" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="9676:9783" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="9823:9898" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="9831:9866" ph="/* if (_permanent) ... */" />
+            <marker date="1515352433717" expanded="true" signature="9951:10033" ph="{...}" />
+            <marker date="1515352433717" expanded="true" signature="10080:10313" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/PlatformSpecificContent.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="74" column="2" lean-forward="false" selection-start-line="74" selection-start-column="2" selection-end-line="74" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SimulationConfigurable.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="73" column="8" lean-forward="false" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="8" />
+          <folding>
+            <marker date="1515353240041" expanded="false" signature="6:104" ph="..." />
+            <marker date="1515353240041" expanded="true" signature="139:4414" ph="{...}" />
+            <marker date="1515353240041" expanded="true" signature="252:4412" ph="{...}" />
+            <marker date="1515353240041" expanded="true" signature="587:3013" ph="{...}" />
+            <marker date="1515353240041" expanded="true" signature="3088:4408" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/CrossPlatformInputManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="118" column="18" lean-forward="false" selection-start-line="118" selection-start-column="18" selection-end-line="118" selection-end-column="18" />
+          <folding>
+            <marker date="1515355345573" expanded="false" signature="0:82" ph="..." />
+            <marker date="1515355345573" expanded="true" signature="133:6430" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="183:6428" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="219:254" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="455:674" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="849:1092" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="884:1086" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="1448:1504" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="1564:1683" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="1936:1996" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="2107:2192" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="2242:2326" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="2453:2572" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="3373:3473" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="3788:4033" ph="/* virtual axis and button classes - applies to mobile input ... */" />
+            <marker date="1515355345573" expanded="true" signature="4063:4818" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="4231:4320" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="4824:5007" ph="/* a controller gameobject (eg. a virtual GUI button) should call the ... */" />
+            <marker date="1515355345573" expanded="true" signature="5039:6424" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="5295:5384" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="5951:6063" ph="{...}" />
+            <marker date="1515355345573" expanded="true" signature="6181:6260" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/JointFix.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+          <folding>
+            <marker date="1515353329069" expanded="false" signature="6:32" ph="..." />
+            <marker date="1515353329069" expanded="true" signature="63:5281" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="141:5279" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="1103:3350" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="2199:3344" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="2458:2525" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="2568:3336" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="3381:3646" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="3674:3865" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="3699:3859" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="3891:5275" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="4052:5269" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="4086:4228" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="4383:4450" ph="{...}" />
+            <marker date="1515353329069" expanded="true" signature="4493:5261" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="430" column="11" lean-forward="false" selection-start-line="430" selection-start-column="11" selection-end-line="430" selection-end-column="11" />
+          <folding>
+            <marker date="1515353609185" expanded="false" signature="6:338" ph="..." />
+            <marker date="1515353609185" expanded="true" signature="369:24761" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="411:24759" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="417:4981" ph="PublicMethods" />
+            <marker date="1515353609185" expanded="true" signature="516:4965" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="594:4925" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="1377:1766" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="2032:2723" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="4987:24755" ph="PrivateMethods" />
+            <marker date="1515353609185" expanded="true" signature="5112:5900" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="6071:8115" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="8256:9764" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="9926:12040" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="12143:12653" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="12790:13466" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="13621:14200" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="14296:16192" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="14488:14762" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="14800:15041" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="15092:15576" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="15349:15568" ph="/* } else if (observer is NearestByTagObserver) { ... */" />
+            <marker date="1515353609185" expanded="true" signature="16323:18782" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="16476:17010" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="18912:19418" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="19584:21698" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="21858:24739" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="22047:22332" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="22384:22647" ph="{...}" />
+            <marker date="1515353609185" expanded="true" signature="22701:22951" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/PunishmentFunction.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <folding>
+            <marker date="1515353329061" expanded="false" signature="6:44" ph="..." />
+            <marker date="1515353329061" expanded="true" signature="76:848" ph="{...}" />
+            <marker date="1515353329061" expanded="true" signature="172:846" ph="{...}" />
+            <marker date="1515353329061" expanded="true" signature="343:557" ph="{...}" />
+            <marker date="1515353329061" expanded="true" signature="614:727" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/Example.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="15" column="94" lean-forward="false" selection-start-line="15" selection-start-column="94" selection-end-line="15" selection-end-column="94" />
+          <folding>
+            <marker date="1515353452865" expanded="false" signature="6:52" ph="..." />
+            <marker date="1515353452865" expanded="true" signature="106:673" ph="{...}" />
+            <marker date="1515353452865" expanded="true" signature="198:671" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/PlayerMotions.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
+          <folding>
+            <marker date="1515353518857" expanded="false" signature="23:54" ph="..." />
+            <marker date="1515353518857" expanded="true" signature="85:583" ph="{...}" />
+            <marker date="1515353518857" expanded="true" signature="129:581" ph="{...}" />
+            <marker date="1515353518857" expanded="true" signature="247:577" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/NeodroidTask.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="6" column="36" lean-forward="false" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+          <folding>
+            <marker date="1515353518849" expanded="false" signature="23:80" ph="..." />
+            <marker date="1515353518849" expanded="true" signature="106:599" ph="{...}" />
+            <marker date="1515353518849" expanded="true" signature="149:597" ph="{...}" />
+            <marker date="1515353518849" expanded="true" signature="265:593" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/Curriculum.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="6" column="34" lean-forward="false" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+          <folding>
+            <marker date="1515353523341" expanded="false" signature="23:80" ph="..." />
+            <marker date="1515353523341" expanded="true" signature="119:602" ph="{...}" />
+            <marker date="1515353523341" expanded="true" signature="160:600" ph="{...}" />
+            <marker date="1515353523341" expanded="true" signature="272:596" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ScriptableObjects/Curriculum.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+          <folding>
+            <marker date="1515349010662" expanded="false" signature="6:32" ph="..." />
+            <marker date="1515349010662" expanded="true" signature="63:574" ph="{...}" />
+            <marker date="1515349010662" expanded="true" signature="67:185" ph="[...]" />
+            <marker date="1515349010662" expanded="true" signature="231:264" ph="{...}" />
+            <marker date="1515349010662" expanded="true" signature="305:421" ph="{...}" />
+            <marker date="1515349010662" expanded="true" signature="474:572" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/Difficulty.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="4" column="37" lean-forward="false" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+          <folding>
+            <marker date="1515353605577" expanded="false" signature="6:78" ph="..." />
+            <marker date="1515353605577" expanded="true" signature="135:531" ph="{...}" />
+            <marker date="1515353605577" expanded="true" signature="188:529" ph="{...}" />
+            <marker date="1515353605577" expanded="true" signature="264:525" ph="{...}" />
+            <marker date="1515353605577" expanded="true" signature="340:391" ph="{...}" />
+            <marker date="1515353605577" expanded="true" signature="468:519" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Actors/Actor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding>
+            <marker date="1515354025053" expanded="false" signature="6:165" ph="..." />
+            <marker date="1515354025053" expanded="true" signature="207:3554" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="310:3552" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="503:895" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="941:1001" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="949:995" ph="/* Only called in the editor ... */" />
+            <marker date="1515354025053" expanded="true" signature="1106:1672" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="1126:1573" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="1365:1434" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="1731:2250" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="1937:2027" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="2284:2441" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="2447:2821" ph="Fields" />
+            <marker date="1515354025053" expanded="true" signature="2467:2514" ph="[...]" />
+            <marker date="1515354025053" expanded="true" signature="2587:2636" ph="[...]" />
+            <marker date="1515354025053" expanded="true" signature="2692:2737" ph="[...]" />
+            <marker date="1515354025053" expanded="true" signature="2827:3548" ph="Getters" />
+            <marker date="1515354025053" expanded="true" signature="2942:3031" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="3090:3163" ph="{...}" />
+            <marker date="1515354025053" expanded="true" signature="3368:3446" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/RigidbodyConfigurable.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="6" />
+          <folding>
+            <marker date="1515355201481" expanded="true" signature="6:109" ph="..." />
+            <marker date="1515355201481" expanded="true" signature="158:7202" ph="{...}" />
+            <marker date="1515355201481" expanded="true" signature="282:7200" ph="{...}" />
+            <marker date="1515355201481" expanded="true" signature="547:605" ph="[...]" />
+            <marker date="1515355201481" expanded="true" signature="701:790" ph="{...}" />
+            <marker date="1515355201481" expanded="true" signature="713:784" ph="{...}" />
+            <marker date="1515355201481" expanded="true" signature="923:1021" ph="{...}" />
+            <marker date="1515355201481" expanded="true" signature="1068:1185" ph="{...}" />
+            <marker date="1515355201481" expanded="true" signature="1223:1318" ph="{...}" />
+            <marker date="1515355201481" expanded="true" signature="1367:3744" ph="{...}" />
+            <marker date="1515355201481" expanded="true" signature="3819:7196" ph="{...}" />
+            <marker date="1515355201481" expanded="true" signature="4318:4783" ph="{...}" />
+            <marker date="1515355201481" expanded="true" signature="4932:6040" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/EulerTransformConfigurable.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <marker date="1515353976237" expanded="true" signature="6:123" ph="..." />
+            <marker date="1515353976237" expanded="true" signature="172:8870" ph="{...}" />
+            <marker date="1515353976237" expanded="true" signature="251:8868" ph="{...}" />
+            <marker date="1515353976237" expanded="true" signature="463:512" ph="[...]" />
+            <marker date="1515353976237" expanded="true" signature="1164:1389" ph="{...}" />
+            <marker date="1515353976237" expanded="true" signature="1438:4541" ph="{...}" />
+            <marker date="1515353976237" expanded="true" signature="4616:8864" ph="{...}" />
+            <marker date="1515353976237" expanded="true" signature="5182:5517" ph="{...}" />
+            <marker date="1515353976237" expanded="true" signature="5641:7049" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SegmentationWindow.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="14" column="48" lean-forward="false" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+          <folding>
+            <marker date="1515355093333" expanded="true" signature="6:91" ph="..." />
+            <marker date="1515355093333" expanded="true" signature="120:4276" ph="{...}" />
+            <marker date="1515355093333" expanded="true" signature="190:4265" ph="{...}" />
+            <marker date="1515355093333" expanded="true" signature="514:648" ph="{...}" />
+            <marker date="1515355093333" expanded="true" signature="678:1103" ph="{...}" />
+            <marker date="1515355093333" expanded="true" signature="1130:4261" ph="{...}" />
+            <marker date="1515355093333" expanded="true" signature="1618:2853" ph="{...}" />
+            <marker date="1515355093333" expanded="true" signature="2899:3307" ph="/* var material_changer = FindObjectOfType&lt;ChangeMaterialOnRenderByTag&gt; (); ... */" />
+            <marker date="1515355093333" expanded="true" signature="3607:4086" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
