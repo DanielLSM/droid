@@ -1,231 +1,235 @@
-﻿
-using Neodroid.Configurables;
+﻿using System;
 using Neodroid.Messaging.Messages;
-using Neodroid.Utilities;
+using Neodroid.Models.Configurables.General;
+using Neodroid.Scripts.Utilities;
+using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
-namespace Assets.Neodroid.Models.Configurables {
+namespace Neodroid.Models.Configurables {
   public class EulerTransformConfigurable : SingleEulerTransformConfigurable,
-                                            HasEulerTransformProperties {
-    [SerializeField]
-    private Vector3 _direction;
+                                            IHasEulerTransformProperties {
+    string _dir_x;
+    string _dir_y;
+    string _dir_z;
 
-    private string _DirX;
-    private string _DirY;
-    private string _DirZ;
+    [SerializeField] Vector3 _direction;
 
-    [Header (
-      "Observation",
+    [Header(
+      header : "Observation",
       order = 103)]
     [SerializeField]
-    private Vector3 _position;
+    Vector3 _position;
 
-    [SerializeField]
-    private Vector3 _rotation;
+    string _rot_x;
+    string _rot_y;
+    string _rot_z;
 
-    private string _RotX;
-    private string _RotY;
-    private string _RotZ;
+    [SerializeField] Vector3 _rotation;
 
-    private string _X;
-    private string _Y;
-    private string _Z;
+    string _x;
+    string _y;
+    string _z;
 
-    public override string ConfigurableIdentifier { get { return name + "Transform"; } }
+    public override string ConfigurableIdentifier { get { return this.name + "EulerTransform"; } }
 
-    public Vector3 Position { get { return _position; } set { _position = value; } }
+    public Vector3 Position { get { return this._position; } set { this._position = value; } }
 
-    public Vector3 Direction { get { return _direction; } set { _direction = value; } }
+    public Vector3 Direction { get { return this._direction; } set { this._direction = value; } }
 
-    public Vector3 Rotation { get { return _rotation; } set { _rotation = value; } }
+    public Vector3 Rotation { get { return this._rotation; } set { this._rotation = value; } }
 
-    public override void UpdateObservation () {
-      Position = ParentEnvironment.TransformPosition (transform.position);
-      Direction = ParentEnvironment.TransformDirection (transform.forward);
-      Rotation = ParentEnvironment.TransformDirection (transform.up);
+    public override void UpdateObservation() {
+      this.Position = this.ParentEnvironment.TransformPosition(position : this.transform.position);
+      this.Direction = this.ParentEnvironment.TransformDirection(direction : this.transform.forward);
+      this.Rotation = this.ParentEnvironment.TransformDirection(direction : this.transform.up);
     }
 
-    protected override void AddToEnvironment () {
-      _X = ConfigurableIdentifier + "X";
-      _Y = ConfigurableIdentifier + "Y";
-      _Z = ConfigurableIdentifier + "Z";
-      _DirX = ConfigurableIdentifier + "DirX";
-      _DirY = ConfigurableIdentifier + "DirY";
-      _DirZ = ConfigurableIdentifier + "DirZ";
-      _RotX = ConfigurableIdentifier + "RotX";
-      _RotY = ConfigurableIdentifier + "RotY";
-      _RotZ = ConfigurableIdentifier + "RotZ";
-      ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent (
-        ParentEnvironment,
-        (ConfigurableGameObject)this,
-        _X);
-      ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent (
-        ParentEnvironment,
-        (ConfigurableGameObject)this,
-        _Y);
-      ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent (
-        ParentEnvironment,
-        (ConfigurableGameObject)this,
-        _Z);
-      ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent (
-        ParentEnvironment,
-        (ConfigurableGameObject)this,
-        _DirX);
-      ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent (
-        ParentEnvironment,
-        (ConfigurableGameObject)this,
-        _DirY);
-      ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent (
-        ParentEnvironment,
-        (ConfigurableGameObject)this,
-        _DirZ);
-      ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent (
-        ParentEnvironment,
-        (ConfigurableGameObject)this,
-        _RotX);
-      ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent (
-        ParentEnvironment,
-        (ConfigurableGameObject)this,
-        _RotY);
-      ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent (
-        ParentEnvironment,
-        (ConfigurableGameObject)this,
-        _RotZ);
+    protected override void AddToEnvironment() {
+      this._x = this.ConfigurableIdentifier + "X";
+      this._y = this.ConfigurableIdentifier + "Y";
+      this._z = this.ConfigurableIdentifier + "Z";
+      this._dir_x = this.ConfigurableIdentifier + "DirX";
+      this._dir_y = this.ConfigurableIdentifier + "DirY";
+      this._dir_z = this.ConfigurableIdentifier + "DirZ";
+      this._rot_x = this.ConfigurableIdentifier + "RotX";
+      this._rot_y = this.ConfigurableIdentifier + "RotY";
+      this._rot_z = this.ConfigurableIdentifier + "RotZ";
+      this.ParentEnvironment =
+        NeodroidUtilities.MaybeRegisterComponent(
+                                                 r : this.ParentEnvironment,
+                                                 c : (ConfigurableGameObject)this);
+      this.ParentEnvironment =
+        NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._x);
+      this.ParentEnvironment =
+        NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._y);
+      this.ParentEnvironment =
+        NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._z);
+      this.ParentEnvironment =
+        NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._dir_x);
+      this.ParentEnvironment =
+        NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._dir_y);
+      this.ParentEnvironment =
+        NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._dir_z);
+      this.ParentEnvironment =
+        NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._rot_x);
+      this.ParentEnvironment =
+        NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._rot_y);
+      this.ParentEnvironment =
+        NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._rot_z);
     }
 
-    public override void ApplyConfiguration (Configuration configuration) {
-      var pos = ParentEnvironment.TransformPosition (transform.position);
-      var dir = ParentEnvironment.TransformDirection (transform.forward);
-      var rot = ParentEnvironment.TransformDirection (transform.up);
+    public override void ApplyConfiguration(Configuration configuration) {
+      var pos = this.ParentEnvironment.TransformPosition(position : this.transform.position);
+      var dir = this.ParentEnvironment.TransformDirection(direction : this.transform.forward);
+      var rot = this.ParentEnvironment.TransformDirection(direction : this.transform.up);
       var v = configuration.ConfigurableValue;
-      if (ValidInput.decimal_granularity >= 0)
-        v = (int)System.Math.Round (
-          v,
-          ValidInput.decimal_granularity);
-      if (ValidInput.min_value.CompareTo (ValidInput.max_value) != 0)
-      if (v < ValidInput.min_value || v > ValidInput.max_value) {
-        print (
-          string.Format (
-            "Configurable does not accept input{2}, outside allowed range {0} to {1}",
-            ValidInput.min_value,
-            ValidInput.max_value,
-            v));
-        return; // Do nothing
-      }
+      if (this.ValidInput.DecimalGranularity >= 0)
+        v = (int)Math.Round(
+                            value : v,
+                            digits : this.ValidInput.DecimalGranularity);
+      if (this.ValidInput.MinValue.CompareTo(value : this.ValidInput.MaxValue) != 0)
+        if (v < this.ValidInput.MinValue || v > this.ValidInput.MaxValue) {
+          print(
+                message : string.Format(
+                                        format :
+                                        "Configurable does not accept input{2}, outside allowed range {0} to {1}",
+                                        arg0 : this.ValidInput.MinValue,
+                                        arg1 : this.ValidInput.MaxValue,
+                                        arg2 : v));
+          return; // Do nothing
+        }
 
-      if (Debugging)
-        print ("Applying " + v + " To " + ConfigurableIdentifier);
-      if (RelativeToExistingValue) {
-        if (configuration.ConfigurableName == _X)
-          pos.Set (
-            v - pos.x,
-            pos.y,
-            pos.z);
-        else if (configuration.ConfigurableName == _Y)
-          pos.Set (
-            pos.x,
-            v - pos.y,
-            pos.z);
-        else if (configuration.ConfigurableName == _Z)
-          pos.Set (
-            pos.x,
-            pos.y,
-            v - pos.z);
-        else if (configuration.ConfigurableName == _DirX)
-          dir.Set (
-            v - dir.x,
-            dir.y,
-            dir.z);
-        else if (configuration.ConfigurableName == _DirY)
-          dir.Set (
-            dir.x,
-            v - dir.y,
-            dir.z);
-        else if (configuration.ConfigurableName == _DirZ)
-          dir.Set (
-            dir.x,
-            dir.y,
-            v - dir.z);
-        else if (configuration.ConfigurableName == _RotX)
-          rot.Set (
-            v - rot.x,
-            rot.y,
-            rot.z);
-        else if (configuration.ConfigurableName == _RotY)
-          rot.Set (
-            rot.x,
-            v - rot.y,
-            rot.z);
-        else if (configuration.ConfigurableName == _RotZ)
-          rot.Set (
-            rot.x,
-            rot.y,
-            v - rot.z);
+      if (this.Debugging)
+        print(message : "Applying " + v + " To " + this.ConfigurableIdentifier);
+      if (this.RelativeToExistingValue) {
+        if (configuration.ConfigurableName == this._x)
+          pos.Set(
+                  newX : v - pos.x,
+                  newY : pos.y,
+                  newZ : pos.z);
+        else if (configuration.ConfigurableName == this._y)
+          pos.Set(
+                  newX : pos.x,
+                  newY : v - pos.y,
+                  newZ : pos.z);
+        else if (configuration.ConfigurableName == this._z)
+          pos.Set(
+                  newX : pos.x,
+                  newY : pos.y,
+                  newZ : v - pos.z);
+        else if (configuration.ConfigurableName == this._dir_x)
+          dir.Set(
+                  newX : v - dir.x,
+                  newY : dir.y,
+                  newZ : dir.z);
+        else if (configuration.ConfigurableName == this._dir_y)
+          dir.Set(
+                  newX : dir.x,
+                  newY : v - dir.y,
+                  newZ : dir.z);
+        else if (configuration.ConfigurableName == this._dir_z)
+          dir.Set(
+                  newX : dir.x,
+                  newY : dir.y,
+                  newZ : v - dir.z);
+        else if (configuration.ConfigurableName == this._rot_x)
+          rot.Set(
+                  newX : v - rot.x,
+                  newY : rot.y,
+                  newZ : rot.z);
+        else if (configuration.ConfigurableName == this._rot_y)
+          rot.Set(
+                  newX : rot.x,
+                  newY : v - rot.y,
+                  newZ : rot.z);
+        else if (configuration.ConfigurableName == this._rot_z)
+          rot.Set(
+                  newX : rot.x,
+                  newY : rot.y,
+                  newZ : v - rot.z);
       } else {
-        if (configuration.ConfigurableName == _X)
-          pos.Set (
-            v,
-            pos.y,
-            pos.z);
-        else if (configuration.ConfigurableName == _Y)
-          pos.Set (
-            pos.x,
-            v,
-            pos.z);
-        else if (configuration.ConfigurableName == _Z)
-          pos.Set (
-            pos.x,
-            pos.y,
-            v);
-        else if (configuration.ConfigurableName == _DirX)
-          dir.Set (
-            v,
-            dir.y,
-            dir.z);
-        else if (configuration.ConfigurableName == _DirY)
-          dir.Set (
-            dir.x,
-            v,
-            dir.z);
-        else if (configuration.ConfigurableName == _DirZ)
-          dir.Set (
-            dir.x,
-            dir.y,
-            v);
-        else if (configuration.ConfigurableName == _RotX)
-          rot.Set (
-            v,
-            rot.y,
-            rot.z);
-        else if (configuration.ConfigurableName == _RotY)
-          rot.Set (
-            rot.x,
-            v,
-            rot.z);
-        else if (configuration.ConfigurableName == _RotZ)
-          rot.Set (
-            rot.x,
-            rot.y,
-            v);
+        if (configuration.ConfigurableName == this._x)
+          pos.Set(
+                  newX : v,
+                  newY : pos.y,
+                  newZ : pos.z);
+        else if (configuration.ConfigurableName == this._y)
+          pos.Set(
+                  newX : pos.x,
+                  newY : v,
+                  newZ : pos.z);
+        else if (configuration.ConfigurableName == this._z)
+          pos.Set(
+                  newX : pos.x,
+                  newY : pos.y,
+                  newZ : v);
+        else if (configuration.ConfigurableName == this._dir_x)
+          dir.Set(
+                  newX : v,
+                  newY : dir.y,
+                  newZ : dir.z);
+        else if (configuration.ConfigurableName == this._dir_y)
+          dir.Set(
+                  newX : dir.x,
+                  newY : v,
+                  newZ : dir.z);
+        else if (configuration.ConfigurableName == this._dir_z)
+          dir.Set(
+                  newX : dir.x,
+                  newY : dir.y,
+                  newZ : v);
+        else if (configuration.ConfigurableName == this._rot_x)
+          rot.Set(
+                  newX : v,
+                  newY : rot.y,
+                  newZ : rot.z);
+        else if (configuration.ConfigurableName == this._rot_y)
+          rot.Set(
+                  newX : rot.x,
+                  newY : v,
+                  newZ : rot.z);
+        else if (configuration.ConfigurableName == this._rot_z)
+          rot.Set(
+                  newX : rot.x,
+                  newY : rot.y,
+                  newZ : v);
       }
 
-      var inv_pos = ParentEnvironment.InverseTransformPosition (pos);
-      var inv_dir = ParentEnvironment.InverseTransformDirection (dir);
-      var inv_rot = ParentEnvironment.InverseTransformDirection (rot);
-      transform.position = inv_pos;
-      transform.rotation = Quaternion.identity;
-      transform.rotation = Quaternion.LookRotation (
-        inv_dir,
-        inv_rot);
+      var inv_pos = this.ParentEnvironment.InverseTransformPosition(position : pos);
+      var inv_dir = this.ParentEnvironment.InverseTransformDirection(direction : dir);
+      var inv_rot = this.ParentEnvironment.InverseTransformDirection(direction : rot);
+      this.transform.position = inv_pos;
+      this.transform.rotation = Quaternion.identity;
+      this.transform.rotation = Quaternion.LookRotation(
+                                                        forward : inv_dir,
+                                                        upwards : inv_rot);
     }
   }
 }

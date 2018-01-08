@@ -1,75 +1,100 @@
-﻿
+﻿using System;
 using UnityEngine;
 
-namespace Neodroid.Utilities.NeodroidCamera {
-  [RequireComponent (typeof(Camera))]
+namespace Neodroid.Scripts.Utilities.NeodroidCamera {
+  [RequireComponent( typeof(Camera))]
   [ExecuteInEditMode]
-  [System.Serializable]
+  [Serializable]
   public class SynchroniseCameraProperties : MonoBehaviour {
-    private Camera _camera;
-    private Camera[] _cameras;
-    private int _old_culling_mask;
-    private float _old_far_clip_plane;
+    [SerializeField]
+    Camera _camera;
+    [SerializeField]
+    Camera[] _cameras;
+    [SerializeField]
+    int _old_culling_mask;
+    [SerializeField]
+    float _old_far_clip_plane;
+    [SerializeField]
+    float _old_near_clip_plane;
+    [SerializeField]
+    float _old_orthographic_size;
+    [SerializeField]  bool _sync_culling_mask = true;
+    [SerializeField]  bool _sync_far_clip_plane = true;
+    [SerializeField]  bool _sync_near_clip_plane = true;
 
-    private float _old_near_clip_plane;
-    private float _old_orthographic_size;
-    public bool _sync_culling_mask = true;
-    public bool _sync_far_clip_plane = true;
-    public bool _sync_near_clip_plane = true;
+    [SerializeField]  bool _sync_orthographic_size = true;
 
-    public bool _sync_orthographic_size = true;
+    readonly double TOLERANCE = Double.Epsilon;
 
-    double TOLERANCE = System.Double.Epsilon;
+    public Boolean SyncOrthographicSize {
+      get { return this._sync_orthographic_size; }
+      set { this._sync_orthographic_size = value; }
+    }
 
-    public void Start () {
-      _camera = GetComponent<Camera> ();
-      if (_camera) {
-        _old_orthographic_size = _camera.orthographicSize;
-        _old_near_clip_plane = _camera.nearClipPlane;
-        _old_far_clip_plane = _camera.farClipPlane;
-        _old_culling_mask = _camera.cullingMask;
+    public Boolean SyncNearClipPlane {
+      get { return this._sync_near_clip_plane; }
+      set { this._sync_near_clip_plane = value; }
+    }
 
-        _cameras = FindObjectsOfType<Camera> ();
+    public Boolean SyncFarClipPlane {
+      get { return this._sync_far_clip_plane; }
+      set { this._sync_far_clip_plane = value; }
+    }
+
+    public Boolean SyncCullingMask {
+      get { return this._sync_culling_mask; }
+      set { this._sync_culling_mask = value; }
+    }
+
+    public void Start() {
+      this._camera = this.GetComponent<Camera>();
+      if (this._camera) {
+        this._old_orthographic_size = this._camera.orthographicSize;
+        this._old_near_clip_plane = this._camera.nearClipPlane;
+        this._old_far_clip_plane = this._camera.farClipPlane;
+        this._old_culling_mask = this._camera.cullingMask;
+
+        this._cameras = FindObjectsOfType<Camera>();
       } else {
-        print ("No camera component found on gameobject");
+        print(message : "No camera component found on gameobject");
       }
     }
 
-    public void Update () {
-      if (_camera) {
-        if (System.Math.Abs (_old_orthographic_size - _camera.orthographicSize) > TOLERANCE)
-        if (_sync_culling_mask) {
-          _old_orthographic_size = _camera.orthographicSize;
-          foreach (var cam in _cameras)
-            if (cam != _camera)
-              cam.orthographicSize = _camera.orthographicSize;
-        }
+    public void Update() {
+      if (this._camera) {
+        if (Math.Abs(value : this._old_orthographic_size - this._camera.orthographicSize) > this.TOLERANCE)
+          if (this._sync_culling_mask) {
+            this._old_orthographic_size = this._camera.orthographicSize;
+            foreach (var cam in this._cameras)
+              if (cam != this._camera)
+                cam.orthographicSize = this._camera.orthographicSize;
+          }
 
-        if (System.Math.Abs (_old_near_clip_plane - _camera.nearClipPlane) > TOLERANCE)
-        if (_sync_culling_mask) {
-          _old_near_clip_plane = _camera.nearClipPlane;
-          foreach (var cam in _cameras)
-            if (cam != _camera)
-              cam.nearClipPlane = _camera.nearClipPlane;
-        }
+        if (Math.Abs(value : this._old_near_clip_plane - this._camera.nearClipPlane) > this.TOLERANCE)
+          if (this._sync_culling_mask) {
+            this._old_near_clip_plane = this._camera.nearClipPlane;
+            foreach (var cam in this._cameras)
+              if (cam != this._camera)
+                cam.nearClipPlane = this._camera.nearClipPlane;
+          }
 
-        if (System.Math.Abs (_old_far_clip_plane - _camera.farClipPlane) > TOLERANCE)
-        if (_sync_culling_mask) {
-          _old_far_clip_plane = _camera.farClipPlane;
-          foreach (var cam in _cameras)
-            if (cam != _camera)
-              cam.farClipPlane = _camera.farClipPlane;
-        }
+        if (Math.Abs(value : this._old_far_clip_plane - this._camera.farClipPlane) > this.TOLERANCE)
+          if (this._sync_culling_mask) {
+            this._old_far_clip_plane = this._camera.farClipPlane;
+            foreach (var cam in this._cameras)
+              if (cam != this._camera)
+                cam.farClipPlane = this._camera.farClipPlane;
+          }
 
-        if (_old_culling_mask != _camera.cullingMask)
-        if (_sync_culling_mask) {
-          _old_culling_mask = _camera.cullingMask;
-          foreach (var cam in _cameras)
-            if (cam != _camera)
-              cam.cullingMask = _camera.cullingMask;
-        }
+        if (this._old_culling_mask != this._camera.cullingMask)
+          if (this._sync_culling_mask) {
+            this._old_culling_mask = this._camera.cullingMask;
+            foreach (var cam in this._cameras)
+              if (cam != this._camera)
+                cam.cullingMask = this._camera.cullingMask;
+          }
       } else {
-        print ("No camera component found on gameobject");
+        print(message : "No camera component found on gameobject");
       }
     }
   }

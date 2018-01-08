@@ -2,56 +2,56 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Neodroid.Utilities.BoundingBoxes {
-  [RequireComponent(typeof(Camera))]
+  [RequireComponent( typeof(Camera))]
   [ExecuteInEditMode]
   public class DrawBoundingBoxOnCamera : MonoBehaviour {
-    private List<Color> colors;
+    List<Color> colors;
     public Color lColor = Color.green;
     public Material lineMaterial;
-    private List<Vector3[,]> outlines;
-    private List<Vector3[,]> triangles;
+    List<Vector3[,]> outlines;
+    List<Vector3[,]> triangles;
 
-    private void Awake() {
-      outlines = new List<Vector3[,]>();
-      colors = new List<Color>();
-      triangles = new List<Vector3[,]>();
+    void Awake() {
+      this.outlines = new List<Vector3[,]>();
+      this.colors = new List<Color>();
+      this.triangles = new List<Vector3[,]>();
     }
 
-    private void Start() { }
+    void Start() { }
 
-    private void OnPostRender() {
-      if (outlines == null)
+    void OnPostRender() {
+      if (this.outlines == null)
         return;
-      lineMaterial.SetPass(0);
-      GL.Begin(GL.LINES);
-      for (var j = 0; j < outlines.Count; j++) {
-        GL.Color(colors[j]);
-        for (var i = 0; i < outlines[j].GetLength(0); i++) {
+      this.lineMaterial.SetPass(pass : 0);
+      GL.Begin(mode : GL.LINES);
+      for (var j = 0; j < this.outlines.Count; j++) {
+        GL.Color(c : this.colors[index : j]);
+        for (var i = 0; i < this.outlines[index : j].GetLength(dimension : 0); i++) {
           GL.Vertex(
-                    outlines[j][i,
-                                0]);
+                    v : this.outlines[index : j][i,
+                                                 0]);
           GL.Vertex(
-                    outlines[j][i,
-                                1]);
+                    v : this.outlines[index : j][i,
+                                                 1]);
         }
       }
 
       GL.End();
 
-      GL.Begin(GL.TRIANGLES);
+      GL.Begin(mode : GL.TRIANGLES);
 
-      for (var j = 0; j < triangles.Count; j++) {
-        GL.Color(colors[j]);
-        for (var i = 0; i < triangles[j].GetLength(0); i++) {
+      for (var j = 0; j < this.triangles.Count; j++) {
+        GL.Color(c : this.colors[index : j]);
+        for (var i = 0; i < this.triangles[index : j].GetLength(dimension : 0); i++) {
           GL.Vertex(
-                    triangles[j][i,
-                                 0]);
+                    v : this.triangles[index : j][i,
+                                                  0]);
           GL.Vertex(
-                    triangles[j][i,
-                                 1]);
+                    v : this.triangles[index : j][i,
+                                                  1]);
           GL.Vertex(
-                    triangles[j][i,
-                                 2]);
+                    v : this.triangles[index : j][i,
+                                                  2]);
         }
       }
 
@@ -61,30 +61,30 @@ namespace Neodroid.Utilities.BoundingBoxes {
     public void setOutlines(Vector3[,] newOutlines, Color newcolor) {
       if (newOutlines == null)
         return;
-      if (outlines == null)
+      if (this.outlines == null)
         return;
-      if (newOutlines.GetLength(0) > 0) {
-        outlines.Add(newOutlines);
-        colors.Add(newcolor);
+      if (newOutlines.GetLength(dimension : 0) > 0) {
+        this.outlines.Add(item : newOutlines);
+        this.colors.Add(item : newcolor);
       }
     }
 
     public void setOutlines(Vector3[,] newOutlines, Color newcolor, Vector3[,] newTriangles) {
       if (newOutlines == null)
         return;
-      if (outlines == null)
+      if (this.outlines == null)
         return;
-      if (newOutlines.GetLength(0) > 0) {
-        outlines.Add(newOutlines);
-        colors.Add(newcolor);
-        triangles.Add(newTriangles);
+      if (newOutlines.GetLength(dimension : 0) > 0) {
+        this.outlines.Add(item : newOutlines);
+        this.colors.Add(item : newcolor);
+        this.triangles.Add(item : newTriangles);
       }
     }
 
-    private void Update() {
-      outlines = new List<Vector3[,]>();
-      colors = new List<Color>();
-      triangles = new List<Vector3[,]>();
+    void Update() {
+      this.outlines = new List<Vector3[,]>();
+      this.colors = new List<Color>();
+      this.triangles = new List<Vector3[,]>();
     }
   }
 }

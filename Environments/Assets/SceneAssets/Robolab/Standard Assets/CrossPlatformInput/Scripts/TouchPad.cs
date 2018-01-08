@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UnityStandardAssets.CrossPlatformInput {
-  [RequireComponent(typeof(Image))]
+  [RequireComponent( typeof(Image))]
   public class TouchPad : MonoBehaviour,
                           IPointerDownHandler,
                           IPointerUpHandler {
@@ -33,74 +33,75 @@ namespace UnityStandardAssets.CrossPlatformInput {
     public float Xsensitivity = 1f;
     public float Ysensitivity = 1f;
 
-    private Vector3 m_StartPos;
-    private Vector2 m_PreviousDelta;
-    private Vector3 m_JoytickOutput;
-    private bool m_UseX; // Toggle for using the x axis
-    private bool m_UseY; // Toggle for using the Y axis
+    Vector3 m_StartPos;
+    Vector2 m_PreviousDelta;
+    Vector3 m_JoytickOutput;
+    bool m_UseX; // Toggle for using the x axis
+    bool m_UseY; // Toggle for using the Y axis
 
-    private CrossPlatformInputManager.VirtualAxis
+    CrossPlatformInputManager.VirtualAxis
       m_HorizontalVirtualAxis; // Reference to the joystick in the cross platform input
 
-    private CrossPlatformInputManager.VirtualAxis
+    CrossPlatformInputManager.VirtualAxis
       m_VerticalVirtualAxis; // Reference to the joystick in the cross platform input
 
-    private bool m_Dragging;
-    private int m_Id = -1;
-    private Vector2 m_PreviousTouchPos; // swipe style control touch
+    bool m_Dragging;
+    int m_Id = -1;
+    Vector2 m_PreviousTouchPos; // swipe style control touch
 
     #if !UNITY_EDITOR
     private Vector3 m_Center;
     private Image m_Image;
-    #else
-    private Vector3 m_PreviousMouse;
+        #else
+    Vector3 m_PreviousMouse;
     #endif
 
-    private void OnEnable() { CreateVirtualAxes(); }
+    void OnEnable() { this.CreateVirtualAxes(); }
 
-    private void Start() {
+    void Start() {
       #if !UNITY_EDITOR
             m_Image = GetComponent<Image>();
             m_Center = m_Image.transform.position;
-      #endif
+            #endif
     }
 
-    private void CreateVirtualAxes() {
+    void CreateVirtualAxes() {
       // set axes to use
-      m_UseX = axesToUse == AxisOption.Both || axesToUse == AxisOption.OnlyHorizontal;
-      m_UseY = axesToUse == AxisOption.Both || axesToUse == AxisOption.OnlyVertical;
+      this.m_UseX = this.axesToUse == AxisOption.Both || this.axesToUse == AxisOption.OnlyHorizontal;
+      this.m_UseY = this.axesToUse == AxisOption.Both || this.axesToUse == AxisOption.OnlyVertical;
 
       // create new axes based on axes to use
-      if (m_UseX) {
-        m_HorizontalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(horizontalAxisName);
-        CrossPlatformInputManager.RegisterVirtualAxis(m_HorizontalVirtualAxis);
+      if (this.m_UseX) {
+        this.m_HorizontalVirtualAxis =
+          new CrossPlatformInputManager.VirtualAxis(name : this.horizontalAxisName);
+        CrossPlatformInputManager.RegisterVirtualAxis(axis : this.m_HorizontalVirtualAxis);
       }
 
-      if (m_UseY) {
-        m_VerticalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(verticalAxisName);
-        CrossPlatformInputManager.RegisterVirtualAxis(m_VerticalVirtualAxis);
+      if (this.m_UseY) {
+        this.m_VerticalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(name : this.verticalAxisName);
+        CrossPlatformInputManager.RegisterVirtualAxis(axis : this.m_VerticalVirtualAxis);
       }
     }
 
-    private void UpdateVirtualAxes(Vector3 value) {
+    void UpdateVirtualAxes(Vector3 value) {
       value = value.normalized;
-      if (m_UseX) m_HorizontalVirtualAxis.Update(value.x);
+      if (this.m_UseX) this.m_HorizontalVirtualAxis.Update(value : value.x);
 
-      if (m_UseY) m_VerticalVirtualAxis.Update(value.y);
+      if (this.m_UseY) this.m_VerticalVirtualAxis.Update(value : value.y);
     }
 
     public void OnPointerDown(PointerEventData data) {
-      m_Dragging = true;
-      m_Id = data.pointerId;
+      this.m_Dragging = true;
+      this.m_Id = data.pointerId;
       #if !UNITY_EDITOR
         if (controlStyle != ControlStyle.Absolute )
             m_Center = data.position;
-      #endif
+            #endif
     }
 
-    private void Update() {
-      if (!m_Dragging) return;
-      if (Input.touchCount >= m_Id + 1 && m_Id != -1) {
+    void Update() {
+      if (!this.m_Dragging) return;
+      if (Input.touchCount >= this.m_Id + 1 && this.m_Id != -1) {
         #if !UNITY_EDITOR
             if (controlStyle == ControlStyle.Swipe)
             {
@@ -111,35 +112,35 @@ namespace UnityStandardAssets.CrossPlatformInput {
  new Vector2(Input.touches[m_Id].position.x - m_Center.x , Input.touches[m_Id].position.y - m_Center.y).normalized;
             pointerDelta.x *= Xsensitivity;
             pointerDelta.y *= Ysensitivity;
-        #else
+                #else
         Vector2 pointerDelta;
-        pointerDelta.x = Input.mousePosition.x - m_PreviousMouse.x;
-        pointerDelta.y = Input.mousePosition.y - m_PreviousMouse.y;
-        m_PreviousMouse = new Vector3(
-                                      Input.mousePosition.x,
-                                      Input.mousePosition.y,
-                                      0f);
+        pointerDelta.x = Input.mousePosition.x - this.m_PreviousMouse.x;
+        pointerDelta.y = Input.mousePosition.y - this.m_PreviousMouse.y;
+        this.m_PreviousMouse = new Vector3(
+                                           x : Input.mousePosition.x,
+                                           y : Input.mousePosition.y,
+                                           z : 0f);
         #endif
-        UpdateVirtualAxes(
-                          new Vector3(
-                                      pointerDelta.x,
-                                      pointerDelta.y,
-                                      0));
+        this.UpdateVirtualAxes(
+                               value : new Vector3(
+                                                   x : pointerDelta.x,
+                                                   y : pointerDelta.y,
+                                                   z : 0));
       }
     }
 
     public void OnPointerUp(PointerEventData data) {
-      m_Dragging = false;
-      m_Id = -1;
-      UpdateVirtualAxes(Vector3.zero);
+      this.m_Dragging = false;
+      this.m_Id = -1;
+      this.UpdateVirtualAxes(value : Vector3.zero);
     }
 
-    private void OnDisable() {
-      if (CrossPlatformInputManager.AxisExists(horizontalAxisName))
-        CrossPlatformInputManager.UnRegisterVirtualAxis(horizontalAxisName);
+    void OnDisable() {
+      if (CrossPlatformInputManager.AxisExists(name : this.horizontalAxisName))
+        CrossPlatformInputManager.UnRegisterVirtualAxis(name : this.horizontalAxisName);
 
-      if (CrossPlatformInputManager.AxisExists(verticalAxisName))
-        CrossPlatformInputManager.UnRegisterVirtualAxis(verticalAxisName);
+      if (CrossPlatformInputManager.AxisExists(name : this.verticalAxisName))
+        CrossPlatformInputManager.UnRegisterVirtualAxis(name : this.verticalAxisName);
     }
   }
 }

@@ -1,15 +1,18 @@
 ﻿using Neodroid.Evaluation;
 using UnityEngine;
 
-public class AngularVelocity : ObjectiveFunction {
-  public Rigidbody _rigidbody;
+namespace Neodroid.Models.Evaluation {
+  public class AngularVelocity : ObjectiveFunction {
+    [SerializeField]
+    Rigidbody _rigidbody;
 
-  public override float InternalEvaluate() {
-    if (_rigidbody) return 1 / (_rigidbody.angularVelocity.magnitude + 1);
-    return 0;
-  }
+    public override float InternalEvaluate() {
+      if (this._rigidbody) return 1 / (this._rigidbody.angularVelocity.magnitude + 1);
+      return 0;
+    }
 
-  private void Start() {
-    if (_rigidbody == null) _rigidbody = FindObjectOfType<Rigidbody>();
+    void Start() {
+      if (this._rigidbody == null) this._rigidbody = FindObjectOfType<Rigidbody>();
+    }
   }
 }

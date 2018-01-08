@@ -1,4 +1,4 @@
-﻿namespace Neodroid.Utilities {
+﻿namespace Neodroid.Scripts.Utilities.Enums {
   public enum CoordinateSystem {
     GlobalCoordinates,
     LocalCoordinates,

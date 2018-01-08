@@ -1,7 +1,6 @@
-
+using System;
 using System.Collections;
 using UnityEngine;
-
 #if UNITY_EDITOR
 using UnityEditor;
 
@@ -9,187 +8,180 @@ using UnityEditor;
 
 namespace UnityStandardAssets.Utility {
   public class WaypointCircuit : MonoBehaviour {
-    private float[] distances;
+    float[] distances;
 
     public float editorVisualisationSubsteps = 100;
 
-    private float i;
-    private int numPoints;
-    private Vector3 P0;
+    float i;
+    int numPoints;
+    Vector3 P0;
 
     //this being here will save GC allocs
-    private int p0n;
-    private Vector3 P1;
-    private int p1n;
-    private Vector3 P2;
-    private int p2n;
-    private Vector3 P3;
-    private int p3n;
-    private Vector3[] points;
+    int p0n;
+    Vector3 P1;
+    int p1n;
+    Vector3 P2;
+    int p2n;
+    Vector3 P3;
+    int p3n;
+    Vector3[] points;
 
-    [SerializeField]
-    private bool smoothRoute = true;
+    [SerializeField] bool smoothRoute = true;
 
-    public WaypointList waypointList = new WaypointList ();
+    public WaypointList waypointList = new WaypointList();
 
     public float Length { get; private set; }
 
-    public Transform[] Waypoints { get { return waypointList.items; } }
+    public Transform[] Waypoints { get { return this.waypointList.items; } }
 
     // Use this for initialization
-    private void Awake () {
-      if (Waypoints.Length > 1)
-        CachePositionsAndDistances ();
-      numPoints = Waypoints.Length;
+    void Awake() {
+      if (this.Waypoints.Length > 1) this.CachePositionsAndDistances();
+      this.numPoints = this.Waypoints.Length;
     }
 
-    public RoutePoint GetRoutePoint (float dist) {
+    public RoutePoint GetRoutePoint(float dist) {
       // position and direction
-      var p1 = GetRoutePosition (dist);
-      var p2 = GetRoutePosition (dist + 0.1f);
+      var p1 = this.GetRoutePosition(dist : dist);
+      var p2 = this.GetRoutePosition(dist : dist + 0.1f);
       var delta = p2 - p1;
-      return new RoutePoint (
-        p1,
-        delta.normalized);
+      return new RoutePoint(
+                            position : p1,
+                            direction : delta.normalized);
     }
 
-    public Vector3 GetRoutePosition (float dist) {
+    public Vector3 GetRoutePosition(float dist) {
       var point = 0;
 
-      if (Length == 0)
-        Length = distances [distances.Length - 1];
+      if (this.Length == 0) this.Length = this.distances[this.distances.Length - 1];
 
-      dist = Mathf.Repeat (
-        dist,
-        Length);
+      dist = Mathf.Repeat(
+                          t : dist,
+                          length : this.Length);
 
-      while (distances [point] < dist)
+      while (this.distances[point] < dist)
         ++point;
 
       // get nearest two points, ensuring points wrap-around start & end of circuit
-      p1n = (point - 1 + numPoints) % numPoints;
-      p2n = point;
+      this.p1n = (point - 1 + this.numPoints) % this.numPoints;
+      this.p2n = point;
 
       // found point numbers, now find interpolation value between the two middle points
 
-      i = Mathf.InverseLerp (
-        distances [p1n],
-        distances [p2n],
-        dist);
+      this.i = Mathf.InverseLerp(
+                                 a : this.distances[this.p1n],
+                                 b : this.distances[this.p2n],
+                                 value : dist);
 
-      if (smoothRoute) {
+      if (this.smoothRoute) {
         // smooth catmull-rom calculation between the two relevant points
 
         // get indices for the surrounding 2 points, because
         // four points are required by the catmull-rom function
-        p0n = (point - 2 + numPoints) % numPoints;
-        p3n = (point + 1) % numPoints;
+        this.p0n = (point - 2 + this.numPoints) % this.numPoints;
+        this.p3n = (point + 1) % this.numPoints;
 
         // 2nd point may have been the 'last' point - a dupe of the first,
         // (to give a value of max track distance instead of zero)
         // but now it must be wrapped back to zero if that was the case.
-        p2n = p2n % numPoints;
+        this.p2n = this.p2n % this.numPoints;
 
-        P0 = points [p0n];
-        P1 = points [p1n];
-        P2 = points [p2n];
-        P3 = points [p3n];
+        this.P0 = this.points[this.p0n];
+        this.P1 = this.points[this.p1n];
+        this.P2 = this.points[this.p2n];
+        this.P3 = this.points[this.p3n];
 
-        return CatmullRom (
-          P0,
-          P1,
-          P2,
-          P3,
-          i);
+        return this.CatmullRom(
+                               p0 : this.P0,
+                               p1 : this.P1,
+                               p2 : this.P2,
+                               p3 : this.P3,
+                               i : this.i);
       }
       // simple linear lerp between the two points:
 
-      p1n = (point - 1 + numPoints) % numPoints;
-      p2n = point;
+      this.p1n = (point - 1 + this.numPoints) % this.numPoints;
+      this.p2n = point;
 
-      return Vector3.Lerp (
-        points [p1n],
-        points [p2n],
-        i);
+      return Vector3.Lerp(
+                          a : this.points[this.p1n],
+                          b : this.points[this.p2n],
+                          t : this.i);
     }
 
-    private Vector3 CatmullRom (Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float i) {
+    Vector3 CatmullRom(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float i) {
       // comments are no use here... it's the catmull-rom equation.
       // Un-magic this, lord vector!
       return 0.5f
-      * (2 * p1
-      + (-p0 + p2) * i
-      + (2 * p0 - 5 * p1 + 4 * p2 - p3) * i * i
-      + (-p0 + 3 * p1 - 3 * p2 + p3) * i * i * i);
+             * (2 * p1
+                + (-p0 + p2) * i
+                + (2 * p0 - 5 * p1 + 4 * p2 - p3) * i * i
+                + (-p0 + 3 * p1 - 3 * p2 + p3) * i * i * i);
     }
 
-    private void CachePositionsAndDistances () {
+    void CachePositionsAndDistances() {
       // transfer the position of each point and distances between points to arrays for
       // speed of lookup at runtime
-      points = new Vector3[Waypoints.Length + 1];
-      distances = new float[Waypoints.Length + 1];
+      this.points = new Vector3[this.Waypoints.Length + 1];
+      this.distances = new float[this.Waypoints.Length + 1];
 
       float accumulate_distance = 0;
-      for (var i = 0; i < points.Length; ++i) {
-        var t1 = Waypoints [i % Waypoints.Length];
-        var t2 = Waypoints [(i + 1) % Waypoints.Length];
+      for (var i = 0; i < this.points.Length; ++i) {
+        var t1 = this.Waypoints[i % this.Waypoints.Length];
+        var t2 = this.Waypoints[(i + 1) % this.Waypoints.Length];
         if (t1 != null && t2 != null) {
           var p1 = t1.position;
           var p2 = t2.position;
-          points [i] = Waypoints [i % Waypoints.Length].position;
-          distances [i] = accumulate_distance;
+          this.points[i] = this.Waypoints[i % this.Waypoints.Length].position;
+          this.distances[i] = accumulate_distance;
           accumulate_distance += (p1 - p2).magnitude;
         }
       }
     }
 
-    private void OnDrawGizmos () {
-      DrawGizmos (false);
-    }
+    void OnDrawGizmos() { this.DrawGizmos(selected : false); }
 
-    private void OnDrawGizmosSelected () {
-      DrawGizmos (true);
-    }
+    void OnDrawGizmosSelected() { this.DrawGizmos(selected : true); }
 
-    private void DrawGizmos (bool selected) {
-      waypointList.circuit = this;
-      if (Waypoints.Length > 1) {
-        numPoints = Waypoints.Length;
+    void DrawGizmos(bool selected) {
+      this.waypointList.circuit = this;
+      if (this.Waypoints.Length > 1) {
+        this.numPoints = this.Waypoints.Length;
 
-        CachePositionsAndDistances ();
-        Length = distances [distances.Length - 1];
+        this.CachePositionsAndDistances();
+        this.Length = this.distances[this.distances.Length - 1];
 
-        Gizmos.color = selected ? Color.yellow : new Color (
-          1,
-          1,
-          0,
-          0.5f);
-        var prev = Waypoints [0].position;
-        if (smoothRoute) {
-          for (float dist = 0; dist < Length; dist += Length / editorVisualisationSubsteps) {
-            var next = GetRoutePosition (dist + 1);
-            Gizmos.DrawLine (
-              prev,
-              next);
+        Gizmos.color = selected ? Color.yellow : new Color(
+                                                           r : 1,
+                                                           g : 1,
+                                                           b : 0,
+                                                           a : 0.5f);
+        var prev = this.Waypoints[0].position;
+        if (this.smoothRoute) {
+          for (float dist = 0; dist < this.Length; dist += this.Length / this.editorVisualisationSubsteps) {
+            var next = this.GetRoutePosition(dist : dist + 1);
+            Gizmos.DrawLine(
+                            from : prev,
+                            to : next);
             prev = next;
           }
 
-          Gizmos.DrawLine (
-            prev,
-            Waypoints [0].position);
+          Gizmos.DrawLine(
+                          from : prev,
+                          to : this.Waypoints[0].position);
         } else {
-          for (var n = 0; n < Waypoints.Length; ++n) {
-            var next = Waypoints [(n + 1) % Waypoints.Length].position;
-            Gizmos.DrawLine (
-              prev,
-              next);
+          for (var n = 0; n < this.Waypoints.Length; ++n) {
+            var next = this.Waypoints[(n + 1) % this.Waypoints.Length].position;
+            Gizmos.DrawLine(
+                            from : prev,
+                            to : next);
             prev = next;
           }
         }
       }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class WaypointList {
       public WaypointCircuit circuit;
       public Transform[] items = new Transform[0];
@@ -199,7 +191,7 @@ namespace UnityStandardAssets.Utility {
       public Vector3 position;
       public Vector3 direction;
 
-      public RoutePoint (Vector3 position, Vector3 direction) {
+      public RoutePoint(Vector3 position, Vector3 direction) {
         this.position = position;
         this.direction = direction;
       }
@@ -209,16 +201,16 @@ namespace UnityStandardAssets.Utility {
 
 namespace UnityStandardAssets.Utility.Inspector {
   #if UNITY_EDITOR
-  [CustomPropertyDrawer (typeof(WaypointCircuit.WaypointList))]
+  [CustomPropertyDrawer(type : typeof(WaypointCircuit.WaypointList))]
   public class WaypointListDrawer : PropertyDrawer {
-    private readonly float lineHeight = 18;
-    private readonly float spacing = 4;
+    readonly float lineHeight = 18;
+    readonly float spacing = 4;
 
-    public override void OnGUI (Rect position, SerializedProperty property, GUIContent label) {
-      EditorGUI.BeginProperty (
-        position,
-        label,
-        property);
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+      EditorGUI.BeginProperty(
+                              totalPosition : position,
+                              label : label,
+                              property : property);
 
       var x = position.x;
       var y = position.y;
@@ -230,158 +222,160 @@ namespace UnityStandardAssets.Utility.Inspector {
       var indent = EditorGUI.indentLevel;
       EditorGUI.indentLevel = 0;
 
-      var items = property.FindPropertyRelative ("items");
+      var items = property.FindPropertyRelative(relativePropertyPath : "items");
       var titles = new[] {
-        "Transform",
-        "",
-        "",
-        ""
-      };
+                           "Transform",
+                           "",
+                           "",
+                           ""
+                         };
       var props = new[] {
-        "transform",
-        "^",
-        "v",
-        "-"
-      };
+                          "transform",
+                          "^",
+                          "v",
+                          "-"
+                        };
       var widths = new[] {
-        .7f,
-        .1f,
-        .1f,
-        .1f
-      };
+                           .7f,
+                           .1f,
+                           .1f,
+                           .1f
+                         };
       float lineHeight = 18;
       var changedLength = false;
       if (items.arraySize > 0) {
         for (var i = -1; i < items.arraySize; ++i) {
-          var item = items.GetArrayElementAtIndex (i);
+          var item = items.GetArrayElementAtIndex(index : i);
 
           var rowX = x;
           for (var n = 0; n < props.Length; ++n) {
-            var w = widths [n] * inspectorWidth;
+            var w = widths[n] * inspectorWidth;
 
             // Calculate rects
-            var rect = new Rect (
-                         rowX,
-                         y,
-                         w,
-                         lineHeight);
+            var rect = new Rect(
+                                x : rowX,
+                                y : y,
+                                width : w,
+                                height : lineHeight);
             rowX += w;
 
             if (i == -1) {
-              EditorGUI.LabelField (
-                rect,
-                titles [n]);
+              EditorGUI.LabelField(
+                                   position : rect,
+                                   label : titles[n]);
             } else {
               if (n == 0) {
-                EditorGUI.ObjectField (
-                  rect,
-                  item.objectReferenceValue,
-                  typeof(Transform),
-                  true);
+                EditorGUI.ObjectField(
+                                      position : rect,
+                                      obj : item.objectReferenceValue,
+                                      objType : typeof(Transform),
+                                      allowSceneObjects : true);
               } else {
-                if (GUI.Button (
-                      rect,
-                      props [n]))
-                  switch (props [n]) {
-                  case "-":
-                    items.DeleteArrayElementAtIndex (i);
-                    items.DeleteArrayElementAtIndex (i);
-                    changedLength = true;
-                    break;
-                  case "v":
-                    if (i > 0)
-                      items.MoveArrayElement (
-                        i,
-                        i + 1);
-                    break;
-                  case "^":
-                    if (i < items.arraySize - 1)
-                      items.MoveArrayElement (
-                        i,
-                        i - 1);
-                    break;
+                if (GUI.Button(
+                               position : rect,
+                               text : props[n]))
+                  switch (props[n]) {
+                    case "-":
+                      items.DeleteArrayElementAtIndex(index : i);
+                      items.DeleteArrayElementAtIndex(index : i);
+                      changedLength = true;
+                      break;
+                    case "v":
+                      if (i > 0)
+                        items.MoveArrayElement(
+                                               srcIndex : i,
+                                               dstIndex : i + 1);
+                      break;
+                    case "^":
+                      if (i < items.arraySize - 1)
+                        items.MoveArrayElement(
+                                               srcIndex : i,
+                                               dstIndex : i - 1);
+                      break;
                   }
               }
             }
           }
 
-          y += lineHeight + spacing;
+          y += lineHeight + this.spacing;
           if (changedLength)
             break;
         }
       } else {
         // add button
-        var addButtonRect = new Rect (
-                              x + position.width - widths [widths.Length - 1] * inspectorWidth,
-                              y,
-                              widths [widths.Length - 1] * inspectorWidth,
-                              lineHeight);
-        if (GUI.Button (
-              addButtonRect,
-              "+"))
-          items.InsertArrayElementAtIndex (items.arraySize);
+        var addButtonRect = new Rect(
+                                     x : x + position.width - widths[widths.Length - 1] * inspectorWidth,
+                                     y : y,
+                                     width : widths[widths.Length - 1] * inspectorWidth,
+                                     height : lineHeight);
+        if (GUI.Button(
+                       position : addButtonRect,
+                       text : "+"))
+          items.InsertArrayElementAtIndex(index : items.arraySize);
 
-        y += lineHeight + spacing;
+        y += lineHeight + this.spacing;
       }
 
       // add all button
-      var addAllButtonRect = new Rect (
-                               x,
-                               y,
-                               inspectorWidth,
-                               lineHeight);
-      if (GUI.Button (
-            addAllButtonRect,
-            "Assign using all child objects")) {
+      var addAllButtonRect = new Rect(
+                                      x : x,
+                                      y : y,
+                                      width : inspectorWidth,
+                                      height : lineHeight);
+      if (GUI.Button(
+                     position : addAllButtonRect,
+                     text : "Assign using all child objects")) {
         var circuit =
-          property.FindPropertyRelative ("circuit").objectReferenceValue as WaypointCircuit;
+          property.FindPropertyRelative(relativePropertyPath : "circuit").objectReferenceValue as
+            WaypointCircuit;
         var children = new Transform[circuit.transform.childCount];
         var n = 0;
         foreach (Transform child in circuit.transform)
-          children [n++] = child;
-        System.Array.Sort (
-          children,
-          new TransformNameComparer ());
+          children[n++] = child;
+        Array.Sort(
+                   array : children,
+                   comparer : new TransformNameComparer());
         circuit.waypointList.items = new Transform[children.Length];
         for (n = 0; n < children.Length; ++n)
-          circuit.waypointList.items [n] = children [n];
+          circuit.waypointList.items[n] = children[n];
       }
 
-      y += lineHeight + spacing;
+      y += lineHeight + this.spacing;
 
       // rename all button
-      var renameButtonRect = new Rect (
-                               x,
-                               y,
-                               inspectorWidth,
-                               lineHeight);
-      if (GUI.Button (
-            renameButtonRect,
-            "Auto Rename numerically from this order")) {
+      var renameButtonRect = new Rect(
+                                      x : x,
+                                      y : y,
+                                      width : inspectorWidth,
+                                      height : lineHeight);
+      if (GUI.Button(
+                     position : renameButtonRect,
+                     text : "Auto Rename numerically from this order")) {
         var circuit =
-          property.FindPropertyRelative ("circuit").objectReferenceValue as WaypointCircuit;
+          property.FindPropertyRelative(relativePropertyPath : "circuit").objectReferenceValue as
+            WaypointCircuit;
         var n = 0;
         foreach (var child in circuit.waypointList.items)
-          child.name = "Waypoint " + n++.ToString ("000");
+          child.name = "Waypoint " + n++.ToString(format : "000");
       }
 
-      y += lineHeight + spacing;
+      y += lineHeight + this.spacing;
 
       // Set indent back to what it was
       EditorGUI.indentLevel = indent;
-      EditorGUI.EndProperty ();
+      EditorGUI.EndProperty();
     }
 
-    public override float GetPropertyHeight (SerializedProperty property, GUIContent label) {
-      var items = property.FindPropertyRelative ("items");
-      var lineAndSpace = lineHeight + spacing;
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
+      var items = property.FindPropertyRelative(relativePropertyPath : "items");
+      var lineAndSpace = this.lineHeight + this.spacing;
       return 40 + items.arraySize * lineAndSpace + lineAndSpace;
     }
 
     // comparer for check distances in ray cast hits
     public class TransformNameComparer : IComparer {
-      public int Compare (object x, object y) {
-        return ((Transform)x).name.CompareTo (((Transform)y).name);
+      public int Compare(object x, object y) {
+        return ((Transform)x).name.CompareTo(strB : ((Transform)y).name);
       }
     }
   }

@@ -1,14 +1,15 @@
-﻿
+﻿using System;
 using System.Threading;
 using AsyncIO;
 using FlatBuffers;
 using Neodroid.FBS.Reaction;
 using Neodroid.Messaging.Messages;
+using Neodroid.Scripts.Messaging.FBS;
 using NetMQ;
 using NetMQ.Sockets;
 
-namespace Neodroid.Messaging {
-  [System.Serializable]
+namespace Neodroid.Scripts.Messaging {
+  [Serializable]
   public class MessageServer {
     #region PublicMembers
 
@@ -18,20 +19,20 @@ namespace Neodroid.Messaging {
 
     #region PrivateMembers
 
-    private Thread _polling_thread;
-    private Thread _wait_for_client_thread;
-    private readonly object _thread_lock = new object ();
-    private bool _stop_thread_;
-    private bool _waiting_for_main_loop_to_send;
-    private readonly bool _use_inter_process_communication;
-    private bool _debugging;
+    Thread _polling_thread;
+    Thread _wait_for_client_thread;
+    readonly object _thread_lock = new object();
+    bool _stop_thread_;
+    bool _waiting_for_main_loop_to_send;
+    readonly bool _use_inter_process_communication;
+    bool _debugging;
 
-    private readonly ResponseSocket _socket;
+    readonly ResponseSocket _socket;
 
     //PairSocket _socket;
-    private readonly string _ip_address;
-    private readonly int _port;
-    private byte[] _byte_buffer;
+    readonly string _ip_address;
+    readonly int _port;
+    byte[] _byte_buffer;
 
     #endregion
 
@@ -39,47 +40,48 @@ namespace Neodroid.Messaging {
 
     #region Threads
 
-    private void WaitForClientToConnect (System.Action callback) {
-      if (_use_inter_process_communication)
-        _socket.Bind ("ipc:///tmp/neodroid/messages");
+    void WaitForClientToConnect(Action callback) {
+      if (this._use_inter_process_communication)
+        this._socket.Bind(address : "ipc:///tmp/neodroid/messages");
       else
-        _socket.Bind ("tcp://" + _ip_address + ":" + _port);
-      callback ();
-      ClientConnected = true;
+        this._socket.Bind(address : "tcp://" + this._ip_address + ":" + this._port);
+      callback();
+      this.ClientConnected = true;
     }
 
-    private void PollingThread (
-      System.Action<Reaction> receive_callback,
-      System.Action disconnect_callback,
-      System.Action<string> debug_callback) {
-      while (_stop_thread_ == false)
-        if (!_waiting_for_main_loop_to_send)
+    void PollingThread(
+      Action<Reaction> receive_callback,
+      Action disconnect_callback,
+      Action<string> debug_callback) {
+      while (this._stop_thread_ == false)
+        if (!this._waiting_for_main_loop_to_send)
           try {
             byte[] msg;
-            _socket.TryReceiveFrameBytes (
-              System.TimeSpan.FromSeconds (2),
-              out msg);
+            this._socket.TryReceiveFrameBytes(
+                                              timeout : TimeSpan.FromSeconds(value : 2),
+                                              bytes : out msg);
             if (msg != null && msg.Length > 0) {
-              var flat_reaction = FBSReaction.GetRootAsFBSReaction (new ByteBuffer (msg));
-              if (Debugging)
-                debug_callback (flat_reaction.ToString ());
-              var reaction = FBSReactionUtilities.create_reaction (flat_reaction);
-              receive_callback (reaction);
-              _waiting_for_main_loop_to_send = true;
+              var flat_reaction = FBSReaction.GetRootAsFBSReaction(_bb : new ByteBuffer(buffer : msg));
+              if (this.Debugging)
+                debug_callback(obj : flat_reaction.ToString());
+              var reaction = FBSReactionUtilities.create_reaction(reaction : flat_reaction);
+              receive_callback(obj : reaction);
+              this._waiting_for_main_loop_to_send = true;
             }
-          } catch (System.Exception err) {
-            debug_callback (err.ToString ());
+          } catch (Exception err) {
+            debug_callback(obj : err.ToString());
           }
 
-      if (_use_inter_process_communication)
-        _socket.Disconnect ("inproc://neodroid");
+      disconnect_callback();
+      if (this._use_inter_process_communication)
+        this._socket.Disconnect(address : "inproc://neodroid");
       else
-        _socket.Disconnect ("tcp://" + _ip_address + ":" + _port);
+        this._socket.Disconnect(address : "tcp://" + this._ip_address + ":" + this._port);
       try {
-        _socket.Dispose ();
-        _socket.Close ();
+        this._socket.Dispose();
+        this._socket.Close();
       } finally {
-        NetMQConfig.Cleanup (false);
+        NetMQConfig.Cleanup(block : false);
       }
     }
 
@@ -89,66 +91,69 @@ namespace Neodroid.Messaging {
 
     #region PublicMethods
 
-    public void SendEnvironmentStates (EnvironmentState[] environment_states) {
-      _byte_buffer = FBSStateUtilities.build_states (environment_states);
-      _socket.SendFrame (_byte_buffer);
-      _waiting_for_main_loop_to_send = false;
+    public void SendEnvironmentStates(EnvironmentState[] environment_states) {
+      this._byte_buffer = FBSStateUtilities.build_states(states : environment_states);
+      this._socket.SendFrame(data : this._byte_buffer);
+      this._waiting_for_main_loop_to_send = false;
     }
 
-    public void ListenForClientToConnect (System.Action callback) {
-      _wait_for_client_thread = new Thread (unused_param => WaitForClientToConnect (callback)) {
-        IsBackground =
+    public void ListenForClientToConnect(Action callback) {
+      this._wait_for_client_thread =
+        new Thread(start : unused_param => this.WaitForClientToConnect(callback : callback)) {
+                                                                                               IsBackground =
                                                                                                  true
-      };
+                                                                                             };
       // Is terminated with foreground threads, when they terminate
-      _wait_for_client_thread.Start ();
+      this._wait_for_client_thread.Start();
     }
 
-    public void StartReceiving (
-      System.Action<Reaction> cmd_callback,
-      System.Action disconnect_callback,
-      System.Action<string> debug_callback) {
-      _polling_thread = new Thread (
-        unused_param =>
-                                     PollingThread (
-          cmd_callback,
-          disconnect_callback,
-          debug_callback)) {
-        IsBackground = true
-      };
+    public void StartReceiving(
+      Action<Reaction> cmd_callback,
+      Action disconnect_callback,
+      Action<string> debug_callback) {
+      this._polling_thread = new Thread(
+                                        start : unused_param => this.PollingThread(
+                                                                                   receive_callback :
+                                                                                   cmd_callback,
+                                                                                   disconnect_callback :
+                                                                                   disconnect_callback,
+                                                                                   debug_callback :
+                                                                                   debug_callback)) {
+                                                                                                      IsBackground
+                                                                                                        = true
+                                                                                                    };
       // Is terminated with foreground threads, when they terminate
-      _polling_thread.Start ();
+      this._polling_thread.Start();
     }
 
     #region Contstruction
 
-    public MessageServer (
+    public MessageServer(
       string ip_address = "127.0.0.1",
       int port = 5555,
       bool use_inter_process_communication = false,
       bool debug = false) {
-      Debugging = debug;
-      _ip_address = ip_address;
-      _port = port;
-      _use_inter_process_communication = use_inter_process_communication;
-      if (!_use_inter_process_communication)
-        ForceDotNet.Force ();
-      _socket = new ResponseSocket ();
+      this.Debugging = debug;
+      this._ip_address = ip_address;
+      this._port = port;
+      this._use_inter_process_communication = use_inter_process_communication;
+      if (!this._use_inter_process_communication)
+        ForceDotNet.Force();
+      this._socket = new ResponseSocket();
       //_socket = new PairSocket ();
     }
 
-    public MessageServer (bool debug = false) : this (
-        "127.0.0.1",
-        5555,
-        false,
-        debug) {
-    }
+    public MessageServer(bool debug = false) : this(
+                                                    ip_address : "127.0.0.1",
+                                                    port : 5555,
+                                                    use_inter_process_communication : false,
+                                                    debug : debug) { }
 
     #endregion
 
     #region Getters
 
-    public bool Debugging { get { return _debugging; } set { _debugging = value; } }
+    public bool Debugging { get { return this._debugging; } set { this._debugging = value; } }
 
     #endregion
 
@@ -156,33 +161,29 @@ namespace Neodroid.Messaging {
 
     #region Deconstruction
 
-    public void Destroy () {
-      KillPollingAndListenerThread ();
-    }
+    public void Destroy() { this.KillPollingAndListenerThread(); }
 
-    public void KillPollingAndListenerThread () {
+    public void KillPollingAndListenerThread() {
       try {
-        lock (_thread_lock) {
-          _stop_thread_ = true;
+        lock (this._thread_lock) {
+          this._stop_thread_ = true;
         }
 
-        if (_use_inter_process_communication)
-          _socket.Disconnect ("ipc:///tmp/neodroid/messages");
+        if (this._use_inter_process_communication)
+          this._socket.Disconnect(address : "ipc:///tmp/neodroid/messages");
         else
-          _socket.Disconnect ("tcp://" + _ip_address + ":" + _port);
+          this._socket.Disconnect(address : "tcp://" + this._ip_address + ":" + this._port);
         try {
-          _socket.Dispose ();
-          _socket.Close ();
+          this._socket.Dispose();
+          this._socket.Close();
         } finally {
-          NetMQConfig.Cleanup (false);
+          NetMQConfig.Cleanup(block : false);
         }
 
-        if (_wait_for_client_thread != null)
-          _wait_for_client_thread.Join ();
-        if (_polling_thread != null)
-          _polling_thread.Join ();
+        if (this._wait_for_client_thread != null) this._wait_for_client_thread.Join();
+        if (this._polling_thread != null) this._polling_thread.Join();
       } catch {
-        System.Console.WriteLine ("Exception thrown while killing threads");
+        Console.WriteLine(value : "Exception thrown while killing threads");
       }
     }
 

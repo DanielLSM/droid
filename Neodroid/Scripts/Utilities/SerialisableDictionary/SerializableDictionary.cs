@@ -1,43 +1,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Neodroid.Utilities.SerialisableDictionary {
-  public abstract class SerializableDictionary<K, V> : ISerializationCallbackReceiver {
-    public Dictionary<K, V> Dict;
+namespace Neodroid.Scripts.Utilities.SerialisableDictionary {
+  public abstract class SerializableDictionary<TK, TV> : ISerializationCallbackReceiver {
+    [SerializeField] TK[] _keys;
 
-    [SerializeField]
-    private K[] _keys;
+    [SerializeField] TV[] _values;
 
-    [SerializeField]
-    private V[] _values;
+    public Dictionary<TK, TV> Dict;
 
     public void OnAfterDeserialize() {
-      var c = _keys.Length;
-      Dict = new Dictionary<K, V>(c);
-      for (var i = 0; i < c; i++) Dict[_keys[i]] = _values[i];
-      _keys = null;
-      _values = null;
+      var c = this._keys.Length;
+      this.Dict = new Dictionary<TK, TV>(capacity : c);
+      for (var i = 0; i < c; i++) this.Dict[key : this._keys[i]] = this._values[i];
+      this._keys = null;
+      this._values = null;
     }
 
     public void OnBeforeSerialize() {
-      var c = Dict.Count;
-      _keys = new K[c];
-      _values = new V[c];
+      var c = this.Dict.Count;
+      this._keys = new TK[c];
+      this._values = new TV[c];
       var i = 0;
-      using (var e = Dict.GetEnumerator()) {
+      using (var e = this.Dict.GetEnumerator()) {
         while (e.MoveNext()) {
           var kvp = e.Current;
-          _keys[i] = kvp.Key;
-          _values[i] = kvp.Value;
+          this._keys[i] = kvp.Key;
+          this._values[i] = kvp.Value;
           i++;
         }
       }
     }
 
     public static T New<T>()
-      where T : SerializableDictionary<K, V>, new() {
+      where T : SerializableDictionary<TK, TV>, new() {
       var result = new T {
-                           Dict = new Dictionary<K, V>()
+                           Dict = new Dictionary<TK, TV>()
                          };
       return result;
     }

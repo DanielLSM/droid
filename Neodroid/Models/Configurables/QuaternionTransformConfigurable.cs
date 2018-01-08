@@ -1,27 +1,24 @@
-﻿using UnityEngine;
+﻿using Neodroid.Models.Configurables.General;
+using UnityEngine;
 
-namespace Neodroid.Configurables {
+namespace Neodroid.Models.Configurables {
   public class QuaternionTransformConfigurable : ConfigurableGameObject {
     [Header(
-      "Specfic",
+      header : "Specfic",
       order = 102)]
     [SerializeField]
-    private Vector3 _position;
+    Vector3 _position;
 
-    [SerializeField]
-    private Quaternion _rotation;
+    [SerializeField] Quaternion _rotation;
 
-    [SerializeField]
-    private string _X;
+    [SerializeField] string _x;
 
-    [SerializeField]
-    private string _Y;
+    [SerializeField] string _y;
 
-    [SerializeField]
-    private string _Z;
+    [SerializeField] string _z;
 
-    public Quaternion Rotation { get { return _rotation; } }
+    public Quaternion Rotation { get { return this._rotation; } }
 
-    public Vector3 Position { get { return _position; } }
+    public Vector3 Position { get { return this._position; } }
   }
 }

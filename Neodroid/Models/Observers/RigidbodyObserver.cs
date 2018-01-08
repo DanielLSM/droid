@@ -1,37 +1,40 @@
-﻿using Neodroid.Utilities;
+﻿using Neodroid.Models.Observers.General;
+using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
-namespace Neodroid.Observers {
+namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
-  [RequireComponent(typeof(Rigidbody))]
+  [RequireComponent( typeof(Rigidbody))]
   public class RigidbodyObserver : Observer,
-                                   HasRigidbodyProperties {
-    [SerializeField]
-    private Vector3 _angular_velocity;
+                                   IHasRigidbodyProperties {
+    [SerializeField] Vector3 _angular_velocity;
 
-    private Rigidbody _rigidbody;
+    Rigidbody _rigidbody;
 
     [Header(
-      "Observation",
+      header : "Observation",
       order = 103)]
     [SerializeField]
-    private Vector3 _velocity;
+    Vector3 _velocity;
 
-    public override string ObserverIdentifier { get { return name + "Rigidbody"; } }
+    public override string ObserverIdentifier { get { return this.name + "Rigidbody"; } }
 
-    public Vector3 Velocity { get { return _velocity; } set { _velocity = value; } }
+    public Vector3 Velocity { get { return this._velocity; } set { this._velocity = value; } }
 
-    public Vector3 AngularVelocity { get { return _angular_velocity; } set { _angular_velocity = value; } }
+    public Vector3 AngularVelocity {
+      get { return this._angular_velocity; }
+      set { this._angular_velocity = value; }
+    }
 
-    protected override void Start() { _rigidbody = GetComponent<Rigidbody>(); }
+    protected override void Start() { this._rigidbody = this.GetComponent<Rigidbody>(); }
 
     public override void UpdateData() {
-      _velocity = _rigidbody.velocity;
-      _angular_velocity = _rigidbody.angularVelocity;
+      this._velocity = this._rigidbody.velocity;
+      this._angular_velocity = this._rigidbody.angularVelocity;
 
       var str_rep = "{";
-      str_rep += "\"Velocity\": \"" + _velocity;
-      str_rep += "\", \"AngularVelocity\": \"" + _angular_velocity;
+      str_rep += "\"Velocity\": \"" + this._velocity;
+      str_rep += "\", \"AngularVelocity\": \"" + this._angular_velocity;
       str_rep += "\"}";
       //Data = Encoding.ASCII.GetBytes (str_rep);
     }

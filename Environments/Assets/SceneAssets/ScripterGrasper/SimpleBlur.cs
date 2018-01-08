@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-namespace SceneSpecificAssets.Grasping {
+namespace SceneAssets.ScripterGrasper {
   [ExecuteInEditMode]
   public class SimpleBlur : MonoBehaviour {
-    public Material background;
+    [SerializeField]  Material _background;
 
-    private void OnRenderImage(RenderTexture src, RenderTexture dst) {
+    void OnRenderImage(RenderTexture src, RenderTexture dst) {
       Graphics.Blit(
-                    src,
-                    dst,
-                    background);
+                    source : src,
+                    dest : dst,
+                    mat : this._background);
     }
   }
 }

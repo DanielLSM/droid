@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Assets.Neodroid.Models.Actors;
-using Neodroid.Configurables;
 using Neodroid.Evaluation;
-using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
-using Neodroid.Observers;
-using Neodroid.Utilities;
-using Neodroid.Utilities.BoundingBoxes;
+using Neodroid.Models.Actors;
+using Neodroid.Models.Configurables.General;
+using Neodroid.Models.Managers;
+using Neodroid.Models.Observers.General;
+using Neodroid.Scripts.Utilities;
+using Neodroid.Scripts.Utilities.BoundingBoxes;
+using Neodroid.Scripts.Utilities.Enums;
+using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
 namespace Neodroid.Environments {
@@ -18,83 +20,84 @@ namespace Neodroid.Environments {
                                      IHasRegister<Resetable> {
     #region UnityCallbacks
 
-    private void Start() {
-      if (!_simulation_manager) _simulation_manager = FindObjectOfType<SimulationManager>();
-      if (!_objective_function) _objective_function = FindObjectOfType<ObjectiveFunction>();
-      _simulation_manager = NeodroidUtilities.MaybeRegisterComponent(
-                                                                     _simulation_manager,
-                                                                     this);
-      SaveInitialPoses();
-      StartCoroutine(SaveInitialBodiesIE());
+    void Start () {
+      if (!this._simulation_manager)
+        this._simulation_manager = FindObjectOfType<SimulationManager> ();
+      if (!this._objective_function)
+        this._objective_function = FindObjectOfType<ObjectiveFunction> ();
+      this._simulation_manager = NeodroidUtilities.MaybeRegisterComponent (
+        r : this._simulation_manager,
+        c : this);
+      this.SaveInitialPoses ();
+      this.StartCoroutine (routine : this.SaveInitialBodiesIE ());
     }
 
     #endregion
 
     #region Fields
 
-    [Header(
-      "References",
+    [Header (
+      header : "References",
       order = 99)]
     [SerializeField]
-    private ObjectiveFunction _objective_function;
+    ObjectiveFunction _objective_function;
 
-    [SerializeField]
-    private SimulationManager _simulation_manager;
+    [SerializeField] SimulationManager _simulation_manager;
 
-    [Header(
-      "Development",
+    [Header (
+      header : "Development",
       order = 100)]
     [SerializeField]
-    private bool _debugging;
+    bool _debugging;
 
-    [Header(
-      "General",
+    [Header (
+      header : "General",
       order = 101)]
     [SerializeField]
-    private Transform _coordinate_reference_point;
+    Transform _coordinate_reference_point;
 
-    [SerializeField]
-    private CoordinateSystem _coordinate_system = CoordinateSystem.LocalCoordinates;
+    [SerializeField] CoordinateSystem _coordinate_system = CoordinateSystem.LocalCoordinates;
 
-    [SerializeField]
-    private int _episode_length = 1000;
+    [SerializeField] int _episode_length = 1000;
 
-    [Header(
-      "(Optional)",
+    [Header (
+      header : "(Optional)",
       order = 102)]
     [SerializeField]
-    private BoundingBox _playable_area;
+    BoundingBox _playable_area;
 
     #endregion
 
     #region PrivateMembers
 
-    private Vector3[] _reset_positions;
-    private Quaternion[] _reset_rotations;
-    private GameObject[] _child_game_objects;
-    private Vector3[] _reset_velocities;
-    private Vector3[] _reset_angulars;
-    private Rigidbody[] _bodies;
-    private Transform[] _poses;
-    private Pose[] _received_poses;
-    private Body[] _received_bodies;
-    private Configuration[] _configurations;
+    Vector3[] _reset_positions;
+    Quaternion[] _reset_rotations;
+    GameObject[] _child_game_objects;
+    Vector3[] _reset_velocities;
+    Vector3[] _reset_angulars;
+    Rigidbody[] _bodies;
+    Transform[] _poses;
+    Pose[] _received_poses;
+    Body[] _received_bodies;
+    Configuration[] _configurations;
 
-    private readonly Dictionary<string, Resetable> _resetables = new Dictionary<string, Resetable>();
-    private readonly Dictionary<string, Actor> _actors = new Dictionary<string, Actor>();
-    private readonly Dictionary<string, Observer> _observers = new Dictionary<string, Observer>();
+    readonly Dictionary<string, Resetable> _resetables = new Dictionary<string, Resetable> ();
+    readonly Dictionary<string, Actor> _actors = new Dictionary<string, Actor> ();
+    readonly Dictionary<string, Observer> _observers = new Dictionary<string, Observer> ();
 
-    private readonly Dictionary<string, ConfigurableGameObject> _configurables =
-      new Dictionary<string, ConfigurableGameObject>();
+    readonly Dictionary<string, ConfigurableGameObject> _configurables =
+      new Dictionary<string, ConfigurableGameObject> ();
 
-    private float _lastest_reset_time;
-    private float energy_spent;
-    private bool _terminated;
-    private bool _configure;
-    private bool _describe;
-    private bool _terminable = true;
+    float _lastest_reset_time;
+    float energy_spent;
+    bool _terminated;
+    bool _configure;
+    bool _describe;
+    bool _terminable = true;
 
-    public LearningEnvironment() { CurrentFrameNumber = 0; }
+    public LearningEnvironment () {
+      this.CurrentFrameNumber = 0;
+    }
 
     #endregion
 
@@ -102,356 +105,363 @@ namespace Neodroid.Environments {
 
     #region Getters
 
-    public Dictionary<string, Actor> Actors { get { return _actors; } }
+    public Dictionary<string, Actor> Actors { get { return this._actors; } }
 
-    public Dictionary<string, Observer> Observers { get { return _observers; } }
+    public Dictionary<string, Observer> Observers { get { return this._observers; } }
 
-    public int EpisodeLength { get { return _episode_length; } set { _episode_length = value; } }
+    public int EpisodeLength { get { return this._episode_length; } set { this._episode_length = value; } }
 
-    public Dictionary<string, ConfigurableGameObject> Configurables { get { return _configurables; } }
+    public Dictionary<string, ConfigurableGameObject> Configurables { get { return this._configurables; } }
 
-    public Dictionary<string, Resetable> Resetables { get { return _resetables; } }
+    public Dictionary<string, Resetable> Resetables { get { return this._resetables; } }
 
-    public string EnvironmentIdentifier { get { return name; } }
+    public string EnvironmentIdentifier { get { return this.name; } }
 
     public int CurrentFrameNumber { get; private set; }
 
-    public float GetTimeSinceReset() {
-      return Time.time - _lastest_reset_time; //Time.realtimeSinceStartup;
+    public float GetTimeSinceReset () {
+      return Time.time - this._lastest_reset_time; //Time.realtimeSinceStartup;
     }
 
-    public bool Debugging { get { return _debugging; } set { _debugging = value; } }
+    public bool Debugging { get { return this._debugging; } set { this._debugging = value; } }
 
     public SimulationManager SimulationManager {
-      get { return _simulation_manager; }
-      set { _simulation_manager = value; }
+      get { return this._simulation_manager; }
+      set { this._simulation_manager = value; }
     }
 
     public ObjectiveFunction ObjectiveFunction {
-      get { return _objective_function; }
-      set { _objective_function = value; }
+      get { return this._objective_function; }
+      set { this._objective_function = value; }
     }
 
-    public BoundingBox PlayableArea { get { return _playable_area; } set { _playable_area = value; } }
+    public BoundingBox PlayableArea {
+      get { return this._playable_area; }
+      set { this._playable_area = value; }
+    }
 
     public Transform CoordinateReferencePoint {
-      get { return _coordinate_reference_point; }
-      set { _coordinate_reference_point = value; }
+      get { return this._coordinate_reference_point; }
+      set { this._coordinate_reference_point = value; }
     }
 
     public CoordinateSystem CoordinateSystem {
-      get { return _coordinate_system; }
-      set { _coordinate_system = value; }
+      get { return this._coordinate_system; }
+      set { this._coordinate_system = value; }
     }
 
     #endregion
 
-    public void Terminate(string reason) {
-      if (_terminable) {
-        if (Debugging)
-          print(
-                string.Format(
-                              "Was interrupted, because {0}",
-                              reason));
-        _terminated = true;
+    public void Terminate (string reason) {
+      if (this._terminable) {
+        if (this.Debugging)
+          print (
+            message : string.Format (
+              format : "Was interrupted, because {0}",
+              arg0 : reason));
+        this._terminated = true;
       }
     }
 
-    public void PostUpdate() {
-      if (_terminated) {
-        _terminated = false;
-        Reset();
-        UpdateConfigurableValues();
+    public void PostUpdate () {
+      if (this._terminated) {
+        this._terminated = false;
+        this.Reset ();
+        this.UpdateConfigurableValues ();
       }
 
-      if (_configure) {
-        _configure = false;
-        Configure();
-        UpdateConfigurableValues();
+      if (this._configure) {
+        this._configure = false;
+        this.Configure ();
+        this.UpdateConfigurableValues ();
       }
 
-      UpdateObserversData();
+      this.UpdateObserversData ();
     }
 
-    public void UpdateObserversData() {
-      foreach (var obs in Observers.Values)
+    public void UpdateObserversData () {
+      foreach (var obs in this.Observers.Values)
         if (obs)
-          obs.UpdateData();
+          obs.UpdateData ();
     }
 
-    public void UpdateConfigurableValues() {
-      foreach (var con in Configurables.Values)
+    public void UpdateConfigurableValues () {
+      foreach (var con in this.Configurables.Values)
         if (con)
-          con.UpdateObservation();
+          con.UpdateObservation ();
     }
 
-    public EnvironmentState React(Reaction reaction) {
+    public EnvironmentState React (Reaction reaction) {
       if (reaction.Parameters.IsExternal) {
-        _configurations = reaction.Configurations;
-        _configure = reaction.Parameters.Configure;
-        _describe = reaction.Parameters.Describe;
-        _terminable = reaction.Parameters.Terminable;
-        if (_configure && reaction.Unobservables != null) {
-          _received_poses = reaction.Unobservables.Poses;
-          _received_bodies = reaction.Unobservables.Bodies;
+        this._configurations = reaction.Configurations;
+        this._configure = reaction.Parameters.Configure;
+        this._describe = reaction.Parameters.Describe;
+        this._terminable = reaction.Parameters.Terminable;
+        if (this._configure && reaction.Unobservables != null) {
+          this._received_poses = reaction.Unobservables.Poses;
+          this._received_bodies = reaction.Unobservables.Bodies;
         }
       }
 
       if (reaction.Parameters.Step)
-        Step(reaction);
+        this.Step (reaction : reaction);
       else if (reaction.Parameters.Reset)
-        Terminate("Resetting because of reaction");
-      return GetState();
+        this.Terminate (reason : "Resetting because of reaction");
+      return this.GetState ();
     }
 
     #region Registration
 
-    public void Register(Actor actor) {
-      if (!Actors.ContainsKey(actor.ActorIdentifier)) {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} has registered actor {1}",
-                                  name,
-                                  actor.ActorIdentifier));
-        Actors.Add(
-                   actor.ActorIdentifier,
-                   actor);
+    public void Register (Actor actor) {
+      if (!this.Actors.ContainsKey (key : actor.ActorIdentifier)) {
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} has registered actor {1}",
+              arg0 : this.name,
+              arg1 : actor.ActorIdentifier));
+        this.Actors.Add (
+          key : actor.ActorIdentifier,
+          value : actor);
       } else {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} already has actor {1} registered",
-                                  name,
-                                  actor.ActorIdentifier));
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} already has actor {1} registered",
+              arg0 : this.name,
+              arg1 : actor.ActorIdentifier));
       }
     }
 
-    public void Register(Actor actor, string identifier) {
-      if (!Actors.ContainsKey(identifier)) {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} has registered actor {1}",
-                                  name,
-                                  identifier));
-        Actors.Add(
-                   identifier,
-                   actor);
+    public void Register (Actor actor, string identifier) {
+      if (!this.Actors.ContainsKey (key : identifier)) {
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} has registered actor {1}",
+              arg0 : this.name,
+              arg1 : identifier));
+        this.Actors.Add (
+          key : identifier,
+          value : actor);
       } else {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} already has actor {1} registered",
-                                  name,
-                                  identifier));
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} already has actor {1} registered",
+              arg0 : this.name,
+              arg1 : identifier));
       }
     }
 
-    public void Register(Observer observer) {
-      if (!_observers.ContainsKey(observer.ObserverIdentifier)) {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} has registered observer {1}",
-                                  name,
-                                  observer.ObserverIdentifier));
-        _observers.Add(
-                       observer.ObserverIdentifier,
-                       observer);
+    public void Register (Observer observer) {
+      if (!this._observers.ContainsKey (key : observer.ObserverIdentifier)) {
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} has registered observer {1}",
+              arg0 : this.name,
+              arg1 : observer.ObserverIdentifier));
+        this._observers.Add (
+          key : observer.ObserverIdentifier,
+          value : observer);
       } else {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} already has observer {1} registered",
-                                  name,
-                                  observer.ObserverIdentifier));
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} already has observer {1} registered",
+              arg0 : this.name,
+              arg1 : observer.ObserverIdentifier));
       }
     }
 
-    public void Register(Observer observer, string identifier) {
-      if (!_observers.ContainsKey(identifier)) {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} has registered observer {1}",
-                                  name,
-                                  identifier));
-        _observers.Add(
-                       identifier,
-                       observer);
+    public void Register (Observer observer, string identifier) {
+      if (!this._observers.ContainsKey (key : identifier)) {
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} has registered observer {1}",
+              arg0 : this.name,
+              arg1 : identifier));
+        this._observers.Add (
+          key : identifier,
+          value : observer);
       } else {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} already has observer {1} registered",
-                                  name,
-                                  identifier));
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} already has observer {1} registered",
+              arg0 : this.name,
+              arg1 : identifier));
       }
     }
 
-    public void Register(ConfigurableGameObject configurable) {
-      if (!_configurables.ContainsKey(configurable.ConfigurableIdentifier)) {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} has registered configurable {1}",
-                                  name,
-                                  configurable.ConfigurableIdentifier));
-        _configurables.Add(
-                           configurable.ConfigurableIdentifier,
-                           configurable);
+    public void Register (ConfigurableGameObject configurable) {
+      if (!this._configurables.ContainsKey (key : configurable.ConfigurableIdentifier)) {
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} has registered configurable {1}",
+              arg0 : this.name,
+              arg1 : configurable.ConfigurableIdentifier));
+        this._configurables.Add (
+          key : configurable.ConfigurableIdentifier,
+          value : configurable);
       } else {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} already has configurable {1} registered",
-                                  name,
-                                  configurable.ConfigurableIdentifier));
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format :
+                                            "Environment {0} already has configurable {1} registered",
+              arg0 : this.name,
+              arg1 : configurable.ConfigurableIdentifier));
       }
     }
 
-    public void Register(ConfigurableGameObject configurable, string identifier) {
-      if (!_configurables.ContainsKey(identifier)) {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} has registered configurable {1}",
-                                  name,
-                                  identifier));
-        _configurables.Add(
-                           identifier,
-                           configurable);
+    public void Register (ConfigurableGameObject configurable, string identifier) {
+      if (!this._configurables.ContainsKey (key : identifier)) {
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} has registered configurable {1}",
+              arg0 : this.name,
+              arg1 : identifier));
+        this._configurables.Add (
+          key : identifier,
+          value : configurable);
       } else {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} already has configurable {1} registered",
-                                  name,
-                                  identifier));
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format :
+                                            "Environment {0} already has configurable {1} registered",
+              arg0 : this.name,
+              arg1 : identifier));
       }
     }
 
-    public void Register(Resetable resetable, string identifier) {
-      if (!_resetables.ContainsKey(identifier)) {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} has registered resetables {1}",
-                                  name,
-                                  identifier));
-        _resetables.Add(
-                        identifier,
-                        resetable);
+    public void Register (Resetable resetable, string identifier) {
+      if (!this._resetables.ContainsKey (key : identifier)) {
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} has registered resetables {1}",
+              arg0 : this.name,
+              arg1 : identifier));
+        this._resetables.Add (
+          key : identifier,
+          value : resetable);
       } else {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} already has configurable {1} registered",
-                                  name,
-                                  identifier));
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format :
+                                            "Environment {0} already has configurable {1} registered",
+              arg0 : this.name,
+              arg1 : identifier));
       }
     }
 
-    public void Register(Resetable resetable) {
-      if (!_resetables.ContainsKey(resetable.ResetableIdentifier)) {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} has registered resetables {1}",
-                                  name,
-                                  resetable.ResetableIdentifier));
-        _resetables.Add(
-                        resetable.ResetableIdentifier,
-                        resetable);
+    public void Register (Resetable resetable) {
+      if (!this._resetables.ContainsKey (key : resetable.ResetableIdentifier)) {
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format : "Environment {0} has registered resetables {1}",
+              arg0 : this.name,
+              arg1 : resetable.ResetableIdentifier));
+        this._resetables.Add (
+          key : resetable.ResetableIdentifier,
+          value : resetable);
       } else {
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} already has configurable {1} registered",
-                                  name,
-                                  resetable.ResetableIdentifier));
+        if (this.Debugging)
+          Debug.Log (
+            message : string.Format (
+              format :
+                                            "Environment {0} already has configurable {1} registered",
+              arg0 : this.name,
+              arg1 : resetable.ResetableIdentifier));
       }
     }
 
-    public void UnRegisterActor(string identifier) {
-      if (Actors.ContainsKey(identifier))
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} unregistered actor {1}",
-                                  name,
-                                  identifier));
-      Actors.Remove(identifier);
+    public void UnRegisterActor (string identifier) {
+      if (this.Actors.ContainsKey (key : identifier))
+      if (this.Debugging)
+        Debug.Log (
+          message : string.Format (
+            format : "Environment {0} unregistered actor {1}",
+            arg0 : this.name,
+            arg1 : identifier));
+      this.Actors.Remove (key : identifier);
     }
 
-    public void UnRegisterObserver(string identifier) {
-      if (_observers.ContainsKey(identifier))
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} unregistered observer {1}",
-                                  name,
-                                  identifier));
-      _observers.Remove(identifier);
+    public void UnRegisterObserver (string identifier) {
+      if (this._observers.ContainsKey (key : identifier))
+      if (this.Debugging)
+        Debug.Log (
+          message : string.Format (
+            format : "Environment {0} unregistered observer {1}",
+            arg0 : this.name,
+            arg1 : identifier));
+      this._observers.Remove (key : identifier);
     }
 
-    public void UnRegisterConfigurable(string identifier) {
-      if (_configurables.ContainsKey(identifier))
-        if (Debugging)
-          Debug.Log(
-                    string.Format(
-                                  "Environment {0} unregistered configurable {1}",
-                                  name,
-                                  identifier));
-      _configurables.Remove(identifier);
+    public void UnRegisterConfigurable (string identifier) {
+      if (this._configurables.ContainsKey (key : identifier))
+      if (this.Debugging)
+        Debug.Log (
+          message : string.Format (
+            format : "Environment {0} unregistered configurable {1}",
+            arg0 : this.name,
+            arg1 : identifier));
+      this._configurables.Remove (key : identifier);
     }
 
     #endregion
 
     #region Transformations
 
-    public Vector3 TransformPosition(Vector3 position) {
-      if (_coordinate_system == CoordinateSystem.RelativeToReferencePoint)
-        if (_coordinate_reference_point)
-          return _coordinate_reference_point.transform.InverseTransformPoint(position);
-        else
-          return position;
-      if (_coordinate_system == CoordinateSystem.LocalCoordinates)
-        return position - transform.position;
+    public Vector3 TransformPosition (Vector3 position) {
+      if (this._coordinate_system == CoordinateSystem.RelativeToReferencePoint)
+      if (this._coordinate_reference_point)
+        return this._coordinate_reference_point.transform.InverseTransformPoint (position : position);
+      else
+        return position;
+      if (this._coordinate_system == CoordinateSystem.LocalCoordinates)
+        return position - this.transform.position;
       return position;
     }
 
-    public Vector3 InverseTransformPosition(Vector3 position) {
-      if (_coordinate_system == CoordinateSystem.RelativeToReferencePoint)
-        if (_coordinate_reference_point)
-          return _coordinate_reference_point.transform.TransformPoint(position);
-        else
-          return position;
-      if (_coordinate_system == CoordinateSystem.LocalCoordinates)
-        return position - transform.position;
+    public Vector3 InverseTransformPosition (Vector3 position) {
+      if (this._coordinate_system == CoordinateSystem.RelativeToReferencePoint)
+      if (this._coordinate_reference_point)
+        return this._coordinate_reference_point.transform.TransformPoint (position : position);
+      else
+        return position;
+      if (this._coordinate_system == CoordinateSystem.LocalCoordinates)
+        return position - this.transform.position;
       return position;
     }
 
-    public Vector3 TransformDirection(Vector3 direction) {
-      if (_coordinate_system == CoordinateSystem.RelativeToReferencePoint)
-        if (_coordinate_reference_point)
-          return _coordinate_reference_point.transform.InverseTransformDirection(direction);
-        else
-          return direction;
-      if (_coordinate_system == CoordinateSystem.LocalCoordinates)
-        return transform.InverseTransformDirection(direction);
+    public Vector3 TransformDirection (Vector3 direction) {
+      if (this._coordinate_system == CoordinateSystem.RelativeToReferencePoint)
+      if (this._coordinate_reference_point)
+        return this._coordinate_reference_point.transform.InverseTransformDirection (direction : direction);
+      else
+        return direction;
+      if (this._coordinate_system == CoordinateSystem.LocalCoordinates)
+        return this.transform.InverseTransformDirection (direction : direction);
       return direction;
     }
 
-    public Vector3 InverseTransformDirection(Vector3 direction) {
-      if (_coordinate_system == CoordinateSystem.RelativeToReferencePoint)
-        if (_coordinate_reference_point)
-          return _coordinate_reference_point.transform.TransformDirection(direction);
-        else
-          return direction;
-      if (_coordinate_system == CoordinateSystem.LocalCoordinates)
-        return transform.InverseTransformDirection(direction);
+    public Vector3 InverseTransformDirection (Vector3 direction) {
+      if (this._coordinate_system == CoordinateSystem.RelativeToReferencePoint)
+      if (this._coordinate_reference_point)
+        return this._coordinate_reference_point.transform.TransformDirection (direction : direction);
+      else
+        return direction;
+      if (this._coordinate_system == CoordinateSystem.LocalCoordinates)
+        return this.transform.InverseTransformDirection (direction : direction);
       return direction;
     }
 
@@ -461,218 +471,227 @@ namespace Neodroid.Environments {
 
     #region PrivateMethods
 
-    private void SaveInitialPoses() {
-      var _ignored_layer = LayerMask.NameToLayer("IgnoredByNeodroid");
-      _child_game_objects =
-        NeodroidUtilities.RecursiveChildGameObjectsExceptLayer(
-                                                               transform,
-                                                               _ignored_layer);
-      _reset_positions = new Vector3[_child_game_objects.Length];
-      _reset_rotations = new Quaternion[_child_game_objects.Length];
-      _poses = new Transform[_child_game_objects.Length];
-      for (var i = 0; i < _child_game_objects.Length; i++) {
-        _reset_positions[i] = _child_game_objects[i].transform.position;
-        _reset_rotations[i] = _child_game_objects[i].transform.rotation;
-        _poses[i] = _child_game_objects[i].transform;
-        var maybe_joint = _child_game_objects[i].GetComponent<Joint>();
-        if (maybe_joint != null) maybe_joint.gameObject.AddComponent<JointFix>();
+    void SaveInitialPoses () {
+      var _ignored_layer = LayerMask.NameToLayer (layerName : "IgnoredByNeodroid");
+      this._child_game_objects =
+        NeodroidUtilities.RecursiveChildGameObjectsExceptLayer (
+        parent : this.transform,
+        layer : _ignored_layer);
+      this._reset_positions = new Vector3[this._child_game_objects.Length];
+      this._reset_rotations = new Quaternion[this._child_game_objects.Length];
+      this._poses = new Transform[this._child_game_objects.Length];
+      for (var i = 0; i < this._child_game_objects.Length; i++) {
+        this._reset_positions [i] = this._child_game_objects [i].transform.position;
+        this._reset_rotations [i] = this._child_game_objects [i].transform.rotation;
+        this._poses [i] = this._child_game_objects [i].transform;
+        var maybe_joint = this._child_game_objects [i].GetComponent<Joint> ();
+        if (maybe_joint != null)
+          maybe_joint.gameObject.AddComponent<JointFix> ();
       }
     }
 
-    private void SaveInitialBodies() {
-      var body_list = new List<Rigidbody>();
-      foreach (var go in _child_game_objects) {
-        var body = go.GetComponent<Rigidbody>();
-        if (body) body_list.Add(body);
+    void SaveInitialBodies () {
+      var body_list = new List<Rigidbody> ();
+      foreach (var go in this._child_game_objects) {
+        var body = go.GetComponent<Rigidbody> ();
+        if (body)
+          body_list.Add (item : body);
       }
 
-      _bodies = body_list.ToArray();
-      _reset_velocities = new Vector3[_bodies.Length];
-      _reset_angulars = new Vector3[_bodies.Length];
-      for (var i = 0; i < _bodies.Length; i++) {
-        _reset_velocities[i] = _bodies[i].velocity;
-        _reset_angulars[i] = _bodies[i].angularVelocity;
+      this._bodies = body_list.ToArray ();
+      this._reset_velocities = new Vector3[this._bodies.Length];
+      this._reset_angulars = new Vector3[this._bodies.Length];
+      for (var i = 0; i < this._bodies.Length; i++) {
+        this._reset_velocities [i] = this._bodies [i].velocity;
+        this._reset_angulars [i] = this._bodies [i].angularVelocity;
       }
     }
 
-    private IEnumerator SaveInitialBodiesIE() {
-      yield return new WaitForFixedUpdate();
-      SaveInitialBodies();
+    IEnumerator SaveInitialBodiesIE () {
+      yield return new WaitForFixedUpdate ();
+      this.SaveInitialBodies ();
     }
 
-    private EnvironmentState GetState() {
-      foreach (var a in Actors.Values)
+    EnvironmentState GetState () {
+      foreach (var a in this.Actors.Values)
         foreach (var m in a.Motors.Values)
-          energy_spent += m.GetEnergySpend();
+          this.energy_spent += m.GetEnergySpend ();
 
       var reward = 0f;
-      if (_objective_function != null) reward = _objective_function.Evaluate();
+      if (this._objective_function != null)
+        reward = this._objective_function.Evaluate ();
 
       EnvironmentDescription description = null;
-      if (_describe) {
+      if (this._describe) {
         var threshold = 0f;
-        if (_objective_function != null) threshold = _objective_function.SolvedThreshold;
-        description = new EnvironmentDescription(
-                                                 EpisodeLength,
-                                                 _simulation_manager.FrameSkips,
-                                                 Actors,
-                                                 Configurables,
-                                                 threshold
-                                                );
-        _describe = false;
+        if (this._objective_function != null)
+          threshold = this._objective_function.SolvedThreshold;
+        description = new EnvironmentDescription (
+          max_steps : this.EpisodeLength,
+          frame_skips : this._simulation_manager.FrameSkips,
+          actors : this.Actors,
+          configurables : this.Configurables,
+          solved_threshold : threshold
+        );
+        this._describe = false;
       }
 
-      return new EnvironmentState(
-                                  EnvironmentIdentifier,
-                                  energy_spent,
-                                  Observers,
-                                  CurrentFrameNumber,
-                                  reward,
-                                  _terminated,
-                                  _bodies,
-                                  _poses,
-                                  description
-                                 );
+      return new EnvironmentState (
+        environment_name : this.EnvironmentIdentifier,
+        total_energy_spent_since_reset : this.energy_spent,
+        observers : this.Observers,
+        frame_number : this.CurrentFrameNumber,
+        reward : reward,
+        terminated : this._terminated,
+        bodies : this._bodies,
+        poses : this._poses,
+        description : description
+      );
     }
 
-    private void Reset() {
-      ResetRegisteredObjects();
-      SetEnvironmentPoses(
-                          _child_game_objects,
-                          _reset_positions,
-                          _reset_rotations);
-      SetEnvironmentBodies(
-                           _bodies,
-                           _reset_velocities,
-                           _reset_angulars);
+    void Reset () {
+      this.ResetRegisteredObjects ();
+      this.SetEnvironmentPoses (
+        child_game_objects : this._child_game_objects,
+        positions : this._reset_positions,
+        rotations : this._reset_rotations);
+      this.SetEnvironmentBodies (
+        bodies : this._bodies,
+        velocities : this._reset_velocities,
+        angulars : this._reset_angulars);
     }
 
-    private void Configure() {
-      if (_received_poses != null) {
-        var positions = new Vector3[_received_poses.Length];
-        var rotations = new Quaternion[_received_poses.Length];
-        for (var i = 0; i < _received_poses.Length; i++) {
-          positions[i] = _received_poses[i].position;
-          rotations[i] = _received_poses[i].rotation;
+    void Configure () {
+      if (this._received_poses != null) {
+        var positions = new Vector3[this._received_poses.Length];
+        var rotations = new Quaternion[this._received_poses.Length];
+        for (var i = 0; i < this._received_poses.Length; i++) {
+          positions [i] = this._received_poses [i].position;
+          rotations [i] = this._received_poses [i].rotation;
         }
 
-        SetEnvironmentPoses(
-                            _child_game_objects,
-                            positions,
-                            rotations);
+        this.SetEnvironmentPoses (
+          child_game_objects : this._child_game_objects,
+          positions : positions,
+          rotations : rotations);
       }
 
-      if (_received_bodies != null) {
-        var vels = new Vector3[_received_bodies.Length];
-        var angs = new Vector3[_received_bodies.Length];
-        for (var i = 0; i < _received_bodies.Length; i++) {
-          vels[i] = _received_bodies[i].velocity;
-          angs[i] = _received_bodies[i].angularVelocity;
+      if (this._received_bodies != null) {
+        var vels = new Vector3[this._received_bodies.Length];
+        var angs = new Vector3[this._received_bodies.Length];
+        for (var i = 0; i < this._received_bodies.Length; i++) {
+          vels [i] = this._received_bodies [i].Velocity;
+          angs [i] = this._received_bodies [i].AngularVelocity;
         }
 
-        SetEnvironmentBodies(
-                             _bodies,
-                             vels,
-                             angs);
+        this.SetEnvironmentBodies (
+          bodies : this._bodies,
+          velocities : vels,
+          angulars : angs);
       }
 
-      if (_configurations != null)
-        foreach (var configuration in _configurations)
-          if (_configurables.ContainsKey(configuration.ConfigurableName)) {
-            _configurables[configuration.ConfigurableName].ApplyConfiguration(configuration);
+      if (this._configurations != null)
+        foreach (var configuration in this._configurations)
+          if (this._configurables.ContainsKey (key : configuration.ConfigurableName)) {
+            this._configurables [key : configuration.ConfigurableName]
+                .ApplyConfiguration (configuration : configuration);
           } else {
-            if (Debugging)
-              Debug.Log(
-                        "Could find not configurable with the specified name: "
-                        + configuration.ConfigurableName);
+            if (this.Debugging)
+              Debug.Log (
+                message : "Could find not configurable with the specified name: "
+                + configuration.ConfigurableName);
           }
     }
 
-    private void Step(Reaction reaction) {
-      if (reaction.Parameters.EpisodeCount) CurrentFrameNumber++;
+    void Step (Reaction reaction) {
+      if (reaction.Parameters.EpisodeCount)
+        this.CurrentFrameNumber++;
       if (reaction != null && reaction.Motions != null && reaction.Motions.Length > 0)
         foreach (var motion in reaction.Motions) {
-          if (Debugging)
-            Debug.Log("Applying " + motion + " To " + name + "'s actors");
-          var motion_actor_name = motion.GetActorName();
-          if (Actors.ContainsKey(motion_actor_name) && Actors[motion_actor_name] != null) {
-            Actors[motion_actor_name].ApplyMotion(motion);
+          if (this.Debugging)
+            Debug.Log (message : "Applying " + motion + " To " + this.name + "'s actors");
+          var motion_actor_name = motion.GetActorName ();
+          if (this.Actors.ContainsKey (key : motion_actor_name)
+              && this.Actors [key : motion_actor_name] != null) {
+            this.Actors [key : motion_actor_name].ApplyMotion (motion : motion);
           } else {
-            if (Debugging)
-              Debug.Log("Could find not actor with the specified name: " + motion_actor_name);
+            if (this.Debugging)
+              Debug.Log (message : "Could find not actor with the specified name: " + motion_actor_name);
           }
         }
 
-      if (EpisodeLength > 0 && CurrentFrameNumber > EpisodeLength) {
-        if (Debugging)
-          Debug.Log("Maximum episode length reached, resetting");
-        Terminate("Maximum episode length reached, resetting");
+      if (this.EpisodeLength > 0 && this.CurrentFrameNumber > this.EpisodeLength) {
+        if (this.Debugging)
+          Debug.Log (message : "Maximum episode length reached, resetting");
+        this.Terminate (reason : "Maximum episode length reached, resetting");
       }
 
-      UpdateObserversData();
+      this.UpdateObserversData ();
     }
 
-    private void ResetRegisteredObjects() {
-      if (Debugging)
-        Debug.Log("Resetting registed objects");
-      foreach (var resetable in Resetables.Values)
+    void ResetRegisteredObjects () {
+      if (this.Debugging)
+        Debug.Log (message : "Resetting registed objects");
+      foreach (var resetable in this.Resetables.Values)
         if (resetable != null)
-          resetable.Reset();
-      foreach (var actor in Actors.Values)
+          resetable.Reset ();
+      foreach (var actor in this.Actors.Values)
         if (actor)
-          actor.Reset();
-      foreach (var observer in Observers.Values)
+          actor.Reset ();
+      foreach (var observer in this.Observers.Values)
         if (observer)
-          observer.Reset();
+          observer.Reset ();
     }
 
     #region EnvironmentStateSetters
 
-    private void SetEnvironmentPoses(
+    void SetEnvironmentPoses (
       GameObject[] child_game_objects,
       Vector3[] positions,
       Quaternion[] rotations) {
-      if (_simulation_manager) {
-        for (var iterations = 0; iterations < _simulation_manager.ResetIterations; iterations++)
+      if (this._simulation_manager) {
+        for (var iterations = 0; iterations < this._simulation_manager.ResetIterations; iterations++)
           for (var i = 0; i < child_game_objects.Length; i++)
-            if (child_game_objects[i] != null && i < positions.Length && i < rotations.Length) {
-              var rigid_body = child_game_objects[i].GetComponent<Rigidbody>();
+            if (child_game_objects [i] != null && i < positions.Length && i < rotations.Length) {
+              var rigid_body = child_game_objects [i].GetComponent<Rigidbody> ();
               if (rigid_body)
-                rigid_body.Sleep();
-              child_game_objects[i].transform.position = positions[i];
-              child_game_objects[i].transform.rotation = rotations[i];
+                rigid_body.Sleep ();
+              child_game_objects [i].transform.position = positions [i];
+              child_game_objects [i].transform.rotation = rotations [i];
               if (rigid_body)
-                rigid_body.WakeUp();
+                rigid_body.WakeUp ();
 
-              var joint_fix = child_game_objects[i].GetComponent<JointFix>();
+              var joint_fix = child_game_objects [i].GetComponent<JointFix> ();
               if (joint_fix)
-                joint_fix.Reset();
-              var anim = child_game_objects[i].GetComponent<Animation>();
+                joint_fix.Reset ();
+              var anim = child_game_objects [i].GetComponent<Animation> ();
               if (anim)
-                anim.Rewind();
+                anim.Rewind ();
             }
 
-        _lastest_reset_time = Time.time;
-        CurrentFrameNumber = 0;
-        if (_objective_function) _objective_function.Reset();
+        this._lastest_reset_time = Time.time;
+        this.CurrentFrameNumber = 0;
+        if (this._objective_function)
+          this._objective_function.Reset ();
       }
     }
 
-    private void SetEnvironmentBodies(Rigidbody[] bodies, Vector3[] velocities, Vector3[] angulars) {
+    void SetEnvironmentBodies (Rigidbody[] bodies, Vector3[] velocities, Vector3[] angulars) {
       if (bodies != null && bodies.Length > 0)
         for (var i = 0; i < bodies.Length; i++)
-          if (i < bodies.Length && bodies[i] != null && i < velocities.Length && i < angulars.Length) {
-            if (Debugging)
-              print(
-                    string.Format(
-                                  "Setting {0}, velocity to {1} and angular velocity to {2}",
-                                  bodies[i].name,
-                                  velocities[i],
-                                  angulars[i]));
-            bodies[i].Sleep();
-            bodies[i].velocity = velocities[i];
-            bodies[i].angularVelocity = angulars[i];
-            bodies[i].WakeUp();
+          if (i < bodies.Length && bodies [i] != null && i < velocities.Length && i < angulars.Length) {
+            if (this.Debugging)
+              print (
+                message : string.Format (
+                  format :
+                                            "Setting {0}, velocity to {1} and angular velocity to {2}",
+                  arg0 : bodies [i].name,
+                  arg1 : velocities [i],
+                  arg2 : angulars [i]));
+            bodies [i].Sleep ();
+            bodies [i].velocity = velocities [i];
+            bodies [i].angularVelocity = angulars [i];
+            bodies [i].WakeUp ();
           }
     }
 

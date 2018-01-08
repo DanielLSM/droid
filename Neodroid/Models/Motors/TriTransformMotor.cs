@@ -1,120 +1,117 @@
 ﻿using Neodroid.Messaging.Messages;
-using Neodroid.Utilities;
+using Neodroid.Models.Motors.General;
+using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
-namespace Neodroid.Motors {
+namespace Neodroid.Models.Motors {
   public class TriTransformMotor : Motor {
-    [SerializeField]
-    protected string _layer_mask = "Obstructions";
+    [SerializeField] protected string _layer_mask = "Obstructions";
 
-    [SerializeField]
-    protected bool _no_collisions = true;
+    [SerializeField] protected bool _no_collisions = true;
 
-    [SerializeField]
-    protected Space _relative_to = Space.Self;
+    [SerializeField] protected Space _relative_to = Space.Self;
 
-    [SerializeField]
-    protected bool _rotational_motors;
+    [SerializeField] protected bool _rotational_motors;
 
-    private string _X;
-    private string _Y;
-    private string _Z;
+    string _x;
+    string _y;
+    string _z;
 
     public override void RegisterComponent() {
-      if (!_rotational_motors) {
-        _X = GetMotorIdentifier() + "X";
-        _Y = GetMotorIdentifier() + "Y";
-        _Z = GetMotorIdentifier() + "Z";
+      if (!this._rotational_motors) {
+        this._x = this.GetMotorIdentifier() + "X";
+        this._y = this.GetMotorIdentifier() + "Y";
+        this._z = this.GetMotorIdentifier() + "Z";
       } else {
-        _X = GetMotorIdentifier() + "RotX";
-        _Y = GetMotorIdentifier() + "RotY";
-        _Z = GetMotorIdentifier() + "RotZ";
+        this._x = this.GetMotorIdentifier() + "RotX";
+        this._y = this.GetMotorIdentifier() + "RotY";
+        this._z = this.GetMotorIdentifier() + "RotZ";
       }
 
-      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                  ParentActor,
-                                                                  (Motor)this,
-                                                                  _X);
-      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                  ParentActor,
-                                                                  (Motor)this,
-                                                                  _Y);
-      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                  ParentActor,
-                                                                  (Motor)this,
-                                                                  _Z);
+      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                       r : this.ParentActor,
+                                                                       c : (Motor)this,
+                                                                       identifier : this._x);
+      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                       r : this.ParentActor,
+                                                                       c : (Motor)this,
+                                                                       identifier : this._y);
+      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                       r : this.ParentActor,
+                                                                       c : (Motor)this,
+                                                                       identifier : this._z);
     }
 
-    public override string GetMotorIdentifier() { return name + "Transform"; }
+    public override string GetMotorIdentifier() { return this.name + "Transform"; }
 
     public override void InnerApplyMotion(MotorMotion motion) {
-      var layer_mask = 1 << LayerMask.NameToLayer(_layer_mask);
-      if (!_rotational_motors) {
-        if (motion.GetMotorName() == _X) {
+      var layer_mask = 1 << LayerMask.NameToLayer(layerName : this._layer_mask);
+      if (!this._rotational_motors) {
+        if (motion.GetMotorName() == this._x) {
           var vec = Vector3.right * motion.Strength;
-          if (_no_collisions) {
+          if (this._no_collisions) {
             if (!Physics.Raycast(
-                                 transform.position,
-                                 vec,
-                                 Mathf.Abs(motion.Strength),
-                                 layer_mask))
-              transform.Translate(
-                                  vec,
-                                  _relative_to);
+                                 origin : this.transform.position,
+                                 direction : vec,
+                                 maxDistance : Mathf.Abs(f : motion.Strength),
+                                 layerMask : layer_mask))
+              this.transform.Translate(
+                                       translation : vec,
+                                       relativeTo : this._relative_to);
           } else {
-            transform.Translate(
-                                vec,
-                                _relative_to);
+            this.transform.Translate(
+                                     translation : vec,
+                                     relativeTo : this._relative_to);
           }
-        } else if (motion.GetMotorName() == _Y) {
+        } else if (motion.GetMotorName() == this._y) {
           var vec = -Vector3.up * motion.Strength;
-          if (_no_collisions) {
+          if (this._no_collisions) {
             if (!Physics.Raycast(
-                                 transform.position,
-                                 vec,
-                                 Mathf.Abs(motion.Strength),
-                                 layer_mask))
-              transform.Translate(
-                                  vec,
-                                  _relative_to);
+                                 origin : this.transform.position,
+                                 direction : vec,
+                                 maxDistance : Mathf.Abs(f : motion.Strength),
+                                 layerMask : layer_mask))
+              this.transform.Translate(
+                                       translation : vec,
+                                       relativeTo : this._relative_to);
           } else {
-            transform.Translate(
-                                vec,
-                                _relative_to);
+            this.transform.Translate(
+                                     translation : vec,
+                                     relativeTo : this._relative_to);
           }
-        } else if (motion.GetMotorName() == _Z) {
+        } else if (motion.GetMotorName() == this._z) {
           var vec = -Vector3.forward * motion.Strength;
-          if (_no_collisions) {
+          if (this._no_collisions) {
             if (!Physics.Raycast(
-                                 transform.position,
-                                 vec,
-                                 Mathf.Abs(motion.Strength),
-                                 layer_mask))
-              transform.Translate(
-                                  vec,
-                                  _relative_to);
+                                 origin : this.transform.position,
+                                 direction : vec,
+                                 maxDistance : Mathf.Abs(f : motion.Strength),
+                                 layerMask : layer_mask))
+              this.transform.Translate(
+                                       translation : vec,
+                                       relativeTo : this._relative_to);
           } else {
-            transform.Translate(
-                                vec,
-                                _relative_to);
+            this.transform.Translate(
+                                     translation : vec,
+                                     relativeTo : this._relative_to);
           }
         }
       } else {
-        if (motion.GetMotorName() == _X)
-          transform.Rotate(
-                           Vector3.left,
-                           motion.Strength,
-                           _relative_to);
-        else if (motion.GetMotorName() == _Y)
-          transform.Rotate(
-                           Vector3.up,
-                           motion.Strength,
-                           _relative_to);
-        else if (motion.GetMotorName() == _Z)
-          transform.Rotate(
-                           Vector3.forward,
-                           motion.Strength,
-                           _relative_to);
+        if (motion.GetMotorName() == this._x)
+          this.transform.Rotate(
+                                axis : Vector3.left,
+                                angle : motion.Strength,
+                                relativeTo : this._relative_to);
+        else if (motion.GetMotorName() == this._y)
+          this.transform.Rotate(
+                                axis : Vector3.up,
+                                angle : motion.Strength,
+                                relativeTo : this._relative_to);
+        else if (motion.GetMotorName() == this._z)
+          this.transform.Rotate(
+                                axis : Vector3.forward,
+                                angle : motion.Strength,
+                                relativeTo : this._relative_to);
       }
     }
   }

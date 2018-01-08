@@ -1,81 +1,80 @@
-﻿using Assets.SceneAssets.ScripterGrasper.Utilities;
-using SceneSpecificAssets.Grasping;
-using SceneSpecificAssets.Grasping.Utilities;
+﻿using SceneAssets.ScripterGrasper.Scripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GUIControl : MonoBehaviour {
-  public Text claw1_state;
-  public Text claw2_state;
-  public Text env_state;
+namespace SceneAssets.ScripterGrasper.Utilities.DataCollection {
+  public class GUIControl : MonoBehaviour {
+    [SerializeField]  Text _claw1_state;
+    [SerializeField]  Text _claw2_state;
+    [SerializeField]  Text _env_state;
 
-  [Space]
-  [Header("State Panel")]
-  public Text gripper_state;
+    [Space] [Header(header : "State Panel")]
+    [SerializeField]  Text _gripper_state;
 
-  //float gripper_target_distance;
-  //int iterations;
-  //int obstacle_num;
-  private ScriptedGripper pf;
-  public Text pf_state;
+    //float gripper_target_distance;
+    //int iterations;
+    //int obstacle_num;
+    [SerializeField] ScriptedGripper _pf;
+    [SerializeField]  Text _pf_state;
 
-  public Slider s_distance;
-  public Slider s_obstacle;
+    [SerializeField]  Slider _s_distance;
+    [SerializeField]  Slider _s_obstacle;
 
-  public Text t_gripper_target_distance;
-  public Text t_iterations;
-  public Text t_obstacle_num;
-  public Text t_waiting;
+    [SerializeField]  Text _t_gripper_target_distance;
+    [SerializeField]  Text _t_iterations;
+    [SerializeField]  Text _t_obstacle_num;
+    [SerializeField]  Text _t_waiting;
 
-  private Targets target;
-  public Text target_state;
+    [SerializeField] Targets _target;
+    [SerializeField]  Text _target_state;
 
-  private void Start() {
-    pf = FindObjectOfType<ScriptedGripper>();
-    t_gripper_target_distance.text = s_distance.value.ToString("0.00");
-    t_obstacle_num.text = s_obstacle.value.ToString();
-    t_waiting.text = "";
-  }
-
-  private void Update() {
-    gripper_state.text = pf._state.GripperState.ToString();
-    env_state.text = pf._state.ObstructionMotionState.ToString();
-    pf_state.text = pf._state.PathFindingState.ToString();
-    target_state.text = pf._state.TargetState.ToString();
-    claw1_state.text = pf._state.Claw1State.ToString();
-    claw2_state.text = pf._state.Claw2State.ToString();
-    t_waiting.text = pf._state.PathFindingState == PathFindingState.WaitingForTarget ? "Detecting movement\nWaiting..." : "";
-  }
-
-  public void DistanceSlider() { t_gripper_target_distance.text = s_distance.value.ToString("0.00"); }
-
-  public void ObstacleSlider() { t_obstacle_num.text = s_obstacle.value.ToString(); }
-
-  public void ChooseTarget() {
-    switch (EventSystem.current.currentSelectedGameObject.name) {
-      case "Sill":
-        target = Targets.Sill;
-        break;
-
-      case "Sardin":
-        target = Targets.Sardin;
-        break;
-
-      case "Button":
-        target = Targets.Button;
-        break;
-
-      default:
-        break;
+    void Start() {
+      this._pf = FindObjectOfType<ScriptedGripper>();
+      this._t_gripper_target_distance.text = this._s_distance.value.ToString(format : "0.00");
+      this._t_obstacle_num.text = this._s_obstacle.value.ToString();
+      this._t_waiting.text = "";
     }
 
-    print("Target = " + target);
-  }
+    void Update() {
+      this._gripper_state.text = this._pf.State.GripperState.ToString();
+      this._env_state.text = this._pf.State.ObstructionMotionState.ToString();
+      this._pf_state.text = this._pf.State.PathFindingState.ToString();
+      this._target_state.text = this._pf.State.TargetState.ToString();
+      this._claw1_state.text = this._pf.State.Claw1State.ToString();
+      this._claw2_state.text = this._pf.State.Claw2State.ToString();
+      this._t_waiting.text = this._pf.State.PathFindingState == PathFindingState.WaitingForTarget
+                              ? "Detecting movement\nWaiting..." : "";
+    }
 
-  private enum Targets {
-    Sill,
-    Sardin,
-    Button
+    public void DistanceSlider() {
+      this._t_gripper_target_distance.text = this._s_distance.value.ToString(format : "0.00");
+    }
+
+    public void ObstacleSlider() { this._t_obstacle_num.text = this._s_obstacle.value.ToString(); }
+
+    public void ChooseTarget() {
+      switch (EventSystem.current.currentSelectedGameObject.name) {
+        case "Sill":
+          this._target = Targets.Sill;
+          break;
+
+        case "Sardin":
+          this._target = Targets.Sardin;
+          break;
+
+        case "Button":
+          this._target = Targets.Button;
+          break;
+      }
+
+      print(message : "Target = " + this._target);
+    }
+
+    enum Targets {
+      Sill,
+      Sardin,
+      Button
+    }
   }
 }

@@ -1,88 +1,89 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Neodroid.Segmentation {
+namespace Neodroid.Scripts.Utilities.Segmentation {
   [ExecuteInEditMode]
   public class ChangeMaterialOnRenderByTag : MonoBehaviour {
-    private Renderer[] _all_renders;
+    Renderer[] _all_renders;
 
-    private MaterialPropertyBlock _block;
+    MaterialPropertyBlock _block;
     public SegmentationColorByTag[] _colors_by_tag;
-    private LinkedList<Color>[] _original_colors;
+    LinkedList<Color>[] _original_colors;
 
     public bool _replace_untagged_color = true;
 
-    private Dictionary<string, Color> _tag_colors;
+    Dictionary<string, Color> _tag_colors;
     public Color _untagged_color = Color.black;
 
-    public SegmentationColorByTag[] SegmentationColorsByTag { get { return _colors_by_tag; } }
+    public SegmentationColorByTag[] SegmentationColorsByTag { get { return this._colors_by_tag; } }
 
-    private void Awake() { Setup(); }
+    void Awake() { this.Setup(); }
 
-    private void Update() {
-      Setup(); // renderes maybe be disable and enabled, that is why every update we find all renderers again
+    void Update() {
+      this.Setup(); // renderes maybe be disable and enabled, that is why every update we find all renderers again
     }
 
-    private void Setup() {
-      _all_renders = FindObjectsOfType<Renderer>();
-      _block = new MaterialPropertyBlock();
+    void Setup() {
+      this._all_renders = FindObjectsOfType<Renderer>();
+      this._block = new MaterialPropertyBlock();
 
-      _tag_colors = new Dictionary<string, Color>();
-      if (_colors_by_tag.Length > 0)
-        foreach (var tag_color in _colors_by_tag)
-          if (!_tag_colors.ContainsKey(tag_color.tag))
-            _tag_colors.Add(
-                            tag_color.tag,
-                            tag_color.color);
+      this._tag_colors = new Dictionary<string, Color>();
+      if (this._colors_by_tag.Length > 0)
+        foreach (var tag_color in this._colors_by_tag)
+          if (!this._tag_colors.ContainsKey(key : tag_color.Tag))
+            this._tag_colors.Add(
+                                 key : tag_color.Tag,
+                                 value : tag_color.Col);
     }
 
-    private void Change() {
-      _original_colors = new LinkedList<Color>[_all_renders.Length];
-      for (var i = 0; i < _original_colors.Length; i++) _original_colors[i] = new LinkedList<Color>();
+    void Change() {
+      this._original_colors = new LinkedList<Color>[this._all_renders.Length];
+      for (var i = 0; i < this._original_colors.Length; i++)
+        this._original_colors[i] = new LinkedList<Color>();
 
-      for (var i = 0; i < _all_renders.Length; i++)
-        if (_tag_colors != null && _tag_colors.ContainsKey(_all_renders[i].tag))
-          foreach (var mat in _all_renders[i].sharedMaterials) {
-            if (mat != null) _original_colors[i].AddFirst(mat.color);
-            _block.SetColor(
-                            "_Color",
-                            _tag_colors[_all_renders[i].tag]);
-            _all_renders[i].SetPropertyBlock(_block);
+      for (var i = 0; i < this._all_renders.Length; i++)
+        if (this._tag_colors != null && this._tag_colors.ContainsKey(key : this._all_renders[i].tag))
+          foreach (var mat in this._all_renders[i].sharedMaterials) {
+            if (mat != null) this._original_colors[i].AddFirst(value : mat.color);
+            this._block.SetColor(
+                                 name : "_Color",
+                                 value : this._tag_colors[key : this._all_renders[i].tag]);
+            this._all_renders[i].SetPropertyBlock(properties : this._block);
           }
-        else if (_replace_untagged_color)
-          foreach (var mat in _all_renders[i].sharedMaterials) {
-            if (mat != null) _original_colors[i].AddFirst(mat.color);
-            _block.SetColor(
-                            "_Color",
-                            _untagged_color);
-            _all_renders[i].SetPropertyBlock(_block);
+        else if (this._replace_untagged_color)
+          foreach (var mat in this._all_renders[i].sharedMaterials) {
+            if (mat != null) this._original_colors[i].AddFirst(value : mat.color);
+            this._block.SetColor(
+                                 name : "_Color",
+                                 value : this._untagged_color);
+            this._all_renders[i].SetPropertyBlock(properties : this._block);
           }
     }
 
-    private void Restore() {
-      for (var i = 0; i < _all_renders.Length; i++)
-        foreach (var mat in _all_renders[i].sharedMaterials)
+    void Restore() {
+      for (var i = 0; i < this._all_renders.Length; i++)
+        foreach (var mat in this._all_renders[i].sharedMaterials)
           if (mat != null) {
-            _block.SetColor(
-                            "_Color",
-                            _original_colors[i].Last.Value);
-            _original_colors[i].RemoveLast();
-            _all_renders[i].SetPropertyBlock(_block);
+            this._block.SetColor(
+                                 name : "_Color",
+                                 value : this._original_colors[i].Last.Value);
+            this._original_colors[i].RemoveLast();
+            this._all_renders[i].SetPropertyBlock(properties : this._block);
           }
     }
 
-    private void OnPreCull() {
+    void OnPreCull() {
       // change
     }
 
-    private void OnPreRender() {
+    void OnPreRender() {
       // change
-      Change();
+      this.Change();
     }
 
-    private void OnPostRender() {
+    void OnPostRender() {
       // change back
-      Restore();
+      this.Restore();
     }
   }
 }

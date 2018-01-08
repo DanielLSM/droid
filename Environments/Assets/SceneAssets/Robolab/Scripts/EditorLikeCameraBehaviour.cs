@@ -1,125 +1,128 @@
 ﻿using UnityEngine;
 
-public class EditorLikeCameraBehaviour : MonoBehaviour {
-  //Maximum speed when holdin gshift
-  public float camSens = 0.25f;
+namespace SceneAssets.Robolab.Scripts {
+  public class EditorLikeCameraBehaviour : MonoBehaviour {
+    //Maximum speed when holdin gshift
+    public float CamSens = 0.25f;
 
-  private Vector3 lastMouse = new Vector3(
-                                          255,
-                                          255,
-                                          255);
+    Vector3 _last_mouse = new Vector3(
+                                    x : 255,
+                                    y : 255,
+                                    z : 255);
 
-  public float mainSpeed = 100.0f;
+    public float MainSpeed = 100.0f;
 
-  //multiplied by how long shift is held.  Basically running
-  public float maxShift = 1000.0f;
+    //multiplied by how long shift is held.  Basically running
+    public float MaxShift = 1000.0f;
 
-  public bool movementStaysFlat = true;
+    public bool MovementStaysFlat = true;
 
-  //How sensitive it with mouse
-  public bool rotateOnlyIfMousedown = true;
+    //How sensitive it with mouse
+    public bool RotateOnlyIfMousedown = true;
 
-  //regular speed
-  public float shiftAdd = 250.0f;
+    //regular speed
+    public float ShiftAdd = 250.0f;
 
-  //kind of in the middle of the screen, rather than at the top (play)
-  private float totalRun = 1.0f;
+    //kind of in the middle of the screen, rather than at the top (play)
+    float _total_run = 1.0f;
 
-  private void Awake() {
-    Debug.Log("FlyCamera Awake() - RESETTING CAMERA POSITION"); // nop?
-    // nop:
-    //transform.position.Set(0,8,-32);
-    //transform.rotation.Set(15,0,0,1);
-    transform.position = new Vector3(
-                                     0,
-                                     8,
-                                     -32);
-    transform.rotation = Quaternion.Euler(
-                                          25,
-                                          0,
-                                          0);
-  }
-
-  private void Update() {
-    if (Input.GetMouseButtonDown(1)) lastMouse = Input.mousePosition; // $CTK reset when we begin
-
-    if (!rotateOnlyIfMousedown || rotateOnlyIfMousedown && Input.GetMouseButton(1)) {
-      lastMouse = Input.mousePosition - lastMouse;
-      lastMouse = new Vector3(
-                              -lastMouse.y * camSens,
-                              lastMouse.x * camSens,
-                              0);
-      lastMouse = new Vector3(
-                              transform.eulerAngles.x + lastMouse.x,
-                              transform.eulerAngles.y + lastMouse.y,
-                              0);
-      transform.eulerAngles = lastMouse;
-      lastMouse = Input.mousePosition;
-      //Mouse  camera angle done.  
+    void Awake() {
+      Debug.Log(message : "FlyCamera Awake() - RESETTING CAMERA POSITION"); // nop?
+      // nop:
+      //transform.position.Set(0,8,-32);
+      //transform.rotation.Set(15,0,0,1);
+      this.transform.position = new Vector3(
+                                            x : 0,
+                                            y : 8,
+                                            z : -32);
+      this.transform.rotation = Quaternion.Euler(
+                                                 x : 25,
+                                                 y : 0,
+                                                 z : 0);
     }
 
-    //Keyboard commands
-    var p = GetBaseInput();
-    if (Input.GetKey(KeyCode.LeftShift)) {
-      totalRun += Time.deltaTime;
-      p = p * totalRun * shiftAdd;
-      p.x = Mathf.Clamp(
-                        p.x,
-                        -maxShift,
-                        maxShift);
-      p.y = Mathf.Clamp(
-                        p.y,
-                        -maxShift,
-                        maxShift);
-      p.z = Mathf.Clamp(
-                        p.z,
-                        -maxShift,
-                        maxShift);
-    } else {
-      totalRun = Mathf.Clamp(
-                             totalRun * 0.5f,
-                             1f,
-                             1000f);
-      p = p * mainSpeed;
+    void Update() {
+      if (Input.GetMouseButtonDown(button : 1))
+        this._last_mouse = Input.mousePosition; // $CTK reset when we begin
+
+      if (!this.RotateOnlyIfMousedown || this.RotateOnlyIfMousedown && Input.GetMouseButton(button : 1)) {
+        this._last_mouse = Input.mousePosition - this._last_mouse;
+        this._last_mouse = new Vector3(
+                                     x : -this._last_mouse.y * this.CamSens,
+                                     y : this._last_mouse.x * this.CamSens,
+                                     z : 0);
+        this._last_mouse = new Vector3(
+                                     x : this.transform.eulerAngles.x + this._last_mouse.x,
+                                     y : this.transform.eulerAngles.y + this._last_mouse.y,
+                                     z : 0);
+        this.transform.eulerAngles = this._last_mouse;
+        this._last_mouse = Input.mousePosition;
+        //Mouse  camera angle done.  
+      }
+
+      //Keyboard commands
+      var p = this.GetBaseInput();
+      if (Input.GetKey(key : KeyCode.LeftShift)) {
+        this._total_run += Time.deltaTime;
+        p = p * this._total_run * this.ShiftAdd;
+        p.x = Mathf.Clamp(
+                          value : p.x,
+                          min : -this.MaxShift,
+                          max : this.MaxShift);
+        p.y = Mathf.Clamp(
+                          value : p.y,
+                          min : -this.MaxShift,
+                          max : this.MaxShift);
+        p.z = Mathf.Clamp(
+                          value : p.z,
+                          min : -this.MaxShift,
+                          max : this.MaxShift);
+      } else {
+        this._total_run = Mathf.Clamp(
+                                    value : this._total_run * 0.5f,
+                                    min : 1f,
+                                    max : 1000f);
+        p = p * this.MainSpeed;
+      }
+
+      p = p * Time.deltaTime;
+      var new_position = this.transform.position;
+      if (Input.GetKey(key : KeyCode.Space)
+          || this.MovementStaysFlat && !(this.RotateOnlyIfMousedown && Input.GetMouseButton(button : 1))) {
+        //If player wants to move on X and Z axis only
+        this.transform.Translate(translation : p);
+        new_position.x = this.transform.position.x;
+        new_position.z = this.transform.position.z;
+        this.transform.position = new_position;
+      } else {
+        this.transform.Translate(translation : p);
+      }
     }
 
-    p = p * Time.deltaTime;
-    var newPosition = transform.position;
-    if (Input.GetKey(KeyCode.Space)
-        || movementStaysFlat && !(rotateOnlyIfMousedown && Input.GetMouseButton(1))) {
-      //If player wants to move on X and Z axis only
-      transform.Translate(p);
-      newPosition.x = transform.position.x;
-      newPosition.z = transform.position.z;
-      transform.position = newPosition;
-    } else {
-      transform.Translate(p);
+    Vector3 GetBaseInput() {
+      //returns the basic values, if it's 0 than it's not active.
+      var p_velocity = new Vector3();
+      if (Input.GetKey(key : KeyCode.W))
+        p_velocity += new Vector3(
+                                  x : 0,
+                                  y : 0,
+                                  z : 1);
+      if (Input.GetKey(key : KeyCode.S))
+        p_velocity += new Vector3(
+                                  x : 0,
+                                  y : 0,
+                                  z : -1);
+      if (Input.GetKey(key : KeyCode.A))
+        p_velocity += new Vector3(
+                                  x : -1,
+                                  y : 0,
+                                  z : 0);
+      if (Input.GetKey(key : KeyCode.D))
+        p_velocity += new Vector3(
+                                  x : 1,
+                                  y : 0,
+                                  z : 0);
+      return p_velocity;
     }
-  }
-
-  private Vector3 GetBaseInput() {
-    //returns the basic values, if it's 0 than it's not active.
-    var p_Velocity = new Vector3();
-    if (Input.GetKey(KeyCode.W))
-      p_Velocity += new Vector3(
-                                0,
-                                0,
-                                1);
-    if (Input.GetKey(KeyCode.S))
-      p_Velocity += new Vector3(
-                                0,
-                                0,
-                                -1);
-    if (Input.GetKey(KeyCode.A))
-      p_Velocity += new Vector3(
-                                -1,
-                                0,
-                                0);
-    if (Input.GetKey(KeyCode.D))
-      p_Velocity += new Vector3(
-                                1,
-                                0,
-                                0);
-    return p_Velocity;
   }
 }

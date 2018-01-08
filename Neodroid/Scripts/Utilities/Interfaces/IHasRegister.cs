@@ -1,4 +1,4 @@
-﻿namespace Neodroid.Utilities {
+﻿namespace Neodroid.Scripts.Utilities.Interfaces {
   public interface IHasRegister<in T> {
     void Register(T obj);
 

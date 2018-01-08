@@ -1,42 +1,42 @@
-
+using System;
 using System.Collections;
 using UnityEngine;
 
 namespace UnityStandardAssets.Utility {
-  [System.Serializable]
+  [Serializable]
   public class LerpControlledBob {
     public float BobAmount;
     public float BobDuration;
 
-    private float m_Offset;
+    float m_Offset;
 
     // provides the offset that can be used
-    public float Offset() { return m_Offset; }
+    public float Offset() { return this.m_Offset; }
 
     public IEnumerator DoBobCycle() {
       // make the camera move down slightly
       var t = 0f;
-      while (t < BobDuration) {
-        m_Offset = Mathf.Lerp(
-                              0f,
-                              BobAmount,
-                              t / BobDuration);
+      while (t < this.BobDuration) {
+        this.m_Offset = Mathf.Lerp(
+                                   a : 0f,
+                                   b : this.BobAmount,
+                                   t : t / this.BobDuration);
         t += Time.deltaTime;
         yield return new WaitForFixedUpdate();
       }
 
       // make it move back to neutral
       t = 0f;
-      while (t < BobDuration) {
-        m_Offset = Mathf.Lerp(
-                              BobAmount,
-                              0f,
-                              t / BobDuration);
+      while (t < this.BobDuration) {
+        this.m_Offset = Mathf.Lerp(
+                                   a : this.BobAmount,
+                                   b : 0f,
+                                   t : t / this.BobDuration);
         t += Time.deltaTime;
         yield return new WaitForFixedUpdate();
       }
 
-      m_Offset = 0f;
+      this.m_Offset = 0f;
     }
   }
 }

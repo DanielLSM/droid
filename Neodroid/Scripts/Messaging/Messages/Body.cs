@@ -2,15 +2,15 @@
 
 namespace Neodroid.Messaging.Messages {
   public class Body {
-    public Body(
+    public Body (
       Vector3 vel,
       Vector3 ang) {
-      velocity = vel;
-      angularVelocity = ang;
+      this.Velocity = vel;
+      this.AngularVelocity = ang;
     }
 
-    public Vector3 velocity { get; private set; }
+    public Vector3 Velocity { get; private set; }
 
-    public Vector3 angularVelocity { get; private set; }
+    public Vector3 AngularVelocity { get; private set; }
   }
 }

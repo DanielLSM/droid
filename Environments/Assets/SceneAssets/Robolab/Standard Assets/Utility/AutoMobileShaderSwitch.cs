@@ -1,4 +1,4 @@
-
+using System;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -7,11 +7,10 @@ using UnityEditor;
 
 namespace UnityStandardAssets.Utility {
   public class AutoMobileShaderSwitch : MonoBehaviour {
-    [SerializeField]
-    private ReplacementList m_ReplacementList;
+    [SerializeField] ReplacementList m_ReplacementList;
 
     // Use this for initialization
-    private void OnEnable() {
+    void OnEnable() {
       #if UNITY_IPHONE || UNITY_ANDROID || UNITY_WP8 || UNITY_TIZEN || UNITY_STV
 			var renderers = FindObjectsOfType<Renderer>();
 			Debug.Log (renderers.Length+" renderers");
@@ -60,16 +59,16 @@ namespace UnityStandardAssets.Utility {
 			{
 				Debug.Log (oldMaterials[n].name+" ("+oldMaterials[n].shader.name+")"+" replaced with "+newMaterials[n].name+" ("+newMaterials[n].shader.name+")");
 			}
-      #endif
+            #endif
     }
 
-    [System.Serializable]
+    [Serializable]
     public class ReplacementDefinition {
       public Shader original = null;
       public Shader replacement = null;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class ReplacementList {
       public ReplacementDefinition[] items = new ReplacementDefinition[0];
     }
@@ -78,16 +77,16 @@ namespace UnityStandardAssets.Utility {
 
 namespace UnityStandardAssets.Utility.Inspector {
   #if UNITY_EDITOR
-  [CustomPropertyDrawer(typeof(AutoMobileShaderSwitch.ReplacementList))]
+  [CustomPropertyDrawer(type : typeof(AutoMobileShaderSwitch.ReplacementList))]
   public class ReplacementListDrawer : PropertyDrawer {
-    private const float k_LineHeight = 18;
-    private const float k_Spacing = 4;
+    const float k_LineHeight = 18;
+    const float k_Spacing = 4;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
       EditorGUI.BeginProperty(
-                              position,
-                              label,
-                              property);
+                              totalPosition : position,
+                              label : label,
+                              property : property);
 
       var x = position.x;
       var y = position.y;
@@ -97,7 +96,7 @@ namespace UnityStandardAssets.Utility.Inspector {
       var indent = EditorGUI.indentLevel;
       EditorGUI.indentLevel = 0;
 
-      var items = property.FindPropertyRelative("items");
+      var items = property.FindPropertyRelative(relativePropertyPath : "items");
       var titles = new[] {
                            "Original",
                            "Replacement",
@@ -117,7 +116,7 @@ namespace UnityStandardAssets.Utility.Inspector {
       var changedLength = false;
       if (items.arraySize > 0)
         for (var i = -1; i < items.arraySize; ++i) {
-          var item = items.GetArrayElementAtIndex(i);
+          var item = items.GetArrayElementAtIndex(index : i);
 
           var rowX = x;
           for (var n = 0; n < props.Length; ++n) {
@@ -125,47 +124,47 @@ namespace UnityStandardAssets.Utility.Inspector {
 
             // Calculate rects
             var rect = new Rect(
-                                rowX,
-                                y,
-                                w,
-                                lineHeight);
+                                x : rowX,
+                                y : y,
+                                width : w,
+                                height : lineHeight);
             rowX += w;
 
             if (i == -1) {
               // draw title labels
               EditorGUI.LabelField(
-                                   rect,
-                                   titles[n]);
+                                   position : rect,
+                                   label : titles[n]);
             } else {
               if (props[n] == "-" || props[n] == "^" || props[n] == "v") {
                 if (GUI.Button(
-                               rect,
-                               props[n]))
+                               position : rect,
+                               text : props[n]))
                   switch (props[n]) {
                     case "-":
-                      items.DeleteArrayElementAtIndex(i);
-                      items.DeleteArrayElementAtIndex(i);
+                      items.DeleteArrayElementAtIndex(index : i);
+                      items.DeleteArrayElementAtIndex(index : i);
                       changedLength = true;
                       break;
                     case "v":
                       if (i > 0)
                         items.MoveArrayElement(
-                                               i,
-                                               i + 1);
+                                               srcIndex : i,
+                                               dstIndex : i + 1);
                       break;
                     case "^":
                       if (i < items.arraySize - 1)
                         items.MoveArrayElement(
-                                               i,
-                                               i - 1);
+                                               srcIndex : i,
+                                               dstIndex : i - 1);
                       break;
                   }
               } else {
-                var prop = item.FindPropertyRelative(props[n]);
+                var prop = item.FindPropertyRelative(relativePropertyPath : props[n]);
                 EditorGUI.PropertyField(
-                                        rect,
-                                        prop,
-                                        GUIContent.none);
+                                        position : rect,
+                                        property : prop,
+                                        label : GUIContent.none);
               }
             }
           }
@@ -176,13 +175,13 @@ namespace UnityStandardAssets.Utility.Inspector {
 
       // add button
       var addButtonRect = new Rect(
-                                   x + position.width - widths[widths.Length - 1] * inspectorWidth,
-                                   y,
-                                   widths[widths.Length - 1] * inspectorWidth,
-                                   lineHeight);
+                                   x : x + position.width - widths[widths.Length - 1] * inspectorWidth,
+                                   y : y,
+                                   width : widths[widths.Length - 1] * inspectorWidth,
+                                   height : lineHeight);
       if (GUI.Button(
-                     addButtonRect,
-                     "+")) items.InsertArrayElementAtIndex(items.arraySize);
+                     position : addButtonRect,
+                     text : "+")) items.InsertArrayElementAtIndex(index : items.arraySize);
 
       y += lineHeight + k_Spacing;
 
@@ -192,7 +191,7 @@ namespace UnityStandardAssets.Utility.Inspector {
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-      var items = property.FindPropertyRelative("items");
+      var items = property.FindPropertyRelative(relativePropertyPath : "items");
       var lineAndSpace = k_LineHeight + k_Spacing;
       return 40 + items.arraySize * lineAndSpace + lineAndSpace;
     }

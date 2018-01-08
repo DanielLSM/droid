@@ -1,62 +1,63 @@
 ﻿using Neodroid.Messaging.Messages;
-using Neodroid.Utilities;
+using Neodroid.Models.Configurables.General;
+using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
-namespace Neodroid.Configurables {
-  [RequireComponent(typeof(Renderer))]
+namespace Neodroid.Models.Configurables {
+  [RequireComponent( typeof(Renderer))]
   public class ColorConfigurable : ConfigurableGameObject {
-    private string _A;
-    private string _B;
-    private string _G;
+    string _a;
+    string _b;
+    string _g;
 
-    private string _R;
+    string _r;
 
-    private Renderer _renderer;
+    Renderer _renderer;
 
-    public override string ConfigurableIdentifier { get { return name + "Color"; } }
+    public override string ConfigurableIdentifier { get { return this.name + "Color"; } }
 
-    protected override void Start() { _renderer = GetComponent<Renderer>(); }
+    protected override void Start() { this._renderer = this.GetComponent<Renderer>(); }
 
     protected override void AddToEnvironment() {
-      _R = ConfigurableIdentifier + "R";
-      _G = ConfigurableIdentifier + "G";
-      _B = ConfigurableIdentifier + "B";
-      _A = ConfigurableIdentifier + "A";
-      ParentEnvironment =
+      this._r = this.ConfigurableIdentifier + "R";
+      this._g = this.ConfigurableIdentifier + "G";
+      this._b = this.ConfigurableIdentifier + "B";
+      this._a = this.ConfigurableIdentifier + "A";
+      this.ParentEnvironment =
         NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      ParentEnvironment,
-                                                      (ConfigurableGameObject)this,
-                                                      _R);
-      ParentEnvironment =
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._r);
+      this.ParentEnvironment =
         NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      ParentEnvironment,
-                                                      (ConfigurableGameObject)this,
-                                                      _G);
-      ParentEnvironment =
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._g);
+      this.ParentEnvironment =
         NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      ParentEnvironment,
-                                                      (ConfigurableGameObject)this,
-                                                      _B);
-      ParentEnvironment =
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._b);
+      this.ParentEnvironment =
         NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      ParentEnvironment,
-                                                      (ConfigurableGameObject)this,
-                                                      _A);
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._a);
     }
 
     public override void ApplyConfiguration(Configuration configuration) {
-      if (Debugging)
-        print("Applying " + configuration + " To " + ConfigurableIdentifier);
-      foreach (var mat in _renderer.materials) {
+      if (this.Debugging)
+        print(message : "Applying " + configuration + " To " + this.ConfigurableIdentifier);
+      foreach (var mat in this._renderer.materials) {
         var c = mat.color;
 
-        if (configuration.ConfigurableName == _R)
+        if (configuration.ConfigurableName == this._r)
           c.r = configuration.ConfigurableValue;
-        else if (configuration.ConfigurableName == _G)
+        else if (configuration.ConfigurableName == this._g)
           c.g = configuration.ConfigurableValue;
-        else if (configuration.ConfigurableName == _B)
+        else if (configuration.ConfigurableName == this._b)
           c.b = configuration.ConfigurableValue;
-        else if (configuration.ConfigurableName == _A)
+        else if (configuration.ConfigurableName == this._a)
           c.a = configuration.ConfigurableValue;
 
         mat.color = c;

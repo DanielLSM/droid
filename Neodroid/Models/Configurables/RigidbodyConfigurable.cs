@@ -1,18 +1,19 @@
-﻿using Neodroid.Configurables;
+﻿using System;
 using Neodroid.Messaging.Messages;
-using Neodroid.Utilities;
+using Neodroid.Models.Configurables.General;
+using Neodroid.Scripts.Utilities;
+using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
-namespace Assets.Neodroid.Models.Configurables {
-  [RequireComponent(requiredComponent : typeof(Rigidbody))]
+namespace Neodroid.Models.Configurables {
+  [RequireComponent( typeof(Rigidbody))]
   public class RigidbodyConfigurable : ConfigurableGameObject,
-                                       HasRigidbodyProperties {
+                                       IHasRigidbodyProperties {
     string _ang_x;
     string _ang_y;
     string _ang_z;
 
-    [SerializeField]
-    Vector3 _angular_velocity;
+    [SerializeField] Vector3 _angular_velocity;
 
     Rigidbody _rigidbody;
 
@@ -95,18 +96,18 @@ namespace Assets.Neodroid.Models.Configurables {
       var ang = this._rigidbody.velocity;
 
       var v = configuration.ConfigurableValue;
-      if (this.ValidInput.decimal_granularity >= 0)
-        v = (int)System.Math.Round(
+      if (this.ValidInput.DecimalGranularity >= 0)
+        v = (int)Math.Round(
                             value : v,
-                            digits : this.ValidInput.decimal_granularity);
-      if (this.ValidInput.min_value.CompareTo(value : this.ValidInput.max_value) != 0)
-        if (v < this.ValidInput.min_value || v > this.ValidInput.max_value) {
+                            digits : this.ValidInput.DecimalGranularity);
+      if (this.ValidInput.MinValue.CompareTo(value : this.ValidInput.MaxValue) != 0)
+        if (v < this.ValidInput.MinValue || v > this.ValidInput.MaxValue) {
           print(
                 message : string.Format(
                                         format :
                                         "Configurable does not accept input{2}, outside allowed range {0} to {1}",
-                                        arg0 : this.ValidInput.min_value,
-                                        arg1 : this.ValidInput.max_value,
+                                        arg0 : this.ValidInput.MinValue,
+                                        arg1 : this.ValidInput.MaxValue,
                                         arg2 : v));
           return; // Do nothing
         }

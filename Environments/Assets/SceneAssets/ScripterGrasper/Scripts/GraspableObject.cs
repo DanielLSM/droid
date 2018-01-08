@@ -1,100 +1,105 @@
 ﻿using System.Collections.Generic;
-using SceneSpecificAssets.Grasping.Grasps;
+using SceneAssets.ScripterGrasper.Grasps;
+using SceneAssets.ScripterGrasper.Utilities;
+using SceneSpecificAssets.Grasping;
 using SceneSpecificAssets.Grasping.Utilities;
 using UnityEngine;
 
-namespace SceneSpecificAssets.Grasping {
+namespace SceneAssets.ScripterGrasper.Scripts {
   public class GraspableObject : MonoBehaviour,
-                                 MotionTracker {
-    public bool _draw_grasp = true;
-    private Vector3 _last_recorded_move;
-    private Quaternion _last_recorded_rotation;
-    private Vector3 _previous_position;
-    private Quaternion _previous_rotation;
+                                 IMotionTracker {
+    //[SerializeField] bool _draw_grasp = true;
+    [SerializeField] Vector3 _last_recorded_move;
+    [SerializeField] Quaternion _last_recorded_rotation;
+    [SerializeField] Vector3 _previous_position;
+    [SerializeField] Quaternion _previous_rotation;
 
-    [Space(1)]
-    [Header("Scalars")]
-    public int floor_distance_scalar = 1;
+    //[Space (height : 1)] [Header (header : "Scalars")]
+    //[SerializeField]  int _floor_distance_scalar = 1;
 
-    public int gripper_distance_scalar = 1;
+    //[SerializeField]  int _gripper_distance_scalar = 1;
 
-    public bool IsInMotion() {
-      return transform.position != _previous_position || transform.rotation != _previous_rotation;
+    public bool IsInMotion () {
+      return this.transform.position != this._previous_position
+      || this.transform.rotation != this._previous_rotation;
     }
 
-    public bool IsInMotion(float sensitivity) {
-      var distance_moved = Vector3.Distance(
-                                            transform.position,
-                                            _last_recorded_move);
-      var angle_rotated = Quaternion.Angle(
-                                           transform.rotation,
-                                           _last_recorded_rotation);
+    public bool IsInMotion (float sensitivity) {
+      var distance_moved = Vector3.Distance (
+                             a : this.transform.position,
+                             b : this._last_recorded_move);
+      var angle_rotated = Quaternion.Angle (
+                            a : this.transform.rotation,
+                            b : this._last_recorded_rotation);
       if (distance_moved > sensitivity || angle_rotated > sensitivity) {
-        UpdateLastRecordedTranform();
+        this.UpdateLastRecordedTranform ();
         return true;
       }
 
       return false;
     }
 
-    private void UpdatePreviousTranform() {
-      _previous_position = transform.position;
-      _previous_rotation = transform.rotation;
+    void UpdatePreviousTranform () {
+      this._previous_position = this.transform.position;
+      this._previous_rotation = this.transform.rotation;
     }
 
-    private void UpdateLastRecordedTranform() {
-      _last_recorded_move = transform.position;
-      _last_recorded_rotation = transform.rotation;
+    void UpdateLastRecordedTranform () {
+      this._last_recorded_move = this.transform.position;
+      this._last_recorded_rotation = this.transform.rotation;
     }
 
-    private void Start() {
-      UpdatePreviousTranform();
-      UpdateLastRecordedTranform();
+    void Start () {
+      this.UpdatePreviousTranform ();
+      this.UpdateLastRecordedTranform ();
       //SetVisiblity(false);
     }
 
-    private void Update() { UpdatePreviousTranform(); }
+    void Update () {
+      this.UpdatePreviousTranform ();
+    }
 
-    private Grasp[] GetGrasps() {
-      var grasps = gameObject.GetComponentsInChildren<Grasp>();
+    Grasp[] GetGrasps () {
+      var grasps = this.gameObject.GetComponentsInChildren<Grasp> ();
       return grasps;
     }
 
-    private void SetVisiblity(bool visible) {
-      foreach (var grab in GetGrasps()) grab.gameObject.SetActive(visible);
+    void SetVisiblity (bool visible) {
+      foreach (var grab in this.GetGrasps())
+        grab.gameObject.SetActive (value : visible);
     }
 
-    private void ChangeIndicatorColor(Grasp grasp, Color color) {
+    void ChangeIndicatorColor (Grasp grasp, Color color) {
       foreach (var child in grasp.GetComponentsInChildren<MeshRenderer>())
-        child.material.SetColor(
-                                "_Color1",
-                                color);
+        child.material.SetColor (
+          name : "_Color1",
+          value : color);
     }
 
     //Main function
     //return grip vector/transform with highest score
-    public Pair<Grasp, float> GetOptimalGrasp(ScriptedGripper gripper) {
-      var grasps = GetGrasps();
-      var unobstructed_grasps = new List<Grasp>();
+    public Pair<Grasp, float> GetOptimalGrasp (ScriptedGripper gripper) {
+      var grasps = this.GetGrasps ();
+      var unobstructed_grasps = new List<Grasp> ();
 
       foreach (var grasp in grasps)
-        if (!grasp.IsObstructed()) {
-          unobstructed_grasps.Add(grasp);
-          ChangeIndicatorColor(
-                               grasp,
-                               Color.yellow);
+        if (!grasp.IsObstructed ()) {
+          unobstructed_grasps.Add (item : grasp);
+          this.ChangeIndicatorColor (
+            grasp : grasp,
+            color : Color.yellow);
         } else {
-          ChangeIndicatorColor(
-                               grasp,
-                               Color.red);
+          this.ChangeIndicatorColor (
+            grasp : grasp,
+            color : Color.red);
         }
 
       Grasp optimal_grasp = null;
       var shortest_distance = float.MaxValue;
       foreach (var grasp in unobstructed_grasps) {
-        var distance = Vector3.Distance(
-                                        grasp.transform.position,
-                                        gripper.transform.position);
+        var distance = Vector3.Distance (
+                         a : grasp.transform.position,
+                         b : gripper.transform.position);
         if (distance <= shortest_distance) {
           shortest_distance = distance;
           optimal_grasp = grasp;
@@ -102,12 +107,12 @@ namespace SceneSpecificAssets.Grasping {
       }
 
       if (optimal_grasp != null) {
-        ChangeIndicatorColor(
-                             optimal_grasp,
-                             Color.green);
-        return new Pair<Grasp, float>(
-                                      optimal_grasp,
-                                      shortest_distance);
+        this.ChangeIndicatorColor (
+          grasp : optimal_grasp,
+          color : Color.green);
+        return new Pair<Grasp, float> (
+          first : optimal_grasp,
+          second : shortest_distance);
       }
 
       return null;
@@ -184,14 +189,14 @@ namespace SceneSpecificAssets.Grasping {
   }
   */
     //Distance from hand - Score
-    private Dictionary<GameObject, float> DistanceToHandScore(
+    Dictionary<GameObject, float> DistanceToHandScore (
       GameObject hand,
       Dictionary<GameObject, float> grab_dict) {
       foreach (var pair in grab_dict) {
-        var distance = Vector3.Distance(
-                                        pair.Key.transform.position,
-                                        hand.transform.position);
-        grab_dict[pair.Key] += distance;
+        var distance = Vector3.Distance (
+                         a : pair.Key.transform.position,
+                         b : hand.transform.position);
+        grab_dict [key : pair.Key] += distance;
       }
 
       return grab_dict;

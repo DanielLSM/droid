@@ -1,42 +1,46 @@
-﻿
+﻿using System;
+using Neodroid.Models.Observers.General;
 using UnityEngine;
 
-namespace Neodroid.Observers {
+namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
-  [System.Serializable]
+  [Serializable]
   public class QuaternionTransformObserver : Observer {
     [Header(
-      "Observation",
+      header : "Observation",
       order = 103)]
     [SerializeField]
-    private Vector3 _position;
+    Vector3 _position;
 
-    [SerializeField]
-    private Quaternion _rotation;
+    [SerializeField] Quaternion _rotation;
 
     [Header(
-      "Specfic",
+      header : "Specfic",
       order = 102)]
     [SerializeField]
-    private ObservationSpace _space = ObservationSpace.Environment;
+    ObservationSpace _space = ObservationSpace.Environment;
 
     public bool _use_environments_coordinates = true;
 
-    public ObservationSpace Space { get { return _space; } }
+    public ObservationSpace Space { get { return this._space; } }
 
-    public Vector3 Position { get { return _position; } }
+    public Vector3 Position { get { return this._position; } }
 
-    public Quaternion Rotation { get { return _rotation; } }
+    public Quaternion Rotation { get { return this._rotation; } }
 
-    public override string ObserverIdentifier { get { return name + "QuaternionTransform"; } }
+    public override string ObserverIdentifier { get { return this.name + "QuaternionTransform"; } }
 
     public override void UpdateData() {
-      if (ParentEnvironment && _use_environments_coordinates) {
-        _position = ParentEnvironment.TransformPosition(transform.position);
-        _rotation = Quaternion.Euler(ParentEnvironment.TransformDirection(transform.forward));
+      if (this.ParentEnvironment && this._use_environments_coordinates) {
+        this._position = this.ParentEnvironment.TransformPosition(position : this.transform.position);
+        this._rotation = Quaternion.Euler(
+                                          euler : this.ParentEnvironment.TransformDirection(
+                                                                                            direction : this
+                                                                                                          .transform
+                                                                                                          .forward));
       } else {
-        _position = transform.position;
-        _rotation = transform.rotation;
+        this._position = this.transform.position;
+        this._rotation = this.transform.rotation;
       }
     }
   }

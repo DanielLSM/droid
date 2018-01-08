@@ -1,25 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace Neodroid.Utilities {
-  [CreateAssetMenu (
+namespace Neodroid.Scripts.Utilities.ScriptableObjects {
+  [CreateAssetMenu(
     fileName = "Curriculum",
     menuName = "Neodroid/ScriptableObjects/Curriculum",
     order = 1)]
   public class Curriculum : ScriptableObject {
-    public Level[] _levels;
+    public Level[] Levels;
   }
 
-  [System.Serializable]
+  [Serializable]
   public struct Level {
     public ConfigurableEntry[] configurable_entries;
-    public float min_reward;
-    public float max_reward;
+    public float MinReward;
+    public float MaxReward;
   }
 
-  [System.Serializable]
+  [Serializable]
   public struct ConfigurableEntry {
     public string configurable_name;
-    public float min_value;
-    public float max_value;
+    public float MinValue;
+    public float MaxValue;
   }
 }

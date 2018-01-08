@@ -1,10 +1,10 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
-using Neodroid.Observers;
+using Neodroid.Models.Observers.General;
 using UnityEngine;
 
 namespace Neodroid.Messaging.Messages {
-  [System.Serializable]
+  [Serializable]
   public class EnvironmentState {
     public EnvironmentState(
       string environment_name,
@@ -17,17 +17,17 @@ namespace Neodroid.Messaging.Messages {
       Transform[] poses,
       EnvironmentDescription description = null,
       string debug_message = "") {
-      DebugMessage = debug_message;
-      EnvironmentName = environment_name;
-      TotalEnergySpentSinceReset = total_energy_spent_since_reset;
-      Observers = observers;
-      Reward = reward;
-      FrameNumber = frame_number;
-      Terminated = terminated;
-      Description = description;
-      Unobservables = new Unobservables(
-                                        bodies,
-                                        poses);
+      this.DebugMessage = debug_message;
+      this.EnvironmentName = environment_name;
+      this.TotalEnergySpentSinceReset = total_energy_spent_since_reset;
+      this.Observers = observers;
+      this.Reward = reward;
+      this.FrameNumber = frame_number;
+      this.Terminated = terminated;
+      this.Description = description;
+      this.Unobservables = new Unobservables(
+                                             rigidbodies : bodies,
+                                             transforms : poses);
     }
 
     public string EnvironmentName { get; private set; }

@@ -1,45 +1,49 @@
 ﻿using System.Collections.Generic;
-using Neodroid.Utilities;
+using Neodroid.Models.Configurables.General;
+using Neodroid.Scripts.Utilities.Enums;
 using UnityEngine;
 
-namespace Neodroid.Configurables {
+namespace Neodroid.Models.Configurables {
   public class ObjectSpawnerConfigurable : ConfigurableGameObject {
-    public int _amount;
-    public Axis _axis;
-    public GameObject _object_to_spawn;
+    [SerializeField]
+    int _amount;
+    [SerializeField]
+    Axis _axis;
+    [SerializeField]
+    GameObject _object_to_spawn;
 
-    private List<GameObject> _spawned_objects;
+    List<GameObject> _spawned_objects;
 
     protected override void Start() {
-      DestroyObjects();
-      _spawned_objects = new List<GameObject>();
-      SpawnObjects();
+      this.DestroyObjects();
+      this._spawned_objects = new List<GameObject>();
+      this.SpawnObjects();
     }
 
-    private void DestroyObjects() {
-      if (_spawned_objects != null)
-        foreach (var o in _spawned_objects)
-          Destroy(o);
-      foreach (Transform c in transform) Destroy(c.gameObject);
+    void DestroyObjects() {
+      if (this._spawned_objects != null)
+        foreach (var o in this._spawned_objects)
+          Destroy(obj : o);
+      foreach (Transform c in this.transform) Destroy(obj : c.gameObject);
     }
 
-    private void SpawnObjects() {
-      if (_object_to_spawn) {
+    void SpawnObjects() {
+      if (this._object_to_spawn) {
         var dir = Vector3.up;
-        if (_axis == Axis.X)
+        if (this._axis == Axis.X)
           dir = Vector3.right;
-        else if (_axis == Axis.Z)
+        else if (this._axis == Axis.Z)
           dir = Vector3.forward;
-        for (var i = 0; i < _amount; i++)
-          _spawned_objects.Add(
-                               Instantiate(
-                                           _object_to_spawn,
-                                           transform.position + dir * i,
-                                           Random.rotation,
-                                           transform));
+        for (var i = 0; i < this._amount; i++)
+          this._spawned_objects.Add(
+                                    item : Instantiate(
+                                                       original : this._object_to_spawn,
+                                                       position : this.transform.position + dir * i,
+                                                       rotation : Random.rotation,
+                                                       parent : this.transform));
       }
     }
 
-    private void OnApplicationQuit() { DestroyObjects(); }
+    void OnApplicationQuit() { this.DestroyObjects(); }
   }
 }

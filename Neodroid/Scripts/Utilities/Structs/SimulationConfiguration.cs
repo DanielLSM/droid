@@ -1,22 +1,22 @@
-﻿
+﻿using System;
 using UnityEngine;
 
-namespace Neodroid.Utilities {
-  [System.Serializable]
+namespace Neodroid.Scripts.Utilities.Structs {
+  [Serializable]
   public struct SimulationConfiguration {
-    public int width;
-    public int height;
+    public int Width;
+    public int Height;
 
     [Range(
-      0,
-      4)]
-    public int quality_level;
+      min : 0,
+      max : 4)]
+    public int QualityLevel;
 
     [Range(
-      1f,
-      100f)]
-    public float time_scale;
+      min : 1f,
+      max : 100f)]
+    public float TimeScale;
 
-    public int target_frame_rate;
+    public int TargetFrameRate;
   }
 }

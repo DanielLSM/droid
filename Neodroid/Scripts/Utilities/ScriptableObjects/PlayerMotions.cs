@@ -1,19 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace Neodroid.Utilities {
-  [CreateAssetMenu (
+namespace Neodroid.Scripts.Utilities.ScriptableObjects {
+  [CreateAssetMenu(
     fileName = "PlayerMotions",
     menuName = "Neodroid/ScriptableObjects/PlayerMotions",
     order = 1)]
   public class PlayerMotions : ScriptableObject {
-    public PlayerMotion[] _player_motions;
+    public PlayerMotion[] Motions;
   }
 
-  [System.Serializable]
+  [Serializable]
   public struct PlayerMotion {
-    public KeyCode key;
-    public string actor;
-    public string motor;
-    public float strength;
+    public KeyCode Key;
+    public string Actor;
+    public string Motor;
+    public float Strength;
   }
 }

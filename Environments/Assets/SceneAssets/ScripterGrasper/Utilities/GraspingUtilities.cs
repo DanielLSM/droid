@@ -6,129 +6,129 @@ namespace SceneSpecificAssets.Grasping.Utilities {
       // p is pos.yition of the center, r is "radius" and c is the color of the box
       //Bottom lines
       Debug.DrawLine(
-                     new Vector3(
-                                 -r + p.x,
-                                 -r + p.y,
-                                 -r + p.z),
-                     new Vector3(
-                                 r + p.x,
-                                 -r + p.y,
-                                 -r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : -r + p.x,
+                                         y : -r + p.y,
+                                         z : -r + p.z),
+                     end : new Vector3(
+                                       x : r + p.x,
+                                       y : -r + p.y,
+                                       z : -r + p.z),
+                     color : c);
       Debug.DrawLine(
-                     new Vector3(
-                                 -r + p.x,
-                                 -r + p.y,
-                                 -r + p.z),
-                     new Vector3(
-                                 -r + p.x,
-                                 -r + p.y,
-                                 r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : -r + p.x,
+                                         y : -r + p.y,
+                                         z : -r + p.z),
+                     end : new Vector3(
+                                       x : -r + p.x,
+                                       y : -r + p.y,
+                                       z : r + p.z),
+                     color : c);
       Debug.DrawLine(
-                     new Vector3(
-                                 r + p.x,
-                                 -r + p.y,
-                                 r + p.z),
-                     new Vector3(
-                                 -r + p.x,
-                                 -r + p.y,
-                                 r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : r + p.x,
+                                         y : -r + p.y,
+                                         z : r + p.z),
+                     end : new Vector3(
+                                       x : -r + p.x,
+                                       y : -r + p.y,
+                                       z : r + p.z),
+                     color : c);
       Debug.DrawLine(
-                     new Vector3(
-                                 r + p.x,
-                                 -r + p.y,
-                                 r + p.z),
-                     new Vector3(
-                                 r + p.x,
-                                 -r + p.y,
-                                 -r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : r + p.x,
+                                         y : -r + p.y,
+                                         z : r + p.z),
+                     end : new Vector3(
+                                       x : r + p.x,
+                                       y : -r + p.y,
+                                       z : -r + p.z),
+                     color : c);
 
       //Vertical lines
       Debug.DrawLine(
-                     new Vector3(
-                                 -r + p.x,
-                                 r + p.y,
-                                 -r + p.z),
-                     new Vector3(
-                                 r + p.x,
-                                 r + p.y,
-                                 -r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : -r + p.x,
+                                         y : r + p.y,
+                                         z : -r + p.z),
+                     end : new Vector3(
+                                       x : r + p.x,
+                                       y : r + p.y,
+                                       z : -r + p.z),
+                     color : c);
       Debug.DrawLine(
-                     new Vector3(
-                                 -r + p.x,
-                                 r + p.y,
-                                 -r + p.z),
-                     new Vector3(
-                                 -r + p.x,
-                                 r + p.y,
-                                 r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : -r + p.x,
+                                         y : r + p.y,
+                                         z : -r + p.z),
+                     end : new Vector3(
+                                       x : -r + p.x,
+                                       y : r + p.y,
+                                       z : r + p.z),
+                     color : c);
       Debug.DrawLine(
-                     new Vector3(
-                                 r + p.x,
-                                 r + p.y,
-                                 r + p.z),
-                     new Vector3(
-                                 -r + p.x,
-                                 r + p.y,
-                                 r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : r + p.x,
+                                         y : r + p.y,
+                                         z : r + p.z),
+                     end : new Vector3(
+                                       x : -r + p.x,
+                                       y : r + p.y,
+                                       z : r + p.z),
+                     color : c);
       Debug.DrawLine(
-                     new Vector3(
-                                 r + p.x,
-                                 r + p.y,
-                                 r + p.z),
-                     new Vector3(
-                                 r + p.x,
-                                 r + p.y,
-                                 -r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : r + p.x,
+                                         y : r + p.y,
+                                         z : r + p.z),
+                     end : new Vector3(
+                                       x : r + p.x,
+                                       y : r + p.y,
+                                       z : -r + p.z),
+                     color : c);
 
       //Top lines
       Debug.DrawLine(
-                     new Vector3(
-                                 -r + p.x,
-                                 -r + p.y,
-                                 -r + p.z),
-                     new Vector3(
-                                 -r + p.x,
-                                 r + p.y,
-                                 -r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : -r + p.x,
+                                         y : -r + p.y,
+                                         z : -r + p.z),
+                     end : new Vector3(
+                                       x : -r + p.x,
+                                       y : r + p.y,
+                                       z : -r + p.z),
+                     color : c);
       Debug.DrawLine(
-                     new Vector3(
-                                 -r + p.x,
-                                 -r + p.y,
-                                 r + p.z),
-                     new Vector3(
-                                 -r + p.x,
-                                 r + p.y,
-                                 r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : -r + p.x,
+                                         y : -r + p.y,
+                                         z : r + p.z),
+                     end : new Vector3(
+                                       x : -r + p.x,
+                                       y : r + p.y,
+                                       z : r + p.z),
+                     color : c);
       Debug.DrawLine(
-                     new Vector3(
-                                 r + p.x,
-                                 -r + p.y,
-                                 -r + p.z),
-                     new Vector3(
-                                 r + p.x,
-                                 r + p.y,
-                                 -r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : r + p.x,
+                                         y : -r + p.y,
+                                         z : -r + p.z),
+                     end : new Vector3(
+                                       x : r + p.x,
+                                       y : r + p.y,
+                                       z : -r + p.z),
+                     color : c);
       Debug.DrawLine(
-                     new Vector3(
-                                 r + p.x,
-                                 -r + p.y,
-                                 r + p.z),
-                     new Vector3(
-                                 r + p.x,
-                                 r + p.y,
-                                 r + p.z),
-                     c);
+                     start : new Vector3(
+                                         x : r + p.x,
+                                         y : -r + p.y,
+                                         z : r + p.z),
+                     end : new Vector3(
+                                       x : r + p.x,
+                                       y : r + p.y,
+                                       z : r + p.z),
+                     color : c);
     }
 
     public static void DrawRect(float x_size, float y_size, float z_size, Vector3 pos, Color color) {
@@ -138,129 +138,129 @@ namespace SceneSpecificAssets.Grasping.Utilities {
 
       //Vertical lines
       Debug.DrawLine(
-                     new Vector3(
-                                 -x + pos.x,
-                                 -y + pos.y,
-                                 -z + pos.z),
-                     new Vector3(
-                                 -x + pos.x,
-                                 y + pos.y,
-                                 -z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : -x + pos.x,
+                                         y : -y + pos.y,
+                                         z : -z + pos.z),
+                     end : new Vector3(
+                                       x : -x + pos.x,
+                                       y : y + pos.y,
+                                       z : -z + pos.z),
+                     color : color);
       Debug.DrawLine(
-                     new Vector3(
-                                 x + pos.x,
-                                 -y + pos.y,
-                                 -z + pos.z),
-                     new Vector3(
-                                 x + pos.x,
-                                 y + pos.y,
-                                 -z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : x + pos.x,
+                                         y : -y + pos.y,
+                                         z : -z + pos.z),
+                     end : new Vector3(
+                                       x : x + pos.x,
+                                       y : y + pos.y,
+                                       z : -z + pos.z),
+                     color : color);
       Debug.DrawLine(
-                     new Vector3(
-                                 -x + pos.x,
-                                 -y + pos.y,
-                                 z + pos.z),
-                     new Vector3(
-                                 -x + pos.x,
-                                 y + pos.y,
-                                 z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : -x + pos.x,
+                                         y : -y + pos.y,
+                                         z : z + pos.z),
+                     end : new Vector3(
+                                       x : -x + pos.x,
+                                       y : y + pos.y,
+                                       z : z + pos.z),
+                     color : color);
       Debug.DrawLine(
-                     new Vector3(
-                                 x + pos.x,
-                                 -y + pos.y,
-                                 z + pos.z),
-                     new Vector3(
-                                 x + pos.x,
-                                 y + pos.y,
-                                 z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : x + pos.x,
+                                         y : -y + pos.y,
+                                         z : z + pos.z),
+                     end : new Vector3(
+                                       x : x + pos.x,
+                                       y : y + pos.y,
+                                       z : z + pos.z),
+                     color : color);
 
       //Horizontal top
       Debug.DrawLine(
-                     new Vector3(
-                                 -x + pos.x,
-                                 y + pos.y,
-                                 -z + pos.z),
-                     new Vector3(
-                                 x + pos.x,
-                                 y + pos.y,
-                                 -z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : -x + pos.x,
+                                         y : y + pos.y,
+                                         z : -z + pos.z),
+                     end : new Vector3(
+                                       x : x + pos.x,
+                                       y : y + pos.y,
+                                       z : -z + pos.z),
+                     color : color);
       Debug.DrawLine(
-                     new Vector3(
-                                 -x + pos.x,
-                                 y + pos.y,
-                                 z + pos.z),
-                     new Vector3(
-                                 x + pos.x,
-                                 y + pos.y,
-                                 z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : -x + pos.x,
+                                         y : y + pos.y,
+                                         z : z + pos.z),
+                     end : new Vector3(
+                                       x : x + pos.x,
+                                       y : y + pos.y,
+                                       z : z + pos.z),
+                     color : color);
       Debug.DrawLine(
-                     new Vector3(
-                                 -x + pos.x,
-                                 y + pos.y,
-                                 -z + pos.z),
-                     new Vector3(
-                                 -x + pos.x,
-                                 y + pos.y,
-                                 z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : -x + pos.x,
+                                         y : y + pos.y,
+                                         z : -z + pos.z),
+                     end : new Vector3(
+                                       x : -x + pos.x,
+                                       y : y + pos.y,
+                                       z : z + pos.z),
+                     color : color);
       Debug.DrawLine(
-                     new Vector3(
-                                 x + pos.x,
-                                 y + pos.y,
-                                 -z + pos.z),
-                     new Vector3(
-                                 x + pos.x,
-                                 y + pos.y,
-                                 z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : x + pos.x,
+                                         y : y + pos.y,
+                                         z : -z + pos.z),
+                     end : new Vector3(
+                                       x : x + pos.x,
+                                       y : y + pos.y,
+                                       z : z + pos.z),
+                     color : color);
 
       //Horizontal bottom
       Debug.DrawLine(
-                     new Vector3(
-                                 -x + pos.x,
-                                 -y + pos.y,
-                                 -z + pos.z),
-                     new Vector3(
-                                 x + pos.x,
-                                 -y + pos.y,
-                                 -z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : -x + pos.x,
+                                         y : -y + pos.y,
+                                         z : -z + pos.z),
+                     end : new Vector3(
+                                       x : x + pos.x,
+                                       y : -y + pos.y,
+                                       z : -z + pos.z),
+                     color : color);
       Debug.DrawLine(
-                     new Vector3(
-                                 -x + pos.x,
-                                 -y + pos.y,
-                                 z + pos.z),
-                     new Vector3(
-                                 x + pos.x,
-                                 -y + pos.y,
-                                 z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : -x + pos.x,
+                                         y : -y + pos.y,
+                                         z : z + pos.z),
+                     end : new Vector3(
+                                       x : x + pos.x,
+                                       y : -y + pos.y,
+                                       z : z + pos.z),
+                     color : color);
       Debug.DrawLine(
-                     new Vector3(
-                                 -x + pos.x,
-                                 -y + pos.y,
-                                 -z + pos.z),
-                     new Vector3(
-                                 -x + pos.x,
-                                 -y + pos.y,
-                                 z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : -x + pos.x,
+                                         y : -y + pos.y,
+                                         z : -z + pos.z),
+                     end : new Vector3(
+                                       x : -x + pos.x,
+                                       y : -y + pos.y,
+                                       z : z + pos.z),
+                     color : color);
       Debug.DrawLine(
-                     new Vector3(
-                                 x + pos.x,
-                                 -y + pos.y,
-                                 -z + pos.z),
-                     new Vector3(
-                                 x + pos.x,
-                                 -y + pos.y,
-                                 z + pos.z),
-                     color);
+                     start : new Vector3(
+                                         x : x + pos.x,
+                                         y : -y + pos.y,
+                                         z : -z + pos.z),
+                     end : new Vector3(
+                                       x : x + pos.x,
+                                       y : -y + pos.y,
+                                       z : z + pos.z),
+                     color : color);
     }
 
     public static bool DidTransformsChange(
@@ -285,9 +285,9 @@ namespace SceneSpecificAssets.Grasping.Utilities {
       var result = meshFilter != null ? meshFilter.mesh.bounds : new Bounds();
 
       foreach (Transform transform in objectTransform) {
-        var bounds = GetTotalMeshFilterBounds(transform);
-        result.Encapsulate(bounds.min);
-        result.Encapsulate(bounds.max);
+        var bounds = GetTotalMeshFilterBounds(objectTransform : transform);
+        result.Encapsulate(point : bounds.min);
+        result.Encapsulate(point : bounds.max);
       }
 
       /*var bounds1 = GetTotalColliderBounds(objectTransform);
@@ -302,10 +302,10 @@ namespace SceneSpecificAssets.Grasping.Utilities {
             }
             */
       var scaledMin = result.min;
-      scaledMin.Scale(objectTransform.localScale);
+      scaledMin.Scale(scale : objectTransform.localScale);
       result.min = scaledMin;
       var scaledMax = result.max;
-      scaledMax.Scale(objectTransform.localScale);
+      scaledMax.Scale(scale : objectTransform.localScale);
       result.max = scaledMax;
       return result;
     }
@@ -316,33 +316,33 @@ namespace SceneSpecificAssets.Grasping.Utilities {
       var result = meshFilter != null ? meshFilter.bounds : new Bounds();
 
       foreach (Transform transform in objectTransform) {
-        var bounds = GetTotalColliderBounds(transform);
-        result.Encapsulate(bounds.min);
-        result.Encapsulate(bounds.max);
+        var bounds = GetTotalColliderBounds(objectTransform : transform);
+        result.Encapsulate(point : bounds.min);
+        result.Encapsulate(point : bounds.max);
       }
 
       var scaledMin = result.min;
-      scaledMin.Scale(objectTransform.localScale);
+      scaledMin.Scale(scale : objectTransform.localScale);
       result.min = scaledMin;
       var scaledMax = result.max;
-      scaledMax.Scale(objectTransform.localScale);
+      scaledMax.Scale(scale : objectTransform.localScale);
       result.max = scaledMax;
       return result;
     }
 
     public static Bounds GetMaxBounds(GameObject g) {
       var b = new Bounds(
-                         g.transform.position,
-                         Vector3.zero);
-      foreach (var r in g.GetComponentsInChildren<Renderer>()) b.Encapsulate(r.bounds);
+                         center : g.transform.position,
+                         size : Vector3.zero);
+      foreach (var r in g.GetComponentsInChildren<Renderer>()) b.Encapsulate(bounds : r.bounds);
       return b;
     }
   }
 
   public class Pair<T1, T2> {
     internal Pair(T1 first, T2 second) {
-      First = first;
-      Second = second;
+      this.First = first;
+      this.Second = second;
     }
 
     public T1 First { get; private set; }
@@ -353,8 +353,8 @@ namespace SceneSpecificAssets.Grasping.Utilities {
   public static class Pair {
     public static Pair<T1, T2> New<T1, T2>(T1 first, T2 second) {
       var tuple = new Pair<T1, T2>(
-                                   first,
-                                   second);
+                                   first : first,
+                                   second : second);
       return tuple;
     }
   }

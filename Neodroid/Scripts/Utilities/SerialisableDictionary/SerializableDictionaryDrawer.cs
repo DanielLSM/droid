@@ -3,172 +3,173 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 
-namespace Neodroid.Utilities.SerialisableDictionary {
-  public abstract class SerializableKeyValueTemplate<K, V> : ScriptableObject {
-    public K key;
-    public V value;
+namespace Neodroid.Scripts.Utilities.SerialisableDictionary {
+  public abstract class SerializableKeyValueTemplate<TK, TV> : ScriptableObject {
+    public TK Key;
+    public TV Value;
   }
 
-  public abstract class SerializableDictionaryDrawer<K, V> : PropertyDrawer {
-    private readonly Dictionary<int, Dictionary<int, SerializedProperty>> indexedPropertyDicts =
+  public abstract class SerializableDictionaryDrawer<TK, TV> : PropertyDrawer {
+    readonly Dictionary<int, Dictionary<int, SerializedProperty>> _indexed_property_dicts =
       new Dictionary<int, Dictionary<int, SerializedProperty>>();
 
-    private readonly Dictionary<int, SerializedProperty> keysProps =
+    readonly Dictionary<int, SerializedProperty> _keys_props =
       new Dictionary<int, SerializedProperty>();
 
-    private readonly Dictionary<int, SerializedProperty> templateKeyProp =
+    readonly Dictionary<int, SerializedProperty> _template_key_prop =
       new Dictionary<int, SerializedProperty>();
 
-    private readonly Dictionary<int, SerializedProperty> templateValueProp =
+    readonly Dictionary<int, SerializedProperty> _template_value_prop =
       new Dictionary<int, SerializedProperty>();
 
-    private readonly Dictionary<int, SerializedProperty> valuesProps =
+    readonly Dictionary<int, SerializedProperty> _values_props =
       new Dictionary<int, SerializedProperty>();
 
-    protected abstract SerializableKeyValueTemplate<K, V> GetTemplate();
+    protected abstract SerializableKeyValueTemplate<TK, TV> GetTemplate();
 
     protected T GetGenericTemplate<T>()
-      where T : SerializableKeyValueTemplate<K, V> {
+      where T : SerializableKeyValueTemplate<TK, TV> {
       return ScriptableObject.CreateInstance<T>();
     }
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
       EditorGUI.BeginProperty(
-                              position,
-                              label,
-                              property);
+                              totalPosition : position,
+                              label : label,
+                              property : property);
 
-      var firstLine = position;
-      firstLine.height = EditorGUIUtility.singleLineHeight;
+      var first_line = position;
+      first_line.height = EditorGUIUtility.singleLineHeight;
       EditorGUI.PropertyField(
-                              firstLine,
-                              property);
+                              position : first_line,
+                              property : property);
 
       if (property.isExpanded) {
-        var secondLine = firstLine;
-        secondLine.y += EditorGUIUtility.singleLineHeight;
+        var second_line = first_line;
+        second_line.y += EditorGUIUtility.singleLineHeight;
 
         EditorGUIUtility.labelWidth = 50f;
 
-        secondLine.x += 15f; // indentation
-        secondLine.width -= 15f;
+        second_line.x += 15f; // indentation
+        second_line.width -= 15f;
 
-        var secondLine_key = secondLine;
+        var second_line_key = second_line;
 
         var buttonWidth = 60f;
-        secondLine_key.width -= buttonWidth; // assign button
-        secondLine_key.width /= 2f;
+        second_line_key.width -= buttonWidth; // assign button
+        second_line_key.width /= 2f;
 
-        var secondLine_value = secondLine_key;
-        secondLine_value.x += secondLine_value.width;
-        if (GetTemplateValueProp(property).hasVisibleChildren) {
+        var second_line_value = second_line_key;
+        second_line_value.x += second_line_value.width;
+        if (this.GetTemplateValueProp(main_prop : property).hasVisibleChildren) {
           // if the value has children, indent to make room for fold arrow
-          secondLine_value.x += 15;
-          secondLine_value.width -= 15;
+          second_line_value.x += 15;
+          second_line_value.width -= 15;
         }
 
-        var secondLine_button = secondLine_value;
-        secondLine_button.x += secondLine_value.width;
-        secondLine_button.width = buttonWidth;
+        var second_line_button = second_line_value;
+        second_line_button.x += second_line_value.width;
+        second_line_button.width = buttonWidth;
 
-        var kHeight = EditorGUI.GetPropertyHeight(GetTemplateKeyProp(property));
-        var vHeight = EditorGUI.GetPropertyHeight(GetTemplateValueProp(property));
-        var extraHeight = Mathf.Max(
-                                    kHeight,
-                                    vHeight);
+        var k_height = EditorGUI.GetPropertyHeight(property : this.GetTemplateKeyProp(main_prop : property));
+        var v_height = EditorGUI.GetPropertyHeight(property : this.GetTemplateValueProp(main_prop : property));
+        var extra_height = Mathf.Max(
+                                    a : k_height,
+                                    b : v_height);
 
-        secondLine_key.height = kHeight;
-        secondLine_value.height = vHeight;
+        second_line_key.height = k_height;
+        second_line_value.height = v_height;
 
         EditorGUI.PropertyField(
-                                secondLine_key,
-                                GetTemplateKeyProp(property),
-                                true);
+                                position : second_line_key,
+                                property : this.GetTemplateKeyProp(main_prop : property),
+                                includeChildren : true);
         EditorGUI.PropertyField(
-                                secondLine_value,
-                                GetTemplateValueProp(property),
-                                true);
+                                position : second_line_value,
+                                property : this.GetTemplateValueProp(main_prop : property),
+                                includeChildren : true);
 
-        var keysProp = GetKeysProp(property);
-        var valuesProp = GetValuesProp(property);
+        var keys_prop = this.GetKeysProp(main_prop : property);
+        var values_prop = this.GetValuesProp(main_prop : property);
 
-        var numLines = keysProp.arraySize;
+        var num_lines = keys_prop.arraySize;
 
         if (GUI.Button(
-                       secondLine_button,
-                       "Assign")) {
+                       position : second_line_button,
+                       text : "Assign")) {
           var assignment = false;
-          for (var i = 0; i < numLines; i++)
+          for (var i = 0; i < num_lines; i++)
             // Try to replace existing value
             if (SerializedPropertyExtension.EqualBasics(
-                                                        GetIndexedItemProp(
-                                                                           keysProp,
-                                                                           i),
-                                                        GetTemplateKeyProp(property))) {
+                                                        left : this.GetIndexedItemProp(
+                                                                                       array_prop : keys_prop,
+                                                                                       index : i),
+                                                        right : this.GetTemplateKeyProp(main_prop : property))
+            ) {
               SerializedPropertyExtension.CopyBasics(
-                                                     GetTemplateValueProp(property),
-                                                     GetIndexedItemProp(
-                                                                        valuesProp,
-                                                                        i));
+                                                     source : this.GetTemplateValueProp(main_prop : property),
+                                                     target : this.GetIndexedItemProp(
+                                                                                      array_prop : values_prop,
+                                                                                      index : i));
               assignment = true;
               break;
             }
 
           if (!assignment) {
             // Create a new value
-            keysProp.arraySize += 1;
-            valuesProp.arraySize += 1;
+            keys_prop.arraySize += 1;
+            values_prop.arraySize += 1;
             SerializedPropertyExtension.CopyBasics(
-                                                   GetTemplateKeyProp(property),
-                                                   GetIndexedItemProp(
-                                                                      keysProp,
-                                                                      numLines));
+                                                   source : this.GetTemplateKeyProp(main_prop : property),
+                                                   target : this.GetIndexedItemProp(
+                                                                                    array_prop : keys_prop,
+                                                                                    index : num_lines));
             SerializedPropertyExtension.CopyBasics(
-                                                   GetTemplateValueProp(property),
-                                                   GetIndexedItemProp(
-                                                                      valuesProp,
-                                                                      numLines));
+                                                   source : this.GetTemplateValueProp(main_prop : property),
+                                                   target : this.GetIndexedItemProp(
+                                                                                    array_prop : values_prop,
+                                                                                    index : num_lines));
           }
         }
 
-        for (var i = 0; i < numLines; i++) {
-          secondLine_key.y += extraHeight;
-          secondLine_value.y += extraHeight;
-          secondLine_button.y += extraHeight;
+        for (var i = 0; i < num_lines; i++) {
+          second_line_key.y += extra_height;
+          second_line_value.y += extra_height;
+          second_line_button.y += extra_height;
 
-          kHeight = EditorGUI.GetPropertyHeight(
-                                                GetIndexedItemProp(
-                                                                   keysProp,
-                                                                   i));
-          vHeight = EditorGUI.GetPropertyHeight(
-                                                GetIndexedItemProp(
-                                                                   valuesProp,
-                                                                   i));
-          extraHeight = Mathf.Max(
-                                  kHeight,
-                                  vHeight);
+          k_height = EditorGUI.GetPropertyHeight(
+                                                property : this.GetIndexedItemProp(
+                                                                                   array_prop : keys_prop,
+                                                                                   index : i));
+          v_height = EditorGUI.GetPropertyHeight(
+                                                property : this.GetIndexedItemProp(
+                                                                                   array_prop : values_prop,
+                                                                                   index : i));
+          extra_height = Mathf.Max(
+                                  a : k_height,
+                                  b : v_height);
 
-          secondLine_key.height = kHeight;
-          secondLine_value.height = vHeight;
+          second_line_key.height = k_height;
+          second_line_value.height = v_height;
 
           EditorGUI.PropertyField(
-                                  secondLine_key,
-                                  GetIndexedItemProp(
-                                                     keysProp,
-                                                     i),
-                                  true);
+                                  position : second_line_key,
+                                  property : this.GetIndexedItemProp(
+                                                                     array_prop : keys_prop,
+                                                                     index : i),
+                                  includeChildren : true);
           EditorGUI.PropertyField(
-                                  secondLine_value,
-                                  GetIndexedItemProp(
-                                                     valuesProp,
-                                                     i),
-                                  true);
+                                  position : second_line_value,
+                                  property : this.GetIndexedItemProp(
+                                                                     array_prop : values_prop,
+                                                                     index : i),
+                                  includeChildren : true);
 
           if (GUI.Button(
-                         secondLine_button,
-                         "Remove")) {
-            keysProp.DeleteArrayElementAtIndex(i);
-            valuesProp.DeleteArrayElementAtIndex(i);
+                         position : second_line_button,
+                         text : "Remove")) {
+            keys_prop.DeleteArrayElementAtIndex(index : i);
+            values_prop.DeleteArrayElementAtIndex(index : i);
           }
         }
       }
@@ -182,105 +183,108 @@ namespace Neodroid.Utilities.SerialisableDictionary {
 
       var total = EditorGUIUtility.singleLineHeight;
 
-      var kHeight = EditorGUI.GetPropertyHeight(GetTemplateKeyProp(property));
-      var vHeight = EditorGUI.GetPropertyHeight(GetTemplateValueProp(property));
+      var k_height = EditorGUI.GetPropertyHeight(property : this.GetTemplateKeyProp(main_prop : property));
+      var v_height = EditorGUI.GetPropertyHeight(property : this.GetTemplateValueProp(main_prop : property));
       total += Mathf.Max(
-                         kHeight,
-                         vHeight);
+                         a : k_height,
+                         b : v_height);
 
-      var keysProp = GetKeysProp(property);
-      var valuesProp = GetValuesProp(property);
-      var numLines = keysProp.arraySize;
-      for (var i = 0; i < numLines; i++) {
-        kHeight = EditorGUI.GetPropertyHeight(
-                                              GetIndexedItemProp(
-                                                                 keysProp,
-                                                                 i));
-        vHeight = EditorGUI.GetPropertyHeight(
-                                              GetIndexedItemProp(
-                                                                 valuesProp,
-                                                                 i));
+      var keys_prop = this.GetKeysProp(main_prop : property);
+      var values_prop = this.GetValuesProp(main_prop : property);
+      var num_lines = keys_prop.arraySize;
+      for (var i = 0; i < num_lines; i++) {
+        k_height = EditorGUI.GetPropertyHeight(
+                                              property : this.GetIndexedItemProp(
+                                                                                 array_prop : keys_prop,
+                                                                                 index : i));
+        v_height = EditorGUI.GetPropertyHeight(
+                                              property : this.GetIndexedItemProp(
+                                                                                 array_prop : values_prop,
+                                                                                 index : i));
         total += Mathf.Max(
-                           kHeight,
-                           vHeight);
+                           a : k_height,
+                           b : v_height);
       }
 
       return total;
     }
 
-    private SerializedProperty GetTemplateKeyProp(SerializedProperty mainProp) {
-      return GetTemplateProp(
-                             templateKeyProp,
-                             mainProp);
+    SerializedProperty GetTemplateKeyProp(SerializedProperty main_prop) {
+      return this.GetTemplateProp(
+                                  source : this._template_key_prop,
+                                  main_prop : main_prop);
     }
 
-    private SerializedProperty GetTemplateValueProp(SerializedProperty mainProp) {
-      return GetTemplateProp(
-                             templateValueProp,
-                             mainProp);
+    SerializedProperty GetTemplateValueProp(SerializedProperty main_prop) {
+      return this.GetTemplateProp(
+                                  source : this._template_value_prop,
+                                  main_prop : main_prop);
     }
 
-    private SerializedProperty GetTemplateProp(
+    SerializedProperty GetTemplateProp(
       Dictionary<int, SerializedProperty> source,
-      SerializedProperty mainProp) {
+      SerializedProperty main_prop) {
       SerializedProperty p;
       if (!source.TryGetValue(
-                              mainProp.GetObjectCode(),
-                              out p)) {
-        var templateObject = GetTemplate();
-        var templateSerializedObject = new SerializedObject(templateObject);
-        var kProp = templateSerializedObject.FindProperty("key");
-        var vProp = templateSerializedObject.FindProperty("value");
-        templateKeyProp[mainProp.GetObjectCode()] = kProp;
-        templateValueProp[mainProp.GetObjectCode()] = vProp;
-        p = source == templateKeyProp ? kProp : vProp;
+                              key : main_prop.GetObjectCode(),
+                              value : out p)) {
+        var template_object = this.GetTemplate();
+        var template_serialized_object = new SerializedObject(obj : template_object);
+        var k_prop = template_serialized_object.FindProperty(propertyPath : "key");
+        var v_prop = template_serialized_object.FindProperty(propertyPath : "value");
+        this._template_key_prop[key : main_prop.GetObjectCode()] = k_prop;
+        this._template_value_prop[key : main_prop.GetObjectCode()] = v_prop;
+        p = source == this._template_key_prop ? k_prop : v_prop;
       }
 
       return p;
     }
 
-    private SerializedProperty GetKeysProp(SerializedProperty mainProp) {
-      return GetCachedProp(
-                           mainProp,
-                           "keys",
-                           keysProps);
+    SerializedProperty GetKeysProp(SerializedProperty main_prop) {
+      return this.GetCachedProp(
+                                main_prop : main_prop,
+                                relative_property_name : "keys",
+                                source : this._keys_props);
     }
 
-    private SerializedProperty GetValuesProp(SerializedProperty mainProp) {
-      return GetCachedProp(
-                           mainProp,
-                           "values",
-                           valuesProps);
+    SerializedProperty GetValuesProp(SerializedProperty main_prop) {
+      return this.GetCachedProp(
+                                main_prop : main_prop,
+                                relative_property_name : "values",
+                                source : this._values_props);
     }
 
-    private SerializedProperty GetCachedProp(
-      SerializedProperty mainProp,
-      string relativePropertyName,
+    SerializedProperty GetCachedProp(
+      SerializedProperty main_prop,
+      string relative_property_name,
       Dictionary<int, SerializedProperty> source) {
       SerializedProperty p;
-      var objectCode = mainProp.GetObjectCode();
+      var object_code = main_prop.GetObjectCode();
       if (!source.TryGetValue(
-                              objectCode,
-                              out p))
-        source[objectCode] = p = mainProp.FindPropertyRelative(relativePropertyName);
+                              key : object_code,
+                              value : out p))
+        source[key : object_code] =
+          p = main_prop.FindPropertyRelative(relativePropertyPath : relative_property_name);
       return p;
     }
 
-    private SerializedProperty GetIndexedItemProp(SerializedProperty arrayProp, int index) {
+    SerializedProperty GetIndexedItemProp(SerializedProperty array_prop, int index) {
       Dictionary<int, SerializedProperty> d;
-      if (!indexedPropertyDicts.TryGetValue(
-                                            arrayProp.GetObjectCode(),
-                                            out d))
-        indexedPropertyDicts[arrayProp.GetObjectCode()] =
+      if (!this._indexed_property_dicts.TryGetValue(
+                                                 key : array_prop.GetObjectCode(),
+                                                 value : out d))
+        this._indexed_property_dicts[key : array_prop.GetObjectCode()] =
           d = new Dictionary<int, SerializedProperty>();
       SerializedProperty result;
       if (!d.TryGetValue(
-                         index,
-                         out result))
-        d[index] = result = arrayProp.FindPropertyRelative(
-                                                           string.Format(
-                                                                         "Array.data[{0}]",
-                                                                         index));
+                         key : index,
+                         value : out result))
+        d[key : index] = result = array_prop.FindPropertyRelative(
+                                                                 relativePropertyPath : string.Format(
+                                                                                                      format :
+                                                                                                      "Array.data[{0}]",
+                                                                                                      arg0 :
+                                                                                                      index));
       return result;
     }
   }

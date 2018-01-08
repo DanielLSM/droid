@@ -1,109 +1,112 @@
 ﻿using Neodroid.Environments;
-using Neodroid.Utilities;
 using UnityEngine;
 
-[ExecuteInEditMode]
-[RequireComponent(typeof(Light))]
-[RequireComponent(typeof(ParticleSystem))]
-public class DaylightSimulator : Resetable {
-  public float _day_atmosphere_thickness = 0.88f;
-  public AnimationCurve _fog_density_curve = NeodroidUtilities.DefaultAnimationCurve();
-  public Gradient _fog_gradient = NeodroidUtilities.DefaultGradient();
-  private Light _light;
+namespace Neodroid.Scripts.Utilities.Daylight {
+  [ExecuteInEditMode]
+  [RequireComponent( typeof(Light))]
+  [RequireComponent( typeof(ParticleSystem))]
+  public class DaylightSimulator : Resetable {
+    [SerializeField]
+    float _day_atmosphere_thickness = 0.88f;
+    [SerializeField]
+    AnimationCurve _fog_density_curve = NeodroidUtilities.DefaultAnimationCurve();
+    [SerializeField] Gradient _fog_gradient = NeodroidUtilities.DefaultGradient();
+    [SerializeField] Light _light;
 
-  public Gradient _light_gradient = NeodroidUtilities.DefaultGradient();
+    [SerializeField] Gradient _light_gradient = NeodroidUtilities.DefaultGradient();
 
-  public float _max_ambient = 1f;
+    [SerializeField] float _max_ambient = 1f;
 
-  public float _max_intensity = 1.34f;
-  public float _min_ambient = 0.01f;
-  public float _min_ambient_point = -0.2f;
-  public float _min_intensity = 0.02f;
-  public float _min_point = -0.2f;
-  public float _night_atmosphere_thickness = 1.03f;
+    [SerializeField] float _max_intensity = 1.34f;
+    [SerializeField] float _min_ambient = 0.01f;
+    [SerializeField] float _min_ambient_point = -0.2f;
+    [SerializeField] float _min_intensity = 0.02f;
+    [SerializeField] float _min_point = -0.2f;
+    [SerializeField] float _night_atmosphere_thickness = 1.03f;
 
-  private ParticleSystem _particle_system;
-  private ParticleSystem.Particle[] _particles;
+    [SerializeField] ParticleSystem _particle_system;
+    [SerializeField] ParticleSystem.Particle[] _particles;
 
-  public Vector3 _rotation = new Vector3(
-                                         1f,
-                                         0f,
-                                         1f);
+    [SerializeField] Vector3 _rotation = new Vector3(
+                                           x : 1f,
+                                           y : 0f,
+                                           z : 1f);
 
-  private Material _sky_mat;
-  public float _speed_multiplier = 1f;
+    [SerializeField] Material _sky_mat;
+    [SerializeField] float _speed_multiplier = 1f;
 
-  public Quaternion _start_rotation = Quaternion.identity;
-  public float fogScale = 0.2f;
+    [SerializeField] Quaternion _start_rotation = Quaternion.identity;
+    [SerializeField] float _fog_scale = 0.2f;
 
-  public override string ResetableIdentifier { get { return name; } }
+    public override string ResetableIdentifier { get { return this.name; } }
 
-  private void Awake() {
-    Setup();
+    void Awake() {
+      this.Setup();
 
-    _light = GetComponent<Light>();
-    _sky_mat = RenderSettings.skybox;
-    transform.rotation = _start_rotation;
+      this._light = this.GetComponent<Light>();
+      this._sky_mat = RenderSettings.skybox;
+      this.transform.rotation = this._start_rotation;
+    }
+
+    void Setup() {
+      if (!this._particle_system) this._particle_system = this.GetComponent<ParticleSystem>();
+      this._particle_system.Pause();
+      if (this._particles == null || this._particles.Length < this._particle_system.main.maxParticles)
+        this._particles = new ParticleSystem.Particle[this._particle_system.main.maxParticles];
+    }
+
+    void Update() {
+      this.Setup();
+
+      var a = 1 - this._min_point;
+      var dot = Mathf.Clamp01(
+                              value : (Vector3.Dot(
+                                                   lhs : this._light.transform.forward,
+                                                   rhs : Vector3.down)
+                                       - this._min_point)
+                                      / a);
+      var intensity = (this._max_intensity - this._min_intensity) * dot + this._min_intensity;
+
+      this._light.intensity = intensity;
+
+      var stars_intensity = this._min_intensity / intensity;
+      var particle_color = new Color(
+                                     r : 1f,
+                                     g : 1f,
+                                     b : 1f,
+                                     a : stars_intensity);
+
+      var num_alive_particles = this._particle_system.GetParticles(particles : this._particles);
+      for (var i = 0; i < num_alive_particles; i++) this._particles[i].startColor = particle_color;
+      this._particle_system.SetParticles(
+                                         particles : this._particles,
+                                         size : num_alive_particles);
+
+      a = 1 - this._min_ambient_point;
+      dot = Mathf.Clamp01(
+                          value : (Vector3.Dot(
+                                               lhs : this._light.transform.forward,
+                                               rhs : Vector3.down)
+                                   - this._min_ambient_point)
+                                  / a);
+      var ambient_intensity = (this._max_ambient - this._min_ambient) * dot + this._min_ambient;
+      RenderSettings.ambientIntensity = ambient_intensity;
+
+      this._light.color = this._light_gradient.Evaluate(time : dot);
+      RenderSettings.ambientLight = this._light.color;
+
+      RenderSettings.fogColor = this._fog_gradient.Evaluate(time : dot);
+      RenderSettings.fogDensity = this._fog_density_curve.Evaluate(time : dot) * this._fog_scale;
+
+      var atmosphere_thickness = (this._day_atmosphere_thickness - this._night_atmosphere_thickness) * dot
+                                 + this._night_atmosphere_thickness;
+      this._sky_mat.SetFloat(
+                             name : "_AtmosphereThickness",
+                             value : atmosphere_thickness);
+
+      this.transform.Rotate(eulerAngles : this._rotation * Time.deltaTime * this._speed_multiplier);
+    }
+
+    public override void Reset() { }
   }
-
-  private void Setup() {
-    if (!_particle_system) _particle_system = GetComponent<ParticleSystem>();
-    _particle_system.Pause();
-    if (_particles == null || _particles.Length < _particle_system.main.maxParticles)
-      _particles = new ParticleSystem.Particle[_particle_system.main.maxParticles];
-  }
-
-  private void Update() {
-    Setup();
-
-    var a = 1 - _min_point;
-    var dot = Mathf.Clamp01(
-                            (Vector3.Dot(
-                                         _light.transform.forward,
-                                         Vector3.down)
-                             - _min_point)
-                            / a);
-    var intensity = (_max_intensity - _min_intensity) * dot + _min_intensity;
-
-    _light.intensity = intensity;
-
-    var _stars_intensity = _min_intensity / intensity;
-    var particle_color = new Color(
-                                   1f,
-                                   1f,
-                                   1f,
-                                   _stars_intensity);
-
-    var num_alive_particles = _particle_system.GetParticles(_particles);
-    for (var i = 0; i < num_alive_particles; i++) _particles[i].startColor = particle_color;
-    _particle_system.SetParticles(
-                                  _particles,
-                                  num_alive_particles);
-
-    a = 1 - _min_ambient_point;
-    dot = Mathf.Clamp01(
-                        (Vector3.Dot(
-                                     _light.transform.forward,
-                                     Vector3.down)
-                         - _min_ambient_point)
-                        / a);
-    var ambient_intensity = (_max_ambient - _min_ambient) * dot + _min_ambient;
-    RenderSettings.ambientIntensity = ambient_intensity;
-
-    _light.color = _light_gradient.Evaluate(dot);
-    RenderSettings.ambientLight = _light.color;
-
-    RenderSettings.fogColor = _fog_gradient.Evaluate(dot);
-    RenderSettings.fogDensity = _fog_density_curve.Evaluate(dot) * fogScale;
-
-    var atmosphere_thickness = (_day_atmosphere_thickness - _night_atmosphere_thickness) * dot
-                               + _night_atmosphere_thickness;
-    _sky_mat.SetFloat(
-                      "_AtmosphereThickness",
-                      atmosphere_thickness);
-
-    transform.Rotate(_rotation * Time.deltaTime * _speed_multiplier);
-  }
-
-  public override void Reset() { }
 }

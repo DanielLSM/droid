@@ -1,22 +1,27 @@
 ﻿using UnityEngine;
 
-public class FestoBehaviour : MonoBehaviour {
-  private Rigidbody[] _children;
-  public bool _find_global_rigidbodies;
-  public float _torque_scalar;
+namespace Scenes.Experiments.Rigidbodies {
+  public class FestoBehaviour : MonoBehaviour {
+    [SerializeField] Rigidbody[] _children;
+    [SerializeField]  bool _find_global_rigidbodies;
+    [SerializeField]  float _torque_scalar;
 
-  private void Awake() { _children = _find_global_rigidbodies ? FindObjectsOfType<Rigidbody>() : GetComponentsInChildren<Rigidbody>(); }
+    void Awake() {
+      this._children = this._find_global_rigidbodies ? FindObjectsOfType<Rigidbody>()
+                         : this.GetComponentsInChildren<Rigidbody>();
+    }
 
-  private void Update() {
-    if (Input.GetKeyDown(KeyCode.UpArrow))
-      _torque_scalar += 100;
-    else if (Input.GetKeyDown(KeyCode.DownArrow))
-      _torque_scalar -= 100;
-  }
+    void Update() {
+      if (Input.GetKeyDown(key : KeyCode.UpArrow))
+        this._torque_scalar += 100;
+      else if (Input.GetKeyDown(key : KeyCode.DownArrow))
+        this._torque_scalar -= 100;
+    }
 
-  private void FixedUpdate() {
-    foreach (var body in _children)
-      if (body.gameObject != this)
-        body.AddRelativeTorque(Vector3.forward * _torque_scalar);
+    void FixedUpdate() {
+      foreach (var body in this._children)
+        if (body.gameObject != this)
+          body.AddRelativeTorque(torque : Vector3.forward * this._torque_scalar);
+    }
   }
 }

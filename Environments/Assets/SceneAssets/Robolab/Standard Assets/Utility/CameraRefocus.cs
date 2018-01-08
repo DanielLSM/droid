@@ -2,40 +2,39 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Utility {
   public class CameraRefocus {
+    readonly Vector3 m_OrigCameraPos;
     public Camera Camera;
     public Vector3 Lookatpoint;
-
-    private readonly Vector3 m_OrigCameraPos;
-    private bool m_Refocus;
+    bool m_Refocus;
     public Transform Parent;
 
     public CameraRefocus(Camera camera, Transform parent, Vector3 origCameraPos) {
-      m_OrigCameraPos = origCameraPos;
-      Camera = camera;
-      Parent = parent;
+      this.m_OrigCameraPos = origCameraPos;
+      this.Camera = camera;
+      this.Parent = parent;
     }
 
-    public void ChangeCamera(Camera camera) { Camera = camera; }
+    public void ChangeCamera(Camera camera) { this.Camera = camera; }
 
-    public void ChangeParent(Transform parent) { Parent = parent; }
+    public void ChangeParent(Transform parent) { this.Parent = parent; }
 
     public void GetFocusPoint() {
       RaycastHit hitInfo;
       if (Physics.Raycast(
-                          Parent.transform.position + m_OrigCameraPos,
-                          Parent.transform.forward,
-                          out hitInfo,
-                          100f)) {
-        Lookatpoint = hitInfo.point;
-        m_Refocus = true;
+                          origin : this.Parent.transform.position + this.m_OrigCameraPos,
+                          direction : this.Parent.transform.forward,
+                          hitInfo : out hitInfo,
+                          maxDistance : 100f)) {
+        this.Lookatpoint = hitInfo.point;
+        this.m_Refocus = true;
         return;
       }
 
-      m_Refocus = false;
+      this.m_Refocus = false;
     }
 
     public void SetFocusPoint() {
-      if (m_Refocus) Camera.transform.LookAt(Lookatpoint);
+      if (this.m_Refocus) this.Camera.transform.LookAt(worldPosition : this.Lookatpoint);
     }
   }
 }

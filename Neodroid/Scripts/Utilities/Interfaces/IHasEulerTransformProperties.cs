@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace Neodroid.Utilities {
-  public interface HasEulerTransformProperties {
+namespace Neodroid.Scripts.Utilities.Interfaces {
+  public interface IHasEulerTransformProperties {
     Vector3 Position { get; }
 
     Vector3 Direction { get; }

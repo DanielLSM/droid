@@ -4,39 +4,41 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Utility {
   public class ObjectResetter : MonoBehaviour {
-    private Vector3 originalPosition;
-    private Quaternion originalRotation;
-    private List<Transform> originalStructure;
+    Vector3 originalPosition;
+    Quaternion originalRotation;
+    List<Transform> originalStructure;
 
-    private Rigidbody Rigidbody;
+    Rigidbody Rigidbody;
 
     // Use this for initialization
-    private void Start() {
-      originalStructure = new List<Transform>(GetComponentsInChildren<Transform>());
-      originalPosition = transform.position;
-      originalRotation = transform.rotation;
+    void Start() {
+      this.originalStructure = new List<Transform>(collection : this.GetComponentsInChildren<Transform>());
+      this.originalPosition = this.transform.position;
+      this.originalRotation = this.transform.rotation;
 
-      Rigidbody = GetComponent<Rigidbody>();
+      this.Rigidbody = this.GetComponent<Rigidbody>();
     }
 
-    public void DelayedReset(float delay) { StartCoroutine(ResetCoroutine(delay)); }
+    public void DelayedReset(float delay) {
+      this.StartCoroutine(routine : this.ResetCoroutine(delay : delay));
+    }
 
     public IEnumerator ResetCoroutine(float delay) {
-      yield return new WaitForSeconds(delay);
+      yield return new WaitForSeconds(seconds : delay);
 
       // remove any gameobjects added (fire, skid trails, etc)
-      foreach (var t in GetComponentsInChildren<Transform>())
-        if (!originalStructure.Contains(t))
+      foreach (var t in this.GetComponentsInChildren<Transform>())
+        if (!this.originalStructure.Contains(item : t))
           t.parent = null;
 
-      transform.position = originalPosition;
-      transform.rotation = originalRotation;
-      if (Rigidbody) {
-        Rigidbody.velocity = Vector3.zero;
-        Rigidbody.angularVelocity = Vector3.zero;
+      this.transform.position = this.originalPosition;
+      this.transform.rotation = this.originalRotation;
+      if (this.Rigidbody) {
+        this.Rigidbody.velocity = Vector3.zero;
+        this.Rigidbody.angularVelocity = Vector3.zero;
       }
 
-      SendMessage("Reset");
+      this.SendMessage(methodName : "Reset");
     }
   }
 }

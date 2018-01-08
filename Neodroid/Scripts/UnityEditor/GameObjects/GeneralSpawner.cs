@@ -1,70 +1,70 @@
-﻿using Assets.Neodroid.Models.Actors;
-using Neodroid.Environments;
-using Neodroid.Managers;
+﻿using Neodroid.Environments;
+using Neodroid.Models.Actors;
+using Neodroid.Models.Managers;
+using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
 
-namespace Neodroid.GameObjects {
+namespace Neodroid.Scripts.UnityEditor.GameObjects {
   #if UNITY_EDITOR
   public class GeneralSpawner : MonoBehaviour {
     [MenuItem(
-      "GameObject/Neodroid/SimulationManager",
-      false,
-      10)]
-    private static void CreateSimulationManagerGameObject(MenuCommand menuCommand) {
-      var go = new GameObject("SimulationManager");
+      itemName : "GameObject/Neodroid/SimulationManager",
+      isValidateFunction : false,
+      priority : 10)]
+    static void CreateSimulationManagerGameObject(MenuCommand menu_command) {
+      var go = new GameObject(name : "SimulationManager");
       go.AddComponent<SimulationManager>();
       GameObjectUtility.SetParentAndAlign(
-                                          go,
-                                          menuCommand
-                                              .context as
-                                            GameObject); // Ensure it gets reparented if this was a context click (otherwise does nothing)
+                                          child : go,
+                                          parent : menu_command
+                                                       .context as
+                                                     GameObject); // Ensure it gets reparented if this was a context click (otherwise does nothing)
       Undo.RegisterCreatedObjectUndo(
-                                     go,
-                                     "Create " + go.name); // Register the creation in the undo system
+                                     objectToUndo : go,
+                                     name : "Create " + go.name); // Register the creation in the undo system
       Selection.activeObject = go;
     }
 
     [MenuItem(
-      "GameObject/Neodroid/Environment",
-      false,
-      10)]
-    private static void CreateEnvironmentGameObject(MenuCommand menuCommand) {
-      var go = new GameObject("Environment");
-      var plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+      itemName : "GameObject/Neodroid/Environment",
+      isValidateFunction : false,
+      priority : 10)]
+    static void CreateEnvironmentGameObject(MenuCommand menu_command) {
+      var go = new GameObject(name : "Environment");
+      var plane = GameObject.CreatePrimitive(type : PrimitiveType.Plane);
       plane.transform.parent = go.transform;
       go.AddComponent<LearningEnvironment>();
       GameObjectUtility.SetParentAndAlign(
-                                          go,
-                                          menuCommand
-                                              .context as
-                                            GameObject); // Ensure it gets reparented if this was a context click (otherwise does nothing)
+                                          child : go,
+                                          parent : menu_command
+                                                       .context as
+                                                     GameObject); // Ensure it gets reparented if this was a context click (otherwise does nothing)
       Undo.RegisterCreatedObjectUndo(
-                                     go,
-                                     "Create " + go.name); // Register the creation in the undo system
+                                     objectToUndo : go,
+                                     name : "Create " + go.name); // Register the creation in the undo system
       Selection.activeObject = go;
     }
 
     [MenuItem(
-      "GameObject/Neodroid/Actor",
-      false,
-      10)]
-    private static void CreateActorGameObject(MenuCommand menuCommand) {
-      var go = new GameObject("Actor");
-      var capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+      itemName : "GameObject/Neodroid/Actor",
+      isValidateFunction : false,
+      priority : 10)]
+    static void CreateActorGameObject(MenuCommand menuCommand) {
+      var go = new GameObject(name : "Actor");
+      var capsule = GameObject.CreatePrimitive(type : PrimitiveType.Capsule);
       capsule.transform.parent = go.transform;
       go.AddComponent<Actor>();
       GameObjectUtility.SetParentAndAlign(
-                                          go,
-                                          menuCommand
-                                              .context as
-                                            GameObject); // Ensure it gets reparented if this was a context click (otherwise does nothing)
+                                          child : go,
+                                          parent : menuCommand
+                                                       .context as
+                                                     GameObject); // Ensure it gets reparented if this was a context click (otherwise does nothing)
       Undo.RegisterCreatedObjectUndo(
-                                     go,
-                                     "Create " + go.name); // Register the creation in the undo system
+                                     objectToUndo : go,
+                                     name : "Create " + go.name); // Register the creation in the undo system
       Selection.activeObject = go;
     }
   }

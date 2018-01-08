@@ -1,82 +1,82 @@
 ﻿using UnityEngine;
 
-namespace SceneSpecificAssets.Grasping {
+namespace SceneAssets.ScripterGrasper {
   [ExecuteInEditMode]
   public class QuickGlow : MonoBehaviour {
-    public Material AddMaterial;
-    public Material BlurMaterial;
+    [SerializeField]  Material _add_material;
+    [SerializeField]  Material _blur_material;
 
     [Range(
-      0,
-      4)]
+      min : 0,
+      max : 4)]
     public int DownRes;
 
     [Range(
-      0,
-      3)]
+      min : 0,
+      max : 3)]
     public float Intensity;
 
     [Range(
-      0,
-      10)]
+      min : 0,
+      max : 10)]
     public int Iterations;
 
     [Range(
-      0,
-      10)]
+      min : 0,
+      max : 10)]
     public float Size;
 
-    private void OnValidate() {
-      if (BlurMaterial != null)
-        BlurMaterial.SetFloat(
-                              "_Size",
-                              Size);
-      if (AddMaterial != null)
-        AddMaterial.SetFloat(
-                             "_Intensity",
-                             Intensity);
+    void OnValidate() {
+      if (this._blur_material != null)
+        this._blur_material.SetFloat(
+                                   name : "_Size",
+                                   value : this.Size);
+      if (this._add_material != null)
+        this._add_material.SetFloat(
+                                  name : "_Intensity",
+                                  value : this.Intensity);
     }
 
-    private void OnRenderImage(RenderTexture src, RenderTexture dst) {
+    void OnRenderImage(RenderTexture src, RenderTexture dst) {
       var composite = RenderTexture.GetTemporary(
-                                                 src.width,
-                                                 src.height);
+                                                 width : src.width,
+                                                 height : src.height);
       Graphics.Blit(
-                    src,
-                    composite);
+                    source : src,
+                    dest : composite);
 
-      var width = src.width >> DownRes;
-      var height = src.height >> DownRes;
+      var width = src.width >> this.DownRes;
+      var height = src.height >> this.DownRes;
 
       var rt = RenderTexture.GetTemporary(
-                                          width,
-                                          height);
+                                          width : width,
+                                          height : height);
       Graphics.Blit(
-                    src,
-                    rt);
+                    source : src,
+                    dest : rt);
 
-      for (var i = 0; i < Iterations; i++) {
+      for (var i = 0; i < this.Iterations; i++) {
         var rt2 = RenderTexture.GetTemporary(
-                                             width,
-                                             height);
+                                             width : width,
+                                             height : height);
         Graphics.Blit(
-                      rt,
-                      rt2,
-                      BlurMaterial);
-        RenderTexture.ReleaseTemporary(rt);
+                      source : rt,
+                      dest : rt2,
+                      mat : this._blur_material);
+        RenderTexture.ReleaseTemporary(temp : rt);
         rt = rt2;
       }
 
-      AddMaterial.SetTexture(
-                             "_BlendTex",
-                             rt);
+      this._add_material.SetTexture(
+                                  name : "_BlendTex",
+                                  value : rt);
       Graphics.Blit(
-                    composite,
-                    dst,
-                    AddMaterial);
+                    source : composite,
+                    dest : dst,
+                    mat : this._add_material);
 
-      RenderTexture.ReleaseTemporary(rt);
-      RenderTexture.ReleaseTemporary(composite);
+      RenderTexture.ReleaseTemporary(temp : rt);
+      RenderTexture.ReleaseTemporary(temp : composite);
     }
   }
 }

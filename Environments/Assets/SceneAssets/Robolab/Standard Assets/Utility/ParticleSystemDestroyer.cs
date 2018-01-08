@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Utility {
   public class ParticleSystemDestroyer : MonoBehaviour {
-    private bool m_EarlyStop;
+    bool m_EarlyStop;
 
-    private float m_MaxLifetime;
+    float m_MaxLifetime;
 
     public float maxDuration = 10;
     // allows a particle system to exist for a specified duration,
@@ -14,24 +14,24 @@ namespace UnityStandardAssets.Utility {
 
     public float minDuration = 8;
 
-    private IEnumerator Start() {
-      var systems = GetComponentsInChildren<ParticleSystem>();
+    IEnumerator Start() {
+      var systems = this.GetComponentsInChildren<ParticleSystem>();
 
       // find out the maximum lifetime of any particles in this effect
       foreach (var system in systems)
-        m_MaxLifetime = Mathf.Max(
-                                  system.main.startLifetime.constant,
-                                  m_MaxLifetime);
+        this.m_MaxLifetime = Mathf.Max(
+                                       a : system.main.startLifetime.constant,
+                                       b : this.m_MaxLifetime);
 
       // wait for random duration
 
       var stopTime = Time.time
                      + Random.Range(
-                                    minDuration,
-                                    maxDuration);
+                                    min : this.minDuration,
+                                    max : this.maxDuration);
 
-      while (Time.time < stopTime && !m_EarlyStop) yield return null;
-      Debug.Log("stopping " + name);
+      while (Time.time < stopTime && !this.m_EarlyStop) yield return null;
+      Debug.Log(message : "stopping " + this.name);
 
       // turn off emission
       foreach (var system in systems) {
@@ -39,19 +39,19 @@ namespace UnityStandardAssets.Utility {
         emission.enabled = false;
       }
 
-      BroadcastMessage(
-                       "Extinguish",
-                       SendMessageOptions.DontRequireReceiver);
+      this.BroadcastMessage(
+                            methodName : "Extinguish",
+                            options : SendMessageOptions.DontRequireReceiver);
 
       // wait for any remaining particles to expire
-      yield return new WaitForSeconds(m_MaxLifetime);
+      yield return new WaitForSeconds(seconds : this.m_MaxLifetime);
 
-      Destroy(gameObject);
+      Destroy(obj : this.gameObject);
     }
 
     public void Stop() {
       // stops the particle system early
-      m_EarlyStop = true;
+      this.m_EarlyStop = true;
     }
   }
 }

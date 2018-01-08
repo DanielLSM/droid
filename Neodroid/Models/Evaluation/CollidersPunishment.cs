@@ -1,18 +1,22 @@
 ﻿using Neodroid.Evaluation;
 using UnityEngine;
 
-public class CollidersPunishment : Term {
-  public Collider[] _as;
-  public Collider _b;
+namespace Neodroid.Models.Evaluation {
+  public class CollidersPunishment : Term {
+    [SerializeField]
+    Collider[] _as;
+    [SerializeField]
+    Collider _b;
+    [SerializeField]
+    bool _debugging;
 
-  public bool _debugging;
-
-  public override float Evaluate() {
-    if (_debugging)
-      print("Inside Evaluate");
-    foreach (var _a in _as)
-      if (_a.bounds.Intersects(_b.bounds))
-        return -1;
-    return 0;
+    public override float Evaluate() {
+      if (this._debugging)
+        print(message : "Inside Evaluate");
+      foreach (var a in this._as)
+        if (a.bounds.Intersects(bounds : this._b.bounds))
+          return -1;
+      return 0;
+    }
   }
 }

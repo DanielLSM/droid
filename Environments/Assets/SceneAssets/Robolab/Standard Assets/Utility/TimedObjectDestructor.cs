@@ -2,21 +2,19 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Utility {
   public class TimedObjectDestructor : MonoBehaviour {
-    [SerializeField]
-    private bool m_DetachChildren;
+    [SerializeField] bool m_DetachChildren;
 
-    [SerializeField]
-    private float m_TimeOut = 1.0f;
+    [SerializeField] float m_TimeOut = 1.0f;
 
-    private void Awake() {
-      Invoke(
-             "DestroyNow",
-             m_TimeOut);
+    void Awake() {
+      this.Invoke(
+                  methodName : "DestroyNow",
+                  time : this.m_TimeOut);
     }
 
-    private void DestroyNow() {
-      if (m_DetachChildren) transform.DetachChildren();
-      DestroyObject(gameObject);
+    void DestroyNow() {
+      if (this.m_DetachChildren) this.transform.DetachChildren();
+      DestroyObject(obj : this.gameObject);
     }
   }
 }

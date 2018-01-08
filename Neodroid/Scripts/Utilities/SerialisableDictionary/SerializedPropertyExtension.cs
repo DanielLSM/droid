@@ -1,7 +1,8 @@
 #if UNITY_EDITOR
+using System;
 using UnityEditor;
 
-namespace Neodroid.Utilities.SerialisableDictionary {
+namespace Neodroid.Scripts.Utilities.SerialisableDictionary {
   public static class SerializedPropertyExtension {
     public static int GetObjectCode(this SerializedProperty p) {
       // Unique code per serialized object and property path
@@ -30,9 +31,9 @@ namespace Neodroid.Utilities.SerialisableDictionary {
       if (left.propertyType == SerializedPropertyType.Float)
         if (left.type == right.type)
           if (left.type == "float")
-            return left.floatValue == right.floatValue;
+            return Math.Abs(left.floatValue - right.floatValue) < double.Epsilon;
           else
-            return left.doubleValue == right.doubleValue;
+            return Math.Abs(left.doubleValue - right.doubleValue) < double.Epsilon;
         else
           return false;
       if (left.propertyType == SerializedPropertyType.Color)
@@ -115,15 +116,16 @@ namespace Neodroid.Utilities.SerialisableDictionary {
           var targetIterator = target.Copy();
           while (true) {
             if (sourceIterator.propertyType == SerializedPropertyType.Generic) {
-              if (!sourceIterator.Next(true) || !targetIterator.Next(true))
+              if (!sourceIterator.Next(enterChildren : true) || !targetIterator.Next(enterChildren : true))
                 break;
-            } else if (!sourceIterator.Next(false) || !targetIterator.Next(false)) {
+            } else if (!sourceIterator.Next(enterChildren : false)
+                       || !targetIterator.Next(enterChildren : false)) {
               break;
             }
 
             CopyBasics(
-                       sourceIterator,
-                       targetIterator);
+                       source : sourceIterator,
+                       target : targetIterator);
           }
         }
       }

@@ -1,33 +1,33 @@
-﻿
+﻿using System;
 using Neodroid.Environments;
-using Neodroid.Utilities;
+using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
-namespace Neodroid.Observers {
+namespace Neodroid.Models.Observers.General {
   [ExecuteInEditMode]
-  [System.Serializable]
+  [Serializable]
   public class Observer : MonoBehaviour {
     public LearningEnvironment ParentEnvironment {
-      get { return _environment; }
-      set { _environment = value; }
+      get { return this._environment; }
+      set { this._environment = value; }
     }
 
-    public bool Debugging { get { return _debugging; } set { _debugging = value; } }
+    public bool Debugging { get { return this._debugging; } set { this._debugging = value; } }
 
-    public virtual string ObserverIdentifier { get { return name + "Observer"; } }
+    public virtual string ObserverIdentifier { get { return this.name + "Observer"; } }
 
-    protected virtual void Awake() { Setup(); }
+    protected virtual void Awake() { this.Setup(); }
 
     protected virtual void Start() { }
 
-    public void RefreshAwake() { Awake(); }
+    public void RefreshAwake() { this.Awake(); }
 
-    public void RefreshStart() { Start(); }
+    public void RefreshStart() { this.Start(); }
 
     protected void Setup() {
-      ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(
-                                                                   ParentEnvironment,
-                                                                   this);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(
+                                                                        r : this.ParentEnvironment,
+                                                                        c : this);
     }
 
     public virtual void UpdateData() { }
@@ -37,16 +37,16 @@ namespace Neodroid.Observers {
     #region Fields
 
     [Header(
-      "References",
+      header : "References",
       order = 99)]
     [SerializeField]
-    private LearningEnvironment _environment;
+    LearningEnvironment _environment;
 
     [Header(
-      "Development",
+      header : "Development",
       order = 100)]
     [SerializeField]
-    private bool _debugging;
+    bool _debugging;
 
     //[Header ("General", order = 101)]
 

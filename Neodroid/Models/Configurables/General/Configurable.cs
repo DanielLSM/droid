@@ -1,7 +1,7 @@
 ﻿using Neodroid.Messaging.Messages;
 using UnityEngine;
 
-namespace Neodroid.Configurables {
+namespace Neodroid.Models.Configurables.General {
   //[ExecuteInEditMode]
   public abstract class Configurable : MonoBehaviour {
     public abstract string ConfigurableIdentifier { get; }

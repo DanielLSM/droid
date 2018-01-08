@@ -1,39 +1,42 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
-using Neodroid.Utilities;
+using Neodroid.Models.Observers.NotUsed;
+using Neodroid.Scripts.Utilities.ScriptableObjects;
 using UnityEngine;
 
-namespace Neodroid.Task {
+namespace Neodroid.Scripts.Utilities.Tasks {
   //[ExecuteInEditMode]
   public class TaskSequence : NeodroidTask {
-    public GoalObserver _current_goal;
-    public Stack<GoalObserver> _goal_stack;
+    [SerializeField] GoalObserver _current_goal;
+    public GoalObserver CurrentGoal { get { return this._current_goal; }
+      private set { this._current_goal = value; }
+    }
 
-    public GoalObserver[] _sequence;
+    [SerializeField]
+    Stack<GoalObserver> _goal_stack;
+    [SerializeField]
+    GoalObserver[] _sequence;
 
-    private void Start () {
-      if (_sequence == null || _sequence.Length == 0) {
-        _sequence = FindObjectsOfType<GoalObserver> ();
-        System.Array.Sort (
-          _sequence,
-          (g1, g2) => g1._order_index.CompareTo (g2._order_index));
+    void Start() {
+      if (this._sequence == null || this._sequence.Length == 0) {
+        this._sequence = FindObjectsOfType<GoalObserver>();
+        Array.Sort(
+                   array : this._sequence,
+                   comparison : (g1, g2) => g1.OrderIndex.CompareTo(value : g2.OrderIndex));
       }
 
-      System.Array.Reverse (_sequence);
-      _goal_stack = new Stack<GoalObserver> (_sequence);
-      _current_goal = PopGoal ();
+      Array.Reverse(array : this._sequence);
+      this._goal_stack = new Stack<GoalObserver>(collection : this._sequence);
+      this.CurrentGoal = this.PopGoal();
     }
 
-    private void Update () {
-    }
+    void Update() { }
 
-    public GoalObserver[] GetSequence () {
-      return _sequence;
-    }
+    public GoalObserver[] GetSequence() { return this._sequence; }
 
-    public GoalObserver PopGoal () {
-      _current_goal = _goal_stack.Pop ();
-      return _current_goal;
+    public GoalObserver PopGoal() {
+      this.CurrentGoal = this._goal_stack.Pop();
+      return this.CurrentGoal;
     }
   }
 }

@@ -1,25 +1,22 @@
 ﻿using Neodroid.Messaging.Messages;
-using Neodroid.Utilities;
+using Neodroid.Models.Motors.General;
+using Neodroid.Scripts.Utilities.Enums;
 using UnityEngine;
 
-namespace Neodroid.Motors {
+namespace Neodroid.Models.Motors {
   public class EulerTransformMotor : Motor {
-    [SerializeField]
-    protected Axis _axis_of_motion;
+    [SerializeField] protected Axis _axis_of_motion;
 
-    [SerializeField]
-    protected string _layer_mask = "Obstructions";
+    [SerializeField] protected string _layer_mask = "Obstructions";
 
-    [SerializeField]
-    protected bool _no_collisions = true;
+    [SerializeField] protected bool _no_collisions = true;
 
-    [SerializeField]
-    protected Space _relative_to = Space.Self;
+    [SerializeField] protected Space _relative_to = Space.Self;
 
     public override void InnerApplyMotion(MotorMotion motion) {
-      var layer_mask = 1 << LayerMask.NameToLayer(_layer_mask);
+      var layer_mask = 1 << LayerMask.NameToLayer(layerName : this._layer_mask);
       var vec = Vector3.zero;
-      switch (_axis_of_motion) {
+      switch (this._axis_of_motion) {
         case Axis.X:
           vec = Vector3.right * motion.Strength;
           break;
@@ -30,43 +27,43 @@ namespace Neodroid.Motors {
           vec = -Vector3.forward * motion.Strength;
           break;
         case Axis.RotX:
-          transform.Rotate(
-                           Vector3.left,
-                           motion.Strength,
-                           _relative_to);
+          this.transform.Rotate(
+                                axis : Vector3.left,
+                                angle : motion.Strength,
+                                relativeTo : this._relative_to);
           break;
         case Axis.RotY:
-          transform.Rotate(
-                           Vector3.up,
-                           motion.Strength,
-                           _relative_to);
+          this.transform.Rotate(
+                                axis : Vector3.up,
+                                angle : motion.Strength,
+                                relativeTo : this._relative_to);
           break;
         case Axis.RotZ:
-          transform.Rotate(
-                           Vector3.forward,
-                           motion.Strength,
-                           _relative_to);
+          this.transform.Rotate(
+                                axis : Vector3.forward,
+                                angle : motion.Strength,
+                                relativeTo : this._relative_to);
           break;
         default:
           break;
       }
 
-      if (_no_collisions) {
+      if (this._no_collisions) {
         if (!Physics.Raycast(
-                             transform.position,
-                             vec,
-                             Mathf.Abs(motion.Strength),
-                             layer_mask))
-          transform.Translate(
-                              vec,
-                              _relative_to);
+                             origin : this.transform.position,
+                             direction : vec,
+                             maxDistance : Mathf.Abs(f : motion.Strength),
+                             layerMask : layer_mask))
+          this.transform.Translate(
+                                   translation : vec,
+                                   relativeTo : this._relative_to);
       } else {
-        transform.Translate(
-                            vec,
-                            _relative_to);
+        this.transform.Translate(
+                                 translation : vec,
+                                 relativeTo : this._relative_to);
       }
     }
 
-    public override string GetMotorIdentifier() { return name + "Transform" + _axis_of_motion; }
+    public override string GetMotorIdentifier() { return this.name + "Transform" + this._axis_of_motion; }
   }
 }

@@ -5,10 +5,10 @@ public class EventSystemChecker : MonoBehaviour {
   //public GameObject eventSystem;
 
   // Use this for initialization
-  private void Awake() {
+  void Awake() {
     if (!FindObjectOfType<EventSystem>()) {
       //Instantiate(eventSystem);
-      var obj = new GameObject("EventSystem");
+      var obj = new GameObject(name : "EventSystem");
       obj.AddComponent<EventSystem>();
       obj.AddComponent<StandaloneInputModule>().forceModuleActive = true;
     }

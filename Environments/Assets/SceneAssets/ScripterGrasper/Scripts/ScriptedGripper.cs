@@ -1,345 +1,344 @@
-﻿
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Assets.SceneAssets.ScripterGrasper.Navigation;
-using Assets.SceneAssets.ScripterGrasper.Utilities;
-using Neodroid.Utilities;
-using SceneSpecificAssets.Grasping.Grasps;
+using Neodroid.Scripts.Utilities;
+using SceneAssets.ScripterGrasper.Grasps;
+using SceneAssets.ScripterGrasper.Navigation;
+using SceneAssets.ScripterGrasper.Utilities;
 using SceneSpecificAssets.Grasping.Navigation;
 using SceneSpecificAssets.Grasping.Utilities;
 using UnityEngine;
 
-namespace SceneSpecificAssets.Grasping {
+namespace SceneAssets.ScripterGrasper.Scripts {
   public class ScriptedGripper : MonoBehaviour {
     #region Helpers
 
-    private void PerformReactionToCurrentState (States state) {
+    void PerformReactionToCurrentState(States state) {
       switch (state.PathFindingState) {
-      case PathFindingState.WaitingForTarget:
-        FindTargetAndUpdatePath ();
-        if (_target_grasp != null)
-          state.NavigateToTarget ();
-        break;
-
-      case PathFindingState.Navigating:
-        if (state.IsEnvironmentMoving () && _wait_for_resting_environment) {
-          state.WaitForRestingEnvironment ();
+        case PathFindingState.WaitingForTarget:
+          this.FindTargetAndUpdatePath();
+          if (this._target_grasp != null)
+            state.NavigateToTarget();
           break;
-        }
 
-        if (state.WasEnvironmentMoving ())
-          FindTargetAndUpdatePath ();
-        FollowPathToApproach (
-          _step_size,
-          _target_grasp.transform.rotation,
-          true);
-        state.OpenClaw ();
-        CheckIfGripperIsOpen ();
-        MaybeBeginApproachProcedure ();
-        break;
-
-      case PathFindingState.Approaching:
-        ApproachTarget (_step_size);
-        break;
-
-      case PathFindingState.PickingUpTarget:
-        if (state.IsGripperClosed () && state.IsTargetNotGrabbed ()) {
-          //state.ReturnToStartPosition();
-        }
-
-        break;
-
-      case PathFindingState.WaitingForRestingEnvironment:
-        if (state.WasEnvironmentMoving ())
-          FindTargetAndUpdatePath ();
-        if (state.IsEnvironmentAtRest ()) {
-          FindTargetAndUpdatePath ();
-          if (state.IsTargetGrabbed ())
-            state.ReturnToStartPosition ();
-          else
-            state.NavigateToTarget ();
-        }
-
-        break;
-
-      case PathFindingState.Returning:
-        if (state.WereObstructionMoving ())
-          _path = FindPath (
-            transform.position,
-            _reset_position);
-        if (_wait_for_resting_environment) {
-          if (state.IsObstructionsAtRest ()) {
-            FollowPathToApproach (
-              _step_size,
-              Quaternion.Euler (
-                90,
-                0,
-                0),
-              true);
-            MaybeBeginReleaseProcedure ();
+        case PathFindingState.Navigating:
+          if (state.IsEnvironmentMoving() && this._wait_for_resting_environment) {
+            state.WaitForRestingEnvironment();
+            break;
           }
-        } else {
-          FollowPathToApproach (
-            _step_size,
-            Quaternion.Euler (
-              90,
-              0,
-              0),
-            true);
-          MaybeBeginReleaseProcedure ();
-        }
 
-        break;
-      default:
-        throw new System.ArgumentOutOfRangeException ();
+          if (state.WasEnvironmentMoving()) this.FindTargetAndUpdatePath();
+          this.FollowPathToApproach(
+                                    step_size : this._step_size,
+                                    rotation : this._target_grasp.transform.rotation);
+          state.OpenClaw();
+          this.CheckIfGripperIsOpen();
+          this.MaybeBeginApproachProcedure();
+          break;
+
+        case PathFindingState.Approaching:
+          this.ApproachTarget(step_size : this._step_size);
+          break;
+
+        case PathFindingState.PickingUpTarget:
+          if (state.IsGripperClosed() && state.IsTargetNotGrabbed()) {
+            //state.ReturnToStartPosition();
+          }
+
+          break;
+
+        case PathFindingState.WaitingForRestingEnvironment:
+          if (state.WasEnvironmentMoving()) this.FindTargetAndUpdatePath();
+          if (state.IsEnvironmentAtRest()) {
+            this.FindTargetAndUpdatePath();
+            if (state.IsTargetGrabbed())
+              state.ReturnToStartPosition();
+            else
+              state.NavigateToTarget();
+          }
+
+          break;
+
+        case PathFindingState.Returning:
+          if (state.WereObstructionMoving())
+            this._path = this.FindPath(
+                                       start_position : this.transform.position,
+                                       target_position : this._reset_position);
+          if (this._wait_for_resting_environment) {
+            if (state.IsObstructionsAtRest()) {
+              this.FollowPathToApproach(
+                                        step_size : this._step_size,
+                                        rotation : Quaternion.Euler(
+                                                                    x : 90,
+                                                                    y : 0,
+                                                                    z : 0));
+              this.MaybeBeginReleaseProcedure();
+            }
+          } else {
+            this.FollowPathToApproach(
+                                      step_size : this._step_size,
+                                      rotation : Quaternion.Euler(
+                                                                  x : 90,
+                                                                  y : 0,
+                                                                  z : 0));
+            this.MaybeBeginReleaseProcedure();
+          }
+
+          break;
+        default:
+          throw new ArgumentOutOfRangeException();
       }
 
       switch (state.GripperState) {
-      case GripperState.Opening:
-        OpenClaws (_step_size);
-        break;
+        case GripperState.Opening:
+          this.OpenClaws(step_size : this._step_size);
+          break;
 
-      case GripperState.Closing:
-        CloseClaws (_step_size);
-        break;
+        case GripperState.Closing:
+          this.CloseClaws(step_size : this._step_size);
+          break;
 
-      case GripperState.Closed:
-        break;
+        case GripperState.Closed:
+          break;
       }
 
-      if (!state.IsTargetInsideRegionOrTouching ()) {
-        state.TargetIsNotGrabbed ();
-        if (_target_game_object != null)
-          _target_game_object.transform.parent = null;
+      if (!state.IsTargetInsideRegionOrTouching()) {
+        state.TargetIsNotGrabbed();
+        if (this._target_game_object != null) this._target_game_object.transform.parent = null;
       }
 
-      if (state.IsTargetTouchingAndInsideRegion ()) {
-        if (_target_game_object != null)
-          _target_game_object.transform.parent = transform;
-        state.TargetIsGrabbed ();
-        _path = FindPath (
-          transform.position,
-          _reset_position);
-        _intermediate_target = _path.Next (0.001f);
+      if (state.IsTargetTouchingAndInsideRegion()) {
+        if (this._target_game_object != null) this._target_game_object.transform.parent = this.transform;
+        state.TargetIsGrabbed();
+        this._path = this.FindPath(
+                                   start_position : this.transform.position,
+                                   target_position : this._reset_position);
+        this._intermediate_target = this._path.Next(step_size : 0.001f);
       }
 
-      MaybeClawIsClosed ();
+      this.MaybeClawIsClosed();
     }
 
     #endregion
 
     #region PrivateMembers
 
-    private GraspableObject _target_game_object;
-    private Vector3 _approach_position;
-    private Grasp _target_grasp;
-    private BezierCurvePath _path;
+    GraspableObject _target_game_object;
+    Vector3 _approach_position;
+    Grasp _target_grasp;
+    BezierCurvePath _path;
 
-    private Vector3 _default_motor_position;
-    private Vector3 _closed_motor_position;
+    Vector3 _default_motor_position;
+    Vector3 _closed_motor_position;
 
-    private Vector3 _intermediate_target;
+    Vector3 _intermediate_target;
     //GameObject[] _targets;
 
-    private Vector3 _reset_position;
-    private BezierCurve _bezier_curve;
+    Vector3 _reset_position;
+    BezierCurve _bezier_curve;
 
-    private float _step_size;
+    float _step_size;
 
     #endregion
 
     #region PublicMembers
 
-    [Space (1)]
-    [Header ("Game Objects")]
-    public GameObject _motor;
+    [Space(height : 1)] [Header(header : "Game Objects")]
+    [SerializeField]  GameObject _motor;
 
-    public GameObject _grab_region;
-    public GameObject _begin_grab_region;
+    [SerializeField]  GameObject _grab_region;
+    [SerializeField]  GameObject _begin_grab_region;
 
-    public GameObject _claw_1,
-      _claw_2;
+    [SerializeField] GameObject _claw_1;
+    [SerializeField]  GameObject _claw_2;
 
-    public States _state;
-    public Transform _closed_motor_transform;
-    public ObstacleSpawner _obstacle_spawner;
-    public BezierCurve _bezier_curve_prefab;
+    [SerializeField]  States _state;
+    [SerializeField]  Transform _closed_motor_transform;
+    [SerializeField]  ObstacleSpawner _obstacle_spawner;
+    [SerializeField]  BezierCurve _bezier_curve_prefab;
 
-    [Space (1)]
-    [Header ("Path Finding Parameters")]
-    public float _search_boundary = 6f;
+    [Space(height : 1)] [Header(header : "Path Finding Parameters")]
+    [SerializeField]  float _search_boundary = 6f;
 
-    public float _actor_size = 0.3f;
-    public float _grid_granularity = 0.4f;
-    public float _speed = 0.5f;
-    public float _precision = 0.02f;
-    public float _sensitivity = 0.2f;
-    public float _approach_distance = 0.6f;
-    public bool _wait_for_resting_environment;
+    [SerializeField]  float _actor_size = 0.3f;
+    [SerializeField]  float _grid_granularity = 0.4f;
+    [SerializeField]  float _speed = 0.5f;
+    [SerializeField]  float _precision = 0.02f;
+    [SerializeField]  float _sensitivity = 0.2f;
+    [SerializeField]  float _approach_distance = 0.6f;
+    [SerializeField]  bool _wait_for_resting_environment;
 
-    [Space (1)]
-    [Header ("Show debug logs")]
-    public bool Debugging;
+    [Space(height : 1)] [Header(header : "Show debug logs")]
+    [SerializeField]  bool _debugging;
 
-    [Space (1)]
-    [Header ("Draw Search Boundary")]
-    public bool _draw_search_boundary = true;
+    [Space(height : 1)] [Header(header : "Draw Search Boundary")]
+    [SerializeField]  bool _draw_search_boundary = true;
 
     #endregion
 
     #region Setup
 
-    private void UpdateMeshFilterBounds () {
-      var actor_bounds = GraspingUtilities.GetMaxBounds (gameObject);
+    void UpdateMeshFilterBounds() {
+      var actor_bounds = GraspingUtilities.GetMaxBounds(g : this.gameObject);
       //_environment_size = agent_bounds.size.magnitude;
       //_approach_distance = agent_bounds.size.magnitude + _precision;
-      _actor_size =
+      this._actor_size =
         actor_bounds.extents.magnitude
-      * 2; //Mathf.Max(agent_bounds.extents.x, Mathf.Max(agent_bounds.extents.y, agent_bounds.extents.z)) * 2;
-      _approach_distance = _actor_size + _precision;
+        * 2; //Mathf.Max(agent_bounds.extents.x, Mathf.Max(agent_bounds.extents.y, agent_bounds.extents.z)) * 2;
+      this._approach_distance = this._actor_size + this._precision;
     }
 
-    private void SetupEnvironment () {
-      NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (
-        this,
-        transform,
-        OnCollisionEnterChild,
-        OnTriggerEnterChild,
-        OnCollisionExitChild,
-        OnTriggerExitChild,
-        OnCollisionStayChild,
-        OnTriggerStayChild,
-        Debugging);
+    void SetupEnvironment() {
+      NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren(
+                                                                    caller : this,
+                                                                    parent : this.transform,
+                                                                    on_collision_enter_child : this
+                                                                      .OnCollisionEnterChild,
+                                                                    on_trigger_enter_child : this
+                                                                      .OnTriggerEnterChild,
+                                                                    on_collision_exit_child : this
+                                                                      .OnCollisionExitChild,
+                                                                    on_trigger_exit_child : this
+                                                                      .OnTriggerExitChild,
+                                                                    on_collision_stay_child : this
+                                                                      .OnCollisionStayChild,
+                                                                    on_trigger_stay_child : this
+                                                                      .OnTriggerStayChild,
+                                                                    debug : this._debugging);
     }
 
     #endregion
 
     #region UnityCallbacks
 
-    private void Start () {
-      _state = new States ();
-      _reset_position = transform.position;
-      _default_motor_position = _motor.transform.localPosition;
-      _closed_motor_position = _closed_motor_transform.localPosition;
-      _bezier_curve = FindObjectOfType<BezierCurve> ();
-      if (!_bezier_curve)
-        _bezier_curve = Instantiate (_bezier_curve_prefab);
+    void Start() {
+      this._state = new States();
+      this._reset_position = this.transform.position;
+      this._default_motor_position = this._motor.transform.localPosition;
+      this._closed_motor_position = this._closed_motor_transform.localPosition;
+      this._bezier_curve = FindObjectOfType<BezierCurve>();
+      if (!this._bezier_curve) this._bezier_curve = Instantiate(original : this._bezier_curve_prefab);
 
-      UpdateMeshFilterBounds ();
+      this.UpdateMeshFilterBounds();
 
-      FindTargetAndUpdatePath ();
-      _state.ResetStates ();
-      SetupEnvironment ();
+      this.FindTargetAndUpdatePath();
+      this._state.ResetStates();
+      this.SetupEnvironment();
     }
 
-    private void Update () {
-      _step_size = _speed * Time.deltaTime;
-      if (_draw_search_boundary)
-        GraspingUtilities.DrawBoxFromCenter (
-          transform.position,
-          _search_boundary,
-          Color.magenta);
-      _state.ObstructionMotionState = _state.GetMotionState (
-        FindObjectsOfType<Obstruction> (),
-        _state.ObstructionMotionState,
-        _sensitivity);
-      _state.TargetMotionState = _state.GetMotionState (
-        FindObjectsOfType<GraspableObject> (),
-        _state.TargetMotionState,
-        _sensitivity);
+    void Update() {
+      this._step_size = this._speed * Time.deltaTime;
+      if (this._draw_search_boundary)
+        GraspingUtilities.DrawBoxFromCenter(
+                                            p : this.transform.position,
+                                            r : this._search_boundary,
+                                            c : Color.magenta);
+      this._state.ObstructionMotionState = this._state.GetMotionState(
+                                                                      objects :
+                                                                      FindObjectsOfType<Obstruction>(),
+                                                                      previous_state : this
+                                                                                         ._state
+                                                                                         .ObstructionMotionState,
+                                                                      sensitivity : this._sensitivity);
+      this._state.TargetMotionState = this._state.GetMotionState(
+                                                                 objects :
+                                                                 FindObjectsOfType<GraspableObject>(),
+                                                                 previous_state : this
+                                                                                    ._state.TargetMotionState,
+                                                                 sensitivity : this._sensitivity);
 
-      PerformReactionToCurrentState (_state);
+      this.PerformReactionToCurrentState(state : this._state);
     }
 
     #endregion
 
     #region StateTransitions
 
-    private void MaybeBeginReleaseProcedure () {
-      if (!(Vector3.Distance (
-            transform.position,
-            _reset_position)
-          < _precision))
+    void MaybeBeginReleaseProcedure() {
+      if (!(Vector3.Distance(
+                             a : this.transform.position,
+                             b : this._reset_position)
+            < this._precision))
         return;
-      if (_target_game_object)
-        _target_game_object.transform.parent = null;
-      _state.OpenClaw ();
-      _state.WaitForTarget ();
+      if (this._target_game_object) this._target_game_object.transform.parent = null;
+      this._state.OpenClaw();
+      this._state.WaitForTarget();
 
-      if (_obstacle_spawner != null)
-        _obstacle_spawner.Setup ();
+      if (this._obstacle_spawner != null) this._obstacle_spawner.Setup();
     }
 
-    private void MaybeClawIsClosed () {
-      if (!(Vector3.Distance (
-            _motor.transform.localPosition,
-            _closed_motor_position)
-          < _precision))
+    void MaybeClawIsClosed() {
+      if (!(Vector3.Distance(
+                             a : this._motor.transform.localPosition,
+                             b : this._closed_motor_position)
+            < this._precision))
         return;
-      _state.GripperIsClosed ();
-      _path = FindPath (
-        transform.position,
-        _reset_position);
-      _intermediate_target = _path.Next (0.001f);
-      _state.ReturnToStartPosition ();
+      this._state.GripperIsClosed();
+      this._path = this.FindPath(
+                                 start_position : this.transform.position,
+                                 target_position : this._reset_position);
+      this._intermediate_target = this._path.Next(step_size : 0.001f);
+      this._state.ReturnToStartPosition();
     }
 
-    private void MaybeBeginApproachProcedure () {
-      if (Vector3.Distance (
-            transform.position,
-            _path.TargetPosition)
-          < _approach_distance + _precision
-          && Quaternion.Angle (
-            transform.rotation,
-            _target_grasp.transform.rotation)
-          < _precision
-          && _state.IsGripperOpen ())
-        _state.ApproachTarget ();
+    void MaybeBeginApproachProcedure() {
+      if (Vector3.Distance(
+                           a : this.transform.position,
+                           b : this._path.TargetPosition)
+          < this._approach_distance + this._precision
+          && Quaternion.Angle(
+                              a : this.transform.rotation,
+                              b : this._target_grasp.transform.rotation)
+          < this._precision
+          && this._state.IsGripperOpen())
+        this._state.ApproachTarget();
     }
 
-    private void CheckIfGripperIsOpen () {
-      if (Vector3.Distance (
-            _motor.transform.localPosition,
-            _default_motor_position)
-          < _precision)
-        _state.GripperIsOpen ();
+    void CheckIfGripperIsOpen() {
+      if (Vector3.Distance(
+                           a : this._motor.transform.localPosition,
+                           b : this._default_motor_position)
+          < this._precision)
+        this._state.GripperIsOpen();
     }
 
-    private void CloseClaws (float step_size) {
+    void CloseClaws(float step_size) {
       //Vector3 current_motor_position = _motor.transform.localPosition;
       //current_motor_position.y += step_size / 16;
       //_motor.transform.localPosition = current_motor_position;
-      _motor.transform.localPosition = Vector3.MoveTowards (
-        _motor.transform.localPosition,
-        _closed_motor_position,
-        step_size / 8);
+      this._motor.transform.localPosition = Vector3.MoveTowards(
+                                                                current : this._motor.transform.localPosition,
+                                                                target : this._closed_motor_position,
+                                                                maxDistanceDelta : step_size / 8);
     }
 
-    private void OpenClaws (float step_size) {
-      _motor.transform.localPosition = Vector3.MoveTowards (
-        _motor.transform.localPosition,
-        _default_motor_position,
-        step_size / 8);
+    void OpenClaws(float step_size) {
+      this._motor.transform.localPosition = Vector3.MoveTowards(
+                                                                current : this._motor.transform.localPosition,
+                                                                target : this._default_motor_position,
+                                                                maxDistanceDelta : step_size / 8);
       //StopCoroutine ("claw_movement");
       //StartCoroutine ("claw_movement", OpenClaws1 ());
     }
 
-    private IEnumerator OpenClaws1 () {
-      while (!_state.IsTargetGrabbed ()) {
-        _motor.transform.localPosition = Vector3.MoveTowards (
-          _motor.transform.localPosition,
-          _default_motor_position,
-          Time.deltaTime);
+    IEnumerator OpenClaws1() {
+      while (!this._state.IsTargetGrabbed()) {
+        this._motor.transform.localPosition = Vector3.MoveTowards(
+                                                                  current : this
+                                                                            ._motor.transform.localPosition,
+                                                                  target : this._default_motor_position,
+                                                                  maxDistanceDelta : Time.deltaTime);
         yield return null; // new WaitForSeconds(waitTime);
       }
     }
 
-    private IEnumerator CloseClaws1 () {
-      while (!_state.IsTargetGrabbed ()) {
-        _motor.transform.localPosition = Vector3.MoveTowards (
-          _motor.transform.localPosition,
-          _closed_motor_position,
-          Time.deltaTime);
+    IEnumerator CloseClaws1() {
+      while (!this._state.IsTargetGrabbed()) {
+        this._motor.transform.localPosition = Vector3.MoveTowards(
+                                                                  current : this
+                                                                            ._motor.transform.localPosition,
+                                                                  target : this._closed_motor_position,
+                                                                  maxDistanceDelta : Time.deltaTime);
         yield return null; // new WaitForSeconds(waitTime);
       }
     }
@@ -348,115 +347,115 @@ namespace SceneSpecificAssets.Grasping {
 
     #region Collisions
 
-    private void Ab (GameObject child_game_object, GraspableObject other_maybe_graspable) {
+    void Ab(GameObject child_game_object, GraspableObject other_maybe_graspable) {
       if (other_maybe_graspable) {
-        if (child_game_object == _grab_region.gameObject
-            && other_maybe_graspable.gameObject == _target_game_object.gameObject) {
-          if (Debugging)
-            print (
-              string.Format (
-                "Target {0} is inside region",
-                other_maybe_graspable.name));
-          _state.TargetIsInsideRegion ();
+        if (child_game_object == this._grab_region.gameObject
+            && other_maybe_graspable.gameObject == this._target_game_object.gameObject) {
+          if (this._debugging)
+            print(
+                  message : string.Format(
+                                          format : "Target {0} is inside region",
+                                          arg0 : other_maybe_graspable.name));
+          this._state.TargetIsInsideRegion();
         }
 
-        if (child_game_object == _begin_grab_region.gameObject
-            && other_maybe_graspable.gameObject == _target_game_object.gameObject
-            && !_state.IsTargetGrabbed ()) {
-          if (Debugging)
-            print (
-              string.Format (
-                "Picking up target {0}",
-                other_maybe_graspable.name));
-          _state.PickUpTarget ();
+        if (child_game_object == this._begin_grab_region.gameObject
+            && other_maybe_graspable.gameObject == this._target_game_object.gameObject
+            && !this._state.IsTargetGrabbed()) {
+          if (this._debugging)
+            print(
+                  message : string.Format(
+                                          format : "Picking up target {0}",
+                                          arg0 : other_maybe_graspable.name));
+          this._state.PickUpTarget();
         }
       }
     }
 
-    private void OnTriggerEnterChild (GameObject child_game_object, Collider other_game_object) {
-      var other_maybe_graspable = other_game_object.GetComponentInParent<GraspableObject> ();
-      Ab (
-        child_game_object,
-        other_maybe_graspable);
+    void OnTriggerEnterChild(GameObject child_game_object, Collider other_game_object) {
+      var other_maybe_graspable = other_game_object.GetComponentInParent<GraspableObject>();
+      this.Ab(
+              child_game_object : child_game_object,
+              other_maybe_graspable : other_maybe_graspable);
     }
 
-    private void OnTriggerStayChild (GameObject child_game_object, Collider other_game_object) {
-      var other_maybe_graspable = other_game_object.GetComponentInParent<GraspableObject> ();
-      Ab (
-        child_game_object,
-        other_maybe_graspable);
+    void OnTriggerStayChild(GameObject child_game_object, Collider other_game_object) {
+      var other_maybe_graspable = other_game_object.GetComponentInParent<GraspableObject>();
+      this.Ab(
+              child_game_object : child_game_object,
+              other_maybe_graspable : other_maybe_graspable);
     }
 
-    private void OnCollisionStayChild (GameObject child_game_object, Collision collision) {
-      var other_maybe_graspable = collision.gameObject.GetComponentInParent<GraspableObject> ();
+    void OnCollisionStayChild(GameObject child_game_object, Collision collision) {
+      var other_maybe_graspable = collision.gameObject.GetComponentInParent<GraspableObject>();
       if (other_maybe_graspable) {
-        if (child_game_object == _claw_1.gameObject
-            && other_maybe_graspable.gameObject == _target_game_object.gameObject) {
-          if (Debugging)
-            print (
-              string.Format (
-                "Target {0} is touching {1}",
-                other_maybe_graspable.name,
-                child_game_object.name));
-          _state.Claw1IsTouchingTarget ();
+        if (child_game_object == this._claw_1.gameObject
+            && other_maybe_graspable.gameObject == this._target_game_object.gameObject) {
+          if (this._debugging)
+            print(
+                  message : string.Format(
+                                          format : "Target {0} is touching {1}",
+                                          arg0 : other_maybe_graspable.name,
+                                          arg1 : child_game_object.name));
+          this._state.Claw1IsTouchingTarget();
         }
 
-        if (child_game_object == _claw_2.gameObject
-            && other_maybe_graspable.gameObject == _target_game_object.gameObject) {
-          if (Debugging)
-            print (
-              string.Format (
-                "Target {0} is touching {1}",
-                other_maybe_graspable.name,
-                child_game_object.name));
-          _state.Claw2IsTouchingTarget ();
+        if (child_game_object == this._claw_2.gameObject
+            && other_maybe_graspable.gameObject == this._target_game_object.gameObject) {
+          if (this._debugging)
+            print(
+                  message : string.Format(
+                                          format : "Target {0} is touching {1}",
+                                          arg0 : other_maybe_graspable.name,
+                                          arg1 : child_game_object.name));
+          this._state.Claw2IsTouchingTarget();
         }
       }
     }
 
-    private void OnCollisionExitChild (GameObject child_game_object, Collision collision) {
+    void OnCollisionExitChild(GameObject child_game_object, Collision collision) {
       /*if (collision.gameObject.GetComponent<Obstruction> () != null) {
         _state.GripperState = GripperState.Opening;
       }*/
 
-      var other_maybe_graspable = collision.gameObject.GetComponentInParent<GraspableObject> ();
+      var other_maybe_graspable = collision.gameObject.GetComponentInParent<GraspableObject>();
       if (other_maybe_graspable) {
-        if (child_game_object == _claw_1.gameObject
-            && other_maybe_graspable.gameObject == _target_game_object.gameObject)
-          _state.Claw1IsNotTouchingTarget ();
+        if (child_game_object == this._claw_1.gameObject
+            && other_maybe_graspable.gameObject == this._target_game_object.gameObject)
+          this._state.Claw1IsNotTouchingTarget();
 
-        if (child_game_object == _claw_2.gameObject
-            && other_maybe_graspable.gameObject == _target_game_object.gameObject)
-          _state.Claw2IsNotTouchingTarget ();
+        if (child_game_object == this._claw_2.gameObject
+            && other_maybe_graspable.gameObject == this._target_game_object.gameObject)
+          this._state.Claw2IsNotTouchingTarget();
       }
     }
 
-    private void OnTriggerExitChild (GameObject child_game_object, Collider other_game_object) {
+    void OnTriggerExitChild(GameObject child_game_object, Collider other_game_object) {
       /*if (other_game_object.gameObject.GetComponent<Obstruction> () != null) {
         _state.GripperState = GripperState.Opening;
       }*/
 
-      var other_maybe_graspable = other_game_object.GetComponentInParent<GraspableObject> ();
+      var other_maybe_graspable = other_game_object.GetComponentInParent<GraspableObject>();
       if (other_maybe_graspable)
-      if (child_game_object == _grab_region.gameObject
-            && other_maybe_graspable.gameObject == _target_game_object.gameObject)
-        _state.TargetIsOutsideRegion ();
+        if (child_game_object == this._grab_region.gameObject
+            && other_maybe_graspable.gameObject == this._target_game_object.gameObject)
+          this._state.TargetIsOutsideRegion();
     }
 
-    private void OnCollisionEnterChild (GameObject child_game_object, Collision collision) {
+    void OnCollisionEnterChild(GameObject child_game_object, Collision collision) {
       /*if (collision.gameObject.GetComponent<Obstruction> () != null) {
         _state.GripperState = GripperState.Closing;
       }*/
 
-      var other_maybe_graspable = collision.gameObject.GetComponentInParent<GraspableObject> ();
+      var other_maybe_graspable = collision.gameObject.GetComponentInParent<GraspableObject>();
       if (other_maybe_graspable) {
-        if (child_game_object == _claw_1.gameObject
-            && other_maybe_graspable.gameObject == _target_game_object.gameObject)
-          _state.Claw1IsTouchingTarget ();
+        if (child_game_object == this._claw_1.gameObject
+            && other_maybe_graspable.gameObject == this._target_game_object.gameObject)
+          this._state.Claw1IsTouchingTarget();
 
-        if (child_game_object == _claw_2.gameObject
-            && other_maybe_graspable.gameObject == _target_game_object.gameObject)
-          _state.Claw2IsTouchingTarget ();
+        if (child_game_object == this._claw_2.gameObject
+            && other_maybe_graspable.gameObject == this._target_game_object.gameObject)
+          this._state.Claw2IsTouchingTarget();
       }
     }
 
@@ -464,16 +463,16 @@ namespace SceneSpecificAssets.Grasping {
 
     #region PathFinding
 
-    private Pair<GraspableObject, Grasp> GetOptimalTargetAndGrasp () {
-      var targets = FindObjectsOfType<GraspableObject> ();
+    Pair<GraspableObject, Grasp> GetOptimalTargetAndGrasp() {
+      var targets = FindObjectsOfType<GraspableObject>();
       if (targets.Length == 0)
         return null;
       var shortest_distance = float.MaxValue;
       GraspableObject optimal_target = null;
       Grasp optimal_grasp = null;
       foreach (var target in targets) {
-        var pair = target.GetOptimalGrasp (this);
-        if (pair == null || pair.First == null || pair.First.IsObstructed ())
+        var pair = target.GetOptimalGrasp(gripper : this);
+        if (pair == null || pair.First == null || pair.First.IsObstructed())
           continue;
         var target_grasp = pair.First;
         var distance = pair.Second;
@@ -484,100 +483,100 @@ namespace SceneSpecificAssets.Grasping {
         }
       }
 
-      return new Pair<GraspableObject, Grasp> (
-        optimal_target,
-        optimal_grasp);
+      return new Pair<GraspableObject, Grasp>(
+                                              first : optimal_target,
+                                              second : optimal_grasp);
     }
 
-    public void FindTargetAndUpdatePath () {
-      var pair = GetOptimalTargetAndGrasp ();
+    public void FindTargetAndUpdatePath() {
+      var pair = this.GetOptimalTargetAndGrasp();
       if (pair == null || pair.First == null || pair.Second == null) {
-        _state.PathFindingState = PathFindingState.Returning;
-        _path = FindPath (
-          transform.position,
-          _reset_position);
+        this._state.PathFindingState = PathFindingState.Returning;
+        this._path = this.FindPath(
+                                   start_position : this.transform.position,
+                                   target_position : this._reset_position);
         return;
       }
 
-      _target_game_object = pair.First;
-      _target_grasp = pair.Second;
-      _approach_position = _target_grasp.transform.position
-      - _target_grasp.transform.forward * _approach_distance;
-      if (Vector3.Distance (
-            transform.position,
-            _approach_position)
-          > _search_boundary)
+      this._target_game_object = pair.First;
+      this._target_grasp = pair.Second;
+      this._approach_position = this._target_grasp.transform.position
+                                - this._target_grasp.transform.forward * this._approach_distance;
+      if (Vector3.Distance(
+                           a : this.transform.position,
+                           b : this._approach_position)
+          > this._search_boundary)
         return;
-      _path = FindPath (
-        transform.position,
-        _approach_position);
-      _intermediate_target = _path.Next (_step_size);
+      this._path = this.FindPath(
+                                 start_position : this.transform.position,
+                                 target_position : this._approach_position);
+      this._intermediate_target = this._path.Next(step_size : this._step_size);
     }
 
-    private BezierCurvePath FindPath (Vector3 start_position, Vector3 target_position) {
-      UpdateMeshFilterBounds ();
-      var _path_list = PathFinding.FindPathAstar (
-                         start_position,
-                         target_position,
-                         _search_boundary,
-                         _grid_granularity,
-                         _actor_size,
-                         _approach_distance);
-      if (_path_list != null && _path_list.Count > 0) {
-        _path_list = PathFinding.SimplifyPath (
-          _path_list,
-          _actor_size);
-        _path_list.Add (target_position);
+    BezierCurvePath FindPath(Vector3 start_position, Vector3 target_position) {
+      this.UpdateMeshFilterBounds();
+      var path_list = PathFinding.FindPathAstar(
+                                                 source : start_position,
+                                                 destination : target_position,
+                                                 search_boundary : this._search_boundary,
+                                                 grid_granularity : this._grid_granularity,
+                                                 agent_size : this._actor_size,
+                                                 near_stopping_distance : this._approach_distance);
+      if (path_list != null && path_list.Count > 0) {
+        path_list = PathFinding.SimplifyPath(
+                                              path : path_list,
+                                              sphere_cast_radius : this._actor_size);
+        path_list.Add(item : target_position);
       } else {
-        _path_list = new List<Vector3> {
-          start_position,
-          target_position
-        };
+        path_list = new List<Vector3> {
+                                         start_position,
+                                         target_position
+                                       };
       }
 
-      var path = new BezierCurvePath (
-                   start_position,
-                   target_position,
-                   _bezier_curve,
-                   _path_list);
+      var path = new BezierCurvePath(
+                                     start_position : start_position,
+                                     target_position : target_position,
+                                     game_object : this._bezier_curve,
+                                     path_list : path_list);
       return path;
     }
 
-    private void ApproachTarget (float step_size) {
-      transform.position =
-        Vector3.MoveTowards (
-        transform.position,
-        _target_grasp.transform.position,
-        step_size);
-      if (Debugging)
-        Debug.DrawLine (
-          transform.position,
-          _target_grasp.transform.position,
-          Color.green);
+    void ApproachTarget(float step_size) {
+      this.transform.position =
+        Vector3.MoveTowards(
+                            current : this.transform.position,
+                            target : this._target_grasp.transform.position,
+                            maxDistanceDelta : step_size);
+      if (this._debugging)
+        Debug.DrawLine(
+                       start : this.transform.position,
+                       end : this._target_grasp.transform.position,
+                       color : Color.green);
     }
 
-    private void FollowPathToApproach (float step_size, Quaternion rotation, bool rotate = true) {
-      if (Vector3.Distance (
-            transform.position,
-            _intermediate_target)
-          <= _precision)
-        _intermediate_target = _path.Next (step_size);
+    void FollowPathToApproach(float step_size, Quaternion rotation, bool rotate = true) {
+      if (Vector3.Distance(
+                           a : this.transform.position,
+                           b : this._intermediate_target)
+          <= this._precision)
+        this._intermediate_target = this._path.Next(step_size : step_size);
 
-      if (Debugging)
-        Debug.DrawRay (
-          _intermediate_target,
-          transform.forward,
-          Color.magenta);
+      if (this._debugging)
+        Debug.DrawRay(
+                      start : this._intermediate_target,
+                      dir : this.transform.forward,
+                      color : Color.magenta);
 
       if (rotate)
-        transform.rotation = Quaternion.RotateTowards (
-          transform.rotation,
-          rotation,
-          step_size * 50);
-      transform.position = Vector3.MoveTowards (
-        transform.position,
-        _intermediate_target,
-        step_size);
+        this.transform.rotation = Quaternion.RotateTowards(
+                                                           @from : this.transform.rotation,
+                                                           to : rotation,
+                                                           maxDegreesDelta : step_size * 50);
+      this.transform.position = Vector3.MoveTowards(
+                                                    current : this.transform.position,
+                                                    target : this._intermediate_target,
+                                                    maxDistanceDelta : step_size);
     }
 
     #endregion
@@ -613,5 +612,6 @@ namespace SceneSpecificAssets.Grasping {
       ObstacleSpawner obstacles_spawner = FindObjectOfType<ObstacleSpawner>();
       obstacles_spawner.SpawnObstacles(obstacles_spawner.number_of_cubes, obstacles_spawner.number_of_spheres);
     }*/
+    public States State { get { return this._state; } set { this._state = value; } }
   }
 }

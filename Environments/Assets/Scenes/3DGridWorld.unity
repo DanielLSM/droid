@@ -15,15 +15,15 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
   m_Fog: 0
-  m_FogColor: {r: 0.88773304, g: 0.9231436, b: 0.89308584, a: 0.044776678}
+  m_FogColor: {r: 0.85678816, g: 0.91623265, b: 0.920114, a: 0.038070217}
   m_FogMode: 3
-  m_FogDensity: 0.054102506
+  m_FogDensity: 0.03861767
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.98125464, g: 0.9425053, b: 0.7805885, a: 1}
+  m_AmbientSkyColor: {r: 0.9986336, g: 0.99580914, b: 0.9840068, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.46172038
+  m_AmbientIntensity: 0.54234165
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 906b66e06bb384e14a1881c9d9165e75, type: 2}
@@ -872,10 +872,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _space: 2
+  _direction: {x: 0, y: 0, z: 0}
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
+  _space: 2
 --- !u!23 &550923042
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1113,12 +1113,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 583.5
+      value: 510.5
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 273.5
+      value: 276
       objectReference: {fileID: 0}
     - target: {fileID: 1709914492231660, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_IsActive
@@ -1226,10 +1226,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _space: 2
+  _direction: {x: 0, y: 0, z: 0}
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
+  _space: 2
 --- !u!114 &745076144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1244,17 +1244,11 @@ MonoBehaviour:
   _environment: {fileID: 1943801932}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: 0
-    max_value: 0
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _relative_to_existing_value: 0
-  _axis_of_configuration: 0
-  _use_bounding_box_for_range: 0
-  _bounding_box: {fileID: 1943801935}
   _position: {x: 0, y: 6, z: 4}
-  _X: GoalTransformX
-  _Y: GoalTransformY
-  _Z: GoalTransformZ
 --- !u!1 &836777172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,10 +1582,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _space: 2
+  _direction: {x: 0, y: 0, z: 0}
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
+  _space: 2
 --- !u!1001 &1178393745
 Prefab:
   m_ObjectHideFlags: 0
@@ -1613,19 +1607,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.19610912
+      value: 0.2519253
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.0023122558
+      value: -0.0026750625
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.19605768
+      value: 0.2518062
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.9607795
+      value: 0.93440896
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_RootOrder
@@ -1634,22 +1628,22 @@ Prefab:
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Color.r
-      value: 0.98125464
+      value: 0.9986336
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Color.g
-      value: 0.9425053
+      value: 0.99580914
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Color.b
-      value: 0.7805885
+      value: 0.9840068
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Intensity
-      value: 0.7591788
+      value: 0.8911045
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
@@ -1949,12 +1943,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf0864c173dc49e99dc343bf5d70b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugging: 0
   _as:
   - {fileID: 1067791538}
   - {fileID: 1544235448}
   - {fileID: 550923043}
   _b: {fileID: 1650564488}
+  _debugging: 0
 --- !u!1 &1285624213
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,10 +2162,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _space: 2
+  _direction: {x: 0, y: 0, z: 0}
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
+  _space: 2
 --- !u!23 &1544235447
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2411,10 +2405,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _space: 2
+  _direction: {x: 0, y: 0, z: 0}
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
-  _direction: {x: 0, y: 0, z: 0}
+  _space: 2
 --- !u!114 &1650564491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2429,15 +2423,15 @@ MonoBehaviour:
   _actor: {fileID: 1650564493}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: -1
-    max_value: 1
+    DecimalGranularity: 0
+    MinValue: -10
+    MaxValue: 10
   _energy_spend_since_reset: 0
   _energy_cost: 0
+  _layer_mask: Obstructions
+  _no_collisions: 1
   _relative_to: 1
   _rotational_motors: 0
-  _no_collisions: 1
-  _layer_mask: Obstructions
 --- !u!114 &1650564492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2451,9 +2445,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
+  _direction: {x: 0, y: 0, z: 1}
+  _nearest_object: {fileID: 0}
   _position: {x: 1, y: 0, z: 0}
   _rotation: {x: 0, y: 1, z: 0}
-  _direction: {x: 0, y: 0, z: 1}
   _tag: Obstruction
 --- !u!114 &1650564493
 MonoBehaviour:
@@ -2482,17 +2477,11 @@ MonoBehaviour:
   _environment: {fileID: 1943801932}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: -10
-    max_value: 10
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _relative_to_existing_value: 0
-  _axis_of_configuration: 0
-  _use_bounding_box_for_range: 0
-  _bounding_box: {fileID: 0}
   _position: {x: 0, y: 1, z: -2}
-  _X: ActorTransformX
-  _Y: ActorTransformY
-  _Z: ActorTransformZ
 --- !u!1001 &1663177657
 Prefab:
   m_ObjectHideFlags: 0
@@ -2730,9 +2719,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objective_function: {fileID: 1943801934}
   _simulation_manager: {fileID: 1943801933}
-  _debugging: 1
+  _debugging: 0
   _coordinate_reference_point: {fileID: 0}
   _coordinate_system: 0
+  _episode_length: 1000
   _playable_area: {fileID: 1943801935}
 --- !u!114 &1943801933
 MonoBehaviour:
@@ -2746,13 +2736,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
-  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
-  _wait_every: 1
+  _testing_motors: 0
+  _wait_every: 2
   _update_fixed_time_scale: 0
-  _continue_on_disconnect: 0
-  _episode_length: 100
   _frame_skips: 0
   _simulation_time_scale: 1
   _reset_iterations: 10
@@ -2771,6 +2759,7 @@ MonoBehaviour:
   _extra_terms:
   - {fileID: 1252134782}
   _solved_threshold: 0
+  _peak_reward: 0
   _sparse: 1
   _goal: {fileID: 745076139}
   _actor: {fileID: 1650564493}
@@ -2788,16 +2777,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e918915125b4fdfb1a4025246b5ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider_based: 1
-  _include_children: 0
-  _freeze: 1
-  _line_color: {r: 0.94482756, g: 0, b: 1, a: 0.74}
   _bounds:
     m_Center: {x: -0.5, y: 4.5, z: -0.5}
     m_Extent: {x: 4.5, y: 4.5, z: 4.5}
   _bounds_offset: {x: -0.5, y: 4.5, z: -0.5}
-  _setup_on_awake: 1
   _camera: {fileID: 0}
+  _collider_based: 1
+  _freeze: 1
+  _include_children: 0
+  _line_color: {r: 0.94482756, g: 0, b: 1, a: 0.74}
+  _setup_on_awake: 1
 --- !u!65 &1943801938
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2822,6 +2811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player_motions: {fileID: 11400000, guid: 89bb62747dac84347941765995296270, type: 2}
+  _simulation_manager: {fileID: 0}
   Debugging: 0
 --- !u!1 &1976304150
 GameObject:

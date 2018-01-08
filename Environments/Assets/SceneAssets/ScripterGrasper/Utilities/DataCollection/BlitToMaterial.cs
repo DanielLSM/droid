@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-namespace SceneSpecificAssets.Grasping.Utilities.DataCollection {
+namespace SceneAssets.ScripterGrasper.Utilities.DataCollection {
   [ExecuteInEditMode]
   public class BlitToMaterial : MonoBehaviour {
-    public Material _material;
+    [SerializeField]  Material _material;
 
-    private void OnRenderImage(RenderTexture source, RenderTexture destination) {
+    void OnRenderImage(RenderTexture source, RenderTexture destination) {
       Graphics.Blit(
-                    source,
-                    destination,
-                    _material);
+                    source : source,
+                    dest : destination,
+                    mat : this._material);
     }
   }
 }

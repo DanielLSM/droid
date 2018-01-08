@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace Neodroid.Segmentation {
-  [System.Serializable]
+namespace Neodroid.Scripts.Utilities.Segmentation {
+  [Serializable]
   public struct SegmentationColorByTag {
-    public string tag;
-    public Color color;
+    public string Tag;
+    public Color Col;
   }
 
-  [System.Serializable]
+  [Serializable]
   public struct SegmentationColorByInstance {
-    public GameObject game_object;
-    public Color color;
+    public GameObject Obj;
+    public Color Col;
   }
 }

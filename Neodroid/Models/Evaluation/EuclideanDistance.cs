@@ -1,21 +1,22 @@
-﻿using Assets.Neodroid.Models.Actors;
+﻿using Neodroid.Evaluation;
+using Neodroid.Models.Actors;
 using UnityEngine;
 
-namespace Neodroid.Evaluation {
-  internal class EuclideanDistance : ObjectiveFunction {
-    public Transform g1,
-                     g2;
+namespace Neodroid.Models.Evaluation {
+  class EuclideanDistance : ObjectiveFunction {
+    [SerializeField] Transform _g1;
+    [SerializeField] Transform _g2;
 
     public override float InternalEvaluate() {
       return Vector3.Distance(
-                              g1.position,
-                              g2.position);
+                              a : this._g1.position,
+                              b : this._g2.position);
     }
 
-    private void Start() {
-      if (g1 == null) g1 = FindObjectOfType<Actor>().transform;
+    void Start() {
+      if (this._g1 == null) this._g1 = FindObjectOfType<Actor>().transform;
 
-      if (g2 == null) g2 = transform;
+      if (this._g2 == null) this._g2 = this.transform;
     }
   }
 }

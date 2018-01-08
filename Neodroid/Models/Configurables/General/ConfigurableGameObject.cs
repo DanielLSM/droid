@@ -1,37 +1,38 @@
 ﻿using Neodroid.Environments;
 using Neodroid.Messaging.Messages;
-using Neodroid.Utilities;
+using Neodroid.Scripts.Utilities;
+using Neodroid.Scripts.Utilities.Structs;
 using UnityEngine;
 
-namespace Neodroid.Configurables {
+namespace Neodroid.Models.Configurables.General {
   public class ConfigurableGameObject : Configurable {
-    public bool RelativeToExistingValue { get { return _relative_to_existing_value; } }
+    public bool RelativeToExistingValue { get { return this._relative_to_existing_value; } }
 
-    public InputRange ValidInput { get { return _valid_input; } set { _valid_input = value; } }
+    public InputRange ValidInput { get { return this._valid_input; } set { this._valid_input = value; } }
 
     public LearningEnvironment ParentEnvironment {
-      get { return _environment; }
-      set { _environment = value; }
+      get { return this._environment; }
+      set { this._environment = value; }
     }
 
-    public bool Debugging { get { return _debugging; } set { _debugging = value; } }
+    public bool Debugging { get { return this._debugging; } set { this._debugging = value; } }
 
-    public override string ConfigurableIdentifier { get { return name + "Configurable"; } }
+    public override string ConfigurableIdentifier { get { return this.name + "Configurable"; } }
 
     public virtual void UpdateObservation() { }
 
-    protected virtual void Start() { UpdateObservation(); }
+    protected virtual void Start() { this.UpdateObservation(); }
 
-    protected virtual void Awake() { AddToEnvironment(); }
+    protected virtual void Awake() { this.AddToEnvironment(); }
 
-    public void RefreshAwake() { Awake(); }
+    public void RefreshAwake() { this.Awake(); }
 
-    public void RefreshStart() { Start(); }
+    public void RefreshStart() { this.Start(); }
 
     protected virtual void AddToEnvironment() {
-      ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(
-                                                                   ParentEnvironment,
-                                                                   this);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(
+                                                                        r : this.ParentEnvironment,
+                                                                        c : this);
     }
 
     public override void ApplyConfiguration(Configuration configuration) { }
@@ -39,30 +40,29 @@ namespace Neodroid.Configurables {
     #region Fields
 
     [Header(
-      "References",
+      header : "References",
       order = 99)]
     [SerializeField]
-    private LearningEnvironment _environment;
+    LearningEnvironment _environment;
 
     [Header(
-      "Development",
+      header : "Development",
       order = 100)]
     [SerializeField]
-    private bool _debugging;
+    bool _debugging;
 
     [Header(
-      "General",
+      header : "General",
       order = 101)]
     [SerializeField]
-    private InputRange _valid_input =
+    InputRange _valid_input =
       new InputRange {
-                       decimal_granularity = 0,
-                       min_value = 0,
-                       max_value = 0
+                       DecimalGranularity = 0,
+                       MinValue = 0,
+                       MaxValue = 0
                      };
 
-    [SerializeField]
-    private bool _relative_to_existing_value;
+    [SerializeField] bool _relative_to_existing_value;
 
     #endregion
   }

@@ -1,41 +1,41 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Neodroid.Utilities.BoundingBoxes {
+namespace Neodroid.Scripts.Utilities.BoundingBoxes {
   [ExecuteInEditMode]
   public class ShowBoundingBoxes : MonoBehaviour {
     public GameObject _line_object;
-    private Dictionary<GameObject, GameObject> _lines;
+    Dictionary<GameObject, GameObject> _lines;
 
-    private MeshFilter[] _mesh_filter_objects;
+    MeshFilter[] _mesh_filter_objects;
     public Color color = Color.green;
 
-    private void Start() { }
+    void Start() { }
 
-    private void ReallocateLineRenderers() {
-      _mesh_filter_objects = FindObjectsOfType<MeshFilter>();
-      _lines = new Dictionary<GameObject, GameObject>();
+    void ReallocateLineRenderers() {
+      this._mesh_filter_objects = FindObjectsOfType<MeshFilter>();
+      this._lines = new Dictionary<GameObject, GameObject>();
     }
 
-    private void Update() {
-      if (_lines == null || _mesh_filter_objects == null) ReallocateLineRenderers();
-      CalcPositonsAndDrawBoxes();
+    void Update() {
+      if (this._lines == null || this._mesh_filter_objects == null) this.ReallocateLineRenderers();
+      this.CalcPositonsAndDrawBoxes();
     }
 
-    private void CalcPositonsAndDrawBoxes() {
-      foreach (var mesh_filter_object in _mesh_filter_objects)
+    void CalcPositonsAndDrawBoxes() {
+      foreach (var mesh_filter_object in this._mesh_filter_objects)
         if (mesh_filter_object.gameObject.tag == "Target") {
           GameObject liner;
-          if (!_lines.ContainsKey(mesh_filter_object.gameObject)) {
+          if (!this._lines.ContainsKey(key : mesh_filter_object.gameObject)) {
             liner = Instantiate(
-                                _line_object,
-                                _line_object.transform);
-            _lines.Add(
-                       mesh_filter_object.gameObject,
-                       liner);
+                                original : this._line_object,
+                                parent : this._line_object.transform);
+            this._lines.Add(
+                            key : mesh_filter_object.gameObject,
+                            value : liner);
           } else {
-            print("found Target");
-            liner = _lines[mesh_filter_object.gameObject];
+            print(message : "found Target");
+            liner = this._lines[key : mesh_filter_object.gameObject];
           }
 
           var bounds = mesh_filter_object.mesh.bounds;
@@ -51,67 +51,67 @@ namespace Neodroid.Utilities.BoundingBoxes {
           var v3Extents = bounds.extents;
 
           var v3FrontTopLeft = new Vector3(
-                                           v3Center.x - v3Extents.x,
-                                           v3Center.y + v3Extents.y,
-                                           v3Center.z - v3Extents.z); // Front top left corner
+                                           x : v3Center.x - v3Extents.x,
+                                           y : v3Center.y + v3Extents.y,
+                                           z : v3Center.z - v3Extents.z); // Front top left corner
           var v3FrontTopRight = new Vector3(
-                                            v3Center.x + v3Extents.x,
-                                            v3Center.y + v3Extents.y,
-                                            v3Center.z - v3Extents.z); // Front top right corner
+                                            x : v3Center.x + v3Extents.x,
+                                            y : v3Center.y + v3Extents.y,
+                                            z : v3Center.z - v3Extents.z); // Front top right corner
           var v3FrontBottomLeft = new Vector3(
-                                              v3Center.x - v3Extents.x,
-                                              v3Center.y - v3Extents.y,
-                                              v3Center.z - v3Extents.z); // Front bottom left corner
+                                              x : v3Center.x - v3Extents.x,
+                                              y : v3Center.y - v3Extents.y,
+                                              z : v3Center.z - v3Extents.z); // Front bottom left corner
           var v3FrontBottomRight = new Vector3(
-                                               v3Center.x + v3Extents.x,
-                                               v3Center.y - v3Extents.y,
-                                               v3Center.z - v3Extents.z); // Front bottom right corner
+                                               x : v3Center.x + v3Extents.x,
+                                               y : v3Center.y - v3Extents.y,
+                                               z : v3Center.z - v3Extents.z); // Front bottom right corner
           var v3BackTopLeft = new Vector3(
-                                          v3Center.x - v3Extents.x,
-                                          v3Center.y + v3Extents.y,
-                                          v3Center.z + v3Extents.z); // Back top left corner
+                                          x : v3Center.x - v3Extents.x,
+                                          y : v3Center.y + v3Extents.y,
+                                          z : v3Center.z + v3Extents.z); // Back top left corner
           var v3BackTopRight = new Vector3(
-                                           v3Center.x + v3Extents.x,
-                                           v3Center.y + v3Extents.y,
-                                           v3Center.z + v3Extents.z); // Back top right corner
+                                           x : v3Center.x + v3Extents.x,
+                                           y : v3Center.y + v3Extents.y,
+                                           z : v3Center.z + v3Extents.z); // Back top right corner
           var v3BackBottomLeft = new Vector3(
-                                             v3Center.x - v3Extents.x,
-                                             v3Center.y - v3Extents.y,
-                                             v3Center.z + v3Extents.z); // Back bottom left corner
+                                             x : v3Center.x - v3Extents.x,
+                                             y : v3Center.y - v3Extents.y,
+                                             z : v3Center.z + v3Extents.z); // Back bottom left corner
           var v3BackBottomRight = new Vector3(
-                                              v3Center.x + v3Extents.x,
-                                              v3Center.y - v3Extents.y,
-                                              v3Center.z + v3Extents.z); // Back bottom right corner
+                                              x : v3Center.x + v3Extents.x,
+                                              y : v3Center.y - v3Extents.y,
+                                              z : v3Center.z + v3Extents.z); // Back bottom right corner
 
-          v3FrontTopLeft = mesh_filter_object.transform.TransformPoint(v3FrontTopLeft);
-          v3FrontTopRight = mesh_filter_object.transform.TransformPoint(v3FrontTopRight);
-          v3FrontBottomLeft = mesh_filter_object.transform.TransformPoint(v3FrontBottomLeft);
-          v3FrontBottomRight = mesh_filter_object.transform.TransformPoint(v3FrontBottomRight);
-          v3BackTopLeft = mesh_filter_object.transform.TransformPoint(v3BackTopLeft);
-          v3BackTopRight = mesh_filter_object.transform.TransformPoint(v3BackTopRight);
-          v3BackBottomLeft = mesh_filter_object.transform.TransformPoint(v3BackBottomLeft);
-          v3BackBottomRight = mesh_filter_object.transform.TransformPoint(v3BackBottomRight);
+          v3FrontTopLeft = mesh_filter_object.transform.TransformPoint(position : v3FrontTopLeft);
+          v3FrontTopRight = mesh_filter_object.transform.TransformPoint(position : v3FrontTopRight);
+          v3FrontBottomLeft = mesh_filter_object.transform.TransformPoint(position : v3FrontBottomLeft);
+          v3FrontBottomRight = mesh_filter_object.transform.TransformPoint(position : v3FrontBottomRight);
+          v3BackTopLeft = mesh_filter_object.transform.TransformPoint(position : v3BackTopLeft);
+          v3BackTopRight = mesh_filter_object.transform.TransformPoint(position : v3BackTopRight);
+          v3BackBottomLeft = mesh_filter_object.transform.TransformPoint(position : v3BackBottomLeft);
+          v3BackBottomRight = mesh_filter_object.transform.TransformPoint(position : v3BackBottomRight);
 
           liner.GetComponent<LineRenderer>().SetPosition(
-                                                         0,
-                                                         v3BackTopLeft);
+                                                         index : 0,
+                                                         position : v3BackTopLeft);
           liner.GetComponent<LineRenderer>().SetPosition(
-                                                         1,
-                                                         v3BackTopRight);
+                                                         index : 1,
+                                                         position : v3BackTopRight);
 
-          DrawBox(
-                  v3FrontTopLeft,
-                  v3FrontTopRight,
-                  v3FrontBottomLeft,
-                  v3FrontBottomRight,
-                  v3BackTopLeft,
-                  v3BackTopRight,
-                  v3BackBottomLeft,
-                  v3BackBottomRight);
+          this.DrawBox(
+                       v3FrontTopLeft : v3FrontTopLeft,
+                       v3FrontTopRight : v3FrontTopRight,
+                       v3FrontBottomLeft : v3FrontBottomLeft,
+                       v3FrontBottomRight : v3FrontBottomRight,
+                       v3BackTopLeft : v3BackTopLeft,
+                       v3BackTopRight : v3BackTopRight,
+                       v3BackBottomLeft : v3BackBottomLeft,
+                       v3BackBottomRight : v3BackBottomRight);
         }
     }
 
-    private void DrawBox(
+    void DrawBox(
       Vector3 v3FrontTopLeft,
       Vector3 v3FrontTopRight,
       Vector3 v3FrontBottomLeft,
@@ -121,55 +121,55 @@ namespace Neodroid.Utilities.BoundingBoxes {
       Vector3 v3BackBottomLeft,
       Vector3 v3BackBottomRight) {
       Debug.DrawLine(
-                     v3FrontTopLeft,
-                     v3FrontTopRight,
-                     color);
+                     start : v3FrontTopLeft,
+                     end : v3FrontTopRight,
+                     color : this.color);
       Debug.DrawLine(
-                     v3FrontTopRight,
-                     v3FrontBottomRight,
-                     color);
+                     start : v3FrontTopRight,
+                     end : v3FrontBottomRight,
+                     color : this.color);
       Debug.DrawLine(
-                     v3FrontBottomRight,
-                     v3FrontBottomLeft,
-                     color);
+                     start : v3FrontBottomRight,
+                     end : v3FrontBottomLeft,
+                     color : this.color);
       Debug.DrawLine(
-                     v3FrontBottomLeft,
-                     v3FrontTopLeft,
-                     color);
+                     start : v3FrontBottomLeft,
+                     end : v3FrontTopLeft,
+                     color : this.color);
 
       Debug.DrawLine(
-                     v3BackTopLeft,
-                     v3BackTopRight,
-                     color);
+                     start : v3BackTopLeft,
+                     end : v3BackTopRight,
+                     color : this.color);
       Debug.DrawLine(
-                     v3BackTopRight,
-                     v3BackBottomRight,
-                     color);
+                     start : v3BackTopRight,
+                     end : v3BackBottomRight,
+                     color : this.color);
       Debug.DrawLine(
-                     v3BackBottomRight,
-                     v3BackBottomLeft,
-                     color);
+                     start : v3BackBottomRight,
+                     end : v3BackBottomLeft,
+                     color : this.color);
       Debug.DrawLine(
-                     v3BackBottomLeft,
-                     v3BackTopLeft,
-                     color);
+                     start : v3BackBottomLeft,
+                     end : v3BackTopLeft,
+                     color : this.color);
 
       Debug.DrawLine(
-                     v3FrontTopLeft,
-                     v3BackTopLeft,
-                     color);
+                     start : v3FrontTopLeft,
+                     end : v3BackTopLeft,
+                     color : this.color);
       Debug.DrawLine(
-                     v3FrontTopRight,
-                     v3BackTopRight,
-                     color);
+                     start : v3FrontTopRight,
+                     end : v3BackTopRight,
+                     color : this.color);
       Debug.DrawLine(
-                     v3FrontBottomRight,
-                     v3BackBottomRight,
-                     color);
+                     start : v3FrontBottomRight,
+                     end : v3BackBottomRight,
+                     color : this.color);
       Debug.DrawLine(
-                     v3FrontBottomLeft,
-                     v3BackBottomLeft,
-                     color);
+                     start : v3FrontBottomLeft,
+                     end : v3BackBottomLeft,
+                     color : this.color);
     }
   }
 }

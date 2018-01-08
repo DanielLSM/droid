@@ -1,45 +1,46 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class InitialForce : MonoBehaviour {
-  public bool _on_awake = true;
+namespace SceneAssets.Satellite.Scripts {
+  [RequireComponent( typeof(Rigidbody))]
+  public class InitialForce : MonoBehaviour {
+    [SerializeField] bool _on_awake = true;
 
-  private Rigidbody _rb;
-  public bool _relative;
-  public bool _torque;
+    [SerializeField] Rigidbody _rb;
+    [SerializeField]  bool _relative;
+    [SerializeField]  bool _torque;
 
-  [SerializeField]
-  private Vector3 force;
+    [SerializeField] Vector3 _force;
 
-  private void ApplyInitialForce() {
-    if (_torque) {
-      if (_relative)
-        _rb.AddRelativeTorque(
-                              force,
-                              ForceMode.Impulse);
-      else
-        _rb.AddTorque(
-                      force,
-                      ForceMode.Impulse);
-    } else {
-      if (_relative)
-        _rb.AddRelativeForce(
-                             force,
-                             ForceMode.Impulse);
-      else
-        _rb.AddForce(
-                     force,
-                     ForceMode.Impulse);
+    void ApplyInitialForce() {
+      if (this._torque) {
+        if (this._relative)
+          this._rb.AddRelativeTorque(
+                                     torque : this._force,
+                                     mode : ForceMode.Impulse);
+        else
+          this._rb.AddTorque(
+                             torque : this._force,
+                             mode : ForceMode.Impulse);
+      } else {
+        if (this._relative)
+          this._rb.AddRelativeForce(
+                                    force : this._force,
+                                    mode : ForceMode.Impulse);
+        else
+          this._rb.AddForce(
+                            force : this._force,
+                            mode : ForceMode.Impulse);
+      }
     }
-  }
 
-  private void Awake() {
-    _rb = GetComponent<Rigidbody>();
+    void Awake() {
+      this._rb = this.GetComponent<Rigidbody>();
 
-    if (_on_awake) ApplyInitialForce();
-  }
+      if (this._on_awake) this.ApplyInitialForce();
+    }
 
-  private void Start() {
-    if (!_on_awake) ApplyInitialForce();
+    void Start() {
+      if (!this._on_awake) this.ApplyInitialForce();
+    }
   }
 }

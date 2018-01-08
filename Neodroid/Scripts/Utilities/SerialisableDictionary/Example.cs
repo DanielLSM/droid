@@ -1,18 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Neodroid.Utilities.SerialisableDictionary {
+namespace Neodroid.Scripts.Utilities.SerialisableDictionary {
   [CreateAssetMenu(menuName = "Example Asset")]
   public class Example : ScriptableObject {
-    [SerializeField]
-    private GameObjectFloatDictionary gameObjectFloatStore =
+    [SerializeField] GameObjectFloatDictionary _game_object_float_store =
       GameObjectFloatDictionary.New<GameObjectFloatDictionary>();
 
-    [SerializeField]
-    private StringIntDictionary stringIntegerStore = StringIntDictionary.New<StringIntDictionary>();
+    [SerializeField] StringIntDictionary _string_integer_store = StringIntDictionary.New<StringIntDictionary>();
 
-    private Dictionary<string, int> stringIntegers { get { return stringIntegerStore.Dict; } }
+    Dictionary<string, int> StringIntegers { get { return this._string_integer_store.Dict; } }
 
-    private Dictionary<GameObject, float> screenshots { get { return gameObjectFloatStore.Dict; } }
+    Dictionary<GameObject, float> Screenshots { get { return this._game_object_float_store.Dict; } }
   }
 }

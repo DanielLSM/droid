@@ -1,8 +1,7 @@
-
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 #if UNITY_EDITOR
 using UnityEditor;
 
@@ -18,56 +17,56 @@ namespace UnityStandardAssets.Utility {
       Call
     }
 
-    public Entries entries = new Entries ();
+    public Entries entries = new Entries();
 
-    private void Awake () {
-      foreach (var entry in entries.entries)
+    void Awake() {
+      foreach (var entry in this.entries.entries)
         switch (entry.action) {
-        case Action.Activate:
-          StartCoroutine (Activate (entry));
-          break;
-        case Action.Deactivate:
-          StartCoroutine (Deactivate (entry));
-          break;
-        case Action.Destroy:
-          Destroy (
-            entry.target,
-            entry.delay);
-          break;
+          case Action.Activate:
+            this.StartCoroutine(routine : this.Activate(entry : entry));
+            break;
+          case Action.Deactivate:
+            this.StartCoroutine(routine : this.Deactivate(entry : entry));
+            break;
+          case Action.Destroy:
+            Destroy(
+                    obj : entry.target,
+                    t : entry.delay);
+            break;
 
-        case Action.ReloadLevel:
-          StartCoroutine (ReloadLevel (entry));
-          break;
-        case Action.Call:
-          break;
-        default:
-          throw new System.ArgumentOutOfRangeException ();
+          case Action.ReloadLevel:
+            this.StartCoroutine(routine : this.ReloadLevel(entry : entry));
+            break;
+          case Action.Call:
+            break;
+          default:
+            throw new ArgumentOutOfRangeException();
         }
     }
 
-    private IEnumerator Activate (Entry entry) {
-      yield return new WaitForSeconds (entry.delay);
-      entry.target.SetActive (true);
+    IEnumerator Activate(Entry entry) {
+      yield return new WaitForSeconds(seconds : entry.delay);
+      entry.target.SetActive(value : true);
     }
 
-    private IEnumerator Deactivate (Entry entry) {
-      yield return new WaitForSeconds (entry.delay);
-      entry.target.SetActive (false);
+    IEnumerator Deactivate(Entry entry) {
+      yield return new WaitForSeconds(seconds : entry.delay);
+      entry.target.SetActive(value : false);
     }
 
-    private IEnumerator ReloadLevel (Entry entry) {
-      yield return new WaitForSeconds (entry.delay);
-      SceneManager.LoadScene (SceneManager.GetSceneAt (0).name);
+    IEnumerator ReloadLevel(Entry entry) {
+      yield return new WaitForSeconds(seconds : entry.delay);
+      SceneManager.LoadScene(sceneName : SceneManager.GetSceneAt(index : 0).name);
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Entry {
       public Action action;
       public float delay;
       public GameObject target;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Entries {
       public Entry[] entries;
     }
@@ -76,32 +75,32 @@ namespace UnityStandardAssets.Utility {
 
 namespace UnityStandardAssets.Utility.Inspector {
   #if UNITY_EDITOR
-  [CustomPropertyDrawer (typeof(TimedObjectActivator.Entries))]
+  [CustomPropertyDrawer(type : typeof(TimedObjectActivator.Entries))]
   public class EntriesDrawer : PropertyDrawer {
-    private const float k_LineHeight = 18;
-    private const float k_Spacing = 4;
+    const float k_LineHeight = 18;
+    const float k_Spacing = 4;
 
-    public override void OnGUI (Rect position, SerializedProperty property, GUIContent label) {
-      EditorGUI.BeginProperty (
-        position,
-        label,
-        property);
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+      EditorGUI.BeginProperty(
+                              totalPosition : position,
+                              label : label,
+                              property : property);
 
       var x = position.x;
       var y = position.y;
       var width = position.width;
 
       // Draw label
-      EditorGUI.PrefixLabel (
-        position,
-        GUIUtility.GetControlID (FocusType.Passive),
-        label);
+      EditorGUI.PrefixLabel(
+                            totalPosition : position,
+                            id : GUIUtility.GetControlID(focus : FocusType.Passive),
+                            label : label);
 
       // Don't make child fields be indented
       var indent = EditorGUI.indentLevel;
       EditorGUI.indentLevel = 0;
 
-      var entries = property.FindPropertyRelative ("entries");
+      var entries = property.FindPropertyRelative(relativePropertyPath : "entries");
 
       if (entries.arraySize > 0) {
         var actionWidth = .25f * width;
@@ -112,67 +111,67 @@ namespace UnityStandardAssets.Utility.Inspector {
         for (var i = 0; i < entries.arraySize; ++i) {
           y += k_LineHeight + k_Spacing;
 
-          var entry = entries.GetArrayElementAtIndex (i);
+          var entry = entries.GetArrayElementAtIndex(index : i);
 
           var rowX = x;
 
           // Calculate rects
-          var actionRect = new Rect (
-                             rowX,
-                             y,
-                             actionWidth,
-                             k_LineHeight);
+          var actionRect = new Rect(
+                                    x : rowX,
+                                    y : y,
+                                    width : actionWidth,
+                                    height : k_LineHeight);
           rowX += actionWidth;
 
-          var targetRect = new Rect (
-                             rowX,
-                             y,
-                             targetWidth,
-                             k_LineHeight);
+          var targetRect = new Rect(
+                                    x : rowX,
+                                    y : y,
+                                    width : targetWidth,
+                                    height : k_LineHeight);
           rowX += targetWidth;
 
-          var delayRect = new Rect (
-                            rowX,
-                            y,
-                            delayWidth,
-                            k_LineHeight);
+          var delayRect = new Rect(
+                                   x : rowX,
+                                   y : y,
+                                   width : delayWidth,
+                                   height : k_LineHeight);
           rowX += delayWidth;
 
-          var buttonRect = new Rect (
-                             rowX,
-                             y,
-                             buttonWidth,
-                             k_LineHeight);
+          var buttonRect = new Rect(
+                                    x : rowX,
+                                    y : y,
+                                    width : buttonWidth,
+                                    height : k_LineHeight);
           rowX += buttonWidth;
 
           // Draw fields - passs GUIContent.none to each so they are drawn without labels
 
-          if (entry.FindPropertyRelative ("action").enumValueIndex
+          if (entry.FindPropertyRelative(relativePropertyPath : "action").enumValueIndex
               != (int)TimedObjectActivator.Action.ReloadLevel) {
-            EditorGUI.PropertyField (
-              actionRect,
-              entry.FindPropertyRelative ("action"),
-              GUIContent.none);
-            EditorGUI.PropertyField (
-              targetRect,
-              entry.FindPropertyRelative ("target"),
-              GUIContent.none);
+            EditorGUI.PropertyField(
+                                    position : actionRect,
+                                    property : entry.FindPropertyRelative(relativePropertyPath : "action"),
+                                    label : GUIContent.none);
+            EditorGUI.PropertyField(
+                                    position : targetRect,
+                                    property : entry.FindPropertyRelative(relativePropertyPath : "target"),
+                                    label : GUIContent.none);
           } else {
             actionRect.width = actionRect.width + targetRect.width;
-            EditorGUI.PropertyField (
-              actionRect,
-              entry.FindPropertyRelative ("action"),
-              GUIContent.none);
+            EditorGUI.PropertyField(
+                                    position : actionRect,
+                                    property : entry.FindPropertyRelative(relativePropertyPath : "action"),
+                                    label : GUIContent.none);
           }
 
-          EditorGUI.PropertyField (
-            delayRect,
-            entry.FindPropertyRelative ("delay"),
-            GUIContent.none);
-          if (GUI.Button (
-                buttonRect,
-                "-")) {
-            entries.DeleteArrayElementAtIndex (i);
+          EditorGUI.PropertyField(
+                                  position : delayRect,
+                                  property : entry.FindPropertyRelative(relativePropertyPath : "delay"),
+                                  label : GUIContent.none);
+          if (GUI.Button(
+                         position : buttonRect,
+                         text : "-")) {
+            entries.DeleteArrayElementAtIndex(index : i);
             break;
           }
         }
@@ -181,35 +180,36 @@ namespace UnityStandardAssets.Utility.Inspector {
       // add & sort buttons
       y += k_LineHeight + k_Spacing;
 
-      var addButtonRect = new Rect (
-                            position.x + position.width - 120,
-                            y,
-                            60,
-                            k_LineHeight);
-      if (GUI.Button (
-            addButtonRect,
-            "Add"))
-        entries.InsertArrayElementAtIndex (entries.arraySize);
+      var addButtonRect = new Rect(
+                                   x : position.x + position.width - 120,
+                                   y : y,
+                                   width : 60,
+                                   height : k_LineHeight);
+      if (GUI.Button(
+                     position : addButtonRect,
+                     text : "Add"))
+        entries.InsertArrayElementAtIndex(index : entries.arraySize);
 
-      var sortButtonRect = new Rect (
-                             position.x + position.width - 60,
-                             y,
-                             60,
-                             k_LineHeight);
-      if (GUI.Button (
-            sortButtonRect,
-            "Sort")) {
+      var sortButtonRect = new Rect(
+                                    x : position.x + position.width - 60,
+                                    y : y,
+                                    width : 60,
+                                    height : k_LineHeight);
+      if (GUI.Button(
+                     position : sortButtonRect,
+                     text : "Sort")) {
         var changed = true;
         while (entries.arraySize > 1 && changed) {
           changed = false;
           for (var i = 0; i < entries.arraySize - 1; ++i) {
-            var e1 = entries.GetArrayElementAtIndex (i);
-            var e2 = entries.GetArrayElementAtIndex (i + 1);
+            var e1 = entries.GetArrayElementAtIndex(index : i);
+            var e2 = entries.GetArrayElementAtIndex(index : i + 1);
 
-            if (e1.FindPropertyRelative ("delay").floatValue > e2.FindPropertyRelative ("delay").floatValue) {
-              entries.MoveArrayElement (
-                i + 1,
-                i);
+            if (e1.FindPropertyRelative(relativePropertyPath : "delay").floatValue
+                > e2.FindPropertyRelative(relativePropertyPath : "delay").floatValue) {
+              entries.MoveArrayElement(
+                                       srcIndex : i + 1,
+                                       dstIndex : i);
               changed = true;
               break;
             }
@@ -221,11 +221,11 @@ namespace UnityStandardAssets.Utility.Inspector {
       EditorGUI.indentLevel = indent;
       //
 
-      EditorGUI.EndProperty ();
+      EditorGUI.EndProperty();
     }
 
-    public override float GetPropertyHeight (SerializedProperty property, GUIContent label) {
-      var entries = property.FindPropertyRelative ("entries");
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
+      var entries = property.FindPropertyRelative(relativePropertyPath : "entries");
       var lineAndSpace = k_LineHeight + k_Spacing;
       return 40 + entries.arraySize * lineAndSpace + lineAndSpace;
     }

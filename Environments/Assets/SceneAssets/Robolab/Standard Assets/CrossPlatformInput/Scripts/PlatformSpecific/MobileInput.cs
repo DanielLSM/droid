@@ -2,73 +2,79 @@ using UnityEngine;
 
 namespace UnityStandardAssets.CrossPlatformInput.PlatformSpecific {
   public class MobileInput : VirtualInput {
-    private void AddButton(string name) {
+    void AddButton(string name) {
       // we have not registered this button yet so add it, happens in the constructor
       CrossPlatformInputManager.RegisterVirtualButton(
-                                                      new CrossPlatformInputManager.VirtualButton(name));
+                                                      button : new CrossPlatformInputManager.VirtualButton(
+                                                                                                           name
+                                                                                                           : name));
     }
 
-    private void AddAxes(string name) {
+    void AddAxes(string name) {
       // we have not registered this button yet so add it, happens in the constructor
-      CrossPlatformInputManager.RegisterVirtualAxis(new CrossPlatformInputManager.VirtualAxis(name));
+      CrossPlatformInputManager.RegisterVirtualAxis(
+                                                    axis : new CrossPlatformInputManager.VirtualAxis(
+                                                                                                     name :
+                                                                                                     name));
     }
 
     public override float GetAxis(string name, bool raw) {
-      if (!m_VirtualAxes.ContainsKey(name)) AddAxes(name);
-      return m_VirtualAxes[name].GetValue;
+      if (!this.m_VirtualAxes.ContainsKey(key : name)) this.AddAxes(name : name);
+      return this.m_VirtualAxes[key : name].GetValue;
     }
 
     public override void SetButtonDown(string name) {
-      if (!m_VirtualButtons.ContainsKey(name)) AddButton(name);
-      m_VirtualButtons[name].Pressed();
+      if (!this.m_VirtualButtons.ContainsKey(key : name)) this.AddButton(name : name);
+      this.m_VirtualButtons[key : name].Pressed();
     }
 
     public override void SetButtonUp(string name) {
-      if (!m_VirtualButtons.ContainsKey(name)) AddButton(name);
-      m_VirtualButtons[name].Released();
+      if (!this.m_VirtualButtons.ContainsKey(key : name)) this.AddButton(name : name);
+      this.m_VirtualButtons[key : name].Released();
     }
 
     public override void SetAxisPositive(string name) {
-      if (!m_VirtualAxes.ContainsKey(name)) AddAxes(name);
-      m_VirtualAxes[name].Update(1f);
+      if (!this.m_VirtualAxes.ContainsKey(key : name)) this.AddAxes(name : name);
+      this.m_VirtualAxes[key : name].Update(value : 1f);
     }
 
     public override void SetAxisNegative(string name) {
-      if (!m_VirtualAxes.ContainsKey(name)) AddAxes(name);
-      m_VirtualAxes[name].Update(-1f);
+      if (!this.m_VirtualAxes.ContainsKey(key : name)) this.AddAxes(name : name);
+      this.m_VirtualAxes[key : name].Update(value : -1f);
     }
 
     public override void SetAxisZero(string name) {
-      if (!m_VirtualAxes.ContainsKey(name)) AddAxes(name);
-      m_VirtualAxes[name].Update(0f);
+      if (!this.m_VirtualAxes.ContainsKey(key : name)) this.AddAxes(name : name);
+      this.m_VirtualAxes[key : name].Update(value : 0f);
     }
 
     public override void SetAxis(string name, float value) {
-      if (!m_VirtualAxes.ContainsKey(name)) AddAxes(name);
-      m_VirtualAxes[name].Update(value);
+      if (!this.m_VirtualAxes.ContainsKey(key : name)) this.AddAxes(name : name);
+      this.m_VirtualAxes[key : name].Update(value : value);
     }
 
     public override bool GetButtonDown(string name) {
-      if (m_VirtualButtons.ContainsKey(name)) return m_VirtualButtons[name].GetButtonDown;
+      if (this.m_VirtualButtons.ContainsKey(key : name))
+        return this.m_VirtualButtons[key : name].GetButtonDown;
 
-      AddButton(name);
-      return m_VirtualButtons[name].GetButtonDown;
+      this.AddButton(name : name);
+      return this.m_VirtualButtons[key : name].GetButtonDown;
     }
 
     public override bool GetButtonUp(string name) {
-      if (m_VirtualButtons.ContainsKey(name)) return m_VirtualButtons[name].GetButtonUp;
+      if (this.m_VirtualButtons.ContainsKey(key : name)) return this.m_VirtualButtons[key : name].GetButtonUp;
 
-      AddButton(name);
-      return m_VirtualButtons[name].GetButtonUp;
+      this.AddButton(name : name);
+      return this.m_VirtualButtons[key : name].GetButtonUp;
     }
 
     public override bool GetButton(string name) {
-      if (m_VirtualButtons.ContainsKey(name)) return m_VirtualButtons[name].GetButton;
+      if (this.m_VirtualButtons.ContainsKey(key : name)) return this.m_VirtualButtons[key : name].GetButton;
 
-      AddButton(name);
-      return m_VirtualButtons[name].GetButton;
+      this.AddButton(name : name);
+      return this.m_VirtualButtons[key : name].GetButton;
     }
 
-    public override Vector3 MousePosition() { return virtualMousePosition; }
+    public override Vector3 MousePosition() { return this.virtualMousePosition; }
   }
 }

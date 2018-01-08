@@ -1,104 +1,119 @@
-﻿
-using Assets.Neodroid.Models.Actors;
-using Neodroid.Messaging.Messages;
-using Neodroid.Utilities;
+﻿using Neodroid.Messaging.Messages;
+using Neodroid.Models.Actors;
+using Neodroid.Scripts.Utilities;
+using Neodroid.Scripts.Utilities.Structs;
 using UnityEngine;
 
-namespace Neodroid.Motors {
+namespace Neodroid.Models.Motors.General {
   [ExecuteInEditMode]
   [System.Serializable]
   public class Motor : MonoBehaviour {
-    public Actor ParentActor { get { return _actor; } set { _actor = value; } }
+    public Actor ParentActor { get { return this._actor; } set { this._actor = value; } }
 
     public float EnergySpendSinceReset {
-      get { return _energy_spend_since_reset; }
-      set { _energy_spend_since_reset = value; }
+      get { return this._energy_spend_since_reset; }
+      set { this._energy_spend_since_reset = value; }
     }
 
-    public float EnergyCost { get { return _energy_cost; } set { _energy_cost = value; } }
+    public float EnergyCost { get { return this._energy_cost; } set { this._energy_cost = value; } }
 
-    public InputRange ValidInput { get { return _valid_input; } set { _valid_input = value; } }
+    public InputRange ValidInput { get { return this._valid_input; } set { this._valid_input = value; } }
 
-    public bool Debugging { get { return _debugging; } set { _debugging = value; } }
+    public bool Debugging { get { return this._debugging; } set { this._debugging = value; } }
 
-    protected virtual void Awake() { RegisterComponent(); }
+    protected virtual void Awake () {
+      this.RegisterComponent ();
+    }
 
-    public virtual void RegisterComponent() {
-      _actor = NeodroidUtilities.MaybeRegisterComponent(
-                                                        _actor,
-                                                        this);
+    public virtual void RegisterComponent () {
+      this._actor = NeodroidUtilities.MaybeRegisterComponent (
+        r : this._actor,
+        c : this);
     }
 
     #if UNITY_EDITOR
-    private void OnValidate() {
+    void OnValidate() {
       // Only called in the editor
       //RegisterComponent ();
     }
     #endif
 
-    protected virtual void Start() { }
+    protected virtual void Start () {
+    }
 
-    public void RefreshAwake() { Awake(); }
+    public void RefreshAwake () {
+      this.Awake ();
+    }
 
-    public void RefreshStart() { Start(); }
+    public void RefreshStart () {
+      this.Start ();
+    }
 
-    public virtual string GetMotorIdentifier() { return name + "Motor"; }
+    public virtual string GetMotorIdentifier () {
+      return this.name + "Motor";
+    }
 
-    public void ApplyMotion(MotorMotion motion) {
-      if (Debugging)
-        print("Applying " + motion + " To " + name);
-      if (motion.Strength < ValidInput.min_value || motion.Strength > ValidInput.max_value) {
-        print(
-              string.Format(
-                            "It does not accept input {0}, outside allowed range {1} to {2}",
-                            motion.Strength,
-                            ValidInput.min_value,
-                            ValidInput.max_value));
+    public void ApplyMotion (MotorMotion motion) {
+      if (this.Debugging)
+        print (message : "Applying " + motion + " To " + this.name);
+      if (motion.Strength < this.ValidInput.MinValue || motion.Strength > this.ValidInput.MaxValue) {
+        print (
+          message : string.Format (
+            format :
+                                      "It does not accept input {0}, outside allowed range {1} to {2}",
+            arg0 : motion.Strength,
+            arg1 : this.ValidInput.MinValue,
+            arg2 : this.ValidInput.MaxValue));
         return; // Do nothing
       }
 
-      InnerApplyMotion(motion);
-      EnergySpendSinceReset += Mathf.Abs(EnergyCost * motion.Strength);
+      this.InnerApplyMotion (motion : motion);
+      this.EnergySpendSinceReset += Mathf.Abs (f : this.EnergyCost * motion.Strength);
     }
 
-    public virtual void InnerApplyMotion(MotorMotion motion) { }
+    public virtual void InnerApplyMotion (MotorMotion motion) {
+    }
 
-    public virtual float GetEnergySpend() { return _energy_spend_since_reset; }
+    public virtual float GetEnergySpend () {
+      return this._energy_spend_since_reset;
+    }
 
-    public override string ToString() { return GetMotorIdentifier(); }
+    public override string ToString () {
+      return this.GetMotorIdentifier ();
+    }
 
-    public virtual void Reset() { _energy_spend_since_reset = 0; }
+    public virtual void Reset () {
+      this._energy_spend_since_reset = 0;
+    }
 
     #region Fields
 
-    [Header(
-      "References",
+    [Header (
+      header : "References",
       order = 99)]
     [SerializeField]
-    private Actor _actor;
+    Actor _actor;
 
-    [Header(
-      "Development",
+    [Header (
+      header : "Development",
       order = 100)]
     [SerializeField]
-    private bool _debugging;
+    bool _debugging;
 
-    [Header(
-      "General",
+    [Header (
+      header : "General",
       order = 101)]
     [SerializeField]
-    private InputRange _valid_input =
+    InputRange _valid_input =
       new InputRange {
-                       decimal_granularity = 0,
-                       min_value = -10,
-                       max_value = 10
-                     };
+        DecimalGranularity = 0,
+        MinValue = -10,
+        MaxValue = 10
+      };
 
-    [SerializeField]
-    private float _energy_spend_since_reset;
+    [SerializeField] float _energy_spend_since_reset;
 
-    [SerializeField]
-    private float _energy_cost;
+    [SerializeField] float _energy_cost;
 
     #endregion
   }

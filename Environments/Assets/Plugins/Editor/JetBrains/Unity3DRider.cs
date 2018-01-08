@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -579,7 +579,7 @@ namespace Plugins.Editor.JetBrains {
       {
         RiderInitializedOnce = false;
       }*/
-
+/*
       EditorGUILayout.EndVertical();
     }
 
@@ -900,4 +900,6 @@ namespace Plugins.Editor.JetBrains {
   }
 }
 
-// Developed using JetBrains Rider =)
+*/
+
+

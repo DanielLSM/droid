@@ -15,15 +15,15 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
   m_Fog: 0
-  m_FogColor: {r: 0.8630459, g: 0.9176302, b: 0.9146483, a: 0.039426412}
+  m_FogColor: {r: 0.8127944, g: 0.9064075, b: 0.95853925, a: 0.028535783}
   m_FogMode: 3
-  m_FogDensity: 0.04149562
+  m_FogDensity: 0.021688033
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.9951192, g: 0.98502994, b: 0.9428712, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.5260382
+  m_AmbientIntensity: 0.6569591
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 906b66e06bb384e14a1881c9d9165e75, type: 2}
@@ -764,19 +764,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.6742462
+      value: 0.33265787
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.008265525
+      value: -0.0019409927
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.6738495
+      value: 0.3319604
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.3020773
+      value: 0.88268757
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_RootOrder
@@ -785,22 +785,42 @@ Prefab:
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Color.r
-      value: 0.9951192
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Color.g
-      value: 0.98502994
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Color.b
-      value: 0.9428712
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Intensity
-      value: 0.8644262
+      value: 0.7453784
+      objectReference: {fileID: 0}
+    - target: {fileID: 114841559945186668, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+        type: 2}
+      propertyPath: _start_rotation.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114841559945186668, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+        type: 2}
+      propertyPath: _start_rotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114841559945186668, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+        type: 2}
+      propertyPath: _start_rotation.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114841559945186668, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
+        type: 2}
+      propertyPath: _max_intensity
+      value: 1.13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
@@ -914,8 +934,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1943801932}
   _debugging: 0
-  _order_index: 0
+  _current_goal: 0
   _draw_names: 1
+  _order_index: 0
 --- !u!114 &745076144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,14 +951,10 @@ MonoBehaviour:
   _environment: {fileID: 1943801932}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: -10
-    max_value: 10
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _relative_to_existing_value: 0
-  _axis_of_configuration: 0
-  _use_bounding_box_for_range: 0
-  _bounding_box: {fileID: 0}
-  current_value: {x: 0, y: 0, z: 0}
   _position: {x: -4, y: 0, z: 3}
 --- !u!1 &1067791535
 GameObject:
@@ -1329,7 +1346,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 10
+  m_Range: 20
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -1958,15 +1975,15 @@ MonoBehaviour:
   _actor: {fileID: 1650564493}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: -1
-    max_value: 1
+    DecimalGranularity: 0
+    MinValue: -10
+    MaxValue: 10
   _energy_spend_since_reset: 0
   _energy_cost: 0
   _axis_of_motion: 2
-  _relative_to: 1
-  _no_collisions: 1
   _layer_mask: Obstructions
+  _no_collisions: 1
+  _relative_to: 1
 --- !u!114 &1650564491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,15 +1998,15 @@ MonoBehaviour:
   _actor: {fileID: 1650564493}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: -1
-    max_value: 1
+    DecimalGranularity: 0
+    MinValue: -10
+    MaxValue: 10
   _energy_spend_since_reset: 0
   _energy_cost: 0
   _axis_of_motion: 0
-  _relative_to: 1
-  _no_collisions: 1
   _layer_mask: Obstructions
+  _no_collisions: 1
+  _relative_to: 1
 --- !u!114 &1650564492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2004,14 +2021,10 @@ MonoBehaviour:
   _environment: {fileID: 1943801932}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: -10
-    max_value: 10
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _relative_to_existing_value: 0
-  _axis_of_configuration: 0
-  _use_bounding_box_for_range: 0
-  _bounding_box: {fileID: 0}
-  current_value: {x: 0, y: 0, z: 0}
   _position: {x: 3, y: 0, z: -2}
 --- !u!114 &1650564493
 MonoBehaviour:
@@ -2094,12 +2107,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
-  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
-  _wait_every: 1
+  _testing_motors: 0
+  _wait_every: 2
   _update_fixed_time_scale: 0
-  _continue_on_disconnect: 0
   _frame_skips: 0
   _simulation_time_scale: 1
   _reset_iterations: 10
@@ -2117,6 +2129,7 @@ MonoBehaviour:
   _debugging: 0
   _extra_terms: []
   _solved_threshold: 0
+  _peak_reward: 0
   _sparse: 1
   _goal: {fileID: 745076139}
   _actor: {fileID: 1650564493}

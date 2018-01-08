@@ -1,89 +1,87 @@
 ﻿using Neodroid.Messaging.Messages;
-using Neodroid.Utilities;
+using Neodroid.Models.Motors.General;
+using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
-namespace Neodroid.Motors {
+namespace Neodroid.Models.Motors {
   public class HexTransformMotor : Motor {
-    [SerializeField]
-    protected string _layer_mask = "Obstructions";
+    [SerializeField] protected string _layer_mask = "Obstructions";
 
-    [SerializeField]
-    protected bool _no_collisions = true;
+    [SerializeField] protected bool _no_collisions = true;
 
-    [SerializeField]
-    protected Space _relative_to = Space.Self;
+    [SerializeField] protected Space _relative_to = Space.Self;
 
-    private string _RotX;
-    private string _RotY;
-    private string _RotZ;
+    string _rot_x;
+    string _rot_y;
+    string _rot_z;
 
-    private string _X;
-    private string _Y;
-    private string _Z;
+    string _x;
+    string _y;
+    string _z;
 
     public override void RegisterComponent() {
-      _X = GetMotorIdentifier() + "X";
-      _Y = GetMotorIdentifier() + "Y";
-      _Z = GetMotorIdentifier() + "Z";
-      _RotX = GetMotorIdentifier() + "RotX";
-      _RotY = GetMotorIdentifier() + "RotY";
-      _RotZ = GetMotorIdentifier() + "RotZ";
-      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                  ParentActor,
-                                                                  (Motor)this,
-                                                                  _X);
-      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                  ParentActor,
-                                                                  (Motor)this,
-                                                                  _Y);
-      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                  ParentActor,
-                                                                  (Motor)this,
-                                                                  _Z);
-      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                  ParentActor,
-                                                                  (Motor)this,
-                                                                  _RotX);
-      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                  ParentActor,
-                                                                  (Motor)this,
-                                                                  _RotY);
-      ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                  ParentActor,
-                                                                  (Motor)this,
-                                                                  _RotZ);
+      this._x = this.GetMotorIdentifier() + "X";
+      this._y = this.GetMotorIdentifier() + "Y";
+      this._z = this.GetMotorIdentifier() + "Z";
+      this._rot_x = this.GetMotorIdentifier() + "RotX";
+      this._rot_y = this.GetMotorIdentifier() + "RotY";
+      this._rot_z = this.GetMotorIdentifier() + "RotZ";
+      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                       r : this.ParentActor,
+                                                                       c : (Motor)this,
+                                                                       identifier : this._x);
+      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                       r : this.ParentActor,
+                                                                       c : (Motor)this,
+                                                                       identifier : this._y);
+      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                       r : this.ParentActor,
+                                                                       c : (Motor)this,
+                                                                       identifier : this._z);
+      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                       r : this.ParentActor,
+                                                                       c : (Motor)this,
+                                                                       identifier : this._rot_x);
+      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                       r : this.ParentActor,
+                                                                       c : (Motor)this,
+                                                                       identifier : this._rot_y);
+      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                       r : this.ParentActor,
+                                                                       c : (Motor)this,
+                                                                       identifier : this._rot_z);
     }
 
-    public override string GetMotorIdentifier() { return name + "Transform"; }
+    public override string GetMotorIdentifier() { return this.name + "Transform"; }
 
     public override void InnerApplyMotion(MotorMotion motion) {
-      if (motion.GetMotorName() == _X)
-        transform.Translate(
-                            Vector3.left * motion.Strength,
-                            _relative_to);
-      else if (motion.GetMotorName() == _Y)
-        transform.Translate(
-                            -Vector3.up * motion.Strength,
-                            _relative_to);
-      else if (motion.GetMotorName() == _Z)
-        transform.Translate(
-                            -Vector3.forward * motion.Strength,
-                            _relative_to);
-      else if (motion.GetMotorName() == _RotX)
-        transform.Rotate(
-                         Vector3.left,
-                         motion.Strength,
-                         _relative_to);
-      else if (motion.GetMotorName() == _RotY)
-        transform.Rotate(
-                         Vector3.up,
-                         motion.Strength,
-                         _relative_to);
-      else if (motion.GetMotorName() == _RotZ)
-        transform.Rotate(
-                         Vector3.forward,
-                         motion.Strength,
-                         _relative_to);
+      if (motion.GetMotorName() == this._x)
+        this.transform.Translate(
+                                 translation : Vector3.left * motion.Strength,
+                                 relativeTo : this._relative_to);
+      else if (motion.GetMotorName() == this._y)
+        this.transform.Translate(
+                                 translation : -Vector3.up * motion.Strength,
+                                 relativeTo : this._relative_to);
+      else if (motion.GetMotorName() == this._z)
+        this.transform.Translate(
+                                 translation : -Vector3.forward * motion.Strength,
+                                 relativeTo : this._relative_to);
+      else if (motion.GetMotorName() == this._rot_x)
+        this.transform.Rotate(
+                              axis : Vector3.left,
+                              angle : motion.Strength,
+                              relativeTo : this._relative_to);
+      else if (motion.GetMotorName() == this._rot_y)
+        this.transform.Rotate(
+                              axis : Vector3.up,
+                              angle : motion.Strength,
+                              relativeTo : this._relative_to);
+      else if (motion.GetMotorName() == this._rot_z)
+        this.transform.Rotate(
+                              axis : Vector3.forward,
+                              angle : motion.Strength,
+                              relativeTo : this._relative_to);
     }
   }
 }

@@ -1,15 +1,15 @@
 using UnityEngine;
 
-namespace UnityStandardAssets.Utility {
+namespace SceneAssets.LunarLander.Scripts {
   [ExecuteInEditMode]
   public class FollowTarget : MonoBehaviour {
     public Vector3 offset = new Vector3(
-                                        0f,
-                                        7.5f,
-                                        0f);
+                                        x : 0f,
+                                        y : 7.5f,
+                                        z : 0f);
 
     public Transform target;
 
-    private void LateUpdate() { transform.position = target.position + offset; }
+    void LateUpdate() { this.transform.position = this.target.position + this.offset; }
   }
 }

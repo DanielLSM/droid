@@ -630,10 +630,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba1c74cb7e8c456c8de2b06b4dd9566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: {x: 0, y: 0.01, z: 0}
   _on_awake: 1
+  _rb: {fileID: 0}
   _relative: 1
   _torque: 1
+  _force: {x: 0, y: 0, z: 0}
 --- !u!1 &918193733
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,9 +802,9 @@ MonoBehaviour:
   _actor: {fileID: 965130050}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: -10
-    max_value: 10
+    DecimalGranularity: 0
+    MinValue: -1
+    MaxValue: 1
   _energy_spend_since_reset: 0
   _energy_cost: 1
   _relative_to: 1
@@ -846,10 +847,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba1c74cb7e8c456c8de2b06b4dd9566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: {x: 1.83, y: 5.77, z: -2.87}
   _on_awake: 1
+  _rb: {fileID: 0}
   _relative: 1
   _torque: 1
+  _force: {x: 0, y: 0, z: 0}
 --- !u!114 &965130055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,12 +866,12 @@ MonoBehaviour:
   _environment: {fileID: 0}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: -10
-    max_value: 10
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _relative_to_existing_value: 0
-  _velocity: {x: 0, y: 0, z: 0}
   _angular_velocity: {x: 0, y: 0, z: 0}
+  _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1061500704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,12 +1122,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 583.5
+      value: 510.5
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 273.5
+      value: 276
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
@@ -1173,10 +1175,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba1c74cb7e8c456c8de2b06b4dd9566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: {x: 0, y: 0.012, z: 0}
   _on_awake: 1
+  _rb: {fileID: 0}
   _relative: 1
   _torque: 1
+  _force: {x: 0, y: 0.02, z: 0}
 --- !u!114 &1338615078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1346,12 +1349,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
-  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
-  _wait_every: 1
+  _testing_motors: 0
+  _wait_every: 2
   _update_fixed_time_scale: 0
-  _continue_on_disconnect: 0
   _frame_skips: 0
   _simulation_time_scale: 1
   _reset_iterations: 10
@@ -1382,6 +1384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player_motions: {fileID: 11400000, guid: 43eb035cfbe4d4253b215ce70a5e5d58, type: 2}
+  _simulation_manager: {fileID: 0}
   Debugging: 0
 --- !u!1 &2065165352
 GameObject:

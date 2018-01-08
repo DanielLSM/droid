@@ -1,48 +1,50 @@
-﻿using SceneSpecificAssets.Grasping.Utilities;
+﻿using SceneAssets.ScripterGrasper.Utilities;
+using SceneSpecificAssets.Grasping.Utilities;
 using UnityEngine;
 
-namespace SceneSpecificAssets.Grasping {
+namespace SceneAssets.ScripterGrasper.Scripts {
   public class Obstruction : MonoBehaviour,
-                             MotionTracker {
-    private Vector3 _last_recorded_move;
-    private Quaternion _last_recorded_rotation;
-    private Vector3 _previous_position;
-    private Quaternion _previous_rotation;
+                             IMotionTracker {
+    Vector3 _last_recorded_move;
+    Quaternion _last_recorded_rotation;
+    Vector3 _previous_position;
+    Quaternion _previous_rotation;
 
     public bool IsInMotion() {
-      return transform.position != _previous_position || transform.rotation != _previous_rotation;
+      return this.transform.position != this._previous_position
+             || this.transform.rotation != this._previous_rotation;
     }
 
     public bool IsInMotion(float sensitivity) {
       var distance_moved = Vector3.Distance(
-                                            transform.position,
-                                            _last_recorded_move);
+                                            a : this.transform.position,
+                                            b : this._last_recorded_move);
       var angle_rotated = Quaternion.Angle(
-                                           transform.rotation,
-                                           _last_recorded_rotation);
+                                           a : this.transform.rotation,
+                                           b : this._last_recorded_rotation);
       if (distance_moved > sensitivity || angle_rotated > sensitivity) {
-        UpdateLastRecordedTranform();
+        this.UpdateLastRecordedTranform();
         return true;
       }
 
       return false;
     }
 
-    private void UpdatePreviousTranform() {
-      _previous_position = transform.position;
-      _previous_rotation = transform.rotation;
+    void UpdatePreviousTranform() {
+      this._previous_position = this.transform.position;
+      this._previous_rotation = this.transform.rotation;
     }
 
-    private void UpdateLastRecordedTranform() {
-      _last_recorded_move = transform.position;
-      _last_recorded_rotation = transform.rotation;
+    void UpdateLastRecordedTranform() {
+      this._last_recorded_move = this.transform.position;
+      this._last_recorded_rotation = this.transform.rotation;
     }
 
-    private void Start() {
-      UpdatePreviousTranform();
-      UpdateLastRecordedTranform();
+    void Start() {
+      this.UpdatePreviousTranform();
+      this.UpdateLastRecordedTranform();
     }
 
-    private void Update() { UpdatePreviousTranform(); }
+    void Update() { this.UpdatePreviousTranform(); }
   }
 }

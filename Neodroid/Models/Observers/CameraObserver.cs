@@ -1,29 +1,32 @@
-﻿using Neodroid.Utilities;
+﻿using Neodroid.Models.Observers.General;
+using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
-namespace Neodroid.Observers {
+namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
-  [RequireComponent(typeof(Camera))]
+  [RequireComponent( typeof(Camera))]
   public class CameraObserver : Observer {
     [Header(
-      "Specific",
+      header : "Specific",
       order = 102)]
     [SerializeField]
-    private Camera _camera;
+    Camera _camera;
 
     [Header(
-      "Observation",
+      header : "Observation",
       order = 103)]
     [SerializeField]
-    private byte[] _data = { };
+    byte[] _data = { };
 
-    public byte[] Data { get { return _data; } set { _data = value; } }
+    public byte[] Data { get { return this._data; } set { this._data = value; } }
 
-    public override string ObserverIdentifier { get { return name + "Camera"; } }
+    public override string ObserverIdentifier { get { return this.name + "Camera"; } }
 
-    protected override void Start() { _camera = GetComponent<Camera>(); }
+    protected override void Start() { this._camera = this.GetComponent<Camera>(); }
 
-    protected virtual void Update() { Data = NeodroidUtilities.RenderTextureImage(_camera).EncodeToPNG(); }
+    protected virtual void Update() {
+      this.Data = NeodroidUtilities.RenderTextureImage(camera : this._camera).EncodeToPNG();
+    }
 
     public override void UpdateData() {
       //Data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG (); // Must be done on the main thread

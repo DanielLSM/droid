@@ -1,33 +1,34 @@
-﻿using Neodroid.Utilities;
+﻿using Neodroid.Evaluation;
+using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
-namespace Neodroid.Evaluation {
-  [RequireComponent(typeof(Rigidbody))]
+namespace Neodroid.Models.Evaluation {
+  [RequireComponent( typeof(Rigidbody))]
   public class PunishmentFunction : ObjectiveFunction {
     [SerializeField]
-    LayerMask _layer_mask;
-    [SerializeField]
-    GameObject _player;
     int _hits;
 
+    [SerializeField] LayerMask _layer_mask;
+
+    [SerializeField] GameObject _player;
+
     // Use this for initialization
-    private void Start() {
-      ResetHits();
-      var balls = GameObject.FindGameObjectsWithTag("balls");
+    void Start() {
+      this.ResetHits();
+      var balls = GameObject.FindGameObjectsWithTag(tag : "balls");
 
       foreach (var ball in balls)
-        ball.AddComponent<ChildCollisionPublisher>().CollisionDelegate = OnChildCollision;
+        ball.AddComponent<ChildCollisionPublisher>().CollisionDelegate = this.OnChildCollision;
     }
 
-    private void OnChildCollision(Collision collision) {
-      if (collision.collider.name == _player.name)
-        _hits += 1;
+    void OnChildCollision(Collision collision) {
+      if (collision.collider.name == this._player.name) this._hits += 1;
 
-      if (true) Debug.Log(_hits);
+      if (true) Debug.Log(message : this._hits);
     }
 
-    private void ResetHits() { _hits = 0; }
+    void ResetHits() { this._hits = 0; }
 
-    public override float InternalEvaluate() { return _hits * -1f; }
+    public override float InternalEvaluate() { return this._hits * -1f; }
   }
 }

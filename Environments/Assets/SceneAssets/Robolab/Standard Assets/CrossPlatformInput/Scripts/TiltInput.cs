@@ -1,4 +1,4 @@
-
+using System;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -17,63 +17,63 @@ namespace UnityStandardAssets.CrossPlatformInput {
     public float centreAngleOffset;
     public float fullTiltAngle = 25;
 
-    private CrossPlatformInputManager.VirtualAxis m_SteerAxis;
+    CrossPlatformInputManager.VirtualAxis m_SteerAxis;
 
     public AxisMapping mapping;
     public AxisOptions tiltAroundAxis = AxisOptions.ForwardAxis;
 
-    private void OnEnable() {
-      if (mapping.type == AxisMapping.MappingType.NamedAxis) {
-        m_SteerAxis = new CrossPlatformInputManager.VirtualAxis(mapping.axisName);
-        CrossPlatformInputManager.RegisterVirtualAxis(m_SteerAxis);
+    void OnEnable() {
+      if (this.mapping.type == AxisMapping.MappingType.NamedAxis) {
+        this.m_SteerAxis = new CrossPlatformInputManager.VirtualAxis(name : this.mapping.axisName);
+        CrossPlatformInputManager.RegisterVirtualAxis(axis : this.m_SteerAxis);
       }
     }
 
-    private void Update() {
+    void Update() {
       float angle = 0;
       if (Input.acceleration != Vector3.zero)
-        switch (tiltAroundAxis) {
+        switch (this.tiltAroundAxis) {
           case AxisOptions.ForwardAxis:
             angle = Mathf.Atan2(
-                                Input.acceleration.x,
-                                -Input.acceleration.y)
+                                y : Input.acceleration.x,
+                                x : -Input.acceleration.y)
                     * Mathf.Rad2Deg
-                    + centreAngleOffset;
+                    + this.centreAngleOffset;
             break;
           case AxisOptions.SidewaysAxis:
             angle = Mathf.Atan2(
-                                Input.acceleration.z,
-                                -Input.acceleration.y)
+                                y : Input.acceleration.z,
+                                x : -Input.acceleration.y)
                     * Mathf.Rad2Deg
-                    + centreAngleOffset;
+                    + this.centreAngleOffset;
             break;
         }
 
       var axisValue = Mathf.InverseLerp(
-                                        -fullTiltAngle,
-                                        fullTiltAngle,
-                                        angle)
+                                        a : -this.fullTiltAngle,
+                                        b : this.fullTiltAngle,
+                                        value : angle)
                       * 2
                       - 1;
-      switch (mapping.type) {
+      switch (this.mapping.type) {
         case AxisMapping.MappingType.NamedAxis:
-          m_SteerAxis.Update(axisValue);
+          this.m_SteerAxis.Update(value : axisValue);
           break;
         case AxisMapping.MappingType.MousePositionX:
-          CrossPlatformInputManager.SetVirtualMousePositionX(axisValue * Screen.width);
+          CrossPlatformInputManager.SetVirtualMousePositionX(f : axisValue * Screen.width);
           break;
         case AxisMapping.MappingType.MousePositionY:
-          CrossPlatformInputManager.SetVirtualMousePositionY(axisValue * Screen.width);
+          CrossPlatformInputManager.SetVirtualMousePositionY(f : axisValue * Screen.width);
           break;
         case AxisMapping.MappingType.MousePositionZ:
-          CrossPlatformInputManager.SetVirtualMousePositionZ(axisValue * Screen.width);
+          CrossPlatformInputManager.SetVirtualMousePositionZ(f : axisValue * Screen.width);
           break;
       }
     }
 
-    private void OnDisable() { m_SteerAxis.Remove(); }
+    void OnDisable() { this.m_SteerAxis.Remove(); }
 
-    [System.Serializable]
+    [Serializable]
     public class AxisMapping {
       public enum MappingType {
         NamedAxis,
@@ -91,13 +91,13 @@ namespace UnityStandardAssets.CrossPlatformInput {
 
 namespace UnityStandardAssets.CrossPlatformInput.Inspector {
   #if UNITY_EDITOR
-  [CustomPropertyDrawer(typeof(TiltInput.AxisMapping))]
+  [CustomPropertyDrawer(type : typeof(TiltInput.AxisMapping))]
   public class TiltInputAxisStylePropertyDrawer : PropertyDrawer {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
       EditorGUI.BeginProperty(
-                              position,
-                              label,
-                              property);
+                              totalPosition : position,
+                              label : label,
+                              property : property);
 
       var x = position.x;
       var y = position.y;
@@ -115,7 +115,7 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector {
                            .4f,
                            .6f
                          };
-      if (property.FindPropertyRelative("type").enumValueIndex > 0) {
+      if (property.FindPropertyRelative(relativePropertyPath : "type").enumValueIndex > 0) {
         // hide name if not a named axis
         props = new[] {
                         "type"
@@ -131,16 +131,16 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector {
 
         // Calculate rects
         var rect = new Rect(
-                            x,
-                            y,
-                            w,
-                            lineHeight);
+                            x : x,
+                            y : y,
+                            width : w,
+                            height : lineHeight);
         x += w;
 
         EditorGUI.PropertyField(
-                                rect,
-                                property.FindPropertyRelative(props[n]),
-                                GUIContent.none);
+                                position : rect,
+                                property : property.FindPropertyRelative(relativePropertyPath : props[n]),
+                                label : GUIContent.none);
       }
 
       // Set indent back to what it was

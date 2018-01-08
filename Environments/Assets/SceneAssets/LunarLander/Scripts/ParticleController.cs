@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
 
 //[ExecuteInEditMode]
-[RequireComponent(typeof(ParticleSystem))]
-public class ParticleController : MonoBehaviour {
-  private ParticleSystem _particle_system;
+namespace SceneAssets.LunarLander.Scripts {
+  [RequireComponent( typeof(ParticleSystem))]
+  public class ParticleController : MonoBehaviour {
+    ParticleSystem _particle_system;
 
-  // Use this for initialization
-  private void Start() { _particle_system = GetComponent<ParticleSystem>(); }
+    // Use this for initialization
+    void Start() { this._particle_system = this.GetComponent<ParticleSystem>(); }
 
-  // Update is called once per frame
-  private void Update() {
-    if (Input.GetKey(KeyCode.Space)) {
-      if (_particle_system.isPlaying) return;
-      _particle_system.Play(true);
-    } else {
-      //_particle_system.Pause (true);
-      _particle_system.Stop(true);
+    // Update is called once per frame
+    void Update() {
+      if (Input.GetKey(key : KeyCode.Space)) {
+        if (this._particle_system.isPlaying) return;
+        this._particle_system.Play(withChildren : true);
+      } else {
+        //_particle_system.Pause (true);
+        this._particle_system.Stop(withChildren : true);
+      }
     }
   }
 }

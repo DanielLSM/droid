@@ -1,177 +1,192 @@
 ﻿using System.Collections.Generic;
-using Assets.Neodroid.Models.Actors;
-using Neodroid.Configurables;
 using Neodroid.Environments;
 using Neodroid.Evaluation;
-using Neodroid.Managers;
 using Neodroid.Messaging.Messages;
-using Neodroid.Motors;
-using Neodroid.Observers;
-using Neodroid.Utilities;
-
+using Neodroid.Models.Actors;
+using Neodroid.Models.Configurables.General;
+using Neodroid.Models.Managers;
+using Neodroid.Models.Motors.General;
+using Neodroid.Models.Observers.General;
+using Neodroid.Scripts.Utilities;
+using Neodroid.Scripts.Utilities.Enums;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
 
-namespace Neodroid.Windows {
+namespace Neodroid.Scripts.UnityEditor.Windows {
   #if UNITY_EDITOR
   public class SimulationWindow : EditorWindow {
-    private Dictionary<string, Actor> _actors;
-    private Dictionary<string, ConfigurableGameObject> _configurables;
-    private LearningEnvironment[] _environments;
-    private Texture _icon;
-    private Dictionary<string, Motor> _motors;
-    private Texture _neodroid_icon;
-    private Dictionary<string, Observer> _observers;
-    private readonly int _preview_image_size = 100;
-    private Dictionary<string, Resetable> _resetables;
-    private Vector2 _scroll_position;
-    private bool[] _show_environment_properties = new bool[1];
+    readonly int _preview_image_size = 100;
+    Dictionary<string, Actor> _actors;
+    Dictionary<string, ConfigurableGameObject> _configurables;
+    LearningEnvironment[] _environments;
+    Texture _icon;
+    Dictionary<string, Motor> _motors;
+    Texture _neodroid_icon;
+    Dictionary<string, Observer> _observers;
+    Dictionary<string, Resetable> _resetables;
+    Vector2 _scroll_position;
+    bool[] _show_environment_properties = new bool[1];
 
-    private SimulationManager _simulation_manager;
+    SimulationManager _simulation_manager;
 
-    [MenuItem("Neodroid/SimulationWindow")]
+    [MenuItem(itemName : "Neodroid/SimulationWindow")]
     public static void ShowWindow() {
-      GetWindow(typeof(SimulationWindow)); //Show existing window instance. If one doesn't exist, make one.
+      GetWindow(
+                t : typeof(SimulationWindow)); //Show existing window instance. If one doesn't exist, make one.
       //window.Show();
     }
 
-    private void OnEnable() {
-      _icon = (Texture2D)AssetDatabase.LoadAssetAtPath(
-                                                       "Assets/Neodroid/Icons/world.png",
-                                                       typeof(Texture2D));
-      _neodroid_icon =
+    void OnEnable() {
+      this._icon = (Texture2D)AssetDatabase.LoadAssetAtPath(
+                                                            assetPath : "Assets/Neodroid/Icons/world.png",
+                                                            type : typeof(Texture2D));
+      this._neodroid_icon =
         (Texture)AssetDatabase.LoadAssetAtPath(
-                                               "Assets/Neodroid/Icons/neodroid_favicon_cut.png",
-                                               typeof(Texture));
-      titleContent = new GUIContent(
-                                    "Neo:Sim",
-                                    _icon,
-                                    "Window for configuring simulation");
-      Setup();
+                                               assetPath : "Assets/Neodroid/Icons/neodroid_favicon_cut.png",
+                                               type : typeof(Texture));
+      this.titleContent = new GUIContent(
+                                         text : "Neo:Sim",
+                                         image : this._icon,
+                                         tooltip : "Window for configuring simulation");
+      this.Setup();
     }
 
-    private void Setup() {
-      if (_environments != null) _show_environment_properties = new bool[_environments.Length];
+    void Setup() {
+      if (this._environments != null) this._show_environment_properties = new bool[this._environments.Length];
     }
 
-    private void OnGUI() {
-      var serialised_object = new SerializedObject(this);
-      _simulation_manager = FindObjectOfType<SimulationManager>();
-      if (_simulation_manager) {
+    void OnGUI() {
+      var serialised_object = new SerializedObject(obj : this);
+      this._simulation_manager = FindObjectOfType<SimulationManager>();
+      if (this._simulation_manager) {
         EditorGUILayout.BeginHorizontal();
 
         GUILayout.Label(
-                        _neodroid_icon,
-                        GUILayout.Width(_preview_image_size),
-                        GUILayout.Height(_preview_image_size));
+                        this._neodroid_icon,
+                        GUILayout.Width(width : this._preview_image_size),
+                        GUILayout.Height(height : this._preview_image_size));
 
         EditorGUILayout.BeginVertical();
-        _simulation_manager.FrameSkips =
+        this._simulation_manager.FrameSkips =
           EditorGUILayout.IntField(
-                                   "Frame Skips",
-                                   _simulation_manager.FrameSkips);
-        _simulation_manager.ResetIterations = EditorGUILayout.IntField(
-                                                                       "Reset Iterations",
-                                                                       _simulation_manager.ResetIterations);
-        _simulation_manager.WaitEvery =
+                                   label : "Frame Skips",
+                                   value : this._simulation_manager.FrameSkips);
+        this._simulation_manager.ResetIterations = EditorGUILayout.IntField(
+                                                                            label : "Reset Iterations",
+                                                                            value : this
+                                                                                      ._simulation_manager
+                                                                                      .ResetIterations);
+        this._simulation_manager.WaitEvery =
           (WaitOn)EditorGUILayout.EnumPopup(
-                                            "Wait Every",
-                                            _simulation_manager.WaitEvery);
-        _simulation_manager.TestMotors =
+                                            label : "Wait Every",
+                                            selected : this._simulation_manager.WaitEvery);
+        this._simulation_manager.TestMotors =
           EditorGUILayout.Toggle(
-                                 "Test Motors",
-                                 _simulation_manager.TestMotors);
+                                 label : "Test Motors",
+                                 value : this._simulation_manager.TestMotors);
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.EndHorizontal();
 
-        _environments = NeodroidUtilities.FindAllObjectsOfTypeInScene<LearningEnvironment>();
-        if (_show_environment_properties.Length != _environments.Length)
-          Setup();
+        this._environments = NeodroidUtilities.FindAllObjectsOfTypeInScene<LearningEnvironment>();
+        if (this._show_environment_properties.Length != this._environments.Length) this.Setup();
 
-        _scroll_position = EditorGUILayout.BeginScrollView(_scroll_position);
+        this._scroll_position = EditorGUILayout.BeginScrollView(scrollPosition : this._scroll_position);
 
-        EditorGUILayout.BeginVertical("Box");
-        GUILayout.Label("Environments");
-        if (_show_environment_properties != null) {
-          for (var i = 0; i < _show_environment_properties.Length; i++) {
-            _show_environment_properties[i] = EditorGUILayout.Foldout(
-                                                                      _show_environment_properties[i],
-                                                                      _environments[i].EnvironmentIdentifier);
-            if (_show_environment_properties[i]) {
-              _actors = _environments[i].Actors;
-              _observers = _environments[i].Observers;
-              _configurables = _environments[i].Configurables;
-              _resetables = _environments[i].Resetables;
+        EditorGUILayout.BeginVertical(style : "Box");
+        GUILayout.Label(text : "Environments");
+        if (this._show_environment_properties != null) {
+          for (var i = 0; i < this._show_environment_properties.Length; i++) {
+            this._show_environment_properties[i] = EditorGUILayout.Foldout(
+                                                                           foldout : this
+                                                                             ._show_environment_properties[i],
+                                                                           content : this
+                                                                                     ._environments[i]
+                                                                                     .EnvironmentIdentifier);
+            if (this._show_environment_properties[i]) {
+              this._actors = this._environments[i].Actors;
+              this._observers = this._environments[i].Observers;
+              this._configurables = this._environments[i].Configurables;
+              this._resetables = this._environments[i].Resetables;
 
-              EditorGUILayout.BeginVertical("Box");
-              _environments[i].enabled = EditorGUILayout.BeginToggleGroup(
-                                                                          _environments[i]
-                                                                            .EnvironmentIdentifier,
-                                                                          _environments[i].enabled
-                                                                          && _environments[i]
-                                                                               .gameObject.activeSelf);
+              EditorGUILayout.BeginVertical(style : "Box");
+              this._environments[i].enabled = EditorGUILayout.BeginToggleGroup(
+                                                                               label : this._environments[i]
+                                                                                           .EnvironmentIdentifier,
+                                                                               toggle : this._environments[i]
+                                                                                            .enabled
+                                                                                        && this
+                                                                                           ._environments[i]
+                                                                                           .gameObject
+                                                                                           .activeSelf);
               EditorGUILayout.ObjectField(
-                                          _environments[i],
-                                          typeof(LearningEnvironment),
-                                          true);
-              _environments[i].CoordinateSystem = (CoordinateSystem)EditorGUILayout.EnumPopup(
-                                                                                              "Coordinate system",
-                                                                                              _environments[i]
-                                                                                                .CoordinateSystem);
+                                          obj : this._environments[i],
+                                          objType : typeof(LearningEnvironment),
+                                          allowSceneObjects : true);
+              this._environments[i].CoordinateSystem = (CoordinateSystem)EditorGUILayout.EnumPopup(
+                                                                                                   label :
+                                                                                                   "Coordinate system",
+                                                                                                   selected :
+                                                                                                   this
+                                                                                                     ._environments
+                                                                                                       [i]
+                                                                                                     .CoordinateSystem);
               EditorGUI.BeginDisabledGroup(
-                                           _environments[i].CoordinateSystem
-                                           != CoordinateSystem.RelativeToReferencePoint);
-              _environments[i].CoordinateReferencePoint =
+                                           disabled : this._environments[i].CoordinateSystem
+                                                      != CoordinateSystem.RelativeToReferencePoint);
+              this._environments[i].CoordinateReferencePoint =
                 (Transform)EditorGUILayout.ObjectField(
-                                                       "Reference point",
-                                                       _environments[i].CoordinateReferencePoint,
-                                                       typeof(Transform),
-                                                       true);
+                                                       label : "Reference point",
+                                                       obj : this._environments[i].CoordinateReferencePoint,
+                                                       objType : typeof(Transform),
+                                                       allowSceneObjects : true);
               EditorGUI.EndDisabledGroup();
-              _environments[i].ObjectiveFunction =
+              this._environments[i].ObjectiveFunction =
                 (ObjectiveFunction)EditorGUILayout.ObjectField(
-                                                               "Objective function",
-                                                               _environments[i].ObjectiveFunction,
-                                                               typeof(ObjectiveFunction),
-                                                               true);
-              _environments[i].EpisodeLength = EditorGUILayout.IntField(
-                                                                        "Episode Length",
-                                                                        _environments[i].EpisodeLength);
+                                                               label : "Objective function",
+                                                               obj : this._environments[i].ObjectiveFunction,
+                                                               objType : typeof(ObjectiveFunction),
+                                                               allowSceneObjects : true);
+              this._environments[i].EpisodeLength = EditorGUILayout.IntField(
+                                                                             label : "Episode Length",
+                                                                             value : this
+                                                                                     ._environments[i]
+                                                                                     .EpisodeLength);
 
-              EditorGUILayout.BeginVertical("Box");
-              GUILayout.Label("Actors");
-              foreach (var actor in _actors)
+              EditorGUILayout.BeginVertical(style : "Box");
+              GUILayout.Label(text : "Actors");
+              foreach (var actor in this._actors)
                 if (actor.Value != null) {
-                  _motors = actor.Value.Motors;
+                  this._motors = actor.Value.Motors;
 
-                  EditorGUILayout.BeginVertical("Box");
+                  EditorGUILayout.BeginVertical(style : "Box");
                   actor.Value.enabled = EditorGUILayout.BeginToggleGroup(
-                                                                         actor.Key,
-                                                                         actor.Value.enabled
-                                                                         && actor.Value.gameObject
-                                                                                 .activeSelf);
+                                                                         label : actor.Key,
+                                                                         toggle : actor.Value.enabled
+                                                                                  && actor.Value.gameObject
+                                                                                          .activeSelf);
                   EditorGUILayout.ObjectField(
-                                              actor.Value,
-                                              typeof(Actor),
-                                              true);
+                                              obj : actor.Value,
+                                              objType : typeof(Actor),
+                                              allowSceneObjects : true);
 
-                  EditorGUILayout.BeginVertical("Box");
-                  GUILayout.Label("Motors");
-                  foreach (var motor in _motors)
+                  EditorGUILayout.BeginVertical(style : "Box");
+                  GUILayout.Label(text : "Motors");
+                  foreach (var motor in this._motors)
                     if (motor.Value != null) {
-                      EditorGUILayout.BeginVertical("Box");
+                      EditorGUILayout.BeginVertical(style : "Box");
                       motor.Value.enabled = EditorGUILayout.BeginToggleGroup(
-                                                                             motor.Key,
-                                                                             motor.Value.enabled
-                                                                             && motor.Value.gameObject
-                                                                                     .activeSelf);
+                                                                             label : motor.Key,
+                                                                             toggle : motor.Value.enabled
+                                                                                      && motor
+                                                                                         .Value.gameObject
+                                                                                         .activeSelf);
                       EditorGUILayout.ObjectField(
-                                                  motor.Value,
-                                                  typeof(Motor),
-                                                  true);
+                                                  obj : motor.Value,
+                                                  objType : typeof(Motor),
+                                                  allowSceneObjects : true);
                       EditorGUILayout.EndToggleGroup();
 
                       EditorGUILayout.EndVertical();
@@ -186,60 +201,62 @@ namespace Neodroid.Windows {
 
               EditorGUILayout.EndVertical();
 
-              EditorGUILayout.BeginVertical("Box");
-              GUILayout.Label("Observers");
-              foreach (var observer in _observers)
+              EditorGUILayout.BeginVertical(style : "Box");
+              GUILayout.Label(text : "Observers");
+              foreach (var observer in this._observers)
                 if (observer.Value != null) {
-                  EditorGUILayout.BeginVertical("Box");
+                  EditorGUILayout.BeginVertical(style : "Box");
                   observer.Value.enabled = EditorGUILayout.BeginToggleGroup(
-                                                                            observer.Key,
-                                                                            observer.Value.enabled
-                                                                            && observer
-                                                                               .Value.gameObject.activeSelf);
+                                                                            label : observer.Key,
+                                                                            toggle : observer.Value.enabled
+                                                                                     && observer
+                                                                                        .Value.gameObject
+                                                                                        .activeSelf);
                   EditorGUILayout.ObjectField(
-                                              observer.Value,
-                                              typeof(Observer),
-                                              true);
+                                              obj : observer.Value,
+                                              objType : typeof(Observer),
+                                              allowSceneObjects : true);
                   EditorGUILayout.EndToggleGroup();
                   EditorGUILayout.EndVertical();
                 }
 
               EditorGUILayout.EndVertical();
 
-              EditorGUILayout.BeginVertical("Box");
-              GUILayout.Label("Configurables");
-              foreach (var configurable in _configurables)
+              EditorGUILayout.BeginVertical(style : "Box");
+              GUILayout.Label(text : "Configurables");
+              foreach (var configurable in this._configurables)
                 if (configurable.Value != null) {
-                  EditorGUILayout.BeginVertical("Box");
+                  EditorGUILayout.BeginVertical(style : "Box");
                   configurable.Value.enabled =
                     EditorGUILayout.BeginToggleGroup(
-                                                     configurable.Key,
-                                                     configurable.Value.enabled
-                                                     && configurable.Value.gameObject.activeSelf);
+                                                     label : configurable.Key,
+                                                     toggle : configurable.Value.enabled
+                                                              && configurable.Value.gameObject.activeSelf);
                   EditorGUILayout.ObjectField(
-                                              configurable.Value,
-                                              typeof(ConfigurableGameObject),
-                                              true);
+                                              obj : configurable.Value,
+                                              objType : typeof(ConfigurableGameObject),
+                                              allowSceneObjects : true);
                   EditorGUILayout.EndToggleGroup();
                   EditorGUILayout.EndVertical();
                 }
 
               EditorGUILayout.EndVertical();
 
-              EditorGUILayout.BeginVertical("Box");
-              GUILayout.Label("Resetables");
-              foreach (var resetable in _resetables)
+              EditorGUILayout.BeginVertical(style : "Box");
+              GUILayout.Label(text : "Resetables");
+              foreach (var resetable in this._resetables)
                 if (resetable.Value != null) {
-                  EditorGUILayout.BeginVertical("Box");
+                  EditorGUILayout.BeginVertical(style : "Box");
                   resetable.Value.enabled = EditorGUILayout.BeginToggleGroup(
-                                                                             resetable.Key,
-                                                                             resetable.Value.enabled
-                                                                             && resetable
-                                                                                .Value.gameObject.activeSelf);
+                                                                             label : resetable.Key,
+                                                                             toggle : resetable.Value.enabled
+                                                                                      && resetable
+                                                                                         .Value.gameObject
+                                                                                         .activeSelf);
                   EditorGUILayout.ObjectField(
-                                              resetable.Value,
-                                              typeof(Resetable),
-                                              true);
+                                              obj : resetable.Value,
+                                              objType : typeof(Resetable),
+                                              allowSceneObjects : true);
                   EditorGUILayout.EndToggleGroup();
                   EditorGUILayout.EndVertical();
                 }
@@ -256,42 +273,54 @@ namespace Neodroid.Windows {
           EditorGUILayout.EndScrollView();
           serialised_object.ApplyModifiedProperties();
 
-          if (GUILayout.Button("Refresh")) Refresh();
+          if (GUILayout.Button(text : "Refresh")) this.Refresh();
 
-          EditorGUI.BeginDisabledGroup(!Application.isPlaying);
+          EditorGUI.BeginDisabledGroup(disabled : !Application.isPlaying);
 
-          if (GUILayout.Button("Step"))
-            _simulation_manager.ReactInEnvironments(
-                                                    new Reaction(
-                                                                 new ReactionParameters(
-                                                                                        true,
-                                                                                        true,
-                                                                                        false,
-                                                                                        false,
-                                                                                        false),
-                                                                 null,
-                                                                 null,
-                                                                 null));
+          if (GUILayout.Button(text : "Step"))
+            this._simulation_manager.ReactInEnvironments(
+                                                         reaction : new Reaction(
+                                                                                 parameters : new
+                                                                                   ReactionParameters(
+                                                                                                      terminable
+                                                                                                      : true,
+                                                                                                      step :
+                                                                                                      true,
+                                                                                                      reset :
+                                                                                                      false,
+                                                                                                      configure
+                                                                                                      : false,
+                                                                                                      describe
+                                                                                                      : false),
+                                                                                 motions : null,
+                                                                                 configurations : null,
+                                                                                 unobservables : null));
 
-          if (GUILayout.Button("Reset"))
-            _simulation_manager.ReactInEnvironments(
-                                                    new Reaction(
-                                                                 new ReactionParameters(
-                                                                                        true,
-                                                                                        false,
-                                                                                        true,
-                                                                                        false,
-                                                                                        false),
-                                                                 null,
-                                                                 null,
-                                                                 null));
+          if (GUILayout.Button(text : "Reset"))
+            this._simulation_manager.ReactInEnvironments(
+                                                         reaction : new Reaction(
+                                                                                 parameters : new
+                                                                                   ReactionParameters(
+                                                                                                      terminable
+                                                                                                      : true,
+                                                                                                      step :
+                                                                                                      false,
+                                                                                                      reset :
+                                                                                                      true,
+                                                                                                      configure
+                                                                                                      : false,
+                                                                                                      describe
+                                                                                                      : false),
+                                                                                 motions : null,
+                                                                                 configurations : null,
+                                                                                 unobservables : null));
 
           EditorGUI.EndDisabledGroup();
         }
       }
     }
 
-    private void Refresh() {
+    void Refresh() {
       var actors = FindObjectsOfType<Actor>();
       foreach (var obj in actors) obj.RefreshAwake();
       var configurables = FindObjectsOfType<ConfigurableGameObject>();
@@ -306,7 +335,7 @@ namespace Neodroid.Windows {
       foreach (var obj in observers) obj.RefreshStart();
     }
 
-    public void OnInspectorUpdate() { Repaint(); }
+    public void OnInspectorUpdate() { this.Repaint(); }
   }
 
   #endif

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Assets.Neodroid.Models.Actors;
-using Neodroid.Configurables;
+using Neodroid.Models.Actors;
+using Neodroid.Models.Configurables.General;
 
 namespace Neodroid.Messaging.Messages {
   public class EnvironmentDescription {
@@ -10,11 +10,11 @@ namespace Neodroid.Messaging.Messages {
       Dictionary<string, Actor> actors,
       Dictionary<string, ConfigurableGameObject> configurables,
       float solved_threshold) {
-      Configurables = configurables;
-      Actors = actors;
-      MaxSteps = max_steps;
-      FrameSkips = frame_skips;
-      SolvedThreshold = solved_threshold;
+      this.Configurables = configurables;
+      this.Actors = actors;
+      this.MaxSteps = max_steps;
+      this.FrameSkips = frame_skips;
+      this.SolvedThreshold = solved_threshold;
     }
 
     public Dictionary<string, Actor> Actors { get; private set; }

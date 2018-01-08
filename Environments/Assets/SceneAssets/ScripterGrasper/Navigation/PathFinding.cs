@@ -2,15 +2,15 @@
 using Priority_Queue;
 using UnityEngine;
 
-namespace SceneSpecificAssets.Grasping.Navigation {
+namespace SceneAssets.ScripterGrasper.Navigation {
   public static class PathFinding {
-    private static float Heuristic(Vector3 source, Vector3 destination) {
+    static float Heuristic(Vector3 source, Vector3 destination) {
       return Vector3.Distance(
-                              source,
-                              destination);
+                              a : source,
+                              b : destination);
     }
 
-    private static List<FastVector3> GetUnobstructedNeighbouringNodes(
+    static List<FastVector3> GetUnobstructedNeighbouringNodes(
       Vector3 current_point,
       float search_boundary,
       float grid_granularity,
@@ -20,130 +20,130 @@ namespace SceneSpecificAssets.Grasping.Navigation {
 
       var neighbours = new Vector3[26] {
                                          new Vector3(
-                                                     c.x + g,
-                                                     c.y,
-                                                     c.z),
+                                                     x : c.x + g,
+                                                     y : c.y,
+                                                     z : c.z),
                                          new Vector3(
-                                                     c.x + g,
-                                                     c.y + g,
-                                                     c.z),
+                                                     x : c.x + g,
+                                                     y : c.y + g,
+                                                     z : c.z),
                                          new Vector3(
-                                                     c.x + g,
-                                                     c.y - g,
-                                                     c.z),
+                                                     x : c.x + g,
+                                                     y : c.y - g,
+                                                     z : c.z),
                                          new Vector3(
-                                                     c.x + g,
-                                                     c.y,
-                                                     c.z + g),
+                                                     x : c.x + g,
+                                                     y : c.y,
+                                                     z : c.z + g),
                                          new Vector3(
-                                                     c.x + g,
-                                                     c.y,
-                                                     c.z - g),
+                                                     x : c.x + g,
+                                                     y : c.y,
+                                                     z : c.z - g),
                                          new Vector3(
-                                                     c.x + g,
-                                                     c.y + g,
-                                                     c.z + g),
+                                                     x : c.x + g,
+                                                     y : c.y + g,
+                                                     z : c.z + g),
                                          new Vector3(
-                                                     c.x + g,
-                                                     c.y + g,
-                                                     c.z - g),
+                                                     x : c.x + g,
+                                                     y : c.y + g,
+                                                     z : c.z - g),
                                          new Vector3(
-                                                     c.x + g,
-                                                     c.y - g,
-                                                     c.z + g),
+                                                     x : c.x + g,
+                                                     y : c.y - g,
+                                                     z : c.z + g),
                                          new Vector3(
-                                                     c.x + g,
-                                                     c.y - g,
-                                                     c.z - g),
+                                                     x : c.x + g,
+                                                     y : c.y - g,
+                                                     z : c.z - g),
 
                                          new Vector3(
-                                                     c.x - g,
-                                                     c.y,
-                                                     c.z),
+                                                     x : c.x - g,
+                                                     y : c.y,
+                                                     z : c.z),
                                          new Vector3(
-                                                     c.x - g,
-                                                     c.y + g,
-                                                     c.z),
+                                                     x : c.x - g,
+                                                     y : c.y + g,
+                                                     z : c.z),
                                          new Vector3(
-                                                     c.x - g,
-                                                     c.y - g,
-                                                     c.z),
+                                                     x : c.x - g,
+                                                     y : c.y - g,
+                                                     z : c.z),
                                          new Vector3(
-                                                     c.x - g,
-                                                     c.y,
-                                                     c.z + g),
+                                                     x : c.x - g,
+                                                     y : c.y,
+                                                     z : c.z + g),
                                          new Vector3(
-                                                     c.x - g,
-                                                     c.y,
-                                                     c.z - g),
+                                                     x : c.x - g,
+                                                     y : c.y,
+                                                     z : c.z - g),
                                          new Vector3(
-                                                     c.x - g,
-                                                     c.y + g,
-                                                     c.z + g),
+                                                     x : c.x - g,
+                                                     y : c.y + g,
+                                                     z : c.z + g),
                                          new Vector3(
-                                                     c.x - g,
-                                                     c.y + g,
-                                                     c.z - g),
+                                                     x : c.x - g,
+                                                     y : c.y + g,
+                                                     z : c.z - g),
                                          new Vector3(
-                                                     c.x - g,
-                                                     c.y - g,
-                                                     c.z + g),
+                                                     x : c.x - g,
+                                                     y : c.y - g,
+                                                     z : c.z + g),
                                          new Vector3(
-                                                     c.x - g,
-                                                     c.y - g,
-                                                     c.z - g),
+                                                     x : c.x - g,
+                                                     y : c.y - g,
+                                                     z : c.z - g),
 
                                          new Vector3(
-                                                     c.x,
-                                                     c.y,
-                                                     c.z + g),
+                                                     x : c.x,
+                                                     y : c.y,
+                                                     z : c.z + g),
                                          new Vector3(
-                                                     c.x,
-                                                     c.y,
-                                                     c.z - g),
+                                                     x : c.x,
+                                                     y : c.y,
+                                                     z : c.z - g),
                                          new Vector3(
-                                                     c.x,
-                                                     c.y + g,
-                                                     c.z),
+                                                     x : c.x,
+                                                     y : c.y + g,
+                                                     z : c.z),
                                          new Vector3(
-                                                     c.x,
-                                                     c.y - g,
-                                                     c.z),
+                                                     x : c.x,
+                                                     y : c.y - g,
+                                                     z : c.z),
 
                                          new Vector3(
-                                                     c.x,
-                                                     c.y + g,
-                                                     c.z + g),
+                                                     x : c.x,
+                                                     y : c.y + g,
+                                                     z : c.z + g),
                                          new Vector3(
-                                                     c.x,
-                                                     c.y + g,
-                                                     c.z - g),
+                                                     x : c.x,
+                                                     y : c.y + g,
+                                                     z : c.z - g),
                                          new Vector3(
-                                                     c.x,
-                                                     c.y - g,
-                                                     c.z + g),
+                                                     x : c.x,
+                                                     y : c.y - g,
+                                                     z : c.z + g),
                                          new Vector3(
-                                                     c.x,
-                                                     c.y - g,
-                                                     c.z - g)
+                                                     x : c.x,
+                                                     y : c.y - g,
+                                                     z : c.z - g)
                                        };
 
-      var returnSet = new List<FastVector3>();
+      var return_set = new List<FastVector3>();
 
       foreach (var neighbour in neighbours) {
         if (IsObstructed(
-                         neighbour,
-                         c,
-                         search_boundary,
-                         sphere_cast_radius))
+                         point : neighbour,
+                         current : c,
+                         search_boundary : search_boundary,
+                         sphere_cast_radius : sphere_cast_radius))
           continue; // do not add obstructed points to returned set
-        returnSet.Add(new FastVector3(neighbour));
+        return_set.Add(item : new FastVector3(v : neighbour));
       }
 
-      return returnSet;
+      return return_set;
     }
 
-    private static bool IsObstructed(
+    static bool IsObstructed(
       Vector3 point,
       Vector3 current,
       float search_boundary,
@@ -157,15 +157,15 @@ namespace SceneSpecificAssets.Grasping.Navigation {
         return true;
 
       var ray = new Ray(
-                        current,
-                        (point - current).normalized);
+                        origin : current,
+                        direction : (point - current).normalized);
       return Physics.SphereCast(
-                                ray,
-                                sphere_cast_radius,
-                                Vector3.Distance(
-                                                 current,
-                                                 point),
-                                LayerMask.NameToLayer("Obstruction"));
+                                ray : ray,
+                                radius : sphere_cast_radius,
+                                maxDistance : Vector3.Distance(
+                                                               a : current,
+                                                               b : point),
+                                layerMask : LayerMask.NameToLayer(layerName : "Obstruction"));
     }
 
     public static List<Vector3> FindPathAstar(
@@ -179,7 +179,7 @@ namespace SceneSpecificAssets.Grasping.Navigation {
       //FastPriorityQueue<FastVector3> frontier_set = new FastPriorityQueue<FastVector3>(MAX_VECTORS_IN_QUEUE);
       var frontier_set = new SimplePriorityQueue<FastVector3>();
 
-      var fast_source = new FastVector3(source);
+      var fast_source = new FastVector3(v : source);
       var predecessor = new Dictionary<FastVector3, FastVector3>();
       var g_scores = new Dictionary<FastVector3, float> {
                                                           {
@@ -188,26 +188,27 @@ namespace SceneSpecificAssets.Grasping.Navigation {
                                                         };
 
       frontier_set.Enqueue(
-                           fast_source,
-                           Heuristic(
-                                     source,
-                                     destination)); // Priority is distance, lowest distance highest priority
+                           item : fast_source,
+                           priority : Heuristic(
+                                                source : source,
+                                                destination :
+                                                destination)); // Priority is distance, lowest distance highest priority
       while (frontier_set.Count > 0) {
         var current_point = frontier_set.Dequeue();
-        closed_set.Add(current_point);
+        closed_set.Add(item : current_point);
 
         //Stopping condition and reconstruct path
         var distance_to_destination = Heuristic(
-                                                current_point._vector,
-                                                destination);
+                                                source : current_point.V,
+                                                destination : destination);
         if (distance_to_destination < near_stopping_distance) {
           var current_trace_back_point = current_point;
           var path = new List<Vector3> {
-                                         current_trace_back_point._vector
+                                         current_trace_back_point.V
                                        };
-          while (predecessor.ContainsKey(current_trace_back_point)) {
-            current_trace_back_point = predecessor[current_trace_back_point];
-            path.Add(current_trace_back_point._vector);
+          while (predecessor.ContainsKey(key : current_trace_back_point)) {
+            current_trace_back_point = predecessor[key : current_trace_back_point];
+            path.Add(item : current_trace_back_point.V);
           }
 
           path.Reverse();
@@ -216,10 +217,10 @@ namespace SceneSpecificAssets.Grasping.Navigation {
 
         //Get neighboring points
         var neighbours = GetUnobstructedNeighbouringNodes(
-                                                          current_point._vector,
-                                                          search_boundary,
-                                                          grid_granularity,
-                                                          agent_size);
+                                                          current_point : current_point.V,
+                                                          search_boundary : search_boundary,
+                                                          grid_granularity : grid_granularity,
+                                                          sphere_cast_radius : agent_size);
 
         //Calculate scores and add to frontier
         foreach (var neighbour in neighbours) {
@@ -229,44 +230,44 @@ namespace SceneSpecificAssets.Grasping.Navigation {
           }
         }*/
 
-          if (closed_set.Contains(neighbour))
+          if (closed_set.Contains(item : neighbour))
             continue; // Skip if neighbour is already in closed set'
 
-          var temp_g_score = g_scores[current_point]
+          var temp_g_score = g_scores[key : current_point]
                              + Heuristic(
-                                         current_point._vector,
-                                         neighbour._vector);
+                                         source : current_point.V,
+                                         destination : neighbour.V);
 
-          if (frontier_set.Contains(neighbour))
-            if (temp_g_score > g_scores[neighbour])
+          if (frontier_set.Contains(item : neighbour))
+            if (temp_g_score > g_scores[key : neighbour])
               continue; // Skip if neighbour g_score is already lower
             else
-              g_scores[neighbour] = temp_g_score;
+              g_scores[key : neighbour] = temp_g_score;
           else
             g_scores.Add(
-                         neighbour,
-                         temp_g_score);
+                         key : neighbour,
+                         value : temp_g_score);
 
-          var f_score = g_scores[neighbour]
+          var f_score = g_scores[key : neighbour]
                         + Heuristic(
-                                    neighbour._vector,
-                                    destination);
+                                    source : neighbour.V,
+                                    destination : destination);
 
-          if (frontier_set.Contains(neighbour)) {
+          if (frontier_set.Contains(item : neighbour)) {
             frontier_set.UpdatePriority(
-                                        neighbour,
-                                        f_score);
-            predecessor[neighbour] = current_point;
+                                        item : neighbour,
+                                        priority : f_score);
+            predecessor[key : neighbour] = current_point;
           } else {
             /*if (frontier_set.Count > MAX_VECTORS_IN_QUEUE-1) { For FastPriorityQueue implementation this is check necessary
                         return null;
                     }*/
             frontier_set.Enqueue(
-                                 neighbour,
-                                 f_score);
+                                 item : neighbour,
+                                 priority : f_score);
             predecessor.Add(
-                            neighbour,
-                            current_point);
+                            key : neighbour,
+                            value : current_point);
           }
         }
       }
@@ -276,26 +277,26 @@ namespace SceneSpecificAssets.Grasping.Navigation {
 
     public static List<Vector3> SimplifyPath(List<Vector3> path, float sphere_cast_radius = 1f) {
       var smooth_path = new List<Vector3> {
-                                            path[0]
+                                            path[index : 0]
                                           };
-      path.RemoveAt(0);
+      path.RemoveAt(index : 0);
       path.Reverse(); // reverse to walk from last point
 
       while (path.Count > 0) {
         var last_point =
-          smooth_path[smooth_path.Count - 1]; // will be drawing from last point in smoothed path
+          smooth_path[index : smooth_path.Count - 1]; // will be drawing from last point in smoothed path
         var new_point =
-          path[path.Count - 1]; // next unsmoothed path point is the last in reversed array
+          path[index : path.Count - 1]; // next unsmoothed path point is the last in reversed array
         foreach (var point in path) {
           var ray = new Ray(
-                            last_point,
-                            (point - last_point).normalized);
+                            origin : last_point,
+                            direction : (point - last_point).normalized);
           if (Physics.SphereCast(
-                                 ray,
-                                 sphere_cast_radius,
-                                 Vector3.Distance(
-                                                  point,
-                                                  last_point)))
+                                 ray : ray,
+                                 radius : sphere_cast_radius,
+                                 maxDistance : Vector3.Distance(
+                                                                a : point,
+                                                                b : last_point)))
             continue;
           new_point = point;
           break;
@@ -303,11 +304,12 @@ namespace SceneSpecificAssets.Grasping.Navigation {
 
         // new_point can still be unchanged here, so next point is the same as in unsmoothed path
 
-        smooth_path.Add(new_point);
-        var index_of_new_point = path.IndexOf(new_point);
+        smooth_path.Add(item : new_point);
+        var index_of_new_point = path.IndexOf(item : new_point);
         path.RemoveRange(
-                         index_of_new_point,
-                         path.Count - index_of_new_point); // kill everything after (including) found point
+                         index : index_of_new_point,
+                         count : path.Count
+                                 - index_of_new_point); // kill everything after (including) found point
       }
 
       return smooth_path;
@@ -316,23 +318,23 @@ namespace SceneSpecificAssets.Grasping.Navigation {
     //private const int MAX_VECTORS_IN_QUEUE = 1000000; For FastPriorityQueue implementation this is value necessary
 
     public class FastVector3 : FastPriorityQueueNode {
-      public FastVector3(Vector3 vector) { _vector = vector; }
+      public FastVector3(Vector3 v) { this.V = v; }
 
-      public Vector3 _vector { get; private set; }
+      public Vector3 V { get; private set; }
 
       public new int QueueIndex { get; set; }
 
-      public override int GetHashCode() { return _vector.GetHashCode(); }
+      public override int GetHashCode() { return this.V.GetHashCode(); }
 
       public override bool Equals(object obj) {
         if (obj == null) return false;
 
         // If parameter cannot be cast to Point return false.
         var p = obj as FastVector3;
-        return Equals(p);
+        return this.Equals(obj : p);
       }
 
-      public bool Equals(FastVector3 obj) { return _vector == obj._vector; }
+      public bool Equals(FastVector3 obj) { return this.V == obj.V; }
     }
   }
 }

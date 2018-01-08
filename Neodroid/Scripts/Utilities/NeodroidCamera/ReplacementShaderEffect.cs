@@ -1,31 +1,32 @@
 ﻿using UnityEngine;
 
-namespace Neodroid.Utilities.NeodroidCamera {
+namespace Neodroid.Scripts.Utilities.NeodroidCamera {
   [ExecuteInEditMode]
   public class ReplacementShaderEffect : MonoBehaviour {
-    public Color _color;
-    public string _replace_rendertype = "";
-    public Shader _replacement_shader;
+    [SerializeField]
+    Color _color;
+    [SerializeField] string _replace_rendertype = "";
+    [SerializeField] Shader _replacement_shader;
 
-    private void OnValidate() {
+    void OnValidate() {
       Shader.SetGlobalColor(
-                            "_OverDrawColor",
-                            _color);
+                            name : "_OverDrawColor",
+                            value : this._color);
       Shader.SetGlobalColor(
-                            "_SegmentationColor",
-                            _color);
+                            name : "_SegmentationColor",
+                            value : this._color);
       //Shader.SetGlobalColor ("_Color", _color);
     }
 
-    private void OnEnable() {
-      if (_replacement_shader != null)
-        GetComponent<Camera>().SetReplacementShader(
-                                                    _replacement_shader,
-                                                    _replace_rendertype);
+    void OnEnable() {
+      if (this._replacement_shader != null)
+        this.GetComponent<Camera>().SetReplacementShader(
+                                                         shader : this._replacement_shader,
+                                                         replacementTag : this._replace_rendertype);
     }
 
-    private void OnDisable() { GetComponent<Camera>().ResetReplacementShader(); }
+    void OnDisable() { this.GetComponent<Camera>().ResetReplacementShader(); }
 
-    private void OnPreRender() { }
+    void OnPreRender() { }
   }
 }

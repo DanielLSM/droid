@@ -1,82 +1,82 @@
-﻿using Neodroid.Managers;
-
+﻿using Neodroid.Models.Managers;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
 
-namespace Neodroid.Windows {
+namespace Neodroid.Scripts.UnityEditor.Windows {
   #if UNITY_EDITOR
   public class DemonstrationWindow : EditorWindow {
-    private SimulationManager _environment_manager;
-    private Texture _icon;
-    private int capturedFrame;
+    SimulationManager _environment_manager;
+    Texture _icon;
+    int _captured_frame;
 
-    private string fileName = "Demonstration/frame";
-    private float lastFrameTime;
-    private string recordButton = "Record";
-    private bool recording;
+    string _file_name = "Demonstration/frame";
+    float _last_frame_time;
+    string _record_button = "Record";
+    bool _recording;
 
-    private string status = "Idle";
+    string _status = "Idle";
 
-    [MenuItem("Neodroid/DemonstrationWindow")]
+    [MenuItem(itemName : "Neodroid/DemonstrationWindow")]
     public static void ShowWindow() {
       GetWindow(
-                typeof(DemonstrationWindow)); //Show existing window instance. If one doesn't exist, make one.
+                t : typeof(DemonstrationWindow)); //Show existing window instance. If one doesn't exist, make one.
     }
 
-    private void OnEnable() {
-      _icon = (Texture2D)AssetDatabase.LoadAssetAtPath(
-                                                       "Assets/Neodroid/Icons/bullet_red.png",
-                                                       typeof(Texture2D));
-      titleContent = new GUIContent(
-                                    "Neo:Rec",
-                                    _icon,
-                                    "Window for recording demonstrations");
+    void OnEnable() {
+      this._icon = (Texture2D)AssetDatabase.LoadAssetAtPath(
+                                                            assetPath :
+                                                            "Assets/Neodroid/Icons/bullet_red.png",
+                                                            type : typeof(Texture2D));
+      this.titleContent = new GUIContent(
+                                         text : "Neo:Rec",
+                                         image : this._icon,
+                                         tooltip : "Window for recording demonstrations");
     }
 
-    public void OnInspectorUpdate() { Repaint(); }
+    public void OnInspectorUpdate() { this.Repaint(); }
 
-    private void OnGUI() {
-      fileName = EditorGUILayout.TextField(
-                                           "File Name:",
-                                           fileName);
+    void OnGUI() {
+      this._file_name = EditorGUILayout.TextField(
+                                                label : "File Name:",
+                                                text : this._file_name);
 
-      if (GUILayout.Button(recordButton))
-        if (recording) {
+      if (GUILayout.Button(text : this._record_button))
+        if (this._recording) {
           //recording
-          status = "Idle...";
-          recordButton = "Record";
-          recording = false;
+          this._status = "Idle...";
+          this._record_button = "Record";
+          this._recording = false;
         } else {
           // idle
-          capturedFrame = 0;
-          recordButton = "Stop";
-          recording = true;
+          this._captured_frame = 0;
+          this._record_button = "Stop";
+          this._recording = true;
         }
 
       EditorGUILayout.LabelField(
-                                 "Status: ",
-                                 status);
+                                 label : "Status: ",
+                                 label2 : this._status);
     }
 
-    private void Update() {
-      if (recording)
+    void Update() {
+      if (this._recording)
         if (EditorApplication.isPlaying && !EditorApplication.isPaused) {
-          RecordImages();
-          Repaint();
+          this.RecordImages();
+          this.Repaint();
         } else {
-          status = "Waiting for Editor to Play";
+          this._status = "Waiting for Editor to Play";
         }
     }
 
-    private void RecordImages() {
-      if (lastFrameTime < Time.time + 1 / 24f) {
+    void RecordImages() {
+      if (this._last_frame_time < Time.time + 1 / 24f) {
         // 24fps
-        status = "Captured frame" + capturedFrame;
-        ScreenCapture.CaptureScreenshot(fileName + capturedFrame + ".png");
-        capturedFrame++;
-        lastFrameTime = Time.time;
+        this._status = "Captured frame" + this._captured_frame;
+        ScreenCapture.CaptureScreenshot(filename : this._file_name + this._captured_frame + ".png");
+        this._captured_frame++;
+        this._last_frame_time = Time.time;
       }
     }
   }

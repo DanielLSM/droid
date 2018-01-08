@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 
-namespace SceneSpecificAssets.Grasping.Utilities.DataCollection {
+namespace SceneAssets.ScripterGrasper.Utilities.DataCollection {
   public class TimeManager : MonoBehaviour {
-    [Range(
-      0.0f,
-      10.0f)]
-    public float _time_scale = 1f;
+    readonly float interval_size = 0.02f;
 
-    private readonly float interval_size = 0.02f;
+    [Range(
+      min : 0.0f,
+      max : 10.0f)]
+    [SerializeField]  float _time_scale = 1f;
 
     // Use this for initialization
-    private void Start() {
-      Time.timeScale = _time_scale;
-      Time.fixedDeltaTime = interval_size * Time.timeScale;
+    void Start() {
+      Time.timeScale = this._time_scale;
+      Time.fixedDeltaTime = this.interval_size * Time.timeScale;
     }
 
     // Update is called once per frame
-    private void Update() { }
+    void Update() { }
   }
 }

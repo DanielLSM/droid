@@ -300,7 +300,7 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 274
+      value: 276
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
@@ -529,9 +529,9 @@ MonoBehaviour:
   _environment: {fileID: 903194204}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: 0
-    max_value: 0
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _relative_to_existing_value: 0
   _axis_of_configuration: 0
   _bounding_box: {fileID: 0}
@@ -601,7 +601,7 @@ MonoBehaviour:
   _ip_address: 127.0.0.1
   _port: 5555
   _testing_motors: 0
-  _wait_every: 1
+  _wait_every: 2
   _update_fixed_time_scale: 0
   _frame_skips: 0
   _simulation_time_scale: 1
@@ -645,6 +645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player_motions: {fileID: 11400000, guid: 6933863fa391246018c9224647f1ad1f, type: 2}
+  _simulation_manager: {fileID: 0}
   Debugging: 0
 --- !u!114 &903194209
 MonoBehaviour:
@@ -664,7 +665,9 @@ MonoBehaviour:
   _area: {fileID: 675183322}
   _environment: {fileID: 0}
   _obstructions: []
+  _overlapping: 1
   _playable_area: {fileID: 903194210}
+  _is_resting: 0
   _resting_time: 3
 --- !u!114 &903194210
 MonoBehaviour:
@@ -1277,9 +1280,9 @@ MonoBehaviour:
   _environment: {fileID: 903194204}
   _debugging: 0
   _valid_input:
-    decimal_granularity: 0
-    min_value: 0
-    max_value: 0
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _relative_to_existing_value: 0
   _axis_of_configuration: 0
   _bounding_box: {fileID: 0}

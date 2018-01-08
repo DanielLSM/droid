@@ -1,28 +1,28 @@
 ﻿using System.Collections.Generic;
 using Neodroid.Environments;
 using Neodroid.Messaging.Messages;
-using Neodroid.Motors;
-using Neodroid.Utilities;
+using Neodroid.Models.Motors.General;
+using Neodroid.Scripts.Utilities;
+using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
-namespace Assets.Neodroid.Models.Actors {
+namespace Neodroid.Models.Actors {
   [ExecuteInEditMode]
   //[RequireComponent (typeof(Collider))]
   public class Actor : MonoBehaviour,
                        IHasRegister<Motor> {
-    private bool _alive = true;
+    bool _alive = true;
 
-    public bool Alive { get { return _alive; } }
+    public bool Alive { get { return this._alive; } }
 
-    private void Awake() { Setup(); }
+    void Awake() { this.Setup(); }
 
-    private void Setup() {
-      if (_motors == null)
-        _motors = new Dictionary<string, Motor>();
-      if (_environment != null) _environment.UnRegisterActor(ActorIdentifier);
-      ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(
-                                                                   ParentEnvironment,
-                                                                   this);
+    void Setup() {
+      if (this._motors == null) this._motors = new Dictionary<string, Motor>();
+      if (this._environment != null) this._environment.UnRegisterActor(identifier : this.ActorIdentifier);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(
+                                                                        r : this.ParentEnvironment,
+                                                                        c : this);
     }
 
     #if UNITY_EDITOR
@@ -33,101 +33,101 @@ namespace Assets.Neodroid.Models.Actors {
     }
     #endif
 
-    public void Kill() { _alive = false; }
+    public void Kill() { this._alive = false; }
 
     public void ApplyMotion(MotorMotion motion) {
-      if (_alive) {
-        if (Debugging)
-          print("Applying " + motion + " To " + name + "'s motors");
+      if (this._alive) {
+        if (this.Debugging)
+          print(message : "Applying " + motion + " To " + this.name + "'s motors");
         var motion_motor_name = motion.GetMotorName();
-        if (_motors.ContainsKey(motion_motor_name) && _motors[motion_motor_name] != null) {
-          _motors[motion_motor_name].ApplyMotion(motion);
+        if (this._motors.ContainsKey(key : motion_motor_name)
+            && this._motors[key : motion_motor_name] != null) {
+          this._motors[key : motion_motor_name].ApplyMotion(motion : motion);
         } else {
-          if (Debugging)
-            print("Could find not motor with the specified name: " + motion_motor_name);
+          if (this.Debugging)
+            print(message : "Could find not motor with the specified name: " + motion_motor_name);
         }
       } else {
-        if (Debugging)
-          print("Actor is dead, cannot apply motion");
+        if (this.Debugging)
+          print(message : "Actor is dead, cannot apply motion");
       }
     }
 
     public void AddMotor(Motor motor, string identifier) {
-      if (Debugging)
-        print("Actor " + name + " has motor " + identifier);
-      if (_motors == null)
-        _motors = new Dictionary<string, Motor>();
-      if (!_motors.ContainsKey(identifier)) {
-        _motors.Add(
-                    identifier,
-                    motor);
+      if (this.Debugging)
+        print(message : "Actor " + this.name + " has motor " + identifier);
+      if (this._motors == null) this._motors = new Dictionary<string, Motor>();
+      if (!this._motors.ContainsKey(key : identifier)) {
+        this._motors.Add(
+                         key : identifier,
+                         value : motor);
       } else {
-        if (Debugging)
+        if (this.Debugging)
           print(
-                string.Format(
-                              "A motor with the identifier {0} is already registered",
-                              identifier));
+                message : string.Format(
+                                        format : "A motor with the identifier {0} is already registered",
+                                        arg0 : identifier));
       }
     }
 
     public virtual void Reset() {
-      if (_motors != null)
-        foreach (var motor in _motors.Values)
+      if (this._motors != null)
+        foreach (var motor in this._motors.Values)
           if (motor != null)
             motor.Reset();
-      _alive = true;
+      this._alive = true;
     }
 
     #region Fields
 
     [Header(
-      "References",
+      header : "References",
       order = 99)]
     [SerializeField]
-    private LearningEnvironment _environment;
+    LearningEnvironment _environment;
 
     [Header(
-      "Development",
+      header : "Development",
       order = 100)]
     [SerializeField]
-    private bool _debugging;
+    bool _debugging;
 
     [Header(
-      "General",
+      header : "General",
       order = 101)]
     [SerializeField]
-    private Dictionary<string, Motor> _motors;
+    Dictionary<string, Motor> _motors;
 
     #endregion
 
     #region Getters
 
-    public string ActorIdentifier { get { return name; } }
+    public string ActorIdentifier { get { return this.name; } }
 
     public void Register(Motor motor) {
-      AddMotor(
-               motor,
-               motor.GetMotorIdentifier());
+      this.AddMotor(
+                    motor : motor,
+                    identifier : motor.GetMotorIdentifier());
     }
 
     public void Register(Motor motor, string identifier) {
-      AddMotor(
-               motor,
-               identifier);
+      this.AddMotor(
+                    motor : motor,
+                    identifier : identifier);
     }
 
-    public Dictionary<string, Motor> Motors { get { return _motors; } }
+    public Dictionary<string, Motor> Motors { get { return this._motors; } }
 
-    public void RefreshAwake() { Awake(); }
+    public void RefreshAwake() { this.Awake(); }
 
     public void RefreshStart() { }
 
     public LearningEnvironment ParentEnvironment {
-      get { return _environment; }
-      set { _environment = value; }
+      get { return this._environment; }
+      set { this._environment = value; }
     }
 
-    public bool Debugging { get { return _debugging; } set { _debugging = value; } }
+    public bool Debugging { get { return this._debugging; } set { this._debugging = value; } }
 
     #endregion
   }

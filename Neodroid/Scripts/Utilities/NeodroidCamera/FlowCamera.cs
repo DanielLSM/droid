@@ -1,57 +1,60 @@
 ﻿using UnityEngine;
 
-[ExecuteInEditMode]
-[RequireComponent(typeof(Camera))]
-public class FlowCamera : MonoBehaviour {
-  public Color _background_color = Color.white;
+namespace Neodroid.Scripts.Utilities.NeodroidCamera {
+  [ExecuteInEditMode]
+  [RequireComponent( typeof(Camera))]
+  public class FlowCamera : MonoBehaviour {
+    [SerializeField]
+    Color _background_color = Color.white;
 
-  [SerializeField]
-  [Range(
-    0,
-    1)]
-  public float _blending = 0.5f;
+    [SerializeField]
+    [Range(
+      min : 0,
+      max : 1)]
+    float _blending = 0.5f;
 
-  private Material _material;
+    Material _material;
 
-  [SerializeField]
-  [Range(
-    0,
-    100)]
-  public float _overlay_amplitude = 60;
+    [SerializeField]
+    [Range(
+      min : 0,
+      max : 100)]
+    float _overlay_amplitude = 60;
 
-  public Shader _shader;
+    [SerializeField]
+    Shader _shader;
 
-  private void Start() {
-    GetComponent<Camera>().depthTextureMode |= DepthTextureMode.Depth | DepthTextureMode.MotionVectors;
-  }
-
-  private void OnRenderImage(RenderTexture source, RenderTexture destination) {
-    if (_material == null) {
-      _material = new Material(_shader) {
-                                          hideFlags = HideFlags.DontSave
-                                        };
+    void Start() {
+      this.GetComponent<Camera>().depthTextureMode |= DepthTextureMode.Depth | DepthTextureMode.MotionVectors;
     }
 
-    _material.SetColor(
-                       "_BackgroundColor",
-                       _background_color);
-    _material.SetFloat(
-                       "_Blending",
-                       _blending);
-    _material.SetFloat(
-                       "_Amplitude",
-                       _overlay_amplitude);
-    Graphics.Blit(
-                  source,
-                  destination,
-                  _material);
-  }
+    void OnRenderImage(RenderTexture source, RenderTexture destination) {
+      if (this._material == null)
+        this._material = new Material(shader : this._shader) {
+                                                               hideFlags = HideFlags.DontSave
+                                                             };
 
-  private void OnDestroy() {
-    if (_material != null)
-      if (Application.isPlaying)
-        Destroy(_material);
-      else
-        DestroyImmediate(_material);
+      this._material.SetColor(
+                              name : "_BackgroundColor",
+                              value : this._background_color);
+      this._material.SetFloat(
+                              name : "_Blending",
+                              value : this._blending);
+      this._material.SetFloat(
+                              name : "_Amplitude",
+                              value : this._overlay_amplitude);
+      Graphics.Blit(
+                    source : source,
+                    dest : destination,
+                    mat : this._material);
+    }
+
+    void OnDestroy() {
+      if (this._material != null)
+        if (Application.isPlaying)
+          Destroy(obj : this._material);
+        else
+          DestroyImmediate(obj : this._material);
+    }
   }
 }

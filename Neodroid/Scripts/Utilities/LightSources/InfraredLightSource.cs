@@ -1,3 +1,5 @@
 ﻿using UnityEngine;
 
-public class InfraredLightSource : MonoBehaviour { }
+namespace Neodroid.Scripts.Utilities.LightSources {
+  public class InfraredLightSource : MonoBehaviour { }
+}

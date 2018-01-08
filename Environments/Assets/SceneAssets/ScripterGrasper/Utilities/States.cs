@@ -1,7 +1,6 @@
-﻿
-using SceneSpecificAssets.Grasping.Utilities;
+﻿using System;
 
-namespace Assets.SceneAssets.ScripterGrasper.Utilities {
+namespace SceneAssets.ScripterGrasper.Utilities {
   #region Enums
 
   public enum MotionState {
@@ -41,229 +40,194 @@ namespace Assets.SceneAssets.ScripterGrasper.Utilities {
   #endregion
 
   public class States {
-    private ClawState _current_claw_1_state,
-      _current_claw_2_state;
+    readonly Action _on_state_update_callback;
 
-    private GripperState _current_gripper_state;
-    private PathFindingState _current_path_finding_state;
+    ClawState _current_claw_1_state,
+              _current_claw_2_state;
 
-    private TargetState _current_target_state;
+    GripperState _current_gripper_state;
+    PathFindingState _current_path_finding_state;
 
-    private MotionState _obstruction_motion_state,
-      _target_motion_state;
+    TargetState _current_target_state;
 
-    private readonly System.Action _on_state_update_callback;
+    MotionState _obstruction_motion_state,
+                _target_motion_state;
 
-    public States (System.Action on_state_update_callback = null) { 
-      _on_state_update_callback = on_state_update_callback;
+    public States(Action on_state_update_callback = null) {
+      this._on_state_update_callback = on_state_update_callback;
     }
 
     public ClawState Claw1State {
-      get { return _current_claw_1_state; }
+      get { return this._current_claw_1_state; }
       set {
-        _current_claw_1_state = value;
-        _on_state_update_callback ();
+        this._current_claw_1_state = value;
+        this._on_state_update_callback();
       }
     }
 
     public ClawState Claw2State {
-      get { return _current_claw_2_state; }
+      get { return this._current_claw_2_state; }
       set {
-        _current_claw_2_state = value;
-        _on_state_update_callback ();
+        this._current_claw_2_state = value;
+        this._on_state_update_callback();
       }
     }
 
     public TargetState TargetState {
-      get { return _current_target_state; }
+      get { return this._current_target_state; }
       set {
-        _current_target_state = value;
-        _on_state_update_callback ();
+        this._current_target_state = value;
+        this._on_state_update_callback();
       }
     }
 
     public GripperState GripperState {
-      get { return _current_gripper_state; }
+      get { return this._current_gripper_state; }
       set {
-        _current_gripper_state = value;
-        _on_state_update_callback ();
+        this._current_gripper_state = value;
+        this._on_state_update_callback();
       }
     }
 
     public PathFindingState PathFindingState {
-      get { return _current_path_finding_state; }
+      get { return this._current_path_finding_state; }
       set {
-        _current_path_finding_state = value;
-        _on_state_update_callback ();
+        this._current_path_finding_state = value;
+        this._on_state_update_callback();
       }
     }
 
     public MotionState ObstructionMotionState {
-      get { return _obstruction_motion_state; }
+      get { return this._obstruction_motion_state; }
       set {
-        _obstruction_motion_state = value;
-        _on_state_update_callback ();
+        this._obstruction_motion_state = value;
+        this._on_state_update_callback();
       }
     }
 
     public MotionState TargetMotionState {
-      get { return _target_motion_state; }
+      get { return this._target_motion_state; }
       set {
-        _target_motion_state = value;
-        _on_state_update_callback ();
+        this._target_motion_state = value;
+        this._on_state_update_callback();
       }
     }
 
-    public MotionState GetMotionState<T> (
+    public MotionState GetMotionState<T>(
       T[] objects,
       MotionState previous_state,
       float sensitivity = 0.1f)
-      where T : MotionTracker {
+      where T : IMotionTracker {
       foreach (var o in objects)
-        if (o.IsInMotion (sensitivity))
+        if (o.IsInMotion(sensitivity : sensitivity))
           return MotionState.IsMoving;
 
       return previous_state != MotionState.IsMoving ? MotionState.IsAtRest : MotionState.WasMoving;
     }
 
-    public void TargetIsGrabbed () {
-      TargetState = TargetState.Grabbed;
-      GripperState = GripperState.Closed;
-      PathFindingState = PathFindingState.Returning;
+    public void TargetIsGrabbed() {
+      this.TargetState = TargetState.Grabbed;
+      this.GripperState = GripperState.Closed;
+      this.PathFindingState = PathFindingState.Returning;
     }
 
-    public void OpenClaw () {
-      GripperState = GripperState.Opening;
+    public void OpenClaw() { this.GripperState = GripperState.Opening; }
+
+    public void WaitForRestingEnvironment() {
+      this.PathFindingState = PathFindingState.WaitingForRestingEnvironment;
     }
 
-    public void WaitForRestingEnvironment () {
-      PathFindingState = PathFindingState.WaitingForRestingEnvironment;
+    public void ReturnToStartPosition() { this.PathFindingState = PathFindingState.Returning; }
+
+    public void NavigateToTarget() { this.PathFindingState = PathFindingState.Navigating; }
+
+    public bool IsTargetGrabbed() { return this.TargetState == TargetState.Grabbed; }
+
+    public void WaitForTarget() { this.PathFindingState = PathFindingState.WaitingForTarget; }
+
+    public bool IsTargetNotGrabbed() { return this.TargetState != TargetState.Grabbed; }
+
+    public bool IsGripperClosed() { return this.GripperState == GripperState.Closed; }
+
+    public bool IsEnvironmentAtRest() {
+      return this.TargetMotionState == MotionState.IsAtRest
+             && this.ObstructionMotionState == MotionState.IsAtRest;
     }
 
-    public void ReturnToStartPosition () {
-      PathFindingState = PathFindingState.Returning;
+    public bool WasEnvironmentMoving() {
+      return this.ObstructionMotionState == MotionState.WasMoving
+             || this.TargetMotionState == MotionState.WasMoving;
     }
 
-    public void NavigateToTarget () {
-      PathFindingState = PathFindingState.Navigating;
+    public bool IsEnvironmentMoving() {
+      return this.ObstructionMotionState == MotionState.IsMoving
+             || this.TargetMotionState == MotionState.IsMoving;
     }
 
-    public bool IsTargetGrabbed () {
-      return TargetState == TargetState.Grabbed;
+    public bool WereObstructionMoving() { return this.ObstructionMotionState == MotionState.WasMoving; }
+
+    public bool IsObstructionsAtRest() { return this.ObstructionMotionState == MotionState.IsAtRest; }
+
+    public bool AreBothClawsTouchingTarget() {
+      return this.Claw1State == ClawState.NotTouchingTarget && this.Claw2State == ClawState.NotTouchingTarget;
     }
 
-    public void WaitForTarget () {
-      PathFindingState = PathFindingState.WaitingForTarget;
+    public void TargetIsNotGrabbed() { this.TargetState = TargetState.NotGrabbed; }
+
+    public bool IsTargetTouchingAndInsideRegion() {
+      return this.Claw1State == ClawState.TouchingTarget
+             && this.Claw2State == ClawState.TouchingTarget
+             && this.TargetState == TargetState.InsideRegion;
     }
 
-    public bool IsTargetNotGrabbed () {
-      return TargetState != TargetState.Grabbed;
+    public bool IsTargetInsideRegionOrTouching() {
+      return this.Claw1State == ClawState.TouchingTarget
+             || this.Claw2State == ClawState.TouchingTarget
+             || this.TargetState == TargetState.InsideRegion;
     }
 
-    public bool IsGripperClosed () {
-      return GripperState == GripperState.Closed;
-    }
+    public bool IsGripperOpen() { return this.GripperState == GripperState.Open; }
 
-    public bool IsEnvironmentAtRest () {
-      return TargetMotionState == MotionState.IsAtRest && ObstructionMotionState == MotionState.IsAtRest;
-    }
+    public void ApproachTarget() { this.PathFindingState = PathFindingState.Approaching; }
 
-    public bool WasEnvironmentMoving () {
-      return ObstructionMotionState == MotionState.WasMoving || TargetMotionState == MotionState.WasMoving;
-    }
+    public void GripperIsOpen() { this.GripperState = GripperState.Open; }
 
-    public bool IsEnvironmentMoving () {
-      return ObstructionMotionState == MotionState.IsMoving || TargetMotionState == MotionState.IsMoving;
-    }
-
-    public bool WereObstructionMoving () {
-      return ObstructionMotionState == MotionState.WasMoving;
-    }
-
-    public bool IsObstructionsAtRest () {
-      return ObstructionMotionState == MotionState.IsAtRest;
-    }
-
-    public bool AreBothClawsTouchingTarget () {
-      return Claw1State == ClawState.NotTouchingTarget && Claw2State == ClawState.NotTouchingTarget;
-    }
-
-    public void TargetIsNotGrabbed () {
-      TargetState = TargetState.NotGrabbed;
-    }
-
-    public bool IsTargetTouchingAndInsideRegion () {
-      return Claw1State == ClawState.TouchingTarget
-      && Claw2State == ClawState.TouchingTarget
-      && TargetState == TargetState.InsideRegion;
-    }
-
-    public bool IsTargetInsideRegionOrTouching () {
-      return Claw1State == ClawState.TouchingTarget
-      || Claw2State == ClawState.TouchingTarget
-      || TargetState == TargetState.InsideRegion;
-    }
-
-    public bool IsGripperOpen () {
-      return GripperState == GripperState.Open;
-    }
-
-    public void ApproachTarget () {
-      PathFindingState = PathFindingState.Approaching;
-    }
-
-    public void GripperIsOpen () {
-      GripperState = GripperState.Open;
-    }
-
-    public void PickUpTarget () {
+    public void PickUpTarget() {
       //TargetState = TargetState.InsideRegion;
-      GripperState = GripperState.Closing;
-      PathFindingState = PathFindingState.PickingUpTarget;
+      this.GripperState = GripperState.Closing;
+      this.PathFindingState = PathFindingState.PickingUpTarget;
     }
 
-    public void GripperIsClosed () {
-      GripperState = GripperState.Closed;
-    }
+    public void GripperIsClosed() { this.GripperState = GripperState.Closed; }
 
-    public void Claw1IsNotTouchingTarget () {
-      Claw1State = ClawState.NotTouchingTarget;
+    public void Claw1IsNotTouchingTarget() {
+      this.Claw1State = ClawState.NotTouchingTarget;
       //TargetIsNotGrabbed();
     }
 
-    public void Claw2IsNotTouchingTarget () {
-      Claw2State = ClawState.NotTouchingTarget;
+    public void Claw2IsNotTouchingTarget() {
+      this.Claw2State = ClawState.NotTouchingTarget;
       //TargetIsNotGrabbed();
     }
 
-    public void Claw2IsTouchingTarget () {
-      Claw2State = ClawState.TouchingTarget;
-    }
+    public void Claw2IsTouchingTarget() { this.Claw2State = ClawState.TouchingTarget; }
 
-    public void Claw1IsTouchingTarget () {
-      Claw1State = ClawState.TouchingTarget;
-    }
+    public void Claw1IsTouchingTarget() { this.Claw1State = ClawState.TouchingTarget; }
 
-    public void TargetIsOutsideRegion () {
-      TargetState = TargetState.OutsideRegion;
-    }
+    public void TargetIsOutsideRegion() { this.TargetState = TargetState.OutsideRegion; }
 
-    public void TargetIsInsideRegion () {
-      TargetState = TargetState.InsideRegion;
-    }
+    public void TargetIsInsideRegion() { this.TargetState = TargetState.InsideRegion; }
 
-    public bool IsPickingUpTarget () {
-      return PathFindingState == PathFindingState.PickingUpTarget;
-    }
+    public bool IsPickingUpTarget() { return this.PathFindingState == PathFindingState.PickingUpTarget; }
 
-    public void ResetStates () {
-      TargetState = TargetState.OutsideRegion;
-      ObstructionMotionState = MotionState.IsAtRest;
-      TargetMotionState = MotionState.IsAtRest;
-      GripperState = GripperState.Open;
-      PathFindingState = PathFindingState.WaitingForTarget;
-      Claw1State = ClawState.NotTouchingTarget;
-      Claw2State = ClawState.NotTouchingTarget;
+    public void ResetStates() {
+      this.TargetState = TargetState.OutsideRegion;
+      this.ObstructionMotionState = MotionState.IsAtRest;
+      this.TargetMotionState = MotionState.IsAtRest;
+      this.GripperState = GripperState.Open;
+      this.PathFindingState = PathFindingState.WaitingForTarget;
+      this.Claw1State = ClawState.NotTouchingTarget;
+      this.Claw2State = ClawState.NotTouchingTarget;
     }
   }
 }

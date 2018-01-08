@@ -10,57 +10,57 @@ namespace UnityStandardAssets.CrossPlatformInput {
     public string axisName = "Horizontal"; // The name of the axis
     public float axisValue = 1; // The axis that the value has
 
-    private CrossPlatformInputManager.VirtualAxis
+    CrossPlatformInputManager.VirtualAxis
       m_Axis; // A reference to the virtual axis as it is in the cross platform input
 
-    private AxisTouchButton m_PairedWith; // Which button this one is paired with
+    AxisTouchButton m_PairedWith; // Which button this one is paired with
     public float responseSpeed = 3; // The speed at which the axis touch button responds
     public float returnToCentreSpeed = 3; // The speed at which the button will return to its centre
 
     public void OnPointerDown(PointerEventData data) {
-      if (m_PairedWith == null) FindPairedButton();
+      if (this.m_PairedWith == null) this.FindPairedButton();
       // update the axis and record that the button has been pressed this frame
-      m_Axis.Update(
-                    Mathf.MoveTowards(
-                                      m_Axis.GetValue,
-                                      axisValue,
-                                      responseSpeed * Time.deltaTime));
+      this.m_Axis.Update(
+                         value : Mathf.MoveTowards(
+                                                   current : this.m_Axis.GetValue,
+                                                   target : this.axisValue,
+                                                   maxDelta : this.responseSpeed * Time.deltaTime));
     }
 
     public void OnPointerUp(PointerEventData data) {
-      m_Axis.Update(
-                    Mathf.MoveTowards(
-                                      m_Axis.GetValue,
-                                      0,
-                                      responseSpeed * Time.deltaTime));
+      this.m_Axis.Update(
+                         value : Mathf.MoveTowards(
+                                                   current : this.m_Axis.GetValue,
+                                                   target : 0,
+                                                   maxDelta : this.responseSpeed * Time.deltaTime));
     }
 
-    private void OnEnable() {
-      if (!CrossPlatformInputManager.AxisExists(axisName)) {
+    void OnEnable() {
+      if (!CrossPlatformInputManager.AxisExists(name : this.axisName)) {
         // if the axis doesnt exist create a new one in cross platform input
-        m_Axis = new CrossPlatformInputManager.VirtualAxis(axisName);
-        CrossPlatformInputManager.RegisterVirtualAxis(m_Axis);
+        this.m_Axis = new CrossPlatformInputManager.VirtualAxis(name : this.axisName);
+        CrossPlatformInputManager.RegisterVirtualAxis(axis : this.m_Axis);
       } else {
-        m_Axis = CrossPlatformInputManager.VirtualAxisReference(axisName);
+        this.m_Axis = CrossPlatformInputManager.VirtualAxisReference(name : this.axisName);
       }
 
-      FindPairedButton();
+      this.FindPairedButton();
     }
 
-    private void FindPairedButton() {
+    void FindPairedButton() {
       // find the other button witch which this button should be paired
       // (it should have the same axisName)
-      var other_axis_buttons = FindObjectsOfType(typeof(AxisTouchButton)) as AxisTouchButton[];
+      var other_axis_buttons = FindObjectsOfType(type : typeof(AxisTouchButton)) as AxisTouchButton[];
 
       if (other_axis_buttons != null)
         for (var i = 0; i < other_axis_buttons.Length; i++)
-          if (other_axis_buttons[i].axisName == axisName && other_axis_buttons[i] != this)
-            m_PairedWith = other_axis_buttons[i];
+          if (other_axis_buttons[i].axisName == this.axisName && other_axis_buttons[i] != this)
+            this.m_PairedWith = other_axis_buttons[i];
     }
 
-    private void OnDisable() {
+    void OnDisable() {
       // The object is disabled so remove it from the cross platform input system
-      m_Axis.Remove();
+      this.m_Axis.Remove();
     }
   }
 }

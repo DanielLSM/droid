@@ -13,130 +13,353 @@
     <favorites_list name="Environments" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="HexRigidbodyMotor.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/HexRigidbodyMotor.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+              <folding>
+                <marker date="1515387837440" expanded="false" signature="6:125" ph="..." />
+                <marker date="1515387837440" expanded="true" signature="160:2976" ph="{...}" />
+                <marker date="1515387837440" expanded="true" signature="244:2974" ph="{...}" />
+                <marker date="1515387837440" expanded="true" signature="506:570" ph="{...}" />
+                <marker date="1515387837440" expanded="true" signature="618:2037" ph="{...}" />
+                <marker date="1515387837440" expanded="true" signature="2088:2133" ph="{...}" />
+                <marker date="1515387837440" expanded="true" signature="2198:2970" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SteeringMotor.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="5" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+              <folding>
+                <marker date="1515388025584" expanded="false" signature="6:91" ph="..." />
+                <marker date="1515388025584" expanded="true" signature="145:1162" ph="{...}" />
+                <marker date="1515388025584" expanded="true" signature="229:1160" ph="{...}" />
+                <marker date="1515388025584" expanded="true" signature="303:407" ph="{...}" />
+                <marker date="1515388025584" expanded="true" signature="561:625" ph="{...}" />
+                <marker date="1515388025584" expanded="true" signature="774:1156" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FBSStateUtilities.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="613">
+              <caret line="311" column="53" lean-forward="false" selection-start-line="311" selection-start-column="53" selection-end-line="311" selection-end-column="53" />
+              <folding>
+                <marker date="1515396894483" expanded="true" signature="6:421" ph="..." />
+                <marker date="1515396894483" expanded="true" signature="464:20716" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="506:20714" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="512:4367" ph="PublicMethods" />
+                <marker date="1515396894483" expanded="true" signature="612:4351" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="705:4310" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="1366:1728" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="1953:2346" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="4373:20710" ph="PrivateMethods" />
+                <marker date="1515396894483" expanded="true" signature="4491:5412" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="5576:6839" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="6974:7820" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="7975:9308" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="9404:9845" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="9975:10445" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="10593:11133" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="11223:12972" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="11426:11635" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="11673:11856" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="11903:12170" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="12221:12439" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="13096:15036" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="13249:13678" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="15150:15493" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="15652:16985" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="17138:20694" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="17332:17579" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="17627:17819" ph="{...}" />
+                <marker date="1515396894483" expanded="true" signature="17873:18096" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EulerTransformMotor.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/EulerTransformMotor.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1515386588274" expanded="false" signature="6:131" ph="..." />
+                <marker date="1515386588274" expanded="true" signature="166:2480" ph="{...}" />
+                <marker date="1515386588274" expanded="true" signature="211:2478" ph="{...}" />
+                <marker date="1515386588274" expanded="true" signature="523:2366" ph="{...}" />
+                <marker date="1515386588274" expanded="true" signature="672:1725" ph="{...}" />
+                <marker date="1515386588274" expanded="true" signature="1758:2193" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RigidbodyMotor.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/RigidbodyMotor.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+              <folding>
+                <marker date="1515387790600" expanded="false" signature="6:145" ph="..." />
+                <marker date="1515387790600" expanded="true" signature="180:2395" ph="{...}" />
+                <marker date="1515387790600" expanded="true" signature="261:2393" ph="{...}" />
+                <marker date="1515387790600" expanded="true" signature="473:537" ph="{...}" />
+                <marker date="1515387790600" expanded="true" signature="602:2270" ph="{...}" />
+                <marker date="1515387790600" expanded="true" signature="640:2264" ph="{...}" />
+                <marker date="1515387790600" expanded="true" signature="2321:2389" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TriRigidbodyMotor.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/TriRigidbodyMotor.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+              <folding>
+                <marker date="1515387943680" expanded="false" signature="6:125" ph="..." />
+                <marker date="1515387943680" expanded="true" signature="160:3341" ph="{...}" />
+                <marker date="1515387943680" expanded="true" signature="244:3339" ph="{...}" />
+                <marker date="1515387943680" expanded="true" signature="505:569" ph="{...}" />
+                <marker date="1515387943680" expanded="true" signature="617:1462" ph="{...}" />
+                <marker date="1515387943680" expanded="true" signature="804:978" ph="{...}" />
+                <marker date="1515387943680" expanded="true" signature="1513:1558" ph="{...}" />
+                <marker date="1515387943680" expanded="true" signature="1623:3335" ph="{...}" />
+                <marker date="1515387943680" expanded="true" signature="1661:2486" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>_low_limit</find>
       <find>using</find>
+      <find>_caller</find>
+      <find>[RequireComponent(requiredComponent :</find>
+      <find>build_body_observation</find>
     </findStrings>
+    <replaceStrings>
+      <replace>Caller</replace>
+      <replace>[RequireComponent(</replace>
+    </replaceStrings>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/PlayerControls/PlayerReactions.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Actors/Actor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/AutoMobileShaderSwitch.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ScriptableObjects/Curriculum.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializedPropertyExtension.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/Example.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/ActivateTrigger.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/QuickGlow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/MessageServer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionary.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/DragRigidbody.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSReactionUtilities.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidStateModels.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/SimpleBlur.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/WaypointCircuit.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/SimulationManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/EnvironmentDescription.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/FestoBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Grasps/Grasp.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/General/NeodroidManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Grasps/VRGrip.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/Traction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/ReactionParameters.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SegmentationWindow.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/PlayerMotions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Utilities.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/Curriculum.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/NeodroidTask.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/OnCollision.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ChildSensor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/StatusUpdater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/Unity3DRider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/PunishmentFunction.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/States.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/TiltInput.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/GUIControl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/JointFix.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/PickUpBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/AxisTouchButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ObstacleSpawner.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Environments/LearningEnvironment.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Enums/CoordinateSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/EditorLikeCameraBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/LaserPointer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/Obstruction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/ViveControllerInputTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Enums/Axis.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/ControllerGrabObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/GraspableObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ScriptedGripper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Tasks/TaskSequence.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/VirtualInput.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimedRespawn.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/CrossPlatformInputManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Structs/SimulationConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Structs/InputRange.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Shaders/IgnoreZ.shader" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Testing/DrawSpaces.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/NotUsed/ImageRecorder.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/Path.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/PathFinding.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/EulerTransformConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/BezierCurve.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/HasRegister.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/RigidbodyConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SimulationConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Daylight/DaylightSimulator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/PositionConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/LightSources/InfraredLightSource.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Satellite/Scripts/BodyWithMass.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Satellite/Scripts/InitialForce.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasEulerTransformProperties.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/SegmentationColor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/ChangeMaterialOnRenderByInstance.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SingleEulerTransformConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/ConfigurableGameObject.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/Difficulty.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasEulerPosition.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasRigidbodyProperties.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/ChangeMaterialOnRenderByTag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasRegister.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/DrawBoundingBoxes.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/BoundingBox.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/NotUsed/BoundingBoxUtilities.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/SynchroniseCameraProperties.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/ReplacementShaderEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/FlowCamera.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/IgnoreLightSource.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/TimedObjectActivator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/PlayerControls/PlayerReactions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/PlayerControls/KeyEventEnabler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Actors/Actor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ScriptableObjects/PlayerMotions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/AutoMobileShaderSwitch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ScriptableObjects/Curriculum.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ScriptableObjects/NeodroidTask.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/HexTransformMotor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/EulerTransformMotor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializedPropertyExtension.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/TriTransformMotor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionaryDrawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionaryDrawerImplementations.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/Example.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/ActivateTrigger.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionaryImplementations.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionary.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/TriRigidbodyMotor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/HexRigidbodyMotor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/RigidbodyMotor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/General/Motor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/DragRigidbody.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/Particles/RocketMotor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/WaypointCircuit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SimulationWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/TorqueMotor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/SimulationManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/WindowManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/DebugWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/DemonstrationWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/General/NeodroidManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/RenderTextureConfiguratorWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SegmentationWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/NotUsed/ThinManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/TaskWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/NotUsed/CurriculumManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/CameraSynchronisationWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/GameObjects/PrebuiltSpawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/GameObjects/ObserverSpawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/GameObjects/GeneralSpawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/GameObjects/MotorSpawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/PlayerMotions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/CameraObserver.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/Curriculum.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/NeodroidTask.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/General/Observer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/NotUsed/GoalObserver.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/NotUsed/BoundingBoxObserver.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/CollsionsPunishmentTerm.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Shaders/Depth.shader" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/EuclideanDistance.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/RestInArea.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/PoseDeviance.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/PunishmentFunction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/AngularVelocity.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/States.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/MotionTracker.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/CollidersPunishment.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/TiltInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/GUIControl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/ReachArea.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/AxisTouchButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/ConnectedLine.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/CollisionExplosion.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/ParticleController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/BlitToMaterial.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Environments/LearningEnvironment.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/LowerGravity.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/VirtualInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/DataCollector.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimedRespawn.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/FollowTarget.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimeManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/CrossPlatformInputManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/VerticalGameObjectSpawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/NotUsed/ImageRecorder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/Path.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/BezierPoint.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/PathFinding.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/EulerTransformConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/BezierCurve.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/ColorConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/RigidbodyConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SimulationConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SingleEulerTransformConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/ObjectSpawnerConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/QuaternionTransformConfigurable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/ConfigurableGameObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/Difficulty.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/Configurable.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/PlatformSpecificContent.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/MobileControlRig.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/FestoBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/GUIControl.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/BezierCurve.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/Traction.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Grasps/Grasp.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/DragRigidbody.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/States.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ScriptedGripper.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/TimedObjectActivator.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/ActivateTrigger.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Tasks/TaskSequence.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimedRespawn.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/NotUsed/ImageRecorder.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/SynchroniseCameraProperties.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Managers/SimulationManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/WaypointCircuit.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/IgnoreLightSource.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Environments/LearningEnvironment.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/PickUpBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/ReactionParameters.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ObstacleSpawner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/BoundingBox.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Testing/DrawSpaces.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/HasRegister.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/PathFinding.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionary.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/ChangeMaterialOnRenderByInstance.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/PlayerControls/PlayerReactions.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/FlowCamera.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/MessageServer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Managers/General/NeodroidManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SingleEulerTransformConfigurable.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/Path.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/AxisTouchButton.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Utilities.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SimulationConfigurable.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/JointFix.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/PunishmentFunction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SegmentationWindow.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/SegmentationColor.cs" />
         <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/Example.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/PlayerMotions.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/NeodroidTask.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/Curriculum.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/Difficulty.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/EulerTransformConfigurable.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Actors/Actor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/RigidbodyConfigurable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionary.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionaryDrawer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionaryDrawerImplementations.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionaryImplementations.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializedPropertyExtension.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Structs/InputRange.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Structs/SimulationConfiguration.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Testing/DrawSpaces.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ChildSensor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Utilities.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/StatusUpdater.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/OnCollision.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/JointFix.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/CollisionExplosion.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/ConnectedLine.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/FollowTarget.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/LowerGravity.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/ParticleController.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/EditorLikeCameraBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/PickUpBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Satellite/Scripts/BodyWithMass.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/Satellite/Scripts/InitialForce.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Grasps/Grasp.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/BezierCurve.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/BezierPoint.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/PathFinding.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/GraspableObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ObstacleSpawner.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/Obstruction.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ScriptedGripper.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/GUIControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimedRespawn.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/VerticalGameObjectSpawner.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimeManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/DataCollector.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/BlitToMaterial.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/NotUsed/ImageRecorder.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/SimpleBlur.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/MotionTracker.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/Traction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/FestoBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/States.cs" />
+        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/QuickGlow.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/RigidbodyMotor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/TorqueMotor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/HexRigidbodyMotor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/TriRigidbodyMotor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs" />
       </list>
     </option>
   </component>
@@ -190,6 +413,59 @@
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
               <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Messaging" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Messaging" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="FBS" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -201,7 +477,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.build.unityPlugin" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
     <property name="do_not_show_unity_auto_save_notification" value="true" />
   </component>
   <component name="RunDashboard">
@@ -240,11 +516,13 @@
       <workItem from="1515358221596" duration="119000" />
       <workItem from="1515362038785" duration="314000" />
       <workItem from="1515362380339" duration="196000" />
+      <workItem from="1515378541231" duration="7140000" />
+      <workItem from="1515396585458" duration="564000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10427000" />
+    <option name="totallyTimeSpent" value="18131000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -257,34 +535,35 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="23" y="-1" width="1874" height="1062" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42747673" sideWeight="0.50764525" order="14" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38752052" sideWeight="0.50764525" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Unit Tests" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20470718" sideWeight="0.5035678" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32877463" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32877463" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="NuGet" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26929393" sideWeight="0.5035678" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20470718" sideWeight="0.49643221" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20470718" sideWeight="0.4841998" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39956212" sideWeight="0.49235475" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39956212" sideWeight="0.49235475" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection Results" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38314176" sideWeight="0.49643221" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38314176" sideWeight="0.49643221" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298687" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="0" y="0" width="418" height="862" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20470718" sideWeight="0.5035678" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20470718" sideWeight="0.5158002" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
@@ -302,348 +581,436 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/ActivateTrigger.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="26" lean-forward="false" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/TiltInput.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="34" column="8" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Tasks/TaskSequence.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="7" lean-forward="false" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimedRespawn.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="41" column="78" lean-forward="false" selection-start-line="41" selection-start-column="78" selection-end-line="41" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/NotUsed/ImageRecorder.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ScriptedGripper.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="730">
-          <caret line="109" column="28" lean-forward="false" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/EnvironmentDescription.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="25" column="28" lean-forward="false" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/NotUsed/BoundingBoxUtilities.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="367" column="22" lean-forward="false" selection-start-line="367" selection-start-column="22" selection-end-line="367" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/SimulationManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/WaypointCircuit.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="128" column="14" lean-forward="false" selection-start-line="128" selection-start-column="14" selection-end-line="128" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/SynchroniseCameraProperties.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="41" column="31" lean-forward="false" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/IgnoreLightSource.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="33" column="6" lean-forward="false" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Environments/LearningEnvironment.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="649" column="22" lean-forward="false" selection-start-line="649" selection-start-column="22" selection-end-line="649" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/PickUpBehaviour.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="126" column="41" lean-forward="false" selection-start-line="126" selection-start-column="41" selection-end-line="126" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/ReactionParameters.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/VirtualInput.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="5" column="40" lean-forward="false" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ObstacleSpawner.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="117" column="5" lean-forward="false" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Testing/DrawSpaces.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+        <state relative-caret-position="36">
+          <caret line="2" column="22" lean-forward="false" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/HasRegister.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ChildSensor.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="31" lean-forward="false" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/ConfigurableGameObject.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/PathFinding.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="277" column="26" lean-forward="false" selection-start-line="277" selection-start-column="26" selection-end-line="277" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/SerializableDictionary.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="5" column="32" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/ChangeMaterialOnRenderByInstance.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/PlayerControls/PlayerReactions.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="34" column="27" lean-forward="false" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/NeodroidCamera/FlowCamera.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/MessageServer.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="109" column="27" lean-forward="false" selection-start-line="109" selection-start-column="27" selection-end-line="109" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/General/NeodroidManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="144" column="17" lean-forward="false" selection-start-line="144" selection-start-column="17" selection-end-line="144" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SingleEulerTransformConfigurable.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="23" column="30" lean-forward="false" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/Path.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="14" column="20" lean-forward="false" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/AxisTouchButton.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="55" column="33" lean-forward="false" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+        <state relative-caret-position="432">
+          <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Utilities.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="150" column="10" lean-forward="false" selection-start-line="150" selection-start-column="10" selection-end-line="150" selection-end-column="10" />
+        <state relative-caret-position="586">
+          <caret line="74" column="54" lean-forward="false" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/BoundingBox.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/StatusUpdater.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="211" column="59" lean-forward="false" selection-start-line="211" selection-start-column="59" selection-end-line="211" selection-end-column="59" />
+        <state relative-caret-position="90">
+          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/PlatformSpecificContent.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SimulationConfigurable.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/OnCollision.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="73" column="8" lean-forward="false" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/CrossPlatformInputManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="118" column="18" lean-forward="false" selection-start-line="118" selection-start-column="18" selection-end-line="118" selection-end-column="18" />
+        <state relative-caret-position="36">
+          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/JointFix.cs">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="26" column="39" lean-forward="false" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Shaders/Depth.shader">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1768">
+          <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/CollisionExplosion.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="7" column="10" lean-forward="false" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/ConnectedLine.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="37" lean-forward="false" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/FollowTarget.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/LowerGravity.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="23" lean-forward="false" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/ParticleController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="24" lean-forward="false" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/ControllerGrabObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-670">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/EditorLikeCameraBehaviour.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="103" column="20" lean-forward="false" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/LaserPointer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-810">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/PickUpBehaviour.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="180" column="17" lean-forward="false" selection-start-line="180" selection-start-column="17" selection-end-line="180" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Scripts/ViveControllerInputTest.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Satellite/Scripts/BodyWithMass.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/Satellite/Scripts/InitialForce.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Grasps/VRGrip.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-270">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Grasps/Grasp.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-166">
+          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/BezierCurve.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="5" column="32" lean-forward="false" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/BezierPoint.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="68" column="25" lean-forward="false" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Navigation/PathFinding.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="326" column="50" lean-forward="false" selection-start-line="326" selection-start-column="50" selection-end-line="326" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/GraspableObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="316">
-          <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+          <caret line="187" column="46" lean-forward="false" selection-start-line="187" selection-start-column="46" selection-end-line="187" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ObstacleSpawner.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/Obstruction.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="3" column="30" lean-forward="false" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/VerticalGameObjectSpawner.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="24" lean-forward="false" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimeManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="38" lean-forward="false" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimedRespawn.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/DataCollector.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/NotUsed/ImageRecorder.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-94">
+          <caret line="3" column="21" lean-forward="false" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/MotionTracker.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="30" lean-forward="false" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/BlitToMaterial.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/GUIControl.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="56" column="4" lean-forward="false" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Scripts/ScriptedGripper.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="328" column="0" lean-forward="false" selection-start-line="328" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/Traction.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/FestoBehaviour.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/States.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/SimpleBlur.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/QuickGlow.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="42" lean-forward="false" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/TorqueMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/Particles/RocketMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="11" column="38" lean-forward="false" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/General/Motor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="40" column="4" lean-forward="false" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/HexTransformMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/EulerTransformMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1515386588274" expanded="false" signature="6:131" ph="..." />
+            <marker date="1515386588274" expanded="true" signature="166:2480" ph="{...}" />
+            <marker date="1515386588274" expanded="true" signature="211:2478" ph="{...}" />
+            <marker date="1515386588274" expanded="true" signature="523:2366" ph="{...}" />
+            <marker date="1515386588274" expanded="true" signature="672:1725" ph="{...}" />
+            <marker date="1515386588274" expanded="true" signature="1758:2193" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/RigidbodyMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding>
+            <marker date="1515387790600" expanded="false" signature="6:145" ph="..." />
+            <marker date="1515387790600" expanded="true" signature="180:2395" ph="{...}" />
+            <marker date="1515387790600" expanded="true" signature="261:2393" ph="{...}" />
+            <marker date="1515387790600" expanded="true" signature="473:537" ph="{...}" />
+            <marker date="1515387790600" expanded="true" signature="602:2270" ph="{...}" />
+            <marker date="1515387790600" expanded="true" signature="640:2264" ph="{...}" />
+            <marker date="1515387790600" expanded="true" signature="2321:2389" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/TriRigidbodyMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+          <folding>
+            <marker date="1515387943680" expanded="false" signature="6:125" ph="..." />
+            <marker date="1515387943680" expanded="true" signature="160:3341" ph="{...}" />
+            <marker date="1515387943680" expanded="true" signature="244:3339" ph="{...}" />
+            <marker date="1515387943680" expanded="true" signature="505:569" ph="{...}" />
+            <marker date="1515387943680" expanded="true" signature="617:1462" ph="{...}" />
+            <marker date="1515387943680" expanded="true" signature="804:978" ph="{...}" />
+            <marker date="1515387943680" expanded="true" signature="1513:1558" ph="{...}" />
+            <marker date="1515387943680" expanded="true" signature="1623:3335" ph="{...}" />
+            <marker date="1515387943680" expanded="true" signature="1661:2486" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/HexRigidbodyMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+          <folding>
+            <marker date="1515387837440" expanded="false" signature="6:125" ph="..." />
+            <marker date="1515387837440" expanded="true" signature="160:2976" ph="{...}" />
+            <marker date="1515387837440" expanded="true" signature="244:2974" ph="{...}" />
+            <marker date="1515387837440" expanded="true" signature="506:570" ph="{...}" />
+            <marker date="1515387837440" expanded="true" signature="618:2037" ph="{...}" />
+            <marker date="1515387837440" expanded="true" signature="2088:2133" ph="{...}" />
+            <marker date="1515387837440" expanded="true" signature="2198:2970" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="5" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding>
+            <marker date="1515388025584" expanded="false" signature="6:91" ph="..." />
+            <marker date="1515388025584" expanded="true" signature="145:1162" ph="{...}" />
+            <marker date="1515388025584" expanded="true" signature="229:1160" ph="{...}" />
+            <marker date="1515388025584" expanded="true" signature="303:407" ph="{...}" />
+            <marker date="1515388025584" expanded="true" signature="561:625" ph="{...}" />
+            <marker date="1515388025584" expanded="true" signature="774:1156" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="430" column="11" lean-forward="false" selection-start-line="430" selection-start-column="11" selection-end-line="430" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/PunishmentFunction.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/SerialisableDictionary/Example.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="15" column="94" lean-forward="false" selection-start-line="15" selection-start-column="94" selection-end-line="15" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/PlayerMotions.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/NeodroidTask.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="6" column="36" lean-forward="false" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/ScriptableObjects/Curriculum.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="6" column="34" lean-forward="false" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ScriptableObjects/Curriculum.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/General/Difficulty.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="4" column="37" lean-forward="false" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Actors/Actor.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/RigidbodyConfigurable.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/EulerTransformConfigurable.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SegmentationWindow.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/Unity3DRider.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Shaders/IgnoreZ.shader">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        <state relative-caret-position="613">
+          <caret line="311" column="53" lean-forward="false" selection-start-line="311" selection-start-column="53" selection-end-line="311" selection-end-column="53" />
+          <folding>
+            <marker date="1515396894483" expanded="true" signature="6:421" ph="..." />
+            <marker date="1515396894483" expanded="true" signature="464:20716" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="506:20714" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="512:4367" ph="PublicMethods" />
+            <marker date="1515396894483" expanded="true" signature="612:4351" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="705:4310" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="1366:1728" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="1953:2346" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="4373:20710" ph="PrivateMethods" />
+            <marker date="1515396894483" expanded="true" signature="4491:5412" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="5576:6839" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="6974:7820" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="7975:9308" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="9404:9845" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="9975:10445" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="10593:11133" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="11223:12972" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="11426:11635" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="11673:11856" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="11903:12170" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="12221:12439" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="13096:15036" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="13249:13678" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="15150:15493" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="15652:16985" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="17138:20694" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="17332:17579" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="17627:17819" ph="{...}" />
+            <marker date="1515396894483" expanded="true" signature="17873:18096" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

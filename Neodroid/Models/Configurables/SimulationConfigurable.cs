@@ -1,81 +1,84 @@
-﻿using Neodroid.Managers;
-using Neodroid.Messaging.Messages;
-using Neodroid.Utilities;
+﻿using Neodroid.Messaging.Messages;
+using Neodroid.Models.Configurables.General;
+using Neodroid.Models.Managers;
+using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
-namespace Neodroid.Configurables {
-  [RequireComponent(typeof(SimulationManager))]
+namespace Neodroid.Models.Configurables {
+  [RequireComponent( typeof(SimulationManager))]
   public class SimulationConfigurable : ConfigurableGameObject {
-    private string _fullscreen;
-    private string _height;
+    string _fullscreen;
+    string _height;
 
-    private string _quality_level;
-    private string _target_frame_rate;
-    private string _time_scale;
-    private string _width;
+    string _quality_level;
+    string _target_frame_rate;
+    string _time_scale;
+    string _width;
 
-    public override string ConfigurableIdentifier { get { return name + "Simulation"; } }
+    public override string ConfigurableIdentifier { get { return this.name + "Simulation"; } }
 
     protected override void AddToEnvironment() {
-      _quality_level = ConfigurableIdentifier + "QualityLevel";
-      _target_frame_rate = ConfigurableIdentifier + "TargetFrameRate";
-      _time_scale = ConfigurableIdentifier + "TimeScale";
-      _width = ConfigurableIdentifier + "Width";
-      _height = ConfigurableIdentifier + "Height";
-      _fullscreen = ConfigurableIdentifier + "Fullscreen";
-      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                        ParentEnvironment,
-                                                                        (ConfigurableGameObject)this,
-                                                                        _quality_level);
-      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                        ParentEnvironment,
-                                                                        (ConfigurableGameObject)this,
-                                                                        _target_frame_rate);
-      ParentEnvironment =
+      this._quality_level = this.ConfigurableIdentifier + "QualityLevel";
+      this._target_frame_rate = this.ConfigurableIdentifier + "TargetFrameRate";
+      this._time_scale = this.ConfigurableIdentifier + "TimeScale";
+      this._width = this.ConfigurableIdentifier + "Width";
+      this._height = this.ConfigurableIdentifier + "Height";
+      this._fullscreen = this.ConfigurableIdentifier + "Fullscreen";
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                             r : this.ParentEnvironment,
+                                                                             c : (ConfigurableGameObject)this,
+                                                                             identifier : this
+                                                                               ._quality_level);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                             r : this.ParentEnvironment,
+                                                                             c : (ConfigurableGameObject)this,
+                                                                             identifier : this
+                                                                               ._target_frame_rate);
+      this.ParentEnvironment =
         NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      ParentEnvironment,
-                                                      (ConfigurableGameObject)this,
-                                                      _width);
-      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                        ParentEnvironment,
-                                                                        (ConfigurableGameObject)this,
-                                                                        _height);
-      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                        ParentEnvironment,
-                                                                        (ConfigurableGameObject)this,
-                                                                        _fullscreen);
-      ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                        ParentEnvironment,
-                                                                        (ConfigurableGameObject)this,
-                                                                        _time_scale);
+                                                      r : this.ParentEnvironment,
+                                                      c : (ConfigurableGameObject)this,
+                                                      identifier : this._width);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                             r : this.ParentEnvironment,
+                                                                             c : (ConfigurableGameObject)this,
+                                                                             identifier : this._height);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                             r : this.ParentEnvironment,
+                                                                             c : (ConfigurableGameObject)this,
+                                                                             identifier : this._fullscreen);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+                                                                             r : this.ParentEnvironment,
+                                                                             c : (ConfigurableGameObject)this,
+                                                                             identifier : this._time_scale);
     }
 
     public override void ApplyConfiguration(Configuration configuration) {
-      if (Debugging)
-        print("Applying " + configuration + " To " + ConfigurableIdentifier);
+      if (this.Debugging)
+        print(message : "Applying " + configuration + " To " + this.ConfigurableIdentifier);
 
-      if (configuration.ConfigurableName == _quality_level)
+      if (configuration.ConfigurableName == this._quality_level)
         QualitySettings.SetQualityLevel(
-                                        (int)configuration.ConfigurableValue,
-                                        true);
-      else if (configuration.ConfigurableName == _target_frame_rate)
+                                        index : (int)configuration.ConfigurableValue,
+                                        applyExpensiveChanges : true);
+      else if (configuration.ConfigurableName == this._target_frame_rate)
         Application.targetFrameRate = (int)configuration.ConfigurableValue;
-      else if (configuration.ConfigurableName == _width)
+      else if (configuration.ConfigurableName == this._width)
         Screen.SetResolution(
-                             (int)configuration.ConfigurableValue,
-                             Screen.height,
-                             false);
-      else if (configuration.ConfigurableName == _height)
+                             width : (int)configuration.ConfigurableValue,
+                             height : Screen.height,
+                             fullscreen : false);
+      else if (configuration.ConfigurableName == this._height)
         Screen.SetResolution(
-                             Screen.width,
-                             (int)configuration.ConfigurableValue,
-                             false);
-      else if (configuration.ConfigurableName == _fullscreen)
+                             width : Screen.width,
+                             height : (int)configuration.ConfigurableValue,
+                             fullscreen : false);
+      else if (configuration.ConfigurableName == this._fullscreen)
         Screen.SetResolution(
-                             Screen.width,
-                             Screen.height,
-                             (int)configuration.ConfigurableValue != 0);
-      else if (configuration.ConfigurableName == _time_scale)
+                             width : Screen.width,
+                             height : Screen.height,
+                             fullscreen : (int)configuration.ConfigurableValue != 0);
+      else if (configuration.ConfigurableName == this._time_scale)
         Time.timeScale = configuration.ConfigurableValue;
     }
   }

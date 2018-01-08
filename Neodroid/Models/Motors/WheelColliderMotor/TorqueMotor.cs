@@ -1,13 +1,14 @@
 ﻿using Neodroid.Messaging.Messages;
+using Neodroid.Models.Motors.General;
 using UnityEngine;
 
-namespace Neodroid.Motors {
-  [RequireComponent(typeof(WheelCollider))]
+namespace Neodroid.Models.Motors.WheelColliderMotor {
+  [RequireComponent( typeof(WheelCollider))]
   public class TorqueMotor : Motor {
     public override void InnerApplyMotion(MotorMotion motion) {
-      GetComponent<WheelCollider>().motorTorque = motion.Strength;
+      this.GetComponent<WheelCollider>().motorTorque = motion.Strength;
     }
 
-    public override string GetMotorIdentifier() { return name + "Torque"; }
+    public override string GetMotorIdentifier() { return this.name + "Torque"; }
   }
 }

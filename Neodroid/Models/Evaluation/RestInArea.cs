@@ -1,111 +1,120 @@
 ﻿using System.Collections;
-using Assets.Neodroid.Models.Actors;
 using Neodroid.Environments;
-using Neodroid.Observers;
-using Neodroid.Utilities;
-using Neodroid.Utilities.BoundingBoxes;
-using SceneSpecificAssets.Grasping;
+using Neodroid.Evaluation;
+using Neodroid.Models.Actors;
+using Neodroid.Models.Observers.General;
+using Neodroid.Scripts.Utilities;
+using Neodroid.Scripts.Utilities.BoundingBoxes;
+using SceneAssets.ScripterGrasper.Scripts;
 using UnityEngine;
 
-namespace Neodroid.Evaluation {
+namespace Neodroid.Models.Evaluation {
   public class RestInArea : ObjectiveFunction {
-    public Actor _actor;
-    public Collider _area;
-    public LearningEnvironment _environment;
-    private bool _is_resting;
+    [SerializeField]
+    Actor _actor;
+    [SerializeField]
+    Collider _area;
+    [SerializeField] LearningEnvironment _environment;
 
-    public Obstruction[] _obstructions;
-
-    private ActorOverlapping _overlapping = ActorOverlapping.OUTSIDE_AREA;
-    public BoundingBox _playable_area;
-
-    public float _resting_time = 3f;
-    private Coroutine wait_for_resting;
+    [SerializeField] Obstruction[] _obstructions;
+    //Used for.. if outside playable area then reset
+    [SerializeField]
+    ActorOverlapping _overlapping = ActorOverlapping.OutsideArea;
+    [SerializeField] BoundingBox _playable_area;
+    [SerializeField] bool _is_resting;
+    [SerializeField]  float _resting_time = 3f;
+    [SerializeField] Coroutine _wait_for_resting;
 
     public override float InternalEvaluate() {
-      if (_overlapping == ActorOverlapping.INSIDE_AREA && _is_resting && _actor.Alive) {
-        _environment.Terminate("Inside goal area");
+      if (this._overlapping == ActorOverlapping.InsideArea && this._is_resting && this._actor.Alive) {
+        this._environment.Terminate(reason : "Inside goal area");
         return 1f;
       }
 
-      if (_playable_area && _actor)
-        if (!_playable_area._bounds.Intersects(_actor.GetComponent<Collider>().bounds))
-          _environment.Terminate("Actor is outside playable area");
+      if (this._playable_area && this._actor)
+        if (!this._playable_area._bounds.Intersects(bounds : this._actor.GetComponent<Collider>().bounds))
+          this._environment.Terminate(reason : "Actor is outside playable area");
 
       return 0f;
     }
 
     public override void InternalReset() {
-      if (wait_for_resting != null)
-        StopCoroutine(wait_for_resting);
-      _is_resting = false;
+      if (this._wait_for_resting != null) this.StopCoroutine(routine : this._wait_for_resting);
+      this._is_resting = false;
     }
 
-    private IEnumerator WaitForResting() {
-      yield return new WaitForSeconds(_resting_time);
+    IEnumerator WaitForResting() {
+      yield return new WaitForSeconds(seconds : this._resting_time);
 
-      _is_resting = true;
+      this._is_resting = true;
     }
 
-    private void Start() {
-      if (!_area) _area = FindObjectOfType<Observer>().gameObject.GetComponent<Collider>();
-      if (!_actor) _actor = FindObjectOfType<Actor>();
-      if (!_environment) _environment = FindObjectOfType<LearningEnvironment>();
-      if (_obstructions.Length <= 0) _obstructions = FindObjectsOfType<Obstruction>();
-      if (!_playable_area) _playable_area = FindObjectOfType<BoundingBox>();
+    void Start() {
+      if (!this._area) this._area = FindObjectOfType<Observer>().gameObject.GetComponent<Collider>();
+      if (!this._actor) this._actor = FindObjectOfType<Actor>();
+      if (!this._environment) this._environment = FindObjectOfType<LearningEnvironment>();
+      if (this._obstructions.Length <= 0) this._obstructions = FindObjectsOfType<Obstruction>();
+      if (!this._playable_area) this._playable_area = FindObjectOfType<BoundingBox>();
 
       NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren(
-                                                                    this,
-                                                                    _area.transform,
-                                                                    null,
-                                                                    OnTriggerEnterChild,
-                                                                    null,
-                                                                    OnTriggerExitChild,
-                                                                    null,
-                                                                    OnTriggerStayChild,
-                                                                    Debugging);
+                                                                    caller : this,
+                                                                    parent : this._area.transform,
+                                                                    on_collision_enter_child : null,
+                                                                    on_trigger_enter_child : this
+                                                                      .OnTriggerEnterChild,
+                                                                    on_collision_exit_child : null,
+                                                                    on_trigger_exit_child : this
+                                                                      .OnTriggerExitChild,
+                                                                    on_collision_stay_child : null,
+                                                                    on_trigger_stay_child : this
+                                                                      .OnTriggerStayChild,
+                                                                    debug : this.Debugging);
 
       NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren(
-                                                                    this,
-                                                                    _actor.transform,
-                                                                    null,
-                                                                    OnTriggerEnterChild,
-                                                                    null,
-                                                                    OnTriggerExitChild,
-                                                                    null,
-                                                                    OnTriggerStayChild,
-                                                                    Debugging);
+                                                                    caller : this,
+                                                                    parent : this._actor.transform,
+                                                                    on_collision_enter_child : null,
+                                                                    on_trigger_enter_child : this
+                                                                      .OnTriggerEnterChild,
+                                                                    on_collision_exit_child : null,
+                                                                    on_trigger_exit_child : this
+                                                                      .OnTriggerExitChild,
+                                                                    on_collision_stay_child : null,
+                                                                    on_trigger_stay_child : this
+                                                                      .OnTriggerStayChild,
+                                                                    debug : this.Debugging);
     }
 
-    private void OnTriggerEnterChild(GameObject child_game_object, Collider other_game_object) {
-      if (_actor)
-        if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
-          if (Debugging)
-            Debug.Log("Actor is inside area");
-          _overlapping = ActorOverlapping.INSIDE_AREA;
-          if (wait_for_resting != null)
-            StopCoroutine(wait_for_resting);
-          wait_for_resting = StartCoroutine(WaitForResting());
+    void OnTriggerEnterChild(GameObject child_game_object, Collider other_game_object) {
+      if (this._actor)
+        if (child_game_object == this._area.gameObject
+            && other_game_object.gameObject == this._actor.gameObject) {
+          if (this.Debugging)
+            Debug.Log(message : "Actor is inside area");
+          this._overlapping = ActorOverlapping.InsideArea;
+          if (this._wait_for_resting != null) this.StopCoroutine(routine : this._wait_for_resting);
+          this._wait_for_resting = this.StartCoroutine(routine : this.WaitForResting());
         }
     }
 
-    private void OnTriggerStayChild(GameObject child_game_object, Collider other_game_object) {
-      if (_actor)
-        if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
-          if (Debugging)
-            Debug.Log("Actor is inside area");
-          _overlapping = ActorOverlapping.INSIDE_AREA;
+    void OnTriggerStayChild(GameObject child_game_object, Collider other_game_object) {
+      if (this._actor)
+        if (child_game_object == this._area.gameObject
+            && other_game_object.gameObject == this._actor.gameObject) {
+          if (this.Debugging)
+            Debug.Log(message : "Actor is inside area");
+          this._overlapping = ActorOverlapping.InsideArea;
         }
     }
 
-    private void OnTriggerExitChild(GameObject child_game_object, Collider other_game_object) {
-      if (_actor)
-        if (child_game_object == _area.gameObject && other_game_object.gameObject == _actor.gameObject) {
-          if (Debugging)
-            Debug.Log("Actor is outside area");
-          _overlapping = ActorOverlapping.OUTSIDE_AREA;
-          if (wait_for_resting != null)
-            StopCoroutine(wait_for_resting);
+    void OnTriggerExitChild(GameObject child_game_object, Collider other_game_object) {
+      if (this._actor)
+        if (child_game_object == this._area.gameObject
+            && other_game_object.gameObject == this._actor.gameObject) {
+          if (this.Debugging)
+            Debug.Log(message : "Actor is outside area");
+          this._overlapping = ActorOverlapping.OutsideArea;
+          if (this._wait_for_resting != null) this.StopCoroutine(routine : this._wait_for_resting);
         }
     }
   }

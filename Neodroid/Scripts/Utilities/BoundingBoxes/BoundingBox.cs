@@ -1,95 +1,94 @@
 using System.Collections.Generic;
+using Neodroid.Utilities.BoundingBoxes;
+
 using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
-
 #endif
 
-namespace Neodroid.Utilities.BoundingBoxes {
+namespace Neodroid.Scripts.Utilities.BoundingBoxes {
   [ExecuteInEditMode]
   public class BoundingBox : MonoBehaviour {
-    private Vector3 _bottom_back_left;
-    private Vector3 _bottom_back_right;
-    private Vector3 _bottom_front_left;
-    private Vector3 _bottom_front_right;
+    Vector3 _bottom_back_left;
+    Vector3 _bottom_back_right;
+    Vector3 _bottom_front_left;
+    Vector3 _bottom_front_right;
 
-    [HideInInspector]
-    public Bounds _bounds;
+    [HideInInspector] public Bounds _bounds;
 
-    [HideInInspector]
-    public Vector3 _bounds_offset;
+    [HideInInspector] public Vector3 _bounds_offset;
 
     public DrawBoundingBoxOnCamera _camera;
-    private Collider[] _children_colliders;
+    Collider[] _children_colliders;
 
-    private MeshFilter[] _children_meshes;
+    MeshFilter[] _children_meshes;
 
     public bool _collider_based;
 
-    private Vector3[] _corners;
+    Vector3[] _corners;
     public bool _freeze = true;
 
     public bool _include_children = true;
 
     // Vector3 startingBoundSize;
     // Vector3 startingBoundCenterLocal;
-    private Vector3 _last_position;
-    private Quaternion _last_rotation;
+    Vector3 _last_position;
+    Quaternion _last_rotation;
 
     [HideInInspector]
     //public Vector3 startingScale;
-    private Vector3 _last_scale;
+    Vector3 _last_scale;
 
     public Color _line_color = new Color (
-                                 0f,
-                                 1f,
-                                 0.4f,
-                                 0.74f);
+                                 r : 0f,
+                                 g : 1f,
+                                 b : 0.4f,
+                                 a : 0.74f);
 
-    private Vector3[,] _lines;
+    Vector3[,] _lines;
 
-    private Quaternion _rotation;
+    Quaternion _rotation;
 
     public bool _setup_on_awake = true;
-    private Vector3 _top_back_left;
-    private Vector3 _top_back_right;
+    Vector3 _top_back_left;
+    Vector3 _top_back_right;
 
-    private Vector3 _top_front_left;
-    private Vector3 _top_front_right;
+    Vector3 _top_front_left;
+    Vector3 _top_front_right;
 
     public Vector3[] BoundingBoxCoordinates {
       get {
         return new[] {
-          _top_front_left,
-          _top_front_right,
-          _top_back_left,
-          _top_back_right,
-          _bottom_front_left,
-          _bottom_front_right,
-          _bottom_back_left,
-          _bottom_back_right
+          this._top_front_left,
+          this._top_front_right,
+          this._top_back_left,
+          this._top_back_right,
+          this._bottom_front_left,
+          this._bottom_front_right,
+          this._bottom_back_left,
+          this._bottom_back_right
         };
       }
     }
 
-    public Bounds Bounds { get { return _bounds; } }
+    public Bounds Bounds { get { return this._bounds; } }
 
-    public Vector3 Max { get { return _bounds.max; } }
+    public Vector3 Max { get { return this._bounds.max; } }
 
-    public Vector3 Min { get { return _bounds.min; } }
+    public Vector3 Min { get { return this._bounds.min; } }
 
     public string BoundingBoxCoordinatesAsString {
       get {
         var str_rep = "";
-        str_rep += "\"_top_front_left\":" + BoundingBoxCoordinates [0] + ", ";
-        str_rep += "\"_top_front_right\":" + BoundingBoxCoordinates [1] + ", ";
-        str_rep += "\"_top_back_left\":" + BoundingBoxCoordinates [2] + ", ";
-        str_rep += "\"_top_back_right\":" + BoundingBoxCoordinates [3] + ", ";
-        str_rep += "\"_bottom_front_left\":" + BoundingBoxCoordinates [4] + ", ";
-        str_rep += "\"_bottom_front_right\":" + BoundingBoxCoordinates [5] + ", ";
-        str_rep += "\"_bottom_back_left\":" + BoundingBoxCoordinates [6] + ", ";
-        str_rep += "\"_bottom_back_right\":" + BoundingBoxCoordinates [7];
+        str_rep += "\"_top_front_left\":" + this.BoundingBoxCoordinates [0] + ", ";
+        str_rep += "\"_top_front_right\":" + this.BoundingBoxCoordinates [1] + ", ";
+        str_rep += "\"_top_back_left\":" + this.BoundingBoxCoordinates [2] + ", ";
+        str_rep += "\"_top_back_right\":" + this.BoundingBoxCoordinates [3] + ", ";
+        str_rep += "\"_bottom_front_left\":" + this.BoundingBoxCoordinates [4] + ", ";
+        str_rep += "\"_bottom_front_right\":" + this.BoundingBoxCoordinates [5] + ", ";
+        str_rep += "\"_bottom_back_left\":" + this.BoundingBoxCoordinates [6] + ", ";
+        str_rep += "\"_bottom_back_right\":" + this.BoundingBoxCoordinates [7];
         return str_rep;
       }
     }
@@ -97,76 +96,76 @@ namespace Neodroid.Utilities.BoundingBoxes {
     public string BoundingBoxCoordinatesAsJSON {
       get {
         var str_rep = "{";
-        str_rep += "\"_top_front_left\":" + JSONifyVec3 (BoundingBoxCoordinates [0]) + ", ";
-        str_rep += "\"_bottom_back_right\":" + JSONifyVec3 (BoundingBoxCoordinates [7]);
+        str_rep += "\"_top_front_left\":" + this.JSONifyVec3 (vec : this.BoundingBoxCoordinates [0]) + ", ";
+        str_rep += "\"_bottom_back_right\":" + this.JSONifyVec3 (vec : this.BoundingBoxCoordinates [7]);
         str_rep += "}";
         return str_rep;
       }
     }
 
-    private string JSONifyVec3 (Vector3 vec) {
+    string JSONifyVec3 (Vector3 vec) {
       return string.Format (
-        "[{0},{1},{2}]",
-        vec.x,
-        vec.y,
-        vec.z);
+        format : "[{0},{1},{2}]",
+        arg0 : vec.x,
+        arg1 : vec.y,
+        arg2 : vec.z);
     }
 
-    private void Reset () {
-      Awake ();
+    void Reset () {
+      this.Awake ();
     }
 
-    private void Awake () {
-      if (_setup_on_awake) {
-        Setup ();
-        CalculateBounds ();
+    void Awake () {
+      if (this._setup_on_awake) {
+        this.Setup ();
+        this.CalculateBounds ();
       }
 
-      _last_position = transform.position;
-      _last_rotation = transform.rotation;
-      _last_scale = transform.localScale;
-      Initialise ();
-      _children_meshes = GetComponentsInChildren<MeshFilter> ();
-      _children_colliders = GetComponentsInChildren<Collider> ();
+      this._last_position = this.transform.position;
+      this._last_rotation = this.transform.rotation;
+      this._last_scale = this.transform.localScale;
+      this.Initialise ();
+      this._children_meshes = this.GetComponentsInChildren<MeshFilter> ();
+      this._children_colliders = this.GetComponentsInChildren<Collider> ();
     }
 
-    private void Setup () {
-      _camera = FindObjectOfType<DrawBoundingBoxOnCamera> ();
-      _children_meshes = GetComponentsInChildren<MeshFilter> ();
-      _children_colliders = GetComponentsInChildren<Collider> ();
+    void Setup () {
+      this._camera = FindObjectOfType<DrawBoundingBoxOnCamera> ();
+      this._children_meshes = this.GetComponentsInChildren<MeshFilter> ();
+      this._children_colliders = this.GetComponentsInChildren<Collider> ();
     }
 
     public void Initialise () {
-      RecalculatePoints ();
-      RecalculateLines ();
+      this.RecalculatePoints ();
+      this.RecalculateLines ();
     }
 
-    private void LateUpdate () {
-      if (_freeze)
+    void LateUpdate () {
+      if (this._freeze)
         return;
-      if (_children_meshes != GetComponentsInChildren<MeshFilter> ())
-        Reset ();
-      if (_children_colliders != GetComponentsInChildren<Collider> ())
-        Reset ();
-      if (transform.localScale != _last_scale) {
-        ScaleBounds ();
-        RecalculatePoints ();
+      if (this._children_meshes != this.GetComponentsInChildren<MeshFilter> ())
+        this.Reset ();
+      if (this._children_colliders != this.GetComponentsInChildren<Collider> ())
+        this.Reset ();
+      if (this.transform.localScale != this._last_scale) {
+        this.ScaleBounds ();
+        this.RecalculatePoints ();
       }
 
-      if (transform.position != _last_position
-          || transform.rotation != _last_rotation
-          || transform.localScale != _last_scale) {
-        RecalculateLines ();
-        _last_rotation = transform.rotation;
-        _last_position = transform.position;
-        _last_scale = transform.localScale;
+      if (this.transform.position != this._last_position
+          || this.transform.rotation != this._last_rotation
+          || this.transform.localScale != this._last_scale) {
+        this.RecalculateLines ();
+        this._last_rotation = this.transform.rotation;
+        this._last_position = this.transform.position;
+        this._last_scale = this.transform.localScale;
       }
 
-      if (_camera)
-        _camera.setOutlines (
-          _lines,
-          _line_color,
-          new Vector3[0, 0]);
+      if (this._camera)
+        this._camera.setOutlines (
+          newOutlines : this._lines,
+          newcolor : this._line_color,
+          newTriangles : new Vector3[0, 0]);
     }
 
     public void ScaleBounds () {
@@ -174,145 +173,159 @@ namespace Neodroid.Utilities.BoundingBoxes {
       //_bounds.center = transform.TransformPoint(startingBoundCenterLocal);
     }
 
-    private void FitBoundingBoxToChildrenColliders () {
-      var col = GetComponent<BoxCollider> ();
+    void FitBoundingBoxToChildrenColliders () {
+      var col = this.GetComponent<BoxCollider> ();
       var bounds = new Bounds (
-                     transform.position,
-                     Vector3.zero); // position and size
+                     center : this.transform.position,
+                     size : Vector3.zero); // position and size
 
       if (col)
-        bounds.Encapsulate (col.bounds);
+        bounds.Encapsulate (bounds : col.bounds);
 
-      if (_include_children)
-        foreach (var child_col in _children_colliders)
+      if (this._include_children)
+        foreach (var child_col in this._children_colliders)
           if (child_col != col)
-            bounds.Encapsulate (child_col.bounds);
+            bounds.Encapsulate (bounds : child_col.bounds);
 
-      _bounds = bounds;
-      _bounds_offset = bounds.center - transform.position;
+      this._bounds = bounds;
+      this._bounds_offset = bounds.center - this.transform.position;
     }
 
-    private void FitBoundingBoxToChildrenRenders () {
+    void FitBoundingBoxToChildrenRenders () {
       var bounds = new Bounds (
-                     transform.position,
-                     Vector3.zero);
+                     center : this.transform.position,
+                     size : Vector3.zero);
 
-      var mesh = GetComponent<MeshFilter> ();
+      var mesh = this.GetComponent<MeshFilter> ();
       if (mesh) {
         var ms = mesh.sharedMesh;
         var vc = ms.vertexCount;
         for (var i = 0; i < vc; i++)
-          bounds.Encapsulate (mesh.transform.TransformPoint (ms.vertices [i]));
+          bounds.Encapsulate (point : mesh.transform.TransformPoint (position : ms.vertices [i]));
       }
 
-      for (var i = 0; i < _children_meshes.Length; i++) {
-        var ms = _children_meshes [i].sharedMesh;
+      for (var i = 0; i < this._children_meshes.Length; i++) {
+        var ms = this._children_meshes [i].sharedMesh;
         var vc = ms.vertexCount;
         for (var j = 0; j < vc; j++)
-          bounds.Encapsulate (_children_meshes [i].transform.TransformPoint (ms.vertices [j]));
+          bounds.Encapsulate (
+            point : this._children_meshes [i].transform
+                                         .TransformPoint (position : ms.vertices [j]));
       }
 
-      _bounds = bounds;
-      _bounds_offset = _bounds.center - transform.position;
+      this._bounds = bounds;
+      this._bounds_offset = this._bounds.center - this.transform.position;
     }
 
-    private void CalculateBounds () {
-      _rotation = transform.rotation;
-      transform.rotation = Quaternion.Euler (
-        0f,
-        0f,
-        0f);
+    void CalculateBounds () {
+      this._rotation = this.transform.rotation;
+      this.transform.rotation = Quaternion.Euler (
+        x : 0f,
+        y : 0f,
+        z : 0f);
 
-      if (_collider_based)
-        FitBoundingBoxToChildrenColliders ();
+      if (this._collider_based)
+        this.FitBoundingBoxToChildrenColliders ();
       else
-        FitBoundingBoxToChildrenRenders ();
+        this.FitBoundingBoxToChildrenRenders ();
 
-      transform.rotation = _rotation;
+      this.transform.rotation = this._rotation;
     }
 
-    private void RecalculatePoints () {
-      _bounds.size = new Vector3 (
-        _bounds.size.x * transform.localScale.x / _last_scale.x,
-        _bounds.size.y * transform.localScale.y / _last_scale.y,
-        _bounds.size.z * transform.localScale.z / _last_scale.z);
-      _bounds_offset = new Vector3 (
-        _bounds_offset.x * transform.localScale.x / _last_scale.x,
-        _bounds_offset.y * transform.localScale.y / _last_scale.y,
-        _bounds_offset.z * transform.localScale.z / _last_scale.z);
+    void RecalculatePoints () {
+      this._bounds.size = new Vector3 (
+        x : this._bounds.size.x
+        * this.transform.localScale.x
+        / this._last_scale.x,
+        y : this._bounds.size.y
+        * this.transform.localScale.y
+        / this._last_scale.y,
+        z : this._bounds.size.z
+        * this.transform.localScale.z
+        / this._last_scale.z);
+      this._bounds_offset = new Vector3 (
+        x : this._bounds_offset.x
+        * this.transform.localScale.x
+        / this._last_scale.x,
+        y : this._bounds_offset.y
+        * this.transform.localScale.y
+        / this._last_scale.y,
+        z : this._bounds_offset.z
+        * this.transform.localScale.z
+        / this._last_scale.z);
 
-      _top_front_right = _bounds_offset
+      this._top_front_right = this._bounds_offset
       + Vector3.Scale (
-        _bounds.extents,
-        new Vector3 (
-          1,
-          1,
-          1));
-      _top_front_left = _bounds_offset
+        a : this._bounds.extents,
+        b : new Vector3 (
+          x : 1,
+          y : 1,
+          z : 1));
+      this._top_front_left = this._bounds_offset
       + Vector3.Scale (
-        _bounds.extents,
-        new Vector3 (
-          -1,
-          1,
-          1));
-      _top_back_left = _bounds_offset
+        a : this._bounds.extents,
+        b : new Vector3 (
+          x : -1,
+          y : 1,
+          z : 1));
+      this._top_back_left = this._bounds_offset
       + Vector3.Scale (
-        _bounds.extents,
-        new Vector3 (
-          -1,
-          1,
-          -1));
-      _top_back_right = _bounds_offset
+        a : this._bounds.extents,
+        b : new Vector3 (
+          x : -1,
+          y : 1,
+          z : -1));
+      this._top_back_right = this._bounds_offset
       + Vector3.Scale (
-        _bounds.extents,
-        new Vector3 (
-          1,
-          1,
-          -1));
-      _bottom_front_right = _bounds_offset
+        a : this._bounds.extents,
+        b : new Vector3 (
+          x : 1,
+          y : 1,
+          z : -1));
+      this._bottom_front_right = this._bounds_offset
       + Vector3.Scale (
-        _bounds.extents,
-        new Vector3 (
-          1,
-          -1,
-          1));
-      _bottom_front_left = _bounds_offset
+        a : this._bounds.extents,
+        b : new Vector3 (
+          x : 1,
+          y : -1,
+          z : 1));
+      this._bottom_front_left = this._bounds_offset
       + Vector3.Scale (
-        _bounds.extents,
-        new Vector3 (
-          -1,
-          -1,
-          1));
-      _bottom_back_left = _bounds_offset
+        a : this._bounds.extents,
+        b : new Vector3 (
+          x : -1,
+          y : -1,
+          z : 1));
+      this._bottom_back_left = this._bounds_offset
       + Vector3.Scale (
-        _bounds.extents,
-        new Vector3 (
-          -1,
-          -1,
-          -1));
-      _bottom_back_right = _bounds_offset
+        a : this._bounds.extents,
+        b : new Vector3 (
+          x : -1,
+          y : -1,
+          z : -1));
+      this._bottom_back_right = this._bounds_offset
       + Vector3.Scale (
-        _bounds.extents,
-        new Vector3 (
-          1,
-          -1,
-          -1));
+        a : this._bounds.extents,
+        b : new Vector3 (
+          x : 1,
+          y : -1,
+          z : -1));
 
-      _corners = new[] {
-        _top_front_right,
-        _top_front_left,
-        _top_back_left,
-        _top_back_right,
-        _bottom_front_right,
-        _bottom_front_left,
-        _bottom_back_left,
-        _bottom_back_right
+      this._corners = new[] {
+        this._top_front_right,
+        this._top_front_left,
+        this._top_back_left,
+        this._top_back_right,
+        this._bottom_front_right,
+        this._bottom_front_left,
+        this._bottom_back_left,
+        this._bottom_back_right
       };
     }
 
-    private void RecalculateLines () {
-      var rot = transform.rotation;
-      var pos = transform.position;
+    void RecalculateLines () {
+      var rot = this.transform.rotation;
+      var pos = this.transform.position;
 
       var lines = new List<Vector3[]> ();
       //int linesCount = 12;
@@ -320,58 +333,58 @@ namespace Neodroid.Utilities.BoundingBoxes {
       for (var i = 0; i < 4; i++) {
         //width
         var line = new[] {
-                                 rot * _corners [2 * i] + pos,
-                                 rot * _corners [2 * i + 1] + pos
-                               };
-        lines.Add (line);
+          rot * this._corners [2 * i] + pos,
+          rot * this._corners [2 * i + 1] + pos
+        };
+        lines.Add (item : line);
 
         //height
         line = new[] {
-          rot * _corners [i] + pos,
-          rot * _corners [i + 4] + pos
+          rot * this._corners [i] + pos,
+          rot * this._corners [i + 4] + pos
         };
-        lines.Add (line);
+        lines.Add (item : line);
 
         //depth
         line = new[] {
-          rot * _corners [2 * i] + pos,
-          rot * _corners [2 * i + 3 - 4 * (i % 2)] + pos
+          rot * this._corners [2 * i] + pos,
+          rot * this._corners [2 * i + 3 - 4 * (i % 2)] + pos
         };
-        lines.Add (line);
+        lines.Add (item : line);
       }
 
-      _lines = new Vector3[lines.Count, 2];
+      this._lines = new Vector3[lines.Count, 2];
       for (var j = 0; j < lines.Count; j++) {
-        _lines [j,
-          0] = lines [j] [0];
-        _lines [j,
-          1] = lines [j] [1];
+        this._lines [j,
+          0] = lines [index : j] [0];
+        this._lines [j,
+          1] = lines [index : j] [1];
       }
     }
 
-    private void OnMouseDown () {
+    void OnMouseDown () {
       //if (_permanent)
       //  return;
-      enabled = !enabled;
+      this.enabled = !this.enabled;
     }
 
     #if UNITY_EDITOR
-    private void OnValidate() {
+    void OnValidate() {
       if (EditorApplication.isPlaying)
         return;
-      Initialise();
+      this.Initialise();
     }
 
     #endif
 
-    private void OnDrawGizmos () {
-      Gizmos.color = _line_color;
-      if (_lines != null)
-        for (var i = 0; i < _lines.GetLength (0); i++)
+    void OnDrawGizmos () {
+      Gizmos.color = this._line_color;
+      if (this._lines != null)
+        for (var i = 0; i < this._lines.GetLength (dimension : 0); i++)
           Gizmos.DrawLine (
-            _lines [i,
+            @from : this._lines [i,
               0],
-            _lines [i,
+            to : this._lines [i,
               1]);
     }
   }

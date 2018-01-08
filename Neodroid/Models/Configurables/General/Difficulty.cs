@@ -1,13 +1,12 @@
-﻿using Neodroid.Configurables;
+﻿using System;
 using Neodroid.Messaging.Messages;
 
-namespace Assets.Neodroid.Models.Configurables.General {
+namespace Neodroid.Models.Configurables.General {
   public class Difficulty : ConfigurableGameObject {
-
-    public override void ApplyConfiguration (Configuration configuration) {
-      if (System.Math.Abs (configuration.ConfigurableValue - 1) < double.Epsilon) {
+    public override void ApplyConfiguration(Configuration configuration) {
+      if (Math.Abs(value : configuration.ConfigurableValue - 1) < double.Epsilon) {
         //print ("Increased Difficulty");
-      } else if (System.Math.Abs (configuration.ConfigurableValue - (-1)) < double.Epsilon) {
+      } else if (Math.Abs(value : configuration.ConfigurableValue - -1) < double.Epsilon) {
         //print ("Decreased Difficulty");
       }
     }

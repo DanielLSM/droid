@@ -1,8 +1,8 @@
-﻿
+﻿using System;
 using UnityEngine;
 
 namespace Neodroid.Evaluation {
-  [System.Serializable]
+  [Serializable]
   public abstract class Term : MonoBehaviour {
     //ScriptableObject {
 

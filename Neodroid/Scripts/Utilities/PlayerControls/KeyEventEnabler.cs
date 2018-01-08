@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
-public class KeyEventEnabler : MonoBehaviour {
-  public GameObject _game_object;
+namespace Neodroid.Scripts.Utilities.PlayerControls {
+  public class KeyEventEnabler : MonoBehaviour {
+    [SerializeField]  GameObject _game_object;
 
-  public KeyCode _key;
+    [SerializeField]  KeyCode _key;
 
-  private void Update() {
-    if (Input.GetKeyDown(_key)) _game_object.SetActive(!_game_object.activeSelf);
+    void Update() {
+      if (Input.GetKeyDown(key : this._key)) this._game_object.SetActive(value : !this._game_object.activeSelf);
+    }
   }
 }
