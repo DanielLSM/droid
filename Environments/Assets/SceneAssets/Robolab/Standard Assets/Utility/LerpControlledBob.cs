@@ -17,10 +17,7 @@ namespace UnityStandardAssets.Utility {
       // make the camera move down slightly
       var t = 0f;
       while (t < this.BobDuration) {
-        this.m_Offset = Mathf.Lerp(
-                                   a : 0f,
-                                   b : this.BobAmount,
-                                   t : t / this.BobDuration);
+        this.m_Offset = Mathf.Lerp(0f, this.BobAmount, t / this.BobDuration);
         t += Time.deltaTime;
         yield return new WaitForFixedUpdate();
       }
@@ -28,10 +25,7 @@ namespace UnityStandardAssets.Utility {
       // make it move back to neutral
       t = 0f;
       while (t < this.BobDuration) {
-        this.m_Offset = Mathf.Lerp(
-                                   a : this.BobAmount,
-                                   b : 0f,
-                                   t : t / this.BobDuration);
+        this.m_Offset = Mathf.Lerp(this.BobAmount, 0f, t / this.BobDuration);
         t += Time.deltaTime;
         yield return new WaitForFixedUpdate();
       }

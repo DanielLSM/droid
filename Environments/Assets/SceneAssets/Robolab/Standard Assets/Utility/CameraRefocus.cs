@@ -21,10 +21,10 @@ namespace UnityStandardAssets.Utility {
     public void GetFocusPoint() {
       RaycastHit hitInfo;
       if (Physics.Raycast(
-                          origin : this.Parent.transform.position + this.m_OrigCameraPos,
-                          direction : this.Parent.transform.forward,
-                          hitInfo : out hitInfo,
-                          maxDistance : 100f)) {
+          this.Parent.transform.position + this.m_OrigCameraPos,
+          this.Parent.transform.forward,
+          out hitInfo,
+          100f)) {
         this.Lookatpoint = hitInfo.point;
         this.m_Refocus = true;
         return;
@@ -34,7 +34,7 @@ namespace UnityStandardAssets.Utility {
     }
 
     public void SetFocusPoint() {
-      if (this.m_Refocus) this.Camera.transform.LookAt(worldPosition : this.Lookatpoint);
+      if (this.m_Refocus) this.Camera.transform.LookAt(this.Lookatpoint);
     }
   }
 }

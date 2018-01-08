@@ -33,21 +33,15 @@ namespace UnityStandardAssets.Utility {
 
       // Damp the rotation around the y-axis
       currentRotationAngle = Mathf.LerpAngle(
-                                             a : currentRotationAngle,
-                                             b : wantedRotationAngle,
-                                             t : this.rotationDamping * Time.deltaTime);
+          currentRotationAngle,
+          wantedRotationAngle,
+          this.rotationDamping * Time.deltaTime);
 
       // Damp the height
-      currentHeight = Mathf.Lerp(
-                                 a : currentHeight,
-                                 b : wantedHeight,
-                                 t : this.heightDamping * Time.deltaTime);
+      currentHeight = Mathf.Lerp(currentHeight, wantedHeight, this.heightDamping * Time.deltaTime);
 
       // Convert the angle into a rotation
-      var currentRotation = Quaternion.Euler(
-                                             x : 0,
-                                             y : currentRotationAngle,
-                                             z : 0);
+      var currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
 
       // Set the position of the camera on the x-z plane to:
       // distance meters behind the target
@@ -56,12 +50,12 @@ namespace UnityStandardAssets.Utility {
 
       // Set the height of the camera
       this.transform.position = new Vector3(
-                                            x : this.transform.position.x,
-                                            y : currentHeight,
-                                            z : this.transform.position.z);
+          this.transform.position.x,
+          currentHeight,
+          this.transform.position.z);
 
       // Always look at the target
-      this.transform.LookAt(target : this.target);
+      this.transform.LookAt(this.target);
     }
   }
 }

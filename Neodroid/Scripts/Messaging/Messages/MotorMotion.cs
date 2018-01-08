@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Neodroid.Messaging.Messages {
+namespace Neodroid.Scripts.Messaging.Messages {
   [Serializable]
   public class MotorMotion {
     readonly string _actor_name;

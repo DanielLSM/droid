@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Neodroid.Models.Observers.NotUsed {
   [ExecuteInEditMode]
-  [RequireComponent( typeof(BoundingBox))]
+  [RequireComponent(typeof(BoundingBox))]
   public class BoundingBoxObserver : Observer {
     public override string ObserverIdentifier { get { return this.name + "BoundingBox"; } }
     //BoundingBox _bounding_box;

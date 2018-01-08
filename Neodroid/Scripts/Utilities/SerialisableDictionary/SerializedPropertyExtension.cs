@@ -12,14 +12,16 @@ namespace Neodroid.Scripts.Utilities.SerialisableDictionary {
     public static bool EqualBasics(SerializedProperty left, SerializedProperty right) {
       if (left.propertyType != right.propertyType)
         return false;
-      if (left.propertyType == SerializedPropertyType.Integer)
-        if (left.type == right.type)
+      if (left.propertyType == SerializedPropertyType.Integer) {
+        if (left.type == right.type) {
           if (left.type == "int")
             return left.intValue == right.intValue;
-          else
-            return left.longValue == right.longValue;
-        else
-          return false;
+          return left.longValue == right.longValue;
+        }
+
+        return false;
+      }
+
       if (left.propertyType == SerializedPropertyType.String)
         return left.stringValue == right.stringValue;
       if (left.propertyType == SerializedPropertyType.ObjectReference)
@@ -28,14 +30,16 @@ namespace Neodroid.Scripts.Utilities.SerialisableDictionary {
         return left.enumValueIndex == right.enumValueIndex;
       if (left.propertyType == SerializedPropertyType.Boolean)
         return left.boolValue == right.boolValue;
-      if (left.propertyType == SerializedPropertyType.Float)
-        if (left.type == right.type)
+      if (left.propertyType == SerializedPropertyType.Float) {
+        if (left.type == right.type) {
           if (left.type == "float")
             return Math.Abs(left.floatValue - right.floatValue) < double.Epsilon;
-          else
-            return Math.Abs(left.doubleValue - right.doubleValue) < double.Epsilon;
-        else
-          return false;
+          return Math.Abs(left.doubleValue - right.doubleValue) < double.Epsilon;
+        }
+
+        return false;
+      }
+
       if (left.propertyType == SerializedPropertyType.Color)
         return left.colorValue == right.colorValue;
       if (left.propertyType == SerializedPropertyType.LayerMask)
@@ -67,65 +71,63 @@ namespace Neodroid.Scripts.Utilities.SerialisableDictionary {
       if (source.propertyType != target.propertyType)
         return;
       if (source.propertyType == SerializedPropertyType.Integer) {
-        if (source.type == target.type)
+        if (source.type == target.type) {
           if (source.type == "int")
             target.intValue = source.intValue;
           else
             target.longValue = source.longValue;
-      } else if (source.propertyType == SerializedPropertyType.String) {
+        }
+      } else if (source.propertyType == SerializedPropertyType.String)
         target.stringValue = source.stringValue;
-      } else if (source.propertyType == SerializedPropertyType.ObjectReference) {
+      else if (source.propertyType == SerializedPropertyType.ObjectReference)
         target.objectReferenceValue = source.objectReferenceValue;
-      } else if (source.propertyType == SerializedPropertyType.Enum) {
+      else if (source.propertyType == SerializedPropertyType.Enum)
         target.enumValueIndex = source.enumValueIndex;
-      } else if (source.propertyType == SerializedPropertyType.Boolean) {
+      else if (source.propertyType == SerializedPropertyType.Boolean)
         target.boolValue = source.boolValue;
-      } else if (source.propertyType == SerializedPropertyType.Float) {
-        if (source.type == target.type)
+      else if (source.propertyType == SerializedPropertyType.Float) {
+        if (source.type == target.type) {
           if (source.type == "float")
             target.floatValue = source.floatValue;
           else
             target.doubleValue = source.doubleValue;
-      } else if (source.propertyType == SerializedPropertyType.Color) {
+        }
+      } else if (source.propertyType == SerializedPropertyType.Color)
         target.colorValue = source.colorValue;
-      } else if (source.propertyType == SerializedPropertyType.LayerMask) {
+      else if (source.propertyType == SerializedPropertyType.LayerMask)
         target.intValue = source.intValue;
-      } else if (source.propertyType == SerializedPropertyType.Vector2) {
+      else if (source.propertyType == SerializedPropertyType.Vector2)
         target.vector2Value = source.vector2Value;
-      } else if (source.propertyType == SerializedPropertyType.Vector3) {
+      else if (source.propertyType == SerializedPropertyType.Vector3)
         target.vector3Value = source.vector3Value;
-      } else if (source.propertyType == SerializedPropertyType.Vector4) {
+      else if (source.propertyType == SerializedPropertyType.Vector4)
         target.vector4Value = source.vector4Value;
-      } else if (source.propertyType == SerializedPropertyType.Rect) {
+      else if (source.propertyType == SerializedPropertyType.Rect)
         target.rectValue = source.rectValue;
-      } else if (source.propertyType == SerializedPropertyType.ArraySize) {
+      else if (source.propertyType == SerializedPropertyType.ArraySize)
         target.arraySize = source.arraySize;
-      } else if (source.propertyType == SerializedPropertyType.Character) {
+      else if (source.propertyType == SerializedPropertyType.Character)
         target.intValue = source.intValue;
-      } else if (source.propertyType == SerializedPropertyType.AnimationCurve) {
+      else if (source.propertyType == SerializedPropertyType.AnimationCurve)
         target.animationCurveValue = source.animationCurveValue;
-      } else if (source.propertyType == SerializedPropertyType.Bounds) {
+      else if (source.propertyType == SerializedPropertyType.Bounds)
         target.boundsValue = source.boundsValue;
-      } else if (source.propertyType == SerializedPropertyType.Gradient) {
+      else if (source.propertyType == SerializedPropertyType.Gradient) {
         // TODO?
-      } else if (source.propertyType == SerializedPropertyType.Quaternion) {
+      } else if (source.propertyType == SerializedPropertyType.Quaternion)
         target.quaternionValue = source.quaternionValue;
-      } else {
+      else {
         if (source.hasChildren && target.hasChildren) {
           var sourceIterator = source.Copy();
           var targetIterator = target.Copy();
           while (true) {
             if (sourceIterator.propertyType == SerializedPropertyType.Generic) {
-              if (!sourceIterator.Next(enterChildren : true) || !targetIterator.Next(enterChildren : true))
+              if (!sourceIterator.Next(true) || !targetIterator.Next(true))
                 break;
-            } else if (!sourceIterator.Next(enterChildren : false)
-                       || !targetIterator.Next(enterChildren : false)) {
+            } else if (!sourceIterator.Next(false) || !targetIterator.Next(false))
               break;
-            }
 
-            CopyBasics(
-                       source : sourceIterator,
-                       target : targetIterator);
+            CopyBasics(sourceIterator, targetIterator);
           }
         }
       }

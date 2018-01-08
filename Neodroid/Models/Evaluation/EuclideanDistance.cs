@@ -8,9 +8,7 @@ namespace Neodroid.Models.Evaluation {
     [SerializeField] Transform _g2;
 
     public override float InternalEvaluate() {
-      return Vector3.Distance(
-                              a : this._g1.position,
-                              b : this._g2.position);
+      return Vector3.Distance(this._g1.position, this._g2.position);
     }
 
     void Start() {

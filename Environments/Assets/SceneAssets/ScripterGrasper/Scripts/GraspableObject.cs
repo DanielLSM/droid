@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using SceneAssets.ScripterGrasper.Grasps;
 using SceneAssets.ScripterGrasper.Utilities;
-using SceneSpecificAssets.Grasping;
 using SceneSpecificAssets.Grasping.Utilities;
 using UnityEngine;
 
@@ -19,87 +18,73 @@ namespace SceneAssets.ScripterGrasper.Scripts {
 
     //[SerializeField]  int _gripper_distance_scalar = 1;
 
-    public bool IsInMotion () {
+    public bool IsInMotion() {
       return this.transform.position != this._previous_position
-      || this.transform.rotation != this._previous_rotation;
+             || this.transform.rotation != this._previous_rotation;
     }
 
-    public bool IsInMotion (float sensitivity) {
-      var distance_moved = Vector3.Distance (
-                             a : this.transform.position,
-                             b : this._last_recorded_move);
-      var angle_rotated = Quaternion.Angle (
-                            a : this.transform.rotation,
-                            b : this._last_recorded_rotation);
+    public bool IsInMotion(float sensitivity) {
+      var distance_moved = Vector3.Distance(this.transform.position, this._last_recorded_move);
+      var angle_rotated = Quaternion.Angle(this.transform.rotation, this._last_recorded_rotation);
       if (distance_moved > sensitivity || angle_rotated > sensitivity) {
-        this.UpdateLastRecordedTranform ();
+        this.UpdateLastRecordedTranform();
         return true;
       }
 
       return false;
     }
 
-    void UpdatePreviousTranform () {
+    void UpdatePreviousTranform() {
       this._previous_position = this.transform.position;
       this._previous_rotation = this.transform.rotation;
     }
 
-    void UpdateLastRecordedTranform () {
+    void UpdateLastRecordedTranform() {
       this._last_recorded_move = this.transform.position;
       this._last_recorded_rotation = this.transform.rotation;
     }
 
-    void Start () {
-      this.UpdatePreviousTranform ();
-      this.UpdateLastRecordedTranform ();
+    void Start() {
+      this.UpdatePreviousTranform();
+      this.UpdateLastRecordedTranform();
       //SetVisiblity(false);
     }
 
-    void Update () {
-      this.UpdatePreviousTranform ();
-    }
+    void Update() { this.UpdatePreviousTranform(); }
 
-    Grasp[] GetGrasps () {
-      var grasps = this.gameObject.GetComponentsInChildren<Grasp> ();
+    Grasp[] GetGrasps() {
+      var grasps = this.gameObject.GetComponentsInChildren<Grasp>();
       return grasps;
     }
 
-    void SetVisiblity (bool visible) {
+    void SetVisiblity(bool visible) {
       foreach (var grab in this.GetGrasps())
-        grab.gameObject.SetActive (value : visible);
+        grab.gameObject.SetActive(visible);
     }
 
-    void ChangeIndicatorColor (Grasp grasp, Color color) {
+    void ChangeIndicatorColor(Grasp grasp, Color color) {
       foreach (var child in grasp.GetComponentsInChildren<MeshRenderer>())
-        child.material.SetColor (
-          name : "_Color1",
-          value : color);
+        child.material.SetColor("_Color1", color);
     }
 
     //Main function
     //return grip vector/transform with highest score
-    public Pair<Grasp, float> GetOptimalGrasp (ScriptedGripper gripper) {
-      var grasps = this.GetGrasps ();
-      var unobstructed_grasps = new List<Grasp> ();
+    public Pair<Grasp, float> GetOptimalGrasp(ScriptedGripper gripper) {
+      var grasps = this.GetGrasps();
+      var unobstructed_grasps = new List<Grasp>();
 
-      foreach (var grasp in grasps)
-        if (!grasp.IsObstructed ()) {
-          unobstructed_grasps.Add (item : grasp);
-          this.ChangeIndicatorColor (
-            grasp : grasp,
-            color : Color.yellow);
-        } else {
-          this.ChangeIndicatorColor (
-            grasp : grasp,
-            color : Color.red);
-        }
+      foreach (var grasp in grasps) {
+        if (!grasp.IsObstructed()) {
+          unobstructed_grasps.Add(grasp);
+          this.ChangeIndicatorColor(grasp, Color.yellow);
+        } else
+          this.ChangeIndicatorColor(grasp, Color.red);
+      }
 
       Grasp optimal_grasp = null;
       var shortest_distance = float.MaxValue;
       foreach (var grasp in unobstructed_grasps) {
-        var distance = Vector3.Distance (
-                         a : grasp.transform.position,
-                         b : gripper.transform.position);
+        var distance = Vector3.Distance(grasp.transform.position, gripper.transform.position);
         if (distance <= shortest_distance) {
           shortest_distance = distance;
           optimal_grasp = grasp;
@@ -107,12 +92,8 @@ namespace SceneAssets.ScripterGrasper.Scripts {
       }
 
       if (optimal_grasp != null) {
-        this.ChangeIndicatorColor (
-          grasp : optimal_grasp,
-          color : Color.green);
-        return new Pair<Grasp, float> (
-          first : optimal_grasp,
-          second : shortest_distance);
+        this.ChangeIndicatorColor(optimal_grasp, Color.green);
+        return new Pair<Grasp, float>(optimal_grasp, shortest_distance);
       }
 
       return null;
@@ -189,14 +170,12 @@ namespace SceneAssets.ScripterGrasper.Scripts {
   }
   */
     //Distance from hand - Score
-    Dictionary<GameObject, float> DistanceToHandScore (
-      GameObject hand,
-      Dictionary<GameObject, float> grab_dict) {
+    Dictionary<GameObject, float> DistanceToHandScore(
+        GameObject hand,
+        Dictionary<GameObject, float> grab_dict) {
       foreach (var pair in grab_dict) {
-        var distance = Vector3.Distance (
-                         a : pair.Key.transform.position,
-                         b : hand.transform.position);
-        grab_dict [key : pair.Key] += distance;
+        var distance = Vector3.Distance(pair.Key.transform.position, hand.transform.position);
+        grab_dict[pair.Key] += distance;
       }
 
       return grab_dict;

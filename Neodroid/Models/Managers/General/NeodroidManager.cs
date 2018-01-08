@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Neodroid.Environments;
-using Neodroid.Messaging.Messages;
+using Neodroid.Models.Environments;
 using Neodroid.Scripts.Messaging;
+using Neodroid.Scripts.Messaging.Messages;
 using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 using Random = System.Random;
@@ -10,15 +10,11 @@ using Random = System.Random;
 namespace Neodroid.Models.Managers.General {
   public class NeodroidManager : MonoBehaviour,
                                  IHasRegister<LearningEnvironment> {
-    [Header(
-      header : "Development",
-      order = 99)]
+    [Header("Development", order = 99)]
     [SerializeField]
     bool _debugging;
 
-    [Header(
-      header : "Connection",
-      order = 100)]
+    [Header("Connection", order = 100)]
     [SerializeField]
     string _ip_address = "localhost";
 
@@ -33,21 +29,17 @@ namespace Neodroid.Models.Managers.General {
 
       for (var i = 0; i < arguments.Length; i++) {
         if (arguments[i] == "-ip") this._ip_address = arguments[i + 1];
-        if (arguments[i] == "-port") this._port = int.Parse(s : arguments[i + 1]);
+        if (arguments[i] == "-port") this._port = int.Parse(arguments[i + 1]);
       }
     }
 
     void StartMessagingServer() {
       if (this._ip_address != "" || this._port != 0)
-        this._message_server = new MessageServer(
-                                                 ip_address : this._ip_address,
-                                                 port : this._port,
-                                                 use_inter_process_communication : false,
-                                                 debug : this.Debugging);
+        this._message_server = new MessageServer(this._ip_address, this._port, false, this.Debugging);
       else
-        this._message_server = new MessageServer(debug : this.Debugging);
+        this._message_server = new MessageServer(this.Debugging);
 
-      this._message_server.ListenForClientToConnect(callback : this.OnConnectCallback);
+      this._message_server.ListenForClientToConnect(this.OnConnectCallback);
     }
 
     #region Getter Setters
@@ -67,7 +59,7 @@ namespace Neodroid.Models.Managers.General {
     #region PrivateMembers
 
     protected Dictionary<string, LearningEnvironment> _environments =
-      new Dictionary<string, LearningEnvironment>();
+        new Dictionary<string, LearningEnvironment>();
 
     protected MessageServer _message_server;
     protected Random _random_generator;
@@ -81,25 +73,28 @@ namespace Neodroid.Models.Managers.General {
       this.FetchCommmandLineArguments();
       this.StartMessagingServer();
       this._random_generator = new Random();
+      this.InnerStart();
     }
 
     void Update() {
       if (this._reply && this.CurrentReaction.Parameters.Phase == ExecutionPhase.Before) {
-        this.SendEnvironmentStates(states : this.ReactInEnvironments(reaction : this.CurrentReaction));
+        this.SendEnvironmentStates(this.ReactInEnvironments(this.CurrentReaction));
         this._reply = false;
       }
 
       this.InnerUpdate();
+
       if (this._reply && this.CurrentReaction.Parameters.Phase == ExecutionPhase.Middle) {
-        this.SendEnvironmentStates(states : this.ReactInEnvironments(reaction : this.CurrentReaction));
+        this.SendEnvironmentStates(this.ReactInEnvironments(this.CurrentReaction));
         this._reply = false;
       }
     }
 
     void LateUpdate() {
       this.PostUpdate();
+
       if (this._reply && this.CurrentReaction.Parameters.Phase == ExecutionPhase.After) {
-        this.SendEnvironmentStates(states : this.ReactInEnvironments(reaction : this.CurrentReaction));
+        this.SendEnvironmentStates(this.ReactInEnvironments(this.CurrentReaction));
         this._reply = false;
       }
     }
@@ -108,6 +103,7 @@ namespace Neodroid.Models.Managers.General {
 
     #region PrivateMethods
 
+    protected virtual void InnerStart() { }
     protected virtual void InnerUpdate() { }
 
     protected void PostUpdate() {
@@ -119,36 +115,24 @@ namespace Neodroid.Models.Managers.General {
     protected Reaction SampleTestReaction() {
       var motions = new List<MotorMotion>();
       foreach (var environment in this._environments) {
-        foreach (var actor in environment.Value.Actors)
+        foreach (var actor in environment.Value.Actors) {
           foreach (var motor in actor.Value.Motors) {
             var strength = this._random_generator.Next(
-                                                       minValue : (int)motor.Value.ValidInput.MinValue,
-                                                       maxValue : (int)(motor.Value.ValidInput.MaxValue
-                                                                        + 1));
-            motions.Add(
-                        item : new MotorMotion(
-                                               actor_name : actor.Key,
-                                               motor_name : motor.Key,
-                                               strength : strength));
+                (int)motor.Value.ValidInput.MinValue,
+                (int)(motor.Value.ValidInput.MaxValue + 1));
+            motions.Add(new MotorMotion(actor.Key, motor.Key, strength));
           }
+        }
 
         break;
       }
 
-      var rp = new ReactionParameters(
-                                      terminable : true,
-                                      step : true) {
-                                                     IsExternal = false
-                                                   };
-      return new Reaction(
-                          parameters : rp,
-                          motions : motions.ToArray(),
-                          configurations : null,
-                          unobservables : null);
+      var rp = new ReactionParameters(true, true) {IsExternal = false};
+      return new Reaction(rp, motions.ToArray(), null, null);
     }
 
     protected void SendEnvironmentStates(EnvironmentState[] states) {
-      this._message_server.SendEnvironmentStates(environment_states : states);
+      this._message_server.SendEnvironmentStates(states);
     }
 
     void SetDefaultReaction() {
@@ -164,7 +148,7 @@ namespace Neodroid.Models.Managers.General {
       var states = new EnvironmentState[this._environments.Values.Count];
       var i = 0;
       foreach (var environment in this._environments.Values)
-        states[i++] = environment.React(reaction : reaction);
+        states[i++] = environment.React(reaction);
       return states;
     }
 
@@ -175,27 +159,18 @@ namespace Neodroid.Models.Managers.General {
     #region HasRegister implementation
 
     public void Register(LearningEnvironment environment) {
-      if (this.Debugging)
+      if (this.Debugging) {
         Debug.Log(
-                  message : string.Format(
-                                          format : "Manager {0} has environment {1}",
-                                          arg0 : this.name,
-                                          arg1 : environment.EnvironmentIdentifier));
-      this._environments.Add(
-                             key : environment.EnvironmentIdentifier,
-                             value : environment);
+            string.Format("Manager {0} has environment {1}", this.name, environment.EnvironmentIdentifier));
+      }
+
+      this._environments.Add(environment.EnvironmentIdentifier, environment);
     }
 
     public void Register(LearningEnvironment environment, string identifier) {
       if (this.Debugging)
-        Debug.Log(
-                  message : string.Format(
-                                          format : "Manager {0} has environment {1}",
-                                          arg0 : this.name,
-                                          arg1 : identifier));
-      this._environments.Add(
-                             key : identifier,
-                             value : environment);
+        Debug.Log(string.Format("Manager {0} has environment {1}", this.name, identifier));
+      this._environments.Add(identifier, environment);
     }
 
     #endregion
@@ -204,7 +179,7 @@ namespace Neodroid.Models.Managers.General {
 
     void OnReceiveCallback(Reaction reaction) {
       if (this.Debugging)
-        print(message : "Received: " + reaction);
+        print("Received: " + reaction);
       this.CurrentReaction = reaction;
       this.CurrentReaction.Parameters.IsExternal = true;
       this._reply = true;
@@ -212,21 +187,21 @@ namespace Neodroid.Models.Managers.General {
 
     void OnDisconnectCallback() {
       if (this.Debugging)
-        Debug.Log(message : "Client disconnected.");
+        Debug.Log("Client disconnected.");
     }
 
     void OnDebugCallback(string error) {
       if (this.Debugging)
-        Debug.Log(message : "DebugCallback: " + error);
+        Debug.Log("DebugCallback: " + error);
     }
 
     void OnConnectCallback() {
       if (this.Debugging)
-        Debug.Log(message : "Client connected.");
+        Debug.Log("Client connected.");
       this._message_server.StartReceiving(
-                                          cmd_callback : this.OnReceiveCallback,
-                                          disconnect_callback : this.OnDisconnectCallback,
-                                          debug_callback : this.OnDebugCallback);
+          this.OnReceiveCallback,
+          this.OnDisconnectCallback,
+          this.OnDebugCallback);
     }
 
     void OnInterruptCallback() { }

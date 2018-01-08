@@ -3,8 +3,8 @@ using System.Threading;
 using AsyncIO;
 using FlatBuffers;
 using Neodroid.FBS.Reaction;
-using Neodroid.Messaging.Messages;
 using Neodroid.Scripts.Messaging.FBS;
+using Neodroid.Scripts.Messaging.Messages;
 using NetMQ;
 using NetMQ.Sockets;
 
@@ -42,46 +42,46 @@ namespace Neodroid.Scripts.Messaging {
 
     void WaitForClientToConnect(Action callback) {
       if (this._use_inter_process_communication)
-        this._socket.Bind(address : "ipc:///tmp/neodroid/messages");
+        this._socket.Bind("ipc:///tmp/neodroid/messages");
       else
-        this._socket.Bind(address : "tcp://" + this._ip_address + ":" + this._port);
+        this._socket.Bind("tcp://" + this._ip_address + ":" + this._port);
       callback();
       this.ClientConnected = true;
     }
 
     void PollingThread(
-      Action<Reaction> receive_callback,
-      Action disconnect_callback,
-      Action<string> debug_callback) {
-      while (this._stop_thread_ == false)
-        if (!this._waiting_for_main_loop_to_send)
+        Action<Reaction> receive_callback,
+        Action disconnect_callback,
+        Action<string> debug_callback) {
+      while (this._stop_thread_ == false) {
+        if (!this._waiting_for_main_loop_to_send) {
           try {
             byte[] msg;
-            this._socket.TryReceiveFrameBytes(
-                                              timeout : TimeSpan.FromSeconds(value : 2),
-                                              bytes : out msg);
+            this._socket.TryReceiveFrameBytes(TimeSpan.FromSeconds(2), out msg);
             if (msg != null && msg.Length > 0) {
-              var flat_reaction = FBSReaction.GetRootAsFBSReaction(_bb : new ByteBuffer(buffer : msg));
+              var flat_reaction = FBSReaction.GetRootAsFBSReaction(new ByteBuffer(msg));
               if (this.Debugging)
-                debug_callback(obj : flat_reaction.ToString());
-              var reaction = FBSReactionUtilities.create_reaction(reaction : flat_reaction);
-              receive_callback(obj : reaction);
+                debug_callback(flat_reaction.ToString());
+              var reaction = FBSReactionUtilities.create_reaction(flat_reaction);
+              receive_callback(reaction);
               this._waiting_for_main_loop_to_send = true;
             }
           } catch (Exception err) {
-            debug_callback(obj : err.ToString());
+            debug_callback(err.ToString());
           }
+        }
+      }
 
       disconnect_callback();
       if (this._use_inter_process_communication)
-        this._socket.Disconnect(address : "inproc://neodroid");
+        this._socket.Disconnect("inproc://neodroid");
       else
-        this._socket.Disconnect(address : "tcp://" + this._ip_address + ":" + this._port);
+        this._socket.Disconnect("tcp://" + this._ip_address + ":" + this._port);
       try {
         this._socket.Dispose();
         this._socket.Close();
       } finally {
-        NetMQConfig.Cleanup(block : false);
+        NetMQConfig.Cleanup(false);
       }
     }
 
@@ -92,36 +92,26 @@ namespace Neodroid.Scripts.Messaging {
     #region PublicMethods
 
     public void SendEnvironmentStates(EnvironmentState[] environment_states) {
-      this._byte_buffer = FBSStateUtilities.build_states(states : environment_states);
-      this._socket.SendFrame(data : this._byte_buffer);
+      this._byte_buffer = FBSStateUtilities.build_states(environment_states);
+      this._socket.SendFrame(this._byte_buffer);
       this._waiting_for_main_loop_to_send = false;
     }
 
     public void ListenForClientToConnect(Action callback) {
       this._wait_for_client_thread =
-        new Thread(start : unused_param => this.WaitForClientToConnect(callback : callback)) {
-                                                                                               IsBackground =
-                                                                                                 true
-                                                                                             };
+          new Thread(unused_param => this.WaitForClientToConnect(callback)) {IsBackground = true};
       // Is terminated with foreground threads, when they terminate
       this._wait_for_client_thread.Start();
     }
 
     public void StartReceiving(
-      Action<Reaction> cmd_callback,
-      Action disconnect_callback,
-      Action<string> debug_callback) {
-      this._polling_thread = new Thread(
-                                        start : unused_param => this.PollingThread(
-                                                                                   receive_callback :
-                                                                                   cmd_callback,
-                                                                                   disconnect_callback :
-                                                                                   disconnect_callback,
-                                                                                   debug_callback :
-                                                                                   debug_callback)) {
-                                                                                                      IsBackground
-                                                                                                        = true
-                                                                                                    };
+        Action<Reaction> cmd_callback,
+        Action disconnect_callback,
+        Action<string> debug_callback) {
+      this._polling_thread =
+          new Thread(unused_param => this.PollingThread(cmd_callback, disconnect_callback, debug_callback)) {
+              IsBackground = true
+          };
       // Is terminated with foreground threads, when they terminate
       this._polling_thread.Start();
     }
@@ -129,10 +119,10 @@ namespace Neodroid.Scripts.Messaging {
     #region Contstruction
 
     public MessageServer(
-      string ip_address = "127.0.0.1",
-      int port = 5555,
-      bool use_inter_process_communication = false,
-      bool debug = false) {
+        string ip_address = "127.0.0.1",
+        int port = 5555,
+        bool use_inter_process_communication = false,
+        bool debug = false) {
       this.Debugging = debug;
       this._ip_address = ip_address;
       this._port = port;
@@ -143,11 +133,7 @@ namespace Neodroid.Scripts.Messaging {
       //_socket = new PairSocket ();
     }
 
-    public MessageServer(bool debug = false) : this(
-                                                    ip_address : "127.0.0.1",
-                                                    port : 5555,
-                                                    use_inter_process_communication : false,
-                                                    debug : debug) { }
+    public MessageServer(bool debug = false) : this("127.0.0.1", 5555, false, debug) { }
 
     #endregion
 
@@ -165,25 +151,23 @@ namespace Neodroid.Scripts.Messaging {
 
     public void KillPollingAndListenerThread() {
       try {
-        lock (this._thread_lock) {
-          this._stop_thread_ = true;
-        }
+        lock (this._thread_lock) this._stop_thread_ = true;
 
         if (this._use_inter_process_communication)
-          this._socket.Disconnect(address : "ipc:///tmp/neodroid/messages");
+          this._socket.Disconnect("ipc:///tmp/neodroid/messages");
         else
-          this._socket.Disconnect(address : "tcp://" + this._ip_address + ":" + this._port);
+          this._socket.Disconnect("tcp://" + this._ip_address + ":" + this._port);
         try {
           this._socket.Dispose();
           this._socket.Close();
         } finally {
-          NetMQConfig.Cleanup(block : false);
+          NetMQConfig.Cleanup(false);
         }
 
         if (this._wait_for_client_thread != null) this._wait_for_client_thread.Join();
         if (this._polling_thread != null) this._polling_thread.Join();
       } catch {
-        Console.WriteLine(value : "Exception thrown while killing threads");
+        Console.WriteLine("Exception thrown while killing threads");
       }
     }
 

@@ -3,10 +3,7 @@ using UnityEngine;
 namespace SceneAssets.LunarLander.Scripts {
   [ExecuteInEditMode]
   public class FollowTarget : MonoBehaviour {
-    public Vector3 offset = new Vector3(
-                                        x : 0f,
-                                        y : 7.5f,
-                                        z : 0f);
+    public Vector3 offset = new Vector3(0f, 7.5f, 0f);
 
     public Transform target;
 

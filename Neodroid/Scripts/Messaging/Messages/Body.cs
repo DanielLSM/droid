@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Neodroid.Messaging.Messages {
+namespace Neodroid.Scripts.Messaging.Messages {
   public class Body {
-    public Body (
-      Vector3 vel,
-      Vector3 ang) {
+    public Body(Vector3 vel, Vector3 ang) {
       this.Velocity = vel;
       this.AngularVelocity = ang;
     }

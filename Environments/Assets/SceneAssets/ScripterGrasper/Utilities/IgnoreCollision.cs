@@ -10,23 +10,17 @@ namespace SceneSpecificAssets.Grasping.Utilities {
 
     void OnCollisionEnter(Collision collision) {
       if (collision.gameObject.tag == "ignored_by_sub_collider_fish")
-        Physics.IgnoreCollision(
-                                collider1 : this.GetComponent<Collider>(),
-                                collider2 : collision.collider);
+        Physics.IgnoreCollision(this.GetComponent<Collider>(), collision.collider);
     }
 
     void OnCollisionExit(Collision collision) {
       if (collision.gameObject.tag == "ignored_by_sub_collider_fish")
-        Physics.IgnoreCollision(
-                                collider1 : this.GetComponent<Collider>(),
-                                collider2 : collision.collider);
+        Physics.IgnoreCollision(this.GetComponent<Collider>(), collision.collider);
     }
 
     void OnCollisionStay(Collision collision) {
       if (collision.gameObject.tag == "ignored_by_sub_collider_fish")
-        Physics.IgnoreCollision(
-                                collider1 : this.GetComponent<Collider>(),
-                                collider2 : collision.collider);
+        Physics.IgnoreCollision(this.GetComponent<Collider>(), collision.collider);
     }
   }
 }

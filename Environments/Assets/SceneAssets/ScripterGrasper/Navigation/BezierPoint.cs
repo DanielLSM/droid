@@ -52,14 +52,15 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - Curve this point belongs to
     ///   - Changing this value will automatically remove this point from the current curve and add it to the new one
     /// </summary>
-    [SerializeField] BezierCurve _curve;
+    [SerializeField]
+    BezierCurve _curve;
 
     public BezierCurve Curve {
       get { return this._curve; }
       set {
-        if (this._curve) this._curve.RemovePoint(point : this);
+        if (this._curve) this._curve.RemovePoint(this);
         this._curve = value;
-        this._curve.AddPoint(point : this);
+        this._curve.AddPoint(this);
       }
     }
 
@@ -95,7 +96,8 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - Setting this value will cause the curve to become dirty
     ///   - This handle effects the curve generated from this point and the point proceeding it in curve.points
     /// </summary>
-    [SerializeField] Vector3 _handle1;
+    [SerializeField]
+    Vector3 _handle1;
 
     public Vector3 Handle1 {
       get { return this._handle1; }
@@ -118,8 +120,8 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - This handle effects the curve generated from this point and the point proceeding it in curve.points
     /// </summary>
     public Vector3 GlobalHandle1 {
-      get { return this.transform.TransformPoint(position : this.Handle1); }
-      set { this.Handle1 = this.transform.InverseTransformPoint(position : value); }
+      get { return this.transform.TransformPoint(this.Handle1); }
+      set { this.Handle1 = this.transform.InverseTransformPoint(value); }
     }
 
     /// <summary>
@@ -127,7 +129,8 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - Setting this value will cause the curve to become dirty
     ///   - This handle effects the curve generated from this point and the point coming after it in curve.points
     /// </summary>
-    [SerializeField] Vector3 _handle2;
+    [SerializeField]
+    Vector3 _handle2;
 
     public Vector3 Handle2 {
       get { return this._handle2; }
@@ -150,8 +153,8 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - This handle effects the curve generated from this point and the point coming after it in curve.points
     /// </summary>
     public Vector3 GlobalHandle2 {
-      get { return this.transform.TransformPoint(position : this.Handle2); }
-      set { this.Handle2 = this.transform.InverseTransformPoint(position : value); }
+      get { return this.transform.TransformPoint(this.Handle2); }
+      set { this.Handle2 = this.transform.InverseTransformPoint(value); }
     }
 
     #endregion

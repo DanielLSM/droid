@@ -11,8 +11,8 @@ namespace Neodroid.Scripts.Utilities.SerialisableDictionary {
 
     public void OnAfterDeserialize() {
       var c = this._keys.Length;
-      this.Dict = new Dictionary<TK, TV>(capacity : c);
-      for (var i = 0; i < c; i++) this.Dict[key : this._keys[i]] = this._values[i];
+      this.Dict = new Dictionary<TK, TV>(c);
+      for (var i = 0; i < c; i++) this.Dict[this._keys[i]] = this._values[i];
       this._keys = null;
       this._values = null;
     }
@@ -32,11 +32,8 @@ namespace Neodroid.Scripts.Utilities.SerialisableDictionary {
       }
     }
 
-    public static T New<T>()
-      where T : SerializableDictionary<TK, TV>, new() {
-      var result = new T {
-                           Dict = new Dictionary<TK, TV>()
-                         };
+    public static T New<T>() where T : SerializableDictionary<TK, TV>, new() {
+      var result = new T {Dict = new Dictionary<TK, TV>()};
       return result;
     }
   }

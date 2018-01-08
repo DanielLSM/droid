@@ -16,17 +16,13 @@ namespace Neodroid.Models.Observers {
                                         IHasEulerTransformProperties {
     [SerializeField] Vector3 _direction;
 
-    [Header(
-      header : "Observation",
-      order = 103)]
+    [Header("Observation", order = 103)]
     [SerializeField]
     Vector3 _position;
 
     [SerializeField] Vector3 _rotation;
 
-    [Header(
-      header : "Specfic",
-      order = 102)]
+    [Header("Specfic", order = 102)]
     [SerializeField]
     ObservationSpace _space = ObservationSpace.Environment;
 
@@ -42,9 +38,9 @@ namespace Neodroid.Models.Observers {
 
     public override void UpdateData() {
       if (this.ParentEnvironment && this._space == ObservationSpace.Environment) {
-        this._position = this.ParentEnvironment.TransformPosition(position : this.transform.position);
-        this._direction = this.ParentEnvironment.TransformDirection(direction : this.transform.forward);
-        this._rotation = this.ParentEnvironment.TransformDirection(direction : this.transform.up);
+        this._position = this.ParentEnvironment.TransformPosition(this.transform.position);
+        this._direction = this.ParentEnvironment.TransformDirection(this.transform.forward);
+        this._rotation = this.ParentEnvironment.TransformDirection(this.transform.up);
       } else if (this._space == ObservationSpace.Local) {
         this._position = this.transform.localPosition;
         this._direction = this.transform.forward;

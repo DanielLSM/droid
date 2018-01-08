@@ -3,9 +3,7 @@ using UnityEngine;
 
 namespace Neodroid.Models.Configurables {
   public class QuaternionTransformConfigurable : ConfigurableGameObject {
-    [Header(
-      header : "Specfic",
-      order = 102)]
+    [Header("Specfic", order = 102)]
     [SerializeField]
     Vector3 _position;
 

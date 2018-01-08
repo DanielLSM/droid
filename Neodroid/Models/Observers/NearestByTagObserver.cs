@@ -7,15 +7,11 @@ namespace Neodroid.Models.Observers {
                                       IHasEulerTransformProperties {
     [SerializeField] Vector3 _direction;
 
-    [Header(
-      header : "Specific",
-      order = 102)]
+    [Header("Specific", order = 102)]
     [SerializeField]
     GameObject _nearest_object;
 
-    [Header(
-      header : "Observation",
-      order = 103)]
+    [Header("Observation", order = 103)]
     [SerializeField]
     Vector3 _position;
 
@@ -34,12 +30,9 @@ namespace Neodroid.Models.Observers {
     public override void UpdateData() {
       this.FindNearest();
       if (this.ParentEnvironment) {
-        this._position =
-          this.ParentEnvironment.TransformPosition(position : this._nearest_object.transform.position);
-        this._direction =
-          this.ParentEnvironment.TransformDirection(direction : this._nearest_object.transform.forward);
-        this._rotation =
-          this.ParentEnvironment.TransformDirection(direction : this._nearest_object.transform.up);
+        this._position = this.ParentEnvironment.TransformPosition(this._nearest_object.transform.position);
+        this._direction = this.ParentEnvironment.TransformDirection(this._nearest_object.transform.forward);
+        this._rotation = this.ParentEnvironment.TransformDirection(this._nearest_object.transform.up);
       } else {
         this._position = this._nearest_object.transform.position;
         this._direction = this._nearest_object.transform.forward;
@@ -58,16 +51,15 @@ namespace Neodroid.Models.Observers {
     void FindNearest() {
       var candidates = FindObjectsOfType<GameObject>();
       var nearest_distance = -1.0;
-      foreach (var candidate in candidates)
+      foreach (var candidate in candidates) {
         if (candidate.tag == this._tag) {
-          var dist = Vector3.Distance(
-                                      a : this.transform.position,
-                                      b : candidate.transform.position);
+          var dist = Vector3.Distance(this.transform.position, candidate.transform.position);
           if (nearest_distance > dist || nearest_distance < 0) {
             nearest_distance = dist;
             this._nearest_object = candidate;
           }
         }
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace SceneAssets.Satellite.Scripts {
-  [RequireComponent( typeof(Rigidbody))]
+  [RequireComponent(typeof(Rigidbody))]
   public class BodyWithMass : MonoBehaviour {
     const float GravitationalConstant = 667.4f;
 
@@ -22,9 +22,10 @@ namespace SceneAssets.Satellite.Scripts {
     }
 
     void FixedUpdate() {
-      foreach (var attractor in _attractors)
+      foreach (var attractor in _attractors) {
         if (attractor != this)
-          this.Attract(other_body : attractor);
+          this.Attract(attractor);
+      }
     }
 
     void Attract(BodyWithMass other_body) {
@@ -32,9 +33,7 @@ namespace SceneAssets.Satellite.Scripts {
       //float distance = direction.sqrMagnitude;
       var distance = direction.magnitude;
 
-      if (Mathf.Approximately(
-                              a : distance,
-                              b : 0)) return;
+      if (Mathf.Approximately(distance, 0)) return;
 
       var nom = this.Mass * other_body.Mass;
       var denom = distance * distance;
@@ -43,9 +42,9 @@ namespace SceneAssets.Satellite.Scripts {
       force_magnitude *= GravitationalConstant;
       var force = direction.normalized * force_magnitude;
 
-      other_body.ApplyForce(force : force);
+      other_body.ApplyForce(force);
     }
 
-    public void ApplyForce(Vector3 force) { this._rigidbody.AddForce(force : force); }
+    public void ApplyForce(Vector3 force) { this._rigidbody.AddForce(force); }
   }
 }

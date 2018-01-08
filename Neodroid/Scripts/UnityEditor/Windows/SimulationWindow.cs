@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
 using Neodroid.Environments;
 using Neodroid.Evaluation;
-using Neodroid.Messaging.Messages;
 using Neodroid.Models.Actors;
 using Neodroid.Models.Configurables.General;
+using Neodroid.Models.Environments;
 using Neodroid.Models.Managers;
 using Neodroid.Models.Motors.General;
 using Neodroid.Models.Observers.General;
+using Neodroid.Scripts.Messaging.Messages;
 using Neodroid.Scripts.Utilities;
 using Neodroid.Scripts.Utilities.Enums;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace Neodroid.Scripts.UnityEditor.Windows {
@@ -31,25 +33,20 @@ namespace Neodroid.Scripts.UnityEditor.Windows {
 
     SimulationManager _simulation_manager;
 
-    [MenuItem(itemName : "Neodroid/SimulationWindow")]
+    [MenuItem("Neodroid/SimulationWindow")]
     public static void ShowWindow() {
-      GetWindow(
-                t : typeof(SimulationWindow)); //Show existing window instance. If one doesn't exist, make one.
+      GetWindow(typeof(SimulationWindow)); //Show existing window instance. If one doesn't exist, make one.
       //window.Show();
     }
 
     void OnEnable() {
       this._icon = (Texture2D)AssetDatabase.LoadAssetAtPath(
-                                                            assetPath : "Assets/Neodroid/Icons/world.png",
-                                                            type : typeof(Texture2D));
-      this._neodroid_icon =
-        (Texture)AssetDatabase.LoadAssetAtPath(
-                                               assetPath : "Assets/Neodroid/Icons/neodroid_favicon_cut.png",
-                                               type : typeof(Texture));
-      this.titleContent = new GUIContent(
-                                         text : "Neo:Sim",
-                                         image : this._icon,
-                                         tooltip : "Window for configuring simulation");
+          "Assets/Neodroid/Icons/world.png",
+          typeof(Texture2D));
+      this._neodroid_icon = (Texture)AssetDatabase.LoadAssetAtPath(
+          "Assets/Neodroid/Icons/neodroid_favicon_cut.png",
+          typeof(Texture));
+      this.titleContent = new GUIContent("Neo:Sim", this._icon, "Window for configuring simulation");
       this.Setup();
     }
 
@@ -58,34 +55,29 @@ namespace Neodroid.Scripts.UnityEditor.Windows {
     }
 
     void OnGUI() {
-      var serialised_object = new SerializedObject(obj : this);
+      var serialised_object = new SerializedObject(this);
       this._simulation_manager = FindObjectOfType<SimulationManager>();
       if (this._simulation_manager) {
         EditorGUILayout.BeginHorizontal();
 
         GUILayout.Label(
-                        this._neodroid_icon,
-                        GUILayout.Width(width : this._preview_image_size),
-                        GUILayout.Height(height : this._preview_image_size));
+            this._neodroid_icon,
+            GUILayout.Width(this._preview_image_size),
+            GUILayout.Height(this._preview_image_size));
 
         EditorGUILayout.BeginVertical();
-        this._simulation_manager.FrameSkips =
-          EditorGUILayout.IntField(
-                                   label : "Frame Skips",
-                                   value : this._simulation_manager.FrameSkips);
-        this._simulation_manager.ResetIterations = EditorGUILayout.IntField(
-                                                                            label : "Reset Iterations",
-                                                                            value : this
-                                                                                      ._simulation_manager
-                                                                                      .ResetIterations);
-        this._simulation_manager.WaitEvery =
-          (WaitOn)EditorGUILayout.EnumPopup(
-                                            label : "Wait Every",
-                                            selected : this._simulation_manager.WaitEvery);
-        this._simulation_manager.TestMotors =
-          EditorGUILayout.Toggle(
-                                 label : "Test Motors",
-                                 value : this._simulation_manager.TestMotors);
+        this._simulation_manager.Configuration.FrameSkips = EditorGUILayout.IntField(
+            "Frame Skips",
+            this._simulation_manager.Configuration.FrameSkips);
+        this._simulation_manager.Configuration.ResetIterations = EditorGUILayout.IntField(
+            "Reset Iterations",
+            this._simulation_manager.Configuration.ResetIterations);
+        this._simulation_manager.Configuration.WaitEvery = (WaitOn)EditorGUILayout.EnumPopup(
+            "Wait Every",
+            this._simulation_manager.Configuration.WaitEvery);
+        this._simulation_manager.TestMotors = EditorGUILayout.Toggle(
+            "Test Motors",
+            this._simulation_manager.TestMotors);
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.EndHorizontal();
@@ -93,104 +85,72 @@ namespace Neodroid.Scripts.UnityEditor.Windows {
         this._environments = NeodroidUtilities.FindAllObjectsOfTypeInScene<LearningEnvironment>();
         if (this._show_environment_properties.Length != this._environments.Length) this.Setup();
 
-        this._scroll_position = EditorGUILayout.BeginScrollView(scrollPosition : this._scroll_position);
+        this._scroll_position = EditorGUILayout.BeginScrollView(this._scroll_position);
 
-        EditorGUILayout.BeginVertical(style : "Box");
-        GUILayout.Label(text : "Environments");
+        EditorGUILayout.BeginVertical("Box");
+        GUILayout.Label("Environments");
         if (this._show_environment_properties != null) {
           for (var i = 0; i < this._show_environment_properties.Length; i++) {
             this._show_environment_properties[i] = EditorGUILayout.Foldout(
-                                                                           foldout : this
-                                                                             ._show_environment_properties[i],
-                                                                           content : this
-                                                                                     ._environments[i]
-                                                                                     .EnvironmentIdentifier);
+                this._show_environment_properties[i],
+                this._environments[i].EnvironmentIdentifier);
             if (this._show_environment_properties[i]) {
               this._actors = this._environments[i].Actors;
               this._observers = this._environments[i].Observers;
               this._configurables = this._environments[i].Configurables;
               this._resetables = this._environments[i].Resetables;
 
-              EditorGUILayout.BeginVertical(style : "Box");
+              EditorGUILayout.BeginVertical("Box");
               this._environments[i].enabled = EditorGUILayout.BeginToggleGroup(
-                                                                               label : this._environments[i]
-                                                                                           .EnvironmentIdentifier,
-                                                                               toggle : this._environments[i]
-                                                                                            .enabled
-                                                                                        && this
-                                                                                           ._environments[i]
-                                                                                           .gameObject
-                                                                                           .activeSelf);
-              EditorGUILayout.ObjectField(
-                                          obj : this._environments[i],
-                                          objType : typeof(LearningEnvironment),
-                                          allowSceneObjects : true);
+                  this._environments[i].EnvironmentIdentifier,
+                  this._environments[i].enabled && this._environments[i].gameObject.activeSelf);
+              EditorGUILayout.ObjectField(this._environments[i], typeof(LearningEnvironment), true);
               this._environments[i].CoordinateSystem = (CoordinateSystem)EditorGUILayout.EnumPopup(
-                                                                                                   label :
-                                                                                                   "Coordinate system",
-                                                                                                   selected :
-                                                                                                   this
-                                                                                                     ._environments
-                                                                                                       [i]
-                                                                                                     .CoordinateSystem);
+                  "Coordinate system",
+                  this._environments[i].CoordinateSystem);
               EditorGUI.BeginDisabledGroup(
-                                           disabled : this._environments[i].CoordinateSystem
-                                                      != CoordinateSystem.RelativeToReferencePoint);
-              this._environments[i].CoordinateReferencePoint =
-                (Transform)EditorGUILayout.ObjectField(
-                                                       label : "Reference point",
-                                                       obj : this._environments[i].CoordinateReferencePoint,
-                                                       objType : typeof(Transform),
-                                                       allowSceneObjects : true);
+                  this._environments[i].CoordinateSystem != CoordinateSystem.RelativeToReferencePoint);
+              this._environments[i].CoordinateReferencePoint = (Transform)EditorGUILayout.ObjectField(
+                  "Reference point",
+                  this._environments[i].CoordinateReferencePoint,
+                  typeof(Transform),
+                  true);
               EditorGUI.EndDisabledGroup();
-              this._environments[i].ObjectiveFunction =
-                (ObjectiveFunction)EditorGUILayout.ObjectField(
-                                                               label : "Objective function",
-                                                               obj : this._environments[i].ObjectiveFunction,
-                                                               objType : typeof(ObjectiveFunction),
-                                                               allowSceneObjects : true);
+              this._environments[i].ObjectiveFunction = (ObjectiveFunction)EditorGUILayout.ObjectField(
+                  "Objective function",
+                  this._environments[i].ObjectiveFunction,
+                  typeof(ObjectiveFunction),
+                  true);
               this._environments[i].EpisodeLength = EditorGUILayout.IntField(
-                                                                             label : "Episode Length",
-                                                                             value : this
-                                                                                     ._environments[i]
-                                                                                     .EpisodeLength);
+                  "Episode Length",
+                  this._environments[i].EpisodeLength);
 
-              EditorGUILayout.BeginVertical(style : "Box");
-              GUILayout.Label(text : "Actors");
-              foreach (var actor in this._actors)
+              EditorGUILayout.BeginVertical("Box");
+              GUILayout.Label("Actors");
+              foreach (var actor in this._actors) {
                 if (actor.Value != null) {
                   this._motors = actor.Value.Motors;
 
-                  EditorGUILayout.BeginVertical(style : "Box");
+                  EditorGUILayout.BeginVertical("Box");
                   actor.Value.enabled = EditorGUILayout.BeginToggleGroup(
-                                                                         label : actor.Key,
-                                                                         toggle : actor.Value.enabled
-                                                                                  && actor.Value.gameObject
-                                                                                          .activeSelf);
-                  EditorGUILayout.ObjectField(
-                                              obj : actor.Value,
-                                              objType : typeof(Actor),
-                                              allowSceneObjects : true);
+                      actor.Key,
+                      actor.Value.enabled && actor.Value.gameObject.activeSelf);
+                  EditorGUILayout.ObjectField(actor.Value, typeof(Actor), true);
 
-                  EditorGUILayout.BeginVertical(style : "Box");
-                  GUILayout.Label(text : "Motors");
-                  foreach (var motor in this._motors)
+                  EditorGUILayout.BeginVertical("Box");
+                  GUILayout.Label("Motors");
+                  foreach (var motor in this._motors) {
                     if (motor.Value != null) {
-                      EditorGUILayout.BeginVertical(style : "Box");
+                      EditorGUILayout.BeginVertical("Box");
                       motor.Value.enabled = EditorGUILayout.BeginToggleGroup(
-                                                                             label : motor.Key,
-                                                                             toggle : motor.Value.enabled
-                                                                                      && motor
-                                                                                         .Value.gameObject
-                                                                                         .activeSelf);
-                      EditorGUILayout.ObjectField(
-                                                  obj : motor.Value,
-                                                  objType : typeof(Motor),
-                                                  allowSceneObjects : true);
+                          motor.Key,
+                          motor.Value.enabled && motor.Value.gameObject.activeSelf);
+                      EditorGUILayout.ObjectField(motor.Value, typeof(Motor), true);
                       EditorGUILayout.EndToggleGroup();
 
                       EditorGUILayout.EndVertical();
                     }
+                  }
 
                   EditorGUILayout.EndVertical();
 
@@ -198,68 +158,55 @@ namespace Neodroid.Scripts.UnityEditor.Windows {
 
                   EditorGUILayout.EndVertical();
                 }
+              }
 
               EditorGUILayout.EndVertical();
 
-              EditorGUILayout.BeginVertical(style : "Box");
-              GUILayout.Label(text : "Observers");
-              foreach (var observer in this._observers)
+              EditorGUILayout.BeginVertical("Box");
+              GUILayout.Label("Observers");
+              foreach (var observer in this._observers) {
                 if (observer.Value != null) {
-                  EditorGUILayout.BeginVertical(style : "Box");
+                  EditorGUILayout.BeginVertical("Box");
                   observer.Value.enabled = EditorGUILayout.BeginToggleGroup(
-                                                                            label : observer.Key,
-                                                                            toggle : observer.Value.enabled
-                                                                                     && observer
-                                                                                        .Value.gameObject
-                                                                                        .activeSelf);
-                  EditorGUILayout.ObjectField(
-                                              obj : observer.Value,
-                                              objType : typeof(Observer),
-                                              allowSceneObjects : true);
+                      observer.Key,
+                      observer.Value.enabled && observer.Value.gameObject.activeSelf);
+                  EditorGUILayout.ObjectField(observer.Value, typeof(Observer), true);
                   EditorGUILayout.EndToggleGroup();
                   EditorGUILayout.EndVertical();
                 }
+              }
 
               EditorGUILayout.EndVertical();
 
-              EditorGUILayout.BeginVertical(style : "Box");
-              GUILayout.Label(text : "Configurables");
-              foreach (var configurable in this._configurables)
+              EditorGUILayout.BeginVertical("Box");
+              GUILayout.Label("Configurables");
+              foreach (var configurable in this._configurables) {
                 if (configurable.Value != null) {
-                  EditorGUILayout.BeginVertical(style : "Box");
-                  configurable.Value.enabled =
-                    EditorGUILayout.BeginToggleGroup(
-                                                     label : configurable.Key,
-                                                     toggle : configurable.Value.enabled
-                                                              && configurable.Value.gameObject.activeSelf);
-                  EditorGUILayout.ObjectField(
-                                              obj : configurable.Value,
-                                              objType : typeof(ConfigurableGameObject),
-                                              allowSceneObjects : true);
+                  EditorGUILayout.BeginVertical("Box");
+                  configurable.Value.enabled = EditorGUILayout.BeginToggleGroup(
+                      configurable.Key,
+                      configurable.Value.enabled && configurable.Value.gameObject.activeSelf);
+                  EditorGUILayout.ObjectField(configurable.Value, typeof(ConfigurableGameObject), true);
                   EditorGUILayout.EndToggleGroup();
                   EditorGUILayout.EndVertical();
                 }
+              }
 
               EditorGUILayout.EndVertical();
 
-              EditorGUILayout.BeginVertical(style : "Box");
-              GUILayout.Label(text : "Resetables");
-              foreach (var resetable in this._resetables)
+              EditorGUILayout.BeginVertical("Box");
+              GUILayout.Label("Resetables");
+              foreach (var resetable in this._resetables) {
                 if (resetable.Value != null) {
-                  EditorGUILayout.BeginVertical(style : "Box");
+                  EditorGUILayout.BeginVertical("Box");
                   resetable.Value.enabled = EditorGUILayout.BeginToggleGroup(
-                                                                             label : resetable.Key,
-                                                                             toggle : resetable.Value.enabled
-                                                                                      && resetable
-                                                                                         .Value.gameObject
-                                                                                         .activeSelf);
-                  EditorGUILayout.ObjectField(
-                                              obj : resetable.Value,
-                                              objType : typeof(Resetable),
-                                              allowSceneObjects : true);
+                      resetable.Key,
+                      resetable.Value.enabled && resetable.Value.gameObject.activeSelf);
+                  EditorGUILayout.ObjectField(resetable.Value, typeof(Resetable), true);
                   EditorGUILayout.EndToggleGroup();
                   EditorGUILayout.EndVertical();
                 }
+              }
 
               EditorGUILayout.EndVertical();
 
@@ -273,47 +220,19 @@ namespace Neodroid.Scripts.UnityEditor.Windows {
           EditorGUILayout.EndScrollView();
           serialised_object.ApplyModifiedProperties();
 
-          if (GUILayout.Button(text : "Refresh")) this.Refresh();
+          if (GUILayout.Button("Refresh")) this.Refresh();
 
-          EditorGUI.BeginDisabledGroup(disabled : !Application.isPlaying);
+          EditorGUI.BeginDisabledGroup(!Application.isPlaying);
 
-          if (GUILayout.Button(text : "Step"))
+          if (GUILayout.Button("Step")) {
             this._simulation_manager.ReactInEnvironments(
-                                                         reaction : new Reaction(
-                                                                                 parameters : new
-                                                                                   ReactionParameters(
-                                                                                                      terminable
-                                                                                                      : true,
-                                                                                                      step :
-                                                                                                      true,
-                                                                                                      reset :
-                                                                                                      false,
-                                                                                                      configure
-                                                                                                      : false,
-                                                                                                      describe
-                                                                                                      : false),
-                                                                                 motions : null,
-                                                                                 configurations : null,
-                                                                                 unobservables : null));
+                new Reaction(new ReactionParameters(true, true, false, false, false), null, null, null));
+          }
 
-          if (GUILayout.Button(text : "Reset"))
+          if (GUILayout.Button("Reset")) {
             this._simulation_manager.ReactInEnvironments(
-                                                         reaction : new Reaction(
-                                                                                 parameters : new
-                                                                                   ReactionParameters(
-                                                                                                      terminable
-                                                                                                      : true,
-                                                                                                      step :
-                                                                                                      false,
-                                                                                                      reset :
-                                                                                                      true,
-                                                                                                      configure
-                                                                                                      : false,
-                                                                                                      describe
-                                                                                                      : false),
-                                                                                 motions : null,
-                                                                                 configurations : null,
-                                                                                 unobservables : null));
+                new Reaction(new ReactionParameters(true, false, true, false, false), null, null, null));
+          }
 
           EditorGUI.EndDisabledGroup();
         }

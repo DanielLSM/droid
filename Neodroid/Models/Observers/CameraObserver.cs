@@ -4,17 +4,13 @@ using UnityEngine;
 
 namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
-  [RequireComponent( typeof(Camera))]
+  [RequireComponent(typeof(Camera))]
   public class CameraObserver : Observer {
-    [Header(
-      header : "Specific",
-      order = 102)]
+    [Header("Specific", order = 102)]
     [SerializeField]
     Camera _camera;
 
-    [Header(
-      header : "Observation",
-      order = 103)]
+    [Header("Observation", order = 103)]
     [SerializeField]
     byte[] _data = { };
 
@@ -25,7 +21,7 @@ namespace Neodroid.Models.Observers {
     protected override void Start() { this._camera = this.GetComponent<Camera>(); }
 
     protected virtual void Update() {
-      this.Data = NeodroidUtilities.RenderTextureImage(camera : this._camera).EncodeToPNG();
+      this.Data = NeodroidUtilities.RenderTextureImage(this._camera).EncodeToPNG();
     }
 
     public override void UpdateData() {

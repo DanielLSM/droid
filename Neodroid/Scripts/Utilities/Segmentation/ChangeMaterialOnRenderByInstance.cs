@@ -17,10 +17,7 @@ namespace Neodroid.Scripts.Utilities.Segmentation {
           var instance_color_array = new SegmentationColorByInstance[this.InstanceColorsDict.Keys.Count];
           var i = 0;
           foreach (var key in this.InstanceColorsDict.Keys) {
-            var seg = new SegmentationColorByInstance {
-                                                        Obj = key,
-                                                        Col = this.InstanceColorsDict[key : key]
-                                                      };
+            var seg = new SegmentationColorByInstance {Obj = key, Col = this.InstanceColorsDict[key]};
             instance_color_array[i] = seg;
             i++;
           }
@@ -31,7 +28,7 @@ namespace Neodroid.Scripts.Utilities.Segmentation {
         return null;
       }
       set {
-        foreach (var seg in value) this.InstanceColorsDict[key : seg.Obj] = seg.Col;
+        foreach (var seg in value) this.InstanceColorsDict[seg.Obj] = seg.Col;
       }
     }
 
@@ -52,11 +49,9 @@ namespace Neodroid.Scripts.Utilities.Segmentation {
       this._all_renders = FindObjectsOfType<Renderer>();
       this._block = new MaterialPropertyBlock();
 
-      this.InstanceColorsDict = new Dictionary<GameObject, Color>(capacity : this._all_renders.Length);
+      this.InstanceColorsDict = new Dictionary<GameObject, Color>(this._all_renders.Length);
       foreach (var rend in this._all_renders)
-        this.InstanceColorsDict.Add(
-                                    key : rend.gameObject,
-                                    value : Random.ColorHSV());
+        this.InstanceColorsDict.Add(rend.gameObject, Random.ColorHSV());
     }
 
     void Change() {
@@ -65,26 +60,25 @@ namespace Neodroid.Scripts.Utilities.Segmentation {
       for (var i = 0; i < this._original_colors.Length; i++)
         this._original_colors[i] = new LinkedList<Color>();
 
-      for (var i = 0; i < this._all_renders.Length; i++)
+      for (var i = 0; i < this._all_renders.Length; i++) {
         foreach (var mat in this._all_renders[i].sharedMaterials) {
-          if (mat != null) this._original_colors[i].AddFirst(value : mat.color);
-          this._block.SetColor(
-                               name : "_Color",
-                               value : this.InstanceColorsDict[key : this._all_renders[i].gameObject]);
-          this._all_renders[i].SetPropertyBlock(properties : this._block);
+          if (mat != null) this._original_colors[i].AddFirst(mat.color);
+          this._block.SetColor("_Color", this.InstanceColorsDict[this._all_renders[i].gameObject]);
+          this._all_renders[i].SetPropertyBlock(this._block);
         }
+      }
     }
 
     void Restore() {
-      for (var i = 0; i < this._all_renders.Length; i++)
-        foreach (var mat in this._all_renders[i].sharedMaterials)
+      for (var i = 0; i < this._all_renders.Length; i++) {
+        foreach (var mat in this._all_renders[i].sharedMaterials) {
           if (mat != null) {
-            this._block.SetColor(
-                                 name : "_Color",
-                                 value : this._original_colors[i].Last.Value);
+            this._block.SetColor("_Color", this._original_colors[i].Last.Value);
             this._original_colors[i].RemoveLast();
-            this._all_renders[i].SetPropertyBlock(properties : this._block);
+            this._all_renders[i].SetPropertyBlock(this._block);
           }
+        }
+      }
     }
 
     void OnPreRender() {

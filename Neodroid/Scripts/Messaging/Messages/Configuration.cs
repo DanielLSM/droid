@@ -1,4 +1,4 @@
-﻿namespace Neodroid.Messaging.Messages {
+﻿namespace Neodroid.Scripts.Messaging.Messages {
   public class Configuration {
     public Configuration(string configurable_name, float configurable_value) {
       this.ConfigurableName = configurable_name;

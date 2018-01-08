@@ -1,10 +1,10 @@
-﻿using Neodroid.Messaging.Messages;
-using Neodroid.Models.Configurables.General;
+﻿using Neodroid.Models.Configurables.General;
+using Neodroid.Scripts.Messaging.Messages;
 using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
 namespace Neodroid.Models.Configurables {
-  [RequireComponent( typeof(Renderer))]
+  [RequireComponent(typeof(Renderer))]
   public class ColorConfigurable : ConfigurableGameObject {
     string _a;
     string _b;
@@ -23,31 +23,27 @@ namespace Neodroid.Models.Configurables {
       this._g = this.ConfigurableIdentifier + "G";
       this._b = this.ConfigurableIdentifier + "B";
       this._a = this.ConfigurableIdentifier + "A";
-      this.ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      r : this.ParentEnvironment,
-                                                      c : (ConfigurableGameObject)this,
-                                                      identifier : this._r);
-      this.ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      r : this.ParentEnvironment,
-                                                      c : (ConfigurableGameObject)this,
-                                                      identifier : this._g);
-      this.ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      r : this.ParentEnvironment,
-                                                      c : (ConfigurableGameObject)this,
-                                                      identifier : this._b);
-      this.ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      r : this.ParentEnvironment,
-                                                      c : (ConfigurableGameObject)this,
-                                                      identifier : this._a);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+          this.ParentEnvironment,
+          (ConfigurableGameObject)this,
+          this._r);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+          this.ParentEnvironment,
+          (ConfigurableGameObject)this,
+          this._g);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+          this.ParentEnvironment,
+          (ConfigurableGameObject)this,
+          this._b);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+          this.ParentEnvironment,
+          (ConfigurableGameObject)this,
+          this._a);
     }
 
     public override void ApplyConfiguration(Configuration configuration) {
       if (this.Debugging)
-        print(message : "Applying " + configuration + " To " + this.ConfigurableIdentifier);
+        print("Applying " + configuration + " To " + this.ConfigurableIdentifier);
       foreach (var mat in this._renderer.materials) {
         var c = mat.color;
 

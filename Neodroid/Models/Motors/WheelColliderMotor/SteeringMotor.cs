@@ -1,9 +1,9 @@
-﻿using Neodroid.Messaging.Messages;
-using Neodroid.Models.Motors.General;
+﻿using Neodroid.Models.Motors.General;
+using Neodroid.Scripts.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Models.Motors.WheelColliderMotor {
-  [RequireComponent( typeof(WheelCollider))]
+  [RequireComponent(typeof(WheelCollider))]
   public class SteeringMotor : Motor {
     WheelCollider _wheel_collider;
 
@@ -12,7 +12,7 @@ namespace Neodroid.Models.Motors.WheelColliderMotor {
       this.RegisterComponent();
     }
 
-    void FixedUpdate() { this.ApplyLocalPositionToVisuals(col : this._wheel_collider); }
+    void FixedUpdate() { this.ApplyLocalPositionToVisuals(this._wheel_collider); }
 
     public override void InnerApplyMotion(MotorMotion motion) {
       this._wheel_collider.steerAngle = motion.Strength;
@@ -23,13 +23,11 @@ namespace Neodroid.Models.Motors.WheelColliderMotor {
     public void ApplyLocalPositionToVisuals(WheelCollider col) {
       if (col.transform.childCount == 0) return;
 
-      var visual_wheel = col.transform.GetChild(index : 0);
+      var visual_wheel = col.transform.GetChild(0);
 
       Vector3 position;
       Quaternion rotation;
-      col.GetWorldPose(
-                       pos : out position,
-                       quat : out rotation);
+      col.GetWorldPose(out position, out rotation);
 
       visual_wheel.transform.position = position;
       visual_wheel.transform.rotation = rotation;

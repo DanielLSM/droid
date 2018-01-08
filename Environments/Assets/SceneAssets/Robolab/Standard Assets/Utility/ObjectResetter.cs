@@ -12,24 +12,23 @@ namespace UnityStandardAssets.Utility {
 
     // Use this for initialization
     void Start() {
-      this.originalStructure = new List<Transform>(collection : this.GetComponentsInChildren<Transform>());
+      this.originalStructure = new List<Transform>(this.GetComponentsInChildren<Transform>());
       this.originalPosition = this.transform.position;
       this.originalRotation = this.transform.rotation;
 
       this.Rigidbody = this.GetComponent<Rigidbody>();
     }
 
-    public void DelayedReset(float delay) {
-      this.StartCoroutine(routine : this.ResetCoroutine(delay : delay));
-    }
+    public void DelayedReset(float delay) { this.StartCoroutine(this.ResetCoroutine(delay)); }
 
     public IEnumerator ResetCoroutine(float delay) {
-      yield return new WaitForSeconds(seconds : delay);
+      yield return new WaitForSeconds(delay);
 
       // remove any gameobjects added (fire, skid trails, etc)
-      foreach (var t in this.GetComponentsInChildren<Transform>())
-        if (!this.originalStructure.Contains(item : t))
+      foreach (var t in this.GetComponentsInChildren<Transform>()) {
+        if (!this.originalStructure.Contains(t))
           t.parent = null;
+      }
 
       this.transform.position = this.originalPosition;
       this.transform.rotation = this.originalRotation;
@@ -38,7 +37,7 @@ namespace UnityStandardAssets.Utility {
         this.Rigidbody.angularVelocity = Vector3.zero;
       }
 
-      this.SendMessage(methodName : "Reset");
+      this.SendMessage("Reset");
     }
   }
 }

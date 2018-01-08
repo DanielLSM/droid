@@ -6,10 +6,6 @@ namespace UnityStandardAssets.CrossPlatformInput {
 
     void Update() { }
 
-    public void HandleInput(float value) {
-      CrossPlatformInputManager.SetAxis(
-                                        name : this.axis,
-                                        value : value * 2f - 1f);
-    }
+    public void HandleInput(float value) { CrossPlatformInputManager.SetAxis(this.axis, value * 2f - 1f); }
   }
 }

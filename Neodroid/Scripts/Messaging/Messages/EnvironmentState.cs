@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using Neodroid.Models.Observers.General;
 using UnityEngine;
 
-namespace Neodroid.Messaging.Messages {
+namespace Neodroid.Scripts.Messaging.Messages {
   [Serializable]
   public class EnvironmentState {
     public EnvironmentState(
-      string environment_name,
-      float total_energy_spent_since_reset,
-      Dictionary<string, Observer> observers,
-      int frame_number,
-      float reward,
-      bool terminated,
-      Rigidbody[] bodies,
-      Transform[] poses,
-      EnvironmentDescription description = null,
-      string debug_message = "") {
+        string environment_name,
+        float total_energy_spent_since_reset,
+        Dictionary<string, Observer> observers,
+        int frame_number,
+        float reward,
+        bool terminated,
+        Rigidbody[] bodies,
+        Transform[] poses,
+        EnvironmentDescription description = null,
+        string debug_message = "") {
       this.DebugMessage = debug_message;
       this.EnvironmentName = environment_name;
       this.TotalEnergySpentSinceReset = total_energy_spent_since_reset;
@@ -25,9 +25,7 @@ namespace Neodroid.Messaging.Messages {
       this.FrameNumber = frame_number;
       this.Terminated = terminated;
       this.Description = description;
-      this.Unobservables = new Unobservables(
-                                             rigidbodies : bodies,
-                                             transforms : poses);
+      this.Unobservables = new Unobservables(bodies, poses);
     }
 
     public string EnvironmentName { get; private set; }

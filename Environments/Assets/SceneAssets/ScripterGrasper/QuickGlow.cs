@@ -3,80 +3,46 @@
 namespace SceneAssets.ScripterGrasper {
   [ExecuteInEditMode]
   public class QuickGlow : MonoBehaviour {
-    [SerializeField]  Material _add_material;
-    [SerializeField]  Material _blur_material;
+    [SerializeField] Material _add_material;
+    [SerializeField] Material _blur_material;
 
-    [Range(
-      min : 0,
-      max : 4)]
-    public int DownRes;
+    [Range(0, 4)] public int DownRes;
 
-    [Range(
-      min : 0,
-      max : 3)]
-    public float Intensity;
+    [Range(0, 3)] public float Intensity;
 
-    [Range(
-      min : 0,
-      max : 10)]
-    public int Iterations;
+    [Range(0, 10)] public int Iterations;
 
-    [Range(
-      min : 0,
-      max : 10)]
-    public float Size;
+    [Range(0, 10)] public float Size;
 
     void OnValidate() {
       if (this._blur_material != null)
-        this._blur_material.SetFloat(
-                                   name : "_Size",
-                                   value : this.Size);
+        this._blur_material.SetFloat("_Size", this.Size);
       if (this._add_material != null)
-        this._add_material.SetFloat(
-                                  name : "_Intensity",
-                                  value : this.Intensity);
+        this._add_material.SetFloat("_Intensity", this.Intensity);
     }
 
     void OnRenderImage(RenderTexture src, RenderTexture dst) {
-      var composite = RenderTexture.GetTemporary(
-                                                 width : src.width,
-                                                 height : src.height);
-      Graphics.Blit(
-                    source : src,
-                    dest : composite);
+      var composite = RenderTexture.GetTemporary(src.width, src.height);
+      Graphics.Blit(src, composite);
 
       var width = src.width >> this.DownRes;
       var height = src.height >> this.DownRes;
 
-      var rt = RenderTexture.GetTemporary(
-                                          width : width,
-                                          height : height);
-      Graphics.Blit(
-                    source : src,
-                    dest : rt);
+      var rt = RenderTexture.GetTemporary(width, height);
+      Graphics.Blit(src, rt);
 
       for (var i = 0; i < this.Iterations; i++) {
-        var rt2 = RenderTexture.GetTemporary(
-                                             width : width,
-                                             height : height);
-        Graphics.Blit(
-                      source : rt,
-                      dest : rt2,
-                      mat : this._blur_material);
-        RenderTexture.ReleaseTemporary(temp : rt);
+        var rt2 = RenderTexture.GetTemporary(width, height);
+        Graphics.Blit(rt, rt2, this._blur_material);
+        RenderTexture.ReleaseTemporary(rt);
         rt = rt2;
       }
 
-      this._add_material.SetTexture(
-                                  name : "_BlendTex",
-                                  value : rt);
-      Graphics.Blit(
-                    source : composite,
-                    dest : dst,
-                    mat : this._add_material);
+      this._add_material.SetTexture("_BlendTex", rt);
+      Graphics.Blit(composite, dst, this._add_material);
 
-      RenderTexture.ReleaseTemporary(temp : rt);
-      RenderTexture.ReleaseTemporary(temp : composite);
+      RenderTexture.ReleaseTemporary(rt);
+      RenderTexture.ReleaseTemporary(composite);
     }
   }
 }

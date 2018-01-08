@@ -1,4 +1,4 @@
-﻿namespace Neodroid.Messaging.Messages {
+﻿namespace Neodroid.Scripts.Messaging.Messages {
   public enum ExecutionPhase {
     Before,
     Middle,
@@ -15,12 +15,12 @@
     ExecutionPhase _phase = ExecutionPhase.Middle;
 
     public ReactionParameters(
-      bool terminable = false,
-      bool step = false,
-      bool reset = false,
-      bool configure = false,
-      bool describe = false,
-      bool episode_count = true) {
+        bool terminable = false,
+        bool step = false,
+        bool reset = false,
+        bool configure = false,
+        bool describe = false,
+        bool episode_count = true) {
       this.IsExternal = false;
       this._terminable = terminable;
       this._reset = reset;
@@ -48,15 +48,15 @@
 
     public override string ToString() {
       return string.Format(
-                           "<ReactionParameters>\n "
-                           + "Terminable:{0},\nStep:{1},\nReset:{2},\nConfigure:{3},\nDescribe:{4}\nEpisodeCount:{5}"
-                           + "\n</ReactionParameters>\n",
-                           this.Terminable,
-                           this.Step,
-                           this.Reset,
-                           this.Configure,
-                           this.Describe,
-                           this.EpisodeCount);
+          "<ReactionParameters>\n "
+          + "Terminable:{0},\nStep:{1},\nReset:{2},\nConfigure:{3},\nDescribe:{4}\nEpisodeCount:{5}"
+          + "\n</ReactionParameters>\n",
+          this.Terminable,
+          this.Step,
+          this.Reset,
+          this.Configure,
+          this.Describe,
+          this.EpisodeCount);
     }
   }
 }

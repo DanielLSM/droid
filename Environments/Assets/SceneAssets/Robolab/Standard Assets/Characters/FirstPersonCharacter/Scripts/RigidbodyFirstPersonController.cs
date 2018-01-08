@@ -3,8 +3,8 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets.Characters.FirstPerson {
-  [RequireComponent( typeof(Rigidbody))]
-  [RequireComponent( typeof(CapsuleCollider))]
+  [RequireComponent(typeof(Rigidbody))]
+  [RequireComponent(typeof(CapsuleCollider))]
   public class RigidbodyFirstPersonController : MonoBehaviour {
     public AdvancedSettings advancedSettings = new AdvancedSettings();
 
@@ -12,8 +12,7 @@ namespace UnityStandardAssets.Characters.FirstPerson {
     CapsuleCollider m_Capsule;
     Vector3 m_GroundContactNormal;
 
-    bool m_Jump,
-         m_PreviouslyGrounded;
+    bool m_Jump, m_PreviouslyGrounded;
 
     Rigidbody m_RigidBody;
     float m_YRotation;
@@ -32,44 +31,38 @@ namespace UnityStandardAssets.Characters.FirstPerson {
         return this.movementSettings.Running;
         #else
 	            return false;
-                #endif
+                                        #endif
       }
     }
 
     void Start() {
       this.m_RigidBody = this.GetComponent<Rigidbody>();
       this.m_Capsule = this.GetComponent<CapsuleCollider>();
-      this.mouseLook.Init(
-                          character : this.transform,
-                          camera : this.cam.transform);
+      this.mouseLook.Init(this.transform, this.cam.transform);
     }
 
     void Update() {
       this.RotateView();
 
-      if (CrossPlatformInputManager.GetButtonDown(name : "Jump") && !this.m_Jump) this.m_Jump = true;
+      if (CrossPlatformInputManager.GetButtonDown("Jump") && !this.m_Jump) this.m_Jump = true;
     }
 
     void FixedUpdate() {
       this.GroundCheck();
       var input = this.GetInput();
 
-      if ((Mathf.Abs(f : input.x) > float.Epsilon || Mathf.Abs(f : input.y) > float.Epsilon)
+      if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon)
           && (this.advancedSettings.airControl || this.Grounded)) {
         // always move along the camera forward as it is the direction that it being aimed at
         var desiredMove = this.cam.transform.forward * input.y + this.cam.transform.right * input.x;
-        desiredMove = Vector3.ProjectOnPlane(
-                                             vector : desiredMove,
-                                             planeNormal : this.m_GroundContactNormal).normalized;
+        desiredMove = Vector3.ProjectOnPlane(desiredMove, this.m_GroundContactNormal).normalized;
 
         desiredMove.x = desiredMove.x * this.movementSettings.CurrentTargetSpeed;
         desiredMove.z = desiredMove.z * this.movementSettings.CurrentTargetSpeed;
         desiredMove.y = desiredMove.y * this.movementSettings.CurrentTargetSpeed;
         if (this.m_RigidBody.velocity.sqrMagnitude
             < this.movementSettings.CurrentTargetSpeed * this.movementSettings.CurrentTargetSpeed)
-          this.m_RigidBody.AddForce(
-                                    force : desiredMove * this.SlopeMultiplier(),
-                                    mode : ForceMode.Impulse);
+          this.m_RigidBody.AddForce(desiredMove * this.SlopeMultiplier(), ForceMode.Impulse);
       }
 
       if (this.Grounded) {
@@ -78,21 +71,16 @@ namespace UnityStandardAssets.Characters.FirstPerson {
         if (this.m_Jump) {
           this.m_RigidBody.drag = 0f;
           this.m_RigidBody.velocity = new Vector3(
-                                                  x : this.m_RigidBody.velocity.x,
-                                                  y : 0f,
-                                                  z : this.m_RigidBody.velocity.z);
-          this.m_RigidBody.AddForce(
-                                    force : new Vector3(
-                                                        x : 0f,
-                                                        y : this.movementSettings.JumpForce,
-                                                        z : 0f),
-                                    mode : ForceMode.Impulse);
+              this.m_RigidBody.velocity.x,
+              0f,
+              this.m_RigidBody.velocity.z);
+          this.m_RigidBody.AddForce(new Vector3(0f, this.movementSettings.JumpForce, 0f), ForceMode.Impulse);
           this.Jumping = true;
         }
 
         if (!this.Jumping
-            && Mathf.Abs(f : input.x) < float.Epsilon
-            && Mathf.Abs(f : input.y) < float.Epsilon
+            && Mathf.Abs(input.x) < float.Epsilon
+            && Mathf.Abs(input.y) < float.Epsilon
             && this.m_RigidBody.velocity.magnitude < 1f)
           this.m_RigidBody.Sleep();
       } else {
@@ -104,60 +92,49 @@ namespace UnityStandardAssets.Characters.FirstPerson {
     }
 
     float SlopeMultiplier() {
-      var angle = Vector3.Angle(
-                                from : this.m_GroundContactNormal,
-                                to : Vector3.up);
-      return this.movementSettings.SlopeCurveModifier.Evaluate(time : angle);
+      var angle = Vector3.Angle(this.m_GroundContactNormal, Vector3.up);
+      return this.movementSettings.SlopeCurveModifier.Evaluate(angle);
     }
 
     void StickToGroundHelper() {
       RaycastHit hitInfo;
       if (Physics.SphereCast(
-                             origin : this.transform.position,
-                             radius : this.m_Capsule.radius * (1.0f - this.advancedSettings.shellOffset),
-                             direction : Vector3.down,
-                             hitInfo : out hitInfo,
-                             maxDistance : this.m_Capsule.height / 2f
-                                           - this.m_Capsule.radius
-                                           + this.advancedSettings.stickToGroundHelperDistance,
-                             layerMask : Physics.AllLayers,
-                             queryTriggerInteraction : QueryTriggerInteraction.Ignore))
-        if (Mathf.Abs(
-                      f : Vector3.Angle(
-                                        from : hitInfo.normal,
-                                        to : Vector3.up))
-            < 85f)
-          this.m_RigidBody.velocity = Vector3.ProjectOnPlane(
-                                                             vector : this.m_RigidBody.velocity,
-                                                             planeNormal : hitInfo.normal);
+          this.transform.position,
+          this.m_Capsule.radius * (1.0f - this.advancedSettings.shellOffset),
+          Vector3.down,
+          out hitInfo,
+          this.m_Capsule.height / 2f
+          - this.m_Capsule.radius
+          + this.advancedSettings.stickToGroundHelperDistance,
+          Physics.AllLayers,
+          QueryTriggerInteraction.Ignore)) {
+        if (Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up)) < 85f)
+          this.m_RigidBody.velocity = Vector3.ProjectOnPlane(this.m_RigidBody.velocity, hitInfo.normal);
+      }
     }
 
     Vector2 GetInput() {
       var input = new Vector2 {
-                                x = CrossPlatformInputManager.GetAxis(name : "Horizontal"),
-                                y = CrossPlatformInputManager.GetAxis(name : "Vertical")
-                              };
-      this.movementSettings.UpdateDesiredTargetSpeed(input : input);
+          x = CrossPlatformInputManager.GetAxis("Horizontal"),
+          y = CrossPlatformInputManager.GetAxis("Vertical")
+      };
+      this.movementSettings.UpdateDesiredTargetSpeed(input);
       return input;
     }
 
     void RotateView() {
       //avoids the mouse looking if the game is effectively paused
-      if (Mathf.Abs(f : Time.timeScale) < float.Epsilon)
+      if (Mathf.Abs(Time.timeScale) < float.Epsilon)
         return;
 
       // get the rotation before it's changed
       var oldYRotation = this.transform.eulerAngles.y;
 
-      this.mouseLook.LookRotation(
-                                  character : this.transform,
-                                  camera : this.cam.transform);
+      this.mouseLook.LookRotation(this.transform, this.cam.transform);
 
       if (this.Grounded || this.advancedSettings.airControl) {
         // Rotate the rigidbody velocity to match the new direction that the character is looking
-        var velRotation = Quaternion.AngleAxis(
-                                               angle : this.transform.eulerAngles.y - oldYRotation,
-                                               axis : Vector3.up);
+        var velRotation = Quaternion.AngleAxis(this.transform.eulerAngles.y - oldYRotation, Vector3.up);
         this.m_RigidBody.velocity = velRotation * this.m_RigidBody.velocity;
       }
     }
@@ -167,15 +144,13 @@ namespace UnityStandardAssets.Characters.FirstPerson {
       this.m_PreviouslyGrounded = this.Grounded;
       RaycastHit hitInfo;
       if (Physics.SphereCast(
-                             origin : this.transform.position,
-                             radius : this.m_Capsule.radius * (1.0f - this.advancedSettings.shellOffset),
-                             direction : Vector3.down,
-                             hitInfo : out hitInfo,
-                             maxDistance : this.m_Capsule.height / 2f
-                                           - this.m_Capsule.radius
-                                           + this.advancedSettings.groundCheckDistance,
-                             layerMask : Physics.AllLayers,
-                             queryTriggerInteraction : QueryTriggerInteraction.Ignore)) {
+          this.transform.position,
+          this.m_Capsule.radius * (1.0f - this.advancedSettings.shellOffset),
+          Vector3.down,
+          out hitInfo,
+          this.m_Capsule.height / 2f - this.m_Capsule.radius + this.advancedSettings.groundCheckDistance,
+          Physics.AllLayers,
+          QueryTriggerInteraction.Ignore)) {
         this.Grounded = true;
         this.m_GroundContactNormal = hitInfo.normal;
       } else {
@@ -204,15 +179,9 @@ namespace UnityStandardAssets.Characters.FirstPerson {
       public float RunMultiplier = 2.0f;
 
       public AnimationCurve SlopeCurveModifier = new AnimationCurve(
-                                                                    new Keyframe(
-                                                                                 time : -90.0f,
-                                                                                 value : 1.0f),
-                                                                    new Keyframe(
-                                                                                 time : 0.0f,
-                                                                                 value : 1.0f),
-                                                                    new Keyframe(
-                                                                                 time : 90.0f,
-                                                                                 value : 0.0f));
+          new Keyframe(-90.0f, 1.0f),
+          new Keyframe(0.0f, 1.0f),
+          new Keyframe(90.0f, 0.0f));
 
       // Speed when walking backwards
       public float StrafeSpeed = 4.0f;
@@ -228,12 +197,11 @@ namespace UnityStandardAssets.Characters.FirstPerson {
         if (input.y < 0) this.CurrentTargetSpeed = this.BackwardSpeed;
         if (input.y > 0) this.CurrentTargetSpeed = this.ForwardSpeed;
         #if !MOBILE_INPUT
-        if (Input.GetKey(key : this.RunKey)) {
+        if (Input.GetKey(this.RunKey)) {
           this.CurrentTargetSpeed *= this.RunMultiplier;
           this.Running = true;
-        } else {
+        } else
           this.Running = false;
-        }
         #endif
       }
 
@@ -249,7 +217,7 @@ namespace UnityStandardAssets.Characters.FirstPerson {
       public float groundCheckDistance = 0.01f;
 
       // can the user control the direction that is being moved in the air
-      [Tooltip(tooltip : "set it to 0.1 or more if you get stuck in wall")]
+      [Tooltip("set it to 0.1 or more if you get stuck in wall")]
       public float shellOffset;
 
       // stops the character

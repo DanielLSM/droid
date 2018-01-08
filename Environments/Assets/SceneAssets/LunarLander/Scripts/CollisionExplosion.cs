@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Neodroid.Environments;
 using Neodroid.Models.Actors;
+using Neodroid.Models.Environments;
 using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
@@ -28,48 +29,38 @@ namespace SceneAssets.LunarLander.Scripts {
       this._explosion = this.GetComponent<ParticleSystem>();
 
       NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren(
-                                                                    caller : this,
-                                                                    parent : this._rigidbody.transform,
-                                                                    on_collision_enter_child : this
-                                                                      .ChildOnCollisionEnter,
-                                                                    on_trigger_enter_child : this
-                                                                      .ChildOnTriggerEnter,
-                                                                    on_collision_exit_child : null,
-                                                                    on_trigger_exit_child : null,
-                                                                    on_collision_stay_child : null,
-                                                                    on_trigger_stay_child : null,
-                                                                    debug : this.Debugging);
+          this,
+          this._rigidbody.transform,
+          this.ChildOnCollisionEnter,
+          this.ChildOnTriggerEnter,
+          null,
+          null,
+          null,
+          null,
+          this.Debugging);
     }
 
     void ChildOnCollisionEnter(GameObject child, Collision col) {
       if (this.Debugging)
-        print(message : "Collision");
+        print("Collision");
       if (!col.collider.isTrigger)
-        this.De(
-                rb : child.GetComponent<Rigidbody>(),
-                other : col.collider.attachedRigidbody);
+        this.De(child.GetComponent<Rigidbody>(), col.collider.attachedRigidbody);
     }
 
     void ChildOnTriggerEnter(GameObject child, Collider col) {
       if (this.Debugging)
-        print(message : "Trigger colliding");
+        print("Trigger colliding");
       if (!col.isTrigger)
-        this.De(
-                rb : child.GetComponent<Rigidbody>(),
-                other : col.attachedRigidbody);
+        this.De(child.GetComponent<Rigidbody>(), col.attachedRigidbody);
     }
 
     void De(Rigidbody rb, Rigidbody other = null) {
       var val = 0f;
-      if (rb != null) val = NeodroidUtilities.KineticEnergy(rb : rb);
+      if (rb != null) val = NeodroidUtilities.KineticEnergy(rb);
       var val_other = 0f;
-      if (other != null) val_other = NeodroidUtilities.KineticEnergy(rb : rb);
+      if (other != null) val_other = NeodroidUtilities.KineticEnergy(rb);
       if (this.Debugging)
-        print(
-              message : string.Format(
-                                      format : "{0} {1}",
-                                      arg0 : val,
-                                      arg1 : val_other));
+        print(string.Format("{0} {1}", val, val_other));
       if ((val >= this._threshold || val_other >= this._threshold) && !this._has_exploded) {
         this._actor.Kill();
         this._has_exploded = true;
@@ -79,64 +70,51 @@ namespace SceneAssets.LunarLander.Scripts {
         }
 
         this.StartCoroutine(
-                            routine : this.SpawnBroken(
-                                                       wait_time : this._delay,
-                                                       parent : this._rigidbody.transform.parent,
-                                                       pos : this._rigidbody.transform.position,
-                                                       rot : this._rigidbody.transform.rotation,
-                                                       vel : this._rigidbody.velocity,
-                                                       ang : this._rigidbody.angularVelocity)
-                           );
-        this._rigidbody.gameObject.SetActive(value : false);
+            this.SpawnBroken(
+                this._delay,
+                this._rigidbody.transform.parent,
+                this._rigidbody.transform.position,
+                this._rigidbody.transform.rotation,
+                this._rigidbody.velocity,
+                this._rigidbody.angularVelocity));
+        this._rigidbody.gameObject.SetActive(false);
         this._rigidbody.Sleep();
       }
     }
 
     public IEnumerator SpawnBroken(
-      float wait_time,
-      Transform parent,
-      Vector3 pos,
-      Quaternion rot,
-      Vector3 vel,
-      Vector3 ang) {
-      var explosion = Instantiate(
-                                  original : this._explosion_prefab,
-                                  position : pos,
-                                  rotation : rot,
-                                  parent : parent);
-      this._broken_object = Instantiate(
-                                        original : this._broken_object_prefab,
-                                        position : pos,
-                                        rotation : rot,
-                                        parent : parent);
+        float wait_time,
+        Transform parent,
+        Vector3 pos,
+        Quaternion rot,
+        Vector3 vel,
+        Vector3 ang) {
+      var explosion = Instantiate(this._explosion_prefab, pos, rot, parent);
+      this._broken_object = Instantiate(this._broken_object_prefab, pos, rot, parent);
       var rbs = this._broken_object.GetComponentsInChildren<Rigidbody>();
       foreach (var rb in rbs) {
         rb.velocity = vel;
         rb.angularVelocity = ang;
-        rb.AddForceAtPosition(
-                              force : (pos - rb.transform.position) * this._explosion_force,
-                              position : pos);
+        rb.AddForceAtPosition((pos - rb.transform.position) * this._explosion_force, pos);
       }
 
-      yield return new WaitForSeconds(seconds : wait_time);
-      Destroy(obj : explosion);
-      this._environment.Terminate(reason : "Actor exploded");
+      yield return new WaitForSeconds(wait_time);
+      Destroy(explosion);
+      this._environment.Terminate("Actor exploded");
     }
 
     protected virtual void Awake() { this.RegisterComponent(); }
 
     public virtual void RegisterComponent() {
-      this._environment = NeodroidUtilities.MaybeRegisterComponent(
-                                                                   r : this._environment,
-                                                                   c : (Resetable)this);
+      this._environment = NeodroidUtilities.MaybeRegisterComponent(this._environment, (Resetable)this);
     }
 
     public override void Reset() {
       if (this._broken_object)
-        Destroy(obj : this._broken_object);
+        Destroy(this._broken_object);
       if (this._rigidbody) {
         this._rigidbody.WakeUp();
-        this._rigidbody.gameObject.SetActive(value : true);
+        this._rigidbody.gameObject.SetActive(true);
       }
 
       this._has_exploded = false;

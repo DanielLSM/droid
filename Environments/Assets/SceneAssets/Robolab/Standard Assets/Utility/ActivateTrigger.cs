@@ -50,22 +50,23 @@ namespace UnityStandardAssets.Utility {
         switch (this.action) {
           case Mode.Trigger:
             if (target_game_object != null)
-              target_game_object.BroadcastMessage(methodName : "DoActivateTrigger");
+              target_game_object.BroadcastMessage("DoActivateTrigger");
             break;
           case Mode.Replace:
-            if (this.source != null)
+            if (this.source != null) {
               if (target_game_object != null) {
                 Instantiate(
-                            original : this.source,
-                            position : target_game_object.transform.position,
-                            rotation : target_game_object.transform.rotation);
-                DestroyObject(obj : target_game_object);
+                    this.source,
+                    target_game_object.transform.position,
+                    target_game_object.transform.rotation);
+                DestroyObject(target_game_object);
               }
+            }
 
             break;
           case Mode.Activate:
             if (target_game_object != null)
-              target_game_object.SetActive(value : true);
+              target_game_object.SetActive(true);
             break;
           case Mode.Enable:
             if (target_behaviour != null)
@@ -77,7 +78,7 @@ namespace UnityStandardAssets.Utility {
             break;
           case Mode.Deactivate:
             if (target_game_object != null)
-              target_game_object.SetActive(value : false);
+              target_game_object.SetActive(false);
             break;
           default:
             throw new ArgumentOutOfRangeException();

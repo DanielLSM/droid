@@ -750,6 +750,7 @@ GameObject:
   - component: {fileID: 965130053}
   - component: {fileID: 965130054}
   - component: {fileID: 965130055}
+  - component: {fileID: 965130056}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: Untagged
@@ -863,13 +864,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5deada7b6965c504b80d979e9f1e6d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _environment: {fileID: 0}
+  _environment: {fileID: 1620948092}
   _debugging: 0
   _valid_input:
     DecimalGranularity: 0
     MinValue: 0
     MaxValue: 0
   _relative_to_existing_value: 0
+  _angular_velocity: {x: 0, y: 0, z: 0}
+  _velocity: {x: 0, y: 0, z: 0}
+--- !u!114 &965130056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 965130048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8246a433fa854b2aa2438e2441a02a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _environment: {fileID: 1620948092}
+  _debugging: 0
   _angular_velocity: {x: 0, y: 0, z: 0}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1061500704
@@ -1298,6 +1314,7 @@ GameObject:
   - component: {fileID: 1620948094}
   - component: {fileID: 1620948095}
   - component: {fileID: 1620948096}
+  - component: {fileID: 1620948097}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -1349,14 +1366,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
-  _ip_address: 127.0.0.1
+  _ip_address: localhost
   _port: 5555
-  _testing_motors: 0
-  _wait_every: 2
+  _testing_motors: 1
+  _configuration:
+    _width: 500
+    _height: 500
+    _full_screen: 0
+    _quality_level: 1
+    _time_scale: 1
+    _wait_every: 2
+    _frame_skips: 0
+    _reset_iterations: 10
+    _target_frame_rate: -1
+    _simulation_time_scale: 0
   _update_fixed_time_scale: 0
-  _frame_skips: 0
-  _simulation_time_scale: 1
-  _reset_iterations: 10
 --- !u!114 &1620948095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1386,6 +1410,24 @@ MonoBehaviour:
   _player_motions: {fileID: 11400000, guid: 43eb035cfbe4d4253b215ce70a5e5d58, type: 2}
   _simulation_manager: {fileID: 0}
   Debugging: 0
+--- !u!114 &1620948097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1620948091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98260ba1aa8584a92bf9f04e2f7ec6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _environment: {fileID: 1620948092}
+  _debugging: 0
+  _valid_input:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _relative_to_existing_value: 0
 --- !u!1 &2065165352
 GameObject:
   m_ObjectHideFlags: 0

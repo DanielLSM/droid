@@ -2,7 +2,7 @@
 
 //[ExecuteInEditMode]
 namespace SceneAssets.LunarLander.Scripts {
-  [RequireComponent( typeof(ParticleSystem))]
+  [RequireComponent(typeof(ParticleSystem))]
   public class ParticleController : MonoBehaviour {
     ParticleSystem _particle_system;
 
@@ -11,12 +11,12 @@ namespace SceneAssets.LunarLander.Scripts {
 
     // Update is called once per frame
     void Update() {
-      if (Input.GetKey(key : KeyCode.Space)) {
+      if (Input.GetKey(KeyCode.Space)) {
         if (this._particle_system.isPlaying) return;
-        this._particle_system.Play(withChildren : true);
+        this._particle_system.Play(true);
       } else {
         //_particle_system.Pause (true);
-        this._particle_system.Stop(withChildren : true);
+        this._particle_system.Stop(true);
       }
     }
   }

@@ -19,7 +19,7 @@ namespace UnityStandardAssets.CrossPlatformInput {
       s_HardwareInput = new StandaloneInput();
       #if MOBILE_INPUT
             activeInput = s_TouchInput;
-            #else
+                              #else
       activeInput = s_HardwareInput;
       #endif
     }
@@ -38,88 +38,67 @@ namespace UnityStandardAssets.CrossPlatformInput {
       }
     }
 
-    public static bool AxisExists(string name) { return activeInput.AxisExists(name : name); }
+    public static bool AxisExists(string name) { return activeInput.AxisExists(name); }
 
-    public static bool ButtonExists(string name) { return activeInput.ButtonExists(name : name); }
+    public static bool ButtonExists(string name) { return activeInput.ButtonExists(name); }
 
-    public static void RegisterVirtualAxis(VirtualAxis axis) { activeInput.RegisterVirtualAxis(axis : axis); }
+    public static void RegisterVirtualAxis(VirtualAxis axis) { activeInput.RegisterVirtualAxis(axis); }
 
     public static void RegisterVirtualButton(VirtualButton button) {
-      activeInput.RegisterVirtualButton(button : button);
+      activeInput.RegisterVirtualButton(button);
     }
 
     public static void UnRegisterVirtualAxis(string name) {
       if (name == null)
-        throw new ArgumentNullException(paramName : "name");
-      activeInput.UnRegisterVirtualAxis(name : name);
+        throw new ArgumentNullException("name");
+      activeInput.UnRegisterVirtualAxis(name);
     }
 
-    public static void UnRegisterVirtualButton(string name) {
-      activeInput.UnRegisterVirtualButton(name : name);
-    }
+    public static void UnRegisterVirtualButton(string name) { activeInput.UnRegisterVirtualButton(name); }
 
     // returns a reference to a named virtual axis if it exists otherwise null
     public static VirtualAxis VirtualAxisReference(string name) {
-      return activeInput.VirtualAxisReference(name : name);
+      return activeInput.VirtualAxisReference(name);
     }
 
     // returns the platform appropriate axis for the given name
-    public static float GetAxis(string name) {
-      return GetAxis(
-                     name : name,
-                     raw : false);
-    }
+    public static float GetAxis(string name) { return GetAxis(name, false); }
 
-    public static float GetAxisRaw(string name) {
-      return GetAxis(
-                     name : name,
-                     raw : true);
-    }
+    public static float GetAxisRaw(string name) { return GetAxis(name, true); }
 
     // private function handles both types of axis (raw and not raw)
-    static float GetAxis(string name, bool raw) {
-      return activeInput.GetAxis(
-                                 name : name,
-                                 raw : raw);
-    }
+    static float GetAxis(string name, bool raw) { return activeInput.GetAxis(name, raw); }
 
     // -- Button handling --
-    public static bool GetButton(string name) { return activeInput.GetButton(name : name); }
+    public static bool GetButton(string name) { return activeInput.GetButton(name); }
 
-    public static bool GetButtonDown(string name) { return activeInput.GetButtonDown(name : name); }
+    public static bool GetButtonDown(string name) { return activeInput.GetButtonDown(name); }
 
-    public static bool GetButtonUp(string name) { return activeInput.GetButtonUp(name : name); }
+    public static bool GetButtonUp(string name) { return activeInput.GetButtonUp(name); }
 
-    public static void SetButtonDown(string name) { activeInput.SetButtonDown(name : name); }
+    public static void SetButtonDown(string name) { activeInput.SetButtonDown(name); }
 
-    public static void SetButtonUp(string name) { activeInput.SetButtonUp(name : name); }
+    public static void SetButtonUp(string name) { activeInput.SetButtonUp(name); }
 
-    public static void SetAxisPositive(string name) { activeInput.SetAxisPositive(name : name); }
+    public static void SetAxisPositive(string name) { activeInput.SetAxisPositive(name); }
 
-    public static void SetAxisNegative(string name) { activeInput.SetAxisNegative(name : name); }
+    public static void SetAxisNegative(string name) { activeInput.SetAxisNegative(name); }
 
-    public static void SetAxisZero(string name) { activeInput.SetAxisZero(name : name); }
+    public static void SetAxisZero(string name) { activeInput.SetAxisZero(name); }
 
-    public static void SetAxis(string name, float value) {
-      activeInput.SetAxis(
-                          name : name,
-                          value : value);
-    }
+    public static void SetAxis(string name, float value) { activeInput.SetAxis(name, value); }
 
-    public static void SetVirtualMousePositionX(float f) { activeInput.SetVirtualMousePositionX(f : f); }
+    public static void SetVirtualMousePositionX(float f) { activeInput.SetVirtualMousePositionX(f); }
 
-    public static void SetVirtualMousePositionY(float f) { activeInput.SetVirtualMousePositionY(f : f); }
+    public static void SetVirtualMousePositionY(float f) { activeInput.SetVirtualMousePositionY(f); }
 
-    public static void SetVirtualMousePositionZ(float f) { activeInput.SetVirtualMousePositionZ(f : f); }
+    public static void SetVirtualMousePositionZ(float f) { activeInput.SetVirtualMousePositionZ(f); }
 
     // virtual axis and button classes - applies to mobile input
     // Can be mapped to touch joysticks, tilt, gyro, etc, depending on desired implementation.
     // Could also be implemented by other input devices - kinect, electronic sensors, etc
     public class VirtualAxis {
-      public VirtualAxis(string name)
-        : this(
-               name : name,
-               matchToInputSettings : true) { }
+      public VirtualAxis(string name) : this(name, true) { }
 
       public VirtualAxis(string name, bool matchToInputSettings) {
         this.name = name;
@@ -135,7 +114,7 @@ namespace UnityStandardAssets.CrossPlatformInput {
       public float GetValueRaw { get { return this.GetValue; } }
 
       // removes an axes from the cross platform input system
-      public void Remove() { UnRegisterVirtualAxis(name : this.name); }
+      public void Remove() { UnRegisterVirtualAxis(this.name); }
 
       // a controller gameobject (eg. a virtual thumbstick) should update this class
       public void Update(float value) { this.GetValue = value; }
@@ -148,10 +127,7 @@ namespace UnityStandardAssets.CrossPlatformInput {
       int m_LastPressedFrame = -5;
       int m_ReleasedFrame = -5;
 
-      public VirtualButton(string name)
-        : this(
-               name : name,
-               matchToInputSettings : true) { }
+      public VirtualButton(string name) : this(name, true) { }
 
       public VirtualButton(string name, bool matchToInputSettings) {
         this.name = name;
@@ -184,7 +160,7 @@ namespace UnityStandardAssets.CrossPlatformInput {
       }
 
       // the controller gameobject should call Remove when the button is destroyed or disabled
-      public void Remove() { UnRegisterVirtualButton(name : this.name); }
+      public void Remove() { UnRegisterVirtualButton(this.name); }
     }
   }
 }

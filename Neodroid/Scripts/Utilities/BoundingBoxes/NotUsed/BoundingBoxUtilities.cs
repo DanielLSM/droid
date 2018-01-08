@@ -5,141 +5,32 @@ namespace Neodroid.Scripts.Utilities.BoundingBoxes.NotUsed {
     public static void DrawBoxFromCenter(Vector3 p, float r, Color c) {
       // p is pos.yition of the center, r is "radius" and c is the color of the box
       //Bottom lines
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -r + p.x,
-                                         y : -r + p.y,
-                                         z : -r + p.z),
-                     end : new Vector3(
-                                       x : r + p.x,
-                                       y : -r + p.y,
-                                       z : -r + p.z),
-                     color : c);
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -r + p.x,
-                                         y : -r + p.y,
-                                         z : -r + p.z),
-                     end : new Vector3(
-                                       x : -r + p.x,
-                                       y : -r + p.y,
-                                       z : r + p.z),
-                     color : c);
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : r + p.x,
-                                         y : -r + p.y,
-                                         z : r + p.z),
-                     end : new Vector3(
-                                       x : -r + p.x,
-                                       y : -r + p.y,
-                                       z : r + p.z),
-                     color : c);
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : r + p.x,
-                                         y : -r + p.y,
-                                         z : r + p.z),
-                     end : new Vector3(
-                                       x : r + p.x,
-                                       y : -r + p.y,
-                                       z : -r + p.z),
-                     color : c);
+      Debug.DrawLine(new Vector3(-r + p.x, -r + p.y, -r + p.z), new Vector3(r + p.x, -r + p.y, -r + p.z), c);
+      Debug.DrawLine(new Vector3(-r + p.x, -r + p.y, -r + p.z), new Vector3(-r + p.x, -r + p.y, r + p.z), c);
+      Debug.DrawLine(new Vector3(r + p.x, -r + p.y, r + p.z), new Vector3(-r + p.x, -r + p.y, r + p.z), c);
+      Debug.DrawLine(new Vector3(r + p.x, -r + p.y, r + p.z), new Vector3(r + p.x, -r + p.y, -r + p.z), c);
 
       //Vertical lines
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -r + p.x,
-                                         y : r + p.y,
-                                         z : -r + p.z),
-                     end : new Vector3(
-                                       x : r + p.x,
-                                       y : r + p.y,
-                                       z : -r + p.z),
-                     color : c);
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -r + p.x,
-                                         y : r + p.y,
-                                         z : -r + p.z),
-                     end : new Vector3(
-                                       x : -r + p.x,
-                                       y : r + p.y,
-                                       z : r + p.z),
-                     color : c);
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : r + p.x,
-                                         y : r + p.y,
-                                         z : r + p.z),
-                     end : new Vector3(
-                                       x : -r + p.x,
-                                       y : r + p.y,
-                                       z : r + p.z),
-                     color : c);
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : r + p.x,
-                                         y : r + p.y,
-                                         z : r + p.z),
-                     end : new Vector3(
-                                       x : r + p.x,
-                                       y : r + p.y,
-                                       z : -r + p.z),
-                     color : c);
+      Debug.DrawLine(new Vector3(-r + p.x, r + p.y, -r + p.z), new Vector3(r + p.x, r + p.y, -r + p.z), c);
+      Debug.DrawLine(new Vector3(-r + p.x, r + p.y, -r + p.z), new Vector3(-r + p.x, r + p.y, r + p.z), c);
+      Debug.DrawLine(new Vector3(r + p.x, r + p.y, r + p.z), new Vector3(-r + p.x, r + p.y, r + p.z), c);
+      Debug.DrawLine(new Vector3(r + p.x, r + p.y, r + p.z), new Vector3(r + p.x, r + p.y, -r + p.z), c);
 
       //Top lines
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -r + p.x,
-                                         y : -r + p.y,
-                                         z : -r + p.z),
-                     end : new Vector3(
-                                       x : -r + p.x,
-                                       y : r + p.y,
-                                       z : -r + p.z),
-                     color : c);
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -r + p.x,
-                                         y : -r + p.y,
-                                         z : r + p.z),
-                     end : new Vector3(
-                                       x : -r + p.x,
-                                       y : r + p.y,
-                                       z : r + p.z),
-                     color : c);
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : r + p.x,
-                                         y : -r + p.y,
-                                         z : -r + p.z),
-                     end : new Vector3(
-                                       x : r + p.x,
-                                       y : r + p.y,
-                                       z : -r + p.z),
-                     color : c);
-      Debug.DrawLine(
-                     start : new Vector3(
-                                         x : r + p.x,
-                                         y : -r + p.y,
-                                         z : r + p.z),
-                     end : new Vector3(
-                                       x : r + p.x,
-                                       y : r + p.y,
-                                       z : r + p.z),
-                     color : c);
+      Debug.DrawLine(new Vector3(-r + p.x, -r + p.y, -r + p.z), new Vector3(-r + p.x, r + p.y, -r + p.z), c);
+      Debug.DrawLine(new Vector3(-r + p.x, -r + p.y, r + p.z), new Vector3(-r + p.x, r + p.y, r + p.z), c);
+      Debug.DrawLine(new Vector3(r + p.x, -r + p.y, -r + p.z), new Vector3(r + p.x, r + p.y, -r + p.z), c);
+      Debug.DrawLine(new Vector3(r + p.x, -r + p.y, r + p.z), new Vector3(r + p.x, r + p.y, r + p.z), c);
     }
 
     public static void RegisterCollisionTriggerCallbacksOnChildren(
-      Transform transform,
-      ChildSensor.OnChildCollisionEnterDelegate OnCollisionEnterChild,
-      ChildSensor.OnChildTriggerEnterDelegate OnTriggerEnterChild,
-      ChildSensor.OnChildCollisionExitDelegate OnCollisionExitChild,
-      ChildSensor.OnChildTriggerExitDelegate OnTriggerExitChild,
-      bool debug = false) {
-      var childrenWithColliders =
-        transform.GetComponentsInChildren<Collider>(includeInactive : transform.gameObject);
+        Transform transform,
+        ChildSensor.OnChildCollisionEnterDelegate OnCollisionEnterChild,
+        ChildSensor.OnChildTriggerEnterDelegate OnTriggerEnterChild,
+        ChildSensor.OnChildCollisionExitDelegate OnCollisionExitChild,
+        ChildSensor.OnChildTriggerExitDelegate OnTriggerExitChild,
+        bool debug = false) {
+      var childrenWithColliders = transform.GetComponentsInChildren<Collider>(transform.gameObject);
 
       foreach (var child in childrenWithColliders) {
         var child_sensor = child.gameObject.AddComponent<ChildSensor>();
@@ -158,134 +49,62 @@ namespace Neodroid.Scripts.Utilities.BoundingBoxes.NotUsed {
 
       //Vertical lines
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -x + pos.x,
-                                         y : -y + pos.y,
-                                         z : -z + pos.z),
-                     end : new Vector3(
-                                       x : -x + pos.x,
-                                       y : y + pos.y,
-                                       z : -z + pos.z),
-                     color : color);
+          new Vector3(-x + pos.x, -y + pos.y, -z + pos.z),
+          new Vector3(-x + pos.x, y + pos.y, -z + pos.z),
+          color);
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : x + pos.x,
-                                         y : -y + pos.y,
-                                         z : -z + pos.z),
-                     end : new Vector3(
-                                       x : x + pos.x,
-                                       y : y + pos.y,
-                                       z : -z + pos.z),
-                     color : color);
+          new Vector3(x + pos.x, -y + pos.y, -z + pos.z),
+          new Vector3(x + pos.x, y + pos.y, -z + pos.z),
+          color);
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -x + pos.x,
-                                         y : -y + pos.y,
-                                         z : z + pos.z),
-                     end : new Vector3(
-                                       x : -x + pos.x,
-                                       y : y + pos.y,
-                                       z : z + pos.z),
-                     color : color);
+          new Vector3(-x + pos.x, -y + pos.y, z + pos.z),
+          new Vector3(-x + pos.x, y + pos.y, z + pos.z),
+          color);
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : x + pos.x,
-                                         y : -y + pos.y,
-                                         z : z + pos.z),
-                     end : new Vector3(
-                                       x : x + pos.x,
-                                       y : y + pos.y,
-                                       z : z + pos.z),
-                     color : color);
+          new Vector3(x + pos.x, -y + pos.y, z + pos.z),
+          new Vector3(x + pos.x, y + pos.y, z + pos.z),
+          color);
 
       //Horizontal top
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -x + pos.x,
-                                         y : y + pos.y,
-                                         z : -z + pos.z),
-                     end : new Vector3(
-                                       x : x + pos.x,
-                                       y : y + pos.y,
-                                       z : -z + pos.z),
-                     color : color);
+          new Vector3(-x + pos.x, y + pos.y, -z + pos.z),
+          new Vector3(x + pos.x, y + pos.y, -z + pos.z),
+          color);
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -x + pos.x,
-                                         y : y + pos.y,
-                                         z : z + pos.z),
-                     end : new Vector3(
-                                       x : x + pos.x,
-                                       y : y + pos.y,
-                                       z : z + pos.z),
-                     color : color);
+          new Vector3(-x + pos.x, y + pos.y, z + pos.z),
+          new Vector3(x + pos.x, y + pos.y, z + pos.z),
+          color);
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -x + pos.x,
-                                         y : y + pos.y,
-                                         z : -z + pos.z),
-                     end : new Vector3(
-                                       x : -x + pos.x,
-                                       y : y + pos.y,
-                                       z : z + pos.z),
-                     color : color);
+          new Vector3(-x + pos.x, y + pos.y, -z + pos.z),
+          new Vector3(-x + pos.x, y + pos.y, z + pos.z),
+          color);
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : x + pos.x,
-                                         y : y + pos.y,
-                                         z : -z + pos.z),
-                     end : new Vector3(
-                                       x : x + pos.x,
-                                       y : y + pos.y,
-                                       z : z + pos.z),
-                     color : color);
+          new Vector3(x + pos.x, y + pos.y, -z + pos.z),
+          new Vector3(x + pos.x, y + pos.y, z + pos.z),
+          color);
 
       //Horizontal bottom
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -x + pos.x,
-                                         y : -y + pos.y,
-                                         z : -z + pos.z),
-                     end : new Vector3(
-                                       x : x + pos.x,
-                                       y : -y + pos.y,
-                                       z : -z + pos.z),
-                     color : color);
+          new Vector3(-x + pos.x, -y + pos.y, -z + pos.z),
+          new Vector3(x + pos.x, -y + pos.y, -z + pos.z),
+          color);
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -x + pos.x,
-                                         y : -y + pos.y,
-                                         z : z + pos.z),
-                     end : new Vector3(
-                                       x : x + pos.x,
-                                       y : -y + pos.y,
-                                       z : z + pos.z),
-                     color : color);
+          new Vector3(-x + pos.x, -y + pos.y, z + pos.z),
+          new Vector3(x + pos.x, -y + pos.y, z + pos.z),
+          color);
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : -x + pos.x,
-                                         y : -y + pos.y,
-                                         z : -z + pos.z),
-                     end : new Vector3(
-                                       x : -x + pos.x,
-                                       y : -y + pos.y,
-                                       z : z + pos.z),
-                     color : color);
+          new Vector3(-x + pos.x, -y + pos.y, -z + pos.z),
+          new Vector3(-x + pos.x, -y + pos.y, z + pos.z),
+          color);
       Debug.DrawLine(
-                     start : new Vector3(
-                                         x : x + pos.x,
-                                         y : -y + pos.y,
-                                         z : -z + pos.z),
-                     end : new Vector3(
-                                       x : x + pos.x,
-                                       y : -y + pos.y,
-                                       z : z + pos.z),
-                     color : color);
+          new Vector3(x + pos.x, -y + pos.y, -z + pos.z),
+          new Vector3(x + pos.x, -y + pos.y, z + pos.z),
+          color);
     }
 
     public static bool DidTransformsChange(
-      Transform[] old_transforms,
-      Transform[] newly_acquired_transforms) {
+        Transform[] old_transforms,
+        Transform[] newly_acquired_transforms) {
       if (old_transforms.Length != newly_acquired_transforms.Length) return true;
 
       var i = 0;
@@ -305,9 +124,9 @@ namespace Neodroid.Scripts.Utilities.BoundingBoxes.NotUsed {
       var result = meshFilter != null ? meshFilter.mesh.bounds : new Bounds();
 
       foreach (Transform transform in objectTransform) {
-        var bounds = GetTotalMeshFilterBounds(objectTransform : transform);
-        result.Encapsulate(point : bounds.min);
-        result.Encapsulate(point : bounds.max);
+        var bounds = GetTotalMeshFilterBounds(transform);
+        result.Encapsulate(bounds.min);
+        result.Encapsulate(bounds.max);
       }
 
       /*var bounds1 = GetTotalColliderBounds(objectTransform);
@@ -322,10 +141,10 @@ namespace Neodroid.Scripts.Utilities.BoundingBoxes.NotUsed {
             }
             */
       var scaledMin = result.min;
-      scaledMin.Scale(scale : objectTransform.localScale);
+      scaledMin.Scale(objectTransform.localScale);
       result.min = scaledMin;
       var scaledMax = result.max;
-      scaledMax.Scale(scale : objectTransform.localScale);
+      scaledMax.Scale(objectTransform.localScale);
       result.max = scaledMax;
       return result;
     }
@@ -336,25 +155,23 @@ namespace Neodroid.Scripts.Utilities.BoundingBoxes.NotUsed {
       var result = meshFilter != null ? meshFilter.bounds : new Bounds();
 
       foreach (Transform transform in objectTransform) {
-        var bounds = GetTotalColliderBounds(objectTransform : transform);
-        result.Encapsulate(point : bounds.min);
-        result.Encapsulate(point : bounds.max);
+        var bounds = GetTotalColliderBounds(transform);
+        result.Encapsulate(bounds.min);
+        result.Encapsulate(bounds.max);
       }
 
       var scaledMin = result.min;
-      scaledMin.Scale(scale : objectTransform.localScale);
+      scaledMin.Scale(objectTransform.localScale);
       result.min = scaledMin;
       var scaledMax = result.max;
-      scaledMax.Scale(scale : objectTransform.localScale);
+      scaledMax.Scale(objectTransform.localScale);
       result.max = scaledMax;
       return result;
     }
 
     public static Bounds GetMaxBounds(GameObject g) {
-      var b = new Bounds(
-                         center : g.transform.position,
-                         size : Vector3.zero);
-      foreach (var r in g.GetComponentsInChildren<Renderer>()) b.Encapsulate(bounds : r.bounds);
+      var b = new Bounds(g.transform.position, Vector3.zero);
+      foreach (var r in g.GetComponentsInChildren<Renderer>()) b.Encapsulate(r.bounds);
       return b;
     }
   }
@@ -372,9 +189,7 @@ namespace Neodroid.Scripts.Utilities.BoundingBoxes.NotUsed {
 
   public static class Pair {
     public static Pair<T1, T2> New<T1, T2>(T1 first, T2 second) {
-      var tuple = new Pair<T1, T2>(
-                                   first : first,
-                                   second : second);
+      var tuple = new Pair<T1, T2>(first, second);
       return tuple;
     }
   }

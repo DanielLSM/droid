@@ -1,5 +1,5 @@
-﻿using Neodroid.Environments;
-using Neodroid.Messaging.Messages;
+﻿using Neodroid.Models.Environments;
+using Neodroid.Scripts.Messaging.Messages;
 using Neodroid.Scripts.Utilities;
 using Neodroid.Scripts.Utilities.Structs;
 using UnityEngine;
@@ -30,37 +30,24 @@ namespace Neodroid.Models.Configurables.General {
     public void RefreshStart() { this.Start(); }
 
     protected virtual void AddToEnvironment() {
-      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(
-                                                                        r : this.ParentEnvironment,
-                                                                        c : this);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(this.ParentEnvironment, this);
     }
 
     public override void ApplyConfiguration(Configuration configuration) { }
 
     #region Fields
 
-    [Header(
-      header : "References",
-      order = 99)]
+    [Header("References", order = 99)]
     [SerializeField]
     LearningEnvironment _environment;
 
-    [Header(
-      header : "Development",
-      order = 100)]
+    [Header("Development", order = 100)]
     [SerializeField]
     bool _debugging;
 
-    [Header(
-      header : "General",
-      order = 101)]
+    [Header("General", order = 101)]
     [SerializeField]
-    InputRange _valid_input =
-      new InputRange {
-                       DecimalGranularity = 0,
-                       MinValue = 0,
-                       MaxValue = 0
-                     };
+    InputRange _valid_input = new InputRange {DecimalGranularity = 0, MinValue = 0, MaxValue = 0};
 
     [SerializeField] bool _relative_to_existing_value;
 

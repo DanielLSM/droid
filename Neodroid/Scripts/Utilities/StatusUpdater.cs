@@ -4,10 +4,9 @@ using UnityEngine.UI;
 
 namespace Neodroid.Scripts.Utilities {
   public class StatusUpdater : MonoBehaviour {
-    [SerializeField]
-    SimulationManager _simulation_manager;
-    [SerializeField]
-    Text _status_text;
+    [SerializeField] SimulationManager _simulation_manager;
+
+    [SerializeField] Text _status_text;
 
     // Use this for initialization
     void Start() {

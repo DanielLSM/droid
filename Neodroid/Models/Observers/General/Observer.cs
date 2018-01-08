@@ -1,5 +1,5 @@
 ﻿using System;
-using Neodroid.Environments;
+using Neodroid.Models.Environments;
 using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
@@ -25,9 +25,7 @@ namespace Neodroid.Models.Observers.General {
     public void RefreshStart() { this.Start(); }
 
     protected void Setup() {
-      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(
-                                                                        r : this.ParentEnvironment,
-                                                                        c : this);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(this.ParentEnvironment, this);
     }
 
     public virtual void UpdateData() { }
@@ -36,15 +34,11 @@ namespace Neodroid.Models.Observers.General {
 
     #region Fields
 
-    [Header(
-      header : "References",
-      order = 99)]
+    [Header("References", order = 99)]
     [SerializeField]
     LearningEnvironment _environment;
 
-    [Header(
-      header : "Development",
-      order = 100)]
+    [Header("Development", order = 100)]
     [SerializeField]
     bool _debugging;
 

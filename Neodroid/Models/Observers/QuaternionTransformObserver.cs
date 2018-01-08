@@ -6,17 +6,13 @@ namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
   [Serializable]
   public class QuaternionTransformObserver : Observer {
-    [Header(
-      header : "Observation",
-      order = 103)]
+    [Header("Observation", order = 103)]
     [SerializeField]
     Vector3 _position;
 
     [SerializeField] Quaternion _rotation;
 
-    [Header(
-      header : "Specfic",
-      order = 102)]
+    [Header("Specfic", order = 102)]
     [SerializeField]
     ObservationSpace _space = ObservationSpace.Environment;
 
@@ -32,12 +28,8 @@ namespace Neodroid.Models.Observers {
 
     public override void UpdateData() {
       if (this.ParentEnvironment && this._use_environments_coordinates) {
-        this._position = this.ParentEnvironment.TransformPosition(position : this.transform.position);
-        this._rotation = Quaternion.Euler(
-                                          euler : this.ParentEnvironment.TransformDirection(
-                                                                                            direction : this
-                                                                                                          .transform
-                                                                                                          .forward));
+        this._position = this.ParentEnvironment.TransformPosition(this.transform.position);
+        this._rotation = Quaternion.Euler(this.ParentEnvironment.TransformDirection(this.transform.forward));
       } else {
         this._position = this.transform.position;
         this._rotation = this.transform.rotation;

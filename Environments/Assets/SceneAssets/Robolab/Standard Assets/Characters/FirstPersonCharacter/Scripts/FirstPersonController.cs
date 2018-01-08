@@ -3,8 +3,8 @@ using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 
 namespace UnityStandardAssets.Characters.FirstPerson {
-  [RequireComponent( typeof(CharacterController))]
-  [RequireComponent( typeof(AudioSource))]
+  [RequireComponent(typeof(CharacterController))]
+  [RequireComponent(typeof(AudioSource))]
   public class FirstPersonController : MonoBehaviour {
     AudioSource m_AudioSource;
     // the sound played when character touches back on ground.
@@ -48,11 +48,7 @@ namespace UnityStandardAssets.Characters.FirstPerson {
 
     [SerializeField] float m_RunSpeed;
 
-    [SerializeField]
-    [Range(
-      min : 0f,
-      max : 1f)]
-    float m_RunstepLenghten;
+    [SerializeField] [Range(0f, 1f)] float m_RunstepLenghten;
 
     float m_StepCycle;
 
@@ -73,27 +69,23 @@ namespace UnityStandardAssets.Characters.FirstPerson {
       this.m_CharacterController = this.GetComponent<CharacterController>();
       this.m_Camera = Camera.main;
       this.m_OriginalCameraPosition = this.m_Camera.transform.localPosition;
-      this.m_FovKick.Setup(camera : this.m_Camera);
-      this.m_HeadBob.Setup(
-                           camera : this.m_Camera,
-                           bobBaseInterval : this.m_StepInterval);
+      this.m_FovKick.Setup(this.m_Camera);
+      this.m_HeadBob.Setup(this.m_Camera, this.m_StepInterval);
       this.m_StepCycle = 0f;
       this.m_NextStep = this.m_StepCycle / 2f;
       this.m_Jumping = false;
       this.m_AudioSource = this.GetComponent<AudioSource>();
-      this.m_MouseLook.Init(
-                            character : this.transform,
-                            camera : this.m_Camera.transform);
+      this.m_MouseLook.Init(this.transform, this.m_Camera.transform);
     }
 
     // Update is called once per frame
     void Update() {
       this.RotateView();
       // the jump state needs to read here to make sure it is not missed
-      if (!this.m_Jump) this.m_Jump = CrossPlatformInputManager.GetButtonDown(name : "Jump");
+      if (!this.m_Jump) this.m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
 
       if (!this.m_PreviouslyGrounded && this.m_CharacterController.isGrounded) {
-        this.StartCoroutine(routine : this.m_JumpBob.DoBobCycle());
+        this.StartCoroutine(this.m_JumpBob.DoBobCycle());
         this.PlayLandingSound();
         this.m_MoveDir.y = 0f;
         this.m_Jumping = false;
@@ -113,23 +105,21 @@ namespace UnityStandardAssets.Characters.FirstPerson {
 
     void FixedUpdate() {
       float speed;
-      this.GetInput(speed : out speed);
+      this.GetInput(out speed);
       // always move along the camera forward as it is the direction that it being aimed at
       var desiredMove = this.transform.forward * this.m_Input.y + this.transform.right * this.m_Input.x;
 
       // get a normal for the surface that is being touched to move along it
       RaycastHit hitInfo;
       Physics.SphereCast(
-                         origin : this.transform.position,
-                         radius : this.m_CharacterController.radius,
-                         direction : Vector3.down,
-                         hitInfo : out hitInfo,
-                         maxDistance : this.m_CharacterController.height / 2f,
-                         layerMask : Physics.AllLayers,
-                         queryTriggerInteraction : QueryTriggerInteraction.Ignore);
-      desiredMove = Vector3.ProjectOnPlane(
-                                           vector : desiredMove,
-                                           planeNormal : hitInfo.normal).normalized;
+          this.transform.position,
+          this.m_CharacterController.radius,
+          Vector3.down,
+          out hitInfo,
+          this.m_CharacterController.height / 2f,
+          Physics.AllLayers,
+          QueryTriggerInteraction.Ignore);
+      desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
       this.m_MoveDir.x = desiredMove.x * speed;
       this.m_MoveDir.z = desiredMove.z * speed;
@@ -143,14 +133,13 @@ namespace UnityStandardAssets.Characters.FirstPerson {
           this.m_Jump = false;
           this.m_Jumping = true;
         }
-      } else {
+      } else
         this.m_MoveDir += Physics.gravity * this.m_GravityMultiplier * Time.fixedDeltaTime;
-      }
 
-      this.m_CollisionFlags = this.m_CharacterController.Move(motion : this.m_MoveDir * Time.fixedDeltaTime);
+      this.m_CollisionFlags = this.m_CharacterController.Move(this.m_MoveDir * Time.fixedDeltaTime);
 
-      this.ProgressStepCycle(speed : speed);
-      this.UpdateCameraPosition(speed : speed);
+      this.ProgressStepCycle(speed);
+      this.UpdateCameraPosition(speed);
 
       this.m_MouseLook.UpdateCursorLock();
     }
@@ -162,11 +151,12 @@ namespace UnityStandardAssets.Characters.FirstPerson {
 
     void ProgressStepCycle(float speed) {
       if (this.m_CharacterController.velocity.sqrMagnitude > 0
-          && (this.m_Input.x != 0 || this.m_Input.y != 0))
+          && (this.m_Input.x != 0 || this.m_Input.y != 0)) {
         this.m_StepCycle +=
-          (this.m_CharacterController.velocity.magnitude
-           + speed * (this.m_IsWalking ? 1f : this.m_RunstepLenghten))
-          * Time.fixedDeltaTime;
+            (this.m_CharacterController.velocity.magnitude
+             + speed * (this.m_IsWalking ? 1f : this.m_RunstepLenghten))
+            * Time.fixedDeltaTime;
+      }
 
       if (!(this.m_StepCycle > this.m_NextStep)) return;
 
@@ -179,11 +169,9 @@ namespace UnityStandardAssets.Characters.FirstPerson {
       if (!this.m_CharacterController.isGrounded) return;
       // pick & play a random footstep sound from the array,
       // excluding sound at index 0
-      var n = Random.Range(
-                           min : 1,
-                           max : this.m_FootstepSounds.Length);
+      var n = Random.Range(1, this.m_FootstepSounds.Length);
       this.m_AudioSource.clip = this.m_FootstepSounds[n];
-      this.m_AudioSource.PlayOneShot(clip : this.m_AudioSource.clip);
+      this.m_AudioSource.PlayOneShot(this.m_AudioSource.clip);
       // move picked sound to index 0 so it's not picked next time
       this.m_FootstepSounds[n] = this.m_FootstepSounds[0];
       this.m_FootstepSounds[0] = this.m_AudioSource.clip;
@@ -194,12 +182,8 @@ namespace UnityStandardAssets.Characters.FirstPerson {
       if (!this.m_UseHeadBob) return;
       if (this.m_CharacterController.velocity.magnitude > 0 && this.m_CharacterController.isGrounded) {
         this.m_Camera.transform.localPosition = this.m_HeadBob.DoHeadBob(
-                                                                         speed : this.m_CharacterController
-                                                                                     .velocity.magnitude
-                                                                                 + speed
-                                                                                 * (this.m_IsWalking ? 1f
-                                                                                      : this.m_RunstepLenghten
-                                                                                   ));
+            this.m_CharacterController.velocity.magnitude
+            + speed * (this.m_IsWalking ? 1f : this.m_RunstepLenghten));
         newCameraPosition = this.m_Camera.transform.localPosition;
         newCameraPosition.y = this.m_Camera.transform.localPosition.y - this.m_JumpBob.Offset();
       } else {
@@ -212,21 +196,19 @@ namespace UnityStandardAssets.Characters.FirstPerson {
 
     void GetInput(out float speed) {
       // Read input
-      var horizontal = CrossPlatformInputManager.GetAxis(name : "Horizontal");
-      var vertical = CrossPlatformInputManager.GetAxis(name : "Vertical");
+      var horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
+      var vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
       var waswalking = this.m_IsWalking;
 
       #if !MOBILE_INPUT
       // On standalone builds, walk/run speed is modified by a key press.
       // keep track of whether or not the character is walking or running
-      this.m_IsWalking = !Input.GetKey(key : KeyCode.LeftShift);
+      this.m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
       #endif
       // set the desired speed to be walking or running
       speed = this.m_IsWalking ? this.m_WalkSpeed : this.m_RunSpeed;
-      this.m_Input = new Vector2(
-                                 x : horizontal,
-                                 y : vertical);
+      this.m_Input = new Vector2(horizontal, vertical);
 
       // normalize input if it exceeds 1 in combined length:
       if (this.m_Input.sqrMagnitude > 1) this.m_Input.Normalize();
@@ -237,17 +219,11 @@ namespace UnityStandardAssets.Characters.FirstPerson {
           && this.m_UseFovKick
           && this.m_CharacterController.velocity.sqrMagnitude > 0) {
         this.StopAllCoroutines();
-        this.StartCoroutine(
-                            routine : !this.m_IsWalking ? this.m_FovKick.FOVKickUp()
-                                        : this.m_FovKick.FOVKickDown());
+        this.StartCoroutine(!this.m_IsWalking ? this.m_FovKick.FOVKickUp() : this.m_FovKick.FOVKickDown());
       }
     }
 
-    void RotateView() {
-      this.m_MouseLook.LookRotation(
-                                    character : this.transform,
-                                    camera : this.m_Camera.transform);
-    }
+    void RotateView() { this.m_MouseLook.LookRotation(this.transform, this.m_Camera.transform); }
 
     void OnControllerColliderHit(ControllerColliderHit hit) {
       var body = hit.collider.attachedRigidbody;
@@ -255,10 +231,7 @@ namespace UnityStandardAssets.Characters.FirstPerson {
       if (this.m_CollisionFlags == CollisionFlags.Below) return;
 
       if (body == null || body.isKinematic) return;
-      body.AddForceAtPosition(
-                              force : this.m_CharacterController.velocity * 0.1f,
-                              position : hit.point,
-                              mode : ForceMode.Impulse);
+      body.AddForceAtPosition(this.m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
     }
   }
 }

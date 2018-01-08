@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using Neodroid.Models.Actors;
 using Neodroid.Models.Configurables.General;
+using Neodroid.Scripts.Utilities.Structs;
 
-namespace Neodroid.Messaging.Messages {
+namespace Neodroid.Scripts.Messaging.Messages {
   public class EnvironmentDescription {
     public EnvironmentDescription(
-      int max_steps,
-      int frame_skips,
-      Dictionary<string, Actor> actors,
-      Dictionary<string, ConfigurableGameObject> configurables,
-      float solved_threshold) {
+        int max_steps,
+        SimulatorConfiguration simulation_configuration,
+        Dictionary<string, Actor> actors,
+        Dictionary<string, ConfigurableGameObject> configurables,
+        float solved_threshold) {
       this.Configurables = configurables;
       this.Actors = actors;
       this.MaxSteps = max_steps;
-      this.FrameSkips = frame_skips;
+      this.FrameSkips = simulation_configuration.FrameSkips;
       this.SolvedThreshold = solved_threshold;
     }
 

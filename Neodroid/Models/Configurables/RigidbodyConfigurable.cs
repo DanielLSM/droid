@@ -1,12 +1,12 @@
 ﻿using System;
-using Neodroid.Messaging.Messages;
 using Neodroid.Models.Configurables.General;
+using Neodroid.Scripts.Messaging.Messages;
 using Neodroid.Scripts.Utilities;
 using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
 namespace Neodroid.Models.Configurables {
-  [RequireComponent( typeof(Rigidbody))]
+  [RequireComponent(typeof(Rigidbody))]
   public class RigidbodyConfigurable : ConfigurableGameObject,
                                        IHasRigidbodyProperties {
     string _ang_x;
@@ -21,9 +21,7 @@ namespace Neodroid.Models.Configurables {
     string _vel_y;
     string _vel_z;
 
-    [Header(
-      header : "Observation",
-      order = 103)]
+    [Header("Observation", order = 103)]
     [SerializeField]
     Vector3 _velocity;
 
@@ -59,36 +57,30 @@ namespace Neodroid.Models.Configurables {
       this._ang_x = this.ConfigurableIdentifier + "AngX";
       this._ang_y = this.ConfigurableIdentifier + "AngY";
       this._ang_z = this.ConfigurableIdentifier + "AngZ";
-      this.ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      r : this.ParentEnvironment,
-                                                      c : (ConfigurableGameObject)this,
-                                                      identifier : this._vel_x);
-      this.ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      r : this.ParentEnvironment,
-                                                      c : (ConfigurableGameObject)this,
-                                                      identifier : this._vel_y);
-      this.ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      r : this.ParentEnvironment,
-                                                      c : (ConfigurableGameObject)this,
-                                                      identifier : this._vel_z);
-      this.ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      r : this.ParentEnvironment,
-                                                      c : (ConfigurableGameObject)this,
-                                                      identifier : this._ang_x);
-      this.ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      r : this.ParentEnvironment,
-                                                      c : (ConfigurableGameObject)this,
-                                                      identifier : this._ang_y);
-      this.ParentEnvironment =
-        NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                      r : this.ParentEnvironment,
-                                                      c : (ConfigurableGameObject)this,
-                                                      identifier : this._ang_z);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+          this.ParentEnvironment,
+          (ConfigurableGameObject)this,
+          this._vel_x);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+          this.ParentEnvironment,
+          (ConfigurableGameObject)this,
+          this._vel_y);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+          this.ParentEnvironment,
+          (ConfigurableGameObject)this,
+          this._vel_z);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+          this.ParentEnvironment,
+          (ConfigurableGameObject)this,
+          this._ang_x);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+          this.ParentEnvironment,
+          (ConfigurableGameObject)this,
+          this._ang_y);
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterNamedComponent(
+          this.ParentEnvironment,
+          (ConfigurableGameObject)this,
+          this._ang_z);
     }
 
     public override void ApplyConfiguration(Configuration configuration) {
@@ -97,85 +89,47 @@ namespace Neodroid.Models.Configurables {
 
       var v = configuration.ConfigurableValue;
       if (this.ValidInput.DecimalGranularity >= 0)
-        v = (int)Math.Round(
-                            value : v,
-                            digits : this.ValidInput.DecimalGranularity);
-      if (this.ValidInput.MinValue.CompareTo(value : this.ValidInput.MaxValue) != 0)
+        v = (int)Math.Round(v, this.ValidInput.DecimalGranularity);
+      if (this.ValidInput.MinValue.CompareTo(this.ValidInput.MaxValue) != 0) {
         if (v < this.ValidInput.MinValue || v > this.ValidInput.MaxValue) {
           print(
-                message : string.Format(
-                                        format :
-                                        "Configurable does not accept input{2}, outside allowed range {0} to {1}",
-                                        arg0 : this.ValidInput.MinValue,
-                                        arg1 : this.ValidInput.MaxValue,
-                                        arg2 : v));
+              string.Format(
+                  "Configurable does not accept input{2}, outside allowed range {0} to {1}",
+                  this.ValidInput.MinValue,
+                  this.ValidInput.MaxValue,
+                  v));
           return; // Do nothing
         }
+      }
 
       if (this.Debugging)
-        print(message : "Applying " + v + " To " + this.ConfigurableIdentifier);
+        print("Applying " + v + " To " + this.ConfigurableIdentifier);
       if (this.RelativeToExistingValue) {
         if (configuration.ConfigurableName == this._vel_x)
-          vel.Set(
-                  newX : v - vel.x,
-                  newY : vel.y,
-                  newZ : vel.z);
+          vel.Set(v - vel.x, vel.y, vel.z);
         else if (configuration.ConfigurableName == this._vel_y)
-          vel.Set(
-                  newX : vel.x,
-                  newY : v - vel.y,
-                  newZ : vel.z);
+          vel.Set(vel.x, v - vel.y, vel.z);
         else if (configuration.ConfigurableName == this._vel_z)
-          vel.Set(
-                  newX : vel.x,
-                  newY : vel.y,
-                  newZ : v - vel.z);
+          vel.Set(vel.x, vel.y, v - vel.z);
         else if (configuration.ConfigurableName == this._ang_x)
-          ang.Set(
-                  newX : v - ang.x,
-                  newY : ang.y,
-                  newZ : ang.z);
+          ang.Set(v - ang.x, ang.y, ang.z);
         else if (configuration.ConfigurableName == this._ang_y)
-          ang.Set(
-                  newX : ang.x,
-                  newY : v - ang.y,
-                  newZ : ang.z);
+          ang.Set(ang.x, v - ang.y, ang.z);
         else if (configuration.ConfigurableName == this._ang_z)
-          ang.Set(
-                  newX : ang.x,
-                  newY : ang.y,
-                  newZ : v - ang.z);
+          ang.Set(ang.x, ang.y, v - ang.z);
       } else {
         if (configuration.ConfigurableName == this._vel_x)
-          vel.Set(
-                  newX : v,
-                  newY : vel.y,
-                  newZ : vel.z);
+          vel.Set(v, vel.y, vel.z);
         else if (configuration.ConfigurableName == this._vel_y)
-          vel.Set(
-                  newX : vel.x,
-                  newY : v,
-                  newZ : vel.z);
+          vel.Set(vel.x, v, vel.z);
         else if (configuration.ConfigurableName == this._vel_z)
-          vel.Set(
-                  newX : vel.x,
-                  newY : vel.y,
-                  newZ : v);
+          vel.Set(vel.x, vel.y, v);
         else if (configuration.ConfigurableName == this._ang_x)
-          ang.Set(
-                  newX : v,
-                  newY : ang.y,
-                  newZ : ang.z);
+          ang.Set(v, ang.y, ang.z);
         else if (configuration.ConfigurableName == this._ang_y)
-          ang.Set(
-                  newX : ang.x,
-                  newY : v,
-                  newZ : ang.z);
+          ang.Set(ang.x, v, ang.z);
         else if (configuration.ConfigurableName == this._ang_z)
-          ang.Set(
-                  newX : ang.x,
-                  newY : ang.y,
-                  newZ : v);
+          ang.Set(ang.x, ang.y, v);
       }
 
       this._rigidbody.velocity = vel;

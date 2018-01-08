@@ -8,7 +8,7 @@ public class EventSystemChecker : MonoBehaviour {
   void Awake() {
     if (!FindObjectOfType<EventSystem>()) {
       //Instantiate(eventSystem);
-      var obj = new GameObject(name : "EventSystem");
+      var obj = new GameObject("EventSystem");
       obj.AddComponent<EventSystem>();
       obj.AddComponent<StandaloneInputModule>().forceModuleActive = true;
     }

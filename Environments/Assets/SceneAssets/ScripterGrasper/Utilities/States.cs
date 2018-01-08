@@ -42,16 +42,14 @@ namespace SceneAssets.ScripterGrasper.Utilities {
   public class States {
     readonly Action _on_state_update_callback;
 
-    ClawState _current_claw_1_state,
-              _current_claw_2_state;
+    ClawState _current_claw_1_state, _current_claw_2_state;
 
     GripperState _current_gripper_state;
     PathFindingState _current_path_finding_state;
 
     TargetState _current_target_state;
 
-    MotionState _obstruction_motion_state,
-                _target_motion_state;
+    MotionState _obstruction_motion_state, _target_motion_state;
 
     public States(Action on_state_update_callback = null) {
       this._on_state_update_callback = on_state_update_callback;
@@ -113,14 +111,12 @@ namespace SceneAssets.ScripterGrasper.Utilities {
       }
     }
 
-    public MotionState GetMotionState<T>(
-      T[] objects,
-      MotionState previous_state,
-      float sensitivity = 0.1f)
-      where T : IMotionTracker {
-      foreach (var o in objects)
-        if (o.IsInMotion(sensitivity : sensitivity))
+    public MotionState GetMotionState<T>(T[] objects, MotionState previous_state, float sensitivity = 0.1f)
+        where T : IMotionTracker {
+      foreach (var o in objects) {
+        if (o.IsInMotion(sensitivity))
           return MotionState.IsMoving;
+      }
 
       return previous_state != MotionState.IsMoving ? MotionState.IsAtRest : MotionState.WasMoving;
     }

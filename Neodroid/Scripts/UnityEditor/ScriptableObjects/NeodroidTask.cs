@@ -5,13 +5,11 @@ using UnityEngine;
 
 namespace Neodroid.Scripts.UnityEditor.ScriptableObjects {
   public static class CreateNeodroidTask {
-    [MenuItem(itemName : "Neodroid/Create/ScriptableObjects/NeodroidTask")]
+    [MenuItem("Neodroid/Create/ScriptableObjects/NeodroidTask")]
     public static void CreateNeodroidTaskAsset() {
       var asset = ScriptableObject.CreateInstance<NeodroidTask>();
 
-      AssetDatabase.CreateAsset(
-                                asset : asset,
-                                path : "Assets/NewNeodroidTask.asset");
+      AssetDatabase.CreateAsset(asset, "Assets/NewNeodroidTask.asset");
       AssetDatabase.SaveAssets();
 
       EditorUtility.FocusProjectWindow();

@@ -4,16 +4,14 @@ using UnityEngine;
 
 namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
-  [RequireComponent( typeof(Rigidbody))]
+  [RequireComponent(typeof(Rigidbody))]
   public class RigidbodyObserver : Observer,
                                    IHasRigidbodyProperties {
     [SerializeField] Vector3 _angular_velocity;
 
     Rigidbody _rigidbody;
 
-    [Header(
-      header : "Observation",
-      order = 103)]
+    [Header("Observation", order = 103)]
     [SerializeField]
     Vector3 _velocity;
 

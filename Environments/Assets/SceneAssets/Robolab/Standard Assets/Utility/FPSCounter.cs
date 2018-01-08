@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace UnityStandardAssets.Utility {
-  [RequireComponent( typeof(Text))]
+  [RequireComponent(typeof(Text))]
   public class FPSCounter : MonoBehaviour {
     const float fpsMeasurePeriod = 0.5f;
     const string display = "{0} FPS";
@@ -23,9 +23,7 @@ namespace UnityStandardAssets.Utility {
         this.m_CurrentFps = (int)(this.m_FpsAccumulator / fpsMeasurePeriod);
         this.m_FpsAccumulator = 0;
         this.m_FpsNextPeriod += fpsMeasurePeriod;
-        this.m_Text.text = string.Format(
-                                         format : display,
-                                         arg0 : this.m_CurrentFps);
+        this.m_Text.text = string.Format(display, this.m_CurrentFps);
       }
     }
   }

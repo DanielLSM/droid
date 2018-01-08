@@ -16,8 +16,7 @@ namespace UnityStandardAssets.Utility {
 
     [SerializeField] WaypointCircuit circuit; // A reference to the waypoint-based route we should follow
 
-    Vector3
-      lastPosition; // Used to calculate current speed (since we may not have a rigidbody component)
+    Vector3 lastPosition; // Used to calculate current speed (since we may not have a rigidbody component)
     // The offset ahead only the route for speed adjustments (applied as the rotation of the waypoint target transform)
 
     [SerializeField] float lookAheadForSpeedFactor = .2f;
@@ -57,7 +56,7 @@ namespace UnityStandardAssets.Utility {
 
       // You can manually create a transform and assign it to this component *and* the AI,
       // then this component will update it, and the AI can read it.
-      if (this.target == null) this.target = new GameObject(name : this.name + " Waypoint Target").transform;
+      if (this.target == null) this.target = new GameObject(this.name + " Waypoint Target").transform;
 
       this.Reset();
     }
@@ -77,33 +76,27 @@ namespace UnityStandardAssets.Utility {
         // determine the position we should currently be aiming for
         // (this is different to the current progress position, it is a a certain amount ahead along the route)
         // we use lerp as a simple way of smoothing out the speed over time.
-        if (Time.deltaTime > 0)
+        if (Time.deltaTime > 0) {
           this.speed = Mathf.Lerp(
-                                  a : this.speed,
-                                  b : (this.lastPosition - this.transform.position).magnitude
-                                      / Time.deltaTime,
-                                  t : Time.deltaTime);
+              this.speed,
+              (this.lastPosition - this.transform.position).magnitude / Time.deltaTime,
+              Time.deltaTime);
+        }
+
         this.target.position = this.circuit.GetRoutePoint(
-                                                          dist : this.progressDistance
-                                                                 + this.lookAheadForTargetOffset
-                                                                 + this.lookAheadForTargetFactor * this.speed)
-                                   .position;
-        this.target.rotation =
-          Quaternion.LookRotation(
-                                  forward : this.circuit.GetRoutePoint(
-                                                                       dist : this.progressDistance
-                                                                              + this.lookAheadForSpeedOffset
-                                                                              + this.lookAheadForSpeedFactor
-                                                                              * this.speed)
-                                                .direction);
+            this.progressDistance
+            + this.lookAheadForTargetOffset
+            + this.lookAheadForTargetFactor * this.speed).position;
+        this.target.rotation = Quaternion.LookRotation(
+            this.circuit.GetRoutePoint(
+                this.progressDistance
+                + this.lookAheadForSpeedOffset
+                + this.lookAheadForSpeedFactor * this.speed).direction);
 
         // get our current progress along the route
-        this.progressPoint = this.circuit.GetRoutePoint(dist : this.progressDistance);
+        this.progressPoint = this.circuit.GetRoutePoint(this.progressDistance);
         var progressDelta = this.progressPoint.position - this.transform.position;
-        if (Vector3.Dot(
-                        lhs : progressDelta,
-                        rhs : this.progressPoint.direction)
-            < 0)
+        if (Vector3.Dot(progressDelta, this.progressPoint.direction) < 0)
           this.progressDistance += progressDelta.magnitude * 0.5f;
 
         this.lastPosition = this.transform.position;
@@ -118,12 +111,9 @@ namespace UnityStandardAssets.Utility {
         this.target.rotation = this.circuit.Waypoints[this.progressNum].rotation;
 
         // get our current progress along the route
-        this.progressPoint = this.circuit.GetRoutePoint(dist : this.progressDistance);
+        this.progressPoint = this.circuit.GetRoutePoint(this.progressDistance);
         var progressDelta = this.progressPoint.position - this.transform.position;
-        if (Vector3.Dot(
-                        lhs : progressDelta,
-                        rhs : this.progressPoint.direction)
-            < 0)
+        if (Vector3.Dot(progressDelta, this.progressPoint.direction) < 0)
           this.progressDistance += progressDelta.magnitude;
         this.lastPosition = this.transform.position;
       }
@@ -132,16 +122,10 @@ namespace UnityStandardAssets.Utility {
     void OnDrawGizmos() {
       if (Application.isPlaying) {
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(
-                        from : this.transform.position,
-                        to : this.target.position);
-        Gizmos.DrawWireSphere(
-                              center : this.circuit.GetRoutePosition(dist : this.progressDistance),
-                              radius : 1);
+        Gizmos.DrawLine(this.transform.position, this.target.position);
+        Gizmos.DrawWireSphere(this.circuit.GetRoutePosition(this.progressDistance), 1);
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(
-                        from : this.target.position,
-                        to : this.target.position + this.target.forward);
+        Gizmos.DrawLine(this.target.position, this.target.position + this.target.forward);
       }
     }
   }

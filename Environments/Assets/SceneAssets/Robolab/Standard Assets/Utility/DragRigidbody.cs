@@ -14,25 +14,24 @@ namespace UnityStandardAssets.Utility {
 
     void Update() {
       // Make sure the user pressed the mouse down
-      if (!Input.GetMouseButtonDown(button : 0)) return;
+      if (!Input.GetMouseButtonDown(0)) return;
 
       var mainCamera = this.FindCamera();
 
       // We need to actually hit an object
       var hit = new RaycastHit();
-      if (
-        !Physics.Raycast(
-                         origin : mainCamera.ScreenPointToRay(position : Input.mousePosition).origin,
-                         direction : mainCamera.ScreenPointToRay(position : Input.mousePosition).direction,
-                         hitInfo : out hit,
-                         maxDistance : 100,
-                         layerMask : Physics.DefaultRaycastLayers))
+      if (!Physics.Raycast(
+              mainCamera.ScreenPointToRay(Input.mousePosition).origin,
+              mainCamera.ScreenPointToRay(Input.mousePosition).direction,
+              out hit,
+              100,
+              Physics.DefaultRaycastLayers))
         return;
       // We need to hit a rigidbody that is not kinematic
       if (!hit.rigidbody || hit.rigidbody.isKinematic) return;
 
       if (!this.m_SpringJoint) {
-        var go = new GameObject(name : "Rigidbody dragger");
+        var go = new GameObject("Rigidbody dragger");
         var body = go.AddComponent<Rigidbody>();
         this.m_SpringJoint = go.AddComponent<SpringJoint>();
         body.isKinematic = true;
@@ -46,9 +45,7 @@ namespace UnityStandardAssets.Utility {
       this.m_SpringJoint.maxDistance = k_Distance;
       this.m_SpringJoint.connectedBody = hit.rigidbody;
 
-      this.StartCoroutine(
-                          methodName : "DragObject",
-                          value : hit.distance);
+      this.StartCoroutine("DragObject", hit.distance);
     }
 
     IEnumerator DragObject(float distance) {
@@ -57,9 +54,9 @@ namespace UnityStandardAssets.Utility {
       this.m_SpringJoint.connectedBody.drag = k_Drag;
       this.m_SpringJoint.connectedBody.angularDrag = k_AngularDrag;
       var mainCamera = this.FindCamera();
-      while (Input.GetMouseButton(button : 0)) {
-        var ray = mainCamera.ScreenPointToRay(position : Input.mousePosition);
-        this.m_SpringJoint.transform.position = ray.GetPoint(distance : distance);
+      while (Input.GetMouseButton(0)) {
+        var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        this.m_SpringJoint.transform.position = ray.GetPoint(distance);
         yield return null;
       }
 

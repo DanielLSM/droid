@@ -28,12 +28,12 @@ namespace Neodroid.Scripts.Utilities.Segmentation {
       this._block = new MaterialPropertyBlock();
 
       this._tag_colors = new Dictionary<string, Color>();
-      if (this._colors_by_tag.Length > 0)
-        foreach (var tag_color in this._colors_by_tag)
-          if (!this._tag_colors.ContainsKey(key : tag_color.Tag))
-            this._tag_colors.Add(
-                                 key : tag_color.Tag,
-                                 value : tag_color.Col);
+      if (this._colors_by_tag.Length > 0) {
+        foreach (var tag_color in this._colors_by_tag) {
+          if (!this._tag_colors.ContainsKey(tag_color.Tag))
+            this._tag_colors.Add(tag_color.Tag, tag_color.Col);
+        }
+      }
     }
 
     void Change() {
@@ -41,35 +41,33 @@ namespace Neodroid.Scripts.Utilities.Segmentation {
       for (var i = 0; i < this._original_colors.Length; i++)
         this._original_colors[i] = new LinkedList<Color>();
 
-      for (var i = 0; i < this._all_renders.Length; i++)
-        if (this._tag_colors != null && this._tag_colors.ContainsKey(key : this._all_renders[i].tag))
+      for (var i = 0; i < this._all_renders.Length; i++) {
+        if (this._tag_colors != null && this._tag_colors.ContainsKey(this._all_renders[i].tag)) {
           foreach (var mat in this._all_renders[i].sharedMaterials) {
-            if (mat != null) this._original_colors[i].AddFirst(value : mat.color);
-            this._block.SetColor(
-                                 name : "_Color",
-                                 value : this._tag_colors[key : this._all_renders[i].tag]);
-            this._all_renders[i].SetPropertyBlock(properties : this._block);
+            if (mat != null) this._original_colors[i].AddFirst(mat.color);
+            this._block.SetColor("_Color", this._tag_colors[this._all_renders[i].tag]);
+            this._all_renders[i].SetPropertyBlock(this._block);
           }
-        else if (this._replace_untagged_color)
+        } else if (this._replace_untagged_color) {
           foreach (var mat in this._all_renders[i].sharedMaterials) {
-            if (mat != null) this._original_colors[i].AddFirst(value : mat.color);
-            this._block.SetColor(
-                                 name : "_Color",
-                                 value : this._untagged_color);
-            this._all_renders[i].SetPropertyBlock(properties : this._block);
+            if (mat != null) this._original_colors[i].AddFirst(mat.color);
+            this._block.SetColor("_Color", this._untagged_color);
+            this._all_renders[i].SetPropertyBlock(this._block);
           }
+        }
+      }
     }
 
     void Restore() {
-      for (var i = 0; i < this._all_renders.Length; i++)
-        foreach (var mat in this._all_renders[i].sharedMaterials)
+      for (var i = 0; i < this._all_renders.Length; i++) {
+        foreach (var mat in this._all_renders[i].sharedMaterials) {
           if (mat != null) {
-            this._block.SetColor(
-                                 name : "_Color",
-                                 value : this._original_colors[i].Last.Value);
+            this._block.SetColor("_Color", this._original_colors[i].Last.Value);
             this._original_colors[i].RemoveLast();
-            this._all_renders[i].SetPropertyBlock(properties : this._block);
+            this._all_renders[i].SetPropertyBlock(this._block);
           }
+        }
+      }
     }
 
     void OnPreCull() {

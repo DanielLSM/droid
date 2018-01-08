@@ -18,12 +18,8 @@ namespace UnityStandardAssets.Utility {
         this.m_LastRealTime = Time.realtimeSinceStartup;
       }
 
-      this.transform.Translate(
-                               translation : this.moveUnitsPerSecond.value * deltaTime,
-                               relativeTo : this.moveUnitsPerSecond.space);
-      this.transform.Rotate(
-                            eulerAngles : this.rotateDegreesPerSecond.value * deltaTime,
-                            relativeTo : this.moveUnitsPerSecond.space);
+      this.transform.Translate(this.moveUnitsPerSecond.value * deltaTime, this.moveUnitsPerSecond.space);
+      this.transform.Rotate(this.rotateDegreesPerSecond.value * deltaTime, this.moveUnitsPerSecond.space);
     }
 
     [Serializable]

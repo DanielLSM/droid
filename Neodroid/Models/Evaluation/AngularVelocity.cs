@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Neodroid.Models.Evaluation {
   public class AngularVelocity : ObjectiveFunction {
-    [SerializeField]
-    Rigidbody _rigidbody;
+    [SerializeField] Rigidbody _rigidbody;
 
     public override float InternalEvaluate() {
       if (this._rigidbody) return 1 / (this._rigidbody.angularVelocity.magnitude + 1);

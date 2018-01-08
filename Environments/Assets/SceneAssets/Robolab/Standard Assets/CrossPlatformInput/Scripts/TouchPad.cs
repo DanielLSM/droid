@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UnityStandardAssets.CrossPlatformInput {
-  [RequireComponent( typeof(Image))]
+  [RequireComponent(typeof(Image))]
   public class TouchPad : MonoBehaviour,
                           IPointerDownHandler,
                           IPointerUpHandler {
@@ -24,11 +24,11 @@ namespace UnityStandardAssets.CrossPlatformInput {
     public ControlStyle controlStyle = ControlStyle.Absolute; // control style to use
 
     public string
-      horizontalAxisName =
-        "Horizontal"; // The name given to the horizontal axis for the cross platform input
+        horizontalAxisName =
+            "Horizontal"; // The name given to the horizontal axis for the cross platform input
 
     public string
-      verticalAxisName = "Vertical"; // The name given to the vertical axis for the cross platform input
+        verticalAxisName = "Vertical"; // The name given to the vertical axis for the cross platform input
 
     public float Xsensitivity = 1f;
     public float Ysensitivity = 1f;
@@ -40,10 +40,10 @@ namespace UnityStandardAssets.CrossPlatformInput {
     bool m_UseY; // Toggle for using the Y axis
 
     CrossPlatformInputManager.VirtualAxis
-      m_HorizontalVirtualAxis; // Reference to the joystick in the cross platform input
+        m_HorizontalVirtualAxis; // Reference to the joystick in the cross platform input
 
     CrossPlatformInputManager.VirtualAxis
-      m_VerticalVirtualAxis; // Reference to the joystick in the cross platform input
+        m_VerticalVirtualAxis; // Reference to the joystick in the cross platform input
 
     bool m_Dragging;
     int m_Id = -1;
@@ -52,7 +52,7 @@ namespace UnityStandardAssets.CrossPlatformInput {
     #if !UNITY_EDITOR
     private Vector3 m_Center;
     private Image m_Image;
-        #else
+                    #else
     Vector3 m_PreviousMouse;
     #endif
 
@@ -62,7 +62,7 @@ namespace UnityStandardAssets.CrossPlatformInput {
       #if !UNITY_EDITOR
             m_Image = GetComponent<Image>();
             m_Center = m_Image.transform.position;
-            #endif
+                              #endif
     }
 
     void CreateVirtualAxes() {
@@ -72,22 +72,21 @@ namespace UnityStandardAssets.CrossPlatformInput {
 
       // create new axes based on axes to use
       if (this.m_UseX) {
-        this.m_HorizontalVirtualAxis =
-          new CrossPlatformInputManager.VirtualAxis(name : this.horizontalAxisName);
-        CrossPlatformInputManager.RegisterVirtualAxis(axis : this.m_HorizontalVirtualAxis);
+        this.m_HorizontalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(this.horizontalAxisName);
+        CrossPlatformInputManager.RegisterVirtualAxis(this.m_HorizontalVirtualAxis);
       }
 
       if (this.m_UseY) {
-        this.m_VerticalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(name : this.verticalAxisName);
-        CrossPlatformInputManager.RegisterVirtualAxis(axis : this.m_VerticalVirtualAxis);
+        this.m_VerticalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(this.verticalAxisName);
+        CrossPlatformInputManager.RegisterVirtualAxis(this.m_VerticalVirtualAxis);
       }
     }
 
     void UpdateVirtualAxes(Vector3 value) {
       value = value.normalized;
-      if (this.m_UseX) this.m_HorizontalVirtualAxis.Update(value : value.x);
+      if (this.m_UseX) this.m_HorizontalVirtualAxis.Update(value.x);
 
-      if (this.m_UseY) this.m_VerticalVirtualAxis.Update(value : value.y);
+      if (this.m_UseY) this.m_VerticalVirtualAxis.Update(value.y);
     }
 
     public void OnPointerDown(PointerEventData data) {
@@ -96,7 +95,7 @@ namespace UnityStandardAssets.CrossPlatformInput {
       #if !UNITY_EDITOR
         if (controlStyle != ControlStyle.Absolute )
             m_Center = data.position;
-            #endif
+                              #endif
     }
 
     void Update() {
@@ -112,35 +111,28 @@ namespace UnityStandardAssets.CrossPlatformInput {
  new Vector2(Input.touches[m_Id].position.x - m_Center.x , Input.touches[m_Id].position.y - m_Center.y).normalized;
             pointerDelta.x *= Xsensitivity;
             pointerDelta.y *= Ysensitivity;
-                #else
+                                        #else
         Vector2 pointerDelta;
         pointerDelta.x = Input.mousePosition.x - this.m_PreviousMouse.x;
         pointerDelta.y = Input.mousePosition.y - this.m_PreviousMouse.y;
-        this.m_PreviousMouse = new Vector3(
-                                           x : Input.mousePosition.x,
-                                           y : Input.mousePosition.y,
-                                           z : 0f);
+        this.m_PreviousMouse = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f);
         #endif
-        this.UpdateVirtualAxes(
-                               value : new Vector3(
-                                                   x : pointerDelta.x,
-                                                   y : pointerDelta.y,
-                                                   z : 0));
+        this.UpdateVirtualAxes(new Vector3(pointerDelta.x, pointerDelta.y, 0));
       }
     }
 
     public void OnPointerUp(PointerEventData data) {
       this.m_Dragging = false;
       this.m_Id = -1;
-      this.UpdateVirtualAxes(value : Vector3.zero);
+      this.UpdateVirtualAxes(Vector3.zero);
     }
 
     void OnDisable() {
-      if (CrossPlatformInputManager.AxisExists(name : this.horizontalAxisName))
-        CrossPlatformInputManager.UnRegisterVirtualAxis(name : this.horizontalAxisName);
+      if (CrossPlatformInputManager.AxisExists(this.horizontalAxisName))
+        CrossPlatformInputManager.UnRegisterVirtualAxis(this.horizontalAxisName);
 
-      if (CrossPlatformInputManager.AxisExists(name : this.verticalAxisName))
-        CrossPlatformInputManager.UnRegisterVirtualAxis(name : this.verticalAxisName);
+      if (CrossPlatformInputManager.AxisExists(this.verticalAxisName))
+        CrossPlatformInputManager.UnRegisterVirtualAxis(this.verticalAxisName);
     }
   }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Neodroid.Scripts.Utilities {
-  [RequireComponent( typeof(Collider))]
+  [RequireComponent(typeof(Collider))]
   public class ChildCollisionPublisher : MonoBehaviour {
     public delegate void OnCollisionDelegate(Collision collision);
 
@@ -9,6 +9,6 @@ namespace Neodroid.Scripts.Utilities {
 
     public OnCollisionDelegate CollisionDelegate { set { this._collision_delegate = value; } }
 
-    void OnCollisionEnter(Collision collision) { this._collision_delegate(collision : collision); }
+    void OnCollisionEnter(Collision collision) { this._collision_delegate(collision); }
   }
 }

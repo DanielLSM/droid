@@ -59,7 +59,7 @@ namespace UnityStandardAssets.Utility {
 			{
 				Debug.Log (oldMaterials[n].name+" ("+oldMaterials[n].shader.name+")"+" replaced with "+newMaterials[n].name+" ("+newMaterials[n].shader.name+")");
 			}
-            #endif
+                              #endif
     }
 
     [Serializable]
@@ -77,16 +77,13 @@ namespace UnityStandardAssets.Utility {
 
 namespace UnityStandardAssets.Utility.Inspector {
   #if UNITY_EDITOR
-  [CustomPropertyDrawer(type : typeof(AutoMobileShaderSwitch.ReplacementList))]
+  [CustomPropertyDrawer(typeof(AutoMobileShaderSwitch.ReplacementList))]
   public class ReplacementListDrawer : PropertyDrawer {
     const float k_LineHeight = 18;
     const float k_Spacing = 4;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-      EditorGUI.BeginProperty(
-                              totalPosition : position,
-                              label : label,
-                              property : property);
+      EditorGUI.BeginProperty(position, label, property);
 
       var x = position.x;
       var y = position.y;
@@ -96,75 +93,49 @@ namespace UnityStandardAssets.Utility.Inspector {
       var indent = EditorGUI.indentLevel;
       EditorGUI.indentLevel = 0;
 
-      var items = property.FindPropertyRelative(relativePropertyPath : "items");
-      var titles = new[] {
-                           "Original",
-                           "Replacement",
-                           ""
-                         };
-      var props = new[] {
-                          "original",
-                          "replacement",
-                          "-"
-                        };
-      var widths = new[] {
-                           .45f,
-                           .45f,
-                           .1f
-                         };
+      var items = property.FindPropertyRelative("items");
+      var titles = new[] {"Original", "Replacement", ""};
+      var props = new[] {"original", "replacement", "-"};
+      var widths = new[] {.45f, .45f, .1f};
       const float lineHeight = 18;
       var changedLength = false;
-      if (items.arraySize > 0)
+      if (items.arraySize > 0) {
         for (var i = -1; i < items.arraySize; ++i) {
-          var item = items.GetArrayElementAtIndex(index : i);
+          var item = items.GetArrayElementAtIndex(i);
 
           var rowX = x;
           for (var n = 0; n < props.Length; ++n) {
             var w = widths[n] * inspectorWidth;
 
             // Calculate rects
-            var rect = new Rect(
-                                x : rowX,
-                                y : y,
-                                width : w,
-                                height : lineHeight);
+            var rect = new Rect(rowX, y, w, lineHeight);
             rowX += w;
 
             if (i == -1) {
               // draw title labels
-              EditorGUI.LabelField(
-                                   position : rect,
-                                   label : titles[n]);
+              EditorGUI.LabelField(rect, titles[n]);
             } else {
               if (props[n] == "-" || props[n] == "^" || props[n] == "v") {
-                if (GUI.Button(
-                               position : rect,
-                               text : props[n]))
+                if (GUI.Button(rect, props[n])) {
                   switch (props[n]) {
                     case "-":
-                      items.DeleteArrayElementAtIndex(index : i);
-                      items.DeleteArrayElementAtIndex(index : i);
+                      items.DeleteArrayElementAtIndex(i);
+                      items.DeleteArrayElementAtIndex(i);
                       changedLength = true;
                       break;
                     case "v":
                       if (i > 0)
-                        items.MoveArrayElement(
-                                               srcIndex : i,
-                                               dstIndex : i + 1);
+                        items.MoveArrayElement(i, i + 1);
                       break;
                     case "^":
                       if (i < items.arraySize - 1)
-                        items.MoveArrayElement(
-                                               srcIndex : i,
-                                               dstIndex : i - 1);
+                        items.MoveArrayElement(i, i - 1);
                       break;
                   }
+                }
               } else {
-                var prop = item.FindPropertyRelative(relativePropertyPath : props[n]);
-                EditorGUI.PropertyField(
-                                        position : rect,
-                                        property : prop,
-                                        label : GUIContent.none);
+                var prop = item.FindPropertyRelative(props[n]);
+                EditorGUI.PropertyField(rect, prop, GUIContent.none);
               }
             }
           }
@@ -172,16 +143,15 @@ namespace UnityStandardAssets.Utility.Inspector {
           y += lineHeight + k_Spacing;
           if (changedLength) break;
         }
+      }
 
       // add button
       var addButtonRect = new Rect(
-                                   x : x + position.width - widths[widths.Length - 1] * inspectorWidth,
-                                   y : y,
-                                   width : widths[widths.Length - 1] * inspectorWidth,
-                                   height : lineHeight);
-      if (GUI.Button(
-                     position : addButtonRect,
-                     text : "+")) items.InsertArrayElementAtIndex(index : items.arraySize);
+          x + position.width - widths[widths.Length - 1] * inspectorWidth,
+          y,
+          widths[widths.Length - 1] * inspectorWidth,
+          lineHeight);
+      if (GUI.Button(addButtonRect, "+")) items.InsertArrayElementAtIndex(items.arraySize);
 
       y += lineHeight + k_Spacing;
 
@@ -191,7 +161,7 @@ namespace UnityStandardAssets.Utility.Inspector {
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-      var items = property.FindPropertyRelative(relativePropertyPath : "items");
+      var items = property.FindPropertyRelative("items");
       var lineAndSpace = k_LineHeight + k_Spacing;
       return 40 + items.arraySize * lineAndSpace + lineAndSpace;
     }

@@ -9,7 +9,10 @@
         <e p="Neodroid" t="Include">
           <e p="Models" t="Include">
             <e p="Actors" t="Include">
-              <e p="Actor.cs" t="Include" />
+              <e p="General" t="Include">
+                <e p="Actor.cs" t="Include" />
+              </e>
+              <e p="KillableActor.cs" t="Include" />
             </e>
             <e p="Configurables" t="Include">
               <e p="ColorConfigurable.cs" t="Include" />
@@ -32,7 +35,9 @@
               </e>
               <e p="LearningEnvironment.cs" t="Include" />
               <e p="NotUsed" t="Include">
+                <e p="GridEnvironment.cs" t="Include" />
                 <e p="ImitationEnvironment.cs" t="Include" />
+                <e p="RandomisedEnvironment.cs" t="Include" />
               </e>
             </e>
             <e p="Evaluation" t="Include">
@@ -154,6 +159,7 @@
               <e p="Enums" t="Include">
                 <e p="Axis.cs" t="Include" />
                 <e p="CoordinateSystem.cs" t="Include" />
+                <e p="WaitOn.cs" t="Include" />
               </e>
               <e p="Interfaces" t="Include">
                 <e p="IHasEulerPosition.cs" t="Include" />
@@ -197,7 +203,7 @@
               <e p="StatusUpdater.cs" t="Include" />
               <e p="Structs" t="Include">
                 <e p="InputRange.cs" t="Include" />
-                <e p="SimulationConfiguration.cs" t="Include" />
+                <e p="SimulatorConfiguration.cs" t="Include" />
               </e>
               <e p="Tasks" t="Include">
                 <e p="TaskSequence.cs" t="Include" />
@@ -225,6 +231,11 @@
           </e>
         </e>
         <e p="SceneAssets" t="Include">
+          <e p="ImagePuzzler" t="Include">
+            <e p="Block.cs" t="Include" />
+            <e p="ImageSlicer.cs" t="Include" />
+            <e p="Puzzle.cs" t="Include" />
+          </e>
           <e p="LunarLander" t="Include">
             <e p="Scripts" t="Include">
               <e p="CollisionExplosion.cs" t="Include" />

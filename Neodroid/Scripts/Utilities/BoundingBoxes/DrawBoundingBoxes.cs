@@ -18,24 +18,21 @@ namespace Neodroid.Scripts.Utilities.BoundingBoxes {
     }
 
     void Update() {
-      if (this._lines == null || this._mesh_filter_objects == null) this.ReallocateLineRenderers();
+      if (this._lines == null || this._mesh_filter_objects == null)
+        this.ReallocateLineRenderers();
       this.CalcPositonsAndDrawBoxes();
     }
 
     void CalcPositonsAndDrawBoxes() {
-      foreach (var mesh_filter_object in this._mesh_filter_objects)
+      foreach (var mesh_filter_object in this._mesh_filter_objects) {
         if (mesh_filter_object.gameObject.tag == "Target") {
           GameObject liner;
-          if (!this._lines.ContainsKey(key : mesh_filter_object.gameObject)) {
-            liner = Instantiate(
-                                original : this._line_object,
-                                parent : this._line_object.transform);
-            this._lines.Add(
-                            key : mesh_filter_object.gameObject,
-                            value : liner);
+          if (!this._lines.ContainsKey(mesh_filter_object.gameObject)) {
+            liner = Instantiate(this._line_object, this._line_object.transform);
+            this._lines.Add(mesh_filter_object.gameObject, liner);
           } else {
-            print(message : "found Target");
-            liner = this._lines[key : mesh_filter_object.gameObject];
+            print("found Target");
+            liner = this._lines[mesh_filter_object.gameObject];
           }
 
           var bounds = mesh_filter_object.mesh.bounds;
@@ -50,126 +47,23 @@ namespace Neodroid.Scripts.Utilities.BoundingBoxes {
           var v3Center = bounds.center;
           var v3Extents = bounds.extents;
 
-          var v3FrontTopLeft = new Vector3(
-                                           x : v3Center.x - v3Extents.x,
-                                           y : v3Center.y + v3Extents.y,
-                                           z : v3Center.z - v3Extents.z); // Front top left corner
-          var v3FrontTopRight = new Vector3(
-                                            x : v3Center.x + v3Extents.x,
-                                            y : v3Center.y + v3Extents.y,
-                                            z : v3Center.z - v3Extents.z); // Front top right corner
-          var v3FrontBottomLeft = new Vector3(
-                                              x : v3Center.x - v3Extents.x,
-                                              y : v3Center.y - v3Extents.y,
-                                              z : v3Center.z - v3Extents.z); // Front bottom left corner
-          var v3FrontBottomRight = new Vector3(
-                                               x : v3Center.x + v3Extents.x,
-                                               y : v3Center.y - v3Extents.y,
-                                               z : v3Center.z - v3Extents.z); // Front bottom right corner
-          var v3BackTopLeft = new Vector3(
-                                          x : v3Center.x - v3Extents.x,
-                                          y : v3Center.y + v3Extents.y,
-                                          z : v3Center.z + v3Extents.z); // Back top left corner
-          var v3BackTopRight = new Vector3(
-                                           x : v3Center.x + v3Extents.x,
-                                           y : v3Center.y + v3Extents.y,
-                                           z : v3Center.z + v3Extents.z); // Back top right corner
-          var v3BackBottomLeft = new Vector3(
-                                             x : v3Center.x - v3Extents.x,
-                                             y : v3Center.y - v3Extents.y,
-                                             z : v3Center.z + v3Extents.z); // Back bottom left corner
-          var v3BackBottomRight = new Vector3(
-                                              x : v3Center.x + v3Extents.x,
-                                              y : v3Center.y - v3Extents.y,
-                                              z : v3Center.z + v3Extents.z); // Back bottom right corner
+          var corners = NeodroidUtilities.ExtractCorners(v3Center, v3Extents, mesh_filter_object.transform);
 
-          v3FrontTopLeft = mesh_filter_object.transform.TransformPoint(position : v3FrontTopLeft);
-          v3FrontTopRight = mesh_filter_object.transform.TransformPoint(position : v3FrontTopRight);
-          v3FrontBottomLeft = mesh_filter_object.transform.TransformPoint(position : v3FrontBottomLeft);
-          v3FrontBottomRight = mesh_filter_object.transform.TransformPoint(position : v3FrontBottomRight);
-          v3BackTopLeft = mesh_filter_object.transform.TransformPoint(position : v3BackTopLeft);
-          v3BackTopRight = mesh_filter_object.transform.TransformPoint(position : v3BackTopRight);
-          v3BackBottomLeft = mesh_filter_object.transform.TransformPoint(position : v3BackBottomLeft);
-          v3BackBottomRight = mesh_filter_object.transform.TransformPoint(position : v3BackBottomRight);
+          liner.GetComponent<LineRenderer>().SetPosition(0, corners[4]);
+          liner.GetComponent<LineRenderer>().SetPosition(1, corners[5]);
 
-          liner.GetComponent<LineRenderer>().SetPosition(
-                                                         index : 0,
-                                                         position : v3BackTopLeft);
-          liner.GetComponent<LineRenderer>().SetPosition(
-                                                         index : 1,
-                                                         position : v3BackTopRight);
-
-          this.DrawBox(
-                       v3FrontTopLeft : v3FrontTopLeft,
-                       v3FrontTopRight : v3FrontTopRight,
-                       v3FrontBottomLeft : v3FrontBottomLeft,
-                       v3FrontBottomRight : v3FrontBottomRight,
-                       v3BackTopLeft : v3BackTopLeft,
-                       v3BackTopRight : v3BackTopRight,
-                       v3BackBottomLeft : v3BackBottomLeft,
-                       v3BackBottomRight : v3BackBottomRight);
+          NeodroidUtilities.DrawBox(
+              corners[0],
+              corners[1],
+              corners[2],
+              corners[3],
+              corners[4],
+              corners[5],
+              corners[6],
+              corners[7],
+              this.color);
         }
-    }
-
-    void DrawBox(
-      Vector3 v3FrontTopLeft,
-      Vector3 v3FrontTopRight,
-      Vector3 v3FrontBottomLeft,
-      Vector3 v3FrontBottomRight,
-      Vector3 v3BackTopLeft,
-      Vector3 v3BackTopRight,
-      Vector3 v3BackBottomLeft,
-      Vector3 v3BackBottomRight) {
-      Debug.DrawLine(
-                     start : v3FrontTopLeft,
-                     end : v3FrontTopRight,
-                     color : this.color);
-      Debug.DrawLine(
-                     start : v3FrontTopRight,
-                     end : v3FrontBottomRight,
-                     color : this.color);
-      Debug.DrawLine(
-                     start : v3FrontBottomRight,
-                     end : v3FrontBottomLeft,
-                     color : this.color);
-      Debug.DrawLine(
-                     start : v3FrontBottomLeft,
-                     end : v3FrontTopLeft,
-                     color : this.color);
-
-      Debug.DrawLine(
-                     start : v3BackTopLeft,
-                     end : v3BackTopRight,
-                     color : this.color);
-      Debug.DrawLine(
-                     start : v3BackTopRight,
-                     end : v3BackBottomRight,
-                     color : this.color);
-      Debug.DrawLine(
-                     start : v3BackBottomRight,
-                     end : v3BackBottomLeft,
-                     color : this.color);
-      Debug.DrawLine(
-                     start : v3BackBottomLeft,
-                     end : v3BackTopLeft,
-                     color : this.color);
-
-      Debug.DrawLine(
-                     start : v3FrontTopLeft,
-                     end : v3BackTopLeft,
-                     color : this.color);
-      Debug.DrawLine(
-                     start : v3FrontTopRight,
-                     end : v3BackTopRight,
-                     color : this.color);
-      Debug.DrawLine(
-                     start : v3FrontBottomRight,
-                     end : v3BackBottomRight,
-                     color : this.color);
-      Debug.DrawLine(
-                     start : v3FrontBottomLeft,
-                     end : v3BackBottomLeft,
-                     color : this.color);
+      }
     }
   }
 }

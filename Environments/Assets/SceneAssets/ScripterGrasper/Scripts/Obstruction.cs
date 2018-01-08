@@ -1,5 +1,4 @@
 ﻿using SceneAssets.ScripterGrasper.Utilities;
-using SceneSpecificAssets.Grasping.Utilities;
 using UnityEngine;
 
 namespace SceneAssets.ScripterGrasper.Scripts {
@@ -16,12 +15,8 @@ namespace SceneAssets.ScripterGrasper.Scripts {
     }
 
     public bool IsInMotion(float sensitivity) {
-      var distance_moved = Vector3.Distance(
-                                            a : this.transform.position,
-                                            b : this._last_recorded_move);
-      var angle_rotated = Quaternion.Angle(
-                                           a : this.transform.rotation,
-                                           b : this._last_recorded_rotation);
+      var distance_moved = Vector3.Distance(this.transform.position, this._last_recorded_move);
+      var angle_rotated = Quaternion.Angle(this.transform.rotation, this._last_recorded_rotation);
       if (distance_moved > sensitivity || angle_rotated > sensitivity) {
         this.UpdateLastRecordedTranform();
         return true;

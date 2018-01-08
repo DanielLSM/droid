@@ -16,29 +16,18 @@ namespace Neodroid.Evaluation {
 
     public virtual void Register(Term term) {
       if (this.Debugging)
-        print(
-              message : string.Format(
-                                      format : "Term registered: {0}",
-                                      arg0 : term));
-      this._extra_terms_dict.Add(
-                                 key : term.name,
-                                 value : term);
-      this._extra_term_weights.Add(
-                                   key : term,
-                                   value : 1);
+        print(string.Format("Term registered: {0}", term));
+      this._extra_terms_dict.Add(term.name, term);
+      this._extra_term_weights.Add(term, 1);
     }
 
     public virtual void Register(Term term, string identifier) {
-      this._extra_terms_dict.Add(
-                                 key : term.name,
-                                 value : term);
-      this._extra_term_weights.Add(
-                                   key : term,
-                                   value : 1);
+      this._extra_terms_dict.Add(term.name, term);
+      this._extra_term_weights.Add(term, 1);
     }
 
     void Awake() {
-      foreach (var go in this._extra_terms) this.Register(term : go);
+      foreach (var go in this._extra_terms) this.Register(go);
     }
 
     public virtual float InternalEvaluate() { return 0; }
@@ -48,7 +37,7 @@ namespace Neodroid.Evaluation {
       signal += this.InternalEvaluate();
       signal += this.EvaluateExtraTerms();
 
-      if (this.Debugging) print(message : signal);
+      if (this.Debugging) print(signal);
       return signal;
     }
 
@@ -57,39 +46,29 @@ namespace Neodroid.Evaluation {
     public virtual void InternalReset() { }
 
     public virtual void AdjustExtraTermsWeights(Term term, float new_weight) {
-      if (this._extra_term_weights.ContainsKey(key : term)) this._extra_term_weights[key : term] = new_weight;
+      if (this._extra_term_weights.ContainsKey(term)) this._extra_term_weights[term] = new_weight;
     }
 
     public virtual float EvaluateExtraTerms() {
       float extra_terms_output = 0;
       foreach (var term in this._extra_terms_dict.Values) {
         if (this.Debugging)
-          print(
-                message : string.Format(
-                                        format : "Extra term: {0}",
-                                        arg0 : term));
-        extra_terms_output += this._extra_term_weights[key : term] * term.Evaluate();
+          print(string.Format("Extra term: {0}", term));
+        extra_terms_output += this._extra_term_weights[term] * term.Evaluate();
       }
 
       if (this.Debugging)
-        print(
-              message : string.Format(
-                                      format : "Extra terms signal: {0}",
-                                      arg0 : extra_terms_output));
+        print(string.Format("Extra terms signal: {0}", extra_terms_output));
       return extra_terms_output;
     }
 
     #region Fields
 
-    [Header(
-      header : "Development",
-      order = 99)]
+    [Header("Development", order = 99)]
     [SerializeField]
     bool _debugging;
 
-    [Header(
-      header : "References",
-      order = 100)]
+    [Header("References", order = 100)]
     [SerializeField]
     Term[] _extra_terms;
 
@@ -97,9 +76,7 @@ namespace Neodroid.Evaluation {
 
     [SerializeField] Dictionary<Term, float> _extra_term_weights = new Dictionary<Term, float>();
 
-    [Header(
-      header : "General",
-      order = 101)]
+    [Header("General", order = 101)]
     [SerializeField]
     float _solved_threshold;
 

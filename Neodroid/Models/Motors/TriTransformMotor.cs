@@ -1,5 +1,5 @@
-﻿using Neodroid.Messaging.Messages;
-using Neodroid.Models.Motors.General;
+﻿using Neodroid.Models.Motors.General;
+using Neodroid.Scripts.Messaging.Messages;
 using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
@@ -28,90 +28,48 @@ namespace Neodroid.Models.Motors {
         this._z = this.GetMotorIdentifier() + "RotZ";
       }
 
-      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                       r : this.ParentActor,
-                                                                       c : (Motor)this,
-                                                                       identifier : this._x);
-      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                       r : this.ParentActor,
-                                                                       c : (Motor)this,
-                                                                       identifier : this._y);
-      this.ParentActor = NeodroidUtilities.MaybeRegisterNamedComponent(
-                                                                       r : this.ParentActor,
-                                                                       c : (Motor)this,
-                                                                       identifier : this._z);
+      this.ParentActor =
+          NeodroidUtilities.MaybeRegisterNamedComponent(this.ParentActor, (Motor)this, this._x);
+      this.ParentActor =
+          NeodroidUtilities.MaybeRegisterNamedComponent(this.ParentActor, (Motor)this, this._y);
+      this.ParentActor =
+          NeodroidUtilities.MaybeRegisterNamedComponent(this.ParentActor, (Motor)this, this._z);
     }
 
     public override string GetMotorIdentifier() { return this.name + "Transform"; }
 
     public override void InnerApplyMotion(MotorMotion motion) {
-      var layer_mask = 1 << LayerMask.NameToLayer(layerName : this._layer_mask);
+      var layer_mask = 1 << LayerMask.NameToLayer(this._layer_mask);
       if (!this._rotational_motors) {
         if (motion.GetMotorName() == this._x) {
           var vec = Vector3.right * motion.Strength;
           if (this._no_collisions) {
-            if (!Physics.Raycast(
-                                 origin : this.transform.position,
-                                 direction : vec,
-                                 maxDistance : Mathf.Abs(f : motion.Strength),
-                                 layerMask : layer_mask))
-              this.transform.Translate(
-                                       translation : vec,
-                                       relativeTo : this._relative_to);
-          } else {
-            this.transform.Translate(
-                                     translation : vec,
-                                     relativeTo : this._relative_to);
-          }
+            if (!Physics.Raycast(this.transform.position, vec, Mathf.Abs(motion.Strength), layer_mask))
+              this.transform.Translate(vec, this._relative_to);
+          } else
+            this.transform.Translate(vec, this._relative_to);
         } else if (motion.GetMotorName() == this._y) {
           var vec = -Vector3.up * motion.Strength;
           if (this._no_collisions) {
-            if (!Physics.Raycast(
-                                 origin : this.transform.position,
-                                 direction : vec,
-                                 maxDistance : Mathf.Abs(f : motion.Strength),
-                                 layerMask : layer_mask))
-              this.transform.Translate(
-                                       translation : vec,
-                                       relativeTo : this._relative_to);
-          } else {
-            this.transform.Translate(
-                                     translation : vec,
-                                     relativeTo : this._relative_to);
-          }
+            if (!Physics.Raycast(this.transform.position, vec, Mathf.Abs(motion.Strength), layer_mask))
+              this.transform.Translate(vec, this._relative_to);
+          } else
+            this.transform.Translate(vec, this._relative_to);
         } else if (motion.GetMotorName() == this._z) {
           var vec = -Vector3.forward * motion.Strength;
           if (this._no_collisions) {
-            if (!Physics.Raycast(
-                                 origin : this.transform.position,
-                                 direction : vec,
-                                 maxDistance : Mathf.Abs(f : motion.Strength),
-                                 layerMask : layer_mask))
-              this.transform.Translate(
-                                       translation : vec,
-                                       relativeTo : this._relative_to);
-          } else {
-            this.transform.Translate(
-                                     translation : vec,
-                                     relativeTo : this._relative_to);
-          }
+            if (!Physics.Raycast(this.transform.position, vec, Mathf.Abs(motion.Strength), layer_mask))
+              this.transform.Translate(vec, this._relative_to);
+          } else
+            this.transform.Translate(vec, this._relative_to);
         }
       } else {
         if (motion.GetMotorName() == this._x)
-          this.transform.Rotate(
-                                axis : Vector3.left,
-                                angle : motion.Strength,
-                                relativeTo : this._relative_to);
+          this.transform.Rotate(Vector3.left, motion.Strength, this._relative_to);
         else if (motion.GetMotorName() == this._y)
-          this.transform.Rotate(
-                                axis : Vector3.up,
-                                angle : motion.Strength,
-                                relativeTo : this._relative_to);
+          this.transform.Rotate(Vector3.up, motion.Strength, this._relative_to);
         else if (motion.GetMotorName() == this._z)
-          this.transform.Rotate(
-                                axis : Vector3.forward,
-                                angle : motion.Strength,
-                                relativeTo : this._relative_to);
+          this.transform.Rotate(Vector3.forward, motion.Strength, this._relative_to);
       }
     }
   }

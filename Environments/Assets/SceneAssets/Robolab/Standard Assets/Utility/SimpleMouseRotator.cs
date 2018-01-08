@@ -23,9 +23,7 @@ namespace UnityStandardAssets.Utility {
     // (Think: looking out the side window of a car, or a gun turret
     // on a moving spaceship with a limited angular range)
     // to have no constraints on an axis, set the rotationRange to 360 or greater.
-    public Vector2 rotationRange = new Vector3(
-                                               x : 70,
-                                               y : 70);
+    public Vector2 rotationRange = new Vector3(70, 70);
 
     public float rotationSpeed = 10;
 
@@ -39,8 +37,8 @@ namespace UnityStandardAssets.Utility {
       float inputH;
       float inputV;
       if (this.relative) {
-        inputH = CrossPlatformInputManager.GetAxis(name : "Mouse X");
-        inputV = CrossPlatformInputManager.GetAxis(name : "Mouse Y");
+        inputH = CrossPlatformInputManager.GetAxis("Mouse X");
+        inputV = CrossPlatformInputManager.GetAxis("Mouse Y");
 
         // wrap values to avoid springing quickly the wrong way from positive to negative
         if (this.m_TargetAngles.y > 180) {
@@ -76,7 +74,7 @@ namespace UnityStandardAssets.Utility {
 			} else {
 				m_TargetAngles.x += inputV * rotationSpeed;
 			}
-                #else
+                                        #else
         // with mouse input, we have direct control with no springback required.
         this.m_TargetAngles.y += inputH * this.rotationSpeed;
         this.m_TargetAngles.x += inputV * this.rotationSpeed;
@@ -84,42 +82,38 @@ namespace UnityStandardAssets.Utility {
 
         // clamp values to allowed range
         this.m_TargetAngles.y = Mathf.Clamp(
-                                            value : this.m_TargetAngles.y,
-                                            min : -this.rotationRange.y * 0.5f,
-                                            max : this.rotationRange.y * 0.5f);
+            this.m_TargetAngles.y,
+            -this.rotationRange.y * 0.5f,
+            this.rotationRange.y * 0.5f);
         this.m_TargetAngles.x = Mathf.Clamp(
-                                            value : this.m_TargetAngles.x,
-                                            min : -this.rotationRange.x * 0.5f,
-                                            max : this.rotationRange.x * 0.5f);
+            this.m_TargetAngles.x,
+            -this.rotationRange.x * 0.5f,
+            this.rotationRange.x * 0.5f);
       } else {
         inputH = Input.mousePosition.x;
         inputV = Input.mousePosition.y;
 
         // set values to allowed range
         this.m_TargetAngles.y = Mathf.Lerp(
-                                           a : -this.rotationRange.y * 0.5f,
-                                           b : this.rotationRange.y * 0.5f,
-                                           t : inputH / Screen.width);
+            -this.rotationRange.y * 0.5f,
+            this.rotationRange.y * 0.5f,
+            inputH / Screen.width);
         this.m_TargetAngles.x = Mathf.Lerp(
-                                           a : -this.rotationRange.x * 0.5f,
-                                           b : this.rotationRange.x * 0.5f,
-                                           t : inputV / Screen.height);
+            -this.rotationRange.x * 0.5f,
+            this.rotationRange.x * 0.5f,
+            inputV / Screen.height);
       }
 
       // smoothly interpolate current values to target angles
-      this.m_FollowAngles =
-        Vector3.SmoothDamp(
-                           current : this.m_FollowAngles,
-                           target : this.m_TargetAngles,
-                           currentVelocity : ref this.m_FollowVelocity,
-                           smoothTime : this.dampingTime);
+      this.m_FollowAngles = Vector3.SmoothDamp(
+          this.m_FollowAngles,
+          this.m_TargetAngles,
+          ref this.m_FollowVelocity,
+          this.dampingTime);
 
       // update the actual gameobject's rotation
       this.transform.localRotation = this.m_OriginalRotation
-                                     * Quaternion.Euler(
-                                                        x : -this.m_FollowAngles.x,
-                                                        y : this.m_FollowAngles.y,
-                                                        z : 0);
+                                     * Quaternion.Euler(-this.m_FollowAngles.x, this.m_FollowAngles.y, 0);
     }
   }
 }

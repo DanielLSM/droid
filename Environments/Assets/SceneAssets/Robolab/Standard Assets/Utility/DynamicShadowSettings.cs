@@ -19,39 +19,24 @@ namespace UnityStandardAssets.Utility {
 
     // Update is called once per frame
     void Update() {
-      var ray = new Ray(
-                        origin : Camera.main.transform.position,
-                        direction : -Vector3.up);
+      var ray = new Ray(Camera.main.transform.position, -Vector3.up);
       RaycastHit hit;
       var height = this.transform.position.y;
-      if (Physics.Raycast(
-                          ray : ray,
-                          hitInfo : out hit)) height = hit.distance;
+      if (Physics.Raycast(ray, out hit)) height = hit.distance;
 
-      if (Mathf.Abs(f : height - this.m_SmoothHeight) > 1)
+      if (Mathf.Abs(height - this.m_SmoothHeight) > 1) {
         this.m_SmoothHeight = Mathf.SmoothDamp(
-                                               current : this.m_SmoothHeight,
-                                               target : height,
-                                               currentVelocity : ref this.m_ChangeSpeed,
-                                               smoothTime : this.adaptTime);
+            this.m_SmoothHeight,
+            height,
+            ref this.m_ChangeSpeed,
+            this.adaptTime);
+      }
 
-      var i = Mathf.InverseLerp(
-                                a : this.minHeight,
-                                b : this.maxHeight,
-                                value : this.m_SmoothHeight);
+      var i = Mathf.InverseLerp(this.minHeight, this.maxHeight, this.m_SmoothHeight);
 
-      QualitySettings.shadowDistance = Mathf.Lerp(
-                                                  a : this.minShadowDistance,
-                                                  b : this.maxShadowDistance,
-                                                  t : i);
-      this.sunLight.shadowBias = Mathf.Lerp(
-                                            a : this.minShadowBias,
-                                            b : this.maxShadowBias,
-                                            t : 1 - (1 - i) * (1 - i));
-      this.sunLight.shadowStrength = Mathf.Lerp(
-                                                a : this.m_OriginalStrength,
-                                                b : 0,
-                                                t : i);
+      QualitySettings.shadowDistance = Mathf.Lerp(this.minShadowDistance, this.maxShadowDistance, i);
+      this.sunLight.shadowBias = Mathf.Lerp(this.minShadowBias, this.maxShadowBias, 1 - (1 - i) * (1 - i));
+      this.sunLight.shadowStrength = Mathf.Lerp(this.m_OriginalStrength, 0, i);
     }
   }
 }

@@ -58,44 +58,32 @@ namespace Neodroid.Scripts.Utilities {
 
     void OnCollisionEnter(Collision collision) {
       if (this._on_collision_enter_delegate != null)
-        this._on_collision_enter_delegate(
-                                          child_game_object : this.gameObject,
-                                          collision : collision);
+        this._on_collision_enter_delegate(this.gameObject, collision);
     }
 
     void OnTriggerEnter(Collider other) {
       if (this._on_trigger_enter_delegate != null)
-        this._on_trigger_enter_delegate(
-                                        child_game_object : this.gameObject,
-                                        collider : other);
+        this._on_trigger_enter_delegate(this.gameObject, other);
     }
 
     void OnTriggerStay(Collider other) {
       if (this._on_trigger_stay_delegate != null)
-        this._on_trigger_stay_delegate(
-                                       child_game_object : this.gameObject,
-                                       collider : other);
+        this._on_trigger_stay_delegate(this.gameObject, other);
     }
 
     void OnCollisionStay(Collision collision) {
       if (this._on_collision_stay_delegate != null)
-        this._on_collision_stay_delegate(
-                                         child_game_object : this.gameObject,
-                                         collision : collision);
+        this._on_collision_stay_delegate(this.gameObject, collision);
     }
 
     void OnTriggerExit(Collider other) {
       if (this._on_trigger_exit_delegate != null)
-        this._on_trigger_exit_delegate(
-                                       child_game_object : this.gameObject,
-                                       collider : other);
+        this._on_trigger_exit_delegate(this.gameObject, other);
     }
 
     void OnCollisionExit(Collision collision) {
       if (this._on_collision_exit_delegate != null)
-        this._on_collision_exit_delegate(
-                                         child_game_object : this.gameObject,
-                                         collision : collision);
+        this._on_collision_exit_delegate(this.gameObject, collision);
     }
   }
 }

@@ -23,7 +23,7 @@ namespace UnityStandardAssets.Utility {
     public float TimeToIncrease = 1f;
 
     public void Setup(Camera camera) {
-      this.CheckStatus(camera : camera);
+      this.CheckStatus(camera);
 
       this.Camera = camera;
       this.originalFov = camera.fieldOfView;
@@ -31,33 +31,31 @@ namespace UnityStandardAssets.Utility {
 
     void CheckStatus(Camera camera) {
       if (camera == null)
-        throw new Exception(message : "FOVKick camera is null, please supply the camera to the constructor");
+        throw new Exception("FOVKick camera is null, please supply the camera to the constructor");
 
-      if (this.IncreaseCurve == null)
+      if (this.IncreaseCurve == null) {
         throw new Exception(
-                            message :
-                            "FOVKick Increase curve is null, please define the curve for the field of view kicks");
+            "FOVKick Increase curve is null, please define the curve for the field of view kicks");
+      }
     }
 
     public void ChangeCamera(Camera camera) { this.Camera = camera; }
 
     public IEnumerator FOVKickUp() {
-      var t = Mathf.Abs(f : (this.Camera.fieldOfView - this.originalFov) / this.FOVIncrease);
+      var t = Mathf.Abs((this.Camera.fieldOfView - this.originalFov) / this.FOVIncrease);
       while (t < this.TimeToIncrease) {
         this.Camera.fieldOfView = this.originalFov
-                                  + this.IncreaseCurve.Evaluate(time : t / this.TimeToIncrease)
-                                  * this.FOVIncrease;
+                                  + this.IncreaseCurve.Evaluate(t / this.TimeToIncrease) * this.FOVIncrease;
         t += Time.deltaTime;
         yield return new WaitForEndOfFrame();
       }
     }
 
     public IEnumerator FOVKickDown() {
-      var t = Mathf.Abs(f : (this.Camera.fieldOfView - this.originalFov) / this.FOVIncrease);
+      var t = Mathf.Abs((this.Camera.fieldOfView - this.originalFov) / this.FOVIncrease);
       while (t > 0) {
         this.Camera.fieldOfView = this.originalFov
-                                  + this.IncreaseCurve.Evaluate(time : t / this.TimeToDecrease)
-                                  * this.FOVIncrease;
+                                  + this.IncreaseCurve.Evaluate(t / this.TimeToDecrease) * this.FOVIncrease;
         t -= Time.deltaTime;
         yield return new WaitForEndOfFrame();
       }

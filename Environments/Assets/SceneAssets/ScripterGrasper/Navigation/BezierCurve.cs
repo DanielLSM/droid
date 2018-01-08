@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using SceneSpecificAssets.Grasping.Navigation;
 using UnityEngine;
 
 namespace SceneAssets.ScripterGrasper.Navigation {
@@ -19,7 +18,8 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - Array of point objects that make up this curve
     ///   - Populated through editor
     /// </summary>
-    [SerializeField] BezierPoint[] _points = new BezierPoint[0];
+    [SerializeField]
+    BezierPoint[] _points = new BezierPoint[0];
 
     #endregion
 
@@ -30,7 +30,8 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - used for drawing the curve in the editor
     ///   - used for calculating the "length" variable
     /// </summary>
-    [SerializeField] int _resolution = 30;
+    [SerializeField]
+    int _resolution = 30;
 
     /// <summary>
     ///   Gets or sets a value indicating whether this <see cref="BezierCurve" /> is dirty.
@@ -55,7 +56,8 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   "points" array
     ///   - setting this value will cause the curve to become dirty
     /// </summary>
-    [SerializeField] bool _close;
+    [SerializeField]
+    bool _close;
 
     public bool Close {
       get { return this._close; }
@@ -98,16 +100,14 @@ namespace SceneAssets.ScripterGrasper.Navigation {
         if (this.Dirty) {
           this._length = 0;
           for (var i = 0; i < this._points.Length - 1; i++)
-            this._length += ApproximateLength(
-                                              p1 : this._points[i],
-                                              p2 : this._points[i + 1],
-                                              resolution : this._resolution);
+            this._length += ApproximateLength(this._points[i], this._points[i + 1], this._resolution);
 
-          if (this.Close)
+          if (this.Close) {
             this._length += ApproximateLength(
-                                              p1 : this._points[this._points.Length - 1],
-                                              p2 : this._points[0],
-                                              resolution : this._resolution);
+                this._points[this._points.Length - 1],
+                this._points[0],
+                this._resolution);
+          }
 
           this.Dirty = false;
         }
@@ -129,16 +129,10 @@ namespace SceneAssets.ScripterGrasper.Navigation {
 
       if (this._points.Length > 1) {
         for (var i = 0; i < this._points.Length - 1; i++)
-          DrawCurve(
-                    p1 : this._points[i],
-                    p2 : this._points[i + 1],
-                    resolution : this._resolution);
+          DrawCurve(this._points[i], this._points[i + 1], this._resolution);
 
         if (this.Close)
-          DrawCurve(
-                    p1 : this._points[this._points.Length - 1],
-                    p2 : this._points[0],
-                    resolution : this._resolution);
+          DrawCurve(this._points[this._points.Length - 1], this._points[0], this._resolution);
       }
     }
 
@@ -155,9 +149,7 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - The point to add.
     /// </param>
     public void AddPoint(BezierPoint point) {
-      var temp_array = new List<BezierPoint>(collection : this._points) {
-                                                                          point
-                                                                        };
+      var temp_array = new List<BezierPoint>(this._points) {point};
       this._points = temp_array.ToArray();
       this.Dirty = true;
     }
@@ -172,7 +164,7 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - Where to add the point
     /// </param>
     public BezierPoint AddPointAt(Vector3 position) {
-      var point_object = new GameObject(name : "Point " + this.PointCount);
+      var point_object = new GameObject("Point " + this.PointCount);
       point_object.transform.parent = this.transform;
       point_object.transform.position = position;
 
@@ -189,8 +181,8 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - The point to remove
     /// </param>
     public void RemovePoint(BezierPoint point) {
-      var temp_array = new List<BezierPoint>(collection : this._points);
-      temp_array.Remove(item : point);
+      var temp_array = new List<BezierPoint>(this._points);
+      temp_array.Remove(point);
       this._points = temp_array.ToArray();
       this.Dirty = false;
     }
@@ -227,10 +219,7 @@ namespace SceneAssets.ScripterGrasper.Navigation {
       BezierPoint p2 = null;
 
       for (var i = 0; i < this._points.Length - 1; i++) {
-        curve_percent = ApproximateLength(
-                                          p1 : this._points[i],
-                                          p2 : this._points[i + 1])
-                        / this.Length;
+        curve_percent = ApproximateLength(this._points[i], this._points[i + 1]) / this.Length;
         if (total_percent + curve_percent > t) {
           p1 = this._points[i];
           p2 = this._points[i + 1];
@@ -247,10 +236,7 @@ namespace SceneAssets.ScripterGrasper.Navigation {
 
       t -= total_percent;
 
-      return GetPoint(
-                      p1 : p1,
-                      p2 : p2,
-                      t : t / curve_percent);
+      return GetPoint(p1, p2, t / curve_percent);
     }
 
     /// <summary>
@@ -264,11 +250,12 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     /// </param>
     public int GetPointIndex(BezierPoint point) {
       var result = -1;
-      for (var i = 0; i < this._points.Length; i++)
+      for (var i = 0; i < this._points.Length; i++) {
         if (this._points[i] == point) {
           result = i;
           break;
         }
+      }
 
       return result;
     }
@@ -301,13 +288,8 @@ namespace SceneAssets.ScripterGrasper.Navigation {
       var last_point = p1.Position;
 
       for (var i = 1; i < limit; i++) {
-        var current_point = GetPoint(
-                                     p1 : p1,
-                                     p2 : p2,
-                                     t : i / res);
-        Gizmos.DrawLine(
-                        @from : last_point,
-                        to : current_point);
+        var current_point = GetPoint(p1, p2, i / res);
+        Gizmos.DrawLine(last_point, current_point);
         last_point = current_point;
       }
     }
@@ -332,31 +314,15 @@ namespace SceneAssets.ScripterGrasper.Navigation {
       if (p1 == null || p2 == null)
         return Vector3.back;
 
-      if (p1.Handle2 != Vector3.zero)
+      if (p1.Handle2 != Vector3.zero) {
         if (p2.Handle1 != Vector3.zero)
-          return GetCubicCurvePoint(
-                                    p1 : p1.Position,
-                                    p2 : p1.GlobalHandle2,
-                                    p3 : p2.GlobalHandle1,
-                                    p4 : p2.Position,
-                                    t : t);
-        else
-          return GetQuadraticCurvePoint(
-                                        p1 : p1.Position,
-                                        p2 : p1.GlobalHandle2,
-                                        p3 : p2.Position,
-                                        t : t);
+          return GetCubicCurvePoint(p1.Position, p1.GlobalHandle2, p2.GlobalHandle1, p2.Position, t);
+        return GetQuadraticCurvePoint(p1.Position, p1.GlobalHandle2, p2.Position, t);
+      }
 
       if (p2.Handle1 != Vector3.zero)
-        return GetQuadraticCurvePoint(
-                                      p1 : p1.Position,
-                                      p2 : p2.GlobalHandle1,
-                                      p3 : p2.Position,
-                                      t : t);
-      return GetLinearPoint(
-                            p1 : p1.Position,
-                            p2 : p2.Position,
-                            t : t);
+        return GetQuadraticCurvePoint(p1.Position, p2.GlobalHandle1, p2.Position, t);
+      return GetLinearPoint(p1.Position, p2.Position, t);
     }
 
     /// <summary>
@@ -381,28 +347,12 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - Value between 0 and 1 representing the percent along the curve (0 = 0%, 1 = 100%)
     /// </param>
     public static Vector3 GetCubicCurvePoint(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, float t) {
-      t = Mathf.Clamp01(value : t);
+      t = Mathf.Clamp01(t);
 
-      var part1 = Mathf.Pow(
-                            f : 1 - t,
-                            p : 3)
-                  * p1;
-      var part2 = 3
-                  * Mathf.Pow(
-                              f : 1 - t,
-                              p : 2)
-                  * t
-                  * p2;
-      var part3 = 3
-                  * (1 - t)
-                  * Mathf.Pow(
-                              f : t,
-                              p : 2)
-                  * p3;
-      var part4 = Mathf.Pow(
-                            f : t,
-                            p : 3)
-                  * p4;
+      var part1 = Mathf.Pow(1 - t, 3) * p1;
+      var part2 = 3 * Mathf.Pow(1 - t, 2) * t * p2;
+      var part3 = 3 * (1 - t) * Mathf.Pow(t, 2) * p3;
+      var part4 = Mathf.Pow(t, 3) * p4;
 
       return part1 + part2 + part3 + part4;
     }
@@ -426,17 +376,11 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - Value between 0 and 1 representing the percent along the curve (0 = 0%, 1 = 100%)
     /// </param>
     public static Vector3 GetQuadraticCurvePoint(Vector3 p1, Vector3 p2, Vector3 p3, float t) {
-      t = Mathf.Clamp01(value : t);
+      t = Mathf.Clamp01(t);
 
-      var part1 = Mathf.Pow(
-                            f : 1 - t,
-                            p : 2)
-                  * p1;
+      var part1 = Mathf.Pow(1 - t, 2) * p1;
       var part2 = 2 * (1 - t) * t * p2;
-      var part3 = Mathf.Pow(
-                            f : t,
-                            p : 2)
-                  * p3;
+      var part3 = Mathf.Pow(t, 2) * p3;
 
       return part1 + part2 + part3;
     }
@@ -472,22 +416,14 @@ namespace SceneAssets.ScripterGrasper.Navigation {
     ///   - The points used to define the curve
     /// </param>
     public static Vector3 GetPoint(float t, params Vector3[] points) {
-      t = Mathf.Clamp01(value : t);
+      t = Mathf.Clamp01(t);
 
       var order = points.Length - 1;
       var point = Vector3.zero;
 
       for (var i = 0; i < points.Length; i++) {
         var vector_to_add = points[points.Length - i - 1]
-                            * (BinomialCoefficient(
-                                                   i : i,
-                                                   n : order)
-                               * Mathf.Pow(
-                                           f : t,
-                                           p : order - i)
-                               * Mathf.Pow(
-                                           f : 1 - t,
-                                           p : i));
+                            * (BinomialCoefficient(i, order) * Mathf.Pow(t, order - i) * Mathf.Pow(1 - t, i));
         point += vector_to_add;
       }
 
@@ -515,10 +451,7 @@ namespace SceneAssets.ScripterGrasper.Navigation {
       var last_position = p1.Position;
 
       for (var i = 0; i < resolution + 1; i++) {
-        var current_position = GetPoint(
-                                        p1 : p1,
-                                        p2 : p2,
-                                        t : i / res);
+        var current_position = GetPoint(p1, p2, i / res);
         total += (current_position - last_position).magnitude;
         last_position = current_position;
       }
@@ -530,9 +463,7 @@ namespace SceneAssets.ScripterGrasper.Navigation {
 
     #region UtilityFunctions
 
-    static int BinomialCoefficient(int i, int n) {
-      return Factoral(i : n) / (Factoral(i : i) * Factoral(i : n - i));
-    }
+    static int BinomialCoefficient(int i, int n) { return Factoral(n) / (Factoral(i) * Factoral(n - i)); }
 
     static int Factoral(int i) {
       if (i == 0)

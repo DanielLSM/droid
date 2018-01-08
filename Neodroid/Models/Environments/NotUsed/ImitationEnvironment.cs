@@ -1,3 +1,3 @@
-﻿namespace Neodroid.Environments {
+﻿namespace Neodroid.Models.Environments.NotUsed {
   public class ImitationEnvironment : LearningEnvironment { }
 }

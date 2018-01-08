@@ -42,12 +42,10 @@ namespace UnityStandardAssets.Utility {
 
     public RoutePoint GetRoutePoint(float dist) {
       // position and direction
-      var p1 = this.GetRoutePosition(dist : dist);
-      var p2 = this.GetRoutePosition(dist : dist + 0.1f);
+      var p1 = this.GetRoutePosition(dist);
+      var p2 = this.GetRoutePosition(dist + 0.1f);
       var delta = p2 - p1;
-      return new RoutePoint(
-                            position : p1,
-                            direction : delta.normalized);
+      return new RoutePoint(p1, delta.normalized);
     }
 
     public Vector3 GetRoutePosition(float dist) {
@@ -55,9 +53,7 @@ namespace UnityStandardAssets.Utility {
 
       if (this.Length == 0) this.Length = this.distances[this.distances.Length - 1];
 
-      dist = Mathf.Repeat(
-                          t : dist,
-                          length : this.Length);
+      dist = Mathf.Repeat(dist, this.Length);
 
       while (this.distances[point] < dist)
         ++point;
@@ -68,10 +64,7 @@ namespace UnityStandardAssets.Utility {
 
       // found point numbers, now find interpolation value between the two middle points
 
-      this.i = Mathf.InverseLerp(
-                                 a : this.distances[this.p1n],
-                                 b : this.distances[this.p2n],
-                                 value : dist);
+      this.i = Mathf.InverseLerp(this.distances[this.p1n], this.distances[this.p2n], dist);
 
       if (this.smoothRoute) {
         // smooth catmull-rom calculation between the two relevant points
@@ -91,22 +84,14 @@ namespace UnityStandardAssets.Utility {
         this.P2 = this.points[this.p2n];
         this.P3 = this.points[this.p3n];
 
-        return this.CatmullRom(
-                               p0 : this.P0,
-                               p1 : this.P1,
-                               p2 : this.P2,
-                               p3 : this.P3,
-                               i : this.i);
+        return this.CatmullRom(this.P0, this.P1, this.P2, this.P3, this.i);
       }
       // simple linear lerp between the two points:
 
       this.p1n = (point - 1 + this.numPoints) % this.numPoints;
       this.p2n = point;
 
-      return Vector3.Lerp(
-                          a : this.points[this.p1n],
-                          b : this.points[this.p2n],
-                          t : this.i);
+      return Vector3.Lerp(this.points[this.p1n], this.points[this.p2n], this.i);
     }
 
     Vector3 CatmullRom(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float i) {
@@ -139,9 +124,9 @@ namespace UnityStandardAssets.Utility {
       }
     }
 
-    void OnDrawGizmos() { this.DrawGizmos(selected : false); }
+    void OnDrawGizmos() { this.DrawGizmos(false); }
 
-    void OnDrawGizmosSelected() { this.DrawGizmos(selected : true); }
+    void OnDrawGizmosSelected() { this.DrawGizmos(true); }
 
     void DrawGizmos(bool selected) {
       this.waypointList.circuit = this;
@@ -151,30 +136,20 @@ namespace UnityStandardAssets.Utility {
         this.CachePositionsAndDistances();
         this.Length = this.distances[this.distances.Length - 1];
 
-        Gizmos.color = selected ? Color.yellow : new Color(
-                                                           r : 1,
-                                                           g : 1,
-                                                           b : 0,
-                                                           a : 0.5f);
+        Gizmos.color = selected ? Color.yellow : new Color(1, 1, 0, 0.5f);
         var prev = this.Waypoints[0].position;
         if (this.smoothRoute) {
           for (float dist = 0; dist < this.Length; dist += this.Length / this.editorVisualisationSubsteps) {
-            var next = this.GetRoutePosition(dist : dist + 1);
-            Gizmos.DrawLine(
-                            from : prev,
-                            to : next);
+            var next = this.GetRoutePosition(dist + 1);
+            Gizmos.DrawLine(prev, next);
             prev = next;
           }
 
-          Gizmos.DrawLine(
-                          from : prev,
-                          to : this.Waypoints[0].position);
+          Gizmos.DrawLine(prev, this.Waypoints[0].position);
         } else {
           for (var n = 0; n < this.Waypoints.Length; ++n) {
             var next = this.Waypoints[(n + 1) % this.Waypoints.Length].position;
-            Gizmos.DrawLine(
-                            from : prev,
-                            to : next);
+            Gizmos.DrawLine(prev, next);
             prev = next;
           }
         }
@@ -201,16 +176,13 @@ namespace UnityStandardAssets.Utility {
 
 namespace UnityStandardAssets.Utility.Inspector {
   #if UNITY_EDITOR
-  [CustomPropertyDrawer(type : typeof(WaypointCircuit.WaypointList))]
+  [CustomPropertyDrawer(typeof(WaypointCircuit.WaypointList))]
   public class WaypointListDrawer : PropertyDrawer {
     readonly float lineHeight = 18;
     readonly float spacing = 4;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-      EditorGUI.BeginProperty(
-                              totalPosition : position,
-                              label : label,
-                              property : property);
+      EditorGUI.BeginProperty(position, label, property);
 
       var x = position.x;
       var y = position.y;
@@ -222,77 +194,47 @@ namespace UnityStandardAssets.Utility.Inspector {
       var indent = EditorGUI.indentLevel;
       EditorGUI.indentLevel = 0;
 
-      var items = property.FindPropertyRelative(relativePropertyPath : "items");
-      var titles = new[] {
-                           "Transform",
-                           "",
-                           "",
-                           ""
-                         };
-      var props = new[] {
-                          "transform",
-                          "^",
-                          "v",
-                          "-"
-                        };
-      var widths = new[] {
-                           .7f,
-                           .1f,
-                           .1f,
-                           .1f
-                         };
+      var items = property.FindPropertyRelative("items");
+      var titles = new[] {"Transform", "", "", ""};
+      var props = new[] {"transform", "^", "v", "-"};
+      var widths = new[] {.7f, .1f, .1f, .1f};
       float lineHeight = 18;
       var changedLength = false;
       if (items.arraySize > 0) {
         for (var i = -1; i < items.arraySize; ++i) {
-          var item = items.GetArrayElementAtIndex(index : i);
+          var item = items.GetArrayElementAtIndex(i);
 
           var rowX = x;
           for (var n = 0; n < props.Length; ++n) {
             var w = widths[n] * inspectorWidth;
 
             // Calculate rects
-            var rect = new Rect(
-                                x : rowX,
-                                y : y,
-                                width : w,
-                                height : lineHeight);
+            var rect = new Rect(rowX, y, w, lineHeight);
             rowX += w;
 
-            if (i == -1) {
-              EditorGUI.LabelField(
-                                   position : rect,
-                                   label : titles[n]);
-            } else {
-              if (n == 0) {
-                EditorGUI.ObjectField(
-                                      position : rect,
-                                      obj : item.objectReferenceValue,
-                                      objType : typeof(Transform),
-                                      allowSceneObjects : true);
-              } else {
-                if (GUI.Button(
-                               position : rect,
-                               text : props[n]))
+            if (i == -1)
+              EditorGUI.LabelField(rect, titles[n]);
+            else {
+              if (n == 0)
+                EditorGUI.ObjectField(rect, item.objectReferenceValue, typeof(Transform), true);
+              else {
+                if (GUI.Button(rect, props[n])) {
                   switch (props[n]) {
                     case "-":
-                      items.DeleteArrayElementAtIndex(index : i);
-                      items.DeleteArrayElementAtIndex(index : i);
+                      items.DeleteArrayElementAtIndex(i);
+                      items.DeleteArrayElementAtIndex(i);
                       changedLength = true;
                       break;
                     case "v":
                       if (i > 0)
-                        items.MoveArrayElement(
-                                               srcIndex : i,
-                                               dstIndex : i + 1);
+                        items.MoveArrayElement(i, i + 1);
                       break;
                     case "^":
                       if (i < items.arraySize - 1)
-                        items.MoveArrayElement(
-                                               srcIndex : i,
-                                               dstIndex : i - 1);
+                        items.MoveArrayElement(i, i - 1);
                       break;
                   }
+                }
               }
             }
           }
@@ -304,37 +246,25 @@ namespace UnityStandardAssets.Utility.Inspector {
       } else {
         // add button
         var addButtonRect = new Rect(
-                                     x : x + position.width - widths[widths.Length - 1] * inspectorWidth,
-                                     y : y,
-                                     width : widths[widths.Length - 1] * inspectorWidth,
-                                     height : lineHeight);
-        if (GUI.Button(
-                       position : addButtonRect,
-                       text : "+"))
-          items.InsertArrayElementAtIndex(index : items.arraySize);
+            x + position.width - widths[widths.Length - 1] * inspectorWidth,
+            y,
+            widths[widths.Length - 1] * inspectorWidth,
+            lineHeight);
+        if (GUI.Button(addButtonRect, "+"))
+          items.InsertArrayElementAtIndex(items.arraySize);
 
         y += lineHeight + this.spacing;
       }
 
       // add all button
-      var addAllButtonRect = new Rect(
-                                      x : x,
-                                      y : y,
-                                      width : inspectorWidth,
-                                      height : lineHeight);
-      if (GUI.Button(
-                     position : addAllButtonRect,
-                     text : "Assign using all child objects")) {
-        var circuit =
-          property.FindPropertyRelative(relativePropertyPath : "circuit").objectReferenceValue as
-            WaypointCircuit;
+      var addAllButtonRect = new Rect(x, y, inspectorWidth, lineHeight);
+      if (GUI.Button(addAllButtonRect, "Assign using all child objects")) {
+        var circuit = property.FindPropertyRelative("circuit").objectReferenceValue as WaypointCircuit;
         var children = new Transform[circuit.transform.childCount];
         var n = 0;
         foreach (Transform child in circuit.transform)
           children[n++] = child;
-        Array.Sort(
-                   array : children,
-                   comparer : new TransformNameComparer());
+        Array.Sort(children, new TransformNameComparer());
         circuit.waypointList.items = new Transform[children.Length];
         for (n = 0; n < children.Length; ++n)
           circuit.waypointList.items[n] = children[n];
@@ -343,20 +273,12 @@ namespace UnityStandardAssets.Utility.Inspector {
       y += lineHeight + this.spacing;
 
       // rename all button
-      var renameButtonRect = new Rect(
-                                      x : x,
-                                      y : y,
-                                      width : inspectorWidth,
-                                      height : lineHeight);
-      if (GUI.Button(
-                     position : renameButtonRect,
-                     text : "Auto Rename numerically from this order")) {
-        var circuit =
-          property.FindPropertyRelative(relativePropertyPath : "circuit").objectReferenceValue as
-            WaypointCircuit;
+      var renameButtonRect = new Rect(x, y, inspectorWidth, lineHeight);
+      if (GUI.Button(renameButtonRect, "Auto Rename numerically from this order")) {
+        var circuit = property.FindPropertyRelative("circuit").objectReferenceValue as WaypointCircuit;
         var n = 0;
         foreach (var child in circuit.waypointList.items)
-          child.name = "Waypoint " + n++.ToString(format : "000");
+          child.name = "Waypoint " + n++.ToString("000");
       }
 
       y += lineHeight + this.spacing;
@@ -367,16 +289,14 @@ namespace UnityStandardAssets.Utility.Inspector {
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-      var items = property.FindPropertyRelative(relativePropertyPath : "items");
+      var items = property.FindPropertyRelative("items");
       var lineAndSpace = this.lineHeight + this.spacing;
       return 40 + items.arraySize * lineAndSpace + lineAndSpace;
     }
 
     // comparer for check distances in ray cast hits
     public class TransformNameComparer : IComparer {
-      public int Compare(object x, object y) {
-        return ((Transform)x).name.CompareTo(strB : ((Transform)y).name);
-      }
+      public int Compare(object x, object y) { return ((Transform)x).name.CompareTo(((Transform)y).name); }
     }
   }
   #endif

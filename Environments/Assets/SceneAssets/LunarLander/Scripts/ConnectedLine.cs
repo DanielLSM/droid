@@ -2,7 +2,7 @@
 
 namespace SceneAssets.LunarLander.Scripts {
   [ExecuteInEditMode]
-  [RequireComponent( typeof(LineRenderer))]
+  [RequireComponent(typeof(LineRenderer))]
   public class ConnectedLine : MonoBehaviour {
     public Transform _connection_to;
     LineRenderer _line_renderer;
@@ -17,19 +17,12 @@ namespace SceneAssets.LunarLander.Scripts {
 
     // Update is called once per frame
     void Update() {
-      if (this._connection_to)
+      if (this._connection_to) {
         this._line_renderer.SetPosition(
-                                        index : 1,
-                                        position : this.transform.InverseTransformPoint(
-                                                                                        position : this
-                                                                                                   ._connection_to
-                                                                                                   .TransformPoint(
-                                                                                                                   position
-                                                                                                                   : this
-                                                                                                                       ._connection_to
-                                                                                                                       .localPosition
-                                                                                                                     + this
-                                                                                                                       ._offset)));
+            1,
+            this.transform.InverseTransformPoint(
+                this._connection_to.TransformPoint(this._connection_to.localPosition + this._offset)));
+      }
     }
   }
 }

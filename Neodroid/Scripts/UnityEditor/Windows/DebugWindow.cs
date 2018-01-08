@@ -1,13 +1,14 @@
-﻿using Neodroid.Environments;
-using Neodroid.Evaluation;
+﻿using Neodroid.Evaluation;
 using Neodroid.Models.Actors;
 using Neodroid.Models.Configurables.General;
+using Neodroid.Models.Environments;
 using Neodroid.Models.Managers;
 using Neodroid.Models.Motors.General;
 using Neodroid.Models.Observers.General;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace Neodroid.Scripts.UnityEditor.Windows {
@@ -36,7 +37,7 @@ namespace Neodroid.Scripts.UnityEditor.Windows {
 
     SimulationManager _simulation_manager;
 
-    [MenuItem(itemName : "Neodroid/DebugWindow")]
+    [MenuItem("Neodroid/DebugWindow")]
     public static void ShowWindow() {
       GetWindow<DebugWindow>(); //Show existing window instance. If one doesn't exist, make one.
     }
@@ -50,13 +51,9 @@ namespace Neodroid.Scripts.UnityEditor.Windows {
       this._configurables = FindObjectsOfType<ConfigurableGameObject>();
       this._objective_functions = FindObjectsOfType<ObjectiveFunction>();
       this._icon = (Texture2D)AssetDatabase.LoadAssetAtPath(
-                                                            assetPath :
-                                                            "Assets/Neodroid/Icons/information.png",
-                                                            type : typeof(Texture2D));
-      this.titleContent = new GUIContent(
-                                         text : "Neo:Debug",
-                                         image : this._icon,
-                                         tooltip : "Window for controlling debug messages");
+          "Assets/Neodroid/Icons/information.png",
+          typeof(Texture2D));
+      this.titleContent = new GUIContent("Neo:Debug", this._icon, "Window for controlling debug messages");
     }
 
     void OnGUI() {
@@ -68,33 +65,23 @@ namespace Neodroid.Scripts.UnityEditor.Windows {
       this._configurables = FindObjectsOfType<ConfigurableGameObject>();
       this._objective_functions = FindObjectsOfType<ObjectiveFunction>();
 
-      this._show_simulation_manager_debug =
-        EditorGUILayout.Toggle(
-                               label : "Debug simulation manager",
-                               value : this._show_simulation_manager_debug);
-      this._show_environments_debug =
-        EditorGUILayout.Toggle(
-                               label : "Debug all environments",
-                               value : this._show_environments_debug);
-      this._show_actors_debug = EditorGUILayout.Toggle(
-                                                       label : "Debug all actors",
-                                                       value : this._show_actors_debug);
-      this._show_motors_debug = EditorGUILayout.Toggle(
-                                                       label : "Debug all motors",
-                                                       value : this._show_motors_debug);
-      this._show_observers_debug = EditorGUILayout.Toggle(
-                                                          label : "Debug all observers",
-                                                          value : this._show_observers_debug);
-      this._show_configurables_debug =
-        EditorGUILayout.Toggle(
-                               label : "Debug all configurables",
-                               value : this._show_configurables_debug);
+      this._show_simulation_manager_debug = EditorGUILayout.Toggle(
+          "Debug simulation manager",
+          this._show_simulation_manager_debug);
+      this._show_environments_debug = EditorGUILayout.Toggle(
+          "Debug all environments",
+          this._show_environments_debug);
+      this._show_actors_debug = EditorGUILayout.Toggle("Debug all actors", this._show_actors_debug);
+      this._show_motors_debug = EditorGUILayout.Toggle("Debug all motors", this._show_motors_debug);
+      this._show_observers_debug = EditorGUILayout.Toggle("Debug all observers", this._show_observers_debug);
+      this._show_configurables_debug = EditorGUILayout.Toggle(
+          "Debug all configurables",
+          this._show_configurables_debug);
       this._show_objective_functions_debug = EditorGUILayout.Toggle(
-                                                                    label : "Debug all objective functions",
-                                                                    value : this
-                                                                      ._show_objective_functions_debug);
+          "Debug all objective functions",
+          this._show_objective_functions_debug);
 
-      if (GUILayout.Button(text : "Apply")) {
+      if (GUILayout.Button("Apply")) {
         if (this._simulation_manager != null)
           this._simulation_manager.Debugging = this._show_simulation_manager_debug;
         foreach (var environment in this._environments) environment.Debugging = this._show_environments_debug;

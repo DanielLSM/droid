@@ -24,32 +24,26 @@ namespace UnityStandardAssets.Characters.FirstPerson {
     }
 
     public void LookRotation(Transform character, Transform camera) {
-      var yRot = CrossPlatformInputManager.GetAxis(name : "Mouse X") * this.XSensitivity;
-      var xRot = CrossPlatformInputManager.GetAxis(name : "Mouse Y") * this.YSensitivity;
+      var yRot = CrossPlatformInputManager.GetAxis("Mouse X") * this.XSensitivity;
+      var xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * this.YSensitivity;
 
       if (this.m_cursorIsLocked) {
-        this.m_CharacterTargetRot *= Quaternion.Euler(
-                                                      x : 0f,
-                                                      y : yRot,
-                                                      z : 0f);
-        this.m_CameraTargetRot *= Quaternion.Euler(
-                                                   x : -xRot,
-                                                   y : 0f,
-                                                   z : 0f);
+        this.m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
+        this.m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
       }
 
       if (this.clampVerticalRotation)
-        this.m_CameraTargetRot = this.ClampRotationAroundXAxis(q : this.m_CameraTargetRot);
+        this.m_CameraTargetRot = this.ClampRotationAroundXAxis(this.m_CameraTargetRot);
 
       if (this.smooth) {
         character.localRotation = Quaternion.Slerp(
-                                                   a : character.localRotation,
-                                                   b : this.m_CharacterTargetRot,
-                                                   t : this.smoothTime * Time.deltaTime);
+            character.localRotation,
+            this.m_CharacterTargetRot,
+            this.smoothTime * Time.deltaTime);
         camera.localRotation = Quaternion.Slerp(
-                                                a : camera.localRotation,
-                                                b : this.m_CameraTargetRot,
-                                                t : this.smoothTime * Time.deltaTime);
+            camera.localRotation,
+            this.m_CameraTargetRot,
+            this.smoothTime * Time.deltaTime);
       } else {
         character.localRotation = this.m_CharacterTargetRot;
         camera.localRotation = this.m_CameraTargetRot;
@@ -73,9 +67,9 @@ namespace UnityStandardAssets.Characters.FirstPerson {
     }
 
     void InternalLockUpdate() {
-      if (Input.GetKeyUp(key : KeyCode.Escape))
+      if (Input.GetKeyUp(KeyCode.Escape))
         this.m_cursorIsLocked = false;
-      else if (Input.GetMouseButtonUp(button : 0))
+      else if (Input.GetMouseButtonUp(0))
         this.m_cursorIsLocked = true;
 
       if (this.m_cursorIsLocked) {
@@ -93,14 +87,11 @@ namespace UnityStandardAssets.Characters.FirstPerson {
       q.z /= q.w;
       q.w = 1.0f;
 
-      var angleX = 2.0f * Mathf.Rad2Deg * Mathf.Atan(f : q.x);
+      var angleX = 2.0f * Mathf.Rad2Deg * Mathf.Atan(q.x);
 
-      angleX = Mathf.Clamp(
-                           value : angleX,
-                           min : this.MinimumX,
-                           max : this.MaximumX);
+      angleX = Mathf.Clamp(angleX, this.MinimumX, this.MaximumX);
 
-      q.x = Mathf.Tan(f : 0.5f * Mathf.Deg2Rad * angleX);
+      q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
 
       return q;
     }

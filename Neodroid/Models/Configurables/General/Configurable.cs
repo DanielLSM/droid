@@ -1,4 +1,4 @@
-﻿using Neodroid.Messaging.Messages;
+﻿using Neodroid.Scripts.Messaging.Messages;
 using UnityEngine;
 
 namespace Neodroid.Models.Configurables.General {

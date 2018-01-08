@@ -2,17 +2,24 @@
 using UnityEngine;
 
 namespace Neodroid.Scripts.Utilities {
-  [RequireComponent( typeof(Joint))]
+  [RequireComponent(typeof(Joint))]
   public class JointFix : MonoBehaviour {
     JointDrive[] _angular_x_drive;
     Rigidbody[] _connected_bodies;
     float[] _force_break_limits;
+    Vector3 _initial_local_position;
+    Quaternion _initial_local_rotation;
     Type[] _joint_types;
 
     Joint[] _joints;
     JointLimits[] _limits;
+    Vector3 _local_position_on_disable;
+
+    Quaternion _local_rotation_on_disable;
     Quaternion[] _target_rotations;
     float[] _torque_break_limits;
+
+    bool _was_disabled;
     SoftJointLimit[] _x_ang_high_limits;
     SoftJointLimit[] _x_ang_low_limits;
     ConfigurableJointMotion[] _x_ang_motion;
@@ -21,13 +28,6 @@ namespace Neodroid.Scripts.Utilities {
     ConfigurableJointMotion[] _y_motion;
     ConfigurableJointMotion[] _z_ang_motion;
     ConfigurableJointMotion[] _z_motion;
-
-    bool _was_disabled;
-    Vector3 _initial_local_position;
-    Quaternion _initial_local_rotation;
-    Vector3 _local_position_on_disable;
-
-    Quaternion _local_rotation_on_disable;
 
     void Awake() {
       this._initial_local_rotation = this.transform.localRotation;
@@ -54,9 +54,9 @@ namespace Neodroid.Scripts.Utilities {
         this._joint_types[i] = this._joints[i].GetType();
         this._force_break_limits[i] = this._joints[i].breakForce;
         this._torque_break_limits[i] = this._joints[i].breakTorque;
-        if (this._joints[i] is HingeJoint) {
+        if (this._joints[i] is HingeJoint)
           this._limits[i] = ((HingeJoint)this._joints[i]).limits;
-        } else if (this._joints[i] is ConfigurableJoint) {
+        else if (this._joints[i] is ConfigurableJoint) {
           this._x_ang_low_limits[i] = ((ConfigurableJoint)this._joints[i]).lowAngularXLimit;
           this._x_ang_high_limits[i] = ((ConfigurableJoint)this._joints[i]).highAngularXLimit;
           this._x_motion[i] = ((ConfigurableJoint)this._joints[i]).xMotion;
@@ -94,16 +94,16 @@ namespace Neodroid.Scripts.Utilities {
       this.transform.localPosition = this._initial_local_position;
       for (var i = 0; i < this._joints.Length; i++) {
         if (this._joints[i] == null) {
-          this._joints[i] = (Joint)this.gameObject.AddComponent(componentType : this._joint_types[i]);
+          this._joints[i] = (Joint)this.gameObject.AddComponent(this._joint_types[i]);
           this._joints[i].connectedBody = this._connected_bodies[i];
         }
 
         this._joints[i].breakForce = this._force_break_limits[i];
         this._joints[i].breakTorque = this._torque_break_limits[i];
 
-        if (this._joints[i] is HingeJoint) {
+        if (this._joints[i] is HingeJoint)
           ((HingeJoint)this._joints[i]).limits = this._limits[i];
-        } else if (this._joints[i] is ConfigurableJoint) {
+        else if (this._joints[i] is ConfigurableJoint) {
           ((ConfigurableJoint)this._joints[i]).lowAngularXLimit = this._x_ang_low_limits[i];
           ((ConfigurableJoint)this._joints[i]).highAngularXLimit = this._x_ang_high_limits[i];
           ((ConfigurableJoint)this._joints[i]).xMotion = this._x_motion[i];

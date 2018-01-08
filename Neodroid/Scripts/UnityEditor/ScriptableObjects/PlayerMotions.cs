@@ -5,13 +5,11 @@ using UnityEngine;
 
 namespace Neodroid.Scripts.UnityEditor.ScriptableObjects {
   public static class CreatePlayerMotions {
-    [MenuItem(itemName : "Neodroid/Create/ScriptableObjects/PlayerMotions")]
+    [MenuItem("Neodroid/Create/ScriptableObjects/PlayerMotions")]
     public static void CreatePlayerMotionsAsset() {
       var asset = ScriptableObject.CreateInstance<PlayerMotions>();
 
-      AssetDatabase.CreateAsset(
-                                asset : asset,
-                                path : "Assets/NewPlayerMotions.asset");
+      AssetDatabase.CreateAsset(asset, "Assets/NewPlayerMotions.asset");
       AssetDatabase.SaveAssets();
 
       EditorUtility.FocusProjectWindow();
