@@ -5,25 +5,26 @@ using UnityEngine;
 namespace Neodroid.Scripts.Utilities.Structs {
   [Serializable]
   public class SimulatorConfiguration {
+//: ScriptableObject {
     [SerializeField] int _frame_skips;
 
     [SerializeField] bool _full_screen;
 
     [SerializeField] int _height;
 
-    [SerializeField] [Range(1, 4)] int _quality_level;
+    [SerializeField] [Range (1, 4)] int _quality_level;
 
     [SerializeField] int _reset_iterations;
     [SerializeField] float _simulation_time_scale;
     [SerializeField] int _target_frame_rate;
 
-    [SerializeField] [Range(1f, 100f)] float _time_scale;
+    [SerializeField] [Range (1f, 100f)] float _time_scale;
 
     [SerializeField] WaitOn _wait_every;
 
     [SerializeField] int _width;
 
-    public SimulatorConfiguration() {
+    public SimulatorConfiguration () {
       this._width = 500;
       this._height = 500;
       this._full_screen = false;

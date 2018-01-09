@@ -10,11 +10,11 @@ using Random = System.Random;
 namespace Neodroid.Models.Managers.General {
   public class NeodroidManager : MonoBehaviour,
                                  IHasRegister<LearningEnvironment> {
-    [Header("Development", order = 99)]
+    [Header ("Development", order = 99)]
     [SerializeField]
     bool _debugging;
 
-    [Header("Connection", order = 100)]
+    [Header ("Connection", order = 100)]
     [SerializeField]
     string _ip_address = "localhost";
 
@@ -24,22 +24,24 @@ namespace Neodroid.Models.Managers.General {
 
     [SerializeField] bool _testing_motors;
 
-    void FetchCommmandLineArguments() {
-      var arguments = Environment.GetCommandLineArgs();
+    void FetchCommmandLineArguments () {
+      var arguments = Environment.GetCommandLineArgs ();
 
       for (var i = 0; i < arguments.Length; i++) {
-        if (arguments[i] == "-ip") this._ip_address = arguments[i + 1];
-        if (arguments[i] == "-port") this._port = int.Parse(arguments[i + 1]);
+        if (arguments [i] == "-ip")
+          this._ip_address = arguments [i + 1];
+        if (arguments [i] == "-port")
+          this._port = int.Parse (arguments [i + 1]);
       }
     }
 
-    void StartMessagingServer() {
+    void StartMessagingServer () {
       if (this._ip_address != "" || this._port != 0)
-        this._message_server = new MessageServer(this._ip_address, this._port, false, this.Debugging);
+        this._message_server = new MessageServer (this._ip_address, this._port, false, this.Debugging);
       else
-        this._message_server = new MessageServer(this.Debugging);
+        this._message_server = new MessageServer (this.Debugging);
 
-      this._message_server.ListenForClientToConnect(this.OnConnectCallback);
+      this._message_server.ListenForClientToConnect (this.OnConnectCallback);
     }
 
     #region Getter Setters
@@ -59,42 +61,46 @@ namespace Neodroid.Models.Managers.General {
     #region PrivateMembers
 
     protected Dictionary<string, LearningEnvironment> _environments =
-        new Dictionary<string, LearningEnvironment>();
+      new Dictionary<string, LearningEnvironment> ();
 
     protected MessageServer _message_server;
     protected Random _random_generator;
-    protected Reaction _reaction = new Reaction();
+    protected Reaction _reaction = new Reaction ();
 
     #endregion
 
     #region UnityCallbacks
 
-    void Start() {
-      this.FetchCommmandLineArguments();
-      this.StartMessagingServer();
-      this._random_generator = new Random();
-      this.InnerStart();
+    void Awake () {
+      InnerUpdate ();
     }
 
-    void Update() {
+    void Start () {
+      this.FetchCommmandLineArguments ();
+      this.StartMessagingServer ();
+      this._random_generator = new Random ();
+      this.InnerStart ();
+    }
+
+    void Update () {
       if (this._reply && this.CurrentReaction.Parameters.Phase == ExecutionPhase.Before) {
-        this.SendEnvironmentStates(this.ReactInEnvironments(this.CurrentReaction));
+        this.SendEnvironmentStates (this.ReactInEnvironments (this.CurrentReaction));
         this._reply = false;
       }
 
-      this.InnerUpdate();
+      this.InnerUpdate ();
 
       if (this._reply && this.CurrentReaction.Parameters.Phase == ExecutionPhase.Middle) {
-        this.SendEnvironmentStates(this.ReactInEnvironments(this.CurrentReaction));
+        this.SendEnvironmentStates (this.ReactInEnvironments (this.CurrentReaction));
         this._reply = false;
       }
     }
 
-    void LateUpdate() {
-      this.PostUpdate();
+    void LateUpdate () {
+      this.PostUpdate ();
 
       if (this._reply && this.CurrentReaction.Parameters.Phase == ExecutionPhase.After) {
-        this.SendEnvironmentStates(this.ReactInEnvironments(this.CurrentReaction));
+        this.SendEnvironmentStates (this.ReactInEnvironments (this.CurrentReaction));
         this._reply = false;
       }
     }
@@ -103,40 +109,46 @@ namespace Neodroid.Models.Managers.General {
 
     #region PrivateMethods
 
-    protected virtual void InnerStart() { }
-    protected virtual void InnerUpdate() { }
-
-    protected void PostUpdate() {
-      foreach (var environment in this._environments.Values)
-        environment.PostUpdate();
-      this.SetDefaultReaction();
+    protected virtual void InnerStart () {
     }
 
-    protected Reaction SampleTestReaction() {
-      var motions = new List<MotorMotion>();
+    protected virtual void InnerUpdate () {
+    }
+
+    protected virtual void InnerAwake () {
+    }
+
+    protected void PostUpdate () {
+      foreach (var environment in this._environments.Values)
+        environment.PostUpdate ();
+      this.SetDefaultReaction ();
+    }
+
+    protected Reaction SampleTestReaction () {
+      var motions = new List<MotorMotion> ();
       foreach (var environment in this._environments) {
         foreach (var actor in environment.Value.Actors) {
           foreach (var motor in actor.Value.Motors) {
-            var strength = this._random_generator.Next(
-                (int)motor.Value.ValidInput.MinValue,
-                (int)(motor.Value.ValidInput.MaxValue + 1));
-            motions.Add(new MotorMotion(actor.Key, motor.Key, strength));
+            var strength = this._random_generator.Next (
+                             (int)motor.Value.ValidInput.MinValue,
+                             (int)(motor.Value.ValidInput.MaxValue + 1));
+            motions.Add (new MotorMotion (actor.Key, motor.Key, strength));
           }
         }
 
         break;
       }
 
-      var rp = new ReactionParameters(true, true) {IsExternal = false};
-      return new Reaction(rp, motions.ToArray(), null, null);
+      var rp = new ReactionParameters (true, true) { IsExternal = false };
+      return new Reaction (rp, motions.ToArray (), null, null);
     }
 
-    protected void SendEnvironmentStates(EnvironmentState[] states) {
-      this._message_server.SendEnvironmentStates(states);
+    protected void SendEnvironmentStates (EnvironmentState[] states) {
+      this._message_server.SendEnvironmentStates (states);
     }
 
-    void SetDefaultReaction() {
-      this.CurrentReaction = new Reaction();
+    void SetDefaultReaction () {
+      this.CurrentReaction = new Reaction ();
       this.CurrentReaction.Parameters.IsExternal = false;
     }
 
@@ -144,77 +156,82 @@ namespace Neodroid.Models.Managers.General {
 
     #region PublicMethods
 
-    public EnvironmentState[] ReactInEnvironments(Reaction reaction) {
+    public EnvironmentState[] ReactInEnvironments (Reaction reaction) {
       var states = new EnvironmentState[this._environments.Values.Count];
       var i = 0;
       foreach (var environment in this._environments.Values)
-        states[i++] = environment.React(reaction);
+        states [i++] = environment.React (reaction);
       return states;
     }
 
-    public string GetStatus() { return this._message_server.ClientConnected ? "Connected" : "Not Connected"; }
+    public string GetStatus () {
+      return this._message_server.ClientConnected ? "Connected" : "Not Connected";
+    }
 
     #endregion
 
     #region HasRegister implementation
 
-    public void Register(LearningEnvironment environment) {
+    public void Register (LearningEnvironment environment) {
       if (this.Debugging) {
-        Debug.Log(
-            string.Format("Manager {0} has environment {1}", this.name, environment.EnvironmentIdentifier));
+        Debug.Log (
+          string.Format ("Manager {0} has environment {1}", this.name, environment.EnvironmentIdentifier));
       }
 
-      this._environments.Add(environment.EnvironmentIdentifier, environment);
+      this._environments.Add (environment.EnvironmentIdentifier, environment);
     }
 
-    public void Register(LearningEnvironment environment, string identifier) {
+    public void Register (LearningEnvironment environment, string identifier) {
       if (this.Debugging)
-        Debug.Log(string.Format("Manager {0} has environment {1}", this.name, identifier));
-      this._environments.Add(identifier, environment);
+        Debug.Log (string.Format ("Manager {0} has environment {1}", this.name, identifier));
+      this._environments.Add (identifier, environment);
     }
 
     #endregion
 
     #region MessageServerCallbacks
 
-    void OnReceiveCallback(Reaction reaction) {
+    void OnReceiveCallback (Reaction reaction) {
       if (this.Debugging)
-        print("Received: " + reaction);
+        print ("Received: " + reaction);
       this.CurrentReaction = reaction;
       this.CurrentReaction.Parameters.IsExternal = true;
       this._reply = true;
     }
 
-    void OnDisconnectCallback() {
+    void OnDisconnectCallback () {
       if (this.Debugging)
-        Debug.Log("Client disconnected.");
+        Debug.Log ("Client disconnected.");
     }
 
-    void OnDebugCallback(string error) {
+    void OnDebugCallback (string error) {
       if (this.Debugging)
-        Debug.Log("DebugCallback: " + error);
+        Debug.Log ("DebugCallback: " + error);
     }
 
-    void OnConnectCallback() {
+    void OnConnectCallback () {
       if (this.Debugging)
-        Debug.Log("Client connected.");
-      this._message_server.StartReceiving(
-          this.OnReceiveCallback,
-          this.OnDisconnectCallback,
-          this.OnDebugCallback);
+        Debug.Log ("Client connected.");
+      this._message_server.StartReceiving (
+        this.OnReceiveCallback,
+        this.OnDisconnectCallback,
+        this.OnDebugCallback);
     }
 
-    void OnInterruptCallback() { }
+    void OnInterruptCallback () {
+    }
 
     #endregion
 
     #region Deconstruction
 
-    void OnApplicationQuit() { this._message_server.KillPollingAndListenerThread(); }
+    void OnApplicationQuit () {
+      this._message_server.KillPollingAndListenerThread ();
+    }
 
-    void OnDestroy() {
+    void OnDestroy () {
       //Deconstructor
-      this._message_server.Destroy();
+      this._message_server.Destroy ();
     }
 
     #endregion

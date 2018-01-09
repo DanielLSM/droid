@@ -16,7 +16,10 @@ namespace Neodroid.Scripts.Messaging.Messages {
       this.MaxSteps = max_steps;
       this.FrameSkips = simulation_configuration.FrameSkips;
       this.SolvedThreshold = solved_threshold;
+      this.APIVersion = "0.1.2";
     }
+
+    public string APIVersion { get; set; }
 
     public Dictionary<string, Actor> Actors { get; private set; }
 

@@ -41,7 +41,7 @@
               </e>
             </e>
             <e p="Evaluation" t="Include">
-              <e p="AngularVelocity.cs" t="Include" />
+              <e p="AngularVelocityEvaluation.cs" t="Include" />
               <e p="CollidersPunishment.cs" t="Include" />
               <e p="CollsionsPunishmentTerm.cs" t="Include" />
               <e p="EuclideanDistance.cs" t="Include" />
@@ -186,6 +186,7 @@
                 <e p="Curriculum.cs" t="Include" />
                 <e p="NeodroidTask.cs" t="Include" />
                 <e p="PlayerMotions.cs" t="Include" />
+                <e p="SimulatorConfiguration.cs" t="Include" />
               </e>
               <e p="Segmentation" t="Include">
                 <e p="ChangeMaterialOnRenderByInstance.cs" t="Include" />
@@ -203,7 +204,6 @@
               <e p="StatusUpdater.cs" t="Include" />
               <e p="Structs" t="Include">
                 <e p="InputRange.cs" t="Include" />
-                <e p="SimulatorConfiguration.cs" t="Include" />
               </e>
               <e p="Tasks" t="Include">
                 <e p="TaskSequence.cs" t="Include" />

@@ -28,6 +28,8 @@ table FBSState {
 table FBSEnvironmentDescription {
   max_episode_length:int;
   solved_threshold:float;
+  api_version:string;
+  simulator_configuration:SimulatorConfiguration;
   actors:[FBSActor];
   configurables:[FBSConfigurable];
 }

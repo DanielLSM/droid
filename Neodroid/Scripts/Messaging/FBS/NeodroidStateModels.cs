@@ -132,33 +132,25 @@ public struct FBSEnvironmentDescription : IFlatbufferObject
 
   public int MaxEpisodeLength { get { int o = __p.__offset(4); return o != 0 ? __p.bb.GetInt(o + __p.bb_pos) : (int)0; } }
   public float SolvedThreshold { get { int o = __p.__offset(6); return o != 0 ? __p.bb.GetFloat(o + __p.bb_pos) : (float)0.0f; } }
-  public FBSActor? Actors(int j) { int o = __p.__offset(8); return o != 0 ? (FBSActor?)(new FBSActor()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
-  public int ActorsLength { get { int o = __p.__offset(8); return o != 0 ? __p.__vector_len(o) : 0; } }
-  public FBSActor? ActorsByKey(string key) { int o = __p.__offset(8); return o != 0 ? FBSActor.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
-  public FBSConfigurable? Configurables(int j) { int o = __p.__offset(10); return o != 0 ? (FBSConfigurable?)(new FBSConfigurable()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
-  public int ConfigurablesLength { get { int o = __p.__offset(10); return o != 0 ? __p.__vector_len(o) : 0; } }
-  public FBSConfigurable? ConfigurablesByKey(string key) { int o = __p.__offset(10); return o != 0 ? FBSConfigurable.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
+  public string ApiVersion { get { int o = __p.__offset(8); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public ArraySegment<byte>? GetApiVersionBytes() { return __p.__vector_as_arraysegment(8); }
+  public Neodroid.FBS.SimulatorConfiguration? SimulatorConfiguration { get { int o = __p.__offset(10); return o != 0 ? (Neodroid.FBS.SimulatorConfiguration?)(new Neodroid.FBS.SimulatorConfiguration()).__assign(o + __p.bb_pos, __p.bb) : null; } }
+  public FBSActor? Actors(int j) { int o = __p.__offset(12); return o != 0 ? (FBSActor?)(new FBSActor()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public int ActorsLength { get { int o = __p.__offset(12); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSActor? ActorsByKey(string key) { int o = __p.__offset(12); return o != 0 ? FBSActor.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
+  public FBSConfigurable? Configurables(int j) { int o = __p.__offset(14); return o != 0 ? (FBSConfigurable?)(new FBSConfigurable()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public int ConfigurablesLength { get { int o = __p.__offset(14); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public FBSConfigurable? ConfigurablesByKey(string key) { int o = __p.__offset(14); return o != 0 ? FBSConfigurable.__lookup_by_key(__p.__vector(o), key, __p.bb) : null; }
 
-  public static Offset<FBSEnvironmentDescription> CreateFBSEnvironmentDescription(FlatBufferBuilder builder,
-      int max_episode_length = 0,
-      float solved_threshold = 0.0f,
-      VectorOffset actorsOffset = default(VectorOffset),
-      VectorOffset configurablesOffset = default(VectorOffset)) {
-    builder.StartObject(4);
-    FBSEnvironmentDescription.AddConfigurables(builder, configurablesOffset);
-    FBSEnvironmentDescription.AddActors(builder, actorsOffset);
-    FBSEnvironmentDescription.AddSolvedThreshold(builder, solved_threshold);
-    FBSEnvironmentDescription.AddMaxEpisodeLength(builder, max_episode_length);
-    return FBSEnvironmentDescription.EndFBSEnvironmentDescription(builder);
-  }
-
-  public static void StartFBSEnvironmentDescription(FlatBufferBuilder builder) { builder.StartObject(4); }
+  public static void StartFBSEnvironmentDescription(FlatBufferBuilder builder) { builder.StartObject(6); }
   public static void AddMaxEpisodeLength(FlatBufferBuilder builder, int maxEpisodeLength) { builder.AddInt(0, maxEpisodeLength, 0); }
   public static void AddSolvedThreshold(FlatBufferBuilder builder, float solvedThreshold) { builder.AddFloat(1, solvedThreshold, 0.0f); }
-  public static void AddActors(FlatBufferBuilder builder, VectorOffset actorsOffset) { builder.AddOffset(2, actorsOffset.Value, 0); }
+  public static void AddApiVersion(FlatBufferBuilder builder, StringOffset apiVersionOffset) { builder.AddOffset(2, apiVersionOffset.Value, 0); }
+  public static void AddSimulatorConfiguration(FlatBufferBuilder builder, Offset<Neodroid.FBS.SimulatorConfiguration> simulatorConfigurationOffset) { builder.AddStruct(3, simulatorConfigurationOffset.Value, 0); }
+  public static void AddActors(FlatBufferBuilder builder, VectorOffset actorsOffset) { builder.AddOffset(4, actorsOffset.Value, 0); }
   public static VectorOffset CreateActorsVector(FlatBufferBuilder builder, Offset<FBSActor>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
   public static void StartActorsVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
-  public static void AddConfigurables(FlatBufferBuilder builder, VectorOffset configurablesOffset) { builder.AddOffset(3, configurablesOffset.Value, 0); }
+  public static void AddConfigurables(FlatBufferBuilder builder, VectorOffset configurablesOffset) { builder.AddOffset(5, configurablesOffset.Value, 0); }
   public static VectorOffset CreateConfigurablesVector(FlatBufferBuilder builder, Offset<FBSConfigurable>[] data) { builder.StartVector(4, data.Length, 4); for (int i = data.Length - 1; i >= 0; i--) builder.AddOffset(data[i].Value); return builder.EndVector(); }
   public static void StartConfigurablesVector(FlatBufferBuilder builder, int numElems) { builder.StartVector(4, numElems, 4); }
   public static Offset<FBSEnvironmentDescription> EndFBSEnvironmentDescription(FlatBufferBuilder builder) {

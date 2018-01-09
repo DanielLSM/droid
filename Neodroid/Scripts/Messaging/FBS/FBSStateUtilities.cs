@@ -231,11 +231,14 @@ namespace Neodroid.Scripts.Messaging.FBS {
         configurables[k++] = build_configurable(b, configurable.Value, configurable.Key);
       var configurables_vector = FBSEnvironmentDescription.CreateConfigurablesVector(b, configurables);
 
+      var api_version_offset = b.CreateString(state.Description.APIVersion);
+
       FBSEnvironmentDescription.StartFBSEnvironmentDescription(b);
       FBSEnvironmentDescription.AddMaxEpisodeLength(b, state.Description.MaxSteps);
       FBSEnvironmentDescription.AddSolvedThreshold(b, state.Description.SolvedThreshold);
       FBSEnvironmentDescription.AddActors(b, actors_vector);
       FBSEnvironmentDescription.AddConfigurables(b, configurables_vector);
+      FBSEnvironmentDescription.AddApiVersion(b,api_version_offset);
       return FBSEnvironmentDescription.EndFBSEnvironmentDescription(b);
     }
 

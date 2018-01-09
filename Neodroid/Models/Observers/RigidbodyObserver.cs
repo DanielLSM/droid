@@ -4,14 +4,21 @@ using UnityEngine;
 
 namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
-  [RequireComponent(typeof(Rigidbody))]
+  [RequireComponent (typeof(Rigidbody))]
   public class RigidbodyObserver : Observer,
                                    IHasRigidbodyProperties {
-    [SerializeField] Vector3 _angular_velocity;
-
+    [Header ("Specfic", order = 103)]
+    [SerializeField]
     Rigidbody _rigidbody;
 
-    [Header("Observation", order = 103)]
+    [SerializeField]
+    bool _differential = false;
+    [SerializeField]
+    float _last_update_time;
+
+    [Header ("Observation", order = 103)]
+    [SerializeField] Vector3 _angular_velocity;
+
     [SerializeField]
     Vector3 _velocity;
 
@@ -24,16 +31,25 @@ namespace Neodroid.Models.Observers {
       set { this._angular_velocity = value; }
     }
 
-    protected override void Start() { this._rigidbody = this.GetComponent<Rigidbody>(); }
+    protected override void Start () {
+      this._rigidbody = this.GetComponent<Rigidbody> ();
+    }
 
-    public override void UpdateData() {
-      this._velocity = this._rigidbody.velocity;
-      this._angular_velocity = this._rigidbody.angularVelocity;
+    public override void UpdateData () {
+      var update_time_difference = Time.time - _last_update_time;
+      if (this._differential && update_time_difference > 0) {
+        this._velocity = (this._velocity - this._rigidbody.velocity) / update_time_difference;
+        this._angular_velocity = (this._angular_velocity - this._rigidbody.angularVelocity) / update_time_difference;
+      } else {
+        this._velocity = this._rigidbody.velocity;
+        this._angular_velocity = this._rigidbody.angularVelocity;
+      }
 
-      var str_rep = "{";
+      _last_update_time = Time.time;
+      /*var str_rep = "{";
       str_rep += "\"Velocity\": \"" + this._velocity;
       str_rep += "\", \"AngularVelocity\": \"" + this._angular_velocity;
-      str_rep += "\"}";
+      str_rep += "\"}";*/
       //Data = Encoding.ASCII.GetBytes (str_rep);
     }
   }

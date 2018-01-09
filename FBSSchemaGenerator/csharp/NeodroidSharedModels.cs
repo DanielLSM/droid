@@ -8,6 +8,13 @@ namespace Neodroid.FBS
 using global::System;
 using global::FlatBuffers;
 
+public enum WaitOn : byte
+{
+ Never = 0,
+ Update = 1,
+ FixedUpdate = 2,
+};
+
 public struct FBSUnobservables : IFlatbufferObject
 {
   private Table __p;
@@ -130,6 +137,39 @@ public struct FBSBody : IFlatbufferObject
     builder.PutDouble(velocity_Y);
     builder.PutDouble(velocity_X);
     return new Offset<FBSBody>(builder.Offset);
+  }
+};
+
+public struct SimulatorConfiguration : IFlatbufferObject
+{
+  private Struct __p;
+  public ByteBuffer ByteBuffer { get { return __p.bb; } }
+  public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
+  public SimulatorConfiguration __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
+
+  public int Width { get { return __p.bb.GetInt(__p.bb_pos + 0); } }
+  public int Height { get { return __p.bb.GetInt(__p.bb_pos + 4); } }
+  public bool FullScreen { get { return 0!=__p.bb.Get(__p.bb_pos + 8); } }
+  public int QualityLevel { get { return __p.bb.GetInt(__p.bb_pos + 12); } }
+  public float TimeScale { get { return __p.bb.GetFloat(__p.bb_pos + 16); } }
+  public float TargetFrameRate { get { return __p.bb.GetFloat(__p.bb_pos + 20); } }
+  public int WaitEvery { get { return __p.bb.GetInt(__p.bb_pos + 24); } }
+  public int FrameSkips { get { return __p.bb.GetInt(__p.bb_pos + 28); } }
+  public int ResetIterations { get { return __p.bb.GetInt(__p.bb_pos + 32); } }
+
+  public static Offset<SimulatorConfiguration> CreateSimulatorConfiguration(FlatBufferBuilder builder, int Width, int Height, bool FullScreen, int QualityLevel, float TimeScale, float TargetFrameRate, int WaitEvery, int FrameSkips, int ResetIterations) {
+    builder.Prep(4, 36);
+    builder.PutInt(ResetIterations);
+    builder.PutInt(FrameSkips);
+    builder.PutInt(WaitEvery);
+    builder.PutFloat(TargetFrameRate);
+    builder.PutFloat(TimeScale);
+    builder.PutInt(QualityLevel);
+    builder.Pad(3);
+    builder.PutBool(FullScreen);
+    builder.PutInt(Height);
+    builder.PutInt(Width);
+    return new Offset<SimulatorConfiguration>(builder.Offset);
   }
 };
 
