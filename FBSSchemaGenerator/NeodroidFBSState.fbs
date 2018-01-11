@@ -1,0 +1,54 @@
+include "NeodroidFBSShared.fbs";
+include "NeodroidFBSObservation.fbs";
+
+namespace Neodroid.FBS.State;
+
+table State {
+  environment_name:string (key);
+  frame_number:int;
+
+  reward:float;
+  terminated:bool;
+  total_energy_spent:float;
+
+  observations:[OBS];
+
+  unobservables:Unobservables;
+  environment_description:EnvironmentDescription;
+
+  debug_message:string;
+}
+
+table EnvironmentDescription {
+  max_episode_length:int;
+  solved_threshold:float;
+  api_version:string;
+  simulator_configuration:SimulatorConfiguration;
+  actors:[Actor];
+  configurables:[Configurable];
+}
+
+table Configurable {
+  configurable_name:string (key);
+  observation:Observation;
+}
+
+table Actor {
+  actor_name:string (key);
+  alive:bool;
+  motors:[Motor];
+}
+
+table Motor{
+  motor_name:string (key);
+  valid_input:Range (required);
+  energy_spent_since_reset: float;
+}
+
+table OBS {
+  observation_name:string (key);
+  observation:Observation;
+}
+
+root_type State;
+file_identifier "STAT";

@@ -1,0 +1,58 @@
+include "NeodroidFBSShared.fbs";
+
+namespace Neodroid.FBS.State;
+
+union Observation {
+  Single,
+  Triple,
+  Array,
+
+  RB,
+  ET,
+  QT,
+
+  String,
+  ByteArray,
+}
+
+table Single {
+  value:double;
+  range:Range;
+}
+
+table Triple {
+  triple:Vector3 (required);
+  x_range:Range;
+  y_range:Range;
+  z_range:Range;
+}
+
+table Array{
+  array:[double] (required);
+  ranges:[Range];
+}
+
+table RB {
+  body:Body (required);
+}
+
+table ET {
+  transform:EulerTransform (required);
+}
+
+table QT {
+  transform:QuaternionTransform (required);
+}
+
+table String {
+  str:string (required);
+}
+
+enum ByteDataType:ubyte { PNG, JPEG, Other }
+
+table ByteArray {
+  bytes:[ubyte] (required);
+  type:ByteDataType;
+}
+
+file_identifier "OBSE";

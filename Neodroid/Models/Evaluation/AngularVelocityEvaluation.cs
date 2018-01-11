@@ -1,5 +1,4 @@
-﻿using Neodroid.Evaluation;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Neodroid.Models.Evaluation {
   public class AngularVelocityEvaluation : ObjectiveFunction {

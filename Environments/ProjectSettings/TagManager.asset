@@ -16,6 +16,7 @@ TagManager:
   - Goal
   - Actor
   - Infrared
+  - Trap
   layers:
   - Default
   - TransparentFX

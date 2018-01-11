@@ -1,5 +1,4 @@
-﻿using Neodroid.Evaluation;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Neodroid.Models.Evaluation {
   public class CollidersPunishment : Term {
@@ -9,11 +8,11 @@ namespace Neodroid.Models.Evaluation {
 
     [SerializeField] bool _debugging;
 
-    public override float Evaluate() {
+    public override float Evaluate () {
       if (this._debugging)
-        print("Inside Evaluate");
+        print ("Inside Evaluate");
       foreach (var a in this._as) {
-        if (a.bounds.Intersects(this._b.bounds))
+        if (a.bounds.Intersects (this._b.bounds))
           return -1;
       }
 

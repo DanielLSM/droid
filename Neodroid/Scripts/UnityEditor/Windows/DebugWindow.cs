@@ -1,11 +1,13 @@
-﻿using Neodroid.Evaluation;
+﻿
 using Neodroid.Models.Actors;
 using Neodroid.Models.Configurables.General;
 using Neodroid.Models.Environments;
 using Neodroid.Models.Managers;
 using Neodroid.Models.Motors.General;
 using Neodroid.Models.Observers.General;
+using Neodroid.Models.Evaluation;
 using UnityEngine;
+
 #if UNITY_EDITOR
 using UnityEditor;
 

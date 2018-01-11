@@ -1,6 +1,6 @@
 rd /s /q csharp\
-flatc -n -o csharp\ NeodroidSharedModels.fbs --gen-onefile
-flatc -n -o csharp\ NeodroidReactionModels.fbs --gen-onefile
-flatc -n -o csharp\ NeodroidObservationModels.fbs --gen-onefile
-flatc -n -o csharp\ NeodroidStateModels.fbs --gen-onefile
+flatc -n -o csharp\ NeodroidFBSShared.fbs --gen-onefile
+flatc -n -o csharp\ NeodroidFBSReaction.fbs --gen-onefile
+flatc -n -o csharp\ NeodroidFBSObservation.fbs --gen-onefile
+flatc -n -o csharp\ NeodroidFBSState.fbs --gen-onefile
 ::@pause

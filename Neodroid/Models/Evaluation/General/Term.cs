@@ -1,11 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Neodroid.Evaluation {
+namespace Neodroid.Models.Evaluation {
   [Serializable]
   public abstract class Term : MonoBehaviour {
-    //ScriptableObject {
 
-    public abstract float Evaluate();
+    public abstract float Evaluate ();
   }
 }

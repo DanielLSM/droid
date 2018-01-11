@@ -26,7 +26,7 @@ namespace Neodroid.Models.Observers {
 
     public override string ObserverIdentifier { get { return this.name + "QuaternionTransform"; } }
 
-    public override void UpdateData() {
+    public override void UpdateObservation() {
       if (this.ParentEnvironment && this._use_environments_coordinates) {
         this._position = this.ParentEnvironment.TransformPosition(this.transform.position);
         this._rotation = Quaternion.Euler(this.ParentEnvironment.TransformDirection(this.transform.forward));

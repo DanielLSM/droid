@@ -36,7 +36,7 @@ namespace Neodroid.Models.Observers {
 
     public Vector3 Direction { get { return this._direction; } }
 
-    public override void UpdateData() {
+    public override void UpdateObservation() {
       if (this.ParentEnvironment && this._space == ObservationSpace.Environment) {
         this._position = this.ParentEnvironment.TransformPosition(this.transform.position);
         this._direction = this.ParentEnvironment.TransformDirection(this.transform.forward);

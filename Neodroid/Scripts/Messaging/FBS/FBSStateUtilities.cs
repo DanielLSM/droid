@@ -21,9 +21,9 @@ namespace Neodroid.Scripts.Messaging.FBS {
       foreach (var state in states) {
         var n = b.CreateString(state.EnvironmentName);
 
-        var observers = new Offset<FBSObserver>[state.Observers.Values.Count];
+        var observers = new Offset<FBSObserver>[state.Observations.Values.Count];
         var k = 0;
-        foreach (var observer in state.Observers.Values)
+        foreach (var observer in state.Observations.Values)
           observers[k++] = build_observer(b, observer);
 
         var observers_vector = FBSState.CreateObserversVector(b, observers);
@@ -169,6 +169,10 @@ namespace Neodroid.Scripts.Messaging.FBS {
       return FBSBodyObservation.EndFBSBodyObservation(b);
     }
 
+    static Offset<FBSNumeral> build_numeral(FlatBufferBuilder b, IHasObservationValue numeral) {
+      return FBSNumeral.CreateFBSNumeral(b, numeral.ObservationValue);
+    }
+
     static Offset<FBSActor> build_actor(
         FlatBufferBuilder b,
         Offset<FBSMotor>[] motors,
@@ -193,6 +197,9 @@ namespace Neodroid.Scripts.Messaging.FBS {
       } else if (observer is CameraObserver) {
         observation_offset = build_byte_array(b, (CameraObserver)observer).Value;
         observation_type = FBSObserverData.FBSByteArray;
+      } else if (observer is IHasObservationValue) {
+        observation_offset = build_numeral(b, (IHasObservationValue)observer).Value;
+        observation_type = FBSObserverData.FBSNumeral;
       } else if (observer is IHasRigidbodyProperties) {
         observation_offset = build_body_observation(
             b,
@@ -238,7 +245,7 @@ namespace Neodroid.Scripts.Messaging.FBS {
       FBSEnvironmentDescription.AddSolvedThreshold(b, state.Description.SolvedThreshold);
       FBSEnvironmentDescription.AddActors(b, actors_vector);
       FBSEnvironmentDescription.AddConfigurables(b, configurables_vector);
-      FBSEnvironmentDescription.AddApiVersion(b,api_version_offset);
+      FBSEnvironmentDescription.AddApiVersion(b, api_version_offset);
       return FBSEnvironmentDescription.EndFBSEnvironmentDescription(b);
     }
 
@@ -284,6 +291,9 @@ namespace Neodroid.Scripts.Messaging.FBS {
       } else if (configurable is PositionConfigurable) {
         observation_offset = build_position(b, (PositionConfigurable)configurable).Value;
         observation_type = FBSObserverData.FBSPosition;
+      } else if (configurable is IHasObservationValue) {
+        observation_offset = build_numeral(b, (IHasObservationValue)configurable).Value;
+        observation_type = FBSObserverData.FBSNumeral;
       } else if (configurable is EulerTransformConfigurable) {
         observation_offset = build_euler_transform(b, (IHasEulerTransformProperties)configurable).Value;
         observation_type = FBSObserverData.FBSEulerTransform;

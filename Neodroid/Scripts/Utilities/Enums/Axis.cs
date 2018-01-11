@@ -5,6 +5,9 @@
     Z,
     RotX,
     RotY,
-    RotZ
+    RotZ,
+    DirX,
+    DirY,
+    DirZ
   }
 }

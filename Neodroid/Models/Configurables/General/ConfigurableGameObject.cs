@@ -47,7 +47,7 @@ namespace Neodroid.Models.Configurables.General {
 
     [Header("General", order = 101)]
     [SerializeField]
-    InputRange _valid_input = new InputRange {DecimalGranularity = 0, MinValue = 0, MaxValue = 0};
+    InputRange _valid_input = new InputRange {DecimalGranularity = 0, MinValue = 10, MaxValue = 10};
 
     [SerializeField] bool _relative_to_existing_value;
 

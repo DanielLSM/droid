@@ -35,7 +35,7 @@ namespace Neodroid.Models.Observers {
       this._rigidbody = this.GetComponent<Rigidbody> ();
     }
 
-    public override void UpdateData () {
+    public override void UpdateObservation () {
       var update_time_difference = Time.time - _last_update_time;
       if (this._differential && update_time_difference > 0) {
         this._velocity = (this._velocity - this._rigidbody.velocity) / update_time_difference;

@@ -27,7 +27,7 @@
               <e p="QuaternionTransformConfigurable.cs" t="Include" />
               <e p="RigidbodyConfigurable.cs" t="Include" />
               <e p="SimulationConfigurable.cs" t="Include" />
-              <e p="SingleEulerTransformConfigurable.cs" t="Include" />
+              <e p="SingleAxisTransformConfigurable.cs" t="Include" />
             </e>
             <e p="Environments" t="Include">
               <e p="General" t="Include">
@@ -37,8 +37,8 @@
               <e p="NotUsed" t="Include">
                 <e p="GridEnvironment.cs" t="Include" />
                 <e p="ImitationEnvironment.cs" t="Include" />
-                <e p="RandomisedEnvironment.cs" t="Include" />
               </e>
+              <e p="RandomisedEnvironment.cs" t="Include" />
             </e>
             <e p="Evaluation" t="Include">
               <e p="AngularVelocityEvaluation.cs" t="Include" />
@@ -53,6 +53,7 @@
               <e p="PunishmentFunction.cs" t="Include" />
               <e p="ReachArea.cs" t="Include" />
               <e p="RestInArea.cs" t="Include" />
+              <e p="RushTerm.cs" t="Include" />
             </e>
             <e p="Managers" t="Include">
               <e p="General" t="Include">
@@ -95,6 +96,7 @@
               </e>
               <e p="QuaternionTransformObserver.cs" t="Include" />
               <e p="RigidbodyObserver.cs" t="Include" />
+              <e p="ValueObserver.cs" t="Include" />
             </e>
           </e>
           <e p="Scripts" t="Include">
@@ -164,6 +166,7 @@
               <e p="Interfaces" t="Include">
                 <e p="IHasEulerPosition.cs" t="Include" />
                 <e p="IHasEulerTransformProperties.cs" t="Include" />
+                <e p="IHasObservationValue.cs" t="Include" />
                 <e p="IHasRegister.cs" t="Include" />
                 <e p="IHasRigidbodyProperties.cs" t="Include" />
               </e>
@@ -231,6 +234,10 @@
           </e>
         </e>
         <e p="SceneAssets" t="Include">
+          <e p="GridWorlds" t="Include">
+            <e p="EnsureReachablity.cs" t="Include" />
+            <e p="EnsureValidState.cs" t="Include" />
+          </e>
           <e p="ImagePuzzler" t="Include">
             <e p="Block.cs" t="Include" />
             <e p="ImageSlicer.cs" t="Include" />

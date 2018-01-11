@@ -28,7 +28,7 @@ namespace Neodroid.Models.Observers.General {
       this.ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(this.ParentEnvironment, this);
     }
 
-    public virtual void UpdateData() { }
+    public virtual void UpdateObservation() { }
 
     public virtual void Reset() { }
 

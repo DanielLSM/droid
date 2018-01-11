@@ -24,7 +24,7 @@ namespace Neodroid.Models.Observers {
       this.Data = NeodroidUtilities.RenderTextureImage(this._camera).EncodeToPNG();
     }
 
-    public override void UpdateData() {
+    public override void UpdateObservation() {
       //Data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG (); // Must be done on the main thread
     }
   }

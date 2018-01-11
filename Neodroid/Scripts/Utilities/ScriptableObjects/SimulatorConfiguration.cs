@@ -1,11 +1,10 @@
-﻿using System;
-using Neodroid.Scripts.Utilities.Enums;
+﻿using Neodroid.Scripts.Utilities.Enums;
 using UnityEngine;
 
 namespace Neodroid.Scripts.Utilities.Structs {
-  [Serializable]
+  [System.Serializable]
   public class SimulatorConfiguration {
-//: ScriptableObject {
+    //: ScriptableObject {
     [SerializeField] int _frame_skips;
 
     [SerializeField] bool _full_screen;
@@ -53,20 +52,20 @@ namespace Neodroid.Scripts.Utilities.Structs {
 
     public WaitOn WaitEvery { get { return this._wait_every; } set { this._wait_every = value; } }
 
-    public Int32 Width { get { return this._width; } set { this._width = value; } }
+    public int Width { get { return this._width; } set { this._width = value; } }
 
-    public Int32 Height { get { return this._height; } set { this._height = value; } }
+    public int Height { get { return this._height; } set { this._height = value; } }
 
-    public Boolean FullScreen { get { return this._full_screen; } set { this._full_screen = value; } }
+    public bool FullScreen { get { return this._full_screen; } set { this._full_screen = value; } }
 
-    public Int32 TargetFrameRate {
+    public int TargetFrameRate {
       get { return this._target_frame_rate; }
       set { this._target_frame_rate = value; }
     }
 
-    public Int32 QualityLevel { get { return this._quality_level; } set { this._quality_level = value; } }
+    public int QualityLevel { get { return this._quality_level; } set { this._quality_level = value; } }
 
-    public Single TimeScale { get { return this._time_scale; } set { this._time_scale = value; } }
+    public float TimeScale { get { return this._time_scale; } set { this._time_scale = value; } }
 
     #endregion
   }

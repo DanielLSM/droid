@@ -9,7 +9,7 @@ namespace Neodroid.Scripts.Messaging.Messages {
     public EnvironmentState(
         string environment_name,
         float total_energy_spent_since_reset,
-        Dictionary<string, Observer> observers,
+        Dictionary<string, Observer> observations,
         int frame_number,
         float reward,
         bool terminated,
@@ -20,7 +20,7 @@ namespace Neodroid.Scripts.Messaging.Messages {
       this.DebugMessage = debug_message;
       this.EnvironmentName = environment_name;
       this.TotalEnergySpentSinceReset = total_energy_spent_since_reset;
-      this.Observers = observers;
+      this.Observations = observations;
       this.Reward = reward;
       this.FrameNumber = frame_number;
       this.Terminated = terminated;
@@ -38,7 +38,7 @@ namespace Neodroid.Scripts.Messaging.Messages {
 
     public string DebugMessage { get; private set; }
 
-    public Dictionary<string, Observer> Observers { get; private set; }
+    public Dictionary<string, Observer> Observations { get; private set; }
 
     public EnvironmentDescription Description { get; private set; }
 

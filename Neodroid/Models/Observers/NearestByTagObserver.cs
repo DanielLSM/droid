@@ -7,11 +7,11 @@ namespace Neodroid.Models.Observers {
                                       IHasEulerTransformProperties {
     [SerializeField] Vector3 _direction;
 
-    [Header("Specific", order = 102)]
+    [Header ("Specific", order = 102)]
     [SerializeField]
     GameObject _nearest_object;
 
-    [Header("Observation", order = 103)]
+    [Header ("Observation", order = 103)]
     [SerializeField]
     Vector3 _position;
 
@@ -19,7 +19,7 @@ namespace Neodroid.Models.Observers {
 
     [SerializeField] string _tag = "";
 
-    public override string ObserverIdentifier { get { return this.name + "NearestByTag"; } }
+    public override string ObserverIdentifier { get { return this.name + "Nearest" + this._tag; } }
 
     public Vector3 Position { get { return this._position; } }
 
@@ -27,39 +27,42 @@ namespace Neodroid.Models.Observers {
 
     public Vector3 Direction { get { return this._direction; } }
 
-    public override void UpdateData() {
-      this.FindNearest();
+    public override void UpdateObservation () {
+      this._nearest_object = this.FindNearest ();
+
       if (this.ParentEnvironment) {
-        this._position = this.ParentEnvironment.TransformPosition(this._nearest_object.transform.position);
-        this._direction = this.ParentEnvironment.TransformDirection(this._nearest_object.transform.forward);
-        this._rotation = this.ParentEnvironment.TransformDirection(this._nearest_object.transform.up);
+        this._position = this.ParentEnvironment.TransformPosition (this._nearest_object.transform.position);
+        this._direction = this.ParentEnvironment.TransformDirection (this._nearest_object.transform.forward);
+        this._rotation = this.ParentEnvironment.TransformDirection (this._nearest_object.transform.up);
       } else {
         this._position = this._nearest_object.transform.position;
         this._direction = this._nearest_object.transform.forward;
         this._rotation = this._nearest_object.transform.up;
       }
 
-      var str_rep = "{";
+      /*var str_rep = "{";
       if (this._nearest_object)
         str_rep += "\"NearestIdentifier\": \"" + this._nearest_object.name;
       else
         str_rep += "\"NearestIdentifier\": \"" + "None";
-      str_rep += "\"}";
+      str_rep += "\"}";*/
       //Data = Encoding.ASCII.GetBytes (str_rep);
     }
 
-    void FindNearest() {
-      var candidates = FindObjectsOfType<GameObject>();
+    GameObject FindNearest () {
+      var candidates = FindObjectsOfType<GameObject> ();
+      var nearest_object = this.gameObject;
       var nearest_distance = -1.0;
       foreach (var candidate in candidates) {
-        if (candidate.tag == this._tag) {
-          var dist = Vector3.Distance(this.transform.position, candidate.transform.position);
+        if (candidate.CompareTag (this._tag)) {
+          var dist = Vector3.Distance (this.transform.position, candidate.transform.position);
           if (nearest_distance > dist || nearest_distance < 0) {
             nearest_distance = dist;
-            this._nearest_object = candidate;
+            nearest_object = candidate;
           }
         }
       }
+      return nearest_object;
     }
   }
 }

@@ -1,5 +1,4 @@
-﻿using Neodroid.Evaluation;
-using Neodroid.Models.Actors;
+﻿using Neodroid.Models.Actors;
 using UnityEngine;
 
 namespace Neodroid.Models.Evaluation {
@@ -7,14 +6,16 @@ namespace Neodroid.Models.Evaluation {
     [SerializeField] Transform _g1;
     [SerializeField] Transform _g2;
 
-    public override float InternalEvaluate() {
-      return Vector3.Distance(this._g1.position, this._g2.position);
+    public override float InternalEvaluate () {
+      return Vector3.Distance (this._g1.position, this._g2.position);
     }
 
-    void Start() {
-      if (this._g1 == null) this._g1 = FindObjectOfType<Actor>().transform;
+    void Start () {
+      if (this._g1 == null)
+        this._g1 = FindObjectOfType<Actor> ().transform;
 
-      if (this._g2 == null) this._g2 = this.transform;
+      if (this._g2 == null)
+        this._g2 = this.transform;
     }
   }
 }

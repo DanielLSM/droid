@@ -1,5 +1,4 @@
-﻿using Neodroid.Evaluation;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Neodroid.Models.Evaluation {
   public class CollsionsPunishmentTerm : Term {
@@ -7,8 +6,8 @@ namespace Neodroid.Models.Evaluation {
 
     [SerializeField] Collider _b;
 
-    public override float Evaluate() {
-      if (this._a.bounds.Intersects(this._b.bounds))
+    public override float Evaluate () {
+      if (this._a.bounds.Intersects (this._b.bounds))
         return -1;
       return 0;
     }

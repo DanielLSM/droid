@@ -13,7 +13,7 @@ namespace Neodroid.Models.Observers.NotUsed {
       //_bounding_box = this.GetComponent<BoundingBox> ();
     }
 
-    public override void UpdateData() {
+    public override void UpdateObservation() {
       //Data = Encoding.ASCII.GetBytes (_bounding_box.BoundingBoxCoordinatesAsJSON);
     }
   }
