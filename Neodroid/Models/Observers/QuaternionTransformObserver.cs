@@ -1,11 +1,12 @@
 ﻿using System;
 using Neodroid.Models.Observers.General;
+using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
 namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
   [Serializable]
-  public class QuaternionTransformObserver : Observer {
+  public class QuaternionTransformObserver : Observer, IHasQuaternionTransform {
     [Header("Observation", order = 103)]
     [SerializeField]
     Vector3 _position;
@@ -15,8 +16,8 @@ namespace Neodroid.Models.Observers {
     [Header("Specfic", order = 102)]
     [SerializeField]
     ObservationSpace _space = ObservationSpace.Environment;
-
-    public bool _use_environments_coordinates = true;
+    [SerializeField]
+    bool _use_environments_coordinates = true;
 
     public ObservationSpace Space { get { return this._space; } }
 

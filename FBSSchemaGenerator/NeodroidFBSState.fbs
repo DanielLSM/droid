@@ -3,7 +3,7 @@ include "NeodroidFBSObservation.fbs";
 
 namespace Neodroid.FBS.State;
 
-table State {
+table FState {
   environment_name:string (key);
   frame_number:int;
 
@@ -11,44 +11,44 @@ table State {
   terminated:bool;
   total_energy_spent:float;
 
-  observations:[OBS];
+  observations:[FOBS];
 
-  unobservables:Unobservables;
-  environment_description:EnvironmentDescription;
+  unobservables:FUnobservables;
+  environment_description:FEnvironmentDescription;
 
   debug_message:string;
 }
 
-table EnvironmentDescription {
+table FEnvironmentDescription {
   max_episode_length:int;
   solved_threshold:float;
   api_version:string;
-  simulator_configuration:SimulatorConfiguration;
-  actors:[Actor];
-  configurables:[Configurable];
+  simulator_configuration:FSimulatorConfiguration;
+  actors:[FActor];
+  configurables:[FConfigurable];
 }
 
-table Configurable {
+table FConfigurable {
   configurable_name:string (key);
-  observation:Observation;
+  observation:FObservation;
 }
 
-table Actor {
+table FActor {
   actor_name:string (key);
   alive:bool;
-  motors:[Motor];
+  motors:[FMotor];
 }
 
-table Motor{
+table FMotor{
   motor_name:string (key);
-  valid_input:Range (required);
+  valid_input:FRange (required);
   energy_spent_since_reset: float;
 }
 
-table OBS {
+table FOBS {
   observation_name:string (key);
-  observation:Observation;
+  observation:FObservation;
 }
 
-root_type State;
+root_type FState;
 file_identifier "STAT";

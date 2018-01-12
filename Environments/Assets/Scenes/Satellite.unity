@@ -1055,15 +1055,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4635725927686626, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4635725927686626, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4635725927686626, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4635725927686626, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_LocalRotation.w
@@ -1151,7 +1151,11 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 220.5
+      value: 221.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635725927686626, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
@@ -1376,7 +1380,7 @@ MonoBehaviour:
   _debugging: 0
   _ip_address: localhost
   _port: 5555
-  _testing_motors: 1
+  _testing_motors: 0
   _configuration:
     _frame_skips: 0
     _full_screen: 0
@@ -1386,7 +1390,7 @@ MonoBehaviour:
     _simulation_time_scale: 0
     _target_frame_rate: -1
     _time_scale: 1
-    _wait_every: 2
+    _wait_every: 1
     _width: 500
   _update_fixed_time_scale: 0
 --- !u!114 &1620948095

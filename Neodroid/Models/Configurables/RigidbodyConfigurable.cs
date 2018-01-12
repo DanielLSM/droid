@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Neodroid.Models.Configurables {
   [RequireComponent(typeof(Rigidbody))]
   public class RigidbodyConfigurable : ConfigurableGameObject,
-                                       IHasRigidbodyProperties {
+                                       IHasRigidbody {
     string _ang_x;
     string _ang_y;
     string _ang_z;

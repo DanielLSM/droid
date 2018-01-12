@@ -14,261 +14,295 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SingleAxisTransformConfigurable.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SingleAxisTransformConfigurable.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
-              <folding>
-                <marker date="1515698605558" expanded="false" signature="6:295" ph="..." />
-                <marker date="1515698605558" expanded="true" signature="337:5315" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="433:5313" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="439:727" ph="Fields" />
-                <marker date="1515698605558" expanded="true" signature="779:862" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="909:2110" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="1067:1261" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="1306:2102" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="2150:2628" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="2228:2622" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="2270:2614" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="2315:2506" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="2704:5172" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="2848:3081" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="3349:3546" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="3591:4639" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="4755:4997" ph="{...}" />
-                <marker date="1515698605558" expanded="true" signature="5208:5309" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FBSStateUtilities.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-648">
-              <caret line="15" column="34" lean-forward="false" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+            <state relative-caret-position="712">
+              <caret line="289" column="42" lean-forward="false" selection-start-line="289" selection-start-column="42" selection-end-line="289" selection-end-column="42" />
               <folding>
-                <marker date="1515700700163" expanded="false" signature="6:429" ph="..." />
-                <marker date="1515700700163" expanded="true" signature="472:13566" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="514:13564" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="520:3170" ph="PublicMethods" />
-                <marker date="1515700700163" expanded="true" signature="619:3154" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="697:3114" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="1189:1353" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="1534:1841" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="3176:13560" ph="PrivateMethods" />
-                <marker date="1515700700163" expanded="true" signature="3293:3746" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="3915:4389" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="4527:5011" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="5169:5713" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="5808:6077" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="6187:6410" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="6507:6585" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="6740:7055" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="7143:8735" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="7341:7513" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="7551:7699" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="7743:7892" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="7939:8209" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="8260:8431" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="8845:10355" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="8998:9286" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="10455:10667" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="10829:11373" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="11531:13544" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="11720:11932" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="11980:12135" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="12183:12336" ph="{...}" />
-                <marker date="1515700700163" expanded="true" signature="12390:12566" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="6:429" ph="..." />
+                <marker date="1515709427421" expanded="true" signature="472:11304" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="514:11302" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="520:3128" ph="PublicMethods" />
+                <marker date="1515709427421" expanded="true" signature="620:3112" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="699:3071" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="1188:1349" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="1530:1818" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="3134:11298" ph="PrivateMethods" />
+                <marker date="1515709427421" expanded="true" signature="3250:3673" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="3679:4136" ph="/* static Offset&lt;FQT&gt; build_quaternion_transform_observation( ... */" />
+                <marker date="1515709427421" expanded="true" signature="4259:4475" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="4596:4954" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="5047:5294" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="5390:5538" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="5622:5807" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="5951:6257" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="6339:7892" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="6524:6668" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="6702:6835" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="6877:7023" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="7070:7226" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="7263:7459" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="7496:7639" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="8001:9499" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="8152:8442" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="9596:9784" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="9935:11282" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="10114:10274" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="10322:10471" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="10509:10646" ph="{...}" />
+                <marker date="1515709427421" expanded="true" signature="10700:10850" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EnvironmentDescription.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/EnvironmentDescription.cs">
+      <file leaf-file-name="RushTerm.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/RushTerm.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+            <state relative-caret-position="306">
+              <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
               <folding>
-                <marker date="1515497898276" expanded="true" signature="6:150" ph="..." />
-                <marker date="1515497898276" expanded="true" signature="198:1106" ph="{...}" />
-                <marker date="1515497898276" expanded="true" signature="238:1104" ph="{...}" />
-                <marker date="1515497898276" expanded="true" signature="495:746" ph="{...}" />
+                <marker date="1515726009575" expanded="false" signature="6:54" ph="..." />
+                <marker date="1515726009575" expanded="true" signature="93:513" ph="{...}" />
+                <marker date="1515726009575" expanded="true" signature="126:511" ph="{...}" />
+                <marker date="1515726009575" expanded="true" signature="246:347" ph="{...}" />
+                <marker date="1515726009575" expanded="true" signature="270:341" ph="{...}" />
+                <marker date="1515726009575" expanded="true" signature="387:507" ph="{...}" />
+                <marker date="1515726009575" expanded="true" signature="410:467" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EnvironmentState.cs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/EnvironmentState.cs">
+      <file leaf-file-name="SteeringMotor.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="22" column="35" lean-forward="false" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+            <state relative-caret-position="342">
+              <caret line="19" column="8" lean-forward="false" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
               <folding>
-                <marker date="1515700700171" expanded="true" signature="6:107" ph="..." />
-                <marker date="1515700700171" expanded="true" signature="155:1528" ph="{...}" />
-                <marker date="1515700700171" expanded="true" signature="206:1526" ph="{...}" />
-                <marker date="1515700700171" expanded="true" signature="581:990" ph="{...}" />
+                <marker date="1515763003935" expanded="true" signature="6:99" ph="..." />
+                <marker date="1515763003935" expanded="true" signature="153:1139" ph="{...}" />
+                <marker date="1515763003935" expanded="true" signature="237:1137" ph="{...}" />
+                <marker date="1515763003935" expanded="true" signature="333:427" ph="{...}" />
+                <marker date="1515763003935" expanded="true" signature="453:523" ph="{...}" />
+                <marker date="1515763003935" expanded="true" signature="591:655" ph="{...}" />
+                <marker date="1515763003935" expanded="true" signature="706:750" ph="{...}" />
+                <marker date="1515763003935" expanded="true" signature="809:1133" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CameraObserver.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/CameraObserver.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1515699275522" expanded="true" signature="6:93" ph="..." />
-                <marker date="1515699275522" expanded="true" signature="131:958" ph="{...}" />
-                <marker date="1515699275522" expanded="true" signature="233:956" ph="{...}" />
-                <marker date="1515699275522" expanded="true" signature="694:785" ph="{...}" />
-                <marker date="1515699275522" expanded="true" signature="832:952" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ValueObserver.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/ValueObserver.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1515699305826" expanded="true" signature="6:104" ph="..." />
-                <marker date="1515699305826" expanded="true" signature="142:659" ph="{...}" />
-                <marker date="1515699305826" expanded="true" signature="206:657" ph="{...}" />
-                <marker date="1515699305826" expanded="true" signature="389:489" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Observer.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/General/Observer.cs">
+      <file leaf-file-name="Motor.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/General/Motor.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="540">
-              <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+              <caret line="62" column="13" lean-forward="false" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
               <folding>
-                <marker date="1515699275494" expanded="true" signature="6:102" ph="..." />
-                <marker date="1515699275494" expanded="true" signature="148:1238" ph="{...}" />
-                <marker date="1515699275494" expanded="true" signature="229:1236" ph="{...}" />
-                <marker date="1515699275494" expanded="true" signature="280:368" ph="{...}" />
-                <marker date="1515699275494" expanded="true" signature="776:886" ph="{...}" />
-                <marker date="1515699275494" expanded="true" signature="978:1232" ph="Fields" />
+                <marker date="1515763003915" expanded="false" signature="6:181" ph="..." />
+                <marker date="1515763003915" expanded="true" signature="224:2813" ph="{...}" />
+                <marker date="1515763003915" expanded="true" signature="302:2811" ph="{...}" />
+                <marker date="1515763003915" expanded="true" signature="434:548" ph="{...}" />
+                <marker date="1515763003915" expanded="true" signature="965:1053" ph="{...}" />
+                <marker date="1515763003915" expanded="true" signature="1098:1170" ph="{...}" />
+                <marker date="1515763003915" expanded="true" signature="1106:1164" ph="/* Only called in the editor ... */" />
+                <marker date="1515763003915" expanded="true" signature="1451:2045" ph="{...}" />
+                <marker date="1515763003915" expanded="true" signature="1637:1919" ph="{...}" />
+                <marker date="1515763003915" expanded="true" signature="2356:2807" ph="Fields" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GoalObserver.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/NotUsed/GoalObserver.cs">
+      <file leaf-file-name="EulerTransformMotor.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/EulerTransformMotor.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <marker date="1515450478140" expanded="false" signature="6:93" ph="..." />
-                <marker date="1515450478140" expanded="true" signature="139:963" ph="{...}" />
-                <marker date="1515450478140" expanded="true" signature="180:961" ph="{...}" />
-                <marker date="1515450478140" expanded="true" signature="693:946" ph="{...}" />
-                <marker date="1515450478140" expanded="true" signature="721:940" ph="{...}" />
+                <marker date="1515763003923" expanded="false" signature="6:139" ph="..." />
+                <marker date="1515763003923" expanded="true" signature="174:1734" ph="{...}" />
+                <marker date="1515763003923" expanded="true" signature="219:1732" ph="{...}" />
+                <marker date="1515763003923" expanded="true" signature="534:1620" ph="{...}" />
+                <marker date="1515763003923" expanded="true" signature="671:1349" ph="{...}" />
+                <marker date="1515763003923" expanded="true" signature="1382:1551" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NeodroidStateModels.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidStateModels.cs">
+      <file leaf-file-name="TorqueMotor.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/TorqueMotor.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="35" column="46" lean-forward="false" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
+              <folding>
+                <marker date="1515763003907" expanded="true" signature="6:99" ph="..." />
+                <marker date="1515763003907" expanded="true" signature="153:1135" ph="{...}" />
+                <marker date="1515763003907" expanded="true" signature="235:1133" ph="{...}" />
+                <marker date="1515763003907" expanded="true" signature="332:426" ph="{...}" />
+                <marker date="1515763003907" expanded="true" signature="494:559" ph="{...}" />
+                <marker date="1515763003907" expanded="true" signature="585:655" ph="{...}" />
+                <marker date="1515763003907" expanded="true" signature="714:1036" ph="{...}" />
+                <marker date="1515763003907" expanded="true" signature="1087:1129" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReachArea.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/ReachArea.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="22" column="29" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+              <folding>
+                <marker date="1515763315438" expanded="false" signature="6:250" ph="..." />
+                <marker date="1515763315438" expanded="true" signature="289:7636" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="315:352" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="376:413" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="417:504" ph="/* [RequireComponent (typeof(BoundingBox))] ... */" />
+                <marker date="1515763315438" expanded="true" signature="550:7634" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="1089:2387" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="1097:1676" ph="/* var regularising_term = 0f; ... */" />
+                <marker date="1515763315438" expanded="true" signature="1917:2003" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="2180:2363" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="2407:3632" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="3722:4868" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="3747:4862" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="3782:4298" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="3883:4039" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="4139:4288" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="4436:4592" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="4695:4844" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="4957:6103" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="4982:6097" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="5017:5533" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="5118:5274" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="5374:5523" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="5671:5827" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="5930:6079" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="6192:7356" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="6217:7350" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="6252:6777" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="6353:6511" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="6611:6767" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="6915:7073" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="7176:7332" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="7441:7448" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="7532:7539" ph="{...}" />
+                <marker date="1515763315438" expanded="true" signature="7623:7630" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NeodroidFBSShared.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSShared.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <marker date="1515496428389" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
-                <marker date="1515496428389" expanded="true" signature="141:26087" ph="{...}" />
-                <marker date="1515496428389" expanded="false" signature="151:193" ph="..." />
-                <marker date="1515496428389" expanded="true" signature="237:1037" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="852:1035" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="1082:7999" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="4177:4777" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="6652:6775" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="7026:7292" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="7383:7997" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="7534:7976" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="7770:7802" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="7822:7898" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="8061:12316" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="12223:12314" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="12368:15770" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="14465:14640" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="14769:15049" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="15147:15768" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="15298:15747" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="15534:15566" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="15586:15662" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="15815:19631" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="17293:17508" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="18426:18543" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="18658:18924" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="19015:19629" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="19166:19608" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="19402:19434" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="19454:19530" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="19676:22539" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="21290:21451" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="21566:21832" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="21923:22537" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="22074:22516" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="22310:22342" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="22362:22438" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="22587:26082" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="23964:24231" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="24853:24976" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="25097:25369" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="25463:26080" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="25614:26059" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="25850:25882" ph="{...}" />
-                <marker date="1515496428389" expanded="true" signature="25902:25978" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
+                <marker date="1515708730508" expanded="true" signature="135:10893" ph="{...}" />
+                <marker date="1515708730508" expanded="false" signature="145:187" ph="..." />
+                <marker date="1515708730508" expanded="true" signature="237:2500" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="1537:1728" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="2418:2498" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="2545:3165" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="3032:3163" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="3210:3938" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="3779:3936" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="3986:4834" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="4646:4832" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="4891:5974" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="5586:5972" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="6026:7321" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="6840:7319" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="7363:8381" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="8019:8379" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="8424:9216" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="9033:9214" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="9276:10888" ph="{...}" />
+                <marker date="1515708730508" expanded="true" signature="10478:10886" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NeodroidObservationModels.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidObservationModels.cs">
+      <file leaf-file-name="NeodroidFBSReaction.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSReaction.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="11" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <marker date="1515496428385" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
-                <marker date="1515496428385" expanded="true" signature="135:14636" ph="{...}" />
-                <marker date="1515496428385" expanded="false" signature="145:187" ph="..." />
-                <marker date="1515496428385" expanded="true" signature="223:437" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="474:511" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="559:1681" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="1561:1679" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="1729:2851" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="2731:2849" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="2905:4790" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="4581:4788" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="4860:6299" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="6156:6297" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="6354:7528" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="7405:7526" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="7577:9908" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="8790:8981" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="9785:9906" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="9955:11181" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="10704:10824" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="11103:11179" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="11233:13202" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="12264:12407" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="13080:13200" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="13248:14631" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="14095:14218" ph="{...}" />
-                <marker date="1515496428385" expanded="true" signature="14516:14629" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
+                <marker date="1515708730512" expanded="true" signature="144:13228" ph="{...}" />
+                <marker date="1515708730512" expanded="false" signature="154:196" ph="..." />
+                <marker date="1515708730512" expanded="true" signature="241:5534" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="4135:4302" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="4557:4825" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="4917:5532" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="5068:5511" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="5304:5336" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="5356:5432" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="5590:6753" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="6476:6751" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="6797:10091" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="8062:8285" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="8850:9009" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="9122:9386" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="9476:10089" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="9627:10068" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="9863:9895" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="9915:9991" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="10142:13223" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="11247:11478" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="11969:12099" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="12226:12504" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="12601:13221" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="12752:13200" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="12988:13020" ph="{...}" />
+                <marker date="1515708730512" expanded="true" signature="13040:13116" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NeodroidFBSObservation.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSObservation.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="187" column="17" lean-forward="false" selection-start-line="187" selection-start-column="14" selection-end-line="187" selection-end-column="17" />
+              <folding>
+                <marker date="1515708730516" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
+                <marker date="1515708730516" expanded="true" signature="141:17705" ph="{...}" />
+                <marker date="1515708730516" expanded="false" signature="151:193" ph="..." />
+                <marker date="1515708730516" expanded="true" signature="226:375" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="410:447" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="491:1780" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="1705:1778" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="1824:3545" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="3470:3543" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="3589:5678" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="5566:5676" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="5725:8193" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="8078:8191" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="8236:10692" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="9524:9683" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="10580:10690" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="10732:11770" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="11662:11768" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="11810:12913" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="12800:12911" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="12953:14076" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="13963:14074" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="14120:15451" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="14941:15054" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="15340:15449" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="15498:17700" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="16655:16820" ph="{...}" />
+                <marker date="1515708730516" expanded="true" signature="17584:17698" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -289,11 +323,18 @@
       <find>DrawB</find>
       <find>_update_fixed_time_scale</find>
       <find>coord</find>
+      <find>FET</find>
+      <find>FBSReaction</find>
+      <find>FBSUnobservables</find>
+      <find>FBS</find>
     </findStrings>
     <replaceStrings>
       <replace>Caller</replace>
       <replace>[RequireComponent(</replace>
       <replace>Coord</replace>
+      <replace>FReaction</replace>
+      <replace>FUnobservables</replace>
+      <replace>F</replace>
     </replaceStrings>
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -301,10 +342,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/QuickGlow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/MessageServer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSReactionUtilities.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidObservationModels.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ImagePuzzler/Puzzle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ImagePuzzler/ImageSlicer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidStateModels.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/SimpleBlur.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ImagePuzzler/Block.cs" root0="FORCE_HIGHLIGHTING" />
@@ -314,7 +353,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/ValueObserver.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/FestoBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/Unobservables.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasObservationValue.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasSingle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Grasps/Grasp.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/Configuration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Grasps/VRGrip.cs" root0="FORCE_HIGHLIGHTING" />
@@ -325,6 +364,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Enums/WaitOn.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Utilities.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/OnCollision.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/RushTerm.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/ChildSensor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/StatusUpdater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/Unity3DRider.cs" root0="FORCE_HIGHLIGHTING" />
@@ -349,11 +389,11 @@
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/LightSources/InfraredLightSource.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Satellite/Scripts/BodyWithMass.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Satellite/Scripts/InitialForce.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasEulerTransformProperties.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasEulerTransform.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/SegmentationColor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/ChangeMaterialOnRenderByInstance.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasEulerPosition.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasRigidbodyProperties.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasTriple.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasRigidbody.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Segmentation/ChangeMaterialOnRenderByTag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasRegister.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/DrawBoundingBoxes.cs" root0="FORCE_HIGHLIGHTING" />
@@ -388,6 +428,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/Particles/RocketMotor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/Utility/WaypointCircuit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasByteArray.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SimulationWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/TorqueMotor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/SimulationManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -398,10 +439,12 @@
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/RenderTextureConfiguratorWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SegmentationWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/NotUsed/ThinManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasQuaternionTransform.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/TaskWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/NotUsed/CurriculumManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/CameraSynchronisationWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/NearestByTagObserver.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/QuaternionTransformObserver.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/GameObjects/PrebuiltSpawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/GameObjects/ObserverSpawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/GameObjects/GeneralSpawner.cs" root0="FORCE_HIGHLIGHTING" />
@@ -422,13 +465,17 @@
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/PunishmentFunction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/GridWorlds/EnsureReachablity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/States.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSState.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSReaction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/MotionTracker.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/CollidersPunishment.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/TiltInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSObservation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/GUIControl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/ReachArea.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/Robolab/Standard Assets/CrossPlatformInput/Scripts/AxisTouchButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/ConnectedLine.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSShared.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/CollisionExplosion.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SceneAssets/LunarLander/Scripts/ParticleController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/General/ObjectiveFunction.cs" root0="FORCE_HIGHLIGHTING" />
@@ -462,23 +509,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimedRespawn.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/VerticalGameObjectSpawner.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/TimeManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/DataCollector.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/BlitToMaterial.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/DataCollection/NotUsed/ImageRecorder.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/SimpleBlur.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/MotionTracker.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/Traction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scenes/Experiments/Rigidbodies/FestoBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/Utilities/States.cs" />
-        <option value="$PROJECT_DIR$/Assets/SceneAssets/ScripterGrasper/QuickGlow.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/RigidbodyMotor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/TorqueMotor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/HexRigidbodyMotor.cs" />
         <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/TriRigidbodyMotor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs" />
         <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Managers/General/NeodroidManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/Configuration.cs" />
         <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Environments/NotUsed/ImitationEnvironment.cs" />
@@ -511,8 +542,24 @@
         <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/SingleAxisTransformConfigurable.cs" />
         <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Observers/General/Observer.cs" />
         <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Observers/ValueObserver.cs" />
-        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs" />
         <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/EnvironmentState.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasEulerTransform.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasRigidbody.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasTriple.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasSingle.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSReactionUtilities.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/MessageServer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasQuaternionTransform.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Observers/QuaternionTransformObserver.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/QuaternionTransformConfigurable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasByteArray.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Observers/CameraObserver.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/RushTerm.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/TorqueMotor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Motors/General/Motor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/ReachArea.cs" />
       </list>
     </option>
   </component>
@@ -600,6 +647,53 @@
               <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Configurables" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Evaluation" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Motors" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Motors" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="General" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Motors" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="WheelColliderMotor" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Observers" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
             <path>
@@ -668,6 +762,25 @@
               <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="UnityEditor" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Environments (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Neodroid" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Utilities" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Interfaces" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -722,12 +835,12 @@
       <workItem from="1515413337294" duration="12783000" />
       <workItem from="1515497788128" duration="838000" />
       <workItem from="1515515569244" duration="4775000" />
-      <workItem from="1515689140017" duration="4506000" />
+      <workItem from="1515689140017" duration="11957000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41033000" />
+    <option name="totallyTimeSpent" value="48484000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -786,100 +899,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/Unobservables.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="31" lean-forward="false" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/PunishmentFunction.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Enums/CoordinateSystem.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Enums/WaitOn.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/UnityEditor/Windows/SimulationWindow.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="90" column="12" lean-forward="false" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Managers/SimulationManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="64" column="16" lean-forward="false" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/BoundingBox.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Utilities.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2371">
-          <caret line="151" column="12" lean-forward="false" selection-start-line="151" selection-start-column="12" selection-end-line="151" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/BoundingBoxes/DrawBoundingBoxes.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="65" column="24" lean-forward="false" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Actors/Actor.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Structs/SimulatorConfiguration.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/AngularVelocity.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/CollsionsPunishmentTerm.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/EuclideanDistance.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ImagePuzzler/Block.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="16" column="3" lean-forward="false" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ImagePuzzler/ImageSlicer.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="46" lean-forward="false" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/SceneAssets/ImagePuzzler/Puzzle.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -891,20 +910,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="39" lean-forward="false" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/MessageServer.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSReactionUtilities.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1081,16 +1086,16 @@
         <state relative-caret-position="342">
           <caret line="21" column="94" lean-forward="false" selection-start-line="21" selection-start-column="94" selection-end-line="21" selection-end-column="94" />
           <folding>
-            <marker date="1515699187882" expanded="false" signature="6:104" ph="..." />
-            <marker date="1515699187882" expanded="true" signature="142:2388" ph="{...}" />
-            <marker date="1515699187882" expanded="true" signature="191:2386" ph="{...}" />
-            <marker date="1515699187882" expanded="true" signature="905:1817" ph="{...}" />
-            <marker date="1515699187882" expanded="true" signature="992:1324" ph="{...}" />
-            <marker date="1515699187882" expanded="true" signature="1539:1761" ph="/* var str_rep = &quot;{&quot;; ... */" />
-            <marker date="1515699187882" expanded="true" signature="1849:2382" ph="{...}" />
-            <marker date="1515699187882" expanded="true" signature="2031:2347" ph="{...}" />
-            <marker date="1515699187882" expanded="true" signature="2079:2339" ph="{...}" />
-            <marker date="1515699187882" expanded="true" signature="2239:2329" ph="{...}" />
+            <marker date="1515706451696" expanded="false" signature="6:104" ph="..." />
+            <marker date="1515706451696" expanded="true" signature="142:2378" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="191:2376" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="895:1807" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="982:1314" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="1529:1751" ph="/* var str_rep = &quot;{&quot;; ... */" />
+            <marker date="1515706451696" expanded="true" signature="1839:2372" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="2021:2337" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="2069:2329" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="2229:2319" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1219,15 +1224,15 @@
         <state relative-caret-position="14">
           <caret line="14" column="57" lean-forward="false" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
           <folding>
-            <marker date="1515689684717" expanded="false" signature="6:199" ph="..." />
-            <marker date="1515689684717" expanded="true" signature="241:3548" ph="{...}" />
-            <marker date="1515689684717" expanded="true" signature="304:3546" ph="{...}" />
-            <marker date="1515689684717" expanded="true" signature="762:1568" ph="{...}" />
-            <marker date="1515689684717" expanded="true" signature="1616:1714" ph="{...}" />
-            <marker date="1515689684717" expanded="true" signature="1790:3542" ph="{...}" />
-            <marker date="1515689684717" expanded="true" signature="2200:2561" ph="{...}" />
-            <marker date="1515689684717" expanded="true" signature="2276:2553" ph="{...}" />
-            <marker date="1515689684717" expanded="true" signature="2732:3051" ph="{...}" />
+            <marker date="1515706481228" expanded="false" signature="6:199" ph="..." />
+            <marker date="1515706481228" expanded="true" signature="241:3541" ph="{...}" />
+            <marker date="1515706481228" expanded="true" signature="304:3539" ph="{...}" />
+            <marker date="1515706481228" expanded="true" signature="755:1561" ph="{...}" />
+            <marker date="1515706481228" expanded="true" signature="1609:1707" ph="{...}" />
+            <marker date="1515706481228" expanded="true" signature="1783:3535" ph="{...}" />
+            <marker date="1515706481228" expanded="true" signature="2193:2554" ph="{...}" />
+            <marker date="1515706481228" expanded="true" signature="2269:2546" ph="{...}" />
+            <marker date="1515706481228" expanded="true" signature="2725:3044" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1237,19 +1242,19 @@
         <state relative-caret-position="90">
           <caret line="10" column="62" lean-forward="false" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="62" />
           <folding>
-            <marker date="1515450478132" expanded="false" signature="6:199" ph="..." />
-            <marker date="1515450478132" expanded="true" signature="241:5095" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="345:5093" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="739:828" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="751:822" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="961:1059" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="1106:1223" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="1261:1356" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="1405:2816" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="2891:5089" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="3221:3598" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="3297:3590" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="3737:4389" ph="{...}" />
+            <marker date="1515706463052" expanded="false" signature="6:199" ph="..." />
+            <marker date="1515706463052" expanded="true" signature="241:5085" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="345:5083" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="729:818" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="741:812" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="951:1049" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="1096:1213" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="1251:1346" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="1395:2806" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="2881:5079" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="3211:3588" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="3287:3580" ph="{...}" />
+            <marker date="1515706463052" expanded="true" signature="3727:4379" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1268,54 +1273,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/QuaternionTransformConfigurable.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1515450478132" expanded="true" signature="6:63" ph="..." />
-            <marker date="1515450478132" expanded="true" signature="105:541" ph="{...}" />
-            <marker date="1515450478132" expanded="true" signature="179:539" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasRigidbodyProperties.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <marker date="1515384100454" expanded="true" signature="68:188" ph="{...}" />
-            <marker date="1515384100454" expanded="true" signature="113:186" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasObservationValue.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-          <folding>
-            <marker date="1515698564186" expanded="true" signature="68:149" ph="{...}" />
-            <marker date="1515698564186" expanded="true" signature="109:147" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/EulerTransformConfigurable.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-324">
           <caret line="8" column="67" lean-forward="false" selection-start-line="8" selection-start-column="67" selection-end-line="8" selection-end-column="67" />
           <folding>
-            <marker date="1515690241853" expanded="false" signature="6:199" ph="..." />
-            <marker date="1515690241853" expanded="true" signature="241:6975" ph="{...}" />
-            <marker date="1515690241853" expanded="true" signature="340:6973" ph="{...}" />
-            <marker date="1515690241853" expanded="true" signature="1111:1384" ph="{...}" />
-            <marker date="1515690241853" expanded="true" signature="1434:3614" ph="{...}" />
-            <marker date="1515690241853" expanded="true" signature="3690:6969" ph="{...}" />
-            <marker date="1515690241853" expanded="true" signature="4184:4545" ph="{...}" />
-            <marker date="1515690241853" expanded="true" signature="4260:4537" ph="{...}" />
-            <marker date="1515690241853" expanded="true" signature="4685:5658" ph="{...}" />
+            <marker date="1515706451696" expanded="false" signature="6:199" ph="..." />
+            <marker date="1515706451696" expanded="true" signature="241:6965" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="330:6963" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="1101:1374" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="1424:3604" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="3680:6959" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="4174:4535" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="4250:4527" ph="{...}" />
+            <marker date="1515706451696" expanded="true" signature="4675:5648" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1325,24 +1296,24 @@
         <state relative-caret-position="216">
           <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
           <folding>
-            <marker date="1515698605558" expanded="false" signature="6:295" ph="..." />
-            <marker date="1515698605558" expanded="true" signature="337:5315" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="433:5313" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="439:727" ph="Fields" />
-            <marker date="1515698605558" expanded="true" signature="779:862" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="909:2110" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="1067:1261" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="1306:2102" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="2150:2628" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="2228:2622" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="2270:2614" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="2315:2506" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="2704:5172" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="2848:3081" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="3349:3546" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="3591:4639" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="4755:4997" ph="{...}" />
-            <marker date="1515698605558" expanded="true" signature="5208:5309" ph="{...}" />
+            <marker date="1515706498020" expanded="false" signature="6:295" ph="..." />
+            <marker date="1515706498020" expanded="true" signature="337:5305" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="423:5303" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="429:717" ph="Fields" />
+            <marker date="1515706498020" expanded="true" signature="769:852" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="899:2100" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="1057:1251" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="1296:2092" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="2140:2618" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="2218:2612" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="2260:2604" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="2305:2496" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="2694:5162" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="2838:3071" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="3339:3536" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="3581:4629" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="4745:4987" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="5198:5299" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1351,53 +1322,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1515496428389" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
-            <marker date="1515496428389" expanded="true" signature="141:26087" ph="{...}" />
-            <marker date="1515496428389" expanded="false" signature="151:193" ph="..." />
-            <marker date="1515496428389" expanded="true" signature="237:1037" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="852:1035" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="1082:7999" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="4177:4777" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="6652:6775" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="7026:7292" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="7383:7997" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="7534:7976" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="7770:7802" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="7822:7898" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="8061:12316" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="12223:12314" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="12368:15770" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="14465:14640" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="14769:15049" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="15147:15768" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="15298:15747" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="15534:15566" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="15586:15662" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="15815:19631" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="17293:17508" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="18426:18543" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="18658:18924" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="19015:19629" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="19166:19608" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="19402:19434" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="19454:19530" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="19676:22539" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="21290:21451" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="21566:21832" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="21923:22537" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="22074:22516" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="22310:22342" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="22362:22438" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="22587:26082" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="23964:24231" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="24853:24976" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="25097:25369" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="25463:26080" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="25614:26059" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="25850:25882" ph="{...}" />
-            <marker date="1515496428389" expanded="true" signature="25902:25978" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1405,49 +1330,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="11" />
-          <folding>
-            <marker date="1515496428385" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
-            <marker date="1515496428385" expanded="true" signature="135:14636" ph="{...}" />
-            <marker date="1515496428385" expanded="false" signature="145:187" ph="..." />
-            <marker date="1515496428385" expanded="true" signature="223:437" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="474:511" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="559:1681" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="1561:1679" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="1729:2851" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="2731:2849" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="2905:4790" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="4581:4788" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="4860:6299" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="6156:6297" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="6354:7528" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="7405:7526" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="7577:9908" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="8790:8981" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="9785:9906" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="9955:11181" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="10704:10824" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="11103:11179" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="11233:13202" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="12264:12407" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="13080:13200" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="13248:14631" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="14095:14218" ph="{...}" />
-            <marker date="1515496428385" expanded="true" signature="14516:14629" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/CameraObserver.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1515699275522" expanded="true" signature="6:93" ph="..." />
-            <marker date="1515699275522" expanded="true" signature="131:958" ph="{...}" />
-            <marker date="1515699275522" expanded="true" signature="233:956" ph="{...}" />
-            <marker date="1515699275522" expanded="true" signature="694:785" ph="{...}" />
-            <marker date="1515699275522" expanded="true" signature="832:952" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1485,51 +1368,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1515699305826" expanded="true" signature="6:104" ph="..." />
-            <marker date="1515699305826" expanded="true" signature="142:659" ph="{...}" />
-            <marker date="1515699305826" expanded="true" signature="206:657" ph="{...}" />
-            <marker date="1515699305826" expanded="true" signature="389:489" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-648">
-          <caret line="15" column="34" lean-forward="false" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
-          <folding>
-            <marker date="1515700700163" expanded="false" signature="6:429" ph="..." />
-            <marker date="1515700700163" expanded="true" signature="472:13566" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="514:13564" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="520:3170" ph="PublicMethods" />
-            <marker date="1515700700163" expanded="true" signature="619:3154" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="697:3114" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="1189:1353" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="1534:1841" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="3176:13560" ph="PrivateMethods" />
-            <marker date="1515700700163" expanded="true" signature="3293:3746" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="3915:4389" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="4527:5011" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="5169:5713" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="5808:6077" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="6187:6410" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="6507:6585" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="6740:7055" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="7143:8735" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="7341:7513" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="7551:7699" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="7743:7892" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="7939:8209" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="8260:8431" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="8845:10355" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="8998:9286" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="10455:10667" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="10829:11373" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="11531:13544" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="11720:11932" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="11980:12135" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="12183:12336" ph="{...}" />
-            <marker date="1515700700163" expanded="true" signature="12390:12566" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="6:104" ph="..." />
+            <marker date="1515706498020" expanded="true" signature="142:649" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="206:647" ph="{...}" />
+            <marker date="1515706498020" expanded="true" signature="379:479" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1556,6 +1398,530 @@
             <marker date="1515700700171" expanded="true" signature="155:1528" ph="{...}" />
             <marker date="1515700700171" expanded="true" signature="206:1526" ph="{...}" />
             <marker date="1515700700171" expanded="true" signature="581:990" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasRigidbody.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="32" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+          <folding>
+            <marker date="1515706464140" expanded="true" signature="68:178" ph="{...}" />
+            <marker date="1515706464140" expanded="true" signature="103:176" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasTriple.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+          <folding>
+            <marker date="1515706482012" expanded="true" signature="68:137" ph="{...}" />
+            <marker date="1515706482012" expanded="true" signature="100:135" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasSingle.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+          <folding>
+            <marker date="1515706498812" expanded="true" signature="68:139" ph="{...}" />
+            <marker date="1515706498812" expanded="true" signature="99:137" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/MessageServer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+          <folding>
+            <marker date="1515706851100" expanded="false" signature="6:215" ph="..." />
+            <marker date="1515706851100" expanded="true" signature="254:5176" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="302:5174" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="308:379" ph="PublicMembers" />
+            <marker date="1515706851100" expanded="true" signature="385:822" ph="PrivateMembers" />
+            <marker date="1515706851100" expanded="true" signature="828:2469" ph="PrivateMethods" />
+            <marker date="1515706851100" expanded="true" signature="856:2453" ph="Threads" />
+            <marker date="1515706851100" expanded="true" signature="922:1176" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="1320:2437" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="1364:2070" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="1416:2062" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="1432:1972" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="1586:1960" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="1995:2052" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="2306:2377" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="2386:2431" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="2475:4315" ph="PublicMethods" />
+            <marker date="1515706851100" expanded="true" signature="2575:2760" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="2820:3075" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="3223:3520" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="3362:3409" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="3526:4166" ph="Contstruction" />
+            <marker date="1515706851100" expanded="true" signature="3723:4060" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="4172:4299" ph="Getters" />
+            <marker date="1515706851100" expanded="true" signature="4321:5170" ph="Deconstruction" />
+            <marker date="1515706851100" expanded="true" signature="4460:5154" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="4472:5063" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="4761:4838" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="4847:4896" ph="{...}" />
+            <marker date="1515706851100" expanded="true" signature="5070:5148" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/Messages/Unobservables.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1515450478144" expanded="false" signature="6:52" ph="..." />
+            <marker date="1515450478144" expanded="true" signature="100:1580" ph="{...}" />
+            <marker date="1515450478144" expanded="true" signature="131:1578" ph="{...}" />
+            <marker date="1515450478144" expanded="true" signature="287:868" ph="{...}" />
+            <marker date="1515450478144" expanded="true" signature="320:582" ph="{...}" />
+            <marker date="1515450478144" expanded="true" signature="428:574" ph="{...}" />
+            <marker date="1515450478144" expanded="true" signature="614:862" ph="{...}" />
+            <marker date="1515450478144" expanded="true" signature="719:854" ph="{...}" />
+            <marker date="1515450478144" expanded="true" signature="924:987" ph="{...}" />
+            <marker date="1515450478144" expanded="true" signature="1175:1574" ph="{...}" />
+            <marker date="1515450478144" expanded="true" signature="1233:1319" ph="{...}" />
+            <marker date="1515450478144" expanded="true" signature="1379:1467" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSReactionUtilities.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1980">
+          <caret line="112" column="33" lean-forward="false" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
+          <folding>
+            <marker date="1515706822332" expanded="false" signature="6:110" ph="..." />
+            <marker date="1515706822332" expanded="true" signature="153:4105" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="198:4103" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="204:734" ph="PublicMethods" />
+            <marker date="1515706822332" expanded="true" signature="291:718" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="322:660" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="740:4099" ph="PrivateMethods" />
+            <marker date="1515706822332" expanded="true" signature="830:1106" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="875:1065" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="1176:1601" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="1218:1555" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="1672:1914" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="1976:2166" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="2245:2459" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="2281:2433" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="2515:2678" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="2741:2922" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="2986:3172" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="3231:3692" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="3259:3660" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="3735:4083" ph="{...}" />
+            <marker date="1515706822332" expanded="true" signature="3762:4057" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasQuaternionTransform.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <marker date="1515706899228" expanded="true" signature="68:184" ph="{...}" />
+            <marker date="1515706899228" expanded="true" signature="113:182" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/QuaternionTransformObserver.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="21" column="53" lean-forward="false" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+          <folding>
+            <marker date="1515706942572" expanded="false" signature="6:118" ph="..." />
+            <marker date="1515706942572" expanded="true" signature="156:1351" ph="{...}" />
+            <marker date="1515706942572" expanded="true" signature="276:1349" ph="{...}" />
+            <marker date="1515706942572" expanded="true" signature="939:1345" ph="{...}" />
+            <marker date="1515706942572" expanded="true" signature="1013:1224" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Configurables/QuaternionTransformConfigurable.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="5" column="96" lean-forward="false" selection-start-line="5" selection-start-column="96" selection-end-line="5" selection-end-column="96" />
+          <folding>
+            <marker date="1515706973144" expanded="false" signature="6:108" ph="..." />
+            <marker date="1515706973144" expanded="true" signature="150:611" ph="{...}" />
+            <marker date="1515706973144" expanded="true" signature="249:609" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasEulerTransform.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="21" lean-forward="false" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="29" />
+          <folding>
+            <marker date="1515706453028" expanded="true" signature="68:208" ph="{...}" />
+            <marker date="1515706453028" expanded="true" signature="108:206" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Utilities/Interfaces/IHasByteArray.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="32" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="32" />
+          <folding>
+            <marker date="1515709193649" expanded="true" signature="48:117" ph="{...}" />
+            <marker date="1515709193649" expanded="true" signature="83:114" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Observers/CameraObserver.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="32" column="51" lean-forward="false" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
+          <folding>
+            <marker date="1515709207073" expanded="true" signature="6:152" ph="..." />
+            <marker date="1515709207073" expanded="true" signature="190:1124" ph="{...}" />
+            <marker date="1515709207073" expanded="true" signature="307:1122" ph="{...}" />
+            <marker date="1515709207073" expanded="true" signature="768:859" ph="{...}" />
+            <marker date="1515709207073" expanded="true" signature="906:1026" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSState.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="30" column="11" lean-forward="false" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+          <folding>
+            <marker date="1515708730520" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
+            <marker date="1515708730520" expanded="true" signature="141:24865" ph="{...}" />
+            <marker date="1515708730520" expanded="false" signature="151:193" ph="..." />
+            <marker date="1515708730520" expanded="true" signature="235:7051" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="3265:3849" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="5722:5843" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="6086:6348" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="6437:7049" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="6588:7028" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="6824:6856" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="6876:6952" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="7111:11322" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="11231:11320" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="11372:14857" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="12701:12986" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="13610:13739" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="13864:14140" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="14236:14855" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="14387:14834" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="14623:14655" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="14675:14751" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="14900:18654" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="16348:16553" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="17463:17578" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="17689:17951" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="18040:18652" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="18191:18631" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="18427:18459" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="18479:18555" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="18697:21568" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="20333:20492" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="20603:20865" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="20954:21566" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="21105:21545" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="21341:21373" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="21393:21469" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="21609:24860" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="22845:23083" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="23677:23796" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="23903:24161" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="24248:24858" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="24399:24837" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="24635:24667" ph="{...}" />
+            <marker date="1515708730520" expanded="true" signature="24687:24763" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSShared.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1515708730508" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
+            <marker date="1515708730508" expanded="true" signature="135:10893" ph="{...}" />
+            <marker date="1515708730508" expanded="false" signature="145:187" ph="..." />
+            <marker date="1515708730508" expanded="true" signature="237:2500" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="1537:1728" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="2418:2498" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="2545:3165" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="3032:3163" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="3210:3938" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="3779:3936" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="3986:4834" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="4646:4832" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="4891:5974" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="5586:5972" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="6026:7321" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="6840:7319" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="7363:8381" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="8019:8379" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="8424:9216" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="9033:9214" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="9276:10888" ph="{...}" />
+            <marker date="1515708730508" expanded="true" signature="10478:10886" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSReaction.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1515708730512" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
+            <marker date="1515708730512" expanded="true" signature="144:13228" ph="{...}" />
+            <marker date="1515708730512" expanded="false" signature="154:196" ph="..." />
+            <marker date="1515708730512" expanded="true" signature="241:5534" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="4135:4302" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="4557:4825" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="4917:5532" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="5068:5511" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="5304:5336" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="5356:5432" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="5590:6753" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="6476:6751" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="6797:10091" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="8062:8285" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="8850:9009" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="9122:9386" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="9476:10089" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="9627:10068" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="9863:9895" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="9915:9991" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="10142:13223" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="11247:11478" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="11969:12099" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="12226:12504" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="12601:13221" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="12752:13200" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="12988:13020" ph="{...}" />
+            <marker date="1515708730512" expanded="true" signature="13040:13116" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/NeodroidFBSObservation.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="187" column="17" lean-forward="false" selection-start-line="187" selection-start-column="14" selection-end-line="187" selection-end-column="17" />
+          <folding>
+            <marker date="1515708730516" expanded="true" signature="0:111" ph="/* &lt;auto-generated&gt; ... */" />
+            <marker date="1515708730516" expanded="true" signature="141:17705" ph="{...}" />
+            <marker date="1515708730516" expanded="false" signature="151:193" ph="..." />
+            <marker date="1515708730516" expanded="true" signature="226:375" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="410:447" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="491:1780" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="1705:1778" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="1824:3545" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="3470:3543" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="3589:5678" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="5566:5676" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="5725:8193" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="8078:8191" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="8236:10692" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="9524:9683" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="10580:10690" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="10732:11770" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="11662:11768" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="11810:12913" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="12800:12911" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="12953:14076" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="13963:14074" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="14120:15451" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="14941:15054" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="15340:15449" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="15498:17700" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="16655:16820" ph="{...}" />
+            <marker date="1515708730516" expanded="true" signature="17584:17698" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Scripts/Messaging/FBS/FBSStateUtilities.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="712">
+          <caret line="289" column="42" lean-forward="false" selection-start-line="289" selection-start-column="42" selection-end-line="289" selection-end-column="42" />
+          <folding>
+            <marker date="1515709427421" expanded="true" signature="6:429" ph="..." />
+            <marker date="1515709427421" expanded="true" signature="472:11304" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="514:11302" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="520:3128" ph="PublicMethods" />
+            <marker date="1515709427421" expanded="true" signature="620:3112" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="699:3071" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="1188:1349" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="1530:1818" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="3134:11298" ph="PrivateMethods" />
+            <marker date="1515709427421" expanded="true" signature="3250:3673" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="3679:4136" ph="/* static Offset&lt;FQT&gt; build_quaternion_transform_observation( ... */" />
+            <marker date="1515709427421" expanded="true" signature="4259:4475" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="4596:4954" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="5047:5294" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="5390:5538" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="5622:5807" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="5951:6257" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="6339:7892" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="6524:6668" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="6702:6835" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="6877:7023" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="7070:7226" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="7263:7459" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="7496:7639" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="8001:9499" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="8152:8442" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="9596:9784" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="9935:11282" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="10114:10274" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="10322:10471" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="10509:10646" ph="{...}" />
+            <marker date="1515709427421" expanded="true" signature="10700:10850" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/RushTerm.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+          <folding>
+            <marker date="1515726009575" expanded="false" signature="6:54" ph="..." />
+            <marker date="1515726009575" expanded="true" signature="93:513" ph="{...}" />
+            <marker date="1515726009575" expanded="true" signature="126:511" ph="{...}" />
+            <marker date="1515726009575" expanded="true" signature="246:347" ph="{...}" />
+            <marker date="1515726009575" expanded="true" signature="270:341" ph="{...}" />
+            <marker date="1515726009575" expanded="true" signature="387:507" ph="{...}" />
+            <marker date="1515726009575" expanded="true" signature="410:467" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/EulerTransformMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1515763003923" expanded="false" signature="6:139" ph="..." />
+            <marker date="1515763003923" expanded="true" signature="174:1734" ph="{...}" />
+            <marker date="1515763003923" expanded="true" signature="219:1732" ph="{...}" />
+            <marker date="1515763003923" expanded="true" signature="534:1620" ph="{...}" />
+            <marker date="1515763003923" expanded="true" signature="671:1349" ph="{...}" />
+            <marker date="1515763003923" expanded="true" signature="1382:1551" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/General/Motor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="62" column="13" lean-forward="false" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+          <folding>
+            <marker date="1515763003915" expanded="false" signature="6:181" ph="..." />
+            <marker date="1515763003915" expanded="true" signature="224:2813" ph="{...}" />
+            <marker date="1515763003915" expanded="true" signature="302:2811" ph="{...}" />
+            <marker date="1515763003915" expanded="true" signature="434:548" ph="{...}" />
+            <marker date="1515763003915" expanded="true" signature="965:1053" ph="{...}" />
+            <marker date="1515763003915" expanded="true" signature="1098:1170" ph="{...}" />
+            <marker date="1515763003915" expanded="true" signature="1106:1164" ph="/* Only called in the editor ... */" />
+            <marker date="1515763003915" expanded="true" signature="1451:2045" ph="{...}" />
+            <marker date="1515763003915" expanded="true" signature="1637:1919" ph="{...}" />
+            <marker date="1515763003915" expanded="true" signature="2356:2807" ph="Fields" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/SteeringMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="8" lean-forward="false" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+          <folding>
+            <marker date="1515763003935" expanded="true" signature="6:99" ph="..." />
+            <marker date="1515763003935" expanded="true" signature="153:1139" ph="{...}" />
+            <marker date="1515763003935" expanded="true" signature="237:1137" ph="{...}" />
+            <marker date="1515763003935" expanded="true" signature="333:427" ph="{...}" />
+            <marker date="1515763003935" expanded="true" signature="453:523" ph="{...}" />
+            <marker date="1515763003935" expanded="true" signature="591:655" ph="{...}" />
+            <marker date="1515763003935" expanded="true" signature="706:750" ph="{...}" />
+            <marker date="1515763003935" expanded="true" signature="809:1133" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Motors/WheelColliderMotor/TorqueMotor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="35" column="46" lean-forward="false" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
+          <folding>
+            <marker date="1515763003907" expanded="true" signature="6:99" ph="..." />
+            <marker date="1515763003907" expanded="true" signature="153:1135" ph="{...}" />
+            <marker date="1515763003907" expanded="true" signature="235:1133" ph="{...}" />
+            <marker date="1515763003907" expanded="true" signature="332:426" ph="{...}" />
+            <marker date="1515763003907" expanded="true" signature="494:559" ph="{...}" />
+            <marker date="1515763003907" expanded="true" signature="585:655" ph="{...}" />
+            <marker date="1515763003907" expanded="true" signature="714:1036" ph="{...}" />
+            <marker date="1515763003907" expanded="true" signature="1087:1129" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Neodroid/Models/Evaluation/ReachArea.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="22" column="29" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+          <folding>
+            <marker date="1515763315438" expanded="false" signature="6:250" ph="..." />
+            <marker date="1515763315438" expanded="true" signature="289:7636" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="315:352" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="376:413" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="417:504" ph="/* [RequireComponent (typeof(BoundingBox))] ... */" />
+            <marker date="1515763315438" expanded="true" signature="550:7634" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="1089:2387" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="1097:1676" ph="/* var regularising_term = 0f; ... */" />
+            <marker date="1515763315438" expanded="true" signature="1917:2003" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="2180:2363" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="2407:3632" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="3722:4868" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="3747:4862" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="3782:4298" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="3883:4039" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="4139:4288" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="4436:4592" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="4695:4844" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="4957:6103" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="4982:6097" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="5017:5533" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="5118:5274" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="5374:5523" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="5671:5827" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="5930:6079" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="6192:7356" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="6217:7350" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="6252:6777" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="6353:6511" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="6611:6767" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="6915:7073" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="7176:7332" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="7441:7448" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="7532:7539" ph="{...}" />
+            <marker date="1515763315438" expanded="true" signature="7623:7630" ph="{...}" />
           </folding>
         </state>
       </provider>

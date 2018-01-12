@@ -29,7 +29,7 @@ namespace Neodroid.Models.Motors.Particles {
       this._fired_this_step = false;
     }
 
-    public override void InnerApplyMotion(MotorMotion motion) {
+    protected override void InnerApplyMotion(MotorMotion motion) {
       switch (this._axis_of_motion) {
         case Axis.X:
           if (this._relative_to == Space.World)

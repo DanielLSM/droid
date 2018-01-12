@@ -60,7 +60,7 @@ namespace Neodroid.Models.Motors.General {
       this.EnergySpendSinceReset += Mathf.Abs(this.EnergyCost * motion.Strength);
     }
 
-    public virtual void InnerApplyMotion(MotorMotion motion) { }
+    protected virtual void InnerApplyMotion(MotorMotion motion) { }
 
     public virtual float GetEnergySpend() { return this._energy_spend_since_reset; }
 

@@ -38,7 +38,7 @@ namespace Neodroid.Models.Motors {
 
     public override string GetMotorIdentifier() { return this.name + "Transform"; }
 
-    public override void InnerApplyMotion(MotorMotion motion) {
+    protected override void InnerApplyMotion(MotorMotion motion) {
       var layer_mask = 1 << LayerMask.NameToLayer(this._layer_mask);
       if (!this._rotational_motors) {
         if (motion.GetMotorName() == this._x) {

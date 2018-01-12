@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
   public class ValueObserver : Observer,
-                               IHasObservationValue {
+                               IHasSingle {
 
     [Header("Observation", order = 103)]
     [SerializeField]

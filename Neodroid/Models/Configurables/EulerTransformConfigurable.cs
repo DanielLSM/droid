@@ -6,7 +6,7 @@ using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
 namespace Neodroid.Models.Configurables {
-  public class EulerTransformConfigurable : ConfigurableGameObject, IHasEulerTransformProperties {
+  public class EulerTransformConfigurable : ConfigurableGameObject, IHasEulerTransform {
     string _dir_x;
     string _dir_y;
     string _dir_z;

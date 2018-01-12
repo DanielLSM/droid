@@ -45,7 +45,7 @@ namespace Neodroid.Models.Motors {
 
     public override string GetMotorIdentifier() { return this.name + "Rigidbody"; }
 
-    public override void InnerApplyMotion(MotorMotion motion) {
+    protected override void InnerApplyMotion(MotorMotion motion) {
       if (motion.GetMotorName() == this._x)
         this._rigidbody.AddForce(Vector3.left * motion.Strength);
       else if (motion.GetMotorName() == this._y)

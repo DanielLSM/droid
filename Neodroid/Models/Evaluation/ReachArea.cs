@@ -20,7 +20,7 @@ namespace Neodroid.Models.Evaluation {
   //[RequireComponent (typeof(BoundingBox))]
   //[RequireComponent (typeof(BoxCollider))]
   public class ReachArea : ObjectiveFunction {
-    [SerializeField] GameObject _actor;
+    [SerializeField] Collider _actor;
 
     [SerializeField] Collider _area;
 
@@ -68,7 +68,7 @@ namespace Neodroid.Models.Evaluation {
       if (!this._area)
         this._area = FindObjectOfType<Observer> ().gameObject.GetComponent<Collider> ();
       if (!this._actor)
-        this._actor = FindObjectOfType<Actor> ().gameObject;
+        this._actor = FindObjectOfType<Actor> ().gameObject.GetComponent<Collider> ();
       if (!this._environment)
         this._environment = FindObjectOfType<LearningEnvironment> ();
       if (this._obstructions.Length <= 0)

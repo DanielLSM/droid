@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Neodroid.Models.Configurables {
   public class PositionConfigurable : ConfigurableGameObject,
-                                      IHasEulerPosition {
+                                      IHasTriple {
     [Header ("Observation", order = 103)]
     [SerializeField]
     Vector3 _position;

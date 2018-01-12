@@ -15,15 +15,15 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
   m_Fog: 1
-  m_FogColor: {r: 0.25735295, g: 0.25735295, b: 0.25735295, a: 0.08235294}
+  m_FogColor: {r: 0.4267318, g: 0.41985902, b: 0.39114067, a: 0.071783476}
   m_FogMode: 3
-  m_FogDensity: 0.20238172
+  m_FogDensity: 0.15391184
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0, g: 0.14655173, b: 0.25, a: 1}
+  m_AmbientSkyColor: {r: 0.26376665, g: 0.3110137, b: 0.23449984, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.01
+  m_AmbientIntensity: 0.13706012
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 906b66e06bb384e14a1881c9d9165e75, type: 2}
@@ -157,6 +157,11 @@ Prefab:
       propertyPath: _environment
       value: 
       objectReference: {fileID: 2076292202}
+    - target: {fileID: 20666255541551740, guid: 9ae6bd28477bf46a8a2566dea833cc8d,
+        type: 2}
+      propertyPath: far clip plane
+      value: 2000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ae6bd28477bf46a8a2566dea833cc8d, type: 2}
   m_IsPrefabParent: 0
@@ -196,19 +201,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.5403092
+      value: -0.0218261
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.0016514622
+      value: -0.006898753
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.5386613
+      value: -0.02187284
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.6464575
+      value: 0.9994987
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_RootOrder
@@ -217,22 +222,22 @@ Prefab:
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Intensity
-      value: 0.02
+      value: 0.22791655
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Color.r
-      value: 0
+      value: 0.26376665
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Color.g
-      value: 0.14655173
+      value: 0.3110137
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Color.b
-      value: 0.25
+      value: 0.23449984
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
@@ -513,6 +518,7 @@ MonoBehaviour:
   _debugging: 0
   _coordinate_reference_point: {fileID: 0}
   _coordinate_system: 1
+  _episode_length: 1000
   _playable_area: {fileID: 0}
 --- !u!114 &2076292203
 MonoBehaviour:
@@ -526,16 +532,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
-  _test_motors: 0
   _ip_address: 127.0.0.1
   _port: 5555
-  _wait_every: 1
+  _testing_motors: 0
+  _configuration:
+    _frame_skips: 0
+    _full_screen: 0
+    _height: 500
+    _quality_level: 1
+    _reset_iterations: 10
+    _simulation_time_scale: 0
+    _target_frame_rate: -1
+    _time_scale: 1
+    _wait_every: 1
+    _width: 500
   _update_fixed_time_scale: 0
-  _continue_on_disconnect: 0
-  _episode_length: 1000
-  _frame_skips: 0
-  _simulation_time_scale: 1
-  _resets: 20
 --- !u!4 &2076292204
 Transform:
   m_ObjectHideFlags: 0
@@ -564,6 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player_motions: {fileID: 11400000, guid: 3851e9370b5544672b17572b26901290, type: 2}
+  _simulation_manager: {fileID: 0}
   Debugging: 0
 --- !u!114 &2076292206
 MonoBehaviour:
@@ -579,9 +591,11 @@ MonoBehaviour:
   _debugging: 0
   _extra_terms: []
   _solved_threshold: 0
-  _based_on_tags: 0
-  _area: {fileID: 2022436477}
   _actor: {fileID: 341840930}
+  _area: {fileID: 2022436477}
+  _based_on_tags: 0
+  _colliding: 0
   _environment: {fileID: 0}
   _obstructions: []
+  _overlapping: 1
   _playable_area: {fileID: 0}

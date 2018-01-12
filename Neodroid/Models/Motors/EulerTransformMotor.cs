@@ -13,7 +13,7 @@ namespace Neodroid.Models.Motors {
 
     [SerializeField] protected Space _relative_to = Space.Self;
 
-    public override void InnerApplyMotion(MotorMotion motion) {
+    protected override void InnerApplyMotion(MotorMotion motion) {
       var layer_mask = 1 << LayerMask.NameToLayer(this._layer_mask);
       var vec = Vector3.zero;
       switch (this._axis_of_motion) {

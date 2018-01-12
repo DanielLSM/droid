@@ -1,11 +1,13 @@
-﻿using Neodroid.Models.Observers.General;
+﻿using System;
+using Neodroid.Models.Observers.General;
 using Neodroid.Scripts.Utilities;
+using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
 namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
   [RequireComponent(typeof(Camera))]
-  public class CameraObserver : Observer {
+  public class CameraObserver : Observer, IHasByteArray {
     [Header("Specific", order = 102)]
     [SerializeField]
     Camera _camera;
@@ -27,5 +29,7 @@ namespace Neodroid.Models.Observers {
     public override void UpdateObservation() {
       //Data = NeodroidUtilities.RenderTextureImage (_camera).EncodeToPNG (); // Must be done on the main thread
     }
+
+    public Byte[] Bytes { get { return this._data; } private set { this._data = value; } }
   }
 }

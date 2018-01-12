@@ -1,58 +1,63 @@
 namespace Neodroid.FBS;
 
-table Unobservables {
-  poses:[QuaternionTransform];
-  bodies:[Body];
+table FUnobservables {
+  poses:[FQuaternionTransform];
+  bodies:[FBody];
 }
 
-struct Vector3 {
+struct FVector2 {
+  x:double;
+  y:double;
+}
+
+struct FVector3 {
   x:double;
   y:double;
   z:double;
 }
 
-struct Quaternion {
+struct FQuaternion {
   x:double;
   y:double;
   z:double;
   w:double;
 }
 
-struct QuaternionTransform {
-  position:Vector3;
-  rotation:Quaternion;
+struct FQuaternionTransform {
+  position:FVector3;
+  rotation:FQuaternion;
 }
 
-struct EulerTransform {
-  position:Vector3;
-  rotation:Vector3;
-  direction:Vector3;
+struct FEulerTransform {
+  position:FVector3;
+  rotation:FVector3;
+  direction:FVector3;
 }
 
-struct Body {
-  velocity:Vector3;
-  angular_velocity:Vector3;
+struct FBody {
+  velocity:FVector3;
+  angular_velocity:FVector3;
 }
 
-struct Range{
+struct FRange{
   decimal_granularity:int;
   max_value:float;
   min_value:float;
 }
 
-struct SimulatorConfiguration {
+struct FSimulatorConfiguration {
   width:int;
   height:int;
   full_screen:bool;
   quality_level:int;
   time_scale:float;
   target_frame_rate:float;
-  wait_every:int; //Use WaitOn type instead
+  wait_every:int; //Use FWaitOn type instead
   frame_skips:int;
   reset_iterations:int;
 }
 
-/*enum WaitOn:ubyte { // Not used yet due to flatbuffer enums being non-scalars
+/*enum FWaitOn:ubyte { // Not used yet due to flatbuffer enums being non-scalars
   Never,
   Update,
   FixedUpdate

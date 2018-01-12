@@ -8,7 +8,7 @@ using Neodroid.Scripts.Utilities.Structs;
 using UnityEngine;
 
 namespace Neodroid.Models.Configurables {
-  public class SingleAxisTransformConfigurable : ConfigurableGameObject, IHasObservationValue {
+  public class SingleAxisTransformConfigurable : ConfigurableGameObject, IHasSingle {
     #region Fields
     [SerializeField] Axis _axis_of_configuration;
     [SerializeField] BoundingBox _bounding_box;

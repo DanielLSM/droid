@@ -38,7 +38,7 @@ namespace Neodroid.Models.Motors {
 
     public override string GetMotorIdentifier() { return this.name + "Rigidbody"; }
 
-    public override void InnerApplyMotion(MotorMotion motion) {
+    protected override void InnerApplyMotion(MotorMotion motion) {
       if (!this._rotational_motors) {
         if (motion.GetMotorName() == this._x) {
           if (this._relative_to == Space.World)

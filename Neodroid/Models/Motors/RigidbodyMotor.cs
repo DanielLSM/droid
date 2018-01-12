@@ -15,7 +15,7 @@ namespace Neodroid.Models.Motors {
 
     protected override void Start() { this._rigidbody = this.GetComponent<Rigidbody>(); }
 
-    public override void InnerApplyMotion(MotorMotion motion) {
+    protected override void InnerApplyMotion(MotorMotion motion) {
       switch (this._axis_of_motion) {
         case Axis.X:
           if (this._relative_to == Space.World)

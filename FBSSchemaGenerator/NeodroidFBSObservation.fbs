@@ -2,57 +2,73 @@ include "NeodroidFBSShared.fbs";
 
 namespace Neodroid.FBS.State;
 
-union Observation {
-  Single,
-  Triple,
-  Array,
+union FObservation {
+  FSingle,
+  FDouble,
+  FTriple,
+  FQuadruple,
+  FArray,
 
-  RB,
-  ET,
-  QT,
+  FRB,
+  FET,
+  FQT,
 
-  String,
-  ByteArray,
+  FString,
+  FByteArray,
 }
 
-table Single {
+table FSingle {
   value:double;
-  range:Range;
+  range:FRange;
 }
 
-table Triple {
-  triple:Vector3 (required);
-  x_range:Range;
-  y_range:Range;
-  z_range:Range;
+table FDouble {
+  vec2:FVector2;
+  x_range:FRange;
+  y_range:FRange;
 }
 
-table Array{
+table FTriple {
+  vec3:FVector3 (required);
+  x_range:FRange;
+  y_range:FRange;
+  z_range:FRange;
+}
+
+table FQuadruple{
+  quat:FQuaternion (required);
+  x_range:FRange;
+  y_range:FRange;
+  z_range:FRange;
+  w_range:FRange;
+}
+
+table FArray{
   array:[double] (required);
-  ranges:[Range];
+  ranges:[FRange];
 }
 
-table RB {
-  body:Body (required);
+table FRB {
+  body:FBody (required);
 }
 
-table ET {
-  transform:EulerTransform (required);
+table FET {
+  transform:FEulerTransform (required);
 }
 
-table QT {
-  transform:QuaternionTransform (required);
+table FQT {
+  transform:FQuaternionTransform (required);
 }
 
-table String {
+table FString {
   str:string (required);
 }
 
-enum ByteDataType:ubyte { PNG, JPEG, Other }
+enum FByteDataType:ubyte { PNG, JPEG, Other }
 
-table ByteArray {
+table FByteArray {
   bytes:[ubyte] (required);
-  type:ByteDataType;
+  type:FByteDataType;
 }
 
 file_identifier "OBSE";

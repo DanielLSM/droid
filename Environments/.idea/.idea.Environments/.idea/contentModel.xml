@@ -105,10 +105,10 @@
                 <e p="CustomFlatBufferImplementation.cs" t="Include" />
                 <e p="FBSReactionUtilities.cs" t="Include" />
                 <e p="FBSStateUtilities.cs" t="Include" />
-                <e p="NeodroidObservationModels.cs" t="Include" />
-                <e p="NeodroidReactionModels.cs" t="Include" />
-                <e p="NeodroidSharedModels.cs" t="Include" />
-                <e p="NeodroidStateModels.cs" t="Include" />
+                <e p="NeodroidFBSObservation.cs" t="Include" />
+                <e p="NeodroidFBSReaction.cs" t="Include" />
+                <e p="NeodroidFBSShared.cs" t="Include" />
+                <e p="NeodroidFBSState.cs" t="Include" />
               </e>
               <e p="MessageServer.cs" t="Include" />
               <e p="Messages" t="Include">
@@ -164,11 +164,13 @@
                 <e p="WaitOn.cs" t="Include" />
               </e>
               <e p="Interfaces" t="Include">
-                <e p="IHasEulerPosition.cs" t="Include" />
-                <e p="IHasEulerTransformProperties.cs" t="Include" />
-                <e p="IHasObservationValue.cs" t="Include" />
+                <e p="IHasByteArray.cs" t="Include" />
+                <e p="IHasEulerTransform.cs" t="Include" />
+                <e p="IHasQuaternionTransform.cs" t="Include" />
                 <e p="IHasRegister.cs" t="Include" />
-                <e p="IHasRigidbodyProperties.cs" t="Include" />
+                <e p="IHasRigidbody.cs" t="Include" />
+                <e p="IHasSingle.cs" t="Include" />
+                <e p="IHasTriple.cs" t="Include" />
               </e>
               <e p="JointFix.cs" t="Include" />
               <e p="LightSources" t="Include">

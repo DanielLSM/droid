@@ -6,7 +6,7 @@ namespace Neodroid.Models.Observers {
   [ExecuteInEditMode]
   [RequireComponent (typeof(Rigidbody))]
   public class RigidbodyObserver : Observer,
-                                   IHasRigidbodyProperties {
+                                   IHasRigidbody {
     [Header ("Specfic", order = 103)]
     [SerializeField]
     Rigidbody _rigidbody;

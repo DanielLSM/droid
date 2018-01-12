@@ -1,8 +1,9 @@
 ﻿using Neodroid.Models.Configurables.General;
+using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
 namespace Neodroid.Models.Configurables {
-  public class QuaternionTransformConfigurable : ConfigurableGameObject {
+  public class QuaternionTransformConfigurable : ConfigurableGameObject, IHasQuaternionTransform {
     [Header("Specfic", order = 102)]
     [SerializeField]
     Vector3 _position;

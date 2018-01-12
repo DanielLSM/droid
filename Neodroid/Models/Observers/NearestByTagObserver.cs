@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Neodroid.Models.Observers {
   public class NearestByTagObserver : Observer,
-                                      IHasEulerTransformProperties {
+                                      IHasEulerTransform {
     [SerializeField] Vector3 _direction;
 
     [Header ("Specific", order = 102)]

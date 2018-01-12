@@ -59,7 +59,7 @@ namespace Neodroid.Scripts.Messaging {
             byte[] msg;
             this._socket.TryReceiveFrameBytes(TimeSpan.FromSeconds(2), out msg);
             if (msg != null && msg.Length > 0) {
-              var flat_reaction = FBSReaction.GetRootAsFBSReaction(new ByteBuffer(msg));
+              var flat_reaction = FReaction.GetRootAsFReaction(new ByteBuffer(msg));
               if (this.Debugging)
                 debug_callback(flat_reaction.ToString());
               var reaction = FBSReactionUtilities.create_reaction(flat_reaction);

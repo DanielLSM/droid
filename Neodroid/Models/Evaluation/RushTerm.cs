@@ -16,9 +16,9 @@ namespace Neodroid.Models.Evaluation {
 
     public override float Evaluate () {
       if (this._env) {
-        return -(1f / _env.EpisodeLength);
+        return -(1f / this._env.EpisodeLength);
       }
-      return -_penalty_size;
+      return -this._penalty_size;
     }
   }
 }

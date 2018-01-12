@@ -42,7 +42,7 @@ namespace Neodroid.Models.Motors {
 
     public override string GetMotorIdentifier() { return this.name + "Transform"; }
 
-    public override void InnerApplyMotion(MotorMotion motion) {
+    protected override void InnerApplyMotion(MotorMotion motion) {
       if (motion.GetMotorName() == this._x)
         this.transform.Translate(Vector3.left * motion.Strength, this._relative_to);
       else if (motion.GetMotorName() == this._y)
