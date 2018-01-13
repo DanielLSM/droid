@@ -9,7 +9,7 @@ namespace Neodroid.Models.Motors {
   public class RigidbodyMotor : Motor {
     [SerializeField] protected Axis _axis_of_motion;
 
-    [SerializeField] protected Space _relative_to = Space.Self;
+    [SerializeField] protected Space _relative_to = UnityEngine.Space.Self;
 
     [SerializeField] protected Rigidbody _rigidbody;
 
@@ -18,37 +18,37 @@ namespace Neodroid.Models.Motors {
     protected override void InnerApplyMotion(MotorMotion motion) {
       switch (this._axis_of_motion) {
         case Axis.X:
-          if (this._relative_to == Space.World)
+          if (this._relative_to == UnityEngine.Space.World)
             this._rigidbody.AddForce(Vector3.left * motion.Strength);
           else
             this._rigidbody.AddRelativeForce(Vector3.left * motion.Strength);
           break;
         case Axis.Y:
-          if (this._relative_to == Space.World)
+          if (this._relative_to == UnityEngine.Space.World)
             this._rigidbody.AddForce(Vector3.up * motion.Strength);
           else
             this._rigidbody.AddRelativeForce(Vector3.up * motion.Strength);
           break;
         case Axis.Z:
-          if (this._relative_to == Space.World)
+          if (this._relative_to == UnityEngine.Space.World)
             this._rigidbody.AddForce(Vector3.forward * motion.Strength);
           else
             this._rigidbody.AddRelativeForce(Vector3.up * motion.Strength);
           break;
         case Axis.RotX:
-          if (this._relative_to == Space.World)
+          if (this._relative_to == UnityEngine.Space.World)
             this._rigidbody.AddTorque(Vector3.left * motion.Strength);
           else
             this._rigidbody.AddRelativeTorque(Vector3.left * motion.Strength);
           break;
         case Axis.RotY:
-          if (this._relative_to == Space.World)
+          if (this._relative_to == UnityEngine.Space.World)
             this._rigidbody.AddTorque(Vector3.up * motion.Strength);
           else
             this._rigidbody.AddRelativeTorque(Vector3.up * motion.Strength);
           break;
         case Axis.RotZ:
-          if (this._relative_to == Space.World)
+          if (this._relative_to == UnityEngine.Space.World)
             this._rigidbody.AddTorque(Vector3.forward * motion.Strength);
           else
             this._rigidbody.AddRelativeTorque(Vector3.forward * motion.Strength);

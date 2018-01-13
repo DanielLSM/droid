@@ -18,7 +18,7 @@ namespace Neodroid.Models.Motors.General {
 
     public float EnergyCost { get { return this._energy_cost; } set { this._energy_cost = value; } }
 
-    public InputRange ValidInput { get { return this._valid_input; } set { this._valid_input = value; } }
+    public SingleSpace MotionSpace { get { return this._motion_space; } set { this._motion_space = value; } }
 
     public bool Debugging { get { return this._debugging; } set { this._debugging = value; } }
 
@@ -46,13 +46,13 @@ namespace Neodroid.Models.Motors.General {
     public void ApplyMotion(MotorMotion motion) {
       if (this.Debugging)
         print("Applying " + motion + " To " + this.name);
-      if (motion.Strength < this.ValidInput.MinValue || motion.Strength > this.ValidInput.MaxValue) {
+      if (motion.Strength < this.MotionSpace.MinValue || motion.Strength > this.MotionSpace.MaxValue) {
         print(
             string.Format(
                 "It does not accept input {0}, outside allowed range {1} to {2}",
                 motion.Strength,
-                this.ValidInput.MinValue,
-                this.ValidInput.MaxValue));
+                this.MotionSpace.MinValue,
+                this.MotionSpace.MaxValue));
         return; // Do nothing
       }
 
@@ -80,7 +80,7 @@ namespace Neodroid.Models.Motors.General {
 
     [Header("General", order = 101)]
     [SerializeField]
-    InputRange _valid_input = new InputRange {DecimalGranularity = 0, MinValue = -10, MaxValue = 10};
+    SingleSpace _motion_space = new SingleSpace {DecimalGranularity = 0, MinValue = -10, MaxValue = 10};
 
     [SerializeField] float _energy_spend_since_reset;
 

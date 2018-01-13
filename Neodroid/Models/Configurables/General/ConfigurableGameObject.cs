@@ -8,7 +8,7 @@ namespace Neodroid.Models.Configurables.General {
   public class ConfigurableGameObject : Configurable {
     public bool RelativeToExistingValue { get { return this._relative_to_existing_value; } }
 
-    public InputRange ValidInput { get { return this._valid_input; } set { this._valid_input = value; } }
+    public SingleSpace ConfigurableSpace { get { return this._configurable_space; } set { this._configurable_space = value; } }
 
     public LearningEnvironment ParentEnvironment {
       get { return this._environment; }
@@ -47,7 +47,7 @@ namespace Neodroid.Models.Configurables.General {
 
     [Header("General", order = 101)]
     [SerializeField]
-    InputRange _valid_input = new InputRange {DecimalGranularity = 0, MinValue = 10, MaxValue = 10};
+    SingleSpace _configurable_space = new SingleSpace {DecimalGranularity = 0, MinValue = 10, MaxValue = 10};
 
     [SerializeField] bool _relative_to_existing_value;
 

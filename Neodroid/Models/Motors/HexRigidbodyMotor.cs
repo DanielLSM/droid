@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Neodroid.Models.Motors {
   [RequireComponent(typeof(Rigidbody))]
   public class HexRigidbodyMotor : Motor {
-    [SerializeField] protected Space _relative_to = Space.Self;
+    [SerializeField] protected Space _relative_to = UnityEngine.Space.Self;
 
     [SerializeField] protected Rigidbody _rigidbody;
 

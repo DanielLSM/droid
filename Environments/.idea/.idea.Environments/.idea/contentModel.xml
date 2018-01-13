@@ -208,7 +208,9 @@
               </e>
               <e p="StatusUpdater.cs" t="Include" />
               <e p="Structs" t="Include">
-                <e p="InputRange.cs" t="Include" />
+                <e p="DoubleSpace.cs" t="Include" />
+                <e p="SingleSpace.cs" t="Include" />
+                <e p="Space.cs" t="Include" />
               </e>
               <e p="Tasks" t="Include">
                 <e p="TaskSequence.cs" t="Include" />

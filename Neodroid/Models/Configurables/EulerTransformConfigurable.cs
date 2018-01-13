@@ -97,15 +97,15 @@ namespace Neodroid.Models.Configurables {
       var dir = this.ParentEnvironment.TransformDirection (this.transform.forward);
       var rot = this.ParentEnvironment.TransformDirection (this.transform.up);
       var v = configuration.ConfigurableValue;
-      if (this.ValidInput.DecimalGranularity >= 0)
-        v = (int)Math.Round (v, this.ValidInput.DecimalGranularity);
-      if (this.ValidInput.MinValue.CompareTo (this.ValidInput.MaxValue) != 0) {
-        if (v < this.ValidInput.MinValue || v > this.ValidInput.MaxValue) {
+      if (this.ConfigurableSpace.DecimalGranularity >= 0)
+        v = (int)Math.Round (v, this.ConfigurableSpace.DecimalGranularity);
+      if (this.ConfigurableSpace.MinValue.CompareTo (this.ConfigurableSpace.MaxValue) != 0) {
+        if (v < this.ConfigurableSpace.MinValue || v > this.ConfigurableSpace.MaxValue) {
           print (
             string.Format (
               "Configurable does not accept input{2}, outside allowed range {0} to {1}",
-              this.ValidInput.MinValue,
-              this.ValidInput.MaxValue,
+              this.ConfigurableSpace.MinValue,
+              this.ConfigurableSpace.MaxValue,
               v));
           return; // Do nothing
         }

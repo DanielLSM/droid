@@ -98,9 +98,9 @@ namespace Neodroid.Scripts.Messaging.FBS {
         b,
         FRange.CreateFRange (
           b,
-          motor.ValidInput.DecimalGranularity,
-          motor.ValidInput.MaxValue,
-          motor.ValidInput.MinValue));
+          motor.MotionSpace.DecimalGranularity,
+          motor.MotionSpace.MaxValue,
+          motor.MotionSpace.MinValue));
       FMotor.AddEnergySpentSinceReset (b, motor.GetEnergySpend ());
       return FMotor.EndFMotor (b);
     }

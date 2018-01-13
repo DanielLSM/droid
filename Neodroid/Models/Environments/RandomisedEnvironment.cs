@@ -7,7 +7,7 @@ namespace Neodroid.Models.Environments {
 
     void RandomiseEnvironment () {
       foreach (var configurable in this._configurables) {
-        var valid_range = configurable.Value.ValidInput;
+        var valid_range = configurable.Value.ConfigurableSpace;
         float value = this._random_generator.Next((int)valid_range.MinValue, (int)valid_range.MaxValue);
         configurable.Value.ApplyConfiguration (new Configuration (configurable.Key, Mathf.Round(value)));
       }

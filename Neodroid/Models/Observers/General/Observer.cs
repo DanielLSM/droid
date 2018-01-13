@@ -1,6 +1,7 @@
 ﻿using System;
 using Neodroid.Models.Environments;
 using Neodroid.Scripts.Utilities;
+using Neodroid.Scripts.Utilities.Structs;
 using UnityEngine;
 
 namespace Neodroid.Models.Observers.General {
@@ -42,8 +43,9 @@ namespace Neodroid.Models.Observers.General {
     [SerializeField]
     bool _debugging;
 
-    //[Header ("General", order = 101)]
-
+    [Header ("General", order = 101)]
+    [SerializeField]
+    SingleSpace _observation_spacex;
     #endregion
   }
 }

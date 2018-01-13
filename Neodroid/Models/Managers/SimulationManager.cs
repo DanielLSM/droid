@@ -66,6 +66,9 @@ namespace Neodroid.Models.Managers {
 
       QualitySettings.SetQualityLevel (this._configuration.QualityLevel, true);
       Application.targetFrameRate = this._configuration.TargetFrameRate;
+      if (this._configuration.TargetFrameRate < 0) {
+        QualitySettings.vSyncCount = 0;
+      }
 
       Time.timeScale = this._configuration.TimeScale;
       #if !UNITY_EDITOR

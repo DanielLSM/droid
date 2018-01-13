@@ -9,7 +9,7 @@ namespace Neodroid.Models.Motors {
 
     [SerializeField] protected bool _no_collisions = true;
 
-    [SerializeField] protected Space _relative_to = Space.Self;
+    [SerializeField] protected Space _relative_to = UnityEngine.Space.Self;
 
     string _rot_x;
     string _rot_y;

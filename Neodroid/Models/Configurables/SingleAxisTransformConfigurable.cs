@@ -70,25 +70,25 @@ namespace Neodroid.Models.Configurables {
       this.AddToEnvironment ();
       if (this._use_bounding_box_for_range) {
         if (this._bounding_box != null) {
-          var valid_input = new InputRange {
+          var valid_input = new SingleSpace {
             MaxValue = Math.Min (
               this._bounding_box._bounds.size.x,
               Math.Min (this._bounding_box._bounds.size.y, this._bounding_box._bounds.size.z))
           };
           valid_input.MinValue = -valid_input.MaxValue;
-          this.ValidInput = valid_input;
+          this.ConfigurableSpace = valid_input;
         }
       }
     }
 
     public override void ApplyConfiguration (Configuration configuration) {
-      if (configuration.ConfigurableValue < this.ValidInput.MinValue
-          || configuration.ConfigurableValue > this.ValidInput.MaxValue) {
+      if (configuration.ConfigurableValue < this.ConfigurableSpace.MinValue
+          || configuration.ConfigurableValue > this.ConfigurableSpace.MaxValue) {
         print (
           string.Format (
             "It does not accept input, outside allowed range {0} to {1}",
-            this.ValidInput.MinValue,
-            this.ValidInput.MaxValue));
+            this.ConfigurableSpace.MinValue,
+            this.ConfigurableSpace.MaxValue));
         return; // Do nothing
       }
 

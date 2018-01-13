@@ -130,8 +130,8 @@ namespace Neodroid.Models.Managers.General {
         foreach (var actor in environment.Value.Actors) {
           foreach (var motor in actor.Value.Motors) {
             var strength = this._random_generator.Next (
-                             (int)motor.Value.ValidInput.MinValue,
-                             (int)(motor.Value.ValidInput.MaxValue + 1));
+                             (int)motor.Value.MotionSpace.MinValue,
+                             (int)(motor.Value.MotionSpace.MaxValue + 1));
             motions.Add (new MotorMotion (actor.Key, motor.Key, strength));
           }
         }

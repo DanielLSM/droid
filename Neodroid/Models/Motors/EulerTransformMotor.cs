@@ -11,7 +11,7 @@ namespace Neodroid.Models.Motors {
 
     [SerializeField] protected bool _no_collisions = true;
 
-    [SerializeField] protected Space _relative_to = Space.Self;
+    [SerializeField] protected Space _relative_to = UnityEngine.Space.Self;
 
     protected override void InnerApplyMotion(MotorMotion motion) {
       var layer_mask = 1 << LayerMask.NameToLayer(this._layer_mask);
