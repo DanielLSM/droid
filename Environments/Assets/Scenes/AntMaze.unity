@@ -15,15 +15,15 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
   m_Fog: 0
-  m_FogColor: {r: 0.8074178, g: 0.90520674, b: 0.9632353, a: 0.019652471}
+  m_FogColor: {r: 0.8074178, g: 0.90520674, b: 0.9632353, a: 0.027018677}
   m_FogMode: 3
-  m_FogDensity: 0.010498548
+  m_FogDensity: 0.019487668
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.76374924
+  m_AmbientIntensity: 0.6751969
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -126,7 +126,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &119598487
 Transform:
@@ -145,7 +145,8 @@ Transform:
   - {fileID: 1298613821}
   - {fileID: 917838063}
   - {fileID: 1385828213}
-  m_Father: {fileID: 1231444472}
+  - {fileID: 1178087223}
+  m_Father: {fileID: 1169246378}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &196431693
@@ -282,13 +283,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
   _energy_spend_since_reset: 0
   _energy_cost: 0
-  _axis_of_motion: 0
+  _axis_of_motion: 2
   _relative_to: 1
   _rigidbody: {fileID: 204392825}
 --- !u!114 &204392823
@@ -304,7 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
@@ -343,22 +344,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -80
+    limit: -60
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 40
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -435,8 +436,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &204392827
@@ -452,8 +457,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &204392828
@@ -469,6 +478,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _rigidbody: {fileID: 204392825}
+  _differential: 0
+  _last_update_time: 0
   _angular_velocity: {x: 0, y: 0, z: 0}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &308099205
@@ -585,13 +601,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
   _energy_spend_since_reset: 0
   _energy_cost: 0
-  _axis_of_motion: 0
+  _axis_of_motion: 2
   _relative_to: 1
   _rigidbody: {fileID: 366972604}
 --- !u!114 &366972602
@@ -607,7 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
@@ -646,22 +662,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -80
+    limit: -60
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 40
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -738,8 +754,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &366972606
@@ -755,8 +775,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &366972607
@@ -772,6 +796,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _rigidbody: {fileID: 366972604}
+  _differential: 0
+  _last_update_time: 0
   _angular_velocity: {x: 0, y: 0, z: 0}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &544107239
@@ -909,8 +940,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &589248242
@@ -926,12 +961,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 0}
   _debugging: 0
-  _valid_input:
+  _configurable_space:
     DecimalGranularity: 0
-    MinValue: 0
-    MaxValue: 0
+    MinValue: 10
+    MaxValue: 10
   _relative_to_existing_value: 0
   _position: {x: 0, y: 0, z: 0}
+  _use_environments_space: 0
 --- !u!114 &589248244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,6 +979,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b7c65bfbcfa4ac381370b0b8eef1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _alive: 1
+  _bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  _draw_bounds: 0
   _environment: {fileID: 1231444470}
   _debugging: 0
 --- !u!54 &589248245
@@ -1070,22 +1111,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -80
+    limit: -60
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 40
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -1147,13 +1188,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
   _energy_spend_since_reset: 0
   _energy_cost: 0
-  _axis_of_motion: 0
+  _axis_of_motion: 2
   _relative_to: 1
   _rigidbody: {fileID: 645827817}
 --- !u!114 &645827820
@@ -1169,7 +1210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
@@ -1191,8 +1232,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &645827822
@@ -1208,6 +1253,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _rigidbody: {fileID: 645827817}
+  _differential: 0
+  _last_update_time: 0
   _angular_velocity: {x: 0, y: 0, z: 0}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &687708494
@@ -1226,7 +1278,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &687708495
 Transform:
@@ -1310,7 +1362,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &706663051
 Transform:
@@ -1544,22 +1596,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -80
+    limit: -60
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 40
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -1621,13 +1673,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
   _energy_spend_since_reset: 0
   _energy_cost: 0
-  _axis_of_motion: 0
+  _axis_of_motion: 2
   _relative_to: 1
   _rigidbody: {fileID: 753379193}
 --- !u!114 &753379196
@@ -1643,7 +1695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
@@ -1665,8 +1717,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &753379198
@@ -1682,6 +1738,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _rigidbody: {fileID: 753379193}
+  _differential: 0
+  _last_update_time: 0
   _angular_velocity: {x: 0, y: 0, z: 0}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &783588108
@@ -1794,22 +1857,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -80
+    limit: -60
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 40
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -1871,13 +1934,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
   _energy_spend_since_reset: 0
   _energy_cost: 0
-  _axis_of_motion: 0
+  _axis_of_motion: 2
   _relative_to: 1
   _rigidbody: {fileID: 859432268}
 --- !u!114 &859432271
@@ -1893,7 +1956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
@@ -1915,8 +1978,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &859432273
@@ -1932,6 +1999,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _rigidbody: {fileID: 859432268}
+  _differential: 0
+  _last_update_time: 0
   _angular_velocity: {x: 0, y: 0, z: 0}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &888327503
@@ -1950,7 +2024,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &888327504
 Transform:
@@ -2034,7 +2108,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &917838063
 Transform:
@@ -2118,7 +2192,7 @@ GameObject:
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!81 &944059390
 AudioListener:
@@ -2179,7 +2253,7 @@ Transform:
   m_LocalPosition: {x: -30.382446, y: 23.168152, z: -28.239265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1169246378}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &977996030
@@ -2377,22 +2451,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -80
+    limit: -60
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 40
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -2454,13 +2528,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
   _energy_spend_since_reset: 0
   _energy_cost: 0
-  _axis_of_motion: 0
+  _axis_of_motion: 2
   _relative_to: 1
   _rigidbody: {fileID: 1135129382}
 --- !u!114 &1135129385
@@ -2476,7 +2550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
@@ -2498,8 +2572,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &1135129387
@@ -2515,6 +2593,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _rigidbody: {fileID: 1135129382}
+  _differential: 0
+  _last_update_time: 0
   _angular_velocity: {x: 0, y: 0, z: 0}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1137912651
@@ -2533,7 +2618,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1137912652
 Transform:
@@ -2630,6 +2715,37 @@ Transform:
   m_Father: {fileID: 589248240}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1169246377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1169246378}
+  m_Layer: 0
+  m_Name: Statics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1169246378
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1169246377}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 944059393}
+  - {fileID: 1534518651}
+  - {fileID: 119598487}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1177943492
 GameObject:
   m_ObjectHideFlags: 0
@@ -2715,6 +2831,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1177943492}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1178087222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1178087223}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1178087223
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1178087222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 119598487}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1200890207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2810,6 +2954,9 @@ GameObject:
   - component: {fileID: 1231444472}
   - component: {fileID: 1231444471}
   - component: {fileID: 1231444470}
+  - component: {fileID: 1231444475}
+  - component: {fileID: 1231444474}
+  - component: {fileID: 1231444473}
   m_Layer: 0
   m_Name: SingleEnvironment
   m_TagString: Untagged
@@ -2828,13 +2975,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4675f9235ecc46a5982e50590d858cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objective_function: {fileID: 0}
-  _simulation_manager: {fileID: 0}
+  _objective_function: {fileID: 1231444475}
+  _simulation_manager: {fileID: 1231444471}
   _debugging: 0
-  _coordinate_reference_point: {fileID: 0}
-  _coordinate_system: 1
+  _coordinate_reference_point: {fileID: 589248240}
+  _coordinate_system: 2
   _episode_length: 3000
-  _playable_area: {fileID: 0}
+  _playable_area: {fileID: 1231444474}
 --- !u!114 &1231444471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2850,11 +2997,18 @@ MonoBehaviour:
   _ip_address: 127.0.0.1
   _port: 5555
   _testing_motors: 0
-  _wait_every: 1
+  _configuration:
+    _frame_skips: 0
+    _full_screen: 0
+    _height: 500
+    _quality_level: 1
+    _reset_iterations: 10
+    _simulation_time_scale: 0
+    _target_frame_rate: -1
+    _time_scale: 1
+    _wait_every: 1
+    _width: 500
   _update_fixed_time_scale: 0
-  _frame_skips: 0
-  _simulation_time_scale: 1
-  _reset_iterations: 20
 --- !u!4 &1231444472
 Transform:
   m_ObjectHideFlags: 0
@@ -2866,13 +3020,65 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 589248240}
-  - {fileID: 1534518651}
-  - {fileID: 119598487}
   - {fileID: 1634767352}
-  - {fileID: 1342506165}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1231444473
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1231444469}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 10, z: 50}
+  m_Center: {x: 0, y: 5, z: 0}
+--- !u!114 &1231444474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1231444469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e918915125b4fdfb1a4025246b5ea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 0, y: 5, z: 0}
+    m_Extent: {x: 25, y: 5, z: 25}
+  _bounds_offset: {x: 0, y: 5, z: 0}
+  _camera: {fileID: 0}
+  _collider_based: 1
+  _freeze: 1
+  _include_children: 1
+  _line_color: {r: 0, g: 1, b: 0.4, a: 0.74}
+  _setup_on_awake: 1
+--- !u!114 &1231444475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1231444469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f5c2538e2c745a6b298603cd6a9737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugging: 0
+  _extra_terms: []
+  _solved_threshold: 0
+  _actor: {fileID: 1270664650}
+  _area: {fileID: 1634767354}
+  _based_on_tags: 0
+  _colliding: 0
+  _environment: {fileID: 1231444470}
+  _obstructions: []
+  _overlapping: 1
+  _playable_area: {fileID: 1231444474}
 --- !u!1 &1248748253
 GameObject:
   m_ObjectHideFlags: 0
@@ -2922,13 +3128,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
   _energy_spend_since_reset: 0
   _energy_cost: 0
-  _axis_of_motion: 0
+  _axis_of_motion: 2
   _relative_to: 1
   _rigidbody: {fileID: 1248748258}
 --- !u!114 &1248748256
@@ -2944,7 +3150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
@@ -2983,22 +3189,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -80
+    limit: -60
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 40
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -3075,8 +3281,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &1248748260
@@ -3092,8 +3302,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &1248748261
@@ -3109,6 +3323,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _rigidbody: {fileID: 1248748258}
+  _differential: 0
+  _last_update_time: 0
   _angular_velocity: {x: 0, y: 0, z: 0}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1270664647
@@ -3212,7 +3433,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1298613821
 Transform:
@@ -3280,11 +3501,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1298613820}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1342506165 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
-    type: 2}
-  m_PrefabInternal: {fileID: 1710061063}
 --- !u!1 &1385828212
 GameObject:
   m_ObjectHideFlags: 0
@@ -3301,7 +3517,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1385828213
 Transform:
@@ -3385,7 +3601,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1534518651
 Transform:
@@ -3397,7 +3613,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
-  m_Father: {fileID: 1231444472}
+  m_Father: {fileID: 1169246378}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1534518652
@@ -3551,7 +3767,7 @@ GameObject:
   - component: {fileID: 1634767353}
   - component: {fileID: 1634767356}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3568,7 +3784,7 @@ Transform:
   m_LocalScale: {x: 10, y: 4, z: 5}
   m_Children: []
   m_Father: {fileID: 1231444472}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1634767353
 MeshRenderer:
@@ -3636,18 +3852,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 0}
   _debugging: 0
-  _valid_input:
+  _configurable_space:
     DecimalGranularity: 0
-    MinValue: 0
-    MaxValue: 0
+    MinValue: 10
+    MaxValue: 10
   _relative_to_existing_value: 0
   _position: {x: 0, y: 0, z: 0}
+  _use_environments_space: 0
 --- !u!1001 &1710061063
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1231444472}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalPosition.x
@@ -3663,28 +3880,28 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.51865435
+      value: 0.6286265
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.0077811675
+      value: -0.0074751033
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.5198156
+      value: 0.62733066
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.6787701
+      value: 0.45959672
       objectReference: {fileID: 0}
     - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
       propertyPath: m_Intensity
-      value: 1.2534078
+      value: 1.108504
       objectReference: {fileID: 0}
     - target: {fileID: 108268193823014630, guid: 13897ff524e1f4fa5bf3a6cc84dd15db,
         type: 2}
@@ -3700,6 +3917,22 @@ Prefab:
         type: 2}
       propertyPath: m_Color.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201898201153146, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1516619755633506, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13897ff524e1f4fa5bf3a6cc84dd15db, type: 2}
@@ -3775,22 +4008,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -80
+    limit: -60
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 40
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 5
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -3867,13 +4100,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
   _energy_spend_since_reset: 0
   _energy_cost: 0
-  _axis_of_motion: 0
+  _axis_of_motion: 2
   _relative_to: 1
   _rigidbody: {fileID: 2027091186}
 --- !u!114 &2027091188
@@ -3889,7 +4122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 589248244}
   _debugging: 0
-  _valid_input:
+  _motion_space:
     DecimalGranularity: 0
     MinValue: -100
     MaxValue: 100
@@ -3911,8 +4144,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &2027091190
@@ -3928,8 +4165,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
-  _direction: {x: 0, y: 0, z: 0}
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
   _position: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _space: 2
 --- !u!114 &2027091191
@@ -3945,6 +4186,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1231444470}
   _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _rigidbody: {fileID: 2027091186}
+  _differential: 0
+  _last_update_time: 0
   _angular_velocity: {x: 0, y: 0, z: 0}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &2051801156

@@ -11,28 +11,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa96101fe55749209a8963174b3defa, type: 3}
   m_Name: PlayerMotions
   m_EditorClassIdentifier: 
-  _player_motions:
-  - key: 119
-    actor: Satellite
-    motor: SatelliteRigidbodyRotX
-    strength: 1
-  - key: 115
-    actor: Satellite
-    motor: SatelliteRigidbodyRotX
-    strength: -1
-  - key: 100
-    actor: Satellite
-    motor: SatelliteRigidbodyRotZ
-    strength: -1
-  - key: 97
-    actor: Satellite
-    motor: SatelliteRigidbodyRotZ
-    strength: 1
-  - key: 113
-    actor: Satellite
-    motor: SatelliteRigidbodyRotY
-    strength: 1
-  - key: 101
-    actor: Satellite
-    motor: SatelliteRigidbodyRotY
-    strength: -1
+  Motions:
+  - Key: 119
+    Actor: Satellite
+    Motor: SatelliteRigidbodyRotX
+    Strength: 1
+  - Key: 97
+    Actor: Satellite
+    Motor: SatelliteRigidbodyRotZ
+    Strength: -1
+  - Key: 115
+    Actor: Satellite
+    Motor: SatelliteRigidbodyRotX
+    Strength: -1
+  - Key: 100
+    Actor: Satellite
+    Motor: SatelliteRigidbodyRotZ
+    Strength: 1
+  - Key: 113
+    Actor: Satellite
+    Motor: SatelliteRigidbodyRotY
+    Strength: -1
+  - Key: 101
+    Actor: Satellite
+    Motor: SatelliteRigidbodyRotY
+    Strength: 1

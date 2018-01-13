@@ -23,7 +23,14 @@ namespace Neodroid.Models.Observers {
     [SerializeField]
     Vector3 _velocity;
 
-    public override string ObserverIdentifier { get { return this.name + "Rigidbody"; } }
+    public override string ObserverIdentifier {
+      get { 
+        if (_differential) {
+          return this.name + "RigidbodyDifferential"; 
+        }
+        return this.name + "Rigidbody"; 
+      }
+    }
 
     public Vector3 Velocity { get { return this._velocity; } set { this._velocity = value; } }
 

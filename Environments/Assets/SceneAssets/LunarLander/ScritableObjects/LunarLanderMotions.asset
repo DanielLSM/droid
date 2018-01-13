@@ -11,48 +11,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa96101fe55749209a8963174b3defa, type: 3}
   m_Name: LunarLanderMotions
   m_EditorClassIdentifier: Assembly-CSharp:Neodroid.Utilities:PlayerMotions
-  _player_motions:
-  - key: 264
-    actor: LunarLander
-    motor: LegNRigidbodyRotX
-    strength: -50
-  - key: 258
-    actor: LunarLander
-    motor: LegSRigidbodyRotX
-    strength: -50
-  - key: 260
-    actor: LunarLander
-    motor: LegWRigidbodyRotX
-    strength: -50
-  - key: 262
-    actor: LunarLander
-    motor: LegERigidbodyRotX
-    strength: -50
-  - key: 32
-    actor: LunarLander
-    motor: LunarLanderRocketY
-    strength: 5
-  - key: 119
-    actor: LunarLander
-    motor: LunarLanderRigidbodyRotX
-    strength: -0.5
-  - key: 115
-    actor: LunarLander
-    motor: LunarLanderRigidbodyRotX
-    strength: 0.5
-  - key: 97
-    actor: LunarLander
-    motor: LunarLanderRigidbodyRotZ
-    strength: 0.5
-  - key: 100
-    actor: LunarLander
-    motor: LunarLanderRigidbodyRotZ
-    strength: -0.5
-  - key: 113
-    actor: LunarLander
-    motor: LunarLanderRigidbodyRotY
-    strength: -0.5
-  - key: 101
-    actor: LunarLander
-    motor: LunarLanderRigidbodyRotY
-    strength: 0.5
+  Motions:
+  - Key: 119
+    Actor: LunarLander
+    Motor: LunarLanderRigidbodyRotX
+    Strength: -1
+  - Key: 97
+    Actor: LunarLander
+    Motor: LunarLanderRigidbodyRotZ
+    Strength: 1
+  - Key: 115
+    Actor: LunarLander
+    Motor: LunarLanderRigidbodyRotX
+    Strength: 1
+  - Key: 100
+    Actor: LunarLander
+    Motor: LunarLanderRigidbodyRotZ
+    Strength: -1
+  - Key: 113
+    Actor: LunarLander
+    Motor: LunarLanderRigidbodyRotY
+    Strength: -1
+  - Key: 101
+    Actor: LunarLander
+    Motor: LunarLanderRigidbodyRotY
+    Strength: 1
+  - Key: 32
+    Actor: LunarLander
+    Motor: LunarLanderRocketY
+    Strength: 5

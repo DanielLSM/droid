@@ -154,8 +154,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _empty_block: {fileID: 0}
   _horisontal_divisions: 6
-  _image: {fileID: 2800000, guid: 9d1fa28219872495ea7f8641b7d6f643, type: 3}
   _vertical_divisions: 6
+  _shuffle_length: 100
+  _default_move_duration: 0
+  _shuffle_move_duration: 0
+  _image: {fileID: 2800000, guid: 1956521219da4430e91b57b86772a1c4, type: 3}
 --- !u!1 &1271056659
 GameObject:
   m_ObjectHideFlags: 0
