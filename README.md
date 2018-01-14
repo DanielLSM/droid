@@ -10,6 +10,8 @@ This project is very similar to Unity's own project [Unity Machine Learning Agen
 
 ## Setup
 
+Download the newest Droid.unitypackage from [releases](https://github.com/sintefneodroid/droid/releases) and import into your Unity project.
+
 ## Environments
 - GridWorld
 - Puzzler
@@ -57,7 +59,7 @@ This unity packages is a selection of scripts and tools for easily setting up (R
 ## Development
 
 ### !Important Notice for Windows Users!
-Run ´´´fix_windows_symlink.bat``` with administrative privileges, to make windows recognise the neodroid symlink in the unity  project of this repository. If on any other platform you should be fine.
+Run ```fix_windows_symlink.bat``` with administrative privileges, to make windows recognise the neodroid symlink in the unity  project of this repository. If on any other platform you should be fine.
 
 # To Do's
 - [ ] Server side memory hash table for large environment state spaces (raw poses and bodies are never send to the learning agent but instead a hash value is send, for dictionary look ups on the server).
