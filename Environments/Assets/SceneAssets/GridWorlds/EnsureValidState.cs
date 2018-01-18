@@ -10,7 +10,7 @@ namespace SceneAssets.GridWorlds {
 
     [SerializeField] Actor _actor;
 
-    [SerializeField] LearningEnvironment _environment;
+    [SerializeField] PrototypingEnvironment _environment;
 
     [SerializeField] BoundingBox _playable_area;
 
@@ -22,7 +22,7 @@ namespace SceneAssets.GridWorlds {
       if (!this._actor)
         this._actor = FindObjectOfType<Actor> ();
       if (!this._environment)
-        this._environment = FindObjectOfType<LearningEnvironment> ();
+        this._environment = FindObjectOfType<PrototypingEnvironment> ();
       if (this._obstructions.Length <= 0)
         this._obstructions = FindObjectsOfType<Obstruction> ();
       if (!this._playable_area)

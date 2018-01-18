@@ -7,7 +7,43 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Neodroid" t="Include">
-          <e p="Models" t="Include">
+          <e p="Environments" t="Include">
+            <e p="General" t="Include">
+              <e p="NeodroidEnvironment.cs" t="Include" />
+              <e p="Resetable.cs" t="Include" />
+            </e>
+            <e p="NotUsed" t="Include">
+              <e p="ImitationEnvironment.cs" t="Include" />
+              <e p="ScriptedEnviroment.cs" t="Include" />
+            </e>
+            <e p="PrototypingEnvironment.cs" t="Include" />
+            <e p="RandomisedEnvironment.cs" t="Include" />
+          </e>
+          <e p="Managers" t="Include">
+            <e p="General" t="Include">
+              <e p="NeodroidManager.cs" t="Include" />
+            </e>
+            <e p="NotUsed" t="Include">
+              <e p="CurriculumManager.cs" t="Include" />
+              <e p="ThinManager.cs" t="Include" />
+            </e>
+            <e p="PausableManager.cs" t="Include" />
+          </e>
+          <e p="Prefabs" t="Include">
+            <e p="Environments" t="Include">
+              <e p="General" t="Include">
+                <e p="NeodroidEnvironment.cs" t="Include" />
+                <e p="Resetable.cs" t="Include" />
+              </e>
+              <e p="NotUsed" t="Include">
+                <e p="ImitationEnvironment.cs" t="Include" />
+                <e p="ScriptedEnviroment.cs" t="Include" />
+              </e>
+              <e p="PrototypingEnvironment.cs" t="Include" />
+              <e p="RandomisedEnvironment.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Prototyping" t="Include">
             <e p="Actors" t="Include">
               <e p="General" t="Include">
                 <e p="Actor.cs" t="Include" />
@@ -29,17 +65,6 @@
               <e p="SimulationConfigurable.cs" t="Include" />
               <e p="SingleAxisTransformConfigurable.cs" t="Include" />
             </e>
-            <e p="Environments" t="Include">
-              <e p="General" t="Include">
-                <e p="Resetable.cs" t="Include" />
-              </e>
-              <e p="LearningEnvironment.cs" t="Include" />
-              <e p="NotUsed" t="Include">
-                <e p="GridEnvironment.cs" t="Include" />
-                <e p="ImitationEnvironment.cs" t="Include" />
-              </e>
-              <e p="RandomisedEnvironment.cs" t="Include" />
-            </e>
             <e p="Evaluation" t="Include">
               <e p="AngularVelocityEvaluation.cs" t="Include" />
               <e p="CollidersPunishment.cs" t="Include" />
@@ -54,16 +79,6 @@
               <e p="ReachArea.cs" t="Include" />
               <e p="RestInArea.cs" t="Include" />
               <e p="RushTerm.cs" t="Include" />
-            </e>
-            <e p="Managers" t="Include">
-              <e p="General" t="Include">
-                <e p="NeodroidManager.cs" t="Include" />
-              </e>
-              <e p="NotUsed" t="Include">
-                <e p="CurriculumManager.cs" t="Include" />
-                <e p="ThinManager.cs" t="Include" />
-              </e>
-              <e p="SimulationManager.cs" t="Include" />
             </e>
             <e p="Motors" t="Include">
               <e p="EulerTransformMotor.cs" t="Include" />
@@ -84,22 +99,68 @@
               </e>
             </e>
             <e p="Observers" t="Include">
+              <e p="AdjacencyObserver.cs" t="Include" />
+              <e p="ArrayCameraObserver.cs" t="Include" />
               <e p="CameraObserver.cs" t="Include" />
+              <e p="CategoryObserver.cs" t="Include" />
               <e p="EulerTransformObserver.cs" t="Include" />
               <e p="General" t="Include">
                 <e p="Observer.cs" t="Include" />
               </e>
+              <e p="LidarObserver.cs" t="Include" />
               <e p="NearestByTagObserver.cs" t="Include" />
               <e p="NotUsed" t="Include">
                 <e p="BoundingBoxObserver.cs" t="Include" />
-                <e p="GoalObserver.cs" t="Include" />
               </e>
+              <e p="PositionObserver.cs" t="Include" />
               <e p="QuaternionTransformObserver.cs" t="Include" />
+              <e p="RaycastObserver.cs" t="Include" />
               <e p="RigidbodyObserver.cs" t="Include" />
               <e p="ValueObserver.cs" t="Include" />
             </e>
           </e>
-          <e p="Scripts" t="Include">
+          <e p="Shaders" t="Include">
+            <e p="Depth.shader" t="Include" />
+            <e p="FlatColor.shader" t="Include" />
+            <e p="Normal.shader" t="Include" />
+            <e p="ScreenSpaceFlow.shader" t="Include" />
+            <e p="Segmentation.shader" t="Include" />
+          </e>
+          <e p="Utilities" t="Include">
+            <e p="BoundingBoxes" t="Include">
+              <e p="BoundingBox.cs" t="Include" />
+              <e p="DrawBoundingBoxOnCamera.cs" t="Include" />
+              <e p="DrawBoundingBoxes.cs" t="Include" />
+              <e p="NotUsed" t="Include">
+                <e p="BoundingBoxUtilities.cs" t="Include" />
+              </e>
+            </e>
+            <e p="ChildSensor.cs" t="Include" />
+            <e p="Daylight" t="Include">
+              <e p="DaylightSimulator.cs" t="Include" />
+            </e>
+            <e p="Enums" t="Include">
+              <e p="Axis.cs" t="Include" />
+              <e p="CoordinateSystem.cs" t="Include" />
+              <e p="WaitOn.cs" t="Include" />
+            </e>
+            <e p="Interfaces" t="Include">
+              <e p="IHasArray.cs" t="Include" />
+              <e p="IHasByteArray.cs" t="Include" />
+              <e p="IHasDouble.cs" t="Include" />
+              <e p="IHasEulerTransform.cs" t="Include" />
+              <e p="IHasFloatEnumarable.cs" t="Include" />
+              <e p="IHasQuadruple.cs" t="Include" />
+              <e p="IHasQuaternionTransform.cs" t="Include" />
+              <e p="IHasRegister.cs" t="Include" />
+              <e p="IHasRigidbody.cs" t="Include" />
+              <e p="IHasSingle.cs" t="Include" />
+              <e p="IHasTriple.cs" t="Include" />
+            </e>
+            <e p="JointFix.cs" t="Include" />
+            <e p="LightSources" t="Include">
+              <e p="InfraredLightSource.cs" t="Include" />
+            </e>
             <e p="Messaging" t="Include">
               <e p="FBS" t="Include">
                 <e p="CustomFlatBufferImplementation.cs" t="Include" />
@@ -122,6 +183,50 @@
                 <e p="Unobservables.cs" t="Include" />
               </e>
             </e>
+            <e p="NeodroidCamera" t="Include">
+              <e p="FlowCamera.cs" t="Include" />
+              <e p="IgnoreLightSource.cs" t="Include" />
+              <e p="ReplacementShaderEffect.cs" t="Include" />
+              <e p="SynchroniseCameraProperties.cs" t="Include" />
+            </e>
+            <e p="OnCollision.cs" t="Include" />
+            <e p="PlayerControls" t="Include">
+              <e p="KeyEventEnabler.cs" t="Include" />
+              <e p="PlayerReactions.cs" t="Include" />
+            </e>
+            <e p="ScriptableObjects" t="Include">
+              <e p="Curriculum.cs" t="Include" />
+              <e p="NeodroidTask.cs" t="Include" />
+              <e p="PlayerMotions.cs" t="Include" />
+              <e p="Segmentations.cs" t="Include" />
+              <e p="SimulatorConfiguration.cs" t="Include" />
+            </e>
+            <e p="Segmentation" t="Include">
+              <e p="ChangeMaterialOnRenderByInstance.cs" t="Include" />
+              <e p="ChangeMaterialOnRenderByTag.cs" t="Include" />
+            </e>
+            <e p="SerialisableDictionary" t="Include">
+              <e p="Example.cs" t="Include" />
+              <e p="SerializableDictionary.cs" t="Include" />
+              <e p="SerializableDictionaryDrawer.cs" t="Include" />
+              <e p="SerializableDictionaryDrawerImplementations.cs" t="Include" />
+              <e p="SerializableDictionaryImplementations.cs" t="Include" />
+              <e p="SerializedPropertyExtension.cs" t="Include" />
+            </e>
+            <e p="StatusUpdater.cs" t="Include" />
+            <e p="Structs" t="Include">
+              <e p="SegmentationColor.cs" t="Include" />
+              <e p="Space2.cs" t="Include" />
+              <e p="Space3.cs" t="Include" />
+              <e p="Space4.cs" t="Include" />
+              <e p="ValueSpace.cs" t="Include" />
+            </e>
+            <e p="Tasks" t="Include">
+              <e p="TaskSequence.cs" t="Include" />
+            </e>
+            <e p="Testing" t="Include">
+              <e p="DrawSpaces.cs" t="Include" />
+            </e>
             <e p="UnityEditor" t="Include">
               <e p="GameObjects" t="Include">
                 <e p="GeneralSpawner.cs" t="Include" />
@@ -133,6 +238,7 @@
                 <e p="Curriculum.cs" t="Include" />
                 <e p="NeodroidTask.cs" t="Include" />
                 <e p="PlayerMotions.cs" t="Include" />
+                <e p="Segmentations.cs" t="Include" />
               </e>
               <e p="Windows" t="Include">
                 <e p="CameraSynchronisationWindow.cs" t="Include" />
@@ -145,88 +251,7 @@
                 <e p="WindowManager.cs" t="Include" />
               </e>
             </e>
-            <e p="Utilities" t="Include">
-              <e p="BoundingBoxes" t="Include">
-                <e p="BoundingBox.cs" t="Include" />
-                <e p="DrawBoundingBoxOnCamera.cs" t="Include" />
-                <e p="DrawBoundingBoxes.cs" t="Include" />
-                <e p="NotUsed" t="Include">
-                  <e p="BoundingBoxUtilities.cs" t="Include" />
-                </e>
-              </e>
-              <e p="ChildSensor.cs" t="Include" />
-              <e p="Daylight" t="Include">
-                <e p="DaylightSimulator.cs" t="Include" />
-              </e>
-              <e p="Enums" t="Include">
-                <e p="Axis.cs" t="Include" />
-                <e p="CoordinateSystem.cs" t="Include" />
-                <e p="WaitOn.cs" t="Include" />
-              </e>
-              <e p="Interfaces" t="Include">
-                <e p="IHasByteArray.cs" t="Include" />
-                <e p="IHasEulerTransform.cs" t="Include" />
-                <e p="IHasQuaternionTransform.cs" t="Include" />
-                <e p="IHasRegister.cs" t="Include" />
-                <e p="IHasRigidbody.cs" t="Include" />
-                <e p="IHasSingle.cs" t="Include" />
-                <e p="IHasTriple.cs" t="Include" />
-              </e>
-              <e p="JointFix.cs" t="Include" />
-              <e p="LightSources" t="Include">
-                <e p="InfraredLightSource.cs" t="Include" />
-              </e>
-              <e p="NeodroidCamera" t="Include">
-                <e p="FlowCamera.cs" t="Include" />
-                <e p="IgnoreLightSource.cs" t="Include" />
-                <e p="ReplacementShaderEffect.cs" t="Include" />
-                <e p="SynchroniseCameraProperties.cs" t="Include" />
-              </e>
-              <e p="OnCollision.cs" t="Include" />
-              <e p="PlayerControls" t="Include">
-                <e p="KeyEventEnabler.cs" t="Include" />
-                <e p="PlayerReactions.cs" t="Include" />
-              </e>
-              <e p="ScriptableObjects" t="Include">
-                <e p="Curriculum.cs" t="Include" />
-                <e p="NeodroidTask.cs" t="Include" />
-                <e p="PlayerMotions.cs" t="Include" />
-                <e p="SimulatorConfiguration.cs" t="Include" />
-              </e>
-              <e p="Segmentation" t="Include">
-                <e p="ChangeMaterialOnRenderByInstance.cs" t="Include" />
-                <e p="ChangeMaterialOnRenderByTag.cs" t="Include" />
-                <e p="SegmentationColor.cs" t="Include" />
-              </e>
-              <e p="SerialisableDictionary" t="Include">
-                <e p="Example.cs" t="Include" />
-                <e p="SerializableDictionary.cs" t="Include" />
-                <e p="SerializableDictionaryDrawer.cs" t="Include" />
-                <e p="SerializableDictionaryDrawerImplementations.cs" t="Include" />
-                <e p="SerializableDictionaryImplementations.cs" t="Include" />
-                <e p="SerializedPropertyExtension.cs" t="Include" />
-              </e>
-              <e p="StatusUpdater.cs" t="Include" />
-              <e p="Structs" t="Include">
-                <e p="DoubleSpace.cs" t="Include" />
-                <e p="SingleSpace.cs" t="Include" />
-                <e p="Space.cs" t="Include" />
-              </e>
-              <e p="Tasks" t="Include">
-                <e p="TaskSequence.cs" t="Include" />
-              </e>
-              <e p="Testing" t="Include">
-                <e p="DrawSpaces.cs" t="Include" />
-              </e>
-              <e p="Utilities.cs" t="Include" />
-            </e>
-          </e>
-          <e p="Shaders" t="Include">
-            <e p="Depth.shader" t="Include" />
-            <e p="FlatColor.shader" t="Include" />
-            <e p="Normal.shader" t="Include" />
-            <e p="ScreenSpaceFlow.shader" t="Include" />
-            <e p="Segmentation.shader" t="Include" />
+            <e p="Utilities.cs" t="Include" />
           </e>
         </e>
         <e p="Plugins" t="Include">
@@ -241,6 +266,11 @@
           <e p="GridWorlds" t="Include">
             <e p="EnsureReachablity.cs" t="Include" />
             <e p="EnsureValidState.cs" t="Include" />
+            <e p="GoalCellObserver.cs" t="Include" />
+            <e p="GridCell.cs" t="Include" />
+            <e p="GridWorldEnvironment.cs" t="Include" />
+            <e p="IntVector3.cs" t="Include" />
+            <e p="ReachGoal.cs" t="Include" />
           </e>
           <e p="ImagePuzzler" t="Include">
             <e p="Block.cs" t="Include" />

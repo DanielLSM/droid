@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/AttachedReacher.unity
     guid: 59b0487c44ede4cbda7b446ea796034e
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GridWorld.unity
     guid: edd2e0226bcca4942aa66b0bad983fc8
   - enabled: 0
@@ -38,9 +38,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Satellite.unity
     guid: 6521cdce11bc9458081ae3518ebc449b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AntMaze.unity
     guid: 6c1a47b76cef748a7a9d21649f20e335
   - enabled: 0
     path: Assets/Scenes/Grasper.unity
     guid: 8d0c345df00f04c49a5f003af3a50d48
+  - enabled: 0
+    path: Assets/Scenes/Maze.unity
+    guid: e1b12c2c051334b8fb70fa9a5e781244
+  - enabled: 0
+    path: Assets/Scenes/GeneratedGridWorld.unity
+    guid: 7467fd5a11ddc460e9765a00cc64e94c

@@ -203,7 +203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1870355748897446
 GameObject:
   m_ObjectHideFlags: 1
@@ -270,7 +270,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1866968490669790}
   m_LocalRotation: {x: 0.1150751, y: 0.8811196, z: -0.27781588, w: 0.36497167}
-  m_LocalPosition: {x: -2.5, y: 8, z: 2.5}
+  m_LocalPosition: {x: -1.796, y: 3.446, z: 1.796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4331612275810624}
@@ -478,7 +478,7 @@ Camera:
   far clip plane: 20
   field of view: 30
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 1
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -513,14 +513,14 @@ Camera:
   far clip plane: 20
   field of view: 30
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 1
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294966527
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -548,7 +548,7 @@ Camera:
   far clip plane: 20
   field of view: 58.6
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 1
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -583,7 +583,7 @@ Camera:
   far clip plane: 20
   field of view: 58.6
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 1
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -618,7 +618,7 @@ Camera:
   far clip plane: 20
   field of view: 58.6
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 1
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -653,7 +653,7 @@ Camera:
   far clip plane: 20
   field of view: 58.6
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 1
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -688,7 +688,7 @@ Camera:
   far clip plane: 20
   field of view: 30
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 1
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -723,7 +723,7 @@ Camera:
   far clip plane: 20
   field of view: 58.6
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 1
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -910,9 +910,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2773a5ee782b3475e9f2cac8306134fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _replacement_shader: {fileID: 4800000, guid: aa118ec7ab6c04e139900fecf923c766, type: 3}
   _color: {r: 0, g: 0, b: 0, a: 0}
   _replace_rendertype: 
+  _replacement_shader: {fileID: 4800000, guid: aa118ec7ab6c04e139900fecf923c766, type: 3}
 --- !u!114 &114100763809553962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -924,50 +924,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d8486c2d1444fb8ac452a5a74cf74b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ignore_infrared_if_empty: 0
   _lights_to_ignore:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _ignore_infrared_if_empty: 0
 --- !u!114 &114115357045572602
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1975303641184726}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96d2b2d8cb1664b2c9870ffd997b2f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: -1.12, y: -1.46, z: -4.84}
-  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
-  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 0}
+  _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _camera: {fileID: 20713194616804364}
 --- !u!114 &114155819769717986
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1634100351029940}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96d2b2d8cb1664b2c9870ffd997b2f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: -1.12, y: -1.46, z: -4.84}
-  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
-  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 0}
+  _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _camera: {fileID: 20145353716750142}
 --- !u!114 &114197453280488484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -979,10 +975,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c744374d5f2e04a94a851a941320bce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orthographic_size: 1
-  _near_clip_plane: 1
-  _far_clip_plane: 1
-  _culling_mask: 1
+  _camera: {fileID: 20713194616804364}
+  _cameras:
+  - {fileID: 20940602749366906}
+  - {fileID: 20768847776266208}
+  - {fileID: 20687481563768866}
+  - {fileID: 20713194616804364}
+  - {fileID: 20145353716750142}
+  - {fileID: 20367486579053346}
+  - {fileID: 20598539646069560}
+  - {fileID: 20224209517257972}
+  _old_culling_mask: -769
+  _old_far_clip_plane: 20
+  _old_near_clip_plane: 0.01
+  _old_orthographic_size: 1
+  _sync_culling_mask: 1
+  _sync_far_clip_plane: 1
+  _sync_near_clip_plane: 1
+  _sync_orthographic_size: 1
 --- !u!114 &114203530777878686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -994,10 +1004,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c744374d5f2e04a94a851a941320bce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orthographic_size: 1
-  _near_clip_plane: 1
-  _far_clip_plane: 1
-  _culling_mask: 1
+  _camera: {fileID: 20145353716750142}
+  _cameras:
+  - {fileID: 20940602749366906}
+  - {fileID: 20768847776266208}
+  - {fileID: 20687481563768866}
+  - {fileID: 20713194616804364}
+  - {fileID: 20145353716750142}
+  - {fileID: 20367486579053346}
+  - {fileID: 20598539646069560}
+  - {fileID: 20224209517257972}
+  _old_culling_mask: -769
+  _old_far_clip_plane: 20
+  _old_near_clip_plane: 0.01
+  _old_orthographic_size: 1
+  _sync_culling_mask: 1
+  _sync_far_clip_plane: 1
+  _sync_near_clip_plane: 1
+  _sync_orthographic_size: 1
 --- !u!114 &114203839715900738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1009,48 +1033,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c744374d5f2e04a94a851a941320bce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orthographic_size: 1
-  _near_clip_plane: 1
-  _far_clip_plane: 1
-  _culling_mask: 1
+  _camera: {fileID: 20940602749366906}
+  _cameras:
+  - {fileID: 20940602749366906}
+  - {fileID: 20768847776266208}
+  - {fileID: 20687481563768866}
+  - {fileID: 20713194616804364}
+  - {fileID: 20145353716750142}
+  - {fileID: 20367486579053346}
+  - {fileID: 20598539646069560}
+  - {fileID: 20224209517257972}
+  _old_culling_mask: -769
+  _old_far_clip_plane: 20
+  _old_near_clip_plane: 0.01
+  _old_orthographic_size: 1
+  _sync_culling_mask: 1
+  _sync_far_clip_plane: 1
+  _sync_near_clip_plane: 1
+  _sync_orthographic_size: 1
 --- !u!114 &114216501179093510
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1858830691588984}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96d2b2d8cb1664b2c9870ffd997b2f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: -1.12, y: -1.46, z: -4.84}
-  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
-  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 0}
+  _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _camera: {fileID: 20768847776266208}
 --- !u!114 &114271565463949058
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1975208461797724}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96d2b2d8cb1664b2c9870ffd997b2f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: -1.12, y: -1.46, z: -4.84}
-  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
-  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
-  _debug: 1
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 0}
+  _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _camera: {fileID: 20598539646069560}
 --- !u!114 &114307586759802868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1062,10 +1098,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c744374d5f2e04a94a851a941320bce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orthographic_size: 1
-  _near_clip_plane: 1
-  _far_clip_plane: 1
-  _culling_mask: 1
+  _camera: {fileID: 20367486579053346}
+  _cameras:
+  - {fileID: 20940602749366906}
+  - {fileID: 20768847776266208}
+  - {fileID: 20687481563768866}
+  - {fileID: 20713194616804364}
+  - {fileID: 20145353716750142}
+  - {fileID: 20367486579053346}
+  - {fileID: 20598539646069560}
+  - {fileID: 20224209517257972}
+  _old_culling_mask: -769
+  _old_far_clip_plane: 20
+  _old_near_clip_plane: 0.01
+  _old_orthographic_size: 1
+  _sync_culling_mask: 1
+  _sync_far_clip_plane: 1
+  _sync_near_clip_plane: 1
+  _sync_orthographic_size: 1
 --- !u!114 &114319058318530508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1077,15 +1127,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9cfd7b9502dd4091965822449faedd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colors_by_tag:
+  - Tag: Obstruction
+    Col: {r: 1, g: 0, b: 0, a: 1}
+  - Tag: Goal
+    Col: {r: 0, g: 1, b: 0.42068958, a: 1}
+  - Tag: Actor
+    Col: {r: 0, g: 0.5862069, b: 1, a: 1}
   _replace_untagged_color: 1
   _untagged_color: {r: 0, g: 0, b: 0, a: 1}
-  _colors_by_tag:
-  - tag: Actor
-    color: {r: 0, g: 1, b: 0.13103437, a: 1}
-  - tag: Obstruction
-    color: {r: 1, g: 0, b: 0, a: 1}
-  - tag: Goal
-    color: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &114376289421041340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1097,9 +1147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d8486c2d1444fb8ac452a5a74cf74b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ignore_infrared_if_empty: 1
   _lights_to_ignore:
   - {fileID: 108906297679887750}
-  _ignore_infrared_if_empty: 1
 --- !u!114 &114442928199698278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1111,28 +1161,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2773a5ee782b3475e9f2cac8306134fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _replacement_shader: {fileID: 4800000, guid: 3863f59f4842f4d90bc3966b1f9502af, type: 3}
   _color: {r: 1, g: 1, b: 1, a: 1}
   _replace_rendertype: 
+  _replacement_shader: {fileID: 4800000, guid: 3863f59f4842f4d90bc3966b1f9502af, type: 3}
 --- !u!114 &114475505895552272
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1870355748897446}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96d2b2d8cb1664b2c9870ffd997b2f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: -1.12, y: -1.46, z: -4.84}
-  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
-  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 0}
+  _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _camera: {fileID: 20687481563768866}
 --- !u!114 &114480522672753226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1144,10 +1193,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c744374d5f2e04a94a851a941320bce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orthographic_size: 1
-  _near_clip_plane: 1
-  _far_clip_plane: 1
-  _culling_mask: 1
+  _camera: {fileID: 20687481563768866}
+  _cameras:
+  - {fileID: 20940602749366906}
+  - {fileID: 20768847776266208}
+  - {fileID: 20687481563768866}
+  - {fileID: 20713194616804364}
+  - {fileID: 20145353716750142}
+  - {fileID: 20367486579053346}
+  - {fileID: 20598539646069560}
+  - {fileID: 20224209517257972}
+  _old_culling_mask: -769
+  _old_far_clip_plane: 20
+  _old_near_clip_plane: 0.01
+  _old_orthographic_size: 1
+  _sync_culling_mask: 1
+  _sync_far_clip_plane: 1
+  _sync_near_clip_plane: 1
+  _sync_orthographic_size: 1
 --- !u!114 &114608562479145288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1159,29 +1222,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c744374d5f2e04a94a851a941320bce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orthographic_size: 1
-  _near_clip_plane: 1
-  _far_clip_plane: 1
-  _culling_mask: 1
+  _camera: {fileID: 20598539646069560}
+  _cameras:
+  - {fileID: 20940602749366906}
+  - {fileID: 20768847776266208}
+  - {fileID: 20687481563768866}
+  - {fileID: 20713194616804364}
+  - {fileID: 20145353716750142}
+  - {fileID: 20367486579053346}
+  - {fileID: 20598539646069560}
+  - {fileID: 20224209517257972}
+  _old_culling_mask: -769
+  _old_far_clip_plane: 20
+  _old_near_clip_plane: 0.01
+  _old_orthographic_size: 1
+  _sync_culling_mask: 1
+  _sync_far_clip_plane: 1
+  _sync_near_clip_plane: 1
+  _sync_orthographic_size: 1
 --- !u!114 &114622768315461166
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138998545480074}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96d2b2d8cb1664b2c9870ffd997b2f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: -1.12, y: -1.46, z: -4.84}
-  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
-  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 0}
+  _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _camera: {fileID: 20367486579053346}
 --- !u!114 &114633070162146770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1193,9 +1269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2773a5ee782b3475e9f2cac8306134fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _replacement_shader: {fileID: 4800000, guid: 0f2361423bff3490d8f046e398478528, type: 3}
   _color: {r: 0, g: 0, b: 0, a: 0}
   _replace_rendertype: 
+  _replacement_shader: {fileID: 4800000, guid: 0f2361423bff3490d8f046e398478528, type: 3}
 --- !u!114 &114704739639699848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1218,29 +1294,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c744374d5f2e04a94a851a941320bce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orthographic_size: 1
-  _near_clip_plane: 1
-  _far_clip_plane: 1
-  _culling_mask: 1
+  _camera: {fileID: 20224209517257972}
+  _cameras:
+  - {fileID: 20940602749366906}
+  - {fileID: 20768847776266208}
+  - {fileID: 20687481563768866}
+  - {fileID: 20713194616804364}
+  - {fileID: 20145353716750142}
+  - {fileID: 20367486579053346}
+  - {fileID: 20598539646069560}
+  - {fileID: 20224209517257972}
+  _old_culling_mask: -769
+  _old_far_clip_plane: 20
+  _old_near_clip_plane: 0.01
+  _old_orthographic_size: 1
+  _sync_culling_mask: 1
+  _sync_far_clip_plane: 1
+  _sync_near_clip_plane: 1
+  _sync_orthographic_size: 1
 --- !u!114 &114789472510660598
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1216578306050604}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96d2b2d8cb1664b2c9870ffd997b2f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent_game_object: {fileID: 0}
-  _environment_manager: {fileID: 0}
-  _position: {x: -1.12, y: -1.46, z: -4.84}
-  _rotation: {x: 0.40557975, y: 0.4055797, z: -0.8191521}
-  _direction: {x: 0.5792281, y: 0.579228, z: 0.5735763}
-  _debug: 0
-  _observer_identifier: 
-  _data: 
+  _environment: {fileID: 0}
+  _debugging: 0
+  _observation_spacex:
+    DecimalGranularity: 0
+    MinValue: 0
+    MaxValue: 0
+  _camera: {fileID: 20940602749366906}
 --- !u!114 &114798311224295254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1252,10 +1341,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c744374d5f2e04a94a851a941320bce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orthographic_size: 1
-  _near_clip_plane: 1
-  _far_clip_plane: 1
-  _culling_mask: 1
+  _camera: {fileID: 20768847776266208}
+  _cameras:
+  - {fileID: 20940602749366906}
+  - {fileID: 20768847776266208}
+  - {fileID: 20687481563768866}
+  - {fileID: 20713194616804364}
+  - {fileID: 20145353716750142}
+  - {fileID: 20367486579053346}
+  - {fileID: 20598539646069560}
+  - {fileID: 20224209517257972}
+  _old_culling_mask: -769
+  _old_far_clip_plane: 20
+  _old_near_clip_plane: 0.01
+  _old_orthographic_size: 1
+  _sync_culling_mask: 1
+  _sync_far_clip_plane: 1
+  _sync_near_clip_plane: 1
+  _sync_orthographic_size: 1
 --- !u!114 &114831488807547016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1267,9 +1370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d8486c2d1444fb8ac452a5a74cf74b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ignore_infrared_if_empty: 1
   _lights_to_ignore:
   - {fileID: 108906297679887750}
-  _ignore_infrared_if_empty: 1
 --- !u!114 &114867302115997544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1281,9 +1384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2773a5ee782b3475e9f2cac8306134fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _replacement_shader: {fileID: 4800000, guid: 41f5b8aa1a0c44af7adc8164267450ec, type: 3}
   _color: {r: 0, g: 0, b: 0, a: 0}
   _replace_rendertype: 
+  _replacement_shader: {fileID: 4800000, guid: 41f5b8aa1a0c44af7adc8164267450ec, type: 3}
 --- !u!114 &114877382518267686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1295,9 +1398,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d8486c2d1444fb8ac452a5a74cf74b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ignore_infrared_if_empty: 1
   _lights_to_ignore:
   - {fileID: 108906297679887750}
-  _ignore_infrared_if_empty: 1
 --- !u!114 &114889075139374148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1309,10 +1412,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d49d815ab86479092ab735aa09264a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blending: 1
-  _shader: {fileID: 4800000, guid: 3863f59f4842f4d90bc3966b1f9502af, type: 3}
-  _overlay_amplitude: 64
   _background_color: {r: 1, g: 1, b: 1, a: 1}
+  _blending: 1
+  _overlay_amplitude: 64
+  _shader: {fileID: 4800000, guid: 3863f59f4842f4d90bc3966b1f9502af, type: 3}
 --- !u!114 &114910394560810596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1324,7 +1427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956749cb3cb1149b1933eb1da9bf66b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _use_shared_materials: 0
 --- !u!114 &114939049052965380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1336,6 +1438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2773a5ee782b3475e9f2cac8306134fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _replacement_shader: {fileID: 4800000, guid: 41f5b8aa1a0c44af7adc8164267450ec, type: 3}
   _color: {r: 0, g: 0, b: 0, a: 0}
   _replace_rendertype: 
+  _replacement_shader: {fileID: 4800000, guid: 41f5b8aa1a0c44af7adc8164267450ec, type: 3}

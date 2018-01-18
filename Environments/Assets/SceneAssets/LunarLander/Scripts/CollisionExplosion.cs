@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Neodroid.Environments.General;
 using Neodroid.Models.Actors;
 using Neodroid.Models.Environments;
 using Neodroid.Scripts.Utilities;
@@ -11,7 +12,7 @@ namespace SceneAssets.LunarLander.Scripts {
     public GameObject _broken_object_prefab;
 
     float _delay = 2f;
-    public LearningEnvironment _environment;
+
     public ParticleSystem _explosion;
     public float _explosion_force = 50;
     public GameObject _explosion_prefab;
@@ -102,16 +103,10 @@ namespace SceneAssets.LunarLander.Scripts {
 
       yield return new WaitForSeconds (wait_time);
       Destroy (explosion);
-      this._environment.Terminate ("Actor exploded");
+      this.ParentEnvironment.Terminate ("Actor exploded");
     }
 
-    protected virtual void Awake () {
-      this.RegisterComponent ();
-    }
 
-    public virtual void RegisterComponent () {
-      this._environment = NeodroidUtilities.MaybeRegisterComponent (this._environment, (Resetable)this);
-    }
 
     public override void Reset () {
       if (this._broken_object)

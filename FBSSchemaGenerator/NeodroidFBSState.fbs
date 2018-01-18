@@ -7,21 +7,30 @@ table FState {
   environment_name:string (key);
   frame_number:int;
 
-  reward:float;
+  signal:float;
   terminated:bool;
+  termination_reason:string;
+
   total_energy_spent:float;
 
   observations:[FOBS];
 
+  observables:[float];
   unobservables:FUnobservables;
   environment_description:FEnvironmentDescription;
 
   debug_message:string;
 }
 
-table FEnvironmentDescription {
+table FObjective{
+  objective_name:string;
   max_episode_length:int;
   solved_threshold:float;
+}
+
+table FEnvironmentDescription {
+  objective:FObjective;
+  available_objectives:[FObjective];
   api_version:string;
   simulator_configuration:FSimulatorConfiguration;
   actors:[FActor];

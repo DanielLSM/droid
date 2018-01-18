@@ -44,7 +44,7 @@ table FQuadruple{
 }
 
 table FArray{
-  array:[double] (required);
+  array:[float] (required);
   ranges:[FRange];
 }
 
