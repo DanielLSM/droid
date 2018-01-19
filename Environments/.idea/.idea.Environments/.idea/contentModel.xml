@@ -65,6 +65,9 @@
               <e p="SimulationConfigurable.cs" t="Include" />
               <e p="SingleAxisTransformConfigurable.cs" t="Include" />
             </e>
+            <e p="Displayers" t="Include">
+              <e p="NeodroidDisplayer.cs" t="Include" />
+            </e>
             <e p="Evaluation" t="Include">
               <e p="AngularVelocityEvaluation.cs" t="Include" />
               <e p="CollidersPunishment.cs" t="Include" />

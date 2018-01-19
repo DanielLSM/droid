@@ -537,7 +537,7 @@ namespace Neodroid.Models.Environments {
           this.Observers,
           this.CurrentFrameNumber,
           signal,
-          this._terminated,
+          this._terminated || this._is_terminated,
           observables.ToArray(),
           this._bodies,
           this._poses,
