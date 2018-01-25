@@ -1,4 +1,4 @@
-﻿using Neodroid.Models.Observers.General;
+﻿using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities.Interfaces;
 using Neodroid.Scripts.Utilities.Structs;
 using Neodroid.Utilities.Structs;
@@ -8,7 +8,7 @@ namespace Neodroid.Models.Observers {
   public class NearestByTagObserver : Observer,
                                       IHasEulerTransform {
     [SerializeField] Vector3 _direction;
-    [SerializeField] Space3 _direction_space = new Space3(int.MaxValue);
+    [SerializeField] Space3 _direction_space = new Space3(10);
 
     [Header("Specific", order = 102)]
     [SerializeField]
@@ -18,9 +18,9 @@ namespace Neodroid.Models.Observers {
     [SerializeField]
     Vector3 _position;
 
-    [SerializeField] Space3 _position_space = new Space3(int.MaxValue);
+    [SerializeField] Space3 _position_space = new Space3(10);
     [SerializeField] Vector3 _rotation;
-    [SerializeField] Space3 _rotation_space = new Space3(int.MaxValue);
+    [SerializeField] Space3 _rotation_space = new Space3(10);
 
     [SerializeField] string _tag = "";
 
@@ -28,17 +28,17 @@ namespace Neodroid.Models.Observers {
 
     public Vector3 Position {
       get { return this._position; }
-      set { this._position = this._position_space.ClipNormalise(value); }
+      set { this._position = this._position_space.ClipNormaliseRound(value); }
     }
 
     public Vector3 Rotation {
       get { return this._rotation; }
-      set { this._rotation = this._rotation_space.ClipNormalise(value); }
+      set { this._rotation = this._rotation_space.ClipNormaliseRound(value); }
     }
 
     public Vector3 Direction {
       get { return this._direction; }
-      set { this._direction = this._direction_space.ClipNormalise(value); }
+      set { this._direction = this._direction_space.ClipNormaliseRound(value); }
     }
 
     public override void UpdateObservation() {

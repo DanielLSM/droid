@@ -7,8 +7,9 @@ using Neodroid.Scripts.Messaging.FBS;
 using Neodroid.Scripts.Messaging.Messages;
 using NetMQ;
 using NetMQ.Sockets;
+using UnityEngine;
 
-namespace Neodroid.Scripts.Messaging {
+namespace Neodroid.Utilities.Messaging {
   [Serializable]
   public class MessageServer {
     #region PublicMembers
@@ -19,6 +20,7 @@ namespace Neodroid.Scripts.Messaging {
 
     #region PrivateMembers
 
+    bool _use_threads = false;
     Thread _polling_thread;
     Thread _wait_for_client_thread;
     readonly object _thread_lock = new object();
@@ -45,8 +47,29 @@ namespace Neodroid.Scripts.Messaging {
         this._socket.Bind("ipc:///tmp/neodroid/messages");
       else
         this._socket.Bind("tcp://" + this._ip_address + ":" + this._port);
-      callback();
+      if(callback!=null)
+        callback();
       this.ClientConnected = true;
+    }
+
+    public Reaction Receive(TimeSpan wait_time) {
+      Reaction reaction = null;
+      try {
+        byte[] msg;
+        if(wait_time>TimeSpan.Zero)
+          this._socket.TryReceiveFrameBytes(wait_time, out msg);
+        else
+          msg = this._socket.ReceiveFrameBytes();
+
+        if (msg != null && msg.Length > 0) {
+          var flat_reaction = FReaction.GetRootAsFReaction(new ByteBuffer(msg));
+          reaction = FBSReactionUtilities.create_reaction(flat_reaction);
+        }
+      } catch (Exception err) {
+        Debug.Log(err);
+      }
+
+      return reaction;
     }
 
     void PollingThread(
@@ -55,19 +78,10 @@ namespace Neodroid.Scripts.Messaging {
         Action<string> debug_callback) {
       while (this._stop_thread_ == false) {
         if (!this._waiting_for_main_loop_to_send) {
-          try {
-            byte[] msg;
-            this._socket.TryReceiveFrameBytes(TimeSpan.FromSeconds(2), out msg);
-            if (msg != null && msg.Length > 0) {
-              var flat_reaction = FReaction.GetRootAsFReaction(new ByteBuffer(msg));
-              if (this.Debugging)
-                debug_callback(flat_reaction.ToString());
-              var reaction = FBSReactionUtilities.create_reaction(flat_reaction);
-              receive_callback(reaction);
-              this._waiting_for_main_loop_to_send = true;
-            }
-          } catch (Exception err) {
-            debug_callback(err.ToString());
+          var reaction = this.Receive(TimeSpan.FromSeconds(2));
+          if (reaction != null) {
+            receive_callback(reaction);
+            this._waiting_for_main_loop_to_send = true;
           }
         }
       }
@@ -85,6 +99,7 @@ namespace Neodroid.Scripts.Messaging {
       }
     }
 
+
     #endregion
 
     #endregion
@@ -98,10 +113,17 @@ namespace Neodroid.Scripts.Messaging {
     }
 
     public void ListenForClientToConnect(Action callback) {
-      this._wait_for_client_thread =
-          new Thread(unused_param => this.WaitForClientToConnect(callback)) {IsBackground = true};
+      if (this._use_threads){
+        this._wait_for_client_thread =
+            new Thread(unused_param => this.WaitForClientToConnect(callback)) {IsBackground = true};
       // Is terminated with foreground threads, when they terminate
       this._wait_for_client_thread.Start();
+    }
+    else
+
+    {
+        this.WaitForClientToConnect(null);
+      }
     }
 
     public void StartReceiving(
@@ -130,7 +152,6 @@ namespace Neodroid.Scripts.Messaging {
       if (!this._use_inter_process_communication)
         ForceDotNet.Force();
       this._socket = new ResponseSocket();
-      //_socket = new PairSocket ();
     }
 
     public MessageServer(bool debug = false) : this("127.0.0.1", 5555, false, debug) { }
@@ -147,9 +168,9 @@ namespace Neodroid.Scripts.Messaging {
 
     #region Deconstruction
 
-    public void Destroy() { this.KillPollingAndListenerThread(); }
+    public void Destroy() { this.CleanUp(); }
 
-    public void KillPollingAndListenerThread() {
+    public void CleanUp() {
       try {
         lock (this._thread_lock) this._stop_thread_ = true;
 

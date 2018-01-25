@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Observers.General;
 using UnityEngine;
 
 namespace Neodroid.Scripts.Messaging.Messages {

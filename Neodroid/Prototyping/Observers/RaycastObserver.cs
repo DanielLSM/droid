@@ -1,11 +1,10 @@
 ﻿using System;
-using Neodroid.Models.Observers.General;
-using Neodroid.Scripts.Utilities.Interfaces;
-using Neodroid.Scripts.Utilities.Structs;
+using Neodroid.Prototyping.Observers.General;
+using Neodroid.Utilities.Interfaces;
 using Neodroid.Utilities.Structs;
 using UnityEngine;
 
-namespace Neodroid.Models.Observers {
+namespace Neodroid.Prototyping.Observers {
   public class RaycastObserver : Observer,
                                  IHasSingle {
     [SerializeField] Vector3 _direction = Vector3.forward;
@@ -14,7 +13,7 @@ namespace Neodroid.Models.Observers {
 
     [SerializeField]
     ValueSpace _observation_space =
-        new ValueSpace {DecimalGranularity = int.MaxValue, MinValue = 0, MaxValue = 100.0f};
+        new ValueSpace {DecimalGranularity = 3, MinValue = 0, MaxValue = 100.0f};
 
     [Header("Observation", order = 103)]
     [SerializeField]

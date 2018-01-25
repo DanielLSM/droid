@@ -1,6 +1,7 @@
-﻿using Neodroid.Models.Observers.General;
+﻿using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities;
 using Neodroid.Scripts.Utilities.Interfaces;
+using Neodroid.Utilities.Interfaces;
 using UnityEngine;
 
 namespace SceneAssets.GridWorlds {
@@ -43,7 +44,7 @@ namespace SceneAssets.GridWorlds {
     }
     #endif
 
-    public Vector3 Position {
+    public Vector3 ObservationValue {
       get { return this._current_goal_position; }
       private set { this._current_goal_position = value; }
     }

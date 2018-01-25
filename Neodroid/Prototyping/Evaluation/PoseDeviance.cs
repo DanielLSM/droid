@@ -1,6 +1,8 @@
-﻿using Neodroid.Models.Actors;
+﻿using Neodroid.Managers.General;
+using Neodroid.Models.Actors;
 using Neodroid.Models.Environments;
 using Neodroid.Models.Evaluation;
+using Neodroid.Prototyping.Evaluation.General;
 using Neodroid.Scripts.Utilities.BoundingBoxes;
 using SceneAssets.ScripterGrasper.Scripts;
 using UnityEngine;
@@ -17,14 +19,14 @@ namespace Neodroid.Prototyping.Evaluation {
       if (this._playable_area != null && !this._playable_area._bounds.Intersects (this._actor.ActorBounds)) {
         if (this.Debugging)
           print ("Outside playable area");
-        this._environment.Terminate ("Outside playable area");
+        this.ParentEnvironment.Terminate ("Outside playable area");
       }
 
       var distance = Mathf.Abs (
                        Vector3.Distance (this._goal.transform.position, this._actor.transform.position));
       var angle = Quaternion.Angle (this._goal.transform.rotation, this._actor.transform.rotation);
 
-      var reward = _default_reward;
+      var reward = this._default_reward;
 
       if (!this._sparse) {
         reward += 1 / Mathf.Abs (distance + 1);
@@ -40,8 +42,8 @@ namespace Neodroid.Prototyping.Evaluation {
       if (distance < 0.5) {
         if (this.Debugging)
           print ("Within range of goal");
-        reward = _goal_reward;
-        this._environment.Terminate ("Within range of goal");
+        reward = this._goal_reward;
+        this.ParentEnvironment.Terminate ("Within range of goal");
       }
 
       return reward;
@@ -56,8 +58,7 @@ namespace Neodroid.Prototyping.Evaluation {
         this._goal = FindObjectOfType<Transform> ();
       if (!this._actor)
         this._actor = FindObjectOfType<Actor> ();
-      if (!this._environment)
-        this._environment = FindObjectOfType<PrototypingEnvironment> ();
+
       if (this._obstructions.Length <= 0)
         this._obstructions = FindObjectsOfType<Obstruction> ();
       if (!this._playable_area)
@@ -70,13 +71,14 @@ namespace Neodroid.Prototyping.Evaluation {
     [SerializeField]
     float _peak_reward;
 
+
+
     [SerializeField] bool _sparse = true;
 
     [SerializeField] Transform _goal;
 
     [SerializeField] Actor _actor;
 
-    [SerializeField] PrototypingEnvironment _environment;
 
     [SerializeField] BoundingBox _playable_area;
 

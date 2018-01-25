@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using Neodroid.Prototyping.Evaluation.General;
+using UnityEngine;
 
-namespace Neodroid.Models.Evaluation {
+namespace Neodroid.Prototyping.Evaluation {
   public class AngularVelocityEvaluation : ObjectiveFunction {
     [SerializeField] Rigidbody _rigidbody;
-    [SerializeField] bool penalty;
+    [SerializeField] bool _penalty;
 
     public override float InternalEvaluate() {
-      if (this.penalty) {
+      if (this._penalty) {
         if (this._rigidbody)
           return -this._rigidbody.angularVelocity.magnitude;
       }

@@ -3,6 +3,7 @@ using Neodroid.Models.Configurables.General;
 using Neodroid.Scripts.Messaging.Messages;
 using Neodroid.Scripts.Utilities;
 using Neodroid.Scripts.Utilities.Interfaces;
+using Neodroid.Utilities.Interfaces;
 using UnityEngine;
 
 namespace Neodroid.Models.Configurables {
@@ -20,7 +21,7 @@ namespace Neodroid.Models.Configurables {
 
     public override string ConfigurableIdentifier { get { return this.name + "Position"; } }
 
-    public Vector3 Position { get { return this._position; } }
+    public Vector3 ObservationValue { get { return this._position; } }
 
     protected override void AddToEnvironment() {
       this._x = this.ConfigurableIdentifier + "X";

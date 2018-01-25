@@ -384,13 +384,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 740492936}
   _debugging: 0
-  _observation_spacex:
-    DecimalGranularity: 0
-    MinValue: 0
-    MaxValue: 0
-  _color: {r: 0, g: 1, b: 0, a: 1}
-  _range: 100
   _obs_array: []
+  _is_2d: 0
+  _observation_value_space:
+    DecimalGranularity: 10
+    MinValue: 0
+    MaxValue: 100
+  _range: 100
+  _color: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &480651638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,17 +423,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actor: {fileID: 480651638}
   _debugging: 0
-  _motion_space:
+  _motion_value_space:
     DecimalGranularity: 0
-    MinValue: -1
-    MaxValue: 1
+    MinValue: -10
+    MaxValue: 10
   _energy_spend_since_reset: 0
   _energy_cost: 0
   _layer_mask: Obstructions
   _no_collisions: 1
-  _use_mask: 1
   _relative_to: 1
   _rotational_motors: 0
+  _use_mask: 1
 --- !u!1 &740492935
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,23 +510,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6fd2ea575694a1297adb4aa84e0523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _awaiting_reply: 0
   _configuration:
-    _frame_skips: 0
     _full_screen: 0
     _height: 500
+    _width: 500
+    _max_reply_interval: 0
     _quality_level: 1
     _reset_iterations: 10
-    _simulation_time_scale: 0
+    _simulation_type: 0
     _target_frame_rate: -1
     _time_scale: 0
-    _simulation_type: 0
-    _width: 500
+    _frame_skips: 0
   _debugging: 0
   _ip_address: localhost
   _port: 5555
-  _awaiting_reply: 0
-  _testing_motors: 0
   _update_fixed_time_scale: 0
+  _testing_motors: 0
+  _last_reply_time: 0
+  _skip_frame_i: 0
 --- !u!114 &740492939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,10 +594,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 740492936}
   _debugging: 0
-  _observation_spacex:
-    DecimalGranularity: 0
-    MinValue: 0
-    MaxValue: 0
   _current_goal: {fileID: 0}
   _current_goal_position: {x: 0, y: 0, z: 0}
   _draw_names: 1

@@ -1,7 +1,8 @@
-﻿using Neodroid.Scripts.Utilities;
+﻿using Neodroid.Prototyping.Evaluation.General;
+using Neodroid.Scripts.Utilities;
 using UnityEngine;
 
-namespace Neodroid.Models.Evaluation {
+namespace Neodroid.Prototyping.Evaluation {
   [RequireComponent(typeof(Rigidbody))]
   public class PunishmentFunction : ObjectiveFunction {
     [SerializeField] int _hits;

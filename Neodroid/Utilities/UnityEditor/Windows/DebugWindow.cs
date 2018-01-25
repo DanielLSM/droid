@@ -5,7 +5,8 @@ using Neodroid.Models.Environments;
 using Neodroid.Models.Evaluation;
 using Neodroid.Models.Managers;
 using Neodroid.Models.Motors.General;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Evaluation.General;
+using Neodroid.Prototyping.Observers.General;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;

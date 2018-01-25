@@ -1,6 +1,7 @@
 ﻿using Neodroid.Models.Actors;
 using Neodroid.Models.Environments;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Evaluation.General;
+using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities;
 using Neodroid.Scripts.Utilities.BoundingBoxes;
 using SceneAssets.ScripterGrasper.Scripts;
@@ -26,7 +27,6 @@ namespace Neodroid.Models.Evaluation {
 
     [SerializeField] bool _based_on_tags;
     [SerializeField] ActorColliding _colliding = ActorColliding.NotColliding;
-    [SerializeField] PrototypingEnvironment _environment;
 
     [SerializeField] Obstruction[] _obstructions;
 
@@ -50,15 +50,15 @@ namespace Neodroid.Models.Evaluation {
       //reward += 1 / Mathf.Abs (Vector3.Distance (_area.transform.position, _actor.transform.position)); // Inversely porpotional to the absolute distance, closer higher reward
 
       if (this._overlapping == ActorOverlapping.InsideArea) {
-        this._environment.Terminate("Inside goal area");
+        this.ParentEnvironment.Terminate("Inside goal area");
         return 1f;
       }
 
       if (this._colliding == ActorColliding.Colliding)
-        this._environment.Terminate("Actor colliding with obstruction");
+        this.ParentEnvironment.Terminate("Actor colliding with obstruction");
       if (this._playable_area && this._actor) {
         if (!this._playable_area._bounds.Intersects(this._actor.GetComponent<Collider>().bounds))
-          this._environment.Terminate("Actor is outside playable area");
+          this.ParentEnvironment.Terminate("Actor is outside playable area");
       }
 
       return 0f;
@@ -69,8 +69,6 @@ namespace Neodroid.Models.Evaluation {
         this._area = FindObjectOfType<Observer>().gameObject.GetComponent<Collider>();
       if (!this._actor)
         this._actor = FindObjectOfType<Actor>().gameObject.GetComponent<Collider>();
-      if (!this._environment)
-        this._environment = FindObjectOfType<PrototypingEnvironment>();
       if (this._obstructions.Length <= 0)
         this._obstructions = FindObjectsOfType<Obstruction>();
       if (!this._playable_area)

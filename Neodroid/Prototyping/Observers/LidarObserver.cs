@@ -1,5 +1,5 @@
 ﻿using System;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities.Interfaces;
 using Neodroid.Scripts.Utilities.Structs;
 using Neodroid.Utilities.Structs;
@@ -18,7 +18,7 @@ namespace Neodroid.Prototyping.Observers {
 
     [SerializeField]
     ValueSpace _observation_value_space =
-      new ValueSpace { DecimalGranularity = int.MaxValue, MinValue = 0.0f, MaxValue = 100.0f };
+      new ValueSpace { DecimalGranularity = 10, MinValue = 0.0f, MaxValue = 100.0f };
 
     [SerializeField] float _range = 100.0f;
 

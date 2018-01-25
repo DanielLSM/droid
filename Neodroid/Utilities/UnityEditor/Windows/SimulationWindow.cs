@@ -1,24 +1,24 @@
 ﻿using System.Collections.Generic;
 using Neodroid.Environments.General;
 using Neodroid.Managers;
-using Neodroid.Managers.General;
 using Neodroid.Models.Actors;
 using Neodroid.Models.Configurables.General;
 using Neodroid.Models.Environments;
-using Neodroid.Models.Evaluation;
-using Neodroid.Models.Managers;
 using Neodroid.Models.Motors.General;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Evaluation.General;
+using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Messaging.Messages;
 using Neodroid.Scripts.Utilities;
 using Neodroid.Scripts.Utilities.Enums;
-using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
+using Neodroid.Utilities.ScriptableObjects;
 
+using UnityEngine;
+
+#if UNITY_EDITOR
+  using UnityEditor;
 #endif
 
-namespace Neodroid.Scripts.UnityEditor.Windows {
+namespace Neodroid.Utilities.UnityEditor.Windows {
   #if UNITY_EDITOR
   public class SimulationWindow : EditorWindow {
     readonly int _preview_image_size = 100;

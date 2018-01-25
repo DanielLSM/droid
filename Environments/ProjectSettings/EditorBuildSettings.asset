@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/AttachedReacher.unity
     guid: 59b0487c44ede4cbda7b446ea796034e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GridWorld.unity
     guid: edd2e0226bcca4942aa66b0bad983fc8
   - enabled: 0
@@ -35,7 +35,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LunarLander.unity
     guid: bea06f4b9662d4e20a16eb86ce11cfd3
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Satellite.unity
     guid: 6521cdce11bc9458081ae3518ebc449b
   - enabled: 0

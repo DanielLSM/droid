@@ -1,29 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Neodroid.Environments.General;
 using Neodroid.Scripts.Messaging;
 using Neodroid.Scripts.Messaging.Messages;
 using Neodroid.Scripts.Utilities.Interfaces;
 using Neodroid.Scripts.Utilities.ScriptableObjects;
+using Neodroid.Utilities.Messaging;
+using Neodroid.Utilities.ScriptableObjects;
 using UnityEngine;
 
 namespace Neodroid.Managers.General {
-  public enum SimulationType {
-    FrameDependent,
-    // Waiting for frame instead means stable physics(Multiple fixed updates) and camera has updated their rendertextures. Pauses the game after every reaction until next reaction.
 
-    PhysicsDependent,
-
-    /// <summary>
-    ///   Experimental! Pausing simulation in fixed update is not a possible solution another way is needed.
-    ///   This setting to false causes major slowdowns.
-    ///   Disabled for now.
-    ///   possibility of obervations in the physics updates, as of right know it is very slow and does not support pausing the
-    ///   environment as fixed updates will only be called if time > 0. Pausing leads to a deadlock of the client-server
-    ///   connection. Also camera observers should be manually rendered to ensure validity and freshness with camera.Render()
-    /// </summary>
-    Independent
-  }
 
   public class NeodroidManager : MonoBehaviour,
                                  IHasRegister<NeodroidEnvironment> {
@@ -42,9 +30,6 @@ namespace Neodroid.Managers.General {
     string _ip_address = "localhost";
 
     [SerializeField] int _port = 5555;
-
-
-
 
     [Header ("Simulation", order = 101)]
 
@@ -73,6 +58,13 @@ namespace Neodroid.Managers.General {
     public event Action EarlyUpdateEvent;
     public event Action UpdateEvent;
     public event Action LateUpdateEvent;
+    public event Action OnPostRenderEvent;
+    public event Action OnRenderImageEvent;
+    public event Action OnEndOfFrameEvent;
+
+
+
+    public event Action OnReceiveEvent;
 
     void FetchCommmandLineArguments () {
       var arguments = Environment.GetCommandLineArgs ();
@@ -90,13 +82,12 @@ namespace Neodroid.Managers.General {
         this._message_server = new MessageServer (this.IPAddress, this.Port, false, this.Debugging);
       else
         this._message_server = new MessageServer (this.Debugging);
-
       this._message_server.ListenForClientToConnect (this.OnConnectCallback);
     }
 
     #region Getter Setters
 
-    public Reaction CurrentCurrentReaction {
+    public Reaction CurrentReaction {
       get { return this._current_reaction; }
       set { this._current_reaction = value; }
     }
@@ -120,30 +111,45 @@ namespace Neodroid.Managers.General {
 
     protected Reaction _current_reaction = new Reaction ();
 
-
-
     #endregion
 
     #region UnityCallbacks
 
     protected void Start () {
-      this.FetchCommmandLineArguments ();
-      this.StartMessagingServer ();
-
       if (this.Configuration.SimulationType != SimulationType.FrameDependent) {
         this.EarlyFixedUpdateEvent += this.PreStep;
         this.FixedUpdateEvent += this.Step;
         this.LateFixedUpdateEvent += this.PostStep;
+        this.StartCoroutine(this.LateFixedUpdate());
       } else {
         this.EarlyUpdateEvent += this.PreStep;
         this.UpdateEvent += this.Step;
-        this.LateUpdateEvent += this.PostStep;
+        switch (this._configuration.FrameFinishes) {
+          case FrameFinishes.LateUpdate:
+            this.LateUpdateEvent += this.PostStep;
+            break;
+          case FrameFinishes.OnPostRender:
+            this.OnPostRenderEvent += this.PostStep;
+            break;
+          case FrameFinishes.OnRenderImage:
+            this.OnRenderImageEvent += this.PostStep;
+            break;
+          case FrameFinishes.EndOfFrame:
+            this.StartCoroutine(this.EndOfFrame());
+            this.OnEndOfFrameEvent += this.PostStep;
+            break;
+          default: throw new ArgumentOutOfRangeException();
+        }
+
       }
 
       if (this.Configuration == null)
         this.Configuration = new SimulatorConfiguration ();
 
       this.ApplyConfiguration ();
+      this.FetchCommmandLineArguments ();
+
+      this.StartMessagingServer ();
     }
 
     public void ApplyConfiguration () {
@@ -169,15 +175,43 @@ namespace Neodroid.Managers.General {
       }
     }
 
+    void OnPostRender() {
+      if (this.OnPostRenderEvent != null) this.OnPostRenderEvent();
+    }
+
+    /*void OnRenderImage(RenderTexture src, RenderTexture dest) {
+      if (this.OnRenderImageEvent != null) {
+        this.OnRenderImageEvent();
+      }
+    }*/
+
     protected void FixedUpdate () {
       if (this.EarlyFixedUpdateEvent != null)
         this.EarlyFixedUpdateEvent ();
 
       if (this.FixedUpdateEvent != null)
         this.FixedUpdateEvent ();
+    }
 
-      if (this.LateFixedUpdateEvent != null)
-        this.LateFixedUpdateEvent ();
+
+    protected IEnumerator LateFixedUpdate() {
+      while (true) {
+        yield return new WaitForFixedUpdate();
+        if(this.Debugging) print("LateFixedUpdate");
+        if (this.LateFixedUpdateEvent != null)
+          this.LateFixedUpdateEvent ();
+      }
+      // ReSharper disable once IteratorNeverReturns
+    }
+
+    protected IEnumerator EndOfFrame() {
+      while (true) {
+        yield return new WaitForEndOfFrame();
+
+        if (this.OnEndOfFrameEvent != null)
+          this.OnEndOfFrameEvent ();
+      }
+      // ReSharper disable once IteratorNeverReturns
     }
 
     protected void Update () {
@@ -198,7 +232,7 @@ namespace Neodroid.Managers.General {
     #region PrivateMethods
 
     protected void PreStep () {
-      if (this._awaiting_reply && this.CurrentCurrentReaction.Parameters.Phase == ExecutionPhase.Before)
+      if (this._awaiting_reply && this.CurrentReaction.Parameters.Phase == ExecutionPhase.Before)
         this.ReactReply ();
     }
 
@@ -206,12 +240,12 @@ namespace Neodroid.Managers.General {
       if (this.TestMotors)
         this.React (this.SampleRandomReaction ());
 
-      if (this._awaiting_reply && this.CurrentCurrentReaction.Parameters.Phase == ExecutionPhase.Middle)
+      if (this._awaiting_reply && this.CurrentReaction.Parameters.Phase == ExecutionPhase.Middle)
         this.ReactReply ();
     }
 
     protected void ReactReply () {
-      var state = this.React (this.CurrentCurrentReaction);
+      var state = this.React (this.CurrentReaction);
 
       if (this._skip_frame_i >= this.Configuration.FrameSkips) {
         //&&this._last_reply_time + this._configuration.MaxReplyInterval > Time.time) {
@@ -227,7 +261,7 @@ namespace Neodroid.Managers.General {
     }
 
     protected void PostStep () {
-      if (this._awaiting_reply && this.CurrentCurrentReaction.Parameters.Phase == ExecutionPhase.After)
+      if (this._awaiting_reply && this.CurrentReaction.Parameters.Phase == ExecutionPhase.After)
         this.ReactReply ();
 
       foreach (var environment in this._environments.Values)
@@ -251,8 +285,8 @@ namespace Neodroid.Managers.General {
     }
 
     void ResetReaction () {
-      this.CurrentCurrentReaction = new Reaction ();
-      this.CurrentCurrentReaction.Parameters.IsExternal = false;
+      this.CurrentReaction = new Reaction ();
+      this.CurrentReaction.Parameters.IsExternal = false;
     }
 
     #endregion
@@ -294,8 +328,16 @@ namespace Neodroid.Managers.General {
     void OnReceiveCallback (Reaction reaction) {
       if (this.Debugging)
         print ("Received: " + reaction);
-      this.CurrentCurrentReaction = reaction;
-      this.CurrentCurrentReaction.Parameters.IsExternal = true;
+      this.SetReactionFromExternalSource(reaction);
+
+      if (this.OnReceiveEvent != null) {
+        this.OnReceiveEvent();
+      }
+    }
+
+    protected void SetReactionFromExternalSource(Reaction reaction) {
+      this.CurrentReaction = reaction;
+      this.CurrentReaction.Parameters.IsExternal = true;
       this._awaiting_reply = true;
     }
 
@@ -323,7 +365,7 @@ namespace Neodroid.Managers.General {
     #region Deconstruction
 
     void OnApplicationQuit () {
-      this._message_server.KillPollingAndListenerThread ();
+      this._message_server.CleanUp ();
     }
 
     void OnDestroy () {

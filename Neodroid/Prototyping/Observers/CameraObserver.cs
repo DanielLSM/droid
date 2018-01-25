@@ -1,9 +1,10 @@
 ﻿using Neodroid.Managers.General;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities.Interfaces;
+using Neodroid.Utilities.ScriptableObjects;
 using UnityEngine;
 
-namespace Neodroid.Models.Observers {
+namespace Neodroid.Prototyping.Observers {
   [ExecuteInEditMode]
   [RequireComponent(typeof(Camera))]
   public class CameraObserver : Observer,

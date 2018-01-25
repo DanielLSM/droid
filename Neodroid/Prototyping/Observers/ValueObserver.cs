@@ -1,6 +1,7 @@
-﻿using Neodroid.Models.Observers.General;
+﻿using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities.Interfaces;
 using Neodroid.Scripts.Utilities.Structs;
+using Neodroid.Utilities.Interfaces;
 using Neodroid.Utilities.Structs;
 using UnityEngine;
 

@@ -2,7 +2,33 @@
 using Neodroid.Managers.General;
 using UnityEngine;
 
-namespace Neodroid.Scripts.Utilities.ScriptableObjects {
+namespace Neodroid.Utilities.ScriptableObjects {
+
+  public enum SimulationType {
+    FrameDependent,
+    // Waiting for frame instead means stable physics(Multiple fixed updates) and camera has updated their rendertextures. Pauses the game after every reaction until next reaction.
+
+    PhysicsDependent,
+
+    /// <summary>
+    ///   Experimental! Pausing simulation in fixed update is not a possible solution another way is needed.
+    ///   This setting to false causes major slowdowns.
+    ///   Disabled for now.
+    ///   possibility of obervations in the physics updates, as of right know it is very slow and does not support pausing the
+    ///   environment as fixed updates will only be called if time > 0. Pausing leads to a deadlock of the client-server
+    ///   connection. Also camera observers should be manually rendered to ensure validity and freshness with camera.Render()
+    /// </summary>
+    Independent
+  }
+
+  public enum FrameFinishes {
+    LateUpdate,
+    OnPostRender,
+    OnRenderImage,
+    EndOfFrame
+  }
+
+
   [Serializable]
   public class SimulatorConfiguration {
 
@@ -19,6 +45,7 @@ namespace Neodroid.Scripts.Utilities.ScriptableObjects {
     //: ScriptableObject {
     [Header ("Simulation")]
     [SerializeField] SimulationType _simulation_type;
+    [SerializeField] FrameFinishes _frame_finishes;
     [SerializeField] [Range (-1, 9999)] int _target_frame_rate;
     [SerializeField] [Range (0f, 99f)] float _time_scale;
     [SerializeField] [Range (0, 99)] int _frame_skips;
@@ -31,6 +58,7 @@ namespace Neodroid.Scripts.Utilities.ScriptableObjects {
       this.TimeScale = 0;
       this.TargetFrameRate = -1;
       this.SimulationType = SimulationType.FrameDependent;
+      this.FrameFinishes = FrameFinishes.LateUpdate;
       this.FrameSkips = 0;
       this.ResetIterations = 10;
       this.MaxReplyInterval = 0;
@@ -105,6 +133,11 @@ namespace Neodroid.Scripts.Utilities.ScriptableObjects {
     public Single MaxReplyInterval {
       get { return this._max_reply_interval; }
       set { this._max_reply_interval = value; }
+    }
+
+    public FrameFinishes FrameFinishes {
+      get { return this._frame_finishes; }
+      set { this._frame_finishes = value; }
     }
 
     #endregion

@@ -6,9 +6,10 @@ using Neodroid.Models.Actors;
 using Neodroid.Models.Configurables;
 using Neodroid.Models.Configurables.General;
 using Neodroid.Models.Motors.General;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Messaging.Messages;
 using Neodroid.Scripts.Utilities.Interfaces;
+using Neodroid.Utilities.Interfaces;
 using UnityEngine;
 
 namespace Neodroid.Scripts.Messaging.FBS {
@@ -178,7 +179,7 @@ namespace Neodroid.Scripts.Messaging.FBS {
 
     static Offset<FTriple> build_triple(FlatBufferBuilder b, IHasTriple numeral) {
       FTriple.StartFTriple(b);
-      var vec3 = numeral.Position;
+      var vec3 = numeral.ObservationValue;
       FTriple.AddVec3(b, FVector3.CreateFVector3(b, vec3.x, vec3.y, vec3.z));
       //FSingle.AddRange(b, numeral.ObservationValue);
       return FTriple.EndFTriple(b);
@@ -294,7 +295,7 @@ namespace Neodroid.Scripts.Messaging.FBS {
     }
 
     static Offset<FTriple> build_position(FlatBufferBuilder b, PositionConfigurable observer) {
-      var pos = observer.Position;
+      var pos = observer.ObservationValue;
       FTriple.StartFTriple(b);
       FTriple.AddVec3(b, FVector3.CreateFVector3(b, pos.x, pos.y, pos.z));
       return FTriple.EndFTriple(b);

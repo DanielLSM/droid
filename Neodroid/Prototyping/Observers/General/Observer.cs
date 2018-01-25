@@ -5,7 +5,7 @@ using Neodroid.Scripts.Utilities;
 using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 
-namespace Neodroid.Models.Observers.General {
+namespace Neodroid.Prototyping.Observers.General {
   [ExecuteInEditMode]
   [Serializable]
   public class Observer : MonoBehaviour,
@@ -21,31 +21,43 @@ namespace Neodroid.Models.Observers.General {
 
     public virtual IEnumerable<float> FloatEnumerable { get; protected set; }
 
-    protected virtual void Awake() { this.Setup(); }
-
-    protected virtual void Start() { }
-
-    public void RefreshAwake() { this.Awake(); }
-
-    public void RefreshStart() { this.Start(); }
-
-    protected void Setup() { this.RegisterComponent(); }
-
-    public virtual void RegisterComponent() {
-      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent(this.ParentEnvironment, this);
+    protected virtual void Awake () {
+      this.Setup ();
     }
 
-    public virtual void UpdateObservation() { }
+    protected virtual void Start () {
+    }
 
-    public virtual void Reset() { }
+    public void RefreshAwake () {
+      this.Awake ();
+    }
+
+    public void RefreshStart () {
+      this.Start ();
+    }
+
+    protected void Setup () {
+      this.RegisterComponent ();
+      this.FloatEnumerable = new float[]{ };
+    }
+
+    public virtual void RegisterComponent () {
+      this.ParentEnvironment = NeodroidUtilities.MaybeRegisterComponent (this.ParentEnvironment, this);
+    }
+
+    public virtual void UpdateObservation () {
+    }
+
+    public virtual void Reset () {
+    }
 
     #region Fields
 
-    [Header("References", order = 99)]
+    [Header ("References", order = 99)]
     [SerializeField]
     PrototypingEnvironment _environment;
 
-    [Header("Development", order = 100)]
+    [Header ("Development", order = 100)]
     [SerializeField]
     bool _debugging;
 

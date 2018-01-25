@@ -106,11 +106,14 @@
               <e p="ArrayCameraObserver.cs" t="Include" />
               <e p="CameraObserver.cs" t="Include" />
               <e p="CategoryObserver.cs" t="Include" />
+              <e p="CompassObserver.cs" t="Include" />
+              <e p="DoublePositionObserver.cs" t="Include" />
               <e p="EulerTransformObserver.cs" t="Include" />
               <e p="General" t="Include">
                 <e p="Observer.cs" t="Include" />
               </e>
               <e p="LidarObserver.cs" t="Include" />
+              <e p="LineOfSightObserver.cs" t="Include" />
               <e p="NearestByTagObserver.cs" t="Include" />
               <e p="NotUsed" t="Include">
                 <e p="BoundingBoxObserver.cs" t="Include" />

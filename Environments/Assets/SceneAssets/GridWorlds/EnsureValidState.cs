@@ -16,6 +16,11 @@ namespace SceneAssets.GridWorlds {
 
     [SerializeField] Obstruction[] _obstructions;
 
+    public PrototypingEnvironment ParentEnvironment {
+      get { return this._environment; }
+      set { this._environment = value; }
+    }
+
     void Awake () {
       if (!this._goal)
         this._goal = FindObjectOfType<Transform> ();

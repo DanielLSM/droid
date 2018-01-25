@@ -8,7 +8,7 @@ namespace Neodroid.Utilities.Structs {
     public Vector2 MinValues;
     public Vector2 MaxValues;
 
-    public Space2(Int32 decimal_granularity = Int32.MaxValue) : this() {
+    public Space2 (Int32 decimal_granularity = 10) : this () {
       this.MinValues = Vector2.one * -100f; //Vector2.negativeInfinity;
       this.MaxValues = Vector2.one * 100f; //Vector2.positiveInfinity;
       this.DecimalGranularity = decimal_granularity;
@@ -20,7 +20,7 @@ namespace Neodroid.Utilities.Structs {
       }
     }
 
-    public Vector2 ClipNormalise(Vector2 v) {
+    public Vector2 ClipNormalise (Vector2 v) {
       if (v.x > this.MaxValues.x)
         v.x = this.MaxValues.x;
       else if (v.x < this.MinValues.x)
@@ -36,6 +36,8 @@ namespace Neodroid.Utilities.Structs {
       return v;
     }
 
-    public float Round(float v) { return (float)Math.Round(v, this.DecimalGranularity); }
+    public float Round (float v) {
+      return (float)Math.Round (v, this.DecimalGranularity);
+    }
   }
 }

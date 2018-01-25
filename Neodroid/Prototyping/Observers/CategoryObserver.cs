@@ -1,4 +1,4 @@
-﻿using Neodroid.Models.Observers.General;
+﻿using Neodroid.Prototyping.Observers.General;
 
 namespace Neodroid.Models.Observers {
   enum Category {

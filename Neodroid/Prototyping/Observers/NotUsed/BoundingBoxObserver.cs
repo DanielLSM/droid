@@ -1,4 +1,4 @@
-﻿using Neodroid.Models.Observers.General;
+﻿using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities.BoundingBoxes;
 using UnityEngine;
 

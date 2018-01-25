@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using Neodroid.Models.Actors;
 using Neodroid.Models.Environments;
-using Neodroid.Models.Observers.General;
+using Neodroid.Models.Evaluation;
+using Neodroid.Prototyping.Evaluation.General;
+using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities;
 using Neodroid.Scripts.Utilities.BoundingBoxes;
 using SceneAssets.ScripterGrasper.Scripts;
 using UnityEngine;
 
-namespace Neodroid.Models.Evaluation {
+namespace Neodroid.Prototyping.Evaluation {
   public class RestInArea : ObjectiveFunction {
     [SerializeField] Actor _actor;
 
     [SerializeField] Collider _area;
-
-    [SerializeField] PrototypingEnvironment _environment;
     [SerializeField] bool _is_resting;
 
     [SerializeField] Obstruction[] _obstructions;
@@ -27,13 +27,13 @@ namespace Neodroid.Models.Evaluation {
 
     public override float InternalEvaluate() {
       if (this._overlapping == ActorOverlapping.InsideArea && this._is_resting && this._actor.Alive) {
-        this._environment.Terminate("Inside goal area");
+        this.ParentEnvironment.Terminate("Inside goal area");
         return 1f;
       }
 
       if (this._playable_area && this._actor) {
         if (!this._playable_area._bounds.Intersects(this._actor.GetComponent<Collider>().bounds))
-          this._environment.Terminate("Actor is outside playable area");
+          this.ParentEnvironment.Terminate("Actor is outside playable area");
       }
 
       return 0f;
@@ -56,8 +56,6 @@ namespace Neodroid.Models.Evaluation {
         this._area = FindObjectOfType<Observer>().gameObject.GetComponent<Collider>();
       if (!this._actor)
         this._actor = FindObjectOfType<Actor>();
-      if (!this._environment)
-        this._environment = FindObjectOfType<PrototypingEnvironment>();
       if (this._obstructions.Length <= 0)
         this._obstructions = FindObjectsOfType<Obstruction>();
       if (!this._playable_area)

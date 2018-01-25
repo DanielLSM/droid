@@ -1,5 +1,5 @@
 ﻿using System;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities.Interfaces;
 using Neodroid.Scripts.Utilities.Structs;
 using Neodroid.Utilities.Structs;
@@ -17,17 +17,17 @@ namespace Neodroid.Prototyping.Observers {
   public class EulerTransformObserver : Observer,
                                         IHasEulerTransform {
     [SerializeField] Vector3 _direction;
-    [SerializeField] Space3 _direction_space = new Space3(int.MaxValue);
+    [SerializeField] Space3 _direction_space = new Space3 (10);
 
-    [Header("Observation", order = 103)]
+    [Header ("Observation", order = 103)]
     [SerializeField]
     Vector3 _position;
 
-    [SerializeField] Space3 _position_space = new Space3(int.MaxValue);
+    [SerializeField] Space3 _position_space = new Space3 (10);
     [SerializeField] Vector3 _rotation;
-    [SerializeField] Space3 _rotation_space = new Space3(int.MaxValue);
+    [SerializeField] Space3 _rotation_space = new Space3 (10);
 
-    [Header("Specfic", order = 102)]
+    [Header ("Specfic", order = 102)]
     [SerializeField]
     ObservationSpace _space = ObservationSpace.Environment;
 
@@ -37,24 +37,24 @@ namespace Neodroid.Prototyping.Observers {
 
     public Vector3 Position {
       get { return this._position; }
-      set { this._position = this._position_space.ClipNormalise(value); }
+      set { this._position = this._position_space.ClipNormaliseRound (value); }
     }
 
     public Vector3 Rotation {
       get { return this._rotation; }
-      set { this._rotation = this._rotation_space.ClipNormalise(value); }
+      set { this._rotation = this._rotation_space.ClipNormaliseRound (value); }
     }
 
     public Vector3 Direction {
       get { return this._direction; }
-      set { this._direction = this._direction_space.ClipNormalise(value); }
+      set { this._direction = this._direction_space.ClipNormaliseRound (value); }
     }
 
-    public override void UpdateObservation() {
+    public override void UpdateObservation () {
       if (this.ParentEnvironment && this._space == ObservationSpace.Environment) {
-        this.Position = this.ParentEnvironment.TransformPosition(this.transform.position);
-        this.Direction = this.ParentEnvironment.TransformDirection(this.transform.forward);
-        this.Rotation = this.ParentEnvironment.TransformDirection(this.transform.up);
+        this.Position = this.ParentEnvironment.TransformPosition (this.transform.position);
+        this.Direction = this.ParentEnvironment.TransformDirection (this.transform.forward);
+        this.Rotation = this.ParentEnvironment.TransformDirection (this.transform.up);
       } else if (this._space == ObservationSpace.Local) {
         this.Position = this.transform.localPosition;
         this.Direction = this.transform.forward;
@@ -66,15 +66,15 @@ namespace Neodroid.Prototyping.Observers {
       }
 
       this.FloatEnumerable = new[] {
-          this.Position.x,
-          this.Position.y,
-          this.Position.z,
-          this.Direction.x,
-          this.Direction.y,
-          this.Direction.z,
-          this.Rotation.x,
-          this.Rotation.y,
-          this.Rotation.z
+        this.Position.x,
+        this.Position.y,
+        this.Position.z,
+        this.Direction.x,
+        this.Direction.y,
+        this.Direction.z,
+        this.Rotation.x,
+        this.Rotation.y,
+        this.Rotation.z
       };
     }
   }

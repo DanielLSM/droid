@@ -2,6 +2,7 @@
 using Neodroid.Models.Actors;
 using Neodroid.Models.Configurables.General;
 using Neodroid.Scripts.Utilities.ScriptableObjects;
+using Neodroid.Utilities.ScriptableObjects;
 
 namespace Neodroid.Scripts.Messaging.Messages {
   public class EnvironmentDescription {

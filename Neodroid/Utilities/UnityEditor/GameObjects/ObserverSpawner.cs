@@ -1,6 +1,6 @@
 ﻿using Neodroid.Models.Observers;
-using Neodroid.Models.Observers.General;
 using Neodroid.Prototyping.Observers;
+using Neodroid.Prototyping.Observers.General;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;

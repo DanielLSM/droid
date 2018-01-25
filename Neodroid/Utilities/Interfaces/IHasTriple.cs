@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Neodroid.Scripts.Utilities.Interfaces {
+namespace Neodroid.Utilities.Interfaces {
   public interface IHasTriple {
-    Vector3 Position { get; }
+    Vector3 ObservationValue { get; }
   }
 }

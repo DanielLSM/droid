@@ -5,6 +5,7 @@ using Neodroid.Scripts.Utilities.BoundingBoxes;
 using Neodroid.Scripts.Utilities.Enums;
 using Neodroid.Scripts.Utilities.Interfaces;
 using Neodroid.Scripts.Utilities.Structs;
+using Neodroid.Utilities.Interfaces;
 using Neodroid.Utilities.Structs;
 using UnityEngine;
 

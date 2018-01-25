@@ -1,10 +1,11 @@
 ﻿using System;
 using Neodroid.Managers.General;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities.Interfaces;
+using Neodroid.Utilities.ScriptableObjects;
 using UnityEngine;
 
-namespace Neodroid.Models.Observers {
+namespace Neodroid.Prototyping.Observers {
   public class ArrayCameraObserver : Observer,
                                      IHasArray {
     [Header("Observation", order = 103)]

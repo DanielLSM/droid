@@ -1,7 +1,8 @@
 ﻿using System;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities.Interfaces;
 using Neodroid.Scripts.Utilities.Structs;
+using Neodroid.Utilities.Interfaces;
 using Neodroid.Utilities.Structs;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Neodroid.Prototyping.Observers {
     [SerializeField]
     Vector3 _position;
 
-    [SerializeField] Space3 _position_space = new Space3(int.MaxValue);
+    [SerializeField] Space3 _position_space = new Space3(10);
 
     [Header("Specfic", order = 102)]
     [SerializeField]
@@ -24,24 +25,24 @@ namespace Neodroid.Prototyping.Observers {
 
     public override string ObserverIdentifier { get { return this.name + "Position"; } }
 
-    public Vector3 Position {
+    public Vector3 ObservationValue {
       get { return this._position; }
-      set { this._position = this._position_space.ClipNormalise(value); }
+      set { this._position = this._position_space.ClipNormaliseRound(value); }
     }
 
     public override void UpdateObservation() {
       if (this.ParentEnvironment && this._space == ObservationSpace.Environment) {
-        this.Position = this.ParentEnvironment.TransformPosition(this.transform.position);
+        this.ObservationValue = this.ParentEnvironment.TransformPosition(this.transform.position);
       } else if (this._space == ObservationSpace.Local) {
-        this.Position = this.transform.localPosition;
+        this.ObservationValue = this.transform.localPosition;
       } else {
-        this.Position = this.transform.position;
+        this.ObservationValue = this.transform.position;
       }
 
       this.FloatEnumerable = new[] {
-          this.Position.x,
-          this.Position.y,
-          this.Position.z
+          this.ObservationValue.x,
+          this.ObservationValue.y,
+          this.ObservationValue.z
       };
     }
   }

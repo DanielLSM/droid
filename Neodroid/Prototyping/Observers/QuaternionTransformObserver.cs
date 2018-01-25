@@ -1,6 +1,6 @@
 ﻿using System;
-using Neodroid.Models.Observers.General;
 using Neodroid.Prototyping.Observers;
+using Neodroid.Prototyping.Observers.General;
 using Neodroid.Scripts.Utilities.Interfaces;
 using UnityEngine;
 

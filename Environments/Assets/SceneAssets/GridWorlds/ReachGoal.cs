@@ -1,7 +1,7 @@
 ﻿using Neodroid.Models.Actors;
 using Neodroid.Models.Environments;
 using Neodroid.Models.Evaluation;
-using Neodroid.Models.Observers.General;
+using Neodroid.Prototyping.Evaluation.General;
 using Neodroid.Scripts.Utilities;
 using Neodroid.Scripts.Utilities.BoundingBoxes;
 using SceneAssets.ScripterGrasper.Scripts;
@@ -19,7 +19,6 @@ namespace SceneAssets.GridWorlds {
     [SerializeField] EmptyCell _goal;
 
     [SerializeField] bool _based_on_tags = false;
-    [SerializeField] PrototypingEnvironment _environment;
 
     //Used for.. if outside playable area then reset
     [SerializeField] ActorOverlapping _overlapping = ActorOverlapping.OutsideArea;
@@ -28,7 +27,7 @@ namespace SceneAssets.GridWorlds {
       var distance = Mathf.Abs (Vector3.Distance (this._goal.transform.position, this._actor.transform.position));
       
       if (this._overlapping == ActorOverlapping.InsideArea || distance < 0.5f) {
-        this._environment.Terminate ("Inside goal area");
+        this.ParentEnvironment.Terminate ("Inside goal area");
         return 1f;
       }
         
@@ -50,8 +49,6 @@ namespace SceneAssets.GridWorlds {
         this._goal = FindObjectOfType<EmptyCell> ();
       if (!this._actor)
         this._actor = FindObjectOfType<Actor> ();
-      if (!this._environment)
-        this._environment = FindObjectOfType<PrototypingEnvironment> ();
       if (this._goal)
         NeodroidUtilities.RegisterCollisionTriggerCallbacksOnChildren (
           this,

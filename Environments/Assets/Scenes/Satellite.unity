@@ -819,8 +819,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _actor: {fileID: 965130050}
-  _debugging: 1
-  _motion_space:
+  _debugging: 0
+  _motion_value_space:
     DecimalGranularity: 0
     MinValue: -10
     MaxValue: 10
@@ -884,7 +884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1620948092}
   _debugging: 0
-  _configurable_space:
+  _configurable_value_space:
     DecimalGranularity: 0
     MinValue: 10
     MaxValue: 10
@@ -904,14 +904,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1620948092}
   _debugging: 0
-  _observation_spacex:
-    DecimalGranularity: 0
-    MinValue: 0
-    MaxValue: 0
-  _rigidbody: {fileID: 965130052}
+  _angular_space:
+    DecimalGranularity: 3
+    MinValues: {x: -100, y: -100, z: -100}
+    MaxValues: {x: 100, y: 100, z: 100}
+  _velocity_space:
+    DecimalGranularity: 3
+    MinValues: {x: -100, y: -100, z: -100}
+    MaxValues: {x: 100, y: 100, z: 100}
+  _angular_velocity: {x: 0, y: 0, z: 0}
   _differential: 1
   _last_update_time: 0
-  _angular_velocity: {x: 0, y: 0, z: 0}
+  _rigidbody: {fileID: 965130052}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &965130057
 MonoBehaviour:
@@ -926,14 +930,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1620948092}
   _debugging: 0
-  _observation_spacex:
-    DecimalGranularity: 0
-    MinValue: 0
-    MaxValue: 0
-  _rigidbody: {fileID: 965130052}
+  _angular_space:
+    DecimalGranularity: 3
+    MinValues: {x: -100, y: -100, z: -100}
+    MaxValues: {x: 100, y: 100, z: 100}
+  _velocity_space:
+    DecimalGranularity: 3
+    MinValues: {x: -100, y: -100, z: -100}
+    MaxValues: {x: 100, y: 100, z: 100}
+  _angular_velocity: {x: 0, y: 0, z: 0}
   _differential: 0
   _last_update_time: 0
-  _angular_velocity: {x: 0, y: 0, z: 0}
+  _rigidbody: {fileID: 965130052}
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1061500704
 GameObject:
@@ -1185,12 +1193,12 @@ Prefab:
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 403.5
+      value: 553
       objectReference: {fileID: 0}
     - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 219
+      value: 307
       objectReference: {fileID: 0}
     - target: {fileID: 4635725927686626, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1355,6 +1363,11 @@ Prefab:
     - target: {fileID: 1748858491772888, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 224234215991166828, guid: 2e92782f81c5740819ca66bda35481ce,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e92782f81c5740819ca66bda35481ce, type: 2}
@@ -1550,7 +1563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objective_function: {fileID: 1620948095}
-  _simulation_manager: {fileID: 0}
+  _time_simulation_manager: {fileID: 0}
   _debugging: 0
   _coordinate_reference_point: {fileID: 0}
   _coordinate_system: 1
@@ -1581,22 +1594,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6fd2ea575694a1297adb4aa84e0523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _awaiting_reply: 0
+  _configuration:
+    _full_screen: 0
+    _height: 500
+    _width: 500
+    _max_reply_interval: 0
+    _quality_level: 1
+    _reset_iterations: 10
+    _simulation_type: 1
+    _frame_finishes: 0
+    _target_frame_rate: 60
+    _time_scale: 1
+    _frame_skips: 0
   _debugging: 0
   _ip_address: localhost
   _port: 5555
-  _testing_motors: 0
-  _configuration:
-    _frame_skips: 0
-    _full_screen: 0
-    _height: 500
-    _quality_level: 1
-    _reset_iterations: 10
-    _simulation_time_scale: 0
-    _target_frame_rate: -1
-    _time_scale: 1
-    _wait_every: 1
-    _width: 500
   _update_fixed_time_scale: 0
+  _testing_motors: 0
+  _last_reply_time: 0
+  _skip_frame_i: 0
+  _blocked: 0
 --- !u!114 &1620948095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1609,10 +1627,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugging: 0
+  _discount_factor: 0.9999
+  _environment: {fileID: 1620948092}
   _extra_terms: []
   _solved_threshold: 0
   _rigidbody: {fileID: 965130052}
-  penalty: 1
+  _penalty: 0
 --- !u!114 &1620948096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1625,8 +1645,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player_motions: {fileID: 11400000, guid: 43eb035cfbe4d4253b215ce70a5e5d58, type: 2}
-  _simulation_manager: {fileID: 0}
-  Debugging: 0
+  _manager: {fileID: 1620948094}
+  Debugging: 1
 --- !u!114 &1620948097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1640,7 +1660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _environment: {fileID: 1620948092}
   _debugging: 0
-  _configurable_space:
+  _configurable_value_space:
     DecimalGranularity: 0
     MinValue: 10
     MaxValue: 10
